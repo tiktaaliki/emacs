@@ -1,0 +1,30 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is ahead of 'origin/master' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+# Changes to be committed:
+#	deleted:    .#1.inbox.org
+#	modified:   1.inbox.org
+#	modified:   2.budget.org
+#	modified:   4.work.org
+#	modified:   5.journal.org
+#	modified:   6.calendar.org
+#	modified:   7.lis.org
+#	modified:   8.personal.org
+#	deleted:    animal-husbandry.org
+#	modified:   archive.org
+#	deleted:    calendar.org
+#
+# Untracked files:
+#	.#11.references.bib
+#	10.games.org
+#	11.references.bib
+#	11.references.bib.bak
+#	12.ndd.org
+#	flagged.org
+#	pdfs/
+#	scratchpad
+#

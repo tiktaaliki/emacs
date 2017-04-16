@@ -1,0 +1,93 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#	new file:   .emacs
+#	new file:   .emacs.d/.#settings.org
+#	new file:   .emacs.d/auto-save-list/.saves-8648-LENOVO-PC~
+#	new file:   .emacs.d/elpa/archives/gnu/archive-contents
+#	new file:   .emacs.d/elpa/archives/melpa/archive-contents
+#	new file:   .emacs.d/elpa/archives/org/archive-contents
+#	new file:   .emacs.d/elpa/bind-key-20161218.1520/bind-key-autoloads.el
+#	new file:   .emacs.d/elpa/bind-key-20161218.1520/bind-key-pkg.el
+#	new file:   .emacs.d/elpa/bind-key-20161218.1520/bind-key.el
+#	new file:   .emacs.d/elpa/bind-key-20161218.1520/bind-key.elc
+#	new file:   .emacs.d/elpa/color-theme-20080305.34/color-theme-autoloads.el
+#
+# Changes not staged for commit:
+#	modified:   .emacs
+#	modified:   .emacs.d/elpa/archives/gnu/archive-contents
+#	modified:   .emacs.d/elpa/archives/melpa/archive-contents
+#
+# Untracked files:
+#	.#-emacsa09924
+#	.emacs.d/.org-id-locations
+#	.emacs.d/auto-save-list/.saves-4640-LENOVO-PC~
+#	.emacs.d/auto-save-list/.saves-7252-LENOVO-PC~
+#	.emacs.d/auto-save-list/.saves-760-LENOVO-PC~
+#	.emacs.d/auto-save-list/.saves-9532-LENOVO-PC~
+#	.emacs.d/auto-save-list/.saves-9672-LENOVO-PC~
+#	.emacs.d/auto-save-list/.saves-9752-LENOVO-PC~
+#	.emacs.d/backups/
+#	.emacs.d/bookmarks
+#	.emacs.d/elpa/.#ac-helm-readme.txt
+#	.emacs.d/elpa/ac-helm-readme.txt
+#	.emacs.d/elpa/async-20170219.942/
+#	.emacs.d/elpa/auctex-11.90.0/
+#	.emacs.d/elpa/autothemer-20170112.1324/
+#	.emacs.d/elpa/bbdb-20170129.2224/
+#	.emacs.d/elpa/bbdb-readme.txt
+#	.emacs.d/elpa/biblio-20161014.1604/
+#	.emacs.d/elpa/biblio-core-20160901.1115/
+#	.emacs.d/elpa/bibretrieve-readme.txt
+#	.emacs.d/elpa/bibtex-utils-20170221.1757/
+#	.emacs.d/elpa/color-theme-20080305.34/color-theme-pkg.el
+#	.emacs.d/elpa/color-theme-20080305.34/color-theme.el
+#	.emacs.d/elpa/color-theme-20080305.34/color-theme.elc
+#	.emacs.d/elpa/color-theme-20080305.34/themes/
+#	.emacs.d/elpa/company-20170328.1748/
+#	.emacs.d/elpa/dash-20170207.2056/
+#	.emacs.d/elpa/deft-20160610.1739/
+#	.emacs.d/elpa/diminish-20151215.915/
+#	.emacs.d/elpa/f-20170404.1039/
+#	.emacs.d/elpa/flyspell-correct-20170213.700/
+#	.emacs.d/elpa/flyspell-correct-helm-20161031.1134/
+#	.emacs.d/elpa/flyspell-correct-helm-readme.txt
+#	.emacs.d/elpa/git-commit-20170314.1414/
+#	.emacs.d/elpa/gruvbox-theme-20161229.1817/
+#	.emacs.d/elpa/helm-20170409.26/
+#	.emacs.d/elpa/helm-bibtex-20170321.1306/
+#	.emacs.d/elpa/helm-core-20170409.1007/
+#	.emacs.d/elpa/hydra-20170325.815/
+#	.emacs.d/elpa/interleave-20170211.807/
+#	.emacs.d/elpa/ivy-20170409.212/
+#	.emacs.d/elpa/key-chord-20160227.438/
+#	.emacs.d/elpa/magit-20170415.918/
+#	.emacs.d/elpa/magit-popup-20170308.146/
+#	.emacs.d/elpa/ob-dart-readme.txt
+#	.emacs.d/elpa/org-bullets-20140918.1137/
+#	.emacs.d/elpa/org-plus-contrib-20170210/
+#	.emacs.d/elpa/org-ref-20170407.1250/
+#	.emacs.d/elpa/org-ref-readme.txt
+#	.emacs.d/elpa/parsebib-20170326.2344/
+#	.emacs.d/elpa/pdf-tools-20170317.810/
+#	.emacs.d/elpa/popup-20160709.729/
+#	.emacs.d/elpa/s-20160928.636/
+#	.emacs.d/elpa/smart-mode-line-readme.txt
+#	.emacs.d/elpa/solarized-theme-20161222.109/
+#	.emacs.d/elpa/tablist-20170219.1935/
+#	.emacs.d/elpa/use-package-20170405.1028/
+#	.emacs.d/elpa/visual-fill-column-20161109.337/
+#	.emacs.d/elpa/with-editor-20170111.609/
+#	.emacs.d/history
+#	.emacs.d/server/
+#	.emacs.d/settings.org
+#	.emacs.d/typopunct.el
+#	.emacs.d/url/
+#	.emacs~
+#	settings.el
+#	settings.org
+#	settings.org~
+#	settings_OLD.org
+#

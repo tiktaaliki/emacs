@@ -1,0 +1,709 @@
+* CVS
+** hours worked 
+| Date             | Time          |     Hours | What                                                    |
+|------------------+---------------+-----------+---------------------------------------------------------|
+| <2018-02-06 Tue> | 1-6:30 pm     |       5.5 | orientation                                             |
+| <2017-02-07 Tue> | 2-5 pm        |         3 | 209100, 891030, 800681, 800005, 800272, 800008          |
+| <2018-02-08 Thu> | 6-8 pm        |         2 | 206010, 206000                                          |
+| <2018-02-09 Fri> | 2-6 pm        |         4 | register training 400301, 400302                        |
+| <2018-02-15 Thu> | 6-8:10 pm     | 2h 10 min | 206020, 300500, 204010                                  |
+| <2018-02-15 Thu> | 9-6 pm        |       8.5 | regular shift                                           |
+| <2018-02-17 Sat> | 9-3 pm        |       5.5 | Pick up training                                        |
+| <2018-02-21 Wed> | 10-3:30 pm    |       5.5 | regular shift                                           |
+| <2018-02-22 Thu> | 9-1 pm        |         4 | regular shift                                           |
+| <2017-02-23 Thu> | 10:30-2:30 pm |         4 | OJT pick up                                             |
+| <2018-03-02 Fri> | 8-11:20 pm    | 3h 20 min | 800662, 800164, 800186, 800301, 800107, 5001477, 800167 |
+|                  |               |           |                                                         |
+
+3/10
+400400 - introduction to extracare 20 min
+400100 - mystore 1 hour 
+801307 - social media guidelines 5 min 3/10
+290357 - Safe Production and Production Safety Zone Video Acknowledgemnt 5 min	03/10/2017
+
+300660 - CVS Health Attendance Policy Acknowledgement	5 min 3/05/2017
+
+*** older stuff
+800167 - Recognizing and Preventing Workplace Violence for Newly Hired Store
+Colleagues	25 min
+500147 - Pharmacy Hazardous Waste Training	30 min
+800107 - New Colleague Compliance Training	60 min
+800301 - Social Engineering	15 min
+800186 - Preventing Money Laundering: Pharmacy Version	25 min
+800164 - Safety General Awareness and Emergency Procedures Plan Training 20 min
+800662 - Medicare Parts C and D General Compliance Training	25 min
+
+
+204045 - Pick-Up On-the-Job Training (OJT)	Finished	02/23/2017
+400301 - Register Basics	4 hours
+400302 - Customer Refunds	35 min
+
+206100 - Foundations of Pick-up and Production	Finished	02/18/2017
+204020 - Foundations of Pharmacy	Finished	02/18/2017
+
+
+204010 - Pharmacy Basics	Finished	60 min
+300500 - PROFESSIONAL PRACTICES QUALITY ASSURANCE STANDARDS	10 min
+206020 - Introduction to Production	60 min
+
+
+206000 - Introduction to Pharmacy	75 min
+206010 - Introduction to Pick-up	45 min
+
+
+
+800008 - CVS Health Colleague Handbook	5 min
+800272 - Rx Retail Privacy Training	10 min
+800005 - CVS Health Store and Distribution Center Code of Conduct Training 60 min
+800681 - DEA & Pharmacy Regulatory Training for Pharmacy Support Staff	55 min
+891030 - PSE/E Training for New Hires 10 min
+209100 - Compounding and Processing Non-Sterile Preparations  40 min
+
+** lock codes: 8-14-33
+** module notes
+*** Medicare Part B
+- 65+, disabled
+- medically necessary services & preventative services
+- DMEPOS: Durable medical equipment, prosthetics, orthotics, and supplies
+- unassigned item: nebulizers, walkers, ostomy supplies. if they want to use
+  unassigned item, plan code 22345
+- ABN: advanced beneficiary notice
+- coverage determinations: 
+  - national coverage determinations (NCD)
+  - local coverage determination
+  - durable medical equipment medicare adminstrative contrasctors (4 in US)
+health care procedure code
+ICD code
+procedure modifier code
+*** Advanced Dropoff (60 m)
+:LOGBOOK:
+CLOCK: [2017-03-23 Thu 19:40]--[2017-03-23 Thu 20:18] =>  0:38
+:END:
+*** Ipledge rems training
+:LOGBOOK:
+CLOCK: [2017-03-23 Thu 20:19]--[2017-03-23 Thu 20:31] =>  0:12
+:END:
+*** intro to drive thru (15 min)
+:LOGBOOK:
+CLOCK: [2017-03-23 Thu 20:31]--[2017-03-23 Thu 20:46] =>  0:15
+:END:
+* Editing
+** [TODO] Hosu article re: candlelight protests
+:LOGBOOK:
+CLOCK: [2017-03-23 Thu 10:00]--[2017-03-23 Thu 10:39] =>  0:39
+CLOCK: [2017-03-23 Thu 09:04]--[2017-03-23 Thu 09:47] =>  0:43
+:END:
+
+** [TODO] Edit Left Voice article
+:LOGBOOK:
+CLOCK: [2017-03-24 Fri 21:47]--[2017-03-24 Fri 23:05] =>  1:18
+:END:
+** Editing table
+C-c C-x C-r
+
+|            |              |        | <8>      | <15>            |      |   |
+| Date       | Client       | Rate   | Word count | Title           | Time |   |
+|------------+--------------+--------+----------+-----------------+------+---|
+| 11/21/2016 | Ka-eul Yoo   | $50/hr | 476      |                 |  .75 | x |
+| 12/15/2016 | Hosu Kim     | $40/hr | 2,016    | grant           |    2 | x |
+| 12/16/2016 | Hosu Kim     | $40/hr |          | fellowship application |  .25 | x |
+| 12/16/2016 | Gayeon Son   | $40/hr | 11,121   | dissertation    |  4.5 | x |
+| 12/19/2016 | Yool Choi    | $40/hr | 10,540   | journal article & reviewer letter |    3 | x |
+| 1/10/2017  | Kaitlyn Baek | $50/hr |          | application S   |  1.5 |   |
+| 1/16/2017  | Kaitlyn Baek | $50/HR |          | applications    |    2 |   |
+| 1/30/2017  | Kaitlyn Baek | $50/hr |          | applications    |    1 |   |
+
+* Old Town Press 
+** set up system for james to manage orders [0/1]
+:LOGBOOK:
+CLOCK: [2016-11-21 Mon 01:40]--[2016-11-21 Mon 01:40] =>  0:00
+:END:
+- [ ] set up an OTP email
+
+* Notebooking [2/2]
+** price comparisons
+*** notebook covers
+letter size q 100 = $299.00
+junior size q 100 = $249.00
+
+www.mybinding.com
+23 mil frost poly covers
+q25 = $24.59
+free shipping on orders > 75
+*** ring sizes
+**** arc: 1.75", 1.25", 3/4"
+
+* Paper making
+- http://paperslurry.com/2014/05/19/how-to-make-handmade-paper-from-recycled-materials/
+- http://handpapermaking.net/newsletter/beginner/indexOld.htm
+* Website
+
+* Open positions
+
+** Program Coordinator, Center for the Study of Social Difference (CSSD)  
+https://www.myinterfase.com/cusipa/Job/Detail/OG01TmpMWlgzS0hvS0lwWGQxeUIvbVVVOTY2SkRES2ZpOVBZUXNSS2ZKOD01
+
+** 65420 / Part-time Research Assistant, Data-Pop Alliance 
+Wage/​Salary:
+$15/hour
+Employment Start Date:
+10/12/2016
+Employment End Date:
+Job Description:​ Please include any work authorization requirements:
+Data-Pop Alliance is seeking a motivated and engaged Research Assistant (RA) to support our ongoing research and training activities on big data and development, including conducting research, organizing events and preparing materials for our upcoming global training workshops.
+
+1. Background
+
+Data-Pop Alliance is a global coalition created in 2014 by the Harvard Humanitarian Initiative (HHI), MIT Media Lab, and Overseas Development Institute (ODI) that brings together researchers, experts, practitioners, and activists to promote a people-centered Big Data revolution through collaborative research, capacity building, and community engagement. Our core members include our three founding institutions—HHI, MIT Media Lab and ODI—as well as the Flowminder Foundation as of February 2016. Our key thematic areas of work include: politics and governance; official and population statistics; peacebuilding and violence; climate change and resilience; and data ethics and literacy. Our current portfolio of projects involves developing a series of training workshops and pedagogical materials on Big Data and development, writing and publishing empirical research and white papers on several Big Data and development-related topics, as well as co-organizing and hosting events with various private and public partners. For more information on our work, please visit datapopalliance.org.
+
+2. Position
+
+The RA will support our ongoing research and training activities on big data and development, including conducting research, organizing events and preparing materials for our upcoming global training workshops. Under the supervision of the Data-Pop Alliance Research Manager and Research Scientist, the
+RA will:
+- Assist in literature reviews, proofreading, content development and analysis, report
+preparation
+- Prepare final report and presentation materials, including PowerPoint slides, handouts,
+and other conference presentation materials
+- Provide event and administrative support, as necessary, related to the research and
+training programs
+
+3. Duration of contract
+
+This is a paid part-time position, with a tentative start date of mid-October. The initial contract for the position would be for 2-3 months during Fall 2016 (depending on hourly commitment), with the possibility of extension. Preferred candidates include advanced undergraduates, recent graduates, or current graduate students. 
+
+
+Qualifications:
+4. Key skills, technical background and experience required:
+
+- Strong interest and previous experience in international development and/or our thematic areas. Experience related to statistics, data and development a plus.
+- Previous academic and/or work experience conducting qualitative and/or quantitative research
+- Outstanding attention to detail and organization
+- Familiarity with conducting desk research and navigating academic sources and online databases.
+- Excellent writing, facilitation, and organizational skills
+- Excellent command of the English language
+- Deadline driven with a focus on results
+- Advanced MS Office skills, specifically in MS Word, Excel and PowerPoint
+- Adept at the use of office communication tools
+
+5. Working arrangements
+
+The research assistant will work out of the Data-Pop Alliance office located at ThoughtWorks NYC: 99 Madison Ave, 15th Floor, New York, NY 10016.
+Application Details: /cusipa/Content/images/help.gif
+6. How to Apply
+
+Qualified candidates are requested to submit a CV and brief cover letter paragraph (1 paragraph via email) to research@datapopalliance.org with the subject line "RA Data and Development," by 10 October 2016, 5:00pm EST. 
+
+In this brief cover letter paragraph, please let us know:
+- Undergraduate/graduate or recent graduate
+- Educational background
+- Languages spoken
+- Part-time or full-time
+
+Please also submit a resume and cover letter through SIPAlink by clicking the "Apply Now" Button on this page. *ALL FILES, INCLUDING COVER LETTERS AND RESUMES, MUST BE UPLOADED IN PDF FORMAT TO THE "MY DOCUMENTS" PAGE IN YOUR SIPALINK ACCOUNT.
+Online Application Address:
+Posting Information
+Regional Focus:
+Asia - Southeast, Europe - East Central, Europe - Western, Latin America, Middle East, None, Oceania, Russia and the Former Soviet...
+more
+Job Location City:
+New York
+Job Category:
+Research
+Position Type: /cusipa/Content/images/help.gif
+Internship, Part Time, Temporary/Consultant
+Work Authorization:
+Post Date:
+10/5/2016
+Expiration Date: /cusipa/Content/images/help.gif
+10/21/2016
+** 65253 / Researcher: Mapping Historical Dialogue Project
+Columbia University - Institute for the Study of Human Rights (ISHR) 
+Job Description:​ Please include any work authorization requirements:
+The Institute for the Study of Human Rights (ISHR) was established in 1978 at Columbia University. ISHR is committed to its three core goals of providing excellent human rights education to Columbia students, fostering innovative interdisciplinary academic research, and offering its expertise in capacity building to human rights leaders, organizations, and universities around the world. 
+
+The Alliance for Historical Dialogue and Accountability (AHDA) is seeking a qualified individual to conduct research for the Mapping Historical Dialogue project. The position will require online research skills and attention to detail. Particularly welcome are applicants with an interest in history and memory and reconciliation. This opportunity is paid and will run from the beginning of September for the duration of the fall semester (until mid-December), with the possibility of extension. Open until filled.
+
+Qualifications:
+Online research skills; attention to details. 
+
+Particularly welcome are applicants with an interest in history and memory and reconciliation.
+Application Details: /cusipa/Content/images/help.gif
+Application Deadline: Position open until filled. Please apply early to ensure consideration.
+　
+Please send your CV/resume and cover letter in an e-mail titled 'AHDA Researcher: Mapping Historical Dialogue Project application' to Tim Wyman-McCarthy at 
+tw2468@columbia.edu
+
+Please also submit a cover letter and resume through SIPAlink by clicking the "Apply Now" button on this page. We ask you to do this so that employers can verify whether all interested SIPA candidates have applied to the position. *ALL FILES, INCLUDING COVER LETTERS AND RESUMES, MUST BE UPLOADED IN PDF FORMAT TO THE "MY DOCUMENTS" PAGE IN YOUR SIPALINK ACCOUNT.
+
+
+Online Application Address:
+goo.gl/0zXNz0
+** Membership Assistant
+New York, NY, US
+Job posted by Intrepid Sea, Air & Space Museum on September 28, 2016
+
+http://www.idealist.org/view/job/32HDTb8bKcMfP
+
+As an educational and cultural nonprofit institution, the Intrepid Sea, Air & Space Museum promotes the awareness and understanding of history, science and service through its collections, exhibitions and programming in order to honor our heroes, educate the public and inspire our youth. Located in New York City on the Hudson River, the Intrepid Museum was founded in 1982 with the acquisition of the legendary aircraft carrier Intrepid, a National Historic Landmark. Welcoming one million visitors annually, the Museumalsofeatures the space shuttle Enterprise, the world's fastest jets and a guided missile submarine.
+
+We are seeking a Membership Assistant to assist with all areas of membership acquisition, including on-site sales and renewal calls, as well as the processing of membership applications and the distribution of benefits. The Membership Assistant is a member of the Intrepid Museum's 10-person Institutional Advancement department.
+
+Responsibilities include but are not limited to:
+
+Provides input and assists with strategy for membership department, including establishing short- and long-range goals in cooperation with the Director of Membership to achieve institution membership objectives.
+Processes all Household and Library memberships and updates member records in Tessitura on a daily basis.
+Responds to member inquiries on a daily basis.
+Acknowledges membership gifts and fulfills membership benefits on a weekly basis.
+Reviews, merges and mails renewal and renewal upgrade letters on a monthly basis.
+Manages solicitation, fulfillment, and renewals of Library Membership program.
+Implements membership acquisition strategies, including direct mail, phone solicitations, on-site sales and web sales.
+Records member RSVPs for events in Tessitura.
+Operates ticketing system as it relates to membership.
+Staffs membership desk in Welcome Center and at special events/public programs as needed.
+Represents Institutional Advancement at daily Museum Services meetings.
+Maintains membership calendar of event invitations and acquisitions (print and email).
+Ensures membership portions of website are up-to-date and sends update requests as needed.
+Maintains list of current membership promotions and coordinates with Marketing and Museum Services to ensure universal knowledge of active and expired promotions and codes.
+Works with Manager of Data and Records to review Tessitura membership revenue and appeal reports, as well as other reports that maintain data integrity.
+Maintains member record data cleanliness and up-to-date contact information for members in Tessitura.
+Tracks and reports on membership inquiries and response rate.
+Organizes and maintains the Membership department's collateral inventory.
+Provides administrative support to the department to include filing, purchase orders, mailings, etc.
+Works with Director of Membership and Membership Associate to develop acquisition, renewal and upgrade strategies.
+Researches current Museum members as possible prospective donors.
+Works as a team member in the Institutional Advancement Department on a range of fundraising and development areas.
+Assists with implementation of membership campaigns and promotions.
+Provides content for biannual Institutional Advancement newsletter and monthly member email.
+Provides on-site information about institution and membership benefits to visitors.
+Performs other duties as required by management.
+The ideal candidate will have a BS or BA degree from a four-year college or university and related experience and/or training; or equivalent combination of education and experience. He/She should have exemplary computer skills in MS Word, Excel, Outlook, PowerPoint, and Internet. Knowledge of Database experience required, Tessitura-specific experience preferred.. Excellent organizational skills and an eye for detail essential. Must be able to keep deadlines. The candidate will have excellent judgment, interpersonal, oral and written communication skills to work with members, donors, the public and colleagues, the ability to act with diplomacy and discretion at all organizational levels, as well as work with a wide range of information, organize details and meet deadlines under pressure. Flexibility to attend membership/development or museum events on evenings or weekends as required.
+
+We offer a competitive salary for this position and the opportunity to be a part of a very rewarding time in the Museum's history.
+** Production Manager
+New York, NY, US
+Job posted by Guttmacher Institute on October 11, 2016
+
+Position Summary:
+
+This position manages day-to-day production activities for Guttmacher Institute's print and online publications, including one peer-reviewed journal, ensuring the high quality for which the organization has long been known. The Production Manager works closely with staff from all divisions—authors, researchers, editors, production staff and communications staff—to ensure adherence to schedules and to promote quality, accuracy and efficiency across products and processes.
+
+Responsibilities:
+
+Oversee and contribute to the production of scholarly and non-scholarly products through the complete production process, from receipt to final publication.
+Prepare journal article manuscripts for release to print/composition vendors; monitor through production process.
+Communicate with authors, editors, designers and other staff inside the Institute to facilitate timely and high-quality production of Guttmacher products.
+Communicate with print/composition vendors, printing reps, online hosting support staff and others to coordinate project components and production steps handled externally.
+Proofread print and online content against original manuscript and marked revisions, and for adherence to the Institute's style and content guides for each publication type.
+Preflight incoming projects to ensure that all necessary components are in-house prior to production, including partner logos, funder acknowledgment language, photographs, etc.
+Work with the editorial production coordinator to manage workflow and avoid logjams.
+Work with website team to ensure stylistic consistency on the Institute's website, including preparing content for the web production assistant and proofing content on the staging site (Drupal).
+Proactively contribute to the development and improvement of the production department and on-going development, testing and implementation of new, efficient and effective production processes.
+Supervise and mentor print production assistant and web production assistant.
+Performs other reasonably related job duties as assigned by supervisor.
+Qualifications:
+
+Bachelor's in related field.
+Minimum five years' experience in production involving print and electronic formats, with experience in content, quality and technical issues.
+Proficient in Word, Excel and project management software (e.g., Basecamp, Teamwork, JIRA)
+Intermediate level familiarity with Adobe InDesign, Illustrator and Photoshop; experience with digital art formats.
+Knowledge of scholarly publishing both in print and online.
+Experience proofreading with careful attention to detail.
+Experience using Drupal (or similar CMS/platform) frontend for proofing and management of online content; familiarity with online publisher platforms (JSTOR CSP and/or Wiley Online Library) a plus.
+Strong written and verbal communication skills.
+Strong organizational skills with the ability to plan and balance priorities to meet deadlines.
+Excellent interpersonal skills; flexibility, patience, good sense of humor and perspective a plus.
+Please note that telephone inquiries will not be acknowledged. No agencies please.
+
+Guttmacher Institute is an equal opportunity employer.
+
+** Assistant Editor, Oxford University Press
+Oxford University Press is a department of the University of Oxford, which furthers the University’s objective of excellence in research, scholarship, and education by publishing worldwide.
+
+Assistant Editor responsibilities include, but are not limited to: 
+
+•      Working with OUP commissioning editors, editors in chief, and editorial boards to create and execute publishing plans for digital titles
+•      Establishing, maintaining, and frequently updating project files and records
+•      Recruiting authors to write for our projects based on internal and external recommendations from editors
+•      Corresponding with authors and editors to ensure timely delivery of quality articles
+•      Providing a basic review and edit of articles and other textual and media content to ensure quality
+•      Overseeing the peer-review process for articles, which includes commissioning reviewers and trafficking comments back to authors and board members
+•      Recruiting new editorial board members as needed, based on recommendations from internal and external editors
+•      Reviewing and correcting XML as needed
+•      Handing over final peer-reviewed articles and supporting materials to the production team, and working closely with colleagues in production to ensure smooth and on-schedule publication
+•      Coordinating with marketing and sales teams on promoting and selling titles
+•      Providing general administrative support as needed.
+ 
+Job requirements:
+ 
+At least 1 year of editorial experience, preferably in academic publishing, or comparable experience; intense attention to and appreciation for detail and deadlines; experience managing large-scale, multi-faceted publishing projects; the ability to manage time effectively; an understanding of the difference between online and print publishing; the ability to communicate clearly and effectively in writing and verbally; a demonstrated comfort working and corresponding with senior-level academics and other specialized authors; the ability to work as part of a team and to lead a team when asked. The right candidate will be skilled in working in databases and spreadsheets, eager to solve problems, and unafraid to ask questions. An understanding of how to read and analyze workflows is a plus, as is an understanding of the role of XML and metadata in digital publishing. 4-year degree required; advanced degree a plus.
+https://www.linkedin.com/comm/jobs/view/202522191?refId=c2b5c3ef-fafe-4361-85fd-123114663815&trk=eml-jymbii-organic-job-card&midToken=AQHAsM7iJcID4w&trkEmail=eml-jobs_jymbii_digest-null-79-null-null-557rn~iuofr8np~fl
+*
+ 65627 / Editorial and Production Assistant, Center for Migration Studies
+Employment Start Date:
+11/1/2016
+Employment End Date:
+Job Description:​ Please include any work authorization requirements:
+The Center for Migration Studies of New York (CMS), an educational institute and think-tank devoted to the study of international migration, seeks to hire an editorial and production assistant. The position will report to CMS’s Director of Communications. 
+The editorial and production assistant will manage all administrative processes related to the publication of CMS’s signature publications, the International Migration Review (IMR) and the Journal on Migration and Human Security (JMHS). Among other areas of responsibility, s/he will:
+•	Oversee the logistical and administrative aspects of the submission, peer-evaluation and publication of articles; 
+•	Proofread galleys and perform copy and technical edits for all publications;
+•	Typeset and layout reports and JMHS articles in Adobe InDesign; 
+•	Coordinate the publication of regular IMR and JMHS issues, special collections and print editions;
+•	Support and interface with CMS staff, editors, editorial boards, publishers, authors and peer-reviewers; 
+•	Organize editorial and publisher meetings;
+•	Summarize research and articles for CMS’s website and other purposes;
+•	Maintain, update and expand mailing lists; 
+•	Engage in publicity and marketing of CMS publications, including maintenance of IMR and JMHS social media accounts and co-development of marketing plans with publishers;
+•	Produce and edit CMS multimedia projects;
+•	Develop and design marketing materials, fact-sheets, infographics, and summaries; and
+•	Assume other responsibilities and tasks assigned by the Executive Director and Director of Communications.
+
+
+Qualifications:
+Required Qualifications:
+•	Strong editing skills;
+•	Close attention to detail;
+•	Excellent written and verbal communication skills;
+•	Ability to prioritize and manage multiple projects simultaneously and follow through on issues in a timely manner;
+•	Knowledge of Chicago Manual writing and citation style;
+•	Experience with desktop publishing;
+•	Experience with video and audio production;
+•	Knowledge of Adobe Creative Suite (particularly Adobe InDesign, Photoshop and Premiere Pro) highly preferred;
+•	Academic background and/or professional experience in migration; and,
+•	A relevant degree (graduate degree preferred).
+Application Details: /cusipa/Content/images/help.gif
+This is a starting level, full-time position with opportunities for advancement. This position is based in New York City. Candidates should submit a letter of interest with salary requirements, as well as a resume/CV and original writing sample, to Daniela Alulema at dalulema@cmsny.org by October 28, 2016. The resume/CV should include a summary of past and current research projects, publications, education and employment. 
+
+** 
+
+* ebay process
+- look up item online to see what it's going for and select "sold listings" and "used"
+- select similar item and click "sell one like this"
+- check the chosen category and update everything that needs updating
+
+- anything over 10 dollars and under 16 oz is free shipping USPS first class
+- over $30 and over 16 oz, ships free FedEx smartpost
+- expensive/valuable items - may require insurance
+- most things are fixed price
+- use global shipping program. no alternative int'l shipping
+* Grammar notes
+coordinating conjunctions	Use commas to separate two or more coordinate adjectives that describe the same noun. Be sure never to add an extra comma between the final adjective and the noun itself or to use commas with non-coordinate adjectives.
+	Coordinate adjectives are adjectives with equal ("co"-ordinate) status in describing the noun; neither adjective is subordinate to the other. You can decide if two adjectives in a row are coordinate by asking the following questions:
+	        • Does the sentence make sense if the adjectives are written in reverse order?
+	        • Does the sentence make sense if the adjectives are written with and between them?
+	If you answer yes to these questions, then the adjectives are coordinate and should be separated by a comma. Here are some examples of coordinate and non-coordinate adjectives:
+	He was a difficult, stubborn child. (coordinate)
+	They lived in a white frame house. (non-coordinate)
+	She often wore a gray wool shawl. (non-coordinate)
+	Your cousin has an easy, happy smile. (coordinate)
+	The 1) relentless, 2) powerful 3) summer sun beat down on them. (1-2 are coordinate; 2-3 are non-coordinate.)
+	The 1) relentless, 2) powerful, 3) oppressive sun beat down on them. (Both 1-2 and 2-3 are coordinate.)
+* resume
+** Education
+*** SIPA
+:PROPERTIES:
+:Institution: Columbia University, School of International and Public Affairs
+:Degree:   Master of International Affairs
+:Location: New York, NY
+:Years:    2008–2010
+:Concentration: East Asia
+:END:
+
+*** Sogang University 
+:PROPERTIES:
+:Institution: Sogang University, Korean Language Education Center
+:Degree:   N/A
+:Location: Seoul, South Korea
+:Years:    2006–2007
+:END:
+
+Two-semester full-time Korean language program focused on writing and advanced speech. 
+*** Boston College
+:PROPERTIES:
+:Institution: Boston College
+:Degree:   Bachelor of Arts in English with Honors
+:Location: Chestnut Hill, MA
+:Years:    2000–2004
+:END:
+
+Wrote senior honors thesis in creative writing
+**** courses
+arabic
+logic
+
+** Editing Experience
+*** Yoon Editing
+:PROPERTIES:
+:INSTITUTION: Yoon Editing
+:TITLE: Founder and Editor
+:LOCATION: New York, NY
+:YEARS: January 2013–Present
+:END:
+**** Hosu's book -- both editing and indexing
+Book Editor | Hosu Kim, PhD, Assistant Professor of Sociology, CUNY
+• Edited book manuscript Virtual Mothering: Birthmothers and Transnational
+Adoption Practice in South Korea for clarity and cohesion. Manuscript accepted for publication
+at Palgrave.
+2013–2014
+
+**** Successful dissertations
+**** translated works
+**** submissions to peer-reviewed academic journals
+*** CCRC
+:PROPERTIES:
+:INSTITUTION: Columbia University, Teachers College Community College Research Center
+:TITLE1: Associate Editor 2011—2015
+:TITLE2: Administrative/Editorial Assistant 2008–2011
+:LOCATION: New York, NY
+:YEARS:
+:END:
+
+
+**** Responsibilities:
+- editing
+- proofing
+- formatting
+
+what did I work on?
+- CCRC publications
+  - working papers targeting academics
+  - reports
+  - policy briefs targeting policymakers
+  - journal articles
+  - practitioner packets
+- CCRC research base
+  - Expanded CCRC's reearch base: grant submissions. During this time, submitted X number of successful research grants with DoE and Gates Foundation
+- CCRC efficiency
+  - Created editorial style guides for multiple centers
+  - deveoped Endnote reference database to increase editing efficiency with over 1,000 citations.
+- design 
+  - website redesign
+  - CAPSEE logo
+  - practitioner packet overhauls
+- website maintenance
+  - manage website content for 4 different websites, all with different content management systems
+  - categorized CCRC's large body of research since 2006 for new website redesign 
+  - curate and disseminate electronic newsletter
+
+*** Writing Tutor at SIPA
+:PROPERTIES:
+:INSTITUTION: Columbia University, School of International and Public Affairs
+:TITLE: Writing Tutor Fellow
+:LOCATION: New York, NY
+:YEARS:
+:END:
+Guided SIPA students in all stages of the writing process.
+
+*** KIEP
+:PROPERTIES:
+:INSTITUTION: Korea Institute for International Economic Policy (KIEP)
+:TITLE: English Editor
+:LOCATION: Seoul, South Korea
+:YEARS:
+:END:
+
+• Copy-edited and proofread English language editions of policy research on the South Korean
+economy; created research guides for KIEP economists; authored and maintained KIEP English-
+language style guide; liaised and coordinated with partner research institutions to organize 
+conferences and collaborative projects.
+
+** Pharmacy experience
+
+Pharmacy experience
+CVS/pharmacy
+Newton, MA and West Roxbury, MA				                                January 2001 – May 2004
+Pharmacy Technician (average weekly hours: 24)
+Responsible for prescription data entry into CVS corporate records, process phone-in prescriptions from doctors
+Dispense prescription medication
+Maintain inventory and compute current in-store stock
+Satisfy customer inquiries, assist elderly customers, delegate tasks for efficient service, instruct new employees
+Phone doctors and insurance companies
+
+The Medicine Shoppe, Claymont, DE  	                                        			                                    August 1994 – 2000
+Pharmacy Technician
+Fill prescriptions by counting appropriate quantity and labeling product
+Manage finances including purchasing of office supplies and assisting in marketing efforts
+Assist in compounding medication and personally place orders to warehouse
+Deliver medication for elderly patients which requires driving and a thorough knowledge of the local area
+** Other experience
+*** KEEP
+:PROPERTIES:
+:LOCATION: Queens, NY
+:TITLE:    Co-director of the Korea Education and Exposure Program (KEEP) 
+:INSTITUTION: Nodutdol for Korean Community Development (NDD)
+:YEARS: 2011–Present
+:END:
+(This annual program takes participants to North and South Korea in alternating years.)
+• Developed a standardized 10-session curriculum on Korean history and current conditions,
+updated yearly; created a large database of KEEP resources; coordinated nationwide study
+sessions; conducted trainings on cultural competency and microaggressions; conducted
+workshops and presentations on North Korean human rights; published articles in Foreign
+Policy in Focus, Korean Quarterly, and the Korea Policy Institute.
+• Successfully organized five delegation trips and led three delegations to North Korea; fundraised
+an average of $50,000 in medical aid and delivered to North Korean hospitals; successfully
+liaised with DPRK offices to expand itinerary scope; developed relationships with hosts and
+organizations in DPRK. 
+
+*** Old Town Press
+:PROPERTIES:
+:INSTITUTION:
+:TITLE:
+:LOCATION:
+:YEARS:
+:END:
+
+** Volunteer/Memberships
+Justice Committee: Copwatch
+Nodutdol for Korean Community Development
+Anjellicle Cat Rescue - Foster
+
+** Skills
+*** leadership
+*** coordination
+*** graphic design
+*** editing
+*** languages
+Conversational Korean (proficient), written Korean (intermediate)
+*** computer stuff
+HTML, CSS, Windows 7 and 8, Microsoft Office 2010 and 2013, Adobe Create Suite 6
+
+** articles written
+*** that piece on North Korea
+
+published articles in Foreign
+Policy in Focus, Korean Quarterly, and the Korea Policy Institute.
+
+** Cover letter Cvs pharmacy
+Dear Hiring Manager,
+
+I am applying for the Pharmacy Technician position at CVS/pharmacy. I have 10 years of experience as a pharmacy technician. From 1994–2000, I worked at the Medicine Shoppe. Then, I moved to the Boston area for college where I worked at CVS/pharmacy from 2000–2004, first in Newton, MA, and then in Roxbury, MA. While working at CVS/pharmacy I earned my PTCB certification. 
+
+My most recent experiences as an Associate Editor at the Community College Research Center and as an Editor at Yoon Editing have honed my attention to detail and communication skills. Previous to that I worked as an administrative assistant at the Community College Research Center and have excellent interpersonal and customer service skills.
+
+I am seeking to change careers and would love to once again be part of the CVS/pharmacy team while I attend graduate school for library science. I look forward to hearing from you. 
+
+Thank you for your time. 
+
+Sincerely,
+
+Betsy Yoon
+
+
+
+
+
+o The ability to concentrate on a task over a period of time without being distracted
+
+• Customer Service Orientation
+
+o Actively look for ways to help people, and do so in a friendly manner
+
+o Notice and understand customers’ reactions, and respond appropriately
+
+• Communication Skills
+
+o Use and understand verbal and written communication to interact with customers and colleagues
+
+o Actively listening by giving full attention to what others are saying, taking time to understand the points being made, asking questions as appropriate, and not interrupting at inappropriate times
+
+• Mathematical Reasoning
+
+o The ability to use math to solve a problem, such as calculating day’s supply of a prescription
+
+• Problem Resolution
+
+o Is able to judge when something is wrong or is likely to go wrong; recognizing there is a problem
+
+o Choosing the best course of action when faced with a complex situation with several available options
+
+
+
+718-370-0365
+** Library information assistant
+*** job description
+ 
+Principal Responsibilities:
+
+Under the general supervision of the Library Manager, a Library Information Assistant:
+
+Provides circulation/reference service and instruction to library patrons of all ages using print, media and computer resources
+Answers questions from the public in person, over the telephone and electronically
+Performs community outreach to promote and increase public participation and use of library services
+Assists in planning and delivering library programs for children, teens and/or adults
+Instructs patrons on the use of the Internet, computer applications and other Library services
+Assists with fines & fees management, collection development/weeding, reserves and opening/closing procedures
+Ensures patrons follow library policies and procedures
+May take responsibility for the facility, staff and operations in the absence of the Library Manager
+Performs other related duties as required
+Key Competencies:
+
+Accountability and Professionalism
+Customer Service
+Callaboration and Teamwork
+Job-Specific Knowledge and Skills
+Minimum Qualifications:
+
+Bachelor’s degree required, preferably with a strong, well-rounded liberal arts background
+
+
+Successfully demonstrated public service experience with the ability to work well with a diverse patronage
+
+
+Strong interpersonal, oral, and written communication skills
+
+Successfully demonstrated ability to work as part of a team
+
+Strong organization and planning skills, including the ability to perform multiple projects or tasks simultaneously
+
+Strong computer and other related technology skills, including MS Word, Excel, Powerpoint
+
+Demonstrated knowledge of computer services including on-line searching, social media and Library databases preferred
+
+Experience creating, conducting and/or participating in community training, programming and outreach preferred
+
+Demonstrated knowledge of library resources preferred
+
+Experience working with Children preferred
+
+Spanish language preferred  
+
+Work Environment:
+
+Public service library
+Physical Duties:
+
+Lifting (up to 15 lbs.)
+Sitting and standing for periods of time
+Pushing and pulling book trucks
+Stretching and bending
+Starting Salary:
+
+USD $35,123.00/Yr.
+Minimum Salary (with 2 years of NYPL service):
+
+USD $40,392.00/Yr.
+Hours:
+
+35 hours per week to be scheduled during branch hours
+Evenings and weekends as required
+Schedule subject to change
+Union / Non Union:
+
+Local 1930
+
+*** Cover letter:
+
+Dear Ms Bridget Salvato,
+
+I am applying for the Library Information Assistant position at the Richmondtown New York Public Library branch in Staten Island. I earned a BA in English from Boston College in 2004 and a Master of International Affairs from Columbia University in 2010. I am implementing a career change from editing and publication work to library science and would love this opportunity to gain hands-on library experience. 
+
+In my six years as Associate Editor at the Community College Research Center (CCRC), I was responsible for preparing CCRC research for publication and dissemination, including editing, proofing, and formatting. This experience honed my attention to detail, as well was working efficiently and effectively within time constraints. I have over 10 years of editing experience and have excellent written and verbal communication skills. I also developed superb organization skills. For example, I created and maintained a large database of references to streamline the editing process. During my time, I participated in developing the website, which included cataloging CCRC's existing research from 1996 to ensure that our publications would be easily accessible to the public.
+
+In my role as Co-Director of the Korea Education and Exposure Program (KEEP), run by Nodutdol for Korean Community Development, I have accrued 5 years of experience with community training, programming, and outreach. I have conducted workshops on Korean history and current events, outreached to college students and other interested parties, and maintained and developed the KEEP program. This program takes delegates (drawn from a nationwide applicant pool) to North and South Korea in alternating years. This past year, my co-director and I initiated a strategic planning process to fundamentally rethink and improve the program to meet the evolving needs of the participants and our hosts. Preparing for these trips includes a series of study sessions and workshops to prepare the delegates for the trip. 
+
+I have spoken to many librarians regarding my plans to earn a degree in library science, and all have stressed the importance of practical experience. I am eager to learn more about the library system and would love this opportunity to serve both the New York Public Library and the community it serves. 
+
+
+
+
+

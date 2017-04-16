@@ -1,0 +1,19 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is ahead of 'origin/master' by 2 commits.
+#   (use "git push" to publish your local commits)
+#
+# Changes to be committed:
+#	new file:   10.games.org
+#	new file:   11.references.bib
+#	new file:   12.ndd.org
+#	new file:   flagged.org
+#
+# Untracked files:
+#	.#11.references.bib
+#	11.references.bib.bak
+#	pdfs/
+#	scratchpad
+#

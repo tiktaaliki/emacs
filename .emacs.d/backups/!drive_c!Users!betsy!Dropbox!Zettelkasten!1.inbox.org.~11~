@@ -1,0 +1,625 @@
+
+#+STARTUP: content
+
+
+* files
+:PROPERTIES:
+:visibility: all
+:END:
+| [[file:12.ndd.org][12.ndd]]            |
+| [[file:4.work.org][4.work]]            |
+| [[file:2.budget.org][2.budget]]          |
+| [[file:8.personal.org][8.personal]]        |
+| [[file:5.journal.org][5.journal]]         |
+| [[file:6.calendar.org][6.calendar]]        |
+| [[file:3.notes.org][3.notes]]           |
+| [[file:9.reference-vault.org][9.reference-vault]] |
+| [[file:7.lis.org][7.library science]] |
+| [[file:10.games.org][10.games]]          |
+| [[file:11.references.bib][11.references]]     |
+| [[file:~/Dropbox/emacs/settings.org][init file]]         |
+| [[file:~/Dropbox/emacs/.emacs][emacs file]]        |
+|                   |
+
+* conkeror user manual
+
+*** Overview of the Keys
+
+***** Browsing
+| key   | M-x command | meaning                     |
+| g     | find-url    | open new URL                |
+| B     | back        |                             |
+| F     | forward     |                             |
+| r     | reload      |                             |
+| C-g   | abort       | stop                        |
+| C-h i | help-page   | Show this page.             |
+| C-h t | tutorial    | Show the Conkeror tutorial. |
+***** Movement
+| C-a | beginning of line      |
+| C-e | end of line            |
+| C-f | Forward a column       |
+| C-b | backward a column      |
+| C-n | Forward a line         |
+| C-p | backward a line        |
+| C-v | Page down              |
+| M-v | Page up                |
+| M-< | Beginning of document  |
+| M-> | End of document        |
+| C-s | Open i-search forward  |
+| C-r | Open i-search backward |
+***** I-Search
+| <10>       | <15>            |
+| C-s        | Search forward  |
+| C-r        | Search backward |
+| C-g        | Quit i-search (jump back to where i-search started) |
+| backspace  | Undo search     |
+| any modifier plus a key, RET or TAB | Close i-search  |
+
+*** Webjumps
+
+Webjumps are similar to, but potentially more powerful than Firefox's bookmark keywords. You type a webjump name into the location prompt, followed by one or more search terms. Conkeror substitutes your search terms into an url associated with the webjump.
+
+Conkeror has a few webjumps already, but you can find many more, and share your own at the webjumps page of the conkeror wiki.
+| conkerorwiki    | Search conkeror.org               |
+| answers         | search answers.com                |
+| bugzilla        | search mozilla bugzilla           |
+| clhs            | search the Common Lisp Hyper Spec |
+| cliki           | search the Common Lisp wiki       |
+| creativecommons | search creativecommons.org        |
+| dictionary      | Search dictionary.reference.com   |
+| duckduckgo      | Search with duckduckgo            |
+| ebay            | search ebay.com                   |
+| google          | Search with google                |
+| image           | Search google images              |
+| kuro5hin        | search kuro5hin.com               |
+| lucky           | Google "I'm feeling lucky" search |
+| maps            | Search Google Maps                |
+| ratpoisonwiki   | search the ratpoison wiki         |
+| savannah        | search savannah.gnu.org           |
+| scholar         | search google scholar             |
+| slang           | Search urbandictionary.com        |
+| slashdot        | search slashdot.com               |
+| sourceforge     | search sourceforge.net            |
+| stumpwmwiki     | search the StumpWM wiki           |
+| wikipedia       | Search wikipedia.org              |
+| wiktionary      | Search wiktionary.org             |
+| yahoo           | search yahoo                      |
+
+delicious webjumps can be added by putting the following in your rc file:
+
+add_delicious_webjumps("myusername");
+
+this will create the following webjumps:
+adelicious	Add a delicious bookmark.
+delicious	View your delicious bookmarks
+sdelicious	Search your delicious bookmarks
+sadelicious	Search all delicious bookmarks
+
+lastfm webjumps can be added by putting the following in your rc file:
+
+define_lastfm_webjumps("myusername");
+
+this will create the following webjumps:
+lastfm	 
+lastfm-user	 
+lastfm-music	 
+lastfm-group	 
+lastfm-tag	 
+lastfm-label	 
+lastfm-event	 
+
+You can easily add your own custom webjumps as such:
+
+define_webjump("reddit", "http://www.reddit.com/search?q=%s");
+
+The above will define the "reddit" webjump which searches reddit threads. The "%s" in the URL will be replaced by the search term you enter after the webjump name. I.e. entering "reddit haskell compiler" in the minibuffer will redirect you to the search results for reddit threads matching "haskell compiler" as a search string.
+*** Buffer Management
+| <10>       | <25>                      |
+| C-u g      | Open an URL in a new buffer |
+| C-x b      | Select a buffer based on it's name. |
+| M-p        | previous buffer           |
+| M-n        | Next buffer               |
+| C-x k      | kill buffer               |
+| C-x 5 f or C-u C-u g | Open an URL in a new window |
+| C-x 5 0    | Close the current window (and all buffers in it) |
+| C-x C-c    | Quit conkeror             |
+
+*** Universal Argument
+
+Conkeror support the universal argument, C-u. It's a prefix binding that changes how a command behaves. In Conkeror, C-u has two main effects. The first effect is that the command will be executed multiple times. For example, typing C-u C-n will cause conkeror to scroll down 4 lines. C-u 12 C-n will cause conkeror to scroll down 12 lines. The second effect is to open in a new buffer or a new window. C-u g conkeror.org RET This opens the conkeror project web page in a new buffer. C-u C-u n 12 RET will open link no. 12 in a new window.
+
+There are some commands where the effect is ambiguous. Does C-u B go back four pages in the history or does it go back one and open the result in a new buffer? We are working on adding a second universal argument that would allow you to do both. 
+
+*** keys
+content_buffer_normal_keymap
+C-z	[content_buffer_normal_keymap]	
+back_space	cmd_scrollPageUp	Scroll up one page.
+S-space	cmd_scrollPageUp	Scroll up one page.
+space	cmd_scrollPageDown	Scroll down one page.
+M-v	cmd_scrollPageUp	Scroll up one page.
+C-v	cmd_scrollPageDown	Scroll down one page.
+page_up	cmd_scrollPageUp	Scroll up one page.
+page_down	cmd_scrollPageDown	Scroll down one page.
+C-page_up	cmd_scrollLeft	Scroll left.
+C-page_down	cmd_scrollRight	Scroll right.
+C-p	cmd_scrollLineUp	Scroll up one line.
+C-n	cmd_scrollLineDown	Scroll down one line.
+up	cmd_scrollLineUp	Scroll up one line.
+down	cmd_scrollLineDown	Scroll down one line.
+left	cmd_scrollLeft	Scroll left.
+right	cmd_scrollRight	Scroll right.
+C-b	cmd_scrollLeft	Scroll left.
+C-f	cmd_scrollRight	Scroll right.
+C-a	scroll-beginning-of-line	Scroll the current frame all the way to the left.
+C-e	scroll-end-of-line	Scroll the current frame all the way to the right.
+M-<	scroll-top-left	Scroll the current frame all the way to the top left
+M->	cmd_scrollBottom	Scroll to the bottom of the buffer.
+home	scroll-top-left	Scroll the current frame all the way to the top left
+end	cmd_scrollBottom	Scroll to the bottom of the buffer.
+M-w	cmd_copy	Copy the selection into the clipboard.
+S-page_up	cmd_selectPageUp	Extend selection backward one page.
+S-page_down	cmd_selectPageDown	Extend selection forward one page.
+C-delete	cmd_copy	Copy the selection into the clipboard.
+C-space	set-mark	Toggle whether the mark is active.
+C-@	set-mark	Toggle whether the mark is active.
+C-insert	cmd_copy	Copy the selection into the clipboard.
+C-S-home	cmd_selectTop	Extend selection to the beginning of the first line.
+C-S-end	cmd_selectBottom	Extend selection to the end of the last line.
+C-S-left	cmd_selectWordPrevious	Extend selection backward one word.
+C-S-right	cmd_selectWordNext	Extend selection forward one word.
+S-left	cmd_selectCharPrevious	Extend selection backward one character.
+S-right	cmd_selectCharNext	Extend selection forward one character.
+S-home	cmd_selectBeginLine	Extend selection to the beginning of the current line.
+S-end	cmd_selectEndLine	Extend selection to the end of the current line.
+S-up	cmd_selectLinePrevious	Extend selection backward one line.
+S-down	cmd_selectLineNext	Extend selection forward one line.
+C-B	cmd_selectCharPrevious	Extend selection backward one character.
+C-F	cmd_selectCharNext	Extend selection forward one character.
+M-B	cmd_selectWordPrevious	Extend selection backward one word.
+M-F	cmd_selectWordNext	Extend selection forward one word.
+C-P	cmd_selectLinePrevious	Extend selection backward one line.
+C-N	cmd_selectLineNext	Extend selection forward one line.
+u	up	Go to the parent directory of the current URL
+F	forward	Go forward in the session history for the current buffer.
+B	back	Go back in the session history for the current buffer.
+l	back	Go back in the session history for the current buffer.
+r	reload	Reload the current document.
+g	find-url	Open a URL in the current buffer
+G	find-alternate-url	Edit the current URL in the minibuffer
+C-y	paste-url	Open a URL from the clipboard in the current buffer.
+C-x C-v	find-alternate-url	Edit the current URL in the minibuffer
+C-x C-s	save-page	Save a document, not including any embedded documents such as images and css.
+C-x h	cmd_selectAll	Select all.
+C-x return c	charset-prefix	A prefix command that prompts for a charset to use in a subsequent navigation command.
+C-x return r	reload-with-charset	Prompt for a charset, and reload the current page, forcing use of that charset.
+C-g	stop-loading	Stop loading the current document.
+escape	unfocus	Unfocus is a high-level command for unfocusing hyperlinks, inputs, frames, iframes, plugins, and also for clearing the selection.
+M-escape	unfocus	Unfocus is a high-level command for unfocusing hyperlinks, inputs, frames, iframes, plugins, and also for clearing the selection.
+tab	browser-focus-next-form-field	Focus the next element matching `browser_form_field_xpath_expression'.
+S-tab	browser-focus-previous-form-field	Focus the previous element matching `browser_form_field_xpath_expression'.
+S	isearch-continue-forward	Continue the last isearch, forward.
+R	isearch-continue-backward	Continue the last isearch, backward.
+cmdback	back	Go back in the session history for the current buffer.
+cmdforward	forward	Go forward in the session history for the current buffer.
+cmdreload	reload	Reload the current document.
+cmdstop	stop-loading	Stop loading the current document.
+cancel	stop-loading	Stop loading the current document.
+cmdhome	home	Go to the homepage in the current buffer.
+i	browser-object-images	A prefix command to specify that the following command operate on objects of type: images.
+n	browser-object-links	A prefix command to specify that the following command operate on objects of type: links.
+m	browser-object-frames	A prefix command to specify that the following command operate on objects of type: frames.
+e	browser-object-media	A prefix command to specify that the following command operate on objects of type: media.
+T	browser-object-text	Composable browser object which returns the text of another object.
+#	browser-object-fragment-link	A prefix command to specify that the following command operate on objects of type: fragment-link.
+*e	browser-object-media	A prefix command to specify that the following command operate on objects of type: media.
+*i	browser-object-images	A prefix command to specify that the following command operate on objects of type: images.
+*n	browser-object-links	A prefix command to specify that the following command operate on objects of type: links.
+*m	browser-object-frames	A prefix command to specify that the following command operate on objects of type: frames.
+*M	browser-object-mathml	A prefix command to specify that the following command operate on objects of type: mathml.
+*u	browser-object-url	A prefix command to specify that the following command operate on objects of type: url.
+*a	browser-object-alt	A prefix command to specify that the following command operate on objects of type: alt.
+*t	browser-object-title	A prefix command to specify that the following command operate on objects of type: title.
+*T	browser-object-title-or-alt	A prefix command to specify that the following command operate on objects of type: title-or-alt.
+*#	browser-object-fragment-link	A prefix command to specify that the following command operate on objects of type: fragment-link.
+**	browser-object-dom-node	A prefix command to specify that the following command operate on objects of type: dom-node.
+[	browser-object-relationship-previous	A prefix command to specify that the following command operate on objects of type: relationship-previous.
+]	browser-object-relationship-next	A prefix command to specify that the following command operate on objects of type: relationship-next.
+^	browser-object-up-url	A prefix command to specify that the following command operate on objects of type: up-url.
+f	follow	
+;	focus	
+t	follow-top	
+s	save	Save a browser object.
+c	copy	
+\	view-source	Toggle between source and rendered views of a URL.
+x	shell-command-on-file	Download a document to a temporary file and run a shell command on it.
+X	shell-command-on-url	Run a shell command on the url of a browser object.
+b	bookmark	Create a bookmark.
+v	view-as-mime-type	Display a browser object in the browser using the specified MIME type.
+d	delete	Delete a DOM node, given as a browser object.
+<	scroll	Generalized scroll command.
+>	scroll	Generalized scroll command.
++	zoom-in-text	
+=	zoom-reset-text	
+-	zoom-out-text	
+C-+	zoom-in-full	
+C-=	zoom-reset-full	
+C--	zoom-out-full	
+z i	zoom-in-text	
+z m	zoom-in-text-more	
+z z	zoom-reset-text	
+z o	zoom-out-text	
+z r	zoom-out-text-more	
+z I	zoom-in-full	
+z M	zoom-in-full-more	
+z Z	zoom-reset-full	
+z O	zoom-out-full	
+z R	zoom-out-full-more	
+C-d	darken-page	Darken the page in an attempt to save your eyes.
+h	find-url-from-history-new-buffer	Find a page from history in the current buffer
+H	find-url-from-history	Find a page from history in the current buffer
+default_global_keymap
+C-z	[default_global_keymap]	
+M-x	execute-extended-command	Call a command specified in the minibuffer.
+M-:	eval-expression	Evaluate JavaScript statements.
+M-!	shell-command	
+C-x 5 0	delete-window	Delete the current window.
+C-x 5 2	make-window	Make a new window with the homepage.
+C-x 5 f	find-url-new-window	Open a URL in a new window
+C-x C-c	quit	Quit Conkeror
+C-x b	switch-to-buffer	Prompt for a buffer and switch to it.
+C-x k	kill-buffer	Kill a buffer specified in the minibuffer.
+C-x left	buffer-previous	Switch to the previous buffer.
+C-x right	buffer-next	Switch to the next buffer.
+C-x C-f	find-url-new-buffer	Open a URL in a new buffer
+C-x %	image-toggle-zoom-to-fit	Toggle zoom-to-fit (viewport) on an image document.
+q	kill-current-buffer	Kill the current buffer.
+M-p	buffer-previous	Switch to the previous buffer.
+M-n	buffer-next	Switch to the next buffer.
+M-P	buffer-move-backward	Move the current buffer backward in the buffer order.
+M-N	buffer-move-forward	Move the current buffer forward in the buffer order.
+C-s	isearch-forward	Start interactive text search, forward from point.
+C-r	isearch-backward	Start interactive text search, backwards from point.
+f11	toggle-full-screen	Toggle full screen mode for the current window.
+M-S-return	toggle-full-screen	Toggle full screen mode for the current window.
+C-q	quote-next-mode	This mode sends the next key combo to the buffer, bypassing normal key handling. It disengages after one key combo.
+C-M-q	quote-mode	This mode sends all key combos to the buffer, bypassing normal key handling, until the escape key is pressed.
+cmdsearch	isearch-forward	Start interactive text search, forward from point.
+default_base_keymap
+C-h	[default_help_keymap]	
+f1	[default_help_keymap]	
+C-u	universal-argument	Begin a numeric argument for the following command.
+default_help_keymap
+C-h a	apropos-command	List commands whose names contain a given substring.
+C-h b	describe-bindings	Show a help buffer describing the bindings in the context keymaps, meaning the top-level keymaps according to the focus context in the current buffer.
+C-h f	describe-command	
+C-h v	describe-variable	
+C-h k	describe-key	
+C-h c	describe-key-briefly	
+C-h p	describe-preference	
+C-h i	help-page	Open the Conkeror help page.
+C-h t	tutorial	Open the Conkeror tutorial.
+C-h w	where-is	
+f1 a	apropos-command	List commands whose names contain a given substring.
+f1 b	describe-bindings	Show a help buffer describing the bindings in the context keymaps, meaning the top-level keymaps according to the focus context in the current buffer.
+f1 f	describe-command	
+f1 v	describe-variable	
+f1 k	describe-key	
+f1 c	describe-key-briefly	
+f1 p	describe-preference	
+f1 i	help-page	Open the Conkeror help page.
+f1 t	tutorial	Open the Conkeror tutorial.
+f1 w	where-is	
+*** keys
+content_buffer_normal_keymap
+| <10>       | <3> | <37>                                  |
+| C-z        | [content_buffer_normal_keymap] |                                       |
+
+***** scrolling
+| <10>       | <3> | <30>                           |
+| back_space | cmd_scrollPageUp | Scroll up one page.            |
+| S-space    | cmd_scrollPageUp | Scroll up one page.            |
+| space      | cmd_scrollPageDown | Scroll down one page.          |
+| M-v        | cmd_scrollPageUp | Scroll up one page.            |
+| C-v        | cmd_scrollPageDown | Scroll down one page.          |
+| page_up    | cmd_scrollPageUp | Scroll up one page.            |
+| page_down  | cmd_scrollPageDown | Scroll down one page.          |
+| C-page_up  | cmd_scrollLeft | Scroll left.                   |
+| C-page_down | cmd_scrollRight | Scroll right.                  |
+| C-p        | cmd_scrollLineUp | Scroll up one line.            |
+| C-n        | cmd_scrollLineDown | Scroll down one line.          |
+| up         | cmd_scrollLineUp | Scroll up one line.            |
+| down       | cmd_scrollLineDown | Scroll down one line.          |
+| left       | cmd_scrollLeft | Scroll left.                   |
+| right      | cmd_scrollRight | Scroll right.                  |
+| C-b        | cmd_scrollLeft | Scroll left.                   |
+| C-f        | cmd_scrollRight | Scroll right.                  |
+| C-a        | scroll-beginning-of-line | Scroll the current frame all the way to the left. |
+| C-e        | scroll-end-of-line | Scroll the current frame all the way to the right. |
+| M-<        | scroll-top-left | Scroll the current frame all the way to the top left |
+| M->        | cmd_scrollBottom | Scroll to the bottom of the buffer. |
+| home       | scroll-top-left | Scroll the current frame all the way to the top left |
+| end        | cmd_scrollBottom | Scroll to the bottom of the buffer. |
+
+***** editing   
+| M-w        | cmd_copy | Copy the selection into the clipboard. |
+| S-page_up  | cmd_selectPageUp | Extend selection backward one page. |
+| S-page_down | cmd_selectPageDown | Extend selection forward one page. |
+| C-delete   | cmd_copy | Copy the selection into the clipboard. |
+| C-space    | set-mark | Toggle whether the mark is active. |
+| C-@        | set-mark | Toggle whether the mark is active. |
+| C-insert   | cmd_copy | Copy the selection into the clipboard. |
+| C-S-home   | cmd_selectTop | Extend selection to the beginning of the first line. |
+| C-S-end    | cmd_selectBottom | Extend selection to the end of the last line. |
+| C-S-left   | cmd_selectWordPrevious | Extend selection backward one word. |
+| C-S-right  | cmd_selectWordNext | Extend selection forward one word. |
+| S-left     | cmd_selectCharPrevious | Extend selection backward one character. |
+| S-right    | cmd_selectCharNext | Extend selection forward one character. |
+| S-home     | cmd_selectBeginLine | Extend selection to the beginning of the current line. |
+| S-end      | cmd_selectEndLine | Extend selection to the end of the current line. |
+| S-up       | cmd_selectLinePrevious | Extend selection backward one line. |
+| S-down     | cmd_selectLineNext | Extend selection forward one line. |
+| C-B        | cmd_selectCharPrevious | Extend selection backward one character. |
+| C-F        | cmd_selectCharNext | Extend selection forward one character. |
+| M-B        | cmd_selectWordPrevious | Extend selection backward one word. |
+| M-F        | cmd_selectWordNext | Extend selection forward one word. |
+| C-P        | cmd_selectLinePrevious | Extend selection backward one line. |
+| C-N        | cmd_selectLineNext | Extend selection forward one line. |
+| u          | up  | Go to the parent directory of the current URL |
+| F          | forward | Go forward in the session history for the current buffer. |
+| B          | back | Go back in the session history for the current buffer. |
+| l          | back | Go back in the session history for the current buffer. |
+| r          | reload | Reload the current document.   |
+| g          | find-url | Open a URL in the current buffer |
+| G          | find-alternate-url | Edit the current URL in the minibuffer |
+| C-y        | paste-url | Open a URL from the clipboard in the current buffer. |
+| C-x C-v    | find-alternate-url | Edit the current URL in the minibuffer |
+| C-x C-s    | save-page | Save a document, not including any embedded documents such as images and css. |
+| C-x h      | cmd_selectAll | Select all.                    |
+| C-x return c | charset-prefix | A prefix command that prompts for a charset to use in a subsequent navigation command. |
+| C-x return r | reload-with-charset | Prompt for a charset, and reload the current page, forcing use of that charset. |
+| C-g        | stop-loading | Stop loading the current document. |
+| escape     | unfocus | Unfocus is a high-level command for unfocusing hyperlinks, inputs, frames, iframes, plugins, and also for clearing the selection. |
+| M-escape   | unfocus | Unfocus is a high-level command for unfocusing hyperlinks, inputs, frames, iframes, plugins, and also for clearing the selection. |
+| tab        | browser-focus-next-form-field | Focus the next element matching `browser_form_field_xpath_expression'. |
+| S-tab      | browser-focus-previous-form-field | Focus the previous element matching `browser_form_field_xpath_expression'. |
+| S          | isearch-continue-forward | Continue the last isearch, forward. |
+| R          | isearch-continue-backward | Continue the last isearch, backward. |
+| cmdback    | back | Go back in the session history for the current buffer. |
+| cmdforward | forward | Go forward in the session history for the current buffer. |
+| cmdreload  | reload | Reload the current document.   |
+| cmdstop    | stop-loading | Stop loading the current document. |
+| cancel     | stop-loading | Stop loading the current document. |
+| cmdhome    | home | Go to the homepage in the current buffer. |
+| i          | browser-object-images | A prefix command to specify that the following command operate on objects of type: images. |
+| n          | browser-object-links | A prefix command to specify that the following command operate on objects of type: links. |
+| m          | browser-object-frames | A prefix command to specify that the following command operate on objects of type: frames. |
+| e          | browser-object-media | A prefix command to specify that the following command operate on objects of type: media. |
+| T          | browser-object-text | Composable browser object which returns the text of another object. |
+| #          | browser-object-fragment-link | A prefix command to specify that the following command operate on objects of type: fragment-link. |
+| *e         | browser-object-media | A prefix command to specify that the following command operate on objects of type: media. |
+| *i         | browser-object-images | A prefix command to specify that the following command operate on objects of type: images. |
+| *n         | browser-object-links | A prefix command to specify that the following command operate on objects of type: links. |
+| *m         | browser-object-frames | A prefix command to specify that the following command operate on objects of type: frames. |
+| *M         | browser-object-mathml | A prefix command to specify that the following command operate on objects of type: mathml. |
+| *u         | browser-object-url | A prefix command to specify that the following command operate on objects of type: url. |
+| *a         | browser-object-alt | A prefix command to specify that the following command operate on objects of type: alt. |
+| *t         | browser-object-title | A prefix command to specify that the following command operate on objects of type: title. |
+| *T         | browser-object-title-or-alt | A prefix command to specify that the following command operate on objects of type: title-or-alt. |
+| *#         | browser-object-fragment-link | A prefix command to specify that the following command operate on objects of type: fragment-link. |
+| **         | browser-object-dom-node | A prefix command to specify that the following command operate on objects of type: dom-node. |
+| [          | browser-object-relationship-previous | A prefix command to specify that the following command operate on objects of type: relationship-previous. |
+| ]          | browser-object-relationship-next | A prefix command to specify that the following command operate on objects of type: relationship-next. |
+| ^          | browser-object-up-url | A prefix command to specify that the following command operate on objects of type: up-url. |
+| f          | follow |                                |
+| ;          | focus |                                |
+| t          | follow-top |                                |
+| s          | save | Save a browser object.         |
+| c          | copy |                                |
+| \          | view-source | Toggle between source and rendered views of a URL. |
+| x          | shell-command-on-file | Download a document to a temporary file and run a shell command on it. |
+| X          | shell-command-on-url | Run a shell command on the url of a browser object. |
+| b          | bookmark | Create a bookmark.             |
+| v          | view-as-mime-type | Display a browser object in the browser using the specified MIME type. |
+| d          | delete | Delete a DOM node, given as a browser object. |
+| <          | scroll | Generalized scroll command.    |
+| >          | scroll | Generalized scroll command.    |
+| +          | zoom-in-text |                                |
+| =          | zoom-reset-text |                                |
+| -          | zoom-out-text |                                |
+| C-+        | zoom-in-full |                                |
+| C-=        | zoom-reset-full |                                |
+| C--        | zoom-out-full |                                |
+| z i        | zoom-in-text |                                |
+| z m        | zoom-in-text-more |                                |
+| z z        | zoom-reset-text |                                |
+| z o        | zoom-out-text |                                |
+| z r        | zoom-out-text-more |                                |
+| z I        | zoom-in-full |                                |
+| z M        | zoom-in-full-more |                                |
+| z Z        | zoom-reset-full |                                |
+| z O        | zoom-out-full |                                |
+| z R        | zoom-out-full-more |                                |
+| C-d        | darken-page | Darken the page in an attempt to save your eyes. |
+| h          | find-url-from-history-new-buffer | Find a page from history in the current buffer |
+| H          | find-url-from-history | Find a page from history in the current buffer |
+| C-z        | [default_global_keymap] |                                |
+| M-x        | execute-extended-command | Call a command specified in the minibuffer. |
+| M-:        | eval-expression | Evaluate JavaScript statements. |
+| M-!        | shell-command |                                |
+| C-x 5 0    | delete-window | Delete the current window.     |
+| C-x 5 2    | make-window | Make a new window with the homepage. |
+| C-x 5 f    | find-url-new-window | Open a URL in a new window     |
+| C-x C-c    | quit | Quit Conkeror                  |
+| C-x b      | switch-to-buffer | Prompt for a buffer and switch to it. |
+| C-x k      | kill-buffer | Kill a buffer specified in the minibuffer. |
+| C-x left   | buffer-previous | Switch to the previous buffer. |
+| C-x right  | buffer-next | Switch to the next buffer.     |
+| C-x C-f    | find-url-new-buffer | Open a URL in a new buffer     |
+| C-x %      | image-toggle-zoom-to-fit | Toggle zoom-to-fit (viewport) on an image document. |
+| q          | kill-current-buffer | Kill the current buffer.       |
+| M-p        | buffer-previous | Switch to the previous buffer. |
+| M-n        | buffer-next | Switch to the next buffer.     |
+| M-P        | buffer-move-backward | Move the current buffer backward in the buffer order. |
+| M-N        | buffer-move-forward | Move the current buffer forward in the buffer order. |
+| C-s        | isearch-forward | Start interactive text search, forward from point. |
+| C-r        | isearch-backward | Start interactive text search, backwards from point. |
+| f11        | toggle-full-screen | Toggle full screen mode for the current window. |
+| M-S-return | toggle-full-screen | Toggle full screen mode for the current window. |
+| C-q        | quote-next-mode | This mode sends the next key combo to the buffer, bypassing normal key handling. It disengages after one key combo. |
+| C-M-q      | quote-mode | This mode sends all key combos to the buffer, bypassing normal key handling, until the escape key is pressed. |
+| cmdsearch  | isearch-forward | Start interactive text search, forward from point. |
+| C-h        | [default_help_keymap] |                                |
+| f1         | [default_help_keymap] |                                |
+| C-u        | universal-argument | Begin a numeric argument for the following command. |
+| C-h a      | apropos-command | List commands whose names contain a given substring. |
+| C-h b      | describe-bindings | Show a help buffer describing the bindings in the context keymaps, meaning the top-level keymaps according to the focus context in the current buffer. |
+| C-h f      | describe-command |                                |
+| C-h v      | describe-variable |                                |
+| C-h k      | describe-key |                                |
+| C-h c      | describe-key-briefly |                                |
+| C-h p      | describe-preference |                                |
+| C-h i      | help-page | Open the Conkeror help page.   |
+| C-h t      | tutorial | Open the Conkeror tutorial.    |
+| C-h w      | where-is |                                |
+| f1 a       | apropos-command | List commands whose names contain a given substring. |
+| f1 b       | describe-bindings | Show a help buffer describing the bindings in the context keymaps, meaning the top-level keymaps according to the focus context in the current buffer. |
+| f1 f       | describe-command |                                |
+| f1 v       | describe-variable |                                |
+| f1 k       | describe-key |                                |
+| f1 c       | describe-key-briefly |                                |
+| f1 p       | describe-preference |                                |
+| f1 i       | help-page | Open the Conkeror help page.   |
+| f1 t       | tutorial | Open the Conkeror tutorial.    |
+| f1 w       | where-is |                                |
+* to dos
+
+*** [TODO] get NY driver's license -- see when James can go
+*** [TODO] get new bank
+***** which bank to use?
+******* TD bank
+******* simple
+******* ally bank
+*** [TODO] add verizon payments to shared bills spreadsheet
+*** [TODO] figure out website
+*** [TODO] add Yongchan to KEEP alumni mailing list
+:LOGBOOK:
+CLOCK: [2017-03-19 Sun 16:13]--[2017-03-19 Sun 16:13] =>  0:00
+:END:
+*** [TODO] contact CVS health benefit extras - 888-789-0404
+*** [TODO] post event on NDD website
+*** [✓] see if Meejin, Haruki, and Jas are coming
+- State "[✓]"        from "[TODO]"     [2017-04-09 Sun 21:51]
+
+
+* notes on intro to programming
+*** key bindings
+- M-C-\ --> indent code
+| <11>        | <17>              | <60>                                                         |
+|             |                   |                                                              |
+|-------------+-------------------+--------------------------------------------------------------|
+| C-x C-e     | eval-last-sexp    | evaluates the previous symbolic expression and returns the value in the echo area |
+| C-u C-x C-e |                   | returns C-x C-e value after the expression and not in the echo area |
+| C-x b       | switch-to-buffer  | switches to most recent buffer that is NOT visible           |
+| C-x o       | other-window      |                                                              |
+|             | other-buffer      |                                                              |
+|             | set-buffer        |                                                              |
+
+| symbol | <10>       | <50>                                               |   |
+|--------+------------+----------------------------------------------------+---|
+| +      | number     | sums the argument                                  |   |
+|        |            |                                                    |   |
+
+
+
+| concat           | strings             | combines 2+ strings                                                                 |   |
+| substring        | strings and numbers | returns part of a string based on the numbers given                                 |   |
+| number-to-string | number              | converts number to string                                                           |   |
+| message          |                     | send messages to user                                                               |   |
+| current-buffer   |                     |                                                                                     |   |
+| buffer-name      |                     |                                                                                     |   |
+| buffer-size      |                     | # of words in current buffer                                                        |   |
+| point            |                     | returns # that tells u what number character is at the cursor starting from the top |   |
+| point-min        |                     | minimum permissible value of point in current buffer                                |   |
+| point-max        |                     | value of maximum permissible value of point in current buffer                       |   |
+|                  |                     |                                                                                     |   |
+
+(switch-to-buffer (other-buffer (current-buffer) t))
+--> other buffer tells it to skip the current buffer
+--> other buffer has 2 arguments: 
+      1. (current-buffer): skip current buffer
+      2. t: ok to switch to visible buffer
+
+(switch-to-buffer (other-buffer))  
+***** C-x C-e : eval-last-sexp
+    - sexp = symbolic expression
+*** symbols:
+    2 types:
+    - value AND/OR 
+    - function definition (a set of instructions for the computer)
+*** error messages
+    - void-variable --> function does not have a value as a variable
+    - void-function-this --> function did not have a definition
+*** functions
+    - first item of a list that is not preceded by a quote mark.
+    - command for the computer. 
+    - lists preceded by a quote mark are lists. the quote mark tells lisp to do nothing with the list and to just take it as written
+
+*** arguments: 
+          - arguments are the atoms or list that follow a function
+          - e.g., in (+ 2 2), + is the function, and 2 2 are the arguments
+        - arguments can be symbols that return value when evaluated
+      - e.g., "fill-column", which is a symbol that returns a value when used w/o parentheses, and an be used as an argument 
+
+***** data types:
+     - numbers
+     - strings (text)
+
+***** substring: 
+     - takes 3 arguments:
+       1. string of characters
+       2. number indicating the beginning of substring
+       3. number indicating end of substring
+***** message
+     - (message "The name of this buffer is: %s." (buffer-name))
+       - function "buffer-name" returns the name of the buffer as a string. function "message" then inserts this string where %s is. (%s can be ssss
+       - %d -> print value as an integer
+	 - (message "The value of fill-column is %d." fill-column)
+	   fill-column is a variable so it's not put in parentheses
+           - cf. "buffer-name" is a function, so it is put in parentheses.
+*** setting the value of a variable
+    - functions: set, setq, let
+***** set:
+     - (set 'flowers '(rose violet daisy buttercup)) 
+       - the SET function RETURNS the stuff in the innermost parentheses
+       - thereafter, eval-ing flowers (no quotes or parentheses) returns (rose violet daisy buttercup)
+       - OTOH, evaling 'flowers returns flowers (because the qm tells lisp to take what follows as given).
+***** setq:
+     - same as SET, except the first argument (in the previous one, 'flowers) is quoted automatically
+       (setq carnivores '(lion tiger leopard))
+     - (set 'carnivores '(lion tiger leopard))
+     - (setq trees '(pine fir oak maple)
+             herbivores '(gazelle antelope zebra))
+       - can use setq to set multiple values to multiple variables.
+     - for COUNTING:
+       (setq counter 0) ; the initializer. sets the counter variable to zero
+       (setq counter (+ counter 1)) ; This is the incrementer.
+       counter ; This is the counter.
+*** function definitions
+    - mark-whole-buffer: this is a symbol. it has code attached to it that tells the computer what to do when the function is called.
+    - composed of 5 parts:
+      1. name of symbol that is attached to function definition
+      2. list of arguments to be passed to the function
+      3. documentation describing the function
+      4. an expression to make the function interactive (i.e., allowing you to use M-x __ or a keybinding)
+      5. the body (i.e., code that tells comp what to do
+	 (defun function-name (arguments...)
+	 "optional documentation"
+	 (interactive argument-passing-info)
+	 body...)
+
+(defun multiply-by-seven (number) -->
+  "Multiply NUMBER by seven."
+  (* 7 number))
+
+
+
