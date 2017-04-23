@@ -25,12 +25,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-level-1 ((t (:foreground "gainsboro" :weight bold :height 1.5 :family "quicksand"))))
- '(org-level-2 ((t (:foreground "gainsboro" :height 1.2 :width extra-expanded :family "futura lt"))))
+ '(org-date ((t (:foreground "cornflower blue" :underline t :weight light))))
+ '(org-ellipsis ((t (:foreground "gray" :height 0.75))))
+ '(org-level-1 ((t (:foreground "gainsboro" :weight bold :height 1.3 :family "quicksand"))))
+ '(org-level-2 ((t (:foreground "gainsboro" :height 1.1 :width extra-expanded :family "myriad pro"))))
  '(org-level-3 ((t (:foreground "gainsboro" :width extra-expanded :family "quicksand"))))
+ '(org-level-4 ((t (:foreground "burlywood"))))
  '(org-link ((t (:foreground "magenta" :underline t :family "consolas"))))
  '(org-special-keyword ((t (:foreground "gray"))))
- '(org-table ((t (:family "consolas")))))
+ '(org-table ((t (:family "consolas"))))
+ '(org-tag ((t (:foreground "firebrick3" :overline t :underline t :weight bold)))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -39,10 +43,8 @@
  '(custom-safe-themes
    (quote
     ("10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
- '(org-odd-levels-only t)
- '(org-refile-targets (quote ((org-agenda-files :tag . ""))))
- '(org-refile-use-outline-path (quote file))
+ '(org-agenda-span (quote month))
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
-    (magit gruvbox-theme bbdb bibretrieve bibtex-utils pdf-tools interleave company org-ref flyspell-correct-helm helm use-package solarized-theme org-plus-contrib color-theme))))
+    (ledger-mode org-gcal calfw-org calfw-gcal calfw magit gruvbox-theme bbdb bibretrieve bibtex-utils pdf-tools interleave company org-ref flyspell-correct-helm helm use-package solarized-theme org-plus-contrib color-theme))))

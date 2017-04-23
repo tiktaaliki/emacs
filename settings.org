@@ -43,11 +43,21 @@
 (setq vc-make-backup-files t)
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 #+END_SRC
+
 * navigation
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package helm
-  :bind (("M-x" . helm-M-x)
-		([f10] . helm-buffers-list)))
+    (use-package helm
+    :bind (("M-x" . helm-M-x)
+		  ([f10] . helm-buffers-list)))
+
+(bind-keys ("C-+" . text-scale-increase)
+           ("C--" . text-scale-decrease))
+
+ (fset 'yes-or-no-p 'y-or-n-p)
+ (setq ido-enable-flex-matching t)
+ (setq ido-everywhere t)
+ (ido-mode 1)
+(setq read-file-name-completion-ignore-case t)
 #+END_SRC
 
 * Personal details
@@ -57,15 +67,34 @@
 #+END_SRC
 * buffer behavior
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq initial-buffer-choice "~/Dropbox/Zettelkasten/1.inbox.org")
+    (setq initial-buffer-choice "~/Dropbox/Zettelkasten/1.inbox.org")
 
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;    (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
-(setq inhibit-startup-screen t)
+    (setq split-height-threshold nil)
+    (setq split-width-threshold 0)
+    (setq inhibit-startup-screen t)
+
+    (setq initial-major-mode #'org-mode
+	  initial-scratch-message "# This buffer is for notes you don't want to save\n\n")
+  (global-set-key (kbd "C-x /") 'shrink-window-horizontally)
+
+     ;; (global-set-key (kbd "S-C-<left>") 'shrink-window-orizontally)
+     ;; (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+     ;; (global-set-key (kbd "S-C-<down>") 'shrink-window)
+     ;; (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
 
+    ;; (bind-keys ("S-C-<left>" . shrink-window-horizontally)
+    ;;            ("S-C-<right>" . enlarge-window-horizontally)
+    ;;            ("S-C-<down>" . shrink-window)
+    ;;            ("S-C-<up>" . enlarge-window))
+
+    (fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+* sounds
+#+BEGIN_SRC emacs-lisp :tangle yes
+ (setq visible-bell 1)
 #+END_SRC
 * appearance
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -79,8 +108,64 @@
 
 #+END_SRC
 
+* ledger mode
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+
+
+(use-package ledger-mode
+  :ensure t
+  :if (executable-find "ledger")
+  :mode ("\\.ledger$" . ledger-mode)
+  :demand t ; so that the capture templates get loaded
+  :init
+  (defvar my/ledger-file
+    (expand-file-name "~/Dropbox/Finances/finances.ledger")
+    "Where the ledger journal is kept.")
+  (defun my/ledger-file ()
+    "Find ledger journal file."
+    (interactive)
+    (find-file my/ledger-file))
+  :config
+  (setq org-capture-templates
+        (append org-capture-templates
+                '(("l" "Ledger entries")
+                  ("li" "income" plain (file my/ledger-file)
+                   "%(org-read-date) %^{From?}
+    assets:checking       $ %^{Amount}
+    income:salary" :empty-lines 1 :immediate-finish t)
+                  ("lc" "citi" plain (file my/ledger-file)
+                   "%(org-read-date) %^{Payee}
+    expenses:%^{Expense category}       $ %^{Amount}
+    liabilities:citi mastercard" :empty-lines 1 :immediate-finish t)
+                  ("lo" "capital one" plain (file my/ledger-file)
+                   "%(org-read-date) %^{Payee}
+    expenses:%^{Expense category}       SEK %^{Amount}
+    liabilities:capital one credit" :empty-lines 1 :immediate-finish t)
+                  ("ld" "pay with checking" plain (file my/ledger-file)
+                   "%(org-read-date) %^{Payee}
+    expenses:%^{Expense category}       $ %^{Amount}
+    assets:checking" :empty-lines 1 :immediate-finish t))))
+  (setq ledger-post-amount-alignment-column 70)
+  (setq ledger-post-amount-alignment-at :decimal)
+  ;; There is a correct way to write dates:
+  ;; https://xkcd.com/1179/
+  (setq ledger-use-iso-dates t)
+  (setq ledger-reports '(("on-hand" "ledger -f %(ledger-file) bal \"(assets:cash|checking|liabilities)\"")
+                         ("bal" "ledger -f %(ledger-file) bal")
+                         ("reg" "ledger -f %(ledger-file) reg")
+                         ("payee" "ledger -f %(ledger-file) reg @%(payee)")
+                         ("account" "ledger -f %(ledger-file) reg %(account)"))))
+
+
+#+END_SRC
 * fonts
 #+BEGIN_SRC emacs-lisp :tangle yes
+
+(setq org-ellipsis " ෴ " )
+
+
 (setq my-prefered-font
       (cond ((eq system-type 'windows-nt) "consolas")
             ((eq system-type 'gnu/linux) "mono")
@@ -89,19 +174,20 @@
 (when my-prefered-font
   (set-frame-font my-prefered-font nil t))
 
-(set-face-attribute 'default nil :height 175 :foreground '"lemon chiffon" )
+(set-face-attribute 'default nil :height 155 :foreground '"lemon chiffon" )
 
 (use-package org-bullets
      :init
      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-	(setq org-bullets-bullet-list (quote ("◉" "◉" "⏵" "⏵""⚪" "⚪" "»" "»" "⚹"  "⚹""∙"))))
+	(setq org-bullets-bullet-list (quote ("◉" "⏵" "⚪" "»" "⋇"))))
 
  (setq org-todo-keyword-faces
             '(
-            ("[TODO]" :foreground "olivedrab1" :weight bold :family "fantasque sans mono" ) 
-            ("[?]"  :foreground "yellow" :weight bold) 
-            ( "[✓]"  :foreground "deepskyblue1" :weight bold)
-            ( "[☓]"  :foreground "deepskyblue1" :weight bold)
+            ("[TODO]" :foreground "olivedrab1" :weight bold) 
+            ("[?]"  :foreground "yellow") 
+            ( "[DONE]"  :foreground "gainsboro" )
+            ("[someday]" :foreground "gainsboro") 
+            ( "[☓]"  :foreground "gainsboro")
             )
  )
 
@@ -112,27 +198,33 @@
 
 #+END_SRC
 
-#+RESULTS:
+* org-archive
+ #+BEGIN_SRC emacs-lisp :tangle yes
+  (setq org-archive-location "~/Dropbox/Zettelkasten/archive.org::datetree/")
 
+ #+END_SRC
 * org-agenda
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq org-archive-location "~/Dropbox/Zettelkasten/archive.org::")
-(setq org-agenda-files (quote
-  ("~/Dropbox/Zettelkasten/1.inbox.org" 
-   "~/Dropbox/Zettelkasten/2.budget.org"
-   "~/Dropbox/Zettelkasten/3.notes.org" 
-   "~/Dropbox/Zettelkasten/4.work.org" 
-   "~/Dropbox/Zettelkasten/5.journal.org"
-   "~/Dropbox/Zettelkasten/6.calendar.org" 
-   "~/Dropbox/Zettelkasten/7.lis.org" 
-   "~/Dropbox/Zettelkasten/8.personal.org"
-   "~/Dropbox/Zettelkasten/9.reference-vault.org"
-"~/Dropbox/Zettelkasten/12.ndd.org"
-)))
- (setq org-todo-keywords 
-           (quote ((sequence "[TODO](t)" "[?](w!)" "|" "[✓](d!)" "[☓](c!)"))))
-
-
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key (kbd "C-x .") 'org-archive-subtree-default)
+  (global-set-key (kbd "C-.") 'org-todo)
+  (global-set-key (kbd "C-c n") 'org-refile)
+ (setq org-log-into-drawer t)
+    (setq org-agenda-files (quote
+      ("~/Dropbox/Zettelkasten/1.inbox.org" 
+       "~/Dropbox/Zettelkasten/2.budget.org"
+       "~/Dropbox/Zettelkasten/3.notes.org" 
+       "~/Dropbox/Zettelkasten/4.work.org" 
+       "~/Dropbox/Zettelkasten/5.journal.org"
+       "~/Dropbox/Zettelkasten/6.calendar.org" 
+       "~/Dropbox/Zettelkasten/7.lis.org" 
+       "~/Dropbox/Zettelkasten/8.personal.org"
+       "~/Dropbox/Zettelkasten/9.reference-vault.org"
+    "~/Dropbox/Zettelkasten/12.ndd.org"
+    )))
+     (setq org-todo-keywords 
+	       (quote ((sequence "[TODO](t)"  "|" "[DONE](d!)" )
+               	(sequence "[?](w!)" "[someday](s!)"  "[☓](c!)"))))
 
 #+END_SRC
 * Org-capture
@@ -141,16 +233,31 @@
 
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
  (setq org-capture-templates 
-'(("t" "todo" entry (file+headline "~/Dropbox/Zettelkasten/1.inbox.org" "to dos" ) "** [TODO] %?")
-  ("j" "journal" entry (file+datetree "~/Dropbox/Zettelkasten/5.journal.org")
+	'(("t" "todo" entry (file+headline "~/Dropbox/Zettelkasten/1.inbox.org" "to dos" ) 
+		"** [TODO] %?
+SCHEDULED: %^{SCHEDULED}T DEADLINE: %^{DEADLINE}T")
+	  ("j" "journal" entry (file+datetree "~/Dropbox/Zettelkasten/5.journal.org")
               "* %<%H:%M> %?")
-  ("e" "event" entry (file+datetree+prompt "~/Dropbox/Zettelkasten/6.calendar.org")
+	  ("e" "event" entry (file+datetree+prompt "~/Dropbox/Zettelkasten/6.calendar.org")
               "* %? 
-%^T") ))
+		%^T") 	))
 #+END_SRC
 
+* Org-refile
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(setq org-refile-use-outline-path (quote file))
+
+(setq org-refile-targets '(
+                     (nil :maxlevel . 9)
+                     (org-agenda-files :maxlevel . 9)
+                     ("archive.org" :maxlevel . 9)                   
+))
+
+;(setq org-outline-path-complete-in-steps nil) ; Refile in a single go
 
 
+#+END_SRC
 * magit
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package magit
@@ -196,7 +303,7 @@
       (typopunct-change-language 'english)
       (typopunct-mode 1))
 
-
+(delete-selection-mode) ;allows to delete selected text by typing
 (use-package visual-fill-column
   :ensure t
   :config
