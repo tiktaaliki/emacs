@@ -3,62 +3,171 @@
 :Properties:
 :visibility: all
 :End:
+
 #+BEGIN_SRC emacs-lisp :tangle yes
 
 #+END_SRC
-* mobile org
+
+* commented out
+# ** mobile org
+# # #+BEGIN_SRC emacs-lisp :tangle yes
+# # (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+# # (setq org-directory "~/Dropbox/Zettelkasten")
+# # (setq org-mobile-inbox-for-pull "~/Dropbox/Zettelkasten/flagged.org")
+# # (setq org-mobile-checksum-binary "C:\\Users\\betsy\\coreutils\\md5sum.exe")
+# # #+END_SRC
+# ** package management
+# #+BEGIN_SRC emacs-lisp :tangle yes
+
+
+#   ; (use-package org-plus-contrib)
+#   ; (use-package interleave)
+#   ; (use-package pdf-tools)
+#   ; (use-package dash)
+
+
+#    ;; (use-package org-ref
+#    ;;  :init 
+#    ;; (setq org-ref-default-bibliography
+#    ;; '("~/Dropbox/Zettelkasten/references.bib"))
+#    ;; (setq org-ref-bibliography-notes '("~/Dropbox/Zettelkasten/3.notes.org"))
+#    ;; (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
+#    ;; (setq org-ref-pdf-directory '("~/Dropbox/Zettelkasten/pdfs/"))
+#    ;;  :config (require 'org-ref-helm-cite))
+
+# #+END_SRC
+
+# ** language support
+# #+BEGIN_SRC emacs-lisp :tangle yes
+# ;(require 'hangul)
+# #+END_SRC
+
+
+# ** ledger mode
+
+# #+BEGIN_SRC emacs-lisp :tangle yes
+
+
+
+#   ;; (use-package ledger-mode
+#   ;;   :ensure t
+#   ;;   :if (executable-find "ledger")
+#   ;;   :mode ("\\.ledger$" . ledger-mode)
+#   ;;   :demand t ; so that the capture templates get loaded
+#   ;;   :init
+#   ;;   (defvar my/ledger-file
+#   ;;     (expand-file-name "~/Dropbox/Finances/finances.ledger")
+#   ;;     "Where the ledger journal is kept.")
+#   ;;   (defun my/ledger-file ()
+#   ;;     "Find ledger journal file."
+#   ;;     (interactive)
+#   ;;     (find-file my/ledger-file))
+#   ;;   :config
+#   ;;   (setq org-capture-templates
+#   ;;         (append org-capture-templates
+#   ;;                 '(("l" "Ledger entries")
+#   ;;                   ("li" "income" plain (file my/ledger-file)
+#   ;;                    "%(org-read-date) %^{From?}
+#   ;;     assets:checking       $ %^{Amount}
+#   ;;     income:salary" :empty-lines 1 :immediate-finish t)
+#   ;;                   ("lc" "citi" plain (file my/ledger-file)
+#   ;;                    "%(org-read-date) %^{Payee}
+#   ;;     expenses:%^{Expense category}       $ %^{Amount}
+#   ;;     liabilities:citi mastercard" :empty-lines 1 :immediate-finish t)
+#   ;;                   ("lo" "capital one" plain (file my/ledger-file)
+#   ;;                    "%(org-read-date) %^{Payee}
+#   ;;     expenses:%^{Expense category}       SEK %^{Amount}
+#   ;;     liabilities:capital one credit" :empty-lines 1 :immediate-finish t)
+#   ;;                   ("ld" "pay with checking" plain (file my/ledger-file)
+#   ;;                    "%(org-read-date) %^{Payee}
+#   ;;     expenses:%^{Expense category}       $ %^{Amount}
+#   ;;     assets:checking" :empty-lines 1 :immediate-finish t))))
+#   ;;   (setq ledger-post-amount-alignment-column 70)
+#   ;;   (setq ledger-post-amount-alignment-at :decimal)
+#   ;;   ;; There is a correct way to write dates:
+#   ;;   ;; https://xkcd.com/1179/
+#   ;;   (setq ledger-use-iso-dates t)
+#   ;;   (setq ledger-reports '(("on-hand" "ledger -f %(ledger-file) bal \"(assets:cash|checking|liabilities)\"")
+#   ;;                          ("bal" "ledger -f %(ledger-file) bal")
+#   ;;                          ("reg" "ledger -f %(ledger-file) reg")
+#   ;;                          ("payee" "ledger -f %(ledger-file) reg @%(payee)")
+#   ;;                          ("account" "ledger -f %(ledger-file) reg %(account)"))))
+
+
+# #+END_SRC
+# ** encoding
+# #+BEGIN_SRC emacs-lisp :tangle yes
+
+# ;(set-language-environment "UTF-8")
+# ;(set-default-coding-systems 'utf-8)
+# #+END_SRC
+
+
+
+
+* org-toc: table of contents
+
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
-(setq org-directory "~/Dropbox/Zettelkasten")
-(setq org-mobile-inbox-for-pull "~/Dropbox/Zettelkasten/flagged.org")
-(setq org-mobile-checksum-binary "C:\\Users\\betsy\\coreutils\\md5sum.exe")
+(if (require 'toc-org nil t)
+    (add-hook 'org-mode-hook 'toc-org-enable)
+  (warn "toc-org not found"))
 #+END_SRC
-* package management
-#+BEGIN_SRC emacs-lisp :tangle yes
 
 
-  (use-package org-plus-contrib)
-  (use-package interleave)
-  (use-package pdf-tools)
-  (use-package dash)
-  (use-package deft)
 
 
-  (use-package org-ref
-   :init 
-  (setq org-ref-default-bibliography
-  '("~/Dropbox/Zettelkasten/references.bib"))
-  (setq org-ref-bibliography-notes '("~/Dropbox/Zettelkasten/3.notes.org"))
-  (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
-  (setq org-ref-pdf-directory '("~/Dropbox/Zettelkasten/pdfs/"))
-   :config (require 'org-ref-helm-cite))
- 
-#+END_SRC
 
 * file management
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-(setq delete-old-versions -1)
-(setq version-control t)
-(setq vc-make-backup-files t)
-(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
-#+END_SRC
+ (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+ (setq delete-old-versions -1)
+ (setq version-control t)
+ (setq vc-make-backup-files t)
+ (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+ #+END_SRC
+* org-gcal
 
+* deft
+ #+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package deft
+ 	 :bind ("<f8>" . deft)
+        :ensure t
+        :init
+    	  (setq deft-default-extension "org")
+         (setq deft-use-filename-as-title t)
+         (setq deft-text-mode 'org-mode)
+         (setq deft-directory "~/Dropbox/Zettelkasten/notes")
+         (setq deft-file-naming-rules '((noslash . "-")
+                                       (nospace . "-")
+                                       (case-fn . downcase)))
+         (setq deft-recursive t)
+         (setq deft-new-file-format "%Y%m%d-%H%M")
+         (setq deft-org-mode-title-prefix t)
+         (setq deft-time-format "%Y-%m-%d %H:%M")
+         (setq deft-org-mode-title-prefix t)
+ )
+
+ #+END_SRC
 * navigation
 #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package helm
-    :bind (("M-x" . helm-M-x)
-		  ([f10] . helm-buffers-list)))
+      (use-package helm
+      :bind (("M-x" . helm-M-x)
+		    ([f10] . helm-buffers-list)))
 
-(bind-keys ("C-+" . text-scale-increase)
-           ("C--" . text-scale-decrease))
+  (bind-keys ("C-+" . text-scale-increase)
+             ("C--" . text-scale-decrease)
+             ("C-c l" . org-store-link)
+)
 
- (fset 'yes-or-no-p 'y-or-n-p)
- (setq ido-enable-flex-matching t)
- (setq ido-everywhere t)
- (ido-mode 1)
-(setq read-file-name-completion-ignore-case t)
+   (fset 'yes-or-no-p 'y-or-n-p)
+   (setq ido-enable-flex-matching t)
+   (setq ido-everywhere t)
+   (ido-mode 1)
+  (setq read-file-name-completion-ignore-case t)
+  
+
 #+END_SRC
+
 
 * Personal details
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -66,36 +175,25 @@
       user-mail-address "betsy.yoon@gmail.com")
 #+END_SRC
 * buffer behavior
-#+BEGIN_SRC emacs-lisp :tangle yes
-    (setq initial-buffer-choice "~/Dropbox/Zettelkasten/1.inbox.org")
+ #+BEGIN_SRC emacs-lisp :tangle yes
+     (setq initial-buffer-choice "~/Dropbox/Zettelkasten/1.inbox.org")
 
-;    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+ ;(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-    (setq split-height-threshold nil)
-    (setq split-width-threshold 0)
-    (setq inhibit-startup-screen t)
-
-    (setq initial-major-mode #'org-mode
-	  initial-scratch-message "# This buffer is for notes you don't want to save\n\n")
-  (global-set-key (kbd "C-x /") 'shrink-window-horizontally)
-
-     ;; (global-set-key (kbd "S-C-<left>") 'shrink-window-orizontally)
-     ;; (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
-     ;; (global-set-key (kbd "S-C-<down>") 'shrink-window)
-     ;; (global-set-key (kbd "S-C-<up>") 'enlarge-window)
+     (setq split-height-threshold nil)
+     (setq split-width-threshold 0)
+     (setq inhibit-startup-screen t)
+     (setq initial-major-mode 'org-mode
+ 	  initial-scratch-message "# This buffer is for notes you don't want to save\n\n")
+   (global-set-key (kbd "C-x /") 'shrink-window-horizontally)
 
 
-    ;; (bind-keys ("S-C-<left>" . shrink-window-horizontally)
-    ;;            ("S-C-<right>" . enlarge-window-horizontally)
-    ;;            ("S-C-<down>" . shrink-window)
-    ;;            ("S-C-<up>" . enlarge-window))
-
-    (fset 'yes-or-no-p 'y-or-n-p)
-#+END_SRC
+     (fset 'yes-or-no-p 'y-or-n-p)
+ #+END_SRC
 * sounds
-#+BEGIN_SRC emacs-lisp :tangle yes
- (setq visible-bell 1)
-#+END_SRC
+ #+BEGIN_SRC emacs-lisp :tangle yes
+  (setq visible-bell 1)
+ #+END_SRC
 * appearance
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -104,73 +202,17 @@
  (color-theme-clarity)
   )
 (setq org-hide-leading-stars t)
-
-
+(setq inhibit-eol-conversion nil)
 #+END_SRC
 
-* ledger mode
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-
-
-(use-package ledger-mode
-  :ensure t
-  :if (executable-find "ledger")
-  :mode ("\\.ledger$" . ledger-mode)
-  :demand t ; so that the capture templates get loaded
-  :init
-  (defvar my/ledger-file
-    (expand-file-name "~/Dropbox/Finances/finances.ledger")
-    "Where the ledger journal is kept.")
-  (defun my/ledger-file ()
-    "Find ledger journal file."
-    (interactive)
-    (find-file my/ledger-file))
-  :config
-  (setq org-capture-templates
-        (append org-capture-templates
-                '(("l" "Ledger entries")
-                  ("li" "income" plain (file my/ledger-file)
-                   "%(org-read-date) %^{From?}
-    assets:checking       $ %^{Amount}
-    income:salary" :empty-lines 1 :immediate-finish t)
-                  ("lc" "citi" plain (file my/ledger-file)
-                   "%(org-read-date) %^{Payee}
-    expenses:%^{Expense category}       $ %^{Amount}
-    liabilities:citi mastercard" :empty-lines 1 :immediate-finish t)
-                  ("lo" "capital one" plain (file my/ledger-file)
-                   "%(org-read-date) %^{Payee}
-    expenses:%^{Expense category}       SEK %^{Amount}
-    liabilities:capital one credit" :empty-lines 1 :immediate-finish t)
-                  ("ld" "pay with checking" plain (file my/ledger-file)
-                   "%(org-read-date) %^{Payee}
-    expenses:%^{Expense category}       $ %^{Amount}
-    assets:checking" :empty-lines 1 :immediate-finish t))))
-  (setq ledger-post-amount-alignment-column 70)
-  (setq ledger-post-amount-alignment-at :decimal)
-  ;; There is a correct way to write dates:
-  ;; https://xkcd.com/1179/
-  (setq ledger-use-iso-dates t)
-  (setq ledger-reports '(("on-hand" "ledger -f %(ledger-file) bal \"(assets:cash|checking|liabilities)\"")
-                         ("bal" "ledger -f %(ledger-file) bal")
-                         ("reg" "ledger -f %(ledger-file) reg")
-                         ("payee" "ledger -f %(ledger-file) reg @%(payee)")
-                         ("account" "ledger -f %(ledger-file) reg %(account)"))))
-
-
-#+END_SRC
 * fonts
 #+BEGIN_SRC emacs-lisp :tangle yes
 
 (setq org-ellipsis " ෴ " )
-
-
 (setq my-prefered-font
       (cond ((eq system-type 'windows-nt) "consolas")
             ((eq system-type 'gnu/linux) "mono")
             (t nil)))
-
 (when my-prefered-font
   (set-frame-font my-prefered-font nil t))
 
@@ -191,6 +233,26 @@
             )
  )
 
+
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-date ((t (:foreground "cornflower blue" :underline t :weight light))))
+ '(org-ellipsis ((t (:foreground "gray" :height 0.75))))
+ '(org-level-1 ((t (:foreground "gainsboro" :weight bold :height 1.3 :family "quicksand"))))
+ '(org-level-2 ((t (:foreground "gainsboro" :height 1.1 :width extra-expanded :family "myriad pro"))))
+ '(org-level-3 ((t (:foreground "gainsboro" :width extra-expanded :family "quicksand"))))
+ '(org-level-4 ((t (:foreground "burlywood"))))
+ '(org-link ((t (:foreground "magenta" :underline t :family "consolas"))))
+ '(org-special-keyword ((t (:foreground "gray"))))
+ '(org-table ((t (:family "consolas"))))
+ '(org-tag ((t (:foreground "green yellow" :height 0.75 :width normal :family "consolas")))))
+
+
+
   (use-package unicode-fonts
       :ensure t
       :disabled t
@@ -203,13 +265,17 @@
   (setq org-archive-location "~/Dropbox/Zettelkasten/archive.org::datetree/")
 
  #+END_SRC
+
 * org-agenda
 #+BEGIN_SRC emacs-lisp :tangle yes
   (global-set-key "\C-ca" 'org-agenda)
   (global-set-key (kbd "C-x .") 'org-archive-subtree-default)
   (global-set-key (kbd "C-.") 'org-todo)
   (global-set-key (kbd "C-c n") 'org-refile)
- (setq org-log-into-drawer t)
+  (setq org-log-into-drawer t)
+  (setq org-agenda-span (quote month))
+  (setq org-startup-indented t)
+
     (setq org-agenda-files (quote
       ("~/Dropbox/Zettelkasten/1.inbox.org" 
        "~/Dropbox/Zettelkasten/2.budget.org"
@@ -220,7 +286,8 @@
        "~/Dropbox/Zettelkasten/7.lis.org" 
        "~/Dropbox/Zettelkasten/8.personal.org"
        "~/Dropbox/Zettelkasten/9.reference-vault.org"
-    "~/Dropbox/Zettelkasten/12.ndd.org"
+       "~/Dropbox/Zettelkasten/12.ndd.org"
+   
     )))
      (setq org-todo-keywords 
 	       (quote ((sequence "[TODO](t)"  "|" "[DONE](d!)" )
@@ -237,7 +304,9 @@
 		"** [TODO] %?
 SCHEDULED: %^{SCHEDULED}T DEADLINE: %^{DEADLINE}T")
 	  ("j" "journal" entry (file+datetree "~/Dropbox/Zettelkasten/5.journal.org")
-              "* %<%H:%M> %?")
+             "** %<%H:%M> 
+%?")
+
 	  ("e" "event" entry (file+datetree+prompt "~/Dropbox/Zettelkasten/6.calendar.org")
               "* %? 
 		%^T") 	))
@@ -254,71 +323,70 @@ SCHEDULED: %^{SCHEDULED}T DEADLINE: %^{DEADLINE}T")
                      ("archive.org" :maxlevel . 9)                   
 ))
 
-;(setq org-outline-path-complete-in-steps nil) ; Refile in a single go
+(setq org-outline-path-complete-in-steps nil) ; Refile in a single go
 
 
 #+END_SRC
 * magit
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package magit
-:ensure t)
-#+END_SRC
+ #+BEGIN_SRC emacs-lisp :tangle yes
+ (use-package magit
+ :ensure t)
+ #+END_SRC
 * org modules
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+# #+BEGIN_SRC emacs-lisp :tangle yes
 
 
- (setq org-modules '(org-bbdb
-                      org-gnus
-                      org-drill
-                      org-info
-                      org-jsinfo
-                      org-habit
-                      org-irc
-                      org-mouse
-                      org-protocol
-                      org-annotate-file
-                      org-eval
-                      org-expiry
-                      org-interactive-query
-                      org-man
-                      org-collector
-                      org-panel
-                      org-screen
-                      org-toc))
-(eval-after-load 'org
- '(org-load-modules-maybe t))
+#  (setq org-modules '(org-bbdb
+#                       org-gnus
+#                       org-drill
+#                       org-info
+#                       org-jsinfo
+#                       org-habit
+#                       org-irc
+#                       org-mouse
+#                       org-protocol
+#                       org-annotate-file
+#                       org-eval
+#                       org-expiry
+#                       org-interactive-query
+#                       org-man
+#                       org-collector
+#                       org-panel
+#                       org-screen
+#                       org-toc))
+# (eval-after-load 'org
+#  '(org-load-modules-maybe t))
 
-#+END_SRC
+# #+END_SRC
 * text editing
-
 #+BEGIN_SRC emacs-lisp :tangle yes
-(add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin/")
-(setq ispell-program-name "aspell")
-(require 'ispell)
+  (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin/")
+  (setq ispell-program-name "aspell")
+  (require 'ispell)
 
- (add-hook 'org-mode-hook 'my-org-init)
-    (defun my-org-init ()
-      (require 'typopunct)
-      (typopunct-change-language 'english)
-      (typopunct-mode 1))
+  ;  (add-hook 'org-mode-hook 'my-org-init)
+  ;     (defun my-org-init ()
+  ;       (require 'typopunct)
+  ;       (typopunct-change-language 'english)
+  ;       (typopunct-mode 1))
 
-(delete-selection-mode) ;allows to delete selected text by typing
-(use-package visual-fill-column
-  :ensure t
-  :config
-  (progn
-    (global-visual-fill-column-mode)))
+   (delete-selection-mode) ;allows to delete selected text by typing
+   (use-package visual-fill-column
+     :ensure t
+     :config
+     (progn
+       (global-visual-fill-column-mode)))
 
-(setq org-support-shift-select (quote always))
+   (setq org-support-shift-select (quote always))
 
 
-(global-visual-line-mode t)
-(setq sentence-end-double-space nil)
+   (global-visual-line-mode t)
+   (setq sentence-end-double-space nil)
 
  (use-package flyspell-correct-helm )
-  (use-package company
+ (use-package company
   :ensure t
-  :init (global-company-mode))
+ :init (global-company-mode))
 
 #+END_SRC
