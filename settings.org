@@ -141,32 +141,23 @@ file:~/.emacs
 ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
 
 
-(use-package org-gcal
-   :ensure t
-   :config
-   (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
- 	org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
- 	org-gcal-file-alist '(("betsy.yoon@gmail.com" .  "~/Dropbox/Zettelkasten/org/gcal.org"))))
-
- (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
- (add-hook 'org-capture-afterfinalize-hook (lambda () (org-gcal-sync) ))
 #+END_SRC
 ** Org-refile
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-(setq org-refile-use-outline-path (quote file))
+  (setq org-refile-use-outline-path (quote file))
 
-(setq org-refile-targets '(
-                     (nil :maxlevel . 3)
-                     (org-agenda-files :maxlevel . 3)
-                     ("arch
-ive.org" :maxlevel . 9)                   
-))
+  (setq org-refile-targets '(
+                       (nil :maxlevel . 3)
+                       (org-agenda-files :maxlevel . 3)
+                       ("archive.org" :maxlevel . 9)
+		           ("journal.org" :maxlevel .9)
+  ))
 
-(setq org-outline-path-complete-in-steps nil) ; Refile in a single go
+  (setq org-outline-path-complete-in-steps nil) ; Refile in a single go
 
-(global-set-key (kbd "<f4>") 'org-refile)
-(setq org-refile-allow-creating-parent-nodes 'confirm)
+  (global-set-key (kbd "<f4>") 'org-refile)
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
 
 #+END_SRC
 ** org modules
@@ -214,7 +205,7 @@ ive.org" :maxlevel . 9)
 	("j" "jobs" table-line (file+headline "~/Dropbox/Zettelkasten/org/lis.org" "Jobs")
      "|%t|%A|%^{How far?}|%^{How much?}|" :append t) 
     ("e" "event" entry (file  "~/Dropbox/Zettelkasten/org/gcal.org" )
- 	 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}:END:\n\n")
+ 	 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
     ("r" "recommendation" table-line (file+headline "~/Dropbox/Zettelkasten/org/recommendations.org" "Books")
  "|%t|%A||%?|" :append t :kill-buffer t)
 )
@@ -285,7 +276,7 @@ ive.org" :maxlevel . 9)
 	 (global-set-key (kbd "C-.") 'org-todo)
 	 (global-set-key (kbd "C-c n") 'org-refile)
 	 (setq org-log-into-drawer t)
-	 (setq org-agenda-span (quote month))
+;	 (setq org-agenda-span (quote 8))
      (setq use-package-always-ensure t)
 
 	 (setq org-startup-indented t)
@@ -309,13 +300,13 @@ ive.org" :maxlevel . 9)
 			 ((org-agenda-todo-ignore-with-date t))
 		     ((org-agenda-max-entries 5)))))
 
-  (setq org-enforce-todo-dependencies t)
-     (setq org-agenda-export-html-style nil)
-     (setq org-agenda-skip-deadline-if-done t)
-     (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
-     (setq org-agenda-skip-scheduled-if-done t)
-     (setq org-agenda-todo-ignore-deadlines (quote near))
-     (setq org-agenda-window-setup (quote other-frame))
+ ; (setq org-enforce-todo-dependencies t)
+ ;    (setq org-agenda-export-html-style nil)
+    (setq org-agenda-skip-deadline-if-done t)
+    (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+   (setq org-agenda-skip-scheduled-if-done t)
+   ;  (setq org-agenda-todo-ignore-deadlines (quote near))
+    ; (setq org-agenda-window-setup (quote other-frame))
      (setq org-agenda-with-colors t)
 #+END_SRC
 
@@ -734,7 +725,7 @@ ive.org" :maxlevel . 9)
  #+BEGIN_SRC emacs-lisp :tangle yes
        (use-package helm
        :bind (("M-x" . helm-M-x)
-		     ([f10] . helm-buffers-list)))
+		     ([f3] . helm-buffers-list)))
 
  (helm-mode 1)
 

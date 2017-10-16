@@ -16,6 +16,7 @@
 (use-package org
   :ensure org-plus-contrib )
 (org-babel-load-file "~/Dropbox/emacs/settings.org")
+(org-babel-load-file "~/Dropbox/emacs/pi.org") 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -47,13 +48,13 @@
      ("+"
       (:weight bold :strike-through t :foreground "chartreuse")
       verbatim))))
- '(org-gcal-auto-archive nil)
+ '(org-gcal-auto-archive t)
  '(org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3")
  '(org-gcal-down-days 180)
  '(org-gcal-file-alist
    (quote
     (("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/org/gcal.org"))))
- '(org-gcal-up-days 100000)
+ '(org-gcal-up-days 7)
  '(org-time-clocksum-use-fractional nil)
  '(package-selected-packages
    (quote
