@@ -21,6 +21,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(bib-file "~/Dropbox/Zettelkasten/references.bib")
+ '(dired-hide-details-hide-symlink-targets nil)
  '(interleave-org-notes-dir-list (quote ("~/org/" ".")))
  '(org-clock-continuously t)
  '(org-clock-in-switch-to-state nil)
@@ -58,6 +60,7 @@
     (anzu korean-holidays yasnippet pamparam outline-toc centered-window-mode calfw-org exwm darkokai-theme annotate dash hydra multiple-cursors pandoc org-brain w3m calfw habitica org-pdfview draft-mode toc-org benchmark-init wc-mode magit bbdb bibretrieve bibtex-utils pdf-tools interleave company org-ref flyspell-correct-helm helm use-package org-plus-contrib color-theme)))
  '(projectile-enable-caching t)
  '(shr-max-image-proportion 2.0)
+ '(vc-follow-symlinks nil)
  '(visual-fill-column-center-text t)
  '(visual-fill-column-width 180))
 (custom-set-faces
