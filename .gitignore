@@ -163,3 +163,4 @@ settings.el
 /.emacs.d/.emacs.desktop
 /.emacs.d/.emacs.desktop.lock
 settings.el
+/*.gpg
