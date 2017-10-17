@@ -25,6 +25,10 @@
  '(bib-file "~/Dropbox/Zettelkasten/references.bib")
  '(dired-hide-details-hide-symlink-targets nil)
  '(interleave-org-notes-dir-list (quote ("~/org/" ".")))
+ '(magit-repository-directories
+   (quote
+    (("~/Dropbox/emacs" . 0)
+     ("~/Dropbox/Zettelkasten/org" . 0))))
  '(org-clock-continuously t)
  '(org-clock-in-switch-to-state nil)
  '(org-clock-out-remove-zero-time-clocks nil)
