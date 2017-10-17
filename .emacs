@@ -56,6 +56,15 @@
     (("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/org/gcal.org"))))
  '(org-gcal-up-days 7)
  '(org-time-clocksum-use-fractional nil)
+ '(org-todo-keyword-faces
+   (quote
+    (("[◔]" :foreground "olivedrab1")
+     ("[?]" :foreground "yellow")
+     ("[🗸]" :foreground "gainsboro")
+     ("[☓]" :foreground "gainsboro"))))
+ '(org-todo-keywords
+   (quote
+    ((sequence "[TODO](t!)" "[◔](s!)" "[?](w!)" "|" "[🗸](d!)" "[☓](c!)"))))
  '(package-selected-packages
    (quote
     (anzu korean-holidays yasnippet pamparam outline-toc centered-window-mode calfw-org exwm darkokai-theme annotate dash hydra multiple-cursors pandoc org-brain w3m calfw habitica org-pdfview draft-mode toc-org benchmark-init wc-mode magit bbdb bibretrieve bibtex-utils pdf-tools interleave company org-ref flyspell-correct-helm helm use-package org-plus-contrib color-theme)))
