@@ -13,46 +13,51 @@ file:~/.emacs
 ** org-ref
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package org-plus-contrib)
-  (use-package interleave)
-  (use-package pdf-tools)
+(use-package org-plus-contrib)
+(use-package interleave)
+(use-package pdf-tools)
 
-  (eval-after-load 'org '(require 'org-pdfview))
+(eval-after-load 'org '(require 'org-pdfview))
 
-  (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
-  (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
+(add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
+(add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
 
-  (use-package org-ref
-    :init 
-	 (setq org-ref-default-bibliography '("~/Dropbox/Zettelkasten/org/references.bib")
-               org-ref-bibliography-notes   '("~/Dropbox/Zettelkasten/org/notes.org")
-               reftex-default-bibliography  '("~/Dropbox/Zettelkasten/org/references.bib")
-               org-ref-pdf-directory        '("~/Dropbox/Zettelkasten/org/pdfs/"))
-    :config 
-         (progn
-	      (require 'org-ref-helm-cite)
-          (require 'doi-utils)
-          (require 'org-ref-isbn)
-          (setq helm-bibtex-bibliography "~/Dropbox/Zettelkasten/org/references.bib"
-               helm-bibtex-library-path "~/Dropbox/Zettelkasten/org/pdfs"
-               helm-bibtex-notes-path   "~/Dropbox/Zettelkasten/org/notes.org"
-               bibtex-completion-notes-path   "~/Dropbox/Zettelkasten/org/notes.org"
-               bib-file                 "~/Dropbox/Zettelkasten/org/references.bib"
-               bibtex-completion-bibliography "~/Dropbox/Zettelkasten/org/references.bib"
-               bibtex-completion-notes-template-one-file "* ${Author}. (${year}). ${title}. 
-                                                            :PROPERTIES:
-                                                            :Custom_ID: ${=key=}
-                                                            :COURSE:
-                                                            :FILE:
-                                                            :URL:
-                                                            :END:" )      )
-    :bind ([f6] . helm-bibtex)
-  )
+(use-package dash
+        :ensure t
+)
+
+
+(use-package org-ref
+  :config 
+       (progn
+	    (require 'org-ref-helm-cite)
+        (require 'doi-utils)
+        (require 'org-ref-isbn))
+ :bind ([f6] . helm-bibtex))
+
+
+(setq org-ref-default-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
+(setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/org/notes.org")
+(setq org-ref-pdf-directory "~/Dropbox/Zettelkasten/org/pdfs/")
+
+(setq reftex-default-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
+
+(setq helm-bibtex-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
+(setq helm-bibtex-library-path "~/Dropbox/Zettelkasten/org/pdfs")
+(setq helm-bibtex-notes-path "~/Dropbox/Zettelkasten/org/notes.org")
+(setq bibtex-completion-notes-path "~/Dropbox/Zettelkasten/org/notes.org")
+(setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
+(setq bib-file "~/Dropbox/Zettelkasten/org/references.bib")
+
+
+
 
 
 #+END_SRC
 
 #+RESULTS:
+: ~/Dropbox/Zettelkasten/org/references.bib
+
 
 ** pdf-tools
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -230,18 +235,6 @@ file:~/.emacs
 **** settings
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-
-(require 'smtpmail)
-(setq message-send-mail-function 'smtpmail-send-it
-     starttls-use-gnutls t
-     smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-     smtpmail-auth-credentials
-       '(("smtp.gmail.com" 587 "betsy.yoon" "gyzoxzmytclnifef"))
-     smtpmail-default-smtp-server "smtp.gmail.com"
-     smtpmail-smtp-server "smtp.gmail.com"
-     smtpmail-smtp-service 587
-     smtpmail-local-domain "gmail.com"
-     smtpmail-smtp-user "betsy.yoon")
 
   ;; allow for updating mail using 'U' in the main view:
 (setq mu4e-get-mail-command "true")
@@ -535,6 +528,10 @@ file:~/.emacs
          (lambda () (org-bullets-mode 1)))
          (setq org-bullets-bullet-list 
          (quote ("◉""〉""⚬""»" "⊹"  "⯮" "⊸" "∞" "⛯"   ))))
+
+
+ (setq org-list-demote-modify-bullet
+          '(("+" . "-") ("-" . "+") ("*" . "+")))
 
 ;; ("[TODO]" :foreground "olivedrab1" :weight bold) 
 
