@@ -12,8 +12,27 @@ file:~/.emacs
 
 ** org-ref
 
+
+
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package org-ref)
+(setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
+
+;; see org-ref for use of these variables
+(setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/notes.org"
+      org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
+      org-ref-pdf-directory "~/Dropbox/Zettelkasten/PDFs/")
+
+(setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
+      bibtex-completion-library-path "~/Dropbox/Zettelkasten/PDFs"
+      bibtex-completion-notes-path "~/Dropbox/Zettelkasten/notes.org")
+
+;; open pdf with system pdf viewer (works on mac)
+(setq bibtex-completion-pdf-open-function
+  (lambda (fpath)
+    (start-process "open" "*open*" "open" fpath)))
+
+
 
 
 #+END_SRC
