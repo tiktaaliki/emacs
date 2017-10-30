@@ -1,32 +1,42 @@
-(require 'package) ;; sets up package.el, which is a package manager for emacs. comes automatically bundled with it.
 
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/")  
-             '("org" . "http://orgmode.org/elpa/"))
-            
-(add-to-list 'load-path "~/Dropbox/emacs/.emacs.d")
-
+;; Adde dby Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
 (package-initialize)
 
-(package-refresh-contents)
+(require 'package) ;; sets up package.el, which is a package manager for emacs. comes automatically bundled with it.
 
-(eval-when-compile (require 'use-package))
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
+  (add-to-list 'package-archives (cons "melpa" url) t))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(add-to-list 'load-path "~/.emacs.d/elpa/")
+(add-to-list 'load-path "~/.emacs.d/org-ref/")
+
+(eval-when-compile
+  (require 'use-package))
 (setq use-package-always-ensure t)
 
-(use-package org
-  :ensure org-plus-contrib )
 (org-babel-load-file "~/Dropbox/emacs/settings.org")
-(org-babel-load-file "~/Dropbox/emacs/pi.org") 
-
+(org-babel-load-file "~/Dropbox/emacs/pi.org")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(helm-completion-in-region-fuzzy-match t)
- '(helm-follow-mode-persistent t)
- '(helm-mode t)
- '(org-bibtex-type-property-name "expression")
+ '(bibtex-autokey-name-separator "_")
+ '(bibtex-autokey-name-year-separator "_")
+ '(bibtex-autokey-titleword-separator "-")
+ '(bibtex-autokey-year-length 4)
+ '(bibtex-autokey-year-title-separator "_")
+ '(global-visual-fill-column-mode t)
  '(org-emphasis-alist
    (quote
     (("!"
@@ -51,52 +61,13 @@
       (quote
        (:weight bold :foreground "magenta"))
       verbatim))))
- '(org-ref-bibtex-completion-actions
-   (quote
-    (("Insert citation" . helm-bibtex-insert-citation)
-     ("Open PDF, URL or DOI" . helm-bibtex-open-any)
-     ("Open URL or DOI in browser" . helm-bibtex-open-url-or-doi)
-     ("Insert reference" . helm-bibtex-insert-reference)
-     ("Add PDF to library" . helm-bibtex-add-pdf-to-library)
-     ("Insert BibTeX key" . helm-bibtex-insert-key)
-     ("Insert BibTeX entry" . helm-bibtex-insert-bibtex)
-     ("Insert formatted citation(s)" lambda
-      (_)
-      (insert
-       (mapconcat
-	(quote identity)
-	(loop for key in
-	      (helm-marked-candidates)
-	      collect
-	      (org-ref-format-entry key))
-	"
-
-")))
-     ("Attach PDF to email" . helm-bibtex-add-PDF-attachment)
-     ("Edit notes" . helm-bibtex-edit-notes)
-     ("Show entry" . helm-bibtex-show-entry)
-     ("Add keywords to entries" . org-ref-helm-tag-entries)
-     ("Copy entry to clipboard" . bibtex-completion-copy-candidate))))
- '(org-ref-cite-completion-function (quote org-ref-helm-bibtex))
- '(org-ref-pdf-directory
-   (quote
-    ("~/Dropbox/Zettelkasten/org/pdfs/" "~/Dropbox/QCFall2017/700-Technology-of-info/readings/" "~/Dropbox/QCFall2017/701-fundamentals-of-lis/readings/" "~/Dropbox/QCFall2017/702-Info-sources-svc/Readings" "~/Dropbox/QCFall2017/703-organization-of-info/Readings")) t)
- '(org-ref-prefer-bracket-links t)
  '(org-todo-keywords
    (quote
     ((sequence "[TODO](t)" "[◔](s!)" "[?](w!)" "|" "[✓](d!)" "[☓](c!)"))))
  '(package-selected-packages
    (quote
-    (org-ref org-ref-bibtex doi-utils org-autolist smartparens-html smartparens-config helm-unicode ox-pandoc darkokai-theme annotate hydra multiple-cursors pandoc org-brain calfw habitica org-pdfview draft-mode toc-org wc-mode magit bbdb pdf-tools interleave company flyspell-correct-helm helm use-package org-plus-contrib color-theme)))
- '(pdf-annot-list-listed-types
-   (quote
-    (caret circle file free-text highlight ink line link popup square squiggly strike-out text underline)))
- '(pdf-view-continuous nil)
- '(projectile-completion-system (quote helm))
- '(read-buffer-completion-ignore-case t)
- '(read-file-name-completion-ignore-case t))
-
-
+    (typopunct org-ref-bibtex org-id org-ref-isbn doi-utils helm-projectile projectile toc-org org-drill org-plus-contrib visual-fill-column use-package smartparens org-ref org-pdfview org-gcal org-bullets org-brain magit interleave iedit flyspell-correct-helm deft darkokai-theme company calfw-org calfw-gcal calfw anzu)))
+ '(visual-fill-column-center-text t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -109,10 +80,6 @@
  '(highlight ((t (:weight bold))))
  '(lazy-highlight ((t (:inherit highlight :background "black"))))
  '(link ((t (:foreground "#06d8ff" :underline t :weight normal))))
- '(neo-dir-link-face ((t (:foreground "tomato" :height 0.7))))
- '(neo-file-link-face ((t (:foreground "#f8fbfc" :height 0.7))))
- '(neo-header-face ((t (:background "#242728" :foreground "#ffffff" :height 0.7))))
- '(neo-root-dir-face ((t (:background "#242728" :foreground "#63de5d" :height 0.7))))
  '(org-agenda-clocking ((t (:box (:line-width 2 :color "magenta" :style released-button)))))
  '(org-agenda-date ((t (:background "light steel blue" :foreground "midnight blue" :inverse-video nil :box (:line-width 20 :color "#242728") :overline nil :slant normal :weight normal :height 1.2))))
  '(org-agenda-date-today ((t (:inherit org-agenda-date :background "#242728" :foreground "gold" :inverse-video t :overline nil :weight bold))))
@@ -141,3 +108,5 @@
  '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
  '(org-warning ((t (:background "white smoke" :foreground "red" :underline nil :weight normal))))
  '(variable-pitch ((t (:family "happy monkey")))))
+
+ 

@@ -13,50 +13,74 @@ file:~/.emacs
 ** org-ref
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package org-plus-contrib)
-(use-package interleave)
-(use-package pdf-tools)
-
-(eval-after-load 'org '(require 'org-pdfview))
-
-(add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
-(add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
-
-(use-package dash
-        :ensure t
-)
-
-
-(use-package org-ref
-  :config 
-       (progn
-	    (require 'org-ref-helm-cite)
-        (require 'doi-utils)
-        (require 'org-ref-isbn))
- :bind ([f6] . helm-bibtex))
-
-
-(setq org-ref-default-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
-(setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/org/notes.org")
-(setq org-ref-pdf-directory "~/Dropbox/Zettelkasten/org/pdfs/")
-
-(setq reftex-default-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
-
-(setq helm-bibtex-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
-(setq helm-bibtex-library-path "~/Dropbox/Zettelkasten/org/pdfs")
-(setq helm-bibtex-notes-path "~/Dropbox/Zettelkasten/org/notes.org")
-(setq bibtex-completion-notes-path "~/Dropbox/Zettelkasten/org/notes.org")
-(setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
-(setq bib-file "~/Dropbox/Zettelkasten/org/references.bib")
-
-
-
+(use-package org-ref)
 
 
 #+END_SRC
 
 #+RESULTS:
-: ~/Dropbox/Zettelkasten/org/references.bib
+;(use-package org-plus-contrib)
+
+(use-package org-ref
+                  :bind ([f6] . helm-bibtex))
+(setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
+(setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/org/notes.org"
+      org-ref-default-bibliography "~/Dropbox/Zettelkasten/org/references.bib"
+      org-ref-pdf-directory "~/Dropbox/Zettelkasten/org/pdfs/")
+(setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/org/notes.org")                   
+
+
+(use-package interleave)
+(use-package dash :ensure t)
+
+(use-package reftex)
+(use-package bibtex)
+
+
+(use-package doi-utils
+  :load-path "~/Dropbox/emacs/.emacs.d/org-ref/"
+)
+(use-package org-ref-bibtex
+  :load-path "~/Dropbox/emacs/.emacs.d/org-ref/"
+)
+(use-package org-ref-isbn
+  :load-path "~/Dropbox/emacs/.emacs.d/org-ref/"
+)
+
+(use-package helm-bibtex)
+
+
+
+;(setq org-ref-bibtex-files '("~/Dropbox/Zettelkasten/org/references.bib"))
+;(use-package org-id)
+ ;(setq helm-bibtex-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
+
+;(setq org-ref-completion-library 'org-ref-helm-bibtex)
+
+;; (defun my/org-ref-open-pdf-at-point ()
+;;   "Open the pdf for bibtex key under point if it exists."
+;;   (interactive)
+;;   (let* ((results (org-ref-get-bibtex-key-and-file))
+;;          (key (car results))
+;;      (pdf-file (car (bibtex-completion-find-pdf key))))
+;;     (if (file-exists-p pdf-file)
+;;     (funcall bibtex-completion-pdf-open-function pdf-file)
+;;       (message "No PDF found for %s" key))))
+
+;; (setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)
+
+
+
+;(setq helm-bibtex-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
+;(setq helm-bibtex-library-path "~/Dropbox/Zettelkasten/org/pdfs")
+;(setq helm-bibtex-notes-path "~/Dropbox/Zettelkasten/org/notes.org")
+;(setq bibtex-completion-notes-path "~/Dropbox/Zettelkasten/org/notes.org")
+;(setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
+;(setq bib-file "~/Dropbox/Zettelkasten/org/references.bib")
+
+
+
+
 
 
 ** pdf-tools
@@ -66,6 +90,13 @@ file:~/.emacs
 
 (eval-after-load 'org '(require 'org-pdfview))
 
+(use-package pdf-tools)
+(use-package org-pdfview)
+
+(add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
+(add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
+
+
 (add-to-list 'org-file-apps 
              '("\\.pdf\\'" . (lambda (file link)
                                      (org-pdfview-open link))))
@@ -73,6 +104,8 @@ file:~/.emacs
 
 #+RESULTS:
 : ((\.pdf\' lambda (file link) (org-pdfview-open link)) (\.pdf::\([[:digit:]]+\)\' . org-pdfview-open) (\.pdf\' . org-pdfview-open) (auto-mode . emacs) (\.mm\' . default) (\.x?html?\' . default) (\.pdf\' . default))
+
+
 
 ** text editing
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -100,7 +133,7 @@ file:~/.emacs
 (use-package smartparens
  :init
  (progn
-  (use-package smartparens-config)
+;  (use-package smartparens-config)
   (smartparens-global-mode 1)
   (show-smartparens-global-mode 1) ))
 
@@ -167,8 +200,8 @@ file:~/.emacs
 
 #+BEGIN_SRC emacs-lisp :tangle yes
  	
-(require 'bbdb)
-(bbdb-initialize)
+  ;; (require 'bbdb)
+  ;; (bbdb-initialize)
 
 #+END_SRC
 *** mu4e
@@ -186,7 +219,7 @@ file:~/.emacs
 (setq mu4e-compose-format-flowed t)
 (setq smtpmail-default-smtp-server "smtp.gmail.com")
 
-(add-hook 'mu4e-view-mode-hook (lambda ()(set-fill-column 100)))
+(add-hook 'mu4e-view-mode-hook (lambda ()(set-fill-column 80)))
 (add-hook 'message-mode-hook (lambda ()(set-fill-column 120)))
 (add-hook 'mu4e-headers-mode-hook (lambda ()(set-fill-column 200)))
  #+END_SRC
@@ -281,23 +314,37 @@ file:~/.emacs
 (global-set-key (kbd "C-.") 'org-todo)
 (global-set-key (kbd "C-c n") 'org-refile)
 
-(add-hook 'after-init-hook 'org-agenda-list)
+;show emacs on startup
+;(add-hook 'after-init-hook 'org-agenda-list)
 
 (setq org-log-into-drawer t)
 
 (setq org-agenda-files (quote
-			   ("~/Dropbox/Zettelkasten/org/inbox.org" 
-			    "~/Dropbox/Zettelkasten/org/gcal.org"  
- 			    "~/Dropbox/Zettelkasten/org/lis.org"  
- 			    "~/Dropbox/Zettelkasten/org/ndd.org"
-			    "~/Dropbox/Zettelkasten/org/work.org"
-			    "~/Dropbox/Zettelkasten/org/budget.org"
-			    "~/Dropbox/Zettelkasten/org/notes.org")))
+			   ("~/Dropbox/Zettelkasten/inbox.org" 
+			    "~/Dropbox/Zettelkasten/gcal.org"  
+ 			    "~/Dropbox/Zettelkasten/lis.org"  
+ 			    "~/Dropbox/Zettelkasten/ndd.org"
+			    "~/Dropbox/Zettelkasten/work.org"
+			    "~/Dropbox/Zettelkasten/budget.org"
+			    "~/Dropbox/Zettelkasten/notes.org")))
 
 (setq org-agenda-custom-commands 
       '(("d" "Undated tasks" alltodo "" 
        ((org-agenda-todo-ignore-with-date t))
-       ((org-agenda-max-entries 5)))))
+       ((org-agenda-max-entries 5))))
+)
+
+
+(setq org-agenda-custom-commands 
+      '(("l" "lis tasks only" alltodo "" 
+       ((org-agenda-todo-ignore-with-date t))
+       ((org-agenda-max-entries 5))))
+)
+
+
+
+
+
 
 (setq org-agenda-deadline-leaders: '("DUE:" "In %3d d.:" "%2d d. ago:"))
 (setq org-agenda-scheduled-leaders '("" "%2dx past due: "))
@@ -324,9 +371,11 @@ file:~/.emacs
 *** org-toc: table of contents
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(if (require 'toc-org nil t)
-    (add-hook 'org-mode-hook 'toc-org-enable)
-    (warn "toc-org not found"))
+
+(use-package toc-org)
+;; (if (require 'toc-org nil t)
+;;     (add-hook 'org-mode-hook 'toc-org-enable)
+;;     (warn "toc-org not found"))
 #+END_SRC
 *** org-clock
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -358,7 +407,7 @@ file:~/.emacs
 *** org-drill
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(require 'org-drill)
+(use-package org-drill)
 #+END_SRC
 *** Org-refile
 
@@ -413,17 +462,17 @@ file:~/.emacs
 
   ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
    (setq org-capture-templates '(
-    ("t" "todo" entry (file+headline "~/Dropbox/Zettelkasten/org/inbox.org" "to dos" ) 
+    ("t" "todo" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "to dos" ) 
 	 "** [TODO] %? \nCREATED: %U \nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n%a\n\n" )
-	("d" "journal" entry (file+datetree "~/Dropbox/Zettelkasten/org/journal.org")
+	("d" "journal" entry (file+datetree "~/Dropbox/Zettelkasten/journal.org")
      "** %<%H:%M> \n%?" :kill-buffer nil) 
-	("l" "logging" entry (file+datetree "~/Dropbox/Zettelkasten/org/journal.org")
+	("l" "logging" entry (file+datetree "~/Dropbox/Zettelkasten/journal.org")
      "** %? %T" :kill-buffer nil) 
-	("j" "jobs" table-line (file+headline "~/Dropbox/Zettelkasten/org/lis.org" "Jobs")
+	("j" "jobs" table-line (file+headline "~/Dropbox/Zettelkasten/lis.org" "Jobs")
      "|%t|%A|%^{How far?}|%^{How much?}|" :append t) 
-    ("e" "event" entry (file  "~/Dropbox/Zettelkasten/org/gcal.org" )
+    ("e" "event" entry (file  "~/Dropbox/Zettelkasten/gcal.org" )
  	 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
-    ("r" "recommendation" table-line (file+headline "~/Dropbox/Zettelkasten/org/recommendations.org" "Books")
+    ("r" "recommendation" table-line (file+headline "~/Dropbox/Zettelkasten/recommendations.org" "Books")
  "|%t|%A||%?|" :append t :kill-buffer t)))
 
 
@@ -433,7 +482,7 @@ file:~/.emacs
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package org-brain :ensure t
   :init
-  (setq org-brain-path "~/Dropbox/Zettelkasten/org/")
+  (setq org-brain-path "~/Dropbox/Zettelkasten/")
   :config (progn
   (setq org-id-track-globally t)
   (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
@@ -444,7 +493,7 @@ file:~/.emacs
  #+BEGIN_SRC emacs-lisp :tangle yes
 
 (setq org-archive-location
-        "~/Dropbox/Zettelkasten/org/archive.org::datetree/")
+        "~/Dropbox/Zettelkasten/archive.org::datetree/")
 
  #+END_SRC
 
@@ -510,12 +559,15 @@ file:~/.emacs
 (global-visual-line-mode t)
 
 (use-package visual-fill-column
-     :ensure t
-     :config
-     (progn
-        (global-visual-fill-column-mode)))
+     :ensure t)
+ 
+ 
+        (global-visual-fill-column-mode)
 (setq visual-fill-column-center-text t)
 #+END_SRC
+
+#+RESULTS:
+: t
 
 ** org fonts
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -553,6 +605,7 @@ file:~/.emacs
 (set-default-coding-systems 'utf-8)
 #+END_SRC
 
+
 * Emacs behavior
 ** Frame
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -561,12 +614,16 @@ file:~/.emacs
         '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
 (set-fringe-mode '(50 . 0))
-(setq initial-buffer-choice "~/Dropbox/Zettelkasten/org/inbox.org")
+(setq initial-buffer-choice "~/Dropbox/Zettelkasten/lis.org")
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq inhibit-startup-screen t)
 ;common lisp. 
 (require 'cl)  
 #+END_SRC
+
+#+RESULTS:
+: cl
+
 ** Saving files
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -582,8 +639,12 @@ file:~/.emacs
 
 (use-package magit
      :ensure t)
-
+(setq magit-repository-directories '("~/Dropbox/emacs/" "~/Dropbox/Zettelkasten/"))
 #+END_SRC
+
+#+RESULTS:
+| ~/Dropbox/emacs/ | ~/Dropbox/Zettelkasten/ |
+
 ** Exports
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -610,14 +671,14 @@ file:~/.emacs
 #+END_SRC
 ** navigating
 #+BEGIN_SRC emacs-lisp :tangle yes
-(require 'ido)
+(use-package ido)
 (ido-mode t)
 (use-package deft
              :bind ("<f8>" . deft)
              :ensure t
              :init 
              (progn 
-             (setq deft-directory "~/Dropbox/Zettelkasten/org/")
+             (setq deft-directory "~/Dropbox/Zettelkasten/")
              (setq deft-default-extension "org")
              (setq deft-use-filename-as-title t)
              (setq deft-text-mode 'org-mode)
@@ -636,8 +697,13 @@ file:~/.emacs
 
 (bind-keys ("C-+" . text-scale-increase)
            ("C--" . text-scale-decrease)
-           ("C-c l" . org-store-link))
+           ("C-c l" . org-store-link)
+           ([f6] . helm-bibtex-with-local-bibliography)
+)
 (winner-mode 1)
+(use-package projectile)
+(use-package helm-projectile)
+;(projectile-mode)
 
 #+END_SRC
 
