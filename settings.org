@@ -19,68 +19,6 @@ file:~/.emacs
 #+END_SRC
 
 #+RESULTS:
-;(use-package org-plus-contrib)
-
-(use-package org-ref
-                  :bind ([f6] . helm-bibtex))
-(setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
-(setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/org/notes.org"
-      org-ref-default-bibliography "~/Dropbox/Zettelkasten/org/references.bib"
-      org-ref-pdf-directory "~/Dropbox/Zettelkasten/org/pdfs/")
-(setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/org/notes.org")                   
-
-
-(use-package interleave)
-(use-package dash :ensure t)
-
-(use-package reftex)
-(use-package bibtex)
-
-
-(use-package doi-utils
-  :load-path "~/Dropbox/emacs/.emacs.d/org-ref/"
-)
-(use-package org-ref-bibtex
-  :load-path "~/Dropbox/emacs/.emacs.d/org-ref/"
-)
-(use-package org-ref-isbn
-  :load-path "~/Dropbox/emacs/.emacs.d/org-ref/"
-)
-
-(use-package helm-bibtex)
-
-
-
-;(setq org-ref-bibtex-files '("~/Dropbox/Zettelkasten/org/references.bib"))
-;(use-package org-id)
- ;(setq helm-bibtex-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
-
-;(setq org-ref-completion-library 'org-ref-helm-bibtex)
-
-;; (defun my/org-ref-open-pdf-at-point ()
-;;   "Open the pdf for bibtex key under point if it exists."
-;;   (interactive)
-;;   (let* ((results (org-ref-get-bibtex-key-and-file))
-;;          (key (car results))
-;;      (pdf-file (car (bibtex-completion-find-pdf key))))
-;;     (if (file-exists-p pdf-file)
-;;     (funcall bibtex-completion-pdf-open-function pdf-file)
-;;       (message "No PDF found for %s" key))))
-
-;; (setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)
-
-
-
-;(setq helm-bibtex-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
-;(setq helm-bibtex-library-path "~/Dropbox/Zettelkasten/org/pdfs")
-;(setq helm-bibtex-notes-path "~/Dropbox/Zettelkasten/org/notes.org")
-;(setq bibtex-completion-notes-path "~/Dropbox/Zettelkasten/org/notes.org")
-;(setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/org/references.bib")
-;(setq bib-file "~/Dropbox/Zettelkasten/org/references.bib")
-
-
-
-
 
 
 ** pdf-tools
@@ -615,6 +553,8 @@ file:~/.emacs
 
 (set-fringe-mode '(50 . 0))
 (setq initial-buffer-choice "~/Dropbox/Zettelkasten/lis.org")
+(find-file "~/Dropbox/Zettelkasten/") 
+(find-file "~/Dropbox/emacs/settings.org")
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq inhibit-startup-screen t)
 ;common lisp. 
