@@ -73,7 +73,7 @@
 
  '(package-selected-packages
    (quote
-    (yasnippet csv helm-bbdb bbdb org-trello annotate wc-mode auctex org-mu4e mu4e-contrib mu4e typopunct org-ref-bibtex org-id org-ref-isbn doi-utils helm-projectile projectile toc-org org-drill org-plus-contrib visual-fill-column use-package smartparens org-ref org-pdfview org-gcal org-bullets org-brain magit interleave iedit flyspell-correct-helm deft darkokai-theme company calfw-org calfw-gcal calfw anzu)))
+    (yasnippet csv helm-bbdb bbdb annotate wc-mode auctex org-mu4e mu4e-contrib mu4e typopunct org-ref-bibtex org-id org-ref-isbn doi-utils helm-projectile projectile toc-org org-drill org-plus-contrib visual-fill-column use-package smartparens org-ref org-pdfview org-gcal org-bullets org-brain magit interleave iedit flyspell-correct-helm deft darkokai-theme company calfw-org calfw-gcal calfw anzu)))
 )
 
 

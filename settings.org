@@ -418,8 +418,8 @@ file:~/.emacs
 
   (setq org-refile-use-outline-path (quote file))
 
-  (setq org-refile-targets '((nil :maxlevel . 3)
-                             (org-agenda-files :maxlevel . 3)
+  (setq org-refile-targets '((nil :maxlevel . 2)
+                             (org-agenda-files :maxlevel . 2)
                              ("~/Dropbox/Zettelkasten/General/archive.org" :maxlevel . 9)
 		                 ("journal.org" :maxlevel . 9)))
 
@@ -432,6 +432,10 @@ file:~/.emacs
   (setq org-refile-allow-creating-parent-nodes 'confirm)
 
 #+END_SRC
+
+#+RESULTS:
+: confirm
+
 *** org modules
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -838,7 +842,7 @@ file:~/.emacs
 
 (setq initial-major-mode 'org-mode)
 
- (require 'org-trello)
+; (require 'org-trello)
 ;makes scratch buffer an org buffer
 
 
@@ -859,11 +863,11 @@ file:~/.emacs
 
  '(org-agenda-persistent-filter t)
  '(org-agenda-start-with-entry-text-mode t)
- '(org-agenda-time-grid
-   (quote
-    ((daily today require-timed remove-match)
-     (800 1000 1200 1400 1600 1800 2000)
-     "......" "----------------")))
+; '(org-agenda-time-grid
+ ;  (quote
+  ;  ((daily today require-timed remove-match)
+   ;  (800 1000 1200 1400 1600 1800 2000)
+    ; "......" "----------------")))
  '(org-bbdb-anniversary-field (quote birthday) nil (bbdb))
  '(org-catch-invisible-edits (quote smart))
  '(org-clock-clocktable-default-properties
@@ -882,7 +886,7 @@ file:~/.emacs
 
  '(org-startup-align-all-tables t)
  '(org-startup-folded t)
-'(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
+;'(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(pdf-view-continuous nil)
 )
 
