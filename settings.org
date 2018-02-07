@@ -92,7 +92,7 @@ file:~/.emacs
       (setq ispell-program-name "aspell")
       (use-package ispell)
       (add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/elpa")
-      (load "typopunct")
+      (load "typopunct.el")
 
 
 
@@ -206,7 +206,7 @@ file:~/.emacs
 **** message view
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq mu4e-attachment-dir "~/Downloads")
+(setq mu4e-attachment-dir "~/Dropbox")
 
 (setq shr-color-visible-luminance-min 100) 
 (setq shr-color-visible-distance-min 5)
@@ -225,12 +225,14 @@ file:~/.emacs
 
 #+END_SRC
 
+#+RESULTS:
+
 **** headers view
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (setq org-mu4e-link-query-in-headers-mode nil)
-(setq mu4e-update-interval 60)
-(setq mu4e-index-update-in-background t)
+;(setq mu4e-update-interval 60)
+;(setq mu4e-index-update-in-background t)
 (setq mu4e-headers-fields
       '( (:human-date    .  13)    ;; alternatively, use :human-date
          (:flags         .   6)
@@ -268,12 +270,16 @@ file:~/.emacs
 	 ("/All"    . ?a)))
 
 (setq mu4e-drafts-folder "/Drafts")
-(setq mu4e-sent-folder   "/sent")
-(setq mu4e-trash-folder  "/trash")
-(setq mu4e-refile-folder "/all")
+(setq mu4e-sent-folder   "/Sent")
+(setq mu4e-trash-folder  "/Trash")
+(setq mu4e-refile-folder "/All")
 (setq mu4e-maildir "~/Maildir")
 (setq mu4e-attachment-dir "~/Dropbox/Downloads")
 #+END_SRC 
+
+#+RESULTS:
+: ~/Dropbox/Downloads
+
 **** bbdb
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -286,7 +292,7 @@ file:~/.emacs
 
 (setq bbdb-mail-user-agent 'mu4e-user-agent)
 ;(setq mu4e-view-mode-hook 'bbdb-mua-auto-update visual-line-mode)
-(setq mu4e-compose-complete-addresses nil)
+(setq mu4e-compose-complete-addresses t)
 (setq bbdb-mua-pop-up t)
 (setq bbdb-mua-pop-up-window-size 5)
 (setq mu4e-view-show-addresses t)  
@@ -308,10 +314,13 @@ file:~/.emacs
 (use-package calfw-gcal)
 
 (setq package-check-signature nil)
-
+(setq org-gcal-down-days '120)
 ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
 
 #+END_SRC
+
+#+RESULTS:
+: 120
 
 ** org-agenda
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -322,7 +331,7 @@ file:~/.emacs
 (global-set-key (kbd "C-.") 'org-todo)
 (global-set-key (kbd "C-c n") 'org-schedule)
 ;show emacs on startup
-;(add-hook 'after-init-hook 'org-agenda-list)
+(add-hook 'after-init-hook 'org-agenda-list)
 ;(setq org-agenda-start-with-follow-mode t)
 (setq org-log-into-drawer t)
 
@@ -351,13 +360,17 @@ file:~/.emacs
 (setq org-agenda-span (quote 8))
 (setq org-enforce-todo-dependencies t)
 (setq org-agenda-export-html-style nil)
+;skips
 (setq org-agenda-skip-timestamp-if-deadline-is-shown t)
 (setq org-agenda-skip-deadline-if-done t)
+(setq org-agenda-skip-additional-timestamps-same-entry t)
+(setq org-agenda-todo-ignore-deadlines (quote near))
+
 (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-agenda-jump-prefer-future t)
 (setq org-agenda-start-with-clockreport-mode t)
-; (setq org-agenda-todo-ignore-deadlines (quote near))
+
 ; (setq org-agenda-window-setup (quote other-frame))
 (setq org-deadline-warning-days 4)
 (setq org-agenda-with-colors t)
@@ -385,7 +398,7 @@ file:~/.emacs
 (setq org-clock-history-length 23)
 ;; Resume clocking task on clock-in if the clock is open
 (setq org-clock-in-resume t)
-
+(setq org-clock-mode-line-total (quote current))
 ;; Separate drawers for clocking and logs
 (setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
 ;; Save clock data and state changes and notes in the LOGBOOK drawer
@@ -407,6 +420,10 @@ file:~/.emacs
 (setq org-clock-clocked-in-display (quote both))
 
 #+END_SRC
+
+#+RESULTS:
+: both
+
 *** org-drill
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -478,7 +495,7 @@ file:~/.emacs
 	("j" "jobs" table-line (file+headline "~/Dropbox/Zettelkasten/lis.org" "Jobs")
      "|%t|%A|%^{How far?}|%^{How much?}|" :append t :clock-in t :clock-resume t) 
     ("e" "event" entry (file  "~/Dropbox/Zettelkasten/gcal.org" )
- 	 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n" :clock-in t :clock-resume t)
+ 	 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
     ("r" "recommendation" table-line (file+headline "~/Dropbox/Zettelkasten/recommendations.org" "Books")
  "|%t|%A||%?|" :append t :kill-buffer t :clock-in t :clock-resume t)))
 
@@ -513,14 +530,14 @@ file:~/.emacs
 *** org-archive
  #+BEGIN_SRC emacs-lisp :tangle yes
 
-(setq org-archive-location "~/Dropbox/Zettelkasten/General/archive.org::datetree")
+(setq org-archive-location "~/Dropbox/Zettelkasten/General/archive.org::datetree/")
 
 
 
  #+END_SRC
 
  #+RESULTS:
- : ~/Dropbox/Zettelkasten/General/archive.org::datetree
+ : ~/Dropbox/Zettelkasten/General/archive.org::datetree/
 
 *** org-mode structure templates
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -579,7 +596,7 @@ file:~/.emacs
 (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
                 '("NanumBarunGothic" . "unicode-bmp"))
 (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
-              (font-spec :family "DejaVu Sans Mono" )) 
+              (font-spec :family "DejaVu Sans Mono" :size 20)) 
 
 (setq use-default-font-for-symbols nil)
 
@@ -709,7 +726,7 @@ file:~/.emacs
                      '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
                      '(org-todo ((t (:background "gray13" :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
                      '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
-                     '(org-warning ((t (:background "white smoke" :foreground "red" :underline nil :weight normal))))
+                     '(org-warning ((t (:background "gray13" :foreground "red" :underline nil :weight normal))))
                      '(secondary-selection ((t (:background "gray14" :foreground "pale green"))))
                      '(variable-pitch ((t (:family "happy monkey")))))
 #+END_SRC
@@ -719,23 +736,27 @@ file:~/.emacs
 * Emacs behavior
 ** Frame
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq frame-title-format
-      (list (format "%s %%S: %%j " (system-name))
-        '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
+   (setq frame-title-format
+         (list (format "%s %%S: %%j " (system-name))
+           '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
-(set-fringe-mode '(50 . 0))
-(setq initial-buffer-choice "~/Dropbox/Zettelkasten/inbox.org")
-(find-file "~/Dropbox/Zettelkasten/") 
-(find-file "~/Dropbox/emacs/settings.org")
-(find-file "~/Dropbox/emacs/.emacs")
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-(setq inhibit-startup-screen t)
-;common lisp. 
-(require 'cl)  
+   (set-fringe-mode '(50 . 0))
+   (setq initial-buffer-choice "~/Dropbox/Zettelkasten/inbox.org")
+   (find-file "~/Dropbox/Zettelkasten/") 
+   (find-file "~/Dropbox/emacs/settings.org")
+;   (find-file "~/Dropbox/emacs/.emacs")
+   (add-to-list 'default-frame-alist '(fullscreen . maximized))
+   (setq inhibit-startup-screen t)
+   ;common lisp. 
+   (require 'cl)  
+   (setq org-link-frame-setup '((gnus . gnus-other-frame)
+                              '(vm-imap . vm-visit-imap-folder-other-frame)
+                              '(vm . vm-visit-folder-other-frame)
+                              '(file. find-file-other-frame)))
 #+END_SRC
 
 #+RESULTS:
-: cl
+: ((gnus . gnus-other-frame) (quote (vm-imap . vm-visit-imap-folder-other-frame)) (quote (vm . vm-visit-folder-other-frame)) (quote (file. find-file-other-frame)))
 
 ** Saving files
 
@@ -862,7 +883,7 @@ file:~/.emacs
 
 
  '(org-agenda-persistent-filter t)
- '(org-agenda-start-with-entry-text-mode t)
+; '(org-agenda-start-with-entry-text-mode t)
 ; '(org-agenda-time-grid
  ;  (quote
   ;  ((daily today require-timed remove-match)
