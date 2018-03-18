@@ -1,20 +1,128 @@
 
-* TOC                                                                    :TOC_1: 
-* copy code
-:Properties:
-:visibility: all
-:End:
+
 file:~/.emacs
 #+BEGIN_SRC emacs-lisp :tangle yes
 
+#+END_SRC
+- evaluation of this emacs lisp code block is disabled.
+
+- delete and reinstall org-plus-contrib
+* to be organized
+#+BEGIN_SRC emacs-lisp :tangle yes
+(require 'cl) 
+(setq org-return-follows-link t)
+#+END_SRC
+
+* FRAME
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq frame-title-format (list (format "%s %%S: %%j " (system-name))
+                              '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
+(setq initial-buffer-choice "~/Dropbox/Zettelkasten/lis.org")
+(find-file "~/Dropbox/emacs/settings.org")
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(setq inhibit-startup-screen t)
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
+(tool-bar-mode -1)
+#+END_SRC
+* file encoding
+C-h C RET
+M-x describe-current-coding-system
+
+#+BEGIN_SRC  emacs-lisp :tangle yes
+
+(add-to-list 'file-coding-system-alist '("\\.tex" . utf-8-unix) )
+(add-to-list 'file-coding-system-alist '("\\.txt" . utf-8-unix) )
+(add-to-list 'file-coding-system-alist '("\\.el" . utf-8-unix) )
+(add-to-list 'file-coding-system-alist '("\\.scratch" . utf-8-unix) )
+(add-to-list 'file-coding-system-alist '("user_prefs" . utf-8-unix) )
+
+(add-to-list 'process-coding-system-alist '("\\.txt" . utf-8-unix) )
+
+(add-to-list 'network-coding-system-alist '("\\.txt" . utf-8-unix) )
+
+(prefer-coding-system 'utf-8-unix)
+(set-default-coding-systems 'utf-8-unix)
+(set-terminal-coding-system 'utf-8-unix)
+(set-keyboard-coding-system 'utf-8-unix)
+(set-selection-coding-system 'utf-8-unix)
+(setq-default buffer-file-coding-system 'utf-8-unix)
+
+;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
+;; mnemonic for utf-8 is "U", which is defined in the mule.el
+(setq eol-mnemonic-dos ":CRLF")
+(setq eol-mnemonic-mac ":CR")
+(setq eol-mnemonic-undecided ":?")
+(setq eol-mnemonic-unix ":LF")
+
+(defalias 'read-buffer-file-coding-system 'lawlist-read-buffer-file-coding-system)
+(defun lawlist-read-buffer-file-coding-system ()
+  (let* ((bcss (find-coding-systems-region (point-min) (point-max)))
+         (css-table
+          (unless (equal bcss '(undecided))
+            (append '("dos" "unix" "mac")
+                    (delq nil (mapcar (lambda (cs)
+                                        (if (memq (coding-system-base cs) bcss)
+                                            (symbol-name cs)))
+                                      coding-system-list)))))
+         (combined-table
+          (if css-table
+              (completion-table-in-turn css-table coding-system-alist)
+            coding-system-alist))
+         (auto-cs
+          (unless find-file-literally
+            (save-excursion
+              (save-restriction
+                (widen)
+                (goto-char (point-min))
+                (funcall set-auto-coding-function
+                         (or buffer-file-name "") (buffer-size))))))
+         (preferred 'utf-8-unix)
+         (default 'utf-8-unix)
+         (completion-ignore-case t)
+         (completion-pcm--delim-wild-regex ; Let "u8" complete to "utf-8".
+          (concat completion-pcm--delim-wild-regex
+                  "\\|\\([[:alpha:]]\\)[[:digit:]]"))
+         (cs (completing-read
+              (format "Coding system for saving file (default %s): " default)
+              combined-table
+              nil t nil 'coding-system-history
+              (if default (symbol-name default)))))
+    (unless (zerop (length cs)) (intern cs))))
 
 #+END_SRC
 
+#+RESULTS:
+: lawlist-read-buffer-file-coding-system
 
-* initialization
+* Saving files
+(setq auto-revert-interval 50400)
 #+BEGIN_SRC emacs-lisp :tangle yes
+(global-auto-revert-mode t)
+
+(setq auto-revert-interval 5)
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+(setq delete-old-versions -1)
+(setq version-control t)
+(setq vc-make-backup-files t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+(setq auto-save-interval 5)
+(setq auto-save-visited-file-name nil)
 
 
+#+END_SRC
+
+#+RESULTS:
+| ~/Dropbox/emacs/ | ~/Dropbox/Zettelkasten/ |
+
+* Magit
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package magit
+            :ensure t
+            :init (progn
+                  (setq magit-repository-directories '("~/Dropbox/emacs/" "~/Dropbox/Zettelkasten/"))))
 
 
 
@@ -22,261 +130,63 @@ file:~/.emacs
 
 #+RESULTS:
 
+* smart quotes
+#+BEGIN_SRC emacs-lisp :tangle yes
+(define-key org-mode-map "\"" #'endless/round-quotes)
+(eval-after-load 'markdown-mode
+  '(define-key markdown-mode-map "\""
+     #'endless/round-quotes))
 
+(defun endless/round-quotes (italicize)
+  "Insert “” and leave point in the middle.
+With prefix argument ITALICIZE, insert /“”/ instead
+\(meant for org-mode).
+Inside a code-block, just call `self-insert-command'."
+  (interactive "P")
+  (if (and (derived-mode-p 'org-mode)
+           (org-in-block-p '("src" "latex" "html")))
+      (call-interactively #'self-insert-command)
+    (if (looking-at "”[/=_\\*]?")
+        (goto-char (match-end 0))
+      (when italicize
+        (if (derived-mode-p 'markdown-mode)
+            (insert "__")
+          (insert "//"))
+        (forward-char -1))
+      (insert "“”")
+      (forward-char -1))))
 
-* Emacs style 
-** Display
+#+END_SRC
+
+#+RESULTS:
+: endless/round-quotes
+
+* Prettify
 
 #+BEGIN_SRC emacs-lisp :tangle yes
+(set-fringe-mode '(50 . 0))
 (setq org-startup-indented t)
 (setq org-hide-emphasis-markers t)
 (setq org-hide-leading-stars t) 
-(setq fringe-mode '(50.0) )
-
-; '(fringe-mode (quote (50 . 0)) nil (fringe))
-(setq custom-safe-themes (quote
-   ("365d9553de0e0d658af60cff7b8f891ca185a2d7ba3fc6d29aadba69f5194c7f" "10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
-
 (use-package darkokai-theme
  :ensure t
  :config (load-theme 'darkokai t))
-
-(global-unset-key (kbd "C-z"))
-
 (setq org-startup-with-inline-images t)
 
-
-;(require 'centered-window-mode)
 #+END_SRC
 
 #+RESULTS:
 : t
 
-** fonts
+(setq custom-safe-themes (quote
+   ("365d9553de0e0d658af60cff7b8f891ca185a2d7ba3fc6d29aadba69f5194c7f" "10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
+* Key bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
-  
-(set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                '("NanumBarunGothic" . "unicode-bmp" ))
-(set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
-                '("NanumBarunGothic" . "unicode-bmp"))
-(set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
-              (font-spec :family "DejaVu Sans Mono" :size 20)) 
-
-(setq use-default-font-for-symbols nil)
-
-(use-package unicode-fonts
-	  :ensure t
-	  :disabled t
-	  :init (unicode-fonts-setup))
-
-#+END_SRC
-
-#+RESULTS:
-
-** Formatting
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-(setq fill-column 100)
-(global-visual-line-mode t)
-
-(use-package visual-fill-column
-     :ensure t)
- 
- 
-(global-visual-fill-column-mode t)
-(setq visual-fill-column-center-text t)
-#+END_SRC
-
-#+RESULTS:
-: t
-
-** org fonts
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-            (setq org-ellipsis " ෴ " )
-
-            (use-package org-bullets
-                     :init
-                     (add-hook 'org-mode-hook 
-                     (lambda () (org-bullets-mode 1)))
-                     (setq org-bullets-bullet-list 
-                     (quote ("◉""〉""⚬""»" "⊹"  "⯮" "⊸" "∞" "⛯"   ))))
-
-
-
-             (setq org-list-demote-modify-bullet
-                   '(("+" . "-") ("-" . "+") ))
-         (setq org-list-allow-alphabetical t)
-         (setq org-list-indent-offset 1)
-         (setq org-checkbox-hierarchical-statistics t)
-
-#+END_SRC
-
-#+RESULTS:
-: t
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-   (setq org-todo-keywords '((sequence 
-                              "[습관](h!)" 
-                              "[TODO](t!)" 
-                              "[◔](s!)" 
-                              "[?](w!)" 
-                              "|" 
-                              "[✓](d!)" 
-                              "[☓](c!)" )))
-   (setq org-todo-keyword-faces '(("[습관]" :foreground "dodger blue")
-                                  ("[◔]" :foreground "olivedrab1")
-                                  ("[?]" :foreground "yellow") 
-                                  ("[✓]" :foreground "gainsboro" )
-                                  ("[☓]" :foreground "gainsboro")))
-
-#+END_SRC
-
-#+RESULTS:
-| [습관] | :foreground | dodger blue |
-| [◔]    | :foreground | olivedrab1  |
-| [?]    | :foreground | yellow      |
-| [✓]    | :foreground | gainsboro   |
-| [☓]    | :foreground | gainsboro   |
-
-** encoding
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-(set-language-environment "UTF-8")
-(set-default-coding-systems 'utf-8)
-#+END_SRC
-
-** custom-set-faces
-#+BEGIN_SRC emacs-lisp :tangle yes
-   (custom-set-faces 
- '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "#f8fbfc" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 135 :width normal :family "Consolas"))))                    
- '(fringe ((t (:background "#242728"))))
-                     '(highlight ((t (:weight bold))))
-                     '(lazy-highlight ((t (:inherit highlight :background "black"))))
-                     '(link ((t (:foreground "#06d8ff" :underline t :weight normal))))
-                     '(helm-selection ((t (:inherit bold :background "black" :foreground "magenta" :underline t))))
-                     '(fringe ((t (:background "#242728"))))
-                     '(custom-variable-tag ((t (:inherit variable-pitch :foreground "gold" :height 1.1))))
-                     '(org-agenda-calendar-event ((t (:foreground "light gray"))))
-                     '(org-agenda-clocking ((t (:box (:line-width 2 :color "magenta" :style released-button)))))
-                     '(org-agenda-current-time ((t (:foreground "OliveDrab3"))))
-                     '(org-agenda-date ((t (:background "light steel blue" :foreground "midnight blue" :inverse-video nil :box (:line-width 20 :color "#242728") :overline nil :slant normal :weight normal :height 1.2))))
-
-                     '(org-agenda-date-today ((t (:inherit org-agenda-date :background "#242728" :foreground "gold" :inverse-video t :overline nil :weight bold))))
-                     '(org-agenda-date-weekend ((((class color) (min-colors 257)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "deep pink" :weight unspecified :underline t :overline nil :box (:line-width 20 :color "#242728"))) (((class color) (min-colors 89)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "red" :weight unspecified :underline t :overline nil :box 1))))
-                     '(org-archived ((t (:foreground "saddle brown" :weight normal))))
-                     '(org-block ((t (:foreground "gainsboro"))))
-                     '(org-clock-overlay ((t (:background "dim gray"))))
-                     '(org-date ((t (:foreground "steel blue" :underline t))))
-                     '(org-default ((t (:inherit default))))
-                     '(org-done ((t (:foreground "dark gray" :weight normal))))
-                     '(org-ellipsis ((t (:foreground "#6A6D70" :height 0.5))))
-                     '(org-habit-alert-future-face ((t (:background "red" :foreground "red"))))
-                     '(org-habit-overdue-face ((t (:background "#63de5d" :foreground "#63de5d"))))
-                     '(org-inlinetask ((t (:foreground "dodger blue"))))
-                     '(org-level-1 ((t (:inherit nil :foreground "gray" :weight bold :height 1.5 :width extra-expanded :family "pompiere"))))
-                     '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
-                     '(org-level-3 ((t (:inherit variable-pitch :foreground "SlateGray1" :height 0.95))))
-                     '(org-level-4 ((t (:inherit variable-pitch :foreground "#E6DB74" :height 0.95))))
-                     '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
-                     '(org-level-6 ((t (:inherit variable-pitch :foreground "RoyalBlue3"))))
-                     '(org-link ((t (:foreground "LightSteelBlue3" :underline t :family "nova mono"))))
-                     '(org-list-dt ((t (:foreground "magenta" :weight bold))))
-                     '(org-priority ((t (:foreground "gold" :weight bold))))
-                     '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
-                     '(org-scheduled ((t (:foreground "DarkOliveGreen3"))))
-                     '(org-scheduled-previously ((t (:foreground "deep pink"))))
-                     '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
-                     '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
-                     '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
-                     '(org-todo ((t (:background "gray13" :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
-                     '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
-                     '(org-warning ((t (:background "gray13" :foreground "red" :underline nil :weight normal))))
-                     '(secondary-selection ((t (:background "gray14" :foreground "pale green"))))
-                     '(variable-pitch ((t (:family "happy monkey")))))
-#+END_SRC
-
-#+RESULTS:
-* Emacs behavior
-** Frame
-#+BEGIN_SRC emacs-lisp :tangle yes
-   (setq frame-title-format
-         (list (format "%s %%S: %%j " (system-name))
-           '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
-
-   (set-fringe-mode '(50 . 0))
-   (setq initial-buffer-choice "~/Dropbox/Zettelkasten/inbox.org")
-   (find-file "~/Dropbox/Zettelkasten/lis.org") 
-;   (find-file "~/Dropbox/emacs/settings.org")
-;   (find-file "~/Dropbox/emacs/.emacs")
-   (add-to-list 'default-frame-alist '(fullscreen . maximized))
-   (setq inhibit-startup-screen t)
-   ;common lisp. 
-   (require 'cl)  
-   (setq org-link-frame-setup '((gnus . gnus-other-frame)
-                              '(vm-imap . vm-visit-imap-folder-other-frame)
-                              '(vm . vm-visit-folder-other-frame)
-                              '(file. find-file-other-frame)))
-#+END_SRC
-
-#+RESULTS:
-: ((gnus . gnus-other-frame) (quote (vm-imap . vm-visit-imap-folder-other-frame)) (quote (vm . vm-visit-folder-other-frame)) (quote (file. find-file-other-frame)))
-
-
-** Saving files
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-   (global-auto-revert-mode t)
-;   (setq auto-revert-interval 50400)
-(setq auto-revert-interval 5)
-   (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-   (setq delete-old-versions -1)
-   (setq version-control t)
-   (setq vc-make-backup-files t)
-   (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
-   (setq auto-save-interval 5)
-   (setq auto-save-visited-file-name nil)
-
-   (use-package magit
-        :ensure t)
-   (setq magit-repository-directories '("~/Dropbox/emacs/" "~/Dropbox/Zettelkasten/"))
-#+END_SRC
-
-** Exports
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-;printing
-(add-hook 'org-agenda-before-write-hook
-    (lambda ()
-    (add-text-properties (point-min) (point-max)
-    '(face(:foreground "black")))))
-
-(setq inhibit-eol-conversion nil)
-
-
-#+END_SRC
-
-#+RESULTS:
-
-** sounds
- #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq visible-bell nil)
- #+END_SRC
-
- #+RESULTS:
-
-** Buffer behavior
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
+(global-unset-key (kbd "C-z"))
 (global-set-key (kbd "C-x /") 'shrink-window-horizontally)
 #+END_SRC
 
-#+RESULTS:
-: shrink-window-horizontally
-
-** navigating
+* navigating
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package ido)
 (ido-mode t)
@@ -318,8 +228,201 @@ file:~/.emacs
 
 
 # * Emacs functionality
+* unicode replacement text
+#+BEGIN_SRC   emacs-lisp :tangle yes
 
-** org-ref
+   ;; set keys to insert math symbol
+   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+  (define-key key-translation-map (kbd "C-c -") (kbd "–"))
+  (define-key key-translation-map (kbd "'") (kbd "’"))
+(define-key key-translation-map (kbd "C-c m") (kbd "—"))
+(define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+(define-key key-translation-map (kbd "C-c C-<right>")  (kbd "➔"))
+
+
+(define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+
+;   (define-key key-translation-map (kbd "-") (kbd "-"))
+
+#+END_SRC
+
+#+RESULTS:
+: [8756]
+
+* org noter
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package org-noter
+:ensure t
+)
+
+(setq org-noter-property-doc-file "INTERLEAVE_PDF"
+      org-noter-property-note-location "INTERLEAVE_PAGE_NOTE")
+
+(setq org-noter-notes-window-location 'other-frame)
+(setq org-noter-default-heading-title "p. $p$")
+(setq org-noter-auto-save-last-location t)
+
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* org-gcal
+   
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(use-package calfw)
+(use-package calfw-org)
+(use-package calfw-gcal)
+
+(setq package-check-signature nil)
+(setq org-gcal-down-days '120)
+;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
+
+#+END_SRC
+
+#+RESULTS:
+: 120
+
+* org-agenda
+                              
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+            (global-set-key (kbd "<f7>") 'org-agenda)
+            (global-set-key (kbd "C-c a") 'org-agenda)
+            (global-set-key (kbd "C-x .") 'org-archive-subtree-default)
+            (global-set-key (kbd "C-.") 'org-todo)
+            (global-set-key (kbd "C-c n") 'org-schedule)
+            ;show emacs on startup
+            ;(add-hook 'after-init-hook 'org-agenda-list)
+            ;(setq org-agenda-start-with-follow-mode t)
+            (setq org-log-into-drawer t)
+            (setq org-agenda-files (quote
+                                       ("~/Dropbox/Zettelkasten/inbox.org" 
+                                        "~/Dropbox/Zettelkasten/lis.org"  
+                                        "~/Dropbox/Zettelkasten/ndd.org"
+                                        "~/Dropbox/Zettelkasten/gcal.org" 
+                                        "~/Dropbox/Zettelkasten/journal.org"
+                                        "~/Dropbox/Zettelkasten/work.org"
+                                        "~/Dropbox/Zettelkasten/budget.org"
+                                        "~/Dropbox/Zettelkasten/notes.org")))
+
+     
+            (setq org-agenda-current-time-string "✸✸✸✸✸✸ NOW ✸✸✸✸✸✸✸✸✸✸")
+            (setq org-agenda-entry-text-leaders: "   . ")
+
+            (setq org-agenda-entry-text-maxlines 1)
+            (setq org-agenda-deadline-leaders: '("DUE:" "In %3d d.:" "%2d d. ago:"))
+            (setq org-agenda-scheduled-leaders '("" "%2dx past due: "))
+            (setq org-agenda-span (quote 8))
+
+            (setq org-agenda-export-html-style nil)
+            ;skips
+            (setq org-agenda-skip-timestamp-if-deadline-is-shown t)
+            (setq org-agenda-skip-deadline-if-done t)
+            (setq org-agenda-skip-additional-timestamps-same-entry t)
+            (setq org-agenda-todo-ignore-deadlines nil)
+
+            (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+            (setq org-agenda-skip-scheduled-if-done t)
+            (setq org-agenda-jump-prefer-future t)
+            (setq org-agenda-start-with-clockreport-mode t)
+
+            ; (setq org-agenda-window-setup (quote other-frame))
+            (setq org-deadline-warning-days 4)
+            (setq org-agenda-with-colors t)
+
+            (setq org-enforce-todo-dependencies t)
+         (setq org-agenda-use-tag-inheritance nil)
+         (setq org-use-tag-inheritance nil)
+         ;(setq org-agenda-dim-blocked-tasks t)
+
+
+         (setq org-todo-keywords '((sequence  "TODO(t!)" "NEXT(n!)" "|" "✓(d!)")
+                                (sequence "습관(h!)" "PROJECT(p!)""◔(s!)" "?(w!)" "|" "☓(c!)")))
+
+         (setq org-todo-keyword-faces '(("습관" :foreground "dodger blue")
+      ("PROJECT" :foreground "chartreuse" :weight bold  )
+                                          ("NEXT" :foreground "blue2" :background "white" :weight bold :family "fira mono")
+			         
+                                        ("◔" :foreground "olivedrab1")
+                                        ("?" :foreground "yellow") 
+                                        ("✓" :foreground "gainsboro" )
+                                        ("☓" :foreground "gainsboro")))
+
+
+;   ))
+; (org-babel-load-file "~/Dropbox/emacs/norang.org")
+(setq org-stuck-projects '("/PROJECT"
+ ("NEXT")
+nil ""))
+
+#+END_SRC
+
+#+RESULTS:
+| /PROJECT | (NEXT) | nil |   |
+
+
+
+'("+LEVEL=2/-DONE"
+  ("TODO" "NEXT" "NEXTACTION")
+  nil "")
+
+
+ (setq org-agenda-custom-commands 
+
+           '(("d" "Undated tasks" alltodo "" 
+             ((org-agenda-todo-ignore-with-date t))
+             ((org-agenda-max-entries 5))))
+      )
+
+ 
+a
+
+  (setq org-todo-state-tags-triggers'(
+        ("PROJECT"   ("project" . t))
+		       ("TODO" ("todo" . t))))
+
+      ;(setq org-stuck-projects '("PROJECT+TODO/" ("NEXT") nil ""))
+#+RESULTS:
+| +* [PROJECT] | ([NEXT]) |
+
+* sounds
+ #+BEGIN_SRC emacs-lisp :tangle yes
+  (setq visible-bell nil)
+ #+END_SRC
+
+ #+RESULTS:
+
+
+
+
+
+
+
+
+* Exports
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+;printing
+(add-hook 'org-agenda-before-write-hook
+    (lambda ()
+    (add-text-properties (point-min) (point-max)
+    '(face(:foreground "black")))))
+
+(setq inhibit-eol-conversion nil)
+
+
+#+END_SRC
+
+#+RESULTS:
+
+
+* org-ref
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -348,31 +451,7 @@ file:~/.emacs
 
 
 
-** pdf-tools
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-(pdf-tools-install)
-
-(eval-after-load 'org '(require 'org-pdfview))
-
-(use-package pdf-tools)
-(use-package org-pdfview)
-
-(add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
-(add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
-
-
-(add-to-list 'org-file-apps 
-             '("\\.pdf\\'" . (lambda (file link)
-                                     (org-pdfview-open link))))
-#+END_SRC
-
-#+RESULTS:
-: ((\.pdf\' lambda (file link) (org-pdfview-open link)) (\.pdf::\([[:digit:]]+\)\' . org-pdfview-open) (\.pdf\' . org-pdfview-open) (auto-mode . emacs) (\.mm\' . default) (\.x?html?\' . default) (\.pdf\' . default))
-
-
-
-** mobile org
+* mobile org
 # # :PROPERTIES:
 # # :ARCHIVE_TIME: 2017-10-19 Thu 00:34
 # # :ARCHIVE_FILE: ~/Dropbox/emacs/settings.org
@@ -394,7 +473,7 @@ file:~/.emacs
 # # )))
 # # (setq org-mobile-checkum-binary "C:\\Users\\betsy\\coreutils\\md5sum.exe")
 # # #+END_SRC
-** text editing
+* text editing
 #+BEGIN_SRC emacs-lisp :tangle yes
            (setq org-support-shift-select (quote always))
           (delete-selection-mode) ;allows to delete selected text by typing
@@ -456,12 +535,401 @@ file:~/.emacs
 
          ;allows you to edit one occurrence of some text in a buffer (possibly narrowed) or region, and simultaneously have other occurrences edited in the same way, with visual
 
+* Org-export
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-export-with-properties t)
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
+
+* ORG
+** org-toc: table of contents
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(use-package toc-org)
+;; (if (require 'toc-org nil t)
+;;     (add-hook 'org-mode-hook 'toc-org-enable)
+;;     (warn "toc-org not found"))
+#+END_SRC
+** org-clock
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Resume clocking task when emacs is restarted
+(org-clock-persistence-insinuate)
+;; Show lot of clocking history so it's easy to pick items off the C-F11 list
+(setq org-clock-history-length 30)
+;; Resume clocking task on clock-in if the clock is open
+(setq org-clock-in-resume t)
+
+;; Separate drawers for clocking and logs
+(setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
+;; Save clock data and state changes and notes in the LOGBOOK drawer
+(setq org-clock-persist-file "~/Dropbox/emacs/.emacs.d/org-clock-save.el")
+(setq org-clock-into-drawer t)
+;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
+
+; C-u C-c C-x C-i d
+(setq org-clock-out-remove-zero-time-clocks t)
+;; Clock out when moving task to a done state
+(setq org-clock-out-when-done t)
+;; Save the running clock and all clock history when exiting Emacs, load it on startup
+(setq org-clock-persist t)
+;; Do not prompt to resume an active clock
+(setq org-clock-persist-query-resume nil)
+;; Enable auto clock resolution for finding open clocks
+(setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
+;; Include current clocking task in clock reports
+(setq org-clock-report-include-clocking-task t)
+(setq org-clock-mode-line-total (quote current))
+
+(setq org-clock-clocked-in-display (quote both))
+
+#+END_SRC
+
+#+RESULTS:
+: both
+
+** org-drill
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+;(use-package org-drill)
+#+END_SRC
+** Org-refile
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+  (setq org-refile-use-outline-path (quote file))
+
+  (setq org-refile-targets '((nil :maxlevel . 2)
+                             (org-agenda-files :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/General/archive.org" :maxlevel . 9)
+		                 ("journal.org" :maxlevel . 9)))
+
+  (setq org-outline-path-complete-in-steps nil) 
+
+; Refile in a single go
+
+  (global-set-key (kbd "<f4>") 'org-refile)
+
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
+
+#+END_SRC
+
+#+RESULTS:
+: confirm
+
+** org modules
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+
+ (setq org-modules '(org-bbdb
+                      org-gnus
+                      org-drill
+                      org-info
+                      org-jsinfo
+                      org-habit
+                      org-irc
+                      org-mouse
+                      org-protocol
+                      org-annotate-file
+                      org-eval
+                      org-expiry
+                      org-interactive-query
+                      org-man
+                      org-collector
+                      org-panel
+                      org-screen
+                      org-toc))
+
+(eval-after-load 'org '(org-load-modules-maybe t))
+
+#+END_SRC
+** Org-capture
+#+BEGIN_SRC emacs-lisp :tangle yes
+       (global-set-key (kbd "<f1>") 'org-capture)
+
+       ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
+        (setq org-capture-templates '(
+                                     ("t" "todo" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "TASK INBOX" ) 
+                                      "** TODO %? \nDEADLINE: %^t  \nSCHEDULED: %^t \n%a\n\n" :clock-in t :clock-resume t)
+                                     ("j" "journal" entry (file+datetree "~/Dropbox/Zettelkasten/journal.org")
+                                      "** %<%H:%M> \n\n%?\n\n" :kill-buffer nil :clock-in t :clock-resume t) 
+                                     ;("l" "logging" entry (file+datetree "~/Dropbox/Zettelkasten/journal.org" :kill-buffer nil)
+                                      ;"** %? %T" :kill-buffer nil) 
+                                   ;  ("j" "jobs" table-line (file+headline "~/Dropbox/Zettelkasten/lis.org" "Jobs")
+                                    ;  "|%t|%A|%^{How far?}|%^{How much?}|" :append t) 
+                                     ("c" "calendar" entry (file  "~/Dropbox/Zettelkasten/gcal.org" )
+                                      "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
+;                                     ("r" "recommendation" table-line (file+headline "~/Dropbox/Zettelkasten/recommendations.org" "Books")
+ ;                                     "|%t|%A||%?|" :append t :kill-buffer t)
+                                     ("e" "expense" table-line (file+headline "~/Dropbox/Zettelkasten/budget.org" "Expenses to be filed") "|%t|%^{amount}|%a|%^{category|LIS|Food|Transportation|Clothing}|%?|" :append t :kill-buffer nil)
+   ))
 
 
 
 
-** Outside world
-*** Web
+#+END_SRC
+
+#+RESULTS:
+| t | todo | entry | (file+headline ~/Dropbox/Zettelkasten/inbox.org TASK INBOX) | ** TODO %? |
+
+** org-habit
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-habit-following-days 1)
+(setq org-habit-graph-column 50)
+(setq org-habit-show-habits-only-for-today nil)
+
+
+
+
+#+END_SRC
+** org-brain
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package org-brain :ensure t
+  :init
+  (setq org-brain-path "~/Dropbox/Zettelkasten/")
+  :config (progn
+  (setq org-id-track-globally t)
+  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+  (setq org-brain-visualize-default-choices 'all)))
+#+END_SRC
+
+** org-archive
+ #+BEGIN_SRC emacs-lisp :tangle yes
+
+(setq org-archive-location "~/Dropbox/Zettelkasten/General/archive.org::datetree/")
+
+
+
+ #+END_SRC
+
+ #+RESULTS:
+ : ~/Dropbox/Zettelkasten/General/archive.org::datetree/
+
+** org-mode structure templates
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(add-to-list 'org-structure-template-alist (list "p" (concat ":PROPERTIES:\n" "?\n" ":END:"))) 
+(add-to-list 'org-structure-template-alist (list "eh" (concat ":EXPORT_FILE_NAME: ?\n" ":EXPORT_TITLE:\n" ":EXPORT_OPTIONS: toc:nil html-postamble:nil num:nil")))
+
+#+END_SRC
+
+#+RESULTS:
+| eh | :EXPORT_FILE_NAME: ? |
+
+** org-tags
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(setq org-complete-tags-always-offer-all-agenda-tags t)
+;(setq org-tags-column -80)
+(setq org-tags-match-list-sublevels (quote indented))
+(setq tags-add-tables nil)
+
+#+END_SRC
+
+#+RESULTS:
+
+
+
+
+
+* org-emphasis-alist
+
+#+BEGIN_SRC  emacs-lisp :tangle yes
+(custom-set-variables
+
+'(org-emphasis-alist
+   (quote
+    (("!"
+      (quote
+       (:weight bold :family "consolas" :foreground "red3" :background "slategray3"))
+      verbatim)
+     ("*"
+      (quote
+       (:weight bold :foreground "royalblue1")))
+     ("/"
+      (quote
+       (:slant italic :foreground "darkorchid1")))
+     ("_"
+      (quote
+       (:underline t :foreground "darkorchid1" )))
+     ("=" org-verbatim verbatim)
+     ("~" org-code verbatim)
+     ("+"
+      (quote
+       (:strike-through "chartreuse" :weight bold)))
+     ("@"
+      (quote
+       (:weight bold :foreground "chartreuse")
+       verbatim)))))
+)
+
+#+END_SRC
+
+#+RESULTS:
+
+* fonts
+#+BEGIN_SRC emacs-lisp :tangle yes
+  
+(set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+                '("NanumBarunGothic" . "unicode-bmp" ))
+(set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
+                '("NanumBarunGothic" . "unicode-bmp"))
+(set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
+              (font-spec :family "DejaVu Sans Mono" :size 20)) 
+
+(setq use-default-font-for-symbols nil)
+
+(use-package unicode-fonts
+	  :ensure t
+	  :disabled t
+	  :init (unicode-fonts-setup))
+
+#+END_SRC
+
+#+RESULTS:
+
+* Formatting
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(setq fill-column 80)
+;(fill-column 100)
+(global-visual-line-mode t)
+
+(use-package visual-fill-column
+     :ensure t)
+ 
+;(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
+;(global-visual-fill-column-mode t)
+;(setq global-visual-fill-column-mode t)
+(setq visual-fill-column-center-text t)
+
+#+END_SRC
+
+#+RESULTS:
+
+* org fonts
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+            (setq org-ellipsis " ෴ " )
+
+            (use-package org-bullets
+                     :init
+                     (add-hook 'org-mode-hook 
+                     (lambda () (org-bullets-mode 1)))
+                     (setq org-bullets-bullet-list 
+                     (quote ("◉""〉""⚬" "»" "•" "⊹"  "⯮" "⊸" "∞" "⛯"   ))))
+
+
+
+             (setq org-list-demote-modify-bullet
+                   '(("+" . "-") ("-" . "+") ))
+         (setq org-list-allow-alphabetical t)
+         (setq org-list-indent-offset 1)
+         (setq org-checkbox-hierarchical-statistics t)
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
+
+#+RESULTS:
+| +PROJECT/-MAYBE-DONE | (NEXT) | nil | \<IGNORE\> |
+
+* encoding
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
+#+END_SRC
+
+* custom-set-faces
+#+BEGIN_SRC emacs-lisp :tangle yes
+   (custom-set-faces 
+ '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :family "Consolas"))))                    
+ '(fringe ((t (:background "#242728"))))
+                     '(highlight ((t (:weight bold))))
+                     '(lazy-highlight ((t (:inherit highlight :background "black"))))
+                     '(link ((t (:foreground "#06d8ff" :underline t :weight normal))))
+                     '(helm-selection ((t (:inherit bold :background "black" :foreground "magenta" :underline t))))
+                     '(fringe ((t (:background "#242728"))))
+                     '(custom-variable-tag ((t (:inherit variable-pitch :foreground "gold" :height 1.1))))
+                     '(org-agenda-calendar-event ((t (:foreground "light gray"))))
+                     '(org-agenda-clocking ((t (:box (:line-width 2 :color "magenta" :style released-button)))))
+                     '(org-agenda-current-time ((t (:foreground "OliveDrab3"))))
+                     '(org-agenda-date ((t (:background "light steel blue" :foreground "midnight blue" :inverse-video nil :box (:line-width 20 :color "#242728") :overline nil :slant normal :weight normal :height 1.2))))
+
+                     '(org-agenda-date-today ((t (:inherit org-agenda-date :background "#242728" :foreground "gold" :inverse-video t :overline nil :weight bold))))
+                     '(org-agenda-date-weekend ((((class color) (min-colors 257)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "deep pink" :weight unspecified :underline t :overline nil :box (:line-width 20 :color "#242728"))) (((class color) (min-colors 89)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "red" :weight unspecified :underline t :overline nil :box 1))))
+                     '(org-archived ((t (:foreground "saddle brown" :weight normal))))
+                     '(org-block ((t (:foreground "gainsboro"))))
+                     '(org-clock-overlay ((t (:background "dim gray"))))
+                     '(org-date ((t (:foreground "steel blue" :underline t))))
+                     '(org-default ((t (:inherit default))))
+                     '(org-done ((t (:foreground "dark gray" :weight normal))))
+                     '(org-ellipsis ((t (:foreground "#6A6D70" :height 0.5))))
+                     '(org-habit-alert-future-face ((t (:background "red" :foreground "red"))))
+                     '(org-habit-overdue-face ((t (:background "#63de5d" :foreground "#63de5d"))))
+                     '(org-inlinetask ((t (:foreground "dodger blue"))))
+                     '(org-level-1 ((t (:inherit nil :foreground "gray" :weight bold :height 1.5 :width extra-expanded :family "pompiere"))))
+                     '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
+                     '(org-level-3 ((t (:inherit variable-pitch :foreground "dodger blue" :height 0.95))))
+                     '(org-level-4 ((t (:inherit variable-pitch :foreground "olivedrab1" :height 0.95))))
+                     '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
+                     '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
+                     '(org-link ((t (:foreground "LightSteelBlue3" :underline t :family "nova mono"))))
+                     '(org-list-dt ((t (:foreground "magenta" :weight bold))))
+                     '(org-priority ((t (:foreground "gold" :weight bold))))
+                     '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
+                     '(org-scheduled ((t (:foreground "DarkOliveGreen3"))))
+                     '(org-scheduled-previously ((t (:foreground "deep pink"))))
+                     '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
+                     '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
+                     '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
+                     '(org-todo ((t (:background "gray13" :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
+                     '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
+                     '(org-warning ((t (:background "gray13" :foreground "red" :underline nil :weight normal))))
+                     '(secondary-selection ((t (:background "gray14" :foreground "pale green"))))
+                     '(variable-pitch ((t (:family "happy monkey")))))
+#+END_SRC
+
+#+RESULTS:
+
+
+
+* pdf-tools
+
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(pdf-tools-install)
+
+(eval-after-load 'org '(require 'org-pdfview))
+
+(use-package pdf-tools)
+(use-package org-pdfview)
+
+(add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
+(add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
+
+
+(add-to-list 'org-file-apps 
+             '("\\.pdf\\'" . (lambda (file link)
+                                     (org-pdfview-open link))))
+#+END_SRC
+
+#+RESULTS:
+: ((\.pdf\' lambda (file link) (org-pdfview-open link)) (\.pdf::\([[:digit:]]+\)\' . org-pdfview-open) (\.pdf\' . org-pdfview-open) (auto-mode . emacs) (\.mm\' . default) (\.x?html?\' . default) (\.pdf\' . default))
+
+
+
+
+* Web
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -499,36 +967,37 @@ file:~/.emacs
 
 #+RESULTS:
 
-*** mu4e
+* mu4e
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") 
-   (use-package mu4e) 
-   (use-package mu4e-contrib)
-   (use-package org-mu4e) 
+         (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") 
+        ; (use-package mu4e) 
+        ; (use-package mu4e-contrib)
+      (require 'mu4e)
+      (require 'org-mu4e)
+         ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+         (setq mu4e-sent-messages-behavior 'delete)
+         (setq message-kill-buffer-on-exit t)
+         (setq mu4e-change-filenames-when-moving t)
+         (setq mu4e-compose-format-flowed t)
+         (setq smtpmail-default-smtp-server "smtp.gmail.com")
+      (add-hook 'mu4e-view-mode-hook 'visual-fill-column-mode)
 
-   ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-   (setq mu4e-sent-messages-behavior 'delete)
-   (setq message-kill-buffer-on-exit t)
-   (setq mu4e-change-filenames-when-moving t)
-   (setq mu4e-compose-format-flowed t)
-   (setq smtpmail-default-smtp-server "smtp.gmail.com")
-
-   (add-hook 'mu4e-view-mode-hook (lambda ()(set-fill-column 80)))
-   (add-hook 'message-mode-hook (lambda ()(set-fill-column 120)))
-   (add-hook 'mu4e-headers-mode-hook (lambda ()(set-fill-column 200)))
+   (add-hook 'message-mode-hook 'visual-fill-column-mode)
+       ;  (add-hook 'mu4e-headers-mode-hook (lambda ()(set-fill-column 200)))
  #+END_SRC
 
  #+RESULTS:
- | (lambda nil (set-fill-column 200)) | #[nil \301\300!\210\302\211\207 [bookmark-make-record-function make-local-variable mu4e-view-bookmark-make-record] 2] |
+ | visual-fill-column-mode |
 
-**** message view
+** message view
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq mu4e-attachment-dir "~/Dropbox")
+(setq mu4e-attachment-dir "~/Downloads/")
 
-(setq shr-color-visible-luminance-min 100) 
+(setq shr-color-visible-luminance-min 50) 
 (setq shr-color-visible-distance-min 5)
+;(setq mu4e-view-html-plaintext-ratio-heuristic 'most-positive-fixnum)
 (setq message-yank-prefix ""
       message-yank-empty-prefix ""
       message-yank-cited-prefix "")
@@ -546,30 +1015,34 @@ file:~/.emacs
 
 #+RESULTS:
 
-**** headers view
+** headers view
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq org-mu4e-link-query-in-headers-mode nil)
-;(setq mu4e-update-interval 60)
-;(setq mu4e-index-update-in-background t)
-(setq mu4e-headers-fields
-      '( (:human-date    .  13)    ;; alternatively, use :human-date
-         (:flags         .   6)
-         (:from          .  22)
-         (:thread-subject       . 90 ))) ;; alternatively, use :thre
-   ;; ;;  ;; ad-subject
-(setq mu4e-view-prefer-html t)
-(setq mu4e-headers-skip-duplicates t)
-(setq mu4e-headers-auto-update t)
-(setq mu4e-view-show-addresses t)
-(setq mu4e-headers-date-format "%x")
-(setq mu4e-headers-time-format "%H:%M")
+   (setq org-mu4e-link-query-in-headers-mode nil)
+   ;(setq mu4e-update-interval 60)
+   ;(setq mu4e-index-update-in-background t)
+   (setq mu4e-headers-fields
+         '( (:human-date    .  13)    ;; alternatively, use :human-date
+            (:flags         .   6)
+            (:from          .  22)
+;            (:thread-subject       . 90 )
+            (:thread-subject       . 70 )
+
+            )) 
+   ;; alternatively, use :thre
+      ;; ;;  ;; ad-subject
+   (setq mu4e-view-prefer-html t)
+   (setq mu4e-headers-skip-duplicates t)
+   (setq mu4e-headers-auto-update t)
+   (setq mu4e-view-show-addresses t)
+   (setq mu4e-headers-date-format "%x")
+   (setq mu4e-headers-time-format "%H:%M")
 #+END_SRC
 
 #+RESULTS:
 : %H:%M
 
-**** settings
+** settings
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -578,7 +1051,7 @@ file:~/.emacs
 
 #+END_SRC 
 
-**** folders
+** folders
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -593,17 +1066,17 @@ file:~/.emacs
 (setq mu4e-trash-folder  "/Trash")
 (setq mu4e-refile-folder "/All")
 (setq mu4e-maildir "~/Maildir")
-(setq mu4e-attachment-dir "~/Dropbox/Downloads")
+;(setq mu4e-attachment-dir "~/Dropbox/Downloads")
 #+END_SRC 
 
 #+RESULTS:
-: ~/Dropbox/Downloads
+: ~/Maildir
 
-**** bbdb
+** bbdb
 
 #+BEGIN_SRC emacs-lisp :tangle yes
  	
-(require 'bbdb)
+(use-package bbdb)
 
 (bbdb-initialize)
 (autoload 'bbdb-insinuate-mu4e "bbdb-mu4e")
@@ -624,269 +1097,11 @@ file:~/.emacs
 #+RESULTS:
 : United States
 
-*** org-gcal
-   
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-(use-package calfw)
-(use-package calfw-org)
-(use-package calfw-gcal)
-
-(setq package-check-signature nil)
-(setq org-gcal-down-days '120)
-;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
-
-#+END_SRC
-
-#+RESULTS:
-: 120
-
-** org-agenda
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-(global-set-key (kbd "<f5>") 'org-agenda)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-x .") 'org-archive-subtree-default)
-(global-set-key (kbd "C-.") 'org-todo)
-(global-set-key (kbd "C-c n") 'org-schedule)
-;show emacs on startup
-(add-hook 'after-init-hook 'org-agenda-list)
-;(setq org-agenda-start-with-follow-mode t)
-(setq org-log-into-drawer t)
-
-(setq org-agenda-files (quote
-			   ("~/Dropbox/Zettelkasten/inbox.org" 
-			    "~/Dropbox/Zettelkasten/gcal.org"  
- 			    "~/Dropbox/Zettelkasten/lis.org"  
- 			    "~/Dropbox/Zettelkasten/ndd.org"
-			    "~/Dropbox/Zettelkasten/work.org"
-			    "~/Dropbox/Zettelkasten/budget.org"
-			    "~/Dropbox/Zettelkasten/notes.org")))
-
-(setq org-agenda-custom-commands 
-
-     '(("d" "Undated tasks" alltodo "" 
-       ((org-agenda-todo-ignore-with-date t))
-       ((org-agenda-max-entries 5))))
-)
-
-(setq org-agenda-current-time-string "✸✸✸✸✸✸ NOW ✸✸✸✸✸✸✸✸✸✸")
-(setq org-agenda-entry-text-leaders: "   . ")
-
-(setq org-agenda-entry-text-maxlines 1)
-(setq org-agenda-deadline-leaders: '("DUE:" "In %3d d.:" "%2d d. ago:"))
-(setq org-agenda-scheduled-leaders '("" "%2dx past due: "))
-(setq org-agenda-span (quote 8))
-(setq org-enforce-todo-dependencies t)
-(setq org-agenda-export-html-style nil)
-;skips
-(setq org-agenda-skip-timestamp-if-deadline-is-shown t)
-(setq org-agenda-skip-deadline-if-done t)
-(setq org-agenda-skip-additional-timestamps-same-entry t)
-(setq org-agenda-todo-ignore-deadlines (quote near))
-
-(setq org-agenda-skip-deadline-prewarning-if-scheduled t)
-(setq org-agenda-skip-scheduled-if-done t)
-(setq org-agenda-jump-prefer-future t)
-(setq org-agenda-start-with-clockreport-mode t)
-
-; (setq org-agenda-window-setup (quote other-frame))
-(setq org-deadline-warning-days 4)
-(setq org-agenda-with-colors t)
-
-#+END_SRC
-
-#+RESULTS:
-: t
-
-** ORG
-*** org-toc: table of contents
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-(use-package toc-org)
-;; (if (require 'toc-org nil t)
-;;     (add-hook 'org-mode-hook 'toc-org-enable)
-;;     (warn "toc-org not found"))
-#+END_SRC
-*** org-clock
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; Resume clocking task when emacs is restarted
-(org-clock-persistence-insinuate)
-;; Show lot of clocking history so it's easy to pick items off the C-F11 list
-(setq org-clock-history-length 23)
-;; Resume clocking task on clock-in if the clock is open
-(setq org-clock-in-resume t)
-
-;; Separate drawers for clocking and logs
-(setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
-;; Save clock data and state changes and notes in the LOGBOOK drawer
-(setq org-clock-into-drawer t)
-;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
-(setq org-clock-out-remove-zero-time-clocks t)
-;; Clock out when moving task to a done state
-(setq org-clock-out-when-done t)
-;; Save the running clock and all clock history when exiting Emacs, load it on startup
-(setq org-clock-persist t)
-;; Do not prompt to resume an active clock
-(setq org-clock-persist-query-resume nil)
-;; Enable auto clock resolution for finding open clocks
-(setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
-;; Include current clocking task in clock reports
-(setq org-clock-report-include-clocking-task t)
-(setq org-clock-mode-line-total (quote today))
-
-(setq org-clock-clocked-in-display (quote both))
-
-#+END_SRC
-
-#+RESULTS:
-: both
-
-*** org-drill
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package org-drill)
-#+END_SRC
-*** Org-refile
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-  (setq org-refile-use-outline-path (quote file))
-
-  (setq org-refile-targets '((nil :maxlevel . 2)
-                             (org-agenda-files :maxlevel . 2)
-                             ("~/Dropbox/Zettelkasten/General/archive.org" :maxlevel . 9)
-		                 ("journal.org" :maxlevel . 9)))
-
-  (setq org-outline-path-complete-in-steps nil) 
-
-; Refile in a single go
-
-  (global-set-key (kbd "<f4>") 'org-refile)
-
-  (setq org-refile-allow-creating-parent-nodes 'confirm)
-
-#+END_SRC
-
-#+RESULTS:
-: confirm
-
-*** org modules
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-
- (setq org-modules '(org-bbdb
-                      org-gnus
-                      org-drill
-                      org-info
-                      org-jsinfo
-                      org-habit
-                      org-irc
-                      org-mouse
-                      org-protocol
-                      org-annotate-file
-                      org-eval
-                      org-expiry
-                      org-interactive-query
-                      org-man
-                      org-collector
-                      org-panel
-                      org-screen
-                      org-toc))
-
-(eval-after-load 'org '(org-load-modules-maybe t))
-
-#+END_SRC
-*** Org-capture
-#+BEGIN_SRC emacs-lisp :tangle yes
-       (global-set-key (kbd "<f1>") 'org-capture)
-
-       ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
-        (setq org-capture-templates '(
-                                     ("t" "todo" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "⸻TASK INBOX ⸻" ) 
-                                      "** [TODO] %? \nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n%a\n\n")
-                                     ("d" "journal" entry (file+datetree "~/Dropbox/Zettelkasten/journal.org")
-                                      "** %<%H:%M> \n%?" :kill-buffer nil :clock-in t :clock-resume t) 
-                                     ("l" "logging" entry (file+datetree "~/Dropbox/Zettelkasten/journal.org" :kill-buffer nil)
-                                      "** %? %T" :kill-buffer nil) 
-                                     ("j" "jobs" table-line (file+headline "~/Dropbox/Zettelkasten/lis.org" "Jobs")
-                                      "|%t|%A|%^{How far?}|%^{How much?}|" :append t) 
-                                     ("e" "event" entry (file  "~/Dropbox/Zettelkasten/gcal.org" )
-                                      "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
-                                     ("r" "recommendation" table-line (file+headline "~/Dropbox/Zettelkasten/recommendations.org" "Books")
-                                      "|%t|%A||%?|" :append t :kill-buffer t)
-                                     ("b" "expense" table-line (file+headline "~/Dropbox/Zettelkasten/budget.org" "Expenses to be filed") "|%t|%^{amount}|%a|%^{category|LIS|Food|Transportation|Clothing}|%?|" :append t :kill-buffer nil)
-   ))
-
-
-
-
-#+END_SRC
-
-#+RESULTS:
-| t | todo | entry | (file+headline ~/Dropbox/Zettelkasten/inbox.org ⸻TASK INBOX ⸻) | ** [TODO] %? |
-
-*** org-habit
-#+BEGIN_SRC emacs-lisp :tangle yes
-(setq org-habit-following-days 1)
-(setq org-habit-graph-column 50)
-(setq org-habit-show-habits-only-for-today nil)
-
-
-
-
-#+END_SRC
-*** org-brain
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package org-brain :ensure t
-  :init
-  (setq org-brain-path "~/Dropbox/Zettelkasten/")
-  :config (progn
-  (setq org-id-track-globally t)
-  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-  (setq org-brain-visualize-default-choices 'all)))
-#+END_SRC
-
-*** org-archive
- #+BEGIN_SRC emacs-lisp :tangle yes
-
-(setq org-archive-location "~/Dropbox/Zettelkasten/General/archive.org::datetree/")
-
-
-
- #+END_SRC
-
- #+RESULTS:
- : ~/Dropbox/Zettelkasten/General/archive.org::datetree/
-
-*** org-mode structure templates
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-(add-to-list 'org-structure-template-alist (list "p" (concat ":PROPERTIES:\n" "?\n" ":END:"))) 
-(add-to-list 'org-structure-template-alist (list "eh" (concat ":EXPORT_FILE_NAME: ?\n" ":EXPORT_TITLE:\n" ":EXPORT_OPTIONS: toc:nil html-postamble:nil num:nil")))
-
-#+END_SRC
-
-#+RESULTS:
-| eh | :EXPORT_FILE_NAME: ? |
-
-*** org-tags
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-(setq org-complete-tags-always-offer-all-agenda-tags t)
-(setq org-tags-column -80)
-(setq org-tags-match-list-sublevels (quote indented))
-(setq tags-add-tables nil)
-
-#+END_SRC
 
 * Troubleshooting
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-(setq debug-on-error t)
+(setq debug-on-error nil)
 
 
 
@@ -946,7 +1161,7 @@ file:~/.emacs
  '(org-startup-align-all-tables t)
  '(org-startup-folded t)
 ;'(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
- '(pdf-view-continuous nil)
+ ;'(pdf-view-continuous nil)
 )
 
 
