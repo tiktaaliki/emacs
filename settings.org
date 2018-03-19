@@ -130,6 +130,82 @@ M-x describe-current-coding-system
 
 #+RESULTS:
 
+* templates
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+      (add-to-list 'org-structure-template-alist '
+                   ("r" "- [ ] downloaded\n- [ ] added to bibtex file\n- [ ] read\n- [ ] notes"))
+
+      (add-to-list 'org-structure-template-alist '
+                   ("736" "- [ ] downloaded\n- [ ] added to bibtex file\n-[ ] writing prompt\n- [ ] read\n- [ ] notes\n- [ ] post reflection\n- [ ] respond to 3 posts"))
+
+      (add-to-list 'org-structure-template-alist '
+                   ("b" "[/]"))
+#+END_SRC
+
+#+RESULTS:
+|   b | [/]              |
+| 736 | - [ ] downloaded |
+
+'(("eh" ":EXPORT_FILE_NAME: ?\n:EXPORT_TITLE:\n:EXPORT_OPTIONS: toc:nil html-postamble:nil num:nil")
+  ("p" ":PROPERTIES:\n?\n:END:")
+  ("r" "- [ ] downloaded\n\n- [ ] added to bibtex file\n- [ ] read\n- [ ] notes")
+  ("s" "#+BEGIN_SRC ?\n\n#+END_SRC")
+  ("e" "#+BEGIN_EXAMPLE\n?\n#+END_EXAMPLE")
+  ("q" "#+BEGIN_QUOTE\n?\n#+END_QUOTE")
+  ("v" "#+BEGIN_VERSE\n?\n#+END_VERSE")
+  ("V" "#+BEGIN_VERBATIM\n?\n#+END_VERBATIM")
+  ("c" "#+BEGIN_CENTER\n?\n#+END_CENTER")
+  ("C" "#+BEGIN_COMMENT\n?\n#+END_COMMENT")
+  ("l" "#+BEGIN_EXPORT latex\n?\n#+END_EXPORT")
+  ("L" "#+LaTeX: ")
+  ("h" "#+BEGIN_EXPORT html\n?\n#+END_EXPORT")
+  ("H" "#+HTML: ")
+  ("a" "#+BEGIN_EXPORT ascii\n?\n#+END_EXPORT")
+  ("A" "#+ASCII: ")
+  ("i" "#+INDEX: ?")
+  ("I" "#+INCLUDE: %file ?"))
+#+RESULTS:
+| eh | :EXPORT_FILE_NAME: ? |
+
+* openwith
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package openwith
+  :config (progn
+            (when (require 'openwith nil 'noerror)
+              (setq openwith-associations
+                    (list
+                     ;; (list (openwith-make-extension-regexp
+                     ;;        '("mpg" "mpeg" "mp3" "mp4"
+                     ;;          "avi" "wmv" "wav" "mov" "flv"
+                     ;;          "ogm" "ogg" "mkv"))
+                     ;;       "audacious"
+                     ;;       '(file))
+                     ;; (list (openwith-make-extension-regexp
+                     ;;        '("xbm" "pbm" "pgm" "ppm" "pnm"
+                     ;;          "png" "bmp" "tif" "jpeg" "jpg"))
+                     ;;       "gpicview"
+                     ;;       '(file))
+                    ;; (list (openwith-make-extension-regexp
+                      ;;      '("pdf"))
+                        ;;   "zathura"
+                          ;; '(file))
+                     (list (openwith-make-extension-regexp
+                            '("doc" "docx"))
+                           "wps"
+                           '(file))
+                     ))
+              (openwith-mode 1)))
+:ensure t)
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
+   (require 'openwith)
+   (openwith-mode t)
+
 * smart quotes
 #+BEGIN_SRC emacs-lisp :tangle yes
 (define-key org-mode-map "\"" #'endless/round-quotes)
@@ -184,7 +260,11 @@ Inside a code-block, just call `self-insert-command'."
 #+BEGIN_SRC emacs-lisp :tangle yes
 (global-unset-key (kbd "C-z"))
 (global-set-key (kbd "C-x /") 'shrink-window-horizontally)
+(global-set-key (kbd "<f11>") 'org-clock-in)
 #+END_SRC
+
+#+RESULTS:
+: org-clock-in
 
 * navigating
 #+BEGIN_SRC emacs-lisp :tangle yes
