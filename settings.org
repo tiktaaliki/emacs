@@ -7,6 +7,20 @@ file:~/.emacs
 - evaluation of this emacs lisp code block is disabled.
 
 - delete and reinstall org-plus-contrib
+* color 1
+:PROPERTIES:
+:VISIBILITY: ALL
+:END:
+** color 2
+*** color 3
+**** color 4
+***** color 5
+****** color 7
+******* color 8
+******** color 9
+********* color 10
+
+
 * to be organized
 #+BEGIN_SRC emacs-lisp :tangle yes
    (require 'cl) 
@@ -44,7 +58,7 @@ file:~/.emacs
 ;;em dash
       (define-key key-translation-map (kbd "C-c m") (kbd "—"))
       (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-      (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "➔"))
+      (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "⟹"))
       (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
 
 #+END_SRC
@@ -160,6 +174,12 @@ file:~/.emacs
        (smartparens-global-mode 1)
        (show-smartparens-global-mode 1) ))
 
+
+
+#+END_SRC
+
+#+RESULTS:
+*** smart quotes
    (define-key org-mode-map "\"" #'endless/round-quotes)
    (eval-after-load 'markdown-mode
      '(define-key markdown-mode-map "\""
@@ -184,13 +204,6 @@ file:~/.emacs
          (insert "“”")
          (forward-char -1))))
 
-
-#+END_SRC
-
-#+RESULTS:
-: endless/round-quotes
-*** smart quotes
-
 ** GUI formatting
 #+BEGIN_SRC emacs-lisp :tangle yes
 (set-fringe-mode '(50 . 0))
@@ -201,6 +214,9 @@ file:~/.emacs
  :ensure t
  :config (load-theme 'darkokai t))
 (setq org-startup-with-inline-images t)
+
+(setq org-startup-align-all-tables t)
+ (setq org-startup-folded t)
 
 #+END_SRC
 
@@ -229,6 +245,10 @@ file:~/.emacs
                            		 (case-fn . downcase))) 
              (setq deft-recursive t)
              (setq deft-extensions '("org" "txt" "emacs"))))
+
+(add-hook 'after-init-hook 'deft)
+
+
 
 (use-package helm
        :config (helm-mode 1)
@@ -262,7 +282,7 @@ file:~/.emacs
 (setq org-noter-property-doc-file "INTERLEAVE_PDF"
       org-noter-property-note-location "INTERLEAVE_PAGE_NOTE")
 
-(setq org-noter-notes-window-location 'other-frame)
+(setq org-noter-notes-window-location 'vertical-split)
 (setq org-noter-default-heading-title "p. $p$")
 (setq org-noter-auto-save-last-location t)
 
@@ -348,10 +368,11 @@ file:~/.emacs
              )))
 
             (setq org-stuck-projects '("/PROJECT" ("NEXT") nil ""))
+ (setq org-log-note-clock-out t)
 #+END_SRC
 
 #+RESULTS:
-| /PROJECT | (NEXT) | nil |   |
+: t
 
 
 
@@ -517,7 +538,17 @@ file:~/.emacs
 #+END_SRC
 
 #+RESULTS:
+* writing environment
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package writeroom-mode)
+(setq writeroom-extra-line-spacing 2)
+(setq writeroom-restore-window-config t)
 
+
+(use-package olivetti)
+#+END_SRC
+
+#+RESULTS:
 
 * ORG
 ** org-toc: table of contents
@@ -536,7 +567,7 @@ file:~/.emacs
 ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
 (setq org-clock-history-length 30)
 ;; Resume clocking task on clock-in if the clock is open
-(setq org-clock-in-resume t)
+;(setq org-clock-in-resume nil)
 
 ;; Separate drawers for clocking and logs
 (setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
@@ -561,8 +592,17 @@ file:~/.emacs
 
 (setq org-clock-clocked-in-display (quote both))
 
+(setq org-clock-clocktable-default-properties '(:scope ("inbox.org" "lis.org" "ndd.org" "work.org" "budget.org") :maxlevel 2 :link t :emphasize t :block today))
+
+
+
+
 #+END_SRC
 
+#+RESULTS:
+| :scope | (inbox.org lis.org ndd.org work.org budget.org) | :maxlevel | 2 | :link | t | :emphasize | t | :block | today |
+
+(setq org-clock-clocktable-default-properties '(:maxlevel 2 :scope ("lis.org" "inbox.org" "ndd.org" "work.org" "budget.org")  :fileskip0 t :link t :emphasize t))
 #+RESULTS:
 : both
 
@@ -651,13 +691,17 @@ file:~/.emacs
 ** org-habit
 #+BEGIN_SRC emacs-lisp :tangle yes
    (setq org-habit-following-days 1)
-   (setq org-habit-graph-column 50)
-   (setq org-habit-show-habits-only-for-today nil)
 
-
-
+   (setq org-habit-show-habits-only-for-today t)
+   (setq org-habit-preceding-days 7)
+   (setq org-habit-completed-glyph 128504)
+   (setq org-habit-show-done-always-green t)
 
 #+END_SRC
+
+#+RESULTS:
+: t
+
 ** org-brain
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -722,13 +766,13 @@ file:~/.emacs
       verbatim)
      ("*"
       (quote
-       (:weight bold :foreground "royalblue1")))
+       (:weight bold :foreground "dodgerblue")))
      ("/"
       (quote
        (:slant italic :foreground "darkorchid1")))
      ("_"
       (quote
-       (:underline t :foreground "darkorchid1" )))
+       (:underline t :foreground "orangered" :weight bold )))
      ("=" org-verbatim verbatim)
      ("~" org-code verbatim)
      ("+"
@@ -768,7 +812,7 @@ file:~/.emacs
 * Formatting
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-(setq fill-column 80)
+(setq fill-column 100)
 ;(fill-column 100)
 (global-visual-line-mode t)
 
@@ -794,7 +838,7 @@ file:~/.emacs
                      (add-hook 'org-mode-hook 
                      (lambda () (org-bullets-mode 1)))
                      (setq org-bullets-bullet-list 
-                     (quote ("◉""〉""⚬" "»" "•" "⊹"  "⯮" "⊸" "∞" "⛯"   ))))
+                     (quote ("◉""〉""⚬" "»" "⏵" "⊹"  "⯮" "⊸" "∞" "⛯"   ))))
 
 
 
@@ -822,52 +866,65 @@ file:~/.emacs
 
 * custom-set-faces
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (custom-set-faces 
- '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :family "Consolas"))))                    
- '(fringe ((t (:background "#242728"))))
-                     '(highlight ((t (:weight bold))))
-                     '(lazy-highlight ((t (:inherit highlight :background "black"))))
-                     '(link ((t (:foreground "#06d8ff" :underline t :weight normal))))
-                     '(helm-selection ((t (:inherit bold :background "black" :foreground "magenta" :underline t))))
-                     '(fringe ((t (:background "#242728"))))
-                     '(custom-variable-tag ((t (:inherit variable-pitch :foreground "gold" :height 1.1))))
-                     '(org-agenda-calendar-event ((t (:foreground "light gray"))))
-                     '(org-agenda-clocking ((t (:box (:line-width 2 :color "magenta" :style released-button)))))
-                     '(org-agenda-current-time ((t (:foreground "OliveDrab3"))))
-                     '(org-agenda-date ((t (:background "light steel blue" :foreground "midnight blue" :inverse-video nil :box (:line-width 20 :color "#242728") :overline nil :slant normal :weight normal :height 1.2))))
 
-                     '(org-agenda-date-today ((t (:inherit org-agenda-date :background "#242728" :foreground "gold" :inverse-video t :overline nil :weight bold))))
-                     '(org-agenda-date-weekend ((((class color) (min-colors 257)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "deep pink" :weight unspecified :underline t :overline nil :box (:line-width 20 :color "#242728"))) (((class color) (min-colors 89)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "red" :weight unspecified :underline t :overline nil :box 1))))
-                     '(org-archived ((t (:foreground "saddle brown" :weight normal))))
-                     '(org-block ((t (:foreground "gainsboro"))))
-                     '(org-clock-overlay ((t (:background "dim gray"))))
-                     '(org-date ((t (:foreground "steel blue" :underline t))))
-                     '(org-default ((t (:inherit default))))
-                     '(org-done ((t (:foreground "dark gray" :weight normal))))
-                     '(org-ellipsis ((t (:foreground "#6A6D70" :height 0.5))))
-                     ;'(org-habit-alert-future-face ((t (:background "red" :foreground "red"))))
-                     ;'(org-habit-overdue-face ((t (:background "#63de5d" :foreground "#63de5d"))))
-                     '(org-inlinetask ((t (:foreground "dodger blue"))))
-                     '(org-level-1 ((t (:inherit nil :foreground "gray" :weight bold :height 1.5 :width extra-expanded :family "pompiere"))))
-                     '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
-                     '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 0.95))))
-                     '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 0.95))))
-                     '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
-                     '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
-                     '(org-link ((t (:foreground "LightSteelBlue3" :underline t :family "nova mono"))))
-                     '(org-list-dt ((t (:foreground "magenta" :weight bold))))
-                     '(org-priority ((t (:foreground "gold" :weight bold))))
-                     '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
-                     '(org-scheduled ((t (:foreground "DarkOliveGreen3"))))
-                     '(org-scheduled-previously ((t (:foreground "deep pink"))))
-                     '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
-                     '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
-                     '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
-                     '(org-todo ((t (:background "gray13" :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
-                     '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
-                     '(org-warning ((t (:background "gray13" :foreground "red" :underline nil :weight normal))))
-                     '(secondary-selection ((t (:background "gray14" :foreground "pale green"))))
-                     '(variable-pitch ((t (:family "happy monkey")))))
+    (custom-set-faces 
+     '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :family "Consolas"))))                    
+     '(fringe ((t (:background "#242728"))))
+     '(highlight ((t (:weight bold))))
+     '(lazy-highlight ((t (:inherit highlight :background "black"))))
+     '(link ((t (:foreground "#06d8ff" :underline t :weight normal))))
+     '(helm-selection ((t (:inherit bold :background "black" :foreground "magenta" :underline t))))
+
+     '(custom-variable-tag ((t (:inherit variable-pitch :foreground "gold" :height 1.1))))
+     '(org-agenda-calendar-event ((t (:foreground "light gray"))))
+     '(org-agenda-clocking ((t (:box (:line-width 2 :color "magenta" :style released-button)))))
+     '(org-agenda-current-time ((t (:foreground "OliveDrab3"))))
+     '(org-agenda-date ((t (:background "light steel blue" :foreground "midnight blue" :inverse-video nil :box (:line-width 20 :color "#242728") :overline nil :slant normal :weight normal :height 1.2))))
+
+     '(org-agenda-date-today ((t (:inherit org-agenda-date :background "#242728" :foreground "gold" :inverse-video t :overline nil :weight bold))))
+     '(org-agenda-date-weekend ((((class color) (min-colors 257)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "deep pink" :weight unspecified :underline t :overline nil :box (:line-width 20 :color "#242728"))) (((class color) (min-colors 89)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "red" :weight unspecified :underline t :overline nil :box 1))))
+     '(org-archived ((t (:foreground "saddle brown" :weight normal))))
+     '(org-block ((t (:foreground "gainsboro"))))
+     '(org-clock-overlay ((t (:background "dim gray"))))
+     '(org-date ((t (:foreground "steel blue" :underline t))))
+     '(org-default ((t (:inherit default))))
+     '(org-done ((t (:foreground "dark gray" :weight normal))))
+     '(org-ellipsis ((t (:foreground "#6A6D70" :height 0.5))))
+
+
+
+     '(org-habit-alert-future-face ((t (:background "yellow" :foreground "black"))))
+     '(org-habit-overdue-face ((t (:background "firebrick4" :foreground "white"))))
+     '(org-habit-ready-face ((t (:background "green2" :foreground "black"))))
+
+
+
+
+     '(org-inlinetask ((t (:foreground "dodger blue"))))
+     '(org-level-1 ((t (:inherit nil :foreground "gray" :weight bold :height 1.5 :width extra-expanded :family "pompiere"))))
+     '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
+     '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 0.95))))
+     '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 0.95))))
+     '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
+     '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
+     '(org-link ((t (:foreground "LightSteelBlue3" :underline t :family "nova mono"))))
+
+     '(org-list-dt ((t (:foreground "mediumorchid4" :weight bold :background "lavenderblush1" :underline t ))))
+
+     '(org-priority ((t (:foreground "gold" :weight bold))))
+     '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
+     '(org-scheduled ((t (:foreground "DarkOliveGreen3"))))
+     '(org-scheduled-previously ((t (:foreground "seashell1" :weight bold))))
+     '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
+     '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
+     '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
+     '(org-todo ((t (:background "gray13" :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
+     '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
+     '(org-warning ((t (:foreground "goldenrod1" :underline nil :weight normal))))
+     '(secondary-selection ((t (:background "gray14" :foreground "pale green"))))
+     '(variable-pitch ((t (:family "happy monkey")))))
+
+
 #+END_SRC
 
 #+RESULTS:
@@ -1115,22 +1172,15 @@ file:~/.emacs
     ; "......" "----------------")))
  '(org-bbdb-anniversary-field (quote birthday) nil (bbdb))
  '(org-catch-invisible-edits (quote smart))
- '(org-clock-clocktable-default-properties
-   (quote
-    (:maxlevel 5 :scope agenda-with-archives :fileskip0 nil :link nil :emphasize t)))
- '(org-clock-idle-time 30)
- '(org-clocktable-defaults
-   (quote
-    (:maxlevel 5 :lang "en" :scope agenda-with-archives :block nil :wstart 1 :mstart 1 :tstart nil :tend nil :step nil :stepskip0 t :fileskip0 t :tags nil :emphasize nil :link nil :narrow 40! :indent t :formula nil :timestamp nil :level nil :tcolumns nil :formatter nil)))
+ 
+
  '(org-datetree-add-timestamp (quote inactive))
  '(org-default-notes-file "~/Dropbox/Zettelkasten/inbox.org")
 '(org-ellipsis " ෴ ")
 
- '(org-log-note-clock-out t)
 
 
- '(org-startup-align-all-tables t)
- '(org-startup-folded t)
+
 ;'(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  ;'(pdf-view-continuous nil)
 )
