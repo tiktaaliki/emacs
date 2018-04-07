@@ -20,57 +20,138 @@ file:~/.emacs
 ******** color 9
 ********* color 10
 
-
 * to be organized
 #+BEGIN_SRC emacs-lisp :tangle yes
    (require 'cl) 
-   (setq org-return-follows-link t)
+   (setq org-return-follows-link nil)
    (setq org-log-into-drawer t)
    (setq org-enforce-todo-dependencies t)
    (setq org-agenda-use-tag-inheritance nil)
    (setq org-use-tag-inheritance nil)
 #+END_SRC
+
+#+RESULTS:
+
+* packages
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+ (setq paradox-github-token 'd5d5ad6676a9ba03763251aead84566611c1a290)
+
+#+END_SRC
+
+#+RESULTS:
+: d5d5ad6676a9ba03763251aead84566611c1a290
+
+* frame
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+#+END_SRC
+
+#+RESULTS:
+
+* text files
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
+
+#+END_SRC
+
+#+RESULTS:
+: ((\.txt$ . org-mode) (\.[pP][dD][fF]\' . pdf-view-mode) (\.odc\' . archive-mode) (\.odf\' . archive-mode) (\.odi\' . archive-mode) (\.otp\' . archive-mode) (\.odp\' . archive-mode) (\.otg\' . archive-mode) (\.odg\' . archive-mode) (\.ots\' . archive-mode) (\.ods\' . archive-mode) (\.odm\' . archive-mode) (\.ott\' . archive-mode) (\.odt\' . archive-mode) (\.[Cc][Ss][Vv]\' . csv-mode) (/git-rebase-todo\' . git-rebase-mode) (\.gpg\(~\|\.~[0-9]+~\)?\' nil epa-file) (\.elc\' . elisp-byte-code-mode) (\.dz\' nil jka-compr) (\.xz\' nil jka-compr) (\.lzma\' nil jka-compr) (\.lz\' nil jka-compr) (\.g?z\' nil jka-compr) (\.bz2\' nil jka-compr) (\.Z\' nil jka-compr) (\.vr[hi]?\' . vera-mode) (\(?:\.\(?:rbw?\|ru\|rake\|thor\|jbuilder\|rabl\|gemspec\|podspec\)\|/\(?:Gem\|Rake\|Cap\|Thor\|Puppet\|Berks\|Vagrant\|Guard\|Pod\)file\)\' . ruby-mode) (\.re?st\' . rst-mode) (\.pyw?\' . python-mode) (\.scss\' . scss-mode) (\.awk\' . awk-mode) (\.\(u?lpc\|pike\|pmod\(\.in\)?\)\' . pike-mode) (\.idl\' . idl-mode) (\.java\' . java-mode) (\.m\' . objc-mode) (\.ii\' . c++-mode) (\.i\' . c-mode) (\.lex\' . c-mode) (\.y\(acc\)?\' . c-mode) (\.[ch]\' . c-mode) (\.\(CC?\|HH?\)\' . c++-mode) (\.[ch]\(pp\|xx\|\+\+\)\' . c++-mode) (\.\(cc\|hh\)\' . c++-mode) (\.\(bat\|cmd\)\' . bat-mode) (\.[sx]?html?\(\.[a-zA-Z_]+\)?\' . html-mode) (\.svgz?\' . image-mode) (\.svgz?\' . xml-mode) (\.x[bp]m\' . image-mode) (\.x[bp]m\' . c-mode) (\.p[bpgn]m\' . image-mode) (\.tiff?\' . image-mode) (\.gif\' . image-mode) (\.png\' . image-mode) (\.jpe?g\' . image-mode) (\.te?xt\' . text-mode) (\.[tT]e[xX]\' . tex-mode) (\.ins\' . tex-mode) (\.ltx\' . latex-mode) (\.dtx\' . doctex-mode) (\.org\' . org-mode) (\.el\' . emacs-lisp-mode) (Project\.ede\' . emacs-lisp-mode) (\.\(scm\|stk\|ss\|sch\)\' . scheme-mode) (\.l\' . lisp-mode) (\.li?sp\' . lisp-mode) (\.[fF]\' . fortran-mode) (\.for\' . fortran-mode) (\.p\' . pascal-mode) (\.pas\' . pascal-mode) (\.\(dpr\|DPR\)\' . delphi-mode) (\.ad[abs]\' . ada-mode) (\.ad[bs].dg\' . ada-mode) (\.\([pP]\([Llm]\|erl\|od\)\|al\)\' . perl-mode) (Imakefile\' . makefile-imake-mode) (Makeppfile\(?:\.mk\)?\' . makefile-makepp-mode) (\.makepp\' . makefile-makepp-mode) (\.mk\' . makefile-gmake-mode) (\.make\' . makefile-gmake-mode) ([Mm]akefile\' . makefile-gmake-mode) (\.am\' . makefile-automake-mode) (\.texinfo\' . texinfo-mode) (\.te?xi\' . texinfo-mode) (\.[sS]\' . asm-mode) (\.asm\' . asm-mode) (\.css\' . css-mode) (\.mixal\' . mixal-mode) (\.gcov\' . compilation-mode) (/\.[a-z0-9-]*gdbinit . gdb-script-mode) (-gdb\.gdb . gdb-script-mode) ([cC]hange\.?[lL]og?\' . change-log-mode) ([cC]hange[lL]og[-.][0-9]+\' . change-log-mode) (\$CHANGE_LOG\$\.TXT . change-log-mode) (\.scm\.[0-9]*\' . scheme-mode) (\.[ckz]?sh\'\|\.shar\'\|/\.z?profile\' . sh-mode) (\.bash\' . sh-mode) (\(/\|\`\)\.\(bash_\(profile\|history\|log\(in\|out\)\)\|z?log\(in\|out\)\)\' . sh-mode) (\(/\|\`\)\.\(shrc\|[kz]shrc\|bashrc\|t?cshrc\|esrc\)\' . sh-mode) (\(/\|\`\)\.\([kz]shenv\|xinitrc\|startxrc\|xsession\)\' . sh-mode) (\.m?spec\' . sh-mode) (\.m[mes]\' . nroff-mode) (\.man\' . nroff-mode) (\.sty\' . latex-mode) (\.cl[so]\' . latex-mode) (\.bbl\' . latex-mode) (\.bib\' . bibtex-mode) (\.bst\' . bibtex-style-mode) (\.sql\' . sql-mode) (\.m[4c]\' . m4-mode) (\.mf\' . metafont-mode) (\.mp\' . metapost-mode) (\.vhdl?\' . vhdl-mode) (\.article\' . text-mode) (\.letter\' . text-mode) (\.i?tcl\' . tcl-mode) (\.exp\' . tcl-mode) (\.itk\' . tcl-mode) (\.icn\' . icon-mode) (\.sim\' . simula-mode) (\.mss\' . scribe-mode) (\.f9[05]\' . f90-mode) (\.f0[38]\' . f90-mode) (\.indent\.pro\' . fundamental-mode) (\.\(pro\|PRO\)\' . idlwave-mode) (\.srt\' . srecode-template-mode) (\.prolog\' . prolog-mode) (\.tar\' . tar-mode) (\.\(arc\|zip\|lzh\|lha\|zoo\|[jew]ar\|xpi\|rar\|7z\|ARC\|ZIP\|LZH\|LHA\|ZOO\|[JEW]AR\|XPI\|RAR\|7Z\)\' . archive-mode) (\.oxt\' . archive-mode) (\.\(deb\|[oi]pk\)\' . archive-mode) (\`/tmp/Re . text-mode) (/Message[0-9]*\' . text-mode) (\`/tmp/fol/ . text-mode) (\.oak\' . scheme-mode) (\.sgml?\' . sgml-mode) (\.x[ms]l\' . xml-mode) (\.dbk\' . xml-mode) (\.dtd\' . sgml-mode) (\.ds\(ss\)?l\' . dsssl-mode) (\.jsm?\' . javascript-mode) (\.json\' . javascript-mode) (\.[ds]?vh?\' . verilog-mode) (\.by\' . bovine-grammar-mode) (\.wy\' . wisent-grammar-mode) ([:/\]\..*\(emacs\|gnus\|viper\)\' . emacs-lisp-mode) (\`\..*emacs\' . emacs-lisp-mode) ([:/]_emacs\' . emacs-lisp-mode) (/crontab\.X*[0-9]+\' . shell-script-mode) (\.ml\' . lisp-mode) (\.ld[si]?\' . ld-script-mode) (ld\.?script\' . ld-script-mode) (\.xs\' . c-mode) (\.x[abdsru]?[cnw]?\' . ld-script-mode) (\.zone\' . dns-mode) (\.soa\' . dns-mode) (\.asd\' . lisp-mode) (\.\(asn\|mib\|smi\)\' . snmp-mode) (\.\(as\|mi\|sm\)2\' . snmpv2-mode) (\.\(diffs?\|patch\|rej\)\' . diff-mode) (\.\(dif\|pat\)\' . diff-mode) (\.[eE]?[pP][sS]\' . ps-mode) (\.\(?:PDF\|DVI\|OD[FGPST]\|DOCX?\|XLSX?\|PPTX?\|pdf\|djvu\|dvi\|od[fgpst]\|docx?\|xlsx?\|pptx?\)\' . doc-view-mode-maybe) (configure\.\(ac\|in\)\' . autoconf-mode) (\.s\(v\|iv\|ieve\)\' . sieve-mode) (BROWSE\' . ebrowse-tree-mode) (\.ebrowse\' . ebrowse-tree-mode) (#\*mail\* . mail-mode) (\.g\' . antlr-mode) (\.mod\' . m2-mode) (\.ses\' . ses-mode) (\.docbook\' . sgml-mode) (\.com\' . dcl-mode) (/config\.\(?:bat\|log\)\' . fundamental-mode) (\.\(?:[iI][nN][iI]\|[lL][sS][tT]\|[rR][eE][gG]\|[sS][yY][sS]\)\' . conf-mode) (\.\(?:desktop\|la\)\' . conf-unix-mode) (\.ppd\' . conf-ppd-mode) (java.+\.conf\' . conf-javaprop-mode) (\.properties\(?:\.[a-zA-Z0-9._-]+\)?\' . conf-javaprop-mode) (\`/etc/\(?:DIR_COLORS\|ethers\|.?fstab\|.*hosts\|lesskey\|login\.?de\(?:fs\|vperm\)\|magic\|mtab\|pam\.d/.*\|permissions\(?:\.d/.+\)?\|protocols\|rpc\|services\)\' . conf-space-mode) (\`/etc/\(?:acpid?/.+\|aliases\(?:\.d/.+\)?\|default/.+\|group-?\|hosts\..+\|inittab\|ksysguarddrc\|opera6rc\|passwd-?\|shadow-?\|sysconfig/.+\)\' . conf-mode) ([cC]hange[lL]og[-.][-0-9a-z]+\' . change-log-mode) (/\.?\(?:gitconfig\|gnokiirc\|hgrc\|kde.*rc\|mime\.types\|wgetrc\)\' . conf-mode) (/\.\(?:enigma\|gltron\|gtk\|hxplayer\|net\|neverball\|qt/.+\|realplayer\|scummvm\|sversion\|sylpheed/.+\|xmp\)rc\' . conf-mode) (/\.\(?:gdbtkinit\|grip\|orbital/.+txt\|rhosts\|tuxracer/options\)\' . conf-mode) (/\.?X\(?:default\|resource\|re\)s\> . conf-xdefaults-mode) (/X11.+app-defaults/\|\.ad\' . conf-xdefaults-mode) (/X11.+locale/.+/Compose\' . conf-colon-mode) (/X11.+locale/compose\.dir\' . conf-javaprop-mode) (\.~?[0-9]+\.[0-9][-.0-9]*~?\' nil t) (\.\(?:orig\|in\|[bB][aA][kK]\)\' nil t) ([/.]c\(?:on\)?f\(?:i?g\)?\(?:\.[a-zA-Z0-9._-]+\)?\' . conf-mode-maybe) (\.[1-9]\' . nroff-mode) (\.tgz\' . tar-mode) (\.tbz2?\' . tar-mode) (\.txz\' . tar-mode))
+
+* csv 
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(setq csv-separators '(":" "	"))
+
+#+END_SRC
+
+#+RESULTS:
+| : |   |
+
+* unfill paragraph
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
+    (defun unfill-paragraph (&optional region)
+      "Takes a multi-line paragraph and makes it into a single line of text."
+      (interactive (progn (barf-if-buffer-read-only) '(t)))
+      (let ((fill-column (point-max))
+            ;; This would override `fill-column' if it's an integer.
+            (emacs-lisp-docstring-fill-column t))
+        (fill-paragraph nil region)))
+
+#+END_SRC
+
+#+RESULTS:
+: unfill-paragraph
+
 * Key bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
-      (global-unset-key (kbd "C-z"))
-      (global-set-key (kbd "C-x /") 'shrink-window-horizontally)
-      (global-set-key (kbd "<f11>") 'org-clock-in)
-      (global-set-key (kbd "<f7>") 'org-agenda)
-      (global-set-key (kbd "C-c a") 'org-agenda)
-      (global-set-key (kbd "C-x .") 'org-archive-subtree-default)
-      (global-set-key (kbd "C-.") 'org-todo)
-      (global-set-key (kbd "C-c n") 'org-schedule)
-      (global-set-key (kbd "<f1>") 'org-capture)
 
-      (global-set-key (kbd "M-=") 'count-words)
-      (global-set-key (kbd "<f5>") 'repeat)
-      (global-set-key (kbd "C-<kp-6>") 'xah-select-block)
-      (global-set-key (kbd "M-1") 'org-clock-select-task)
+   (global-unset-key (kbd "C-z"))
+   (global-set-key (kbd "C-x /") 'shrink-window-horizontally)
+   (global-set-key (kbd "<f2>") 'org-clock-in)
+   (global-set-key (kbd "<f7>") 'org-agenda)
+   (global-set-key (kbd "C-c a") 'org-agenda)
+   (global-set-key (kbd "C-x .") 'org-archive-subtree-default)
+   (global-set-key (kbd "C-.") 'org-todo)
+   (global-set-key (kbd "C-c n") 'org-schedule)
+   (global-set-key (kbd "<f1>") 'org-capture)
 
-      (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-      (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-      (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-      (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-;;en-dash
-      (define-key key-translation-map (kbd "C--") (kbd "–"))
-     
-      (define-key key-translation-map (kbd "C-c '") (kbd "'"))
-;;em dash
-      (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-      (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-      (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "⟹"))
-      (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+   (global-set-key (kbd "M-=") 'count-words)
+   (global-set-key (kbd "<f5>") 'repeat)
+   (global-set-key (kbd "C-<kp-6>") 'xah-select-block)
+                                           ;(global-set-key (kbd "M-1") 'org-clock-select-task)
+   (global-set-key (kbd "M-_") 'insert-pair)
+   (global-set-key (kbd "M-*") 'insert-pair)
+   (global-set-key (kbd "M-\/") 'insert-pair)
+
+   (bind-keys ("C-+" . text-scale-increase)
+              ("C--" . text-scale-decrease)
+              ("C-c l" . org-store-link)
+              ([f6] . helm-bibtex-with-local-bibliography)
+              )
+
+   (global-set-key (kbd "C-c <f2>") #'my-org-clock-select-task)
+
+
+
+   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+   ;;en-dash
+   (define-key key-translation-map (kbd "C--") (kbd "–"))
+
+   (define-key key-translation-map (kbd "C-c '") (kbd "'"))
+   ;;em dash
+   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "⟹"))
+   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+
+
+
 
 #+END_SRC
 
 #+RESULTS:
 : [8756]
 
-“”
-–
+* org-babel
+#+BEGIN_SRC emacs-lisp :tangle yes
 
- (define-key key-translation-map (kbd "“") (kbd "’"))
- (define-key key-translation-map (kbd "\"") (kbd "\”"))
+(setq org-babel-load-languages '((emacs-lisp . t)
+  (css . t)))
+
+#+END_SRC
+
+#+RESULTS:
+: ((emacs-lisp . t) (css . t))
+
 * templates
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -163,46 +244,252 @@ file:~/.emacs
 #+RESULTS:
 : browse-url-default-browser
 
+
+* bibtex citations
+
+
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+   (setq org-ref-formatted-citation-formats: 
+   '(("text"
+     ("article" . "${author}. (${year}). ${title}. /${journal}/, ${volume}/(${number})/, ${pages}. ${doi}")
+   
+      ("book" . "${author}. (${year}). /${title}/. ${address}: ${publisher}.")
+      (nil . "${author} [${username}]. (${year}). ${title}. [${type}].Retrieved from ${url} "))
+     ("org"
+        ("article" . "${author}. (${year}). ${title}. /${journal}/, ${volume}/(${number})/, ${pages}. ${doi}")
+      ("inproceedings" . "${author}, /${title}/, In ${editor}, ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
+      ("book" . "${author}. (${year}). /${title}/. ${address}: ${publisher}.")
+      ("phdthesis" . "${author}, /${title}/ (Doctoral dissertation) (${year}). ${school}, ${address}.")
+      ("inbook" . "${author}, /${title}/, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
+      ("incollection" . "${author}, /${title}/, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
+      ("proceedings" . "${editor} (Eds.), _${booktitle}_ (${year}). ${address}: ${publisher}.")
+      ("unpublished" . "${author}, /${title}/ (${year}). Unpublished manuscript.")
+  ("online" . "${author}. [${username}]. (${year}). /${title}/ [${type}]. Retrieved from ${url}")
+      (nil . "${author} [${username}]. (${year}). ${title}. [${type}].Retrieved from ${url} "))
+))
+
+          
+
+
+
+         (setq bibtex-BibTeX-entry-alist 
+         '(("Article" "Article in Journal"
+            (("author")
+             ("title" "Title of the article (BibTeX converts it to lowercase)"))
+            (("journal")
+             ("year"))
+            (("volume" "Volume of the journal")
+             ("number" "Number of the journal (only allowed if entry contains volume)")
+             ("pages" "Pages in the journal")
+             ("month")
+             ("note")))
+           ("InProceedings" "Article in Conference Proceedings"
+            (("author")
+             ("title" "Title of the article in proceedings (BibTeX converts it to lowercase)"))
+            (("booktitle" "Name of the conference proceedings")
+             ("year"))
+            (("editor")
+             ("volume" "Volume of the conference proceedings in the series")
+             ("number" "Number of the conference proceedings in a small series (overwritten by volume)")
+             ("series" "Series in which the conference proceedings appeared")
+             ("pages" "Pages in the conference proceedings")
+             ("month")
+             ("address")
+             ("organization" "Sponsoring organization of the conference")
+             ("publisher" "Publishing company, its location")
+             ("note")))
+           ("InCollection" "Article in a Collection"
+            (("author")
+             ("title" "Title of the article in book (BibTeX converts it to lowercase)")
+             ("booktitle" "Name of the book"))
+            (("publisher")
+             ("year"))
+            (("editor")
+             ("volume" "Volume of the book in the series")
+             ("number" "Number of the book in a small series (overwritten by volume)")
+             ("series" "Series in which the book appeared")
+             ("type" "Word to use instead of \"chapter\"")
+             ("chapter" "Chapter in the book")
+             ("pages" "Pages in the book")
+             ("edition" "Edition of the book as a capitalized English word")
+             ("month")
+             ("address")
+             ("note")))
+           ("InBook" "Chapter or Pages in a Book"
+            (("author" nil nil 0)
+             ("editor" nil nil 0)
+             ("title" "Title of the book")
+             ("chapter" "Chapter in the book"))
+            (("publisher")
+             ("year"))
+            (("volume" "Volume of the book in the series")
+             ("number" "Number of the book in a small series (overwritten by volume)")
+             ("series" "Series in which the book appeared")
+             ("type" "Word to use instead of \"chapter\"")
+             ("address")
+             ("edition" "Edition of the book as a capitalized English word")
+             ("month")
+             ("pages" "Pages in the book")
+             ("note")))
+           ("Proceedings" "Conference Proceedings"
+            (("title" "Title of the conference proceedings")
+             ("year"))
+            nil
+            (("booktitle" "Title of the proceedings for cross references")
+             ("editor")
+             ("volume" "Volume of the conference proceedings in the series")
+             ("number" "Number of the conference proceedings in a small series (overwritten by volume)")
+             ("series" "Series in which the conference proceedings appeared")
+             ("address")
+             ("month")
+             ("organization" "Sponsoring organization of the conference")
+             ("publisher" "Publishing company, its location")
+             ("note")))
+           ("Book" "Book"
+            (("author" nil nil 0)
+             ("editor" nil nil 0)
+             ("title" "Title of the book"))
+            (("publisher")
+             ("year"))
+            (("volume" "Volume of the book in the series")
+             ("number" "Number of the book in a small series (overwritten by volume)")
+             ("series" "Series in which the book appeared")
+             ("address")
+             ("edition" "Edition of the book as a capitalized English word")
+             ("month")
+             ("note")))
+           ("Booklet" "Booklet (Bound, but no Publisher)"
+            (("title" "Title of the booklet (BibTeX converts it to lowercase)"))
+            nil
+            (("author")
+             ("howpublished" "The way in which the booklet was published")
+             ("address")
+             ("month")
+             ("year")
+             ("note")))
+           ("PhdThesis" "PhD. Thesis"
+            (("author")
+             ("title" "Title of the PhD. thesis")
+             ("school" "School where the PhD. thesis was written")
+             ("year"))
+            nil
+            (("type" "Type of the PhD. thesis")
+             ("address" "Address of the school (if not part of field \"school\") or country")
+             ("month")
+             ("note")))
+           ("MastersThesis" "Master's Thesis"
+            (("author")
+             ("title" "Title of the master's thesis (BibTeX converts it to lowercase)")
+             ("school" "School where the master's thesis was written")
+             ("year"))
+            nil
+            (("type" "Type of the master's thesis (if other than \"Master's thesis\")")
+             ("address" "Address of the school (if not part of field \"school\") or country")
+             ("month")
+             ("note")))
+           ("TechReport" "Technical Report"
+            (("author")
+             ("title" "Title of the technical report (BibTeX converts it to lowercase)")
+             ("institution" "Sponsoring institution of the report")
+             ("year"))
+            nil
+            (("type" "Type of the report (if other than \"technical report\")")
+             ("number" "Number of the technical report")
+             ("address")
+             ("month")
+             ("note")))
+           ("Manual" "Technical Manual"
+            (("title" "Title of the manual"))
+            nil
+            (("author")
+             ("organization" "Publishing organization of the manual")
+             ("address")
+             ("edition" "Edition of the manual as a capitalized English word")
+             ("month")
+             ("year")
+             ("note")))
+           ("Unpublished" "Unpublished"
+            (("author")
+             ("title" "Title of the unpublished work (BibTeX converts it to lowercase)")
+             ("note"))
+            nil
+            (("month")
+             ("year")))
+           ("Online" "Online"
+            (("author")
+             ("username")
+             ("title" "Title of the unpublished work (BibTeX converts it to lowercase)")
+             ("url")
+             ("type")
+             ("note"))
+            nil
+            (("month")
+             ("year")))
+
+           ("Misc" "Miscellaneous" nil nil
+            (("author")
+             ("title" "Title of the work (BibTeX converts it to lowercase)")
+             ("howpublished" "The way in which the work was published")
+             ("month")
+             ("year")
+             ("note")))))
+#+END_SRC
+
+#+RESULTS:
+| Article       | Article in Journal                | ((author) (title Title of the article (BibTeX converts it to lowercase)))                                                                      | ((journal) (year))                                      | ((volume Volume of the journal) (number Number of the journal (only allowed if entry contains volume)) (pages Pages in the journal) (month) (note))                                                                                                                                                                                                                                                                  |
+| InProceedings | Article in Conference Proceedings | ((author) (title Title of the article in proceedings (BibTeX converts it to lowercase)))                                                       | ((booktitle Name of the conference proceedings) (year)) | ((editor) (volume Volume of the conference proceedings in the series) (number Number of the conference proceedings in a small series (overwritten by volume)) (series Series in which the conference proceedings appeared) (pages Pages in the conference proceedings) (month) (address) (organization Sponsoring organization of the conference) (publisher Publishing company, its location) (note))               |
+| InCollection  | Article in a Collection           | ((author) (title Title of the article in book (BibTeX converts it to lowercase)) (booktitle Name of the book))                                 | ((publisher) (year))                                    | ((editor) (volume Volume of the book in the series) (number Number of the book in a small series (overwritten by volume)) (series Series in which the book appeared) (type Word to use instead of "chapter") (chapter Chapter in the book) (pages Pages in the book) (edition Edition of the book as a capitalized English word) (month) (address) (note))                                                           |
+| InBook        | Chapter or Pages in a Book        | ((author nil nil 0) (editor nil nil 0) (title Title of the book) (chapter Chapter in the book))                                                | ((publisher) (year))                                    | ((volume Volume of the book in the series) (number Number of the book in a small series (overwritten by volume)) (series Series in which the book appeared) (type Word to use instead of "chapter") (address) (edition Edition of the book as a capitalized English word) (month) (pages Pages in the book) (note))                                                                                                  |
+| Proceedings   | Conference Proceedings            | ((title Title of the conference proceedings) (year))                                                                                           | nil                                                     | ((booktitle Title of the proceedings for cross references) (editor) (volume Volume of the conference proceedings in the series) (number Number of the conference proceedings in a small series (overwritten by volume)) (series Series in which the conference proceedings appeared) (address) (month) (organization Sponsoring organization of the conference) (publisher Publishing company, its location) (note)) |
+| Book          | Book                              | ((author nil nil 0) (editor nil nil 0) (title Title of the book))                                                                              | ((publisher) (year))                                    | ((volume Volume of the book in the series) (number Number of the book in a small series (overwritten by volume)) (series Series in which the book appeared) (address) (edition Edition of the book as a capitalized English word) (month) (note))                                                                                                                                                                    |
+| Booklet       | Booklet (Bound, but no Publisher) | ((title Title of the booklet (BibTeX converts it to lowercase)))                                                                               | nil                                                     | ((author) (howpublished The way in which the booklet was published) (address) (month) (year) (note))                                                                                                                                                                                                                                                                                                                 |
+| PhdThesis     | PhD. Thesis                       | ((author) (title Title of the PhD. thesis) (school School where the PhD. thesis was written) (year))                                           | nil                                                     | ((type Type of the PhD. thesis) (address Address of the school (if not part of field "school") or country) (month) (note))                                                                                                                                                                                                                                                                                           |
+| MastersThesis | Master's Thesis                   | ((author) (title Title of the master's thesis (BibTeX converts it to lowercase)) (school School where the master's thesis was written) (year)) | nil                                                     | ((type Type of the master's thesis (if other than "Master's thesis")) (address Address of the school (if not part of field "school") or country) (month) (note))                                                                                                                                                                                                                                                     |
+| TechReport    | Technical Report                  | ((author) (title Title of the technical report (BibTeX converts it to lowercase)) (institution Sponsoring institution of the report) (year))   | nil                                                     | ((type Type of the report (if other than "technical report")) (number Number of the technical report) (address) (month) (note))                                                                                                                                                                                                                                                                                      |
+| Manual        | Technical Manual                  | ((title Title of the manual))                                                                                                                  | nil                                                     | ((author) (organization Publishing organization of the manual) (address) (edition Edition of the manual as a capitalized English word) (month) (year) (note))                                                                                                                                                                                                                                                        |
+| Unpublished   | Unpublished                       | ((author) (title Title of the unpublished work (BibTeX converts it to lowercase)) (note))                                                      | nil                                                     | ((month) (year))                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Online        | Online                            | ((author) (username) (title Title of the unpublished work (BibTeX converts it to lowercase)) (url) (type) (note))                              | nil                                                     | ((month) (year))                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Misc          | Miscellaneous                     | nil                                                                                                                                            | nil                                                     | ((author) (title Title of the work (BibTeX converts it to lowercase)) (howpublished The way in which the work was published) (month) (year) (note))                                                                                                                                                                                                                                                                  |
+
 * formatting
 ** text formatting
 #+BEGIN_SRC emacs-lisp :tangle yes
+
    (setq sentence-end-double-space nil)
 
-  (use-package smartparens
+   (use-package smartparens
      :init
-     (progn
-       (smartparens-global-mode 1)
-       (show-smartparens-global-mode 1) ))
+     (show-smartparens-global-mode 1))
+   (smartparens-global-mode 1)
+   (setq show-paren-style 'expression)
 
 
+   (setq blink-matching-paren-dont-ignore-comments nil)
+
+(require 'smart-quotes) 
+
+
+(add-to-list 'insert-pair-alist (list ?\* ?\*))
+   (add-to-list 'insert-pair-alist (list ?\_ ?\_))
+   (add-to-list 'insert-pair-alist (list ?\/ ?\/))
+;   (add-to-list 'insert-pair-alist (list ?\" ?\"))
+  
 
 #+END_SRC
 
 #+RESULTS:
+|  47 |  47 |
+|  95 |  95 |
+|  42 |  42 |
+|  40 |  41 |
+|  91 |  93 |
+| 123 | 125 |
+|  60 |  62 |
+|  34 |  34 |
+|  39 |  39 |
+|  96 |  39 |
 *** smart quotes
-   (define-key org-mode-map "\"" #'endless/round-quotes)
-   (eval-after-load 'markdown-mode
-     '(define-key markdown-mode-map "\""
-        #'endless/round-quotes))
-
-   (defun endless/round-quotes (italicize)
-     "Insert “” and leave point in the middle.
-   With prefix argument ITALICIZE, insert /“”/ instead
-   \(meant for org-mode).
-   Inside a code-block, just call `self-insert-command'."
-     (interactive "P")
-     (if (and (derived-mode-p 'org-mode)
-              (org-in-block-p '("src" "latex" "html")))
-         (call-interactively #'self-insert-command)
-       (if (looking-at "”[/=_\\*]?")
-           (goto-char (match-end 0))
-         (when italicize
-           (if (derived-mode-p 'markdown-mode)
-               (insert "__")
-             (insert "//"))
-           (forward-char -1))
-         (insert "“”")
-         (forward-char -1))))
 
 ** GUI formatting
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -229,43 +516,40 @@ file:~/.emacs
 
 * navigating
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ido)
-(ido-mode t)
-(use-package deft
-             :bind ("<f8>" . deft)
-             :ensure t
-             :init 
-             (progn 
-             (setq deft-directory "~/Dropbox/Zettelkasten/")
-             (setq deft-default-extension "org")
-             (setq deft-use-filename-as-title t)
-             (setq deft-text-mode 'org-mode)
-             (setq deft-file-naming-rules '((noslash . "-")
-                           		 (nospace . "-")
-                           		 (case-fn . downcase))) 
-             (setq deft-recursive t)
-             (setq deft-extensions '("org" "txt" "emacs"))))
+   (use-package ido)
+   (ido-mode t)
+   (use-package deft
+     :bind ("<f8>" . deft)
+     :ensure t)
 
+ (setq deft-directory "~/Dropbox/Zettelkasten/")
+ (setq deft-default-extension "org")
+
+ (setq deft-use-filename-as-title t)
+ (setq deft-text-mode 'org-mode)
+ (setq deft-file-naming-rules '((noslash . "-")
+                                (nospace . "-")
+                                (case-fn . downcase))) 
+ (setq deft-recursive t)
+ (setq deft-extensions '("org" "txt" "emacs" "bib"))
+
+(setq deft-auto-save-interval 1.0)
 (add-hook 'after-init-hook 'deft)
 
 
+   (use-package helm
+     :config (
+              helm-mode 1)
+     :bind (("M-x" . helm-M-x)
+            ([f3]  . helm-buffers-list)))
 
-(use-package helm
-       :config (helm-mode 1)
-       :bind (("M-x" . helm-M-x)
-              ([f3]  . helm-buffers-list)))
+   (fset 'yes-or-no-p 'y-or-n-p)
 
-(fset 'yes-or-no-p 'y-or-n-p)
-
-(bind-keys ("C-+" . text-scale-increase)
-           ("C--" . text-scale-decrease)
-           ("C-c l" . org-store-link)
-           ([f6] . helm-bibtex-with-local-bibliography)
-)
-(winner-mode 1)
-(use-package projectile)
-(use-package helm-projectile)
-;(projectile-mode)
+  
+   (winner-mode 1)
+   (use-package projectile)
+   (use-package helm-projectile)
+                                           ;(projectile-mode)
 
 #+END_SRC
 
@@ -275,22 +559,20 @@ file:~/.emacs
 # * Emacs functionality
 * org noter
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package org-noter
-:ensure t
-)
+   (use-package org-noter
+     :ensure t
+     :config (setq org-noter-property-doc-file "INTERLEAVE_PDF")
+     (setq org-noter-property-note-location "INTERLEAVE_PAGE_NOTE") 
+     (setq org-noter-notes-window-location 'other-frame)
+     (setq org-noter-default-heading-title "p. $p$") 
+     (setq org-noter-auto-save-last-location t))
 
-(setq org-noter-property-doc-file "INTERLEAVE_PDF"
-      org-noter-property-note-location "INTERLEAVE_PAGE_NOTE")
-
-(setq org-noter-notes-window-location 'vertical-split)
-(setq org-noter-default-heading-title "p. $p$")
-(setq org-noter-auto-save-last-location t)
+(use-package interleave)
 
 
 #+END_SRC
 
 #+RESULTS:
-: t
 
 * org-gcal
    
@@ -464,10 +746,11 @@ file:~/.emacs
     (start-process "open" "*open*" "open" fpath)))
 
 
+(setq pdf-view-continuous nil)
+
 #+END_SRC
 
 #+RESULTS:
-| lambda | (fpath) | (start-process open *open* open fpath) |
 
 
 
@@ -519,19 +802,24 @@ file:~/.emacs
 * text editing
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (use-package company
-     :ensure t
-     :init (global-company-mode)
-     :config (company-mode 1)
-     )
+         (use-package company
+           :ensure t
+           :init (global-company-mode)
+           :config (company-mode 1)
+           )
 
 
 
-   (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin/")
-   (setq ispell-program-name "aspell")
-   (use-package ispell)
 
-   (use-package flyspell-correct-helm )
+
+   ;;       (use-package ispell
+   ;;         :config (setq ispell-program-name "aspell")
+
+   ;;    )
+
+
+   ;; (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin/")
+         (use-package flyspell-correct-helm )
 
  
 
@@ -540,12 +828,33 @@ file:~/.emacs
 #+RESULTS:
 * writing environment
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package writeroom-mode)
-(setq writeroom-extra-line-spacing 2)
-(setq writeroom-restore-window-config t)
+
+   (use-package writeroom-mode)
+   (setq writeroom-extra-line-spacing 2)
+   (setq writeroom-restore-window-config t)
+   (setq writeroom-major-modes '(text-mode org-mode))
+(setq writeroom-fullscreen-effect 'maximized)
+                                           ;  global-writeroom-mode t
 
 
-(use-package olivetti)
+
+
+
+
+
+   (use-package olivetti)
+#+END_SRC
+
+#+RESULTS:
+
+* auctex
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+
+
+
 #+END_SRC
 
 #+RESULTS:
@@ -592,15 +901,19 @@ file:~/.emacs
 
 (setq org-clock-clocked-in-display (quote both))
 
-(setq org-clock-clocktable-default-properties '(:scope ("inbox.org" "lis.org" "ndd.org" "work.org" "budget.org") :maxlevel 2 :link t :emphasize t :block today))
+(setq org-clock-clocktable-default-properties '(:scope ("inbox.org" "lis.org" "ndd.org" "work.org" "budget.org" "journal.org" "notes.org")  :maxlevel 4 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 1 ))
 
+
+(defun my-org-clock-select-task ()
+  (interactive)
+  (org-clock-select-task))
 
 
 
 #+END_SRC
 
 #+RESULTS:
-| :scope | (inbox.org lis.org ndd.org work.org budget.org) | :maxlevel | 2 | :link | t | :emphasize | t | :block | today |
+: my-org-clock-select-task
 
 (setq org-clock-clocktable-default-properties '(:maxlevel 2 :scope ("lis.org" "inbox.org" "ndd.org" "work.org" "budget.org")  :fileskip0 t :link t :emphasize t))
 #+RESULTS:
@@ -619,8 +932,7 @@ file:~/.emacs
 
   (setq org-refile-targets '((nil :maxlevel . 2)
                              (org-agenda-files :maxlevel . 2)
-                             ("~/Dropbox/Zettelkasten/General/archive.org" :maxlevel . 9)
-		                 ("journal.org" :maxlevel . 9)))
+                       ))
 
   (setq org-outline-path-complete-in-steps nil) 
 
@@ -665,10 +977,8 @@ file:~/.emacs
 ** Org-capture
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (setq org-capture-templates '(("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org")                                 "** TODO %? \n%a\n\n" :clock-in t :clock-resume t :prepend t)
-                                 ("j" "journal" entry (file+datetree "~/Dropbox/Zettelkasten/journal.org")
-                                  "** %<%H:%M> \n\n%?\n\n" :kill-buffer nil :clock-in t :clock-resume t) 
-
+   (setq org-capture-templates '(("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n" :clock-in t :clock-resume t :prepend t)
+                                 ("j" "journal" entry (file+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> \n\n%?\n\n" :kill-buffer nil :clock-in t :clock-resume t) 
                                  ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location:%^{location}\n\n\n:END:\n\n")
 
                                  ("e" "expense" table-line (file+headline "~/Dropbox/Zettelkasten/budget.org" "Expenses to be filed") "|%t|%^{amount}|%a|%^{category|LIS|Food|Transportation|Clothing}|%?|" :append t :kill-buffer nil)
@@ -680,7 +990,7 @@ file:~/.emacs
 #+END_SRC
 
 #+RESULTS:
-| t | todo | entry | (file ~/Dropbox/Zettelkasten/inbox.org) | ** TODO %? |
+| t | todo | entry | (file ~/Dropbox/Zettelkasten/inbox.org) | **** TODO %? |
 
        ;("l" "logging" entry (file+datetree "~/Dropbox/Zettelkasten/journal.org" :kill-buffer nil)
                                            ;"** %? %T" :kill-buffer nil) 
@@ -705,14 +1015,15 @@ file:~/.emacs
 ** org-brain
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package org-brain :ensure t
-  :init
-  (setq org-brain-path "~/Dropbox/Zettelkasten/")
-  :config (progn
-  (setq org-id-track-globally t)
-  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-  (setq org-brain-visualize-default-choices 'all)))
+      (use-package org-brain :ensure t)
+      (setq org-brain-path "~/Dropbox/Zettelkasten/")
+   (setq org-id-track-globally t)
+(setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+(setq org-brain-visualize-default-choices 'all)
 #+END_SRC
+
+#+RESULTS:
+: all
 
 ** org-archive
  #+BEGIN_SRC emacs-lisp :tangle yes
@@ -751,7 +1062,19 @@ file:~/.emacs
 
 
 
+* buffers
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun kill-other-buffers ()
+    "Kill all other buffers."
+    (interactive)
+    (mapc 'kill-buffer 
+          (delq (current-buffer) 
+                (remove-if-not 'buffer-file-name (buffer-list)))))
 
+#+END_SRC
+
+#+RESULTS:
+: kill-other-buffers
 
 * org-emphasis-alist
 
@@ -814,11 +1137,11 @@ file:~/.emacs
 
 (setq fill-column 100)
 ;(fill-column 100)
-(global-visual-line-mode t)
 
+(global-visual-line-mode t) 
 (use-package visual-fill-column
      :ensure t)
- 
+
 ;(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
 ;(global-visual-fill-column-mode t)
 ;(setq global-visual-fill-column-mode t)
@@ -827,6 +1150,7 @@ file:~/.emacs
 #+END_SRC
 
 #+RESULTS:
+: t
 
 * org fonts
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -867,62 +1191,67 @@ file:~/.emacs
 * custom-set-faces
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-    (custom-set-faces 
-     '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :family "Consolas"))))                    
-     '(fringe ((t (:background "#242728"))))
-     '(highlight ((t (:weight bold))))
-     '(lazy-highlight ((t (:inherit highlight :background "black"))))
-     '(link ((t (:foreground "#06d8ff" :underline t :weight normal))))
-     '(helm-selection ((t (:inherit bold :background "black" :foreground "magenta" :underline t))))
+   (custom-set-faces 
+    '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :family "Consolas"))))                    
+    '(fringe ((t (:background "#242728"))))
+    '(highlight ((t (:weight bold))))
+    '(lazy-highlight ((t (:inherit highlight :background "black"))))
+    '(link ((t (:foreground "#06d8ff" :underline t :weight normal))))
+    '(helm-selection ((t (:inherit bold :background "black" :foreground "magenta" :underline t))))
 
-     '(custom-variable-tag ((t (:inherit variable-pitch :foreground "gold" :height 1.1))))
-     '(org-agenda-calendar-event ((t (:foreground "light gray"))))
-     '(org-agenda-clocking ((t (:box (:line-width 2 :color "magenta" :style released-button)))))
-     '(org-agenda-current-time ((t (:foreground "OliveDrab3"))))
-     '(org-agenda-date ((t (:background "light steel blue" :foreground "midnight blue" :inverse-video nil :box (:line-width 20 :color "#242728") :overline nil :slant normal :weight normal :height 1.2))))
+    '(custom-variable-tag ((t (:inherit variable-pitch :foreground "gold" :height 1.1))))
+    '(org-agenda-calendar-event ((t (:foreground "light gray"))))
+    '(org-agenda-clocking ((t (:box (:line-width 2 :color "magenta" :style released-button)))))
+    '(org-agenda-current-time ((t (:foreground "OliveDrab3"))))
+    '(org-agenda-date ((t (:background "light steel blue" :foreground "midnight blue" :inverse-video nil :box (:line-width 20 :color "#242728") :overline nil :slant normal :weight normal :height 1.2))))
 
-     '(org-agenda-date-today ((t (:inherit org-agenda-date :background "#242728" :foreground "gold" :inverse-video t :overline nil :weight bold))))
-     '(org-agenda-date-weekend ((((class color) (min-colors 257)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "deep pink" :weight unspecified :underline t :overline nil :box (:line-width 20 :color "#242728"))) (((class color) (min-colors 89)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "red" :weight unspecified :underline t :overline nil :box 1))))
-     '(org-archived ((t (:foreground "saddle brown" :weight normal))))
-     '(org-block ((t (:foreground "gainsboro"))))
-     '(org-clock-overlay ((t (:background "dim gray"))))
-     '(org-date ((t (:foreground "steel blue" :underline t))))
-     '(org-default ((t (:inherit default))))
-     '(org-done ((t (:foreground "dark gray" :weight normal))))
-     '(org-ellipsis ((t (:foreground "#6A6D70" :height 0.5))))
+
+    '(mode-line ((t (:background "darkgray" :height 120 :foreground "black" :inverse-video nil :box (:line-width 1 :color "#35393b" :style unspecified)))))
 
 
 
-     '(org-habit-alert-future-face ((t (:background "yellow" :foreground "black"))))
-     '(org-habit-overdue-face ((t (:background "firebrick4" :foreground "white"))))
-     '(org-habit-ready-face ((t (:background "green2" :foreground "black"))))
+    '(org-agenda-date-today ((t (:inherit org-agenda-date :background "#242728" :foreground "gold" :inverse-video t :overline nil :weight bold))))
+    '(org-agenda-date-weekend ((((class color) (min-colors 257)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "deep pink" :weight unspecified :underline t :overline nil :box (:line-width 20 :color "#242728"))) (((class color) (min-colors 89)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "red" :weight unspecified :underline t :overline nil :box 1))))
+    '(org-archived ((t (:foreground "saddle brown" :weight normal))))
+    '(org-block ((t (:foreground "gainsboro"))))
+    '(org-clock-overlay ((t (:background "dim gray"))))
+    '(org-date ((t (:foreground "steel blue" :underline t))))
+    '(org-default ((t (:inherit default))))
+    '(org-done ((t (:foreground "dark gray" :weight normal))))
+    '(org-ellipsis ((t (:foreground "#6A6D70" :height 0.5))))
+
+
+
+    '(org-habit-alert-future-face ((t (:background "yellow" :foreground "black"))))
+    '(org-habit-overdue-face ((t (:background "firebrick4" :foreground "white"))))
+    '(org-habit-ready-face ((t (:background "green2" :foreground "black"))))
 
 
 
 
-     '(org-inlinetask ((t (:foreground "dodger blue"))))
-     '(org-level-1 ((t (:inherit nil :foreground "gray" :weight bold :height 1.5 :width extra-expanded :family "pompiere"))))
-     '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
-     '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 0.95))))
-     '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 0.95))))
-     '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
-     '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
-     '(org-link ((t (:foreground "LightSteelBlue3" :underline t :family "nova mono"))))
+    '(org-inlinetask ((t (:foreground "dodger blue"))))
+    '(org-level-1 ((t (:inherit nil :foreground "gray" :weight bold :height 1.5 :width extra-expanded :family "pompiere"))))
+    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
+    '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 0.95))))
+    '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 0.95))))
+    '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
+    '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
+    '(org-link ((t (:foreground "LightSteelBlue3" :underline t :family "nova mono"))))
 
-     '(org-list-dt ((t (:foreground "mediumorchid4" :weight bold :background "lavenderblush1" :underline t ))))
+    '(org-list-dt ((t (:foreground "mediumorchid4" :weight bold :background "lavenderblush1" :underline t ))))
 
-     '(org-priority ((t (:foreground "gold" :weight bold))))
-     '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
-     '(org-scheduled ((t (:foreground "DarkOliveGreen3"))))
-     '(org-scheduled-previously ((t (:foreground "seashell1" :weight bold))))
-     '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
-     '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
-     '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
-     '(org-todo ((t (:background "gray13" :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
-     '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
-     '(org-warning ((t (:foreground "goldenrod1" :underline nil :weight normal))))
-     '(secondary-selection ((t (:background "gray14" :foreground "pale green"))))
-     '(variable-pitch ((t (:family "happy monkey")))))
+    '(org-priority ((t (:foreground "gold" :weight bold))))
+    '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
+    '(org-scheduled ((t (:foreground "DarkOliveGreen3"))))
+    '(org-scheduled-previously ((t (:foreground "seashell1" :weight bold))))
+    '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
+    '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
+    '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
+    '(org-todo ((t (:background "gray13" :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
+    '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
+    '(org-warning ((t (:foreground "goldenrod1" :underline nil :weight normal))))
+    '(secondary-selection ((t (:background "gray14" :foreground "pale green"))))
+    '(variable-pitch ((t (:family "happy monkey")))))
 
 
 #+END_SRC
@@ -1198,7 +1527,7 @@ file:~/.emacs
 #+BEGIN_SRC emacs-lisp :tangle yes
 (setq frame-title-format (list (format "%s %%S: %%j " (system-name))
                               '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
-(setq initial-buffer-choice "~/Dropbox/Zettelkasten/lis.org")
+;(setq initial-buffer-choice 'deft)
 (find-file "~/Dropbox/emacs/settings.org")
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq inhibit-startup-screen t)
@@ -1206,6 +1535,9 @@ file:~/.emacs
 (setq split-width-threshold 0)
 (tool-bar-mode -1)
 #+END_SRC
+
+#+RESULTS:
+
 * file encoding
 C-h C RET
 M-x describe-current-coding-system
@@ -1315,39 +1647,3 @@ M-x describe-current-coding-system
 
 
 
-
-* Exports
-
-
-;printing
-(add-hook 'org-agenda-before-write-hook
-    (lambda ()
-    (add-text-properties (point-min) (point-max)
-    '(face(:foreground "black")))))
-
-(setq inhibit-eol-conversion nil)
-
-
-
-* mobile org
-# # :PROPERTIES:
-# # :ARCHIVE_TIME: 2017-10-19 Thu 00:34
-# # :ARCHIVE_FILE: ~/Dropbox/emacs/settings.org
-# # :ARCHIVE_CATEGORY: settings
-# # :END:
-
-# # #+BEGIN_SRC emacs-lisp :tangle yes
-# # (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
-# # (setq org-directory "~/Dropbox/Zettelkasten")
-# # (setq org-mobile-inbox-for-pull "~/Dropbox/Zettelkasten/inbox.org")
-# # (setq org-mobile-files (quote (
- 
-# #     "~/Dropbox/Zettelkasten/inbox.org" 
-# #     "~/Dropbox/Zettelkasten/work.org" 
-# #     "~/Dropbox/Zettelkasten/gcal.org"
-# #     "~/Dropbox/Zettelkasten/lis.org"
-# #     "~/Dropbox/Zettelkasten/budget.org"
-
-# # )))
-# # (setq org-mobile-checkum-binary "C:\\Users\\betsy\\coreutils\\md5sum.exe")
-# # #+END_SRC
