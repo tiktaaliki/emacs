@@ -38,46 +38,56 @@ file:~/.emacs
 
 * Key bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
+                                              ;   (global-set-key (kbd "C-.") 'org-todo)
+                                              ;   (global-unset-key (kbd "C-c C-d"))
+                                              ;      (global-set-key (kbd "<f1>") 'org-capture)
+                                              ;            (global-set-key (kbd "<f2>") 'org-clock-in)
+                                              ;  (global-set-key (kbd "<f7>") 'org-agenda)
 
-   (global-unset-key (kbd "C-z"))
-  
-;   (global-unset-key (kbd "C-c C-d"))
 
-   (global-set-key (kbd "C-x /") 'shrink-window-horizontally)
-   (global-set-key (kbd "<f2>") 'org-clock-in)
-   (global-set-key (kbd "<f7>") 'org-agenda)
-   (global-set-key (kbd "C-c a") 'org-agenda)
-   (global-set-key (kbd "C-x .") 'org-archive-subtree-default)
-   (global-set-key (kbd "C-.") 'org-todo)
-   (global-set-key (kbd "C-c n") 'org-schedule)
-   (global-set-key (kbd "<f1>") 'org-capture)
+      (global-unset-key (kbd "C-z"))     
+(global-unset-key (kbd "M-c"))
+      (global-set-key (kbd "<f5>") 'repeat)
+      (global-set-key (kbd "C-<kp-6>") 'xah-select-block)
 
-   (global-set-key (kbd "M-=") 'count-words)
-   (global-set-key (kbd "<f5>") 'repeat)
-   (global-set-key (kbd "C-<kp-6>") 'xah-select-block)
-                                           ;(global-set-key (kbd "M-1") 'org-clock-select-task)
-   (global-set-key (kbd "M-_") 'insert-pair)
-   (global-set-key (kbd "M-*") 'insert-pair)
-   (global-set-key (kbd "M-\/") 'insert-pair)
 
-   (bind-keys ("C-+" . text-scale-increase)
-              ("C--" . text-scale-decrease)
-              ("C-c l" . org-store-link)
-              ([f6] . helm-bibtex-with-local-bibliography)
-              )
 
-;   (global-set-key (kbd "C-c <f2>") #'my-org-clock-select-task)
+      (bind-keys ("C-+"   . text-scale-increase)
+                 ("C--"   . text-scale-decrease)
+                 ("C-c l" . org-store-link)
+                 ("C-."   . org-todo)
+                 ("C-x /" . shrink-window-horizontally)
+                 ("C-c a" . org-agenda)
+                 ("C-x ." . org-archive-subtree-default)
+                 ("C-c n" . org-schedule)
+                 ("M-="   . count-words)
+                 ("M-x"   . helm-M-x)
+                 ("M-_" . insert-pair)
+                 ("M-*" . insert-pair)
+                 ("M-\/" . insert-pair)
+              
+                 ([f1] . org-capture)
+                 ([f2] . org-clock-in)
+                 ([f3]  . helm-buffers-list)           
+                 ([f4] . org-refile)
+                 ([f6] . helm-bibtex-with-local-bibliography)
+                 ([f7] . org-agenda)
+                 ([f8] . deft)
+                 )
 
-   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-(define-key key-translation-map (kbd "C--") (kbd "–"))
 
-   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "⟹"))
-   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+                                              ;   (global-set-key (kbd "C-c <f2>") #'my-org-clock-select-task)
+
+      (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+      (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+      (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+      (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+      (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+      (define-key key-translation-map (kbd "C--") (kbd "–"))
+
+      (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+      (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "⟹"))
+      (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
 
 #+END_SRC
 
@@ -169,7 +179,7 @@ file:~/.emacs
    (use-package ido)
    (ido-mode t)
    (use-package deft
-     :bind ("<f8>" . deft)
+
      :ensure t)
 
  (setq deft-directory "~/Dropbox/Zettelkasten/")
@@ -181,18 +191,36 @@ file:~/.emacs
  (setq deft-file-naming-rules '((noslash . "-")
                                 (nospace . "-")
                                 (case-fn . downcase))) 
- (setq deft-recursive nil)
+ (setq deft-recursive t)
  (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
 
 (setq deft-auto-save-interval 1.0)
 (add-hook 'after-init-hook 'deft)
 (add-hook 'after-init-hook 'org-clock-persistence-insinuate)
 
+(use-package org-clock-convenience
+  :ensure t
+  :bind (:map org-agenda-mode-map
+   	   ("<S-up>" . org-clock-convenience-timestamp-up)
+   	   ("<S-down>" . org-clock-convenience-timestamp-down)
+   	   ("ö" . org-clock-convenience-fill-gap)
+   	   ("é" . org-clock-convenience-fill-gap-both)))
+
    (use-package helm
      :config (
               helm-mode 1)
-     :bind (("M-x" . helm-M-x)
-            ([f3]  . helm-buffers-list)))
+
+:config (progn
+   	 ;; extend helm for org headings with the clock in action
+   	 (defun dfeich/helm-org-clock-in (marker)
+   	   "Clock into the item at MARKER"
+   	   (with-current-buffer (marker-buffer marker)
+   	     (goto-char (marker-position marker))
+   	     (org-clock-in)))
+   	 (eval-after-load 'helm-org
+   	   '(nconc helm-org-headings-actions
+   		   (list
+   		    (cons "Clock into task" #'dfeich/helm-org-clock-in))))))
 
    (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -358,17 +386,22 @@ file:~/.emacs
    (custom-set-faces 
     '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :family "Consolas"))))                    
     '(fringe ((t (:background "#242728"))))
-    '(highlight ((t (:weight bold))))
+  ; '(highlight ((t (:weight bold))))
     '(lazy-highlight ((t (:inherit highlight :background "black"))))
     '(link ((t (:foreground "#06d8ff" :underline t :weight normal))))
     '(helm-selection ((t (:inherit bold :background "black" :foreground "magenta" :underline t))))
-
+'(custom-face-tag ((t (:height 1.2 :weight regular :inherit variable-pitch))))
     '(custom-variable-tag ((t (:inherit variable-pitch :foreground "gold" :height 1.1))))
     '(org-agenda-calendar-event ((t (:foreground "light gray"))))
     '(org-agenda-clocking ((t (:box (:line-width 2 :color "magenta" :style released-button)))))
     '(org-agenda-current-time ((t (:foreground "OliveDrab3"))))
     '(org-agenda-date ((t (:background "light steel blue" :foreground "midnight blue" :inverse-video nil :box (:line-width 20 :color "#242728") :overline nil :slant normal :weight normal :height 1.2))))
 
+'(org-agenda-done ((t
+  (:slant italic :foreground "dark orange"))))
+
+'(org-mode-line-clock ((t
+  (:background "gold" :height .75 :foreground "black"))) )
 
     '(mode-line ((t (:background "darkgray" :height 120 :foreground "black" :inverse-video nil :box (:line-width 1 :color "#35393b" :style unspecified)))))
 
@@ -388,21 +421,22 @@ file:~/.emacs
 
  ;   '(org-habit-alert-future-face ((t (:background "yellow" :foreground "black"))))
   '(org-habit-overdue-face ((t (:background "#F20055" :foreground "white"))))
- '(org-habit-ready-face ((t (:background "#63de5d" :foreground "black"))))
+ '(org-habit-ready-face ((t (:background "#63de5d" :foreground "white"))))
 
   '(org-habit-overdue-future-face ((t (:background "#8b668b" :foreground "white"))))
-
+'(org-habit-clear-face ((t
+  (:foreground "white" :background "DodgerBlue1"))))
 
     '(org-inlinetask ((t (:foreground "dodger blue"))))
-    '(org-level-1 ((t (:inherit nil :foreground "gray" :weight bold :height 1.5 :width extra-expanded :family "pompiere"))))
-    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
+    '(org-level-1 ((t (:inherit nil :foreground "gray"  :height 1.2 :family "futura"))))
+    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 1.1))))
     '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 0.95))))
     '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 0.95))))
     '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
     '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
     '(org-link ((t (:foreground "LightSteelBlue3" :underline t :family "nova mono"))))
 
-    '(org-list-dt ((t (:foreground "black" :weight bold :background "yellow" :underline nil ))))
+    '(org-list-dt ((t (:foreground "midnight blue" :weight bold :background "lightgoldenrod1" :underline nil ))))
 
     '(org-priority ((t (:foreground "gold" :weight bold))))
     '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
@@ -411,11 +445,11 @@ file:~/.emacs
     '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
     '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
     '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
-    '(org-todo ((t (:background "gray13" :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
+    '(org-todo ((t ( :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
     '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
     '(org-warning ((t (:foreground "goldenrod1" :underline nil :weight normal))))
     '(secondary-selection ((t (:background "gray14" :foreground "pale green"))))
-    '(variable-pitch ((t (:family "happy monkey")))))
+    '(variable-pitch ((t (:family "futura")))))
 
 
 #+END_SRC
@@ -652,19 +686,31 @@ M-x describe-current-coding-system
          (setq mu4e-change-filenames-when-moving t)
          (setq mu4e-compose-format-flowed t)
          (setq smtpmail-default-smtp-server "smtp.gmail.com")
+      (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
       (add-hook 'mu4e-view-mode-hook 'visual-fill-column-mode)
 
-   (add-hook 'message-mode-hook 'visual-fill-column-mode)
-       ;  (add-hook 'mu4e-headers-mode-hook (lambda ()(set-fill-column 200)))
+(defun vfcm-on ()
+;turn on visual fill column mode
+(visual-fill-column-mode 1)
+)
+
+(add-hook 'mu4e-view-mode-hook #'vfcm-on)
+
+(defun no-auto-fill ()
+  "Turn off auto-fill-mode."
+  (auto-fill-mode -1))
+
+(add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
+ ; (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
  #+END_SRC
 
  #+RESULTS:
- | visual-fill-column-mode |
+ | no-auto-fill |
 
 ** message view
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq mu4e-attachment-dir "~/Downloads/")
+(setq mu4e-attachment-dir "~/Dropbox/Zettelkasten/QCSpring2018/misc")
 
 (setq shr-color-visible-luminance-min 50) 
 (setq shr-color-visible-distance-min 5)
@@ -681,10 +727,11 @@ M-x describe-current-coding-system
 
 (setq mu4e-view-scroll-to-next nil)
 
-
+(add-hook 'message-mode-hook 'visual-fill-column-mode)
 #+END_SRC
 
 #+RESULTS:
+| visual-fill-column-mode |
 
 ** headers view
 
@@ -693,9 +740,9 @@ M-x describe-current-coding-system
    ;(setq mu4e-update-interval 60)
    ;(setq mu4e-index-update-in-background t)
    (setq mu4e-headers-fields
-         '( (:human-date    .  13)    ;; alternatively, use :human-date
+         '( (:human-date    .  8)    ;; alternatively, use :human-date
             (:flags         .   6)
-            (:from          .  22)
+            (:from          .  16)
 ;            (:thread-subject       . 90 )
             (:thread-subject       . 70 )
 
@@ -802,11 +849,16 @@ M-x describe-current-coding-system
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 (tool-bar-mode -1)
-(menu-bar-mode -1)
+;(menu-bar-mode -1)
 (scroll-bar-mode -1)
+
+(setq calendar-daylight-savings-starts '(3 11 year))
+(setq calendar-daylight-savings-ends: '(11 4 year))
+
 #+END_SRC
 
 #+RESULTS:
+| 11 | 4 | year |
 
 * Saving files | MAGIT
 (setq auto-revert-interval 50400)
@@ -881,23 +933,19 @@ M-x describe-current-coding-system
 (setq bibtex-autokey-titleword-length 0)
 
 
-(setq bibtex-completion-notes-template-one-file "\n* ${author}. (${year}). ${title}.\n  :PROPERTIES:\n  :Custom_ID: ${=key=}\n
-
-:CITATION: ${author}. (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}
-  :END:\n\n")
+(setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). ${title}.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}\n:END:")
 
 
-
-(setq org-ref-bibliography-entry-format '(("article" . "%a. (%y). %t. <i>%j</i>, <b>%v(%n)</b>, %p . <a href=\"%U\">link</a>. <a href=\"http://dx.doi.org/%D\">doi</a>.")
-  ("book" . "%a, %t, %u (%y).")
-  ("techreport" . "%a, %t, %i, %u (%y).")
-  ("proceedings" . "%e, %t in %S, %u (%y).")
-  ("inproceedings" . "%a, %t, %p, in %b, edited by %e, %u (%y)")))
 
 #+END_SRC
-
+(setq org-ref-bibliography-entry-format '(("article" . "%a. (%y). %t. <i>%j</i>, <i>%v</i>(%n), %p. %D")
+  ("book" . "%a. (%y). /%t/. %r: %u.")
+  ("techreport" . "%a. (%y). /%t/. %r: %i. Retrieved from %U")
+  ("proceedings" . "%e, %t in %S, %U (%y).")
+("online" . "%a. (%y). %t. Retrieved from %U")
+  ("inproceedings" . "%a, %t, %p, in %b, edited by %e, %u (%y)")))
 #+RESULTS:
-: ((article . %a. (%y). %t. <i>%j</i>, <b>%v(%n)</b>, %p . <a href="%U">link</a>. <a href="http://dx.doi.org/%D">doi</a>.) (book . %a, %t, %u (%y).) (techreport . %a, %t, %i, %u (%y).) (proceedings . %e, %t in %S, %u (%y).) (inproceedings . %a, %t, %p, in %b, edited by %e, %u (%y)))
+: ((article . %a. (%y). %t. <i>%j</i>, <i>%v</i>(%n), %p. %D) (book . %a. (%y). /%t/. %r: %u.) (techreport . %a. (%y). /%t/. %r: %i. Retrieved from %U) (proceedings . %e, %t in %S, %U (%y).) (online . %a. (%y). %t. Retrieved from %U) (inproceedings . %a, %t, %p, in %b, edited by %e, %u (%y)))
 ** org noter
 #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package org-noter
@@ -918,7 +966,9 @@ M-x describe-current-coding-system
 #+BEGIN_SRC emacs-lisp :tangle yes
          (setq ebib-bib-search-dirs '("~/Dropbox/Zettelkasten"))
 
-         (setq bibtex-BibTeX-entry-alist
+      
+#+END_SRC
+   (setq bibtex-BibTeX-entry-alist
          '(("Article" "Article in Journal"
             (("author")
              ("year")                 
@@ -1062,19 +1112,20 @@ M-x describe-current-coding-system
             (("month")
              ("year")))
 
-           ("Online" "Online"
-            (("author")
-             ("title" "Title of the unpublished work (BibTeX converts it to lowercase)")
-             ("note"))
-             ("institution" "Sponsoring institution of the report")
-            nil
-            (("month")
-             ("year")
-             ("url")
+         ;;   ("Online" "Online"
+         ;;    (("author")
+         ;;     ("title" "Title of the unpublished work (BibTeX converts it to lowercase)")
+         ;;     ("note"))
+         ;;     ("institution" "Sponsoring institution of the report")
+         ;;    nil
+         ;;    (("month")
+         ;;     ("year")
+         ;;     ("url")
 
-         ))
+         ;; ))
 
-           ("Misc" "Miscellaneous" nil nil
+          ("Misc" "Miscellaneo
+   us" nil nil
             (("author")
              ("title" "Title of the work (BibTeX converts it to lowercase)")
              ("howpublished" "The way in which the work was published")
@@ -1122,32 +1173,7 @@ M-x describe-current-coding-system
    (setq org-ref-title-case-types '(
                                     "article" 
                                     "book"))
-#+END_SRC
-
 #+RESULTS:
-| article | book |
-  
-original
-  (setq  org-ref-formatted-citation-formats '(("text"
-         ("article" . "${author}. ${title}, ${journal}, ${volume}(${number}), ${pages} (${year}). ${doi}")
-         ("inproceedings" . "${author}, ${title}, In ${editor}, ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
-         ("book" . "${author}, ${title} (${year}), ${address}: ${publisher}.")
-         ("phdthesis" . "${author}, ${title} (Doctoral dissertation) (${year}). ${school}, ${address}.")
-         ("inbook" . "${author}, ${title}, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
-         ("incollection" . "${author}, ${title}, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
-         ("proceedings" . "${editor} (Eds.), ${booktitle} (${year}). ${address}: ${publisher}.")
-         ("unpublished" . "${author}, ${title} (${year}). Unpublished manuscript.")
-         (nil . "${author}, ${title} (${year})."))
-        ("org"
-         ("article" . "${author}, /${title}/, ${journal}, *${volume}(${number})*, ${pages} (${year}). ${doi}")
-         ("inproceedings" . "${author}, /${title}/, In ${editor}, ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
-         ("book" . "${author}, /${title}/ (${year}), ${address}: ${publisher}.")
-         ("phdthesis" . "${author}, /${title}/ (Doctoral dissertation) (${year}). ${school}, ${address}.")
-         ("inbook" . "${author}, /${title}/, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
-         ("incollection" . "${author}, /${title}/, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
-         ("proceedings" . "${editor} (Eds.), _${booktitle}_ (${year}). ${address}: ${publisher}.")
-         ("unpublished" . "${author}, /${title}/ (${year}). Unpublished manuscript.")
-         (nil . "${author}, /${title}/ (${year})."))))
 
 ** auctex
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1156,11 +1182,25 @@ original
 (setq TeX-parse-self t)
      (setq-default TeX-master nil)
 
+(setq TeX-view-program-selection
+'(((output-dvi has-no-display-manager)
+   "dvi2tty")
+  ((output-dvi style-pstricks)
+   "dvips and gv")
+  (output-dvi "xdvi")
+  (output-pdf "PDF Tools")
+  (output-html "xdg-open")))
+
 
 
 #+END_SRC
 
 #+RESULTS:
+| (output-dvi has-no-display-manager) | dvi2tty      |
+| (output-dvi style-pstricks)         | dvips and gv |
+| output-dvi                          | xdvi         |
+| output-pdf                          | PDF Tools    |
+| output-html                         | xdg-open     |
 ** writing environment
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -1269,7 +1309,20 @@ original
                             "~/Dropbox/Zettelkasten/notes.org")))
 
 
+
+(setq  org-agenda-sorting-strategy 
+'((agenda time-up)
+  (todo priority-down category-keep)
+  (tags priority-down category-keep)
+  (search category-keep)))
+
 #+END_SRC
+
+#+RESULTS:
+| agenda | time-up       |               |
+| todo   | priority-down | category-keep |
+| tags   | priority-down | category-keep |
+| search | category-keep |               |
 
 *** inside the main agenda view
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1356,8 +1409,8 @@ original
 #+BEGIN_SRC emacs-lisp :tangle yes
 
 
-   (setq org-todo-keywords '((sequence  "TODO(t!)" "NEXT(n!)" "|" "✓(d!)")
-                             (sequence "습관(h!)" "PROJECT(p!)""◔(s!)" "?(w!)" "|" "☓(c!)")))
+   (setq org-todo-keywords '((sequence  "TODO(t!)" "NEXT(n)" "◔(s)" "|" "✓(d!)")
+                             (sequence "습관(h)" "PROJECT(p)" "?(w!)" "|" "☓(c!)")))
 
    (setq org-todo-keyword-faces '(("습관" :foreground "dodger blue")
                                   ("PROJECT" :foreground "chartreuse" :weight bold  )
@@ -1365,7 +1418,7 @@ original
 
                                   ("◔" :foreground "magenta1")
                                   ("?" :foreground "yellow") 
-                                  ("✓" :foreground "gainsboro" )
+                                  ("✓" :foreground "chocolate" )
                                   ("☓" :foreground "gainsboro")))
 
 
@@ -1378,7 +1431,7 @@ original
 | NEXT    | :foreground | blue2       | :background | white | :weight | bold | :family | fira mono |
 | ◔       | :foreground | magenta1    |             |       |         |      |         |           |
 | ?       | :foreground | yellow      |             |       |         |      |         |           |
-| ✓       | :foreground | gainsboro   |             |       |         |      |         |           |
+| ✓       | :foreground | chocolate   |             |       |         |      |         |           |
 | ☓       | :foreground | gainsboro   |             |       |         |      |         |           |
 
 
@@ -1417,6 +1470,9 @@ original
    ;(setq org-clock-persist-file "~/Dropbox/emacs/.emacs.d/org-clock-save.el")
    (setq org-clock-into-drawer t)
    ;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
+
+;(setq org-clock-in-switch-to-state "◔")
+
 
    ; C-u C-c C-x C-i d
    (setq org-clock-out-remove-zero-time-clocks t)
@@ -1472,7 +1528,7 @@ original
 
 ; Refile in a single go
 
-  (global-set-key (kbd "<f4>") 'org-refile)
+;  (global-set-key (kbd "<f4>") 'org-refile)
 
   (setq org-refile-allow-creating-parent-nodes 'confirm)
 
@@ -1536,14 +1592,16 @@ original
 #+BEGIN_SRC emacs-lisp :tangle yes
    (setq org-habit-following-days 8)
    (setq org-habit-show-habits-only-for-today t)
+(setq  org-habit-show-all-today t)
    (setq org-habit-preceding-days 21)
 ;   (setq org-habit-completed-glyph 128504)
    (setq org-habit-show-done-always-green t)
+(setq org-habit-graph-column 60)
 
 #+END_SRC
 
 #+RESULTS:
-: t
+: 60
 
 ** org-brain
 
