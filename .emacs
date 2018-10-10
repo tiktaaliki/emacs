@@ -33,6 +33,13 @@
 ;(use-package org-plus-contrib :ensure t)
 (setq custom-file "~/Dropbox/emacs/.emacs.d/custom.el")
 
+(setq org-emphasis-regexp-components
+      '("     ('\"{“”"
+        "-   .,!?;''“”\")}/\\“”"
+        "    \r\n,"
+        "."
+        1))
+
 (org-babel-load-file "~/Dropbox/emacs/settings.org")
 (org-babel-load-file "~/Dropbox/emacs/pi.org")
 

@@ -71,7 +71,7 @@ file:~/.emacs
                        ([f2] . org-clock-in)
                        ([f3]  . helm-buffers-list)           
                        ([f4] . org-refile)
-		         ([f5] . helm-projectile)
+		    ([f5] . helm-projectile)
                        ([f6] . helm-bibtex-with-local-bibliography)
                        ([f7] . org-agenda)
                        ([f8] . deft)
@@ -409,7 +409,7 @@ file:~/.emacs
 #+BEGIN_SRC emacs-lisp :tangle yes
 
    (custom-set-faces 
-    '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 200 :width normal :family "Consolas"))))                    
+    '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 180 :width normal :family "Iosevka Term SS09"))))                    
     '(fringe ((t (:background "#242728"))))
   ; '(highlight ((t (:weight bold))))
     '(lazy-highlight ((t (:inherit highlight :background "black"))))
@@ -453,23 +453,26 @@ file:~/.emacs
   (:foreground "white" :background "DodgerBlue1"))))
 
     '(org-inlinetask ((t (:foreground "dodger blue"))))
-    '(org-level-1 ((t (:inherit nil :foreground "gray"  :height 1.4 :family "futura"))))
+    '(org-level-1 ((t (:inherit nil :foreground "gray"  :height 1.5 :family "futura"))))
     '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 1.3))))
-    '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 0.95))))
-    '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 0.95))))
+    '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 1.2))))
+    '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 1.0))))
     '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
     '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
     '(org-link ((t (:foreground "LightSteelBlue3" :underline t :family "nova mono"))))
 
-    '(org-list-dt ((t (:foreground "darkblue" :weight bold :background "white" :underline nil ))))
+    '(org-list-dt ((t (:foreground "black" :overline "thistle" :background "thistle" :underline nil :box (:line-width 1 :color "thistle")))))
+
+
+
 
     '(org-priority ((t (:foreground "gold" :weight bold))))
-    '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
+    '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "Iosevka Term SS09"))))
     '(org-scheduled ((t (:foreground "DarkOliveGreen3"))))
     '(org-scheduled-previously ((t (:foreground "seashell1" :weight bold))))
     '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
     '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
-    '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
+    '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "Iosevka Term SS09"))))
     '(org-todo ((t ( :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
     '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
     '(org-warning ((t (:foreground "goldenrod1" :underline nil :weight normal))))
@@ -901,7 +904,8 @@ M-x describe-current-coding-system
    (setq vc-make-backup-files t)
    (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
    (setq auto-save-interval 5)
-   (setq auto-save-visited-file-name nil)
+(setq auto-save-visited t)
+   (setq auto-save-visited-file-name t)
    (use-package magit
      :ensure t
      :init (progn
@@ -910,7 +914,6 @@ M-x describe-current-coding-system
 #+END_SRC
 
 #+RESULTS:
-| ~/Dropbox/emacs/ | ~/Dropbox/Zettelkasten/ |
 
 * sounds
  #+BEGIN_SRC emacs-lisp :tangle yes
