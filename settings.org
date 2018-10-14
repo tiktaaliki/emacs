@@ -1552,7 +1552,7 @@ M-x describe-current-coding-system
 
   (setq org-refile-use-outline-path (quote file))
 
-  (setq org-refile-targets '((nil :maxlevel . 2)
+  (setq org-refile-targets '((nil :maxlevel . 3)
                              (org-agenda-files :maxlevel . 2)
                        ))
 
@@ -1651,14 +1651,14 @@ M-x describe-current-coding-system
 ** org-archive
  #+BEGIN_SRC emacs-lisp :tangle yes
 
-;(setq org-archive-location "~/Dropbox/Zettelkasten/archive.org::datetree/")
-(setq org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks")
+(setq org-archive-location "~/Dropbox/Zettelkasten/archive.org::datetree/")
+;(setq org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks")
    
 
  #+END_SRC
 
  #+RESULTS:
- : ~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks
+ : ~/Dropbox/Zettelkasten/archive.org::datetree/
 
 ** org-mode structure templates
 #+BEGIN_SRC emacs-lisp :tangle yes
