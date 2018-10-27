@@ -151,6 +151,15 @@ file:~/.emacs
 
 
 
+* display
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(setq visual-fill-column-center-text t)
+
+#+END_SRC
+
+#+RESULTS:
+: t
 
 * bookmarks
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -409,19 +418,24 @@ file:~/.emacs
 
 *** custom-set-faces
 
-    '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :family "consolas"))))                    
+  
+
+  '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :family "iosevka term ss09"))))                    
   '(org-level-1 ((t (:inherit nil :foreground "gray"  :height 1.0 :family "futura"))))
     '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
     '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 0.90))))
     '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 0.90))))
     '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
     '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
+
+
      
 Iosevka Term SS09
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
     (custom-set-faces 
+
 
 
     '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 180 :width normal :family "Iosevka Term SS09"))))                    
@@ -431,9 +445,6 @@ Iosevka Term SS09
     '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 1.0))))
     '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
     '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
-
-
-
 
 
 
@@ -837,11 +848,11 @@ M-x describe-current-coding-system
 (setq mu4e-trash-folder  "/Trash")
 (setq mu4e-refile-folder "/All")
 (setq mu4e-maildir "~/Maildir")
-;(setq mu4e-attachment-dir "~/Dropbox/Downloads")
+(setq mu4e-attachment-dir "~/Dropbox")
 #+END_SRC 
 
 #+RESULTS:
-: ~/Maildir
+: ~/Dropbox
 
 ** bbdb
 
@@ -923,7 +934,7 @@ M-x describe-current-coding-system
    (setq delete-old-versions -1)
    (setq version-control t)
    (setq vc-make-backup-files t)
-   (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+   (setq auto-save-file-name-transforms nil)
    (setq auto-save-interval 5)
 (setq auto-save-visited t)
    (setq auto-save-visited-file-name t)
@@ -1378,38 +1389,48 @@ M-x describe-current-coding-system
 # | search | category-keep |               |
 
 *** inside the main agenda view
-#+BEGIN_SRC emacs-lisp :tangle yes
-      (setq org-agenda-current-time-string "✸✸✸✸✸✸ NOW ✸✸✸✸✸✸✸✸✸✸")
-      (setq org-agenda-entry-text-leaders: "   . ")
-      (setq org-agenda-entry-text-maxlines 1)
-      (setq org-agenda-deadline-leaders: '("DUE:" "In %3d d.:" "%2d d. ago:"))
-      (setq org-agenda-scheduled-leaders  '("!" "%2dx past due: "))
-      (setq org-agenda-span (quote 8))
 
-      (setq org-agenda-export-html-style nil)
-                                              ;skips
-      (setq org-agenda-skip-timestamp-if-deadline-is-shown t)
-      (setq org-agenda-skip-deadline-if-done t)
+(setq org-agenda-entry-text-leaders: "   . ")
+(setq org-agenda-entry-text-maxlines 1)
+(setq org-agenda-deadline-leaders: '("DUE:" "In %3d d.:" "%2d d. ago:"))
+(setq org-agenda-scheduled-leaders  '("!" "%2dx past due: "))
+     
+
+(setq org-agenda-export-html-style nil)
+;skips
+(setq org-agenda-skip-timestamp-if-deadline-is-shown nil)
+
       (setq org-agenda-skip-additional-timestamps-same-entry t)
-      (setq org-agenda-todo-ignore-deadlines nil)
-      (setq org-agenda-skip-scheduled-delay-if-deadline 'post-deadline)
-      ;; (setq org-agenda-skip-scheduled-if-deadline-is-shown )
-       (setq  org-agenda-skip-timestamp-if-done t)
+(setq org-agenda-todo-ignore-deadlines nil)
+(setq org-agenda-skip-scheduled-delay-if-deadline 'post-deadline)
+(setq org-agenda-skip-scheduled-if-deadline-is-shown nil)
 
-      (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
-      (setq org-agenda-skip-scheduled-if-done t)
-      (setq org-agenda-jump-prefer-future t)
-      (setq org-agenda-start-with-clockreport-mode t)
-      (setq org-agenda-time-grid 
-            '((daily weekly today require-timed remove-match)
-              (800 1000 1200 1400 1600 1800 2000)
-              "......" "----------------"))
-                                              ; 
+
+
+
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+   (setq org-log-done 'note)
+   (setq org-agenda-skip-deadline-if-done t)
+   (setq org-agenda-skip-timestamp-if-done t)
+   (setq org-agenda-skip-scheduled-if-done t)
+   (setq org-agenda-current-time-string "✸✸✸✸✸✸ NOW ✸✸✸✸✸✸✸✸✸✸")
+   (setq org-agenda-time-grid 
+         '((daily weekly today require-timed remove-match)
+           (800 1000 1200 1400 1600 1800 2000)
+           "......" "----------------"))
+   (setq org-agenda-start-with-clockreport-mode t)
+   (setq org-agenda-span (quote 8))
+   (setq org-agenda-jump-prefer-future t)
    (setq org-agenda-window-setup (quote other-frame))
-      (setq org-deadline-warning-days 4)
-      (setq org-agenda-with-colors t)
-      (setq org-log-done 'note)
+   (setq org-agenda-with-colors t)
+   (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+   (setq org-agenda-start-on-weekday nil)
+(setq org-deadline-warning-days 4)
 #+END_SRC
+
+#+RESULTS:
+: 4
 
 # #+RESULTS:
 # : note
@@ -1631,7 +1652,7 @@ M-x describe-current-coding-system
 
    (setq org-capture-templates '(("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n" :prepend t)
                                  ("j" "journal" entry (file+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> \n\n%?\n\n" :kill-buffer nil ) 
-                                 ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location:%^{location}\n\n\n:END:\n\n")
+                                 ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
 
                                  ("e" "expense" table-line (file+headline "~/Dropbox/Zettelkasten/budget.org" "Expenses to be filed") "|%t|%^{amount}|%a|%^{category|LIS|Food|Transportation|Clothing}|%?|" :append t :kill-buffer nil)
                                  ))
@@ -1681,14 +1702,14 @@ M-x describe-current-coding-system
 ** org-archive
  #+BEGIN_SRC emacs-lisp :tangle yes
 
-(setq org-archive-location "~/Dropbox/Zettelkasten/archive.org::datetree/")
+(setq org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/")
 ;(setq org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks")
    
 
  #+END_SRC
 
  #+RESULTS:
- : ~/Dropbox/Zettelkasten/archive.org::datetree/
+ : ~/Dropbox/Zettelkasten/journal.org::datetree/
 
 ** org-mode structure templates
 #+BEGIN_SRC emacs-lisp :tangle yes
