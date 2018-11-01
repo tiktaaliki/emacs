@@ -420,22 +420,6 @@ file:~/.emacs
 
   
 
-  '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :family "iosevka term ss09"))))                    
-  '(org-level-1 ((t (:inherit nil :foreground "gray"  :height 1.0 :family "futura"))))
-    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
-    '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 0.90))))
-    '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 0.90))))
-    '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
-    '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
-
-
-     
-Iosevka Term SS09
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-    (custom-set-faces 
-
 
 
     '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 180 :width normal :family "Iosevka Term SS09"))))                    
@@ -445,6 +429,22 @@ Iosevka Term SS09
     '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 1.0))))
     '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
     '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
+     
+Iosevka Term SS09
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+    (custom-set-faces 
+
+
+  '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :family "iosevka term ss09"))))                    
+  '(org-level-1 ((t (:inherit nil :foreground "gray"  :height 1.0 :family "futura"))))
+    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
+    '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 0.90))))
+    '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 0.90))))
+    '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
+    '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
+
 
 
 
