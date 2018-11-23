@@ -156,6 +156,17 @@ file:~/.emacs
 
 (setq visual-fill-column-center-text t)
 
+
+(defun transpose-windows ()
+  (interactive)
+  (let ((this-buffer (window-buffer (selected-window)))
+        (other-buffer (prog2
+                          (other-window +1)
+                          (window-buffer (selected-window))
+                        (other-window -1))))
+    (switch-to-buffer other-buffer)
+    (switch-to-buffer-other-window this-buffer)
+    (other-window -1)))
 #+END_SRC
 
 #+RESULTS:
@@ -756,8 +767,7 @@ M-x describe-current-coding-system
 
 (defun vfcm-on ()
 ;turn on visual fill column mode
-(visual-fill-column-mode 1)
-)
+(visual-fill-column-mode 1))
 
 (add-hook 'mu4e-view-mode-hook #'vfcm-on)
 
@@ -890,10 +900,10 @@ M-x describe-current-coding-system
    (custom-set-variables
     '(annotate-annotation-column 100)
     '(bibtex-autokey-name-separator "_")
-    '(bibtex-autokey-name-year-separator "_")
-    '(bibtex-autokey-titleword-separator "-")
+    '(bibtex-autokey-name-year-separator ":")
+
     '(bibtex-autokey-year-length 4)
-    '(bibtex-autokey-year-title-separator "_")
+
     '(org-agenda-persistent-filter t)
     '(org-bbdb-anniversary-field (quote birthday) nil (bbdb))
     '(org-catch-invisible-edits (quote smart))
@@ -1370,7 +1380,7 @@ M-x describe-current-coding-system
                             "~/Dropbox/Zettelkasten/work.org"
                             "~/Dropbox/Zettelkasten/budget.org"
                             "~/Dropbox/Zettelkasten/personal.org"
-                            "~/Dropbox/Zettelkasten/reference.org"
+                     
                             "~/Dropbox/Zettelkasten/notes.org")))
 
 
