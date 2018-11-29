@@ -1,41 +1,7 @@
-
 file:~/.emacs
+
 #+BEGIN_SRC emacs-lisp :tangle yes
 #+END_SRC
-- evaluation of this emacs lisp code block is disabled.
-- delete and reinstall org-plus-contrib
-* color 1
-:PROPERTIES:
-:VISIBILITY: ALL
-:END:
-** color 2
-*** color 3
-**** color 4
-***** color 5
-****** color 7
-******* color 8
-******** color 9
-********* color 10
-
-* text files
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-(add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
-
-#+END_SRC
-
-* csv 
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-(setq csv-separators '(":" "	"))
-
-
-
-(setq org-table-default-size "2x1")
-#+END_SRC
-
-#+RESULTS:
-: 2x1
 
 * Key bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -98,8 +64,84 @@ file:~/.emacs
    (define-key key-translation-map (kbd "C-c u") (kbd "ü"))
 #+END_SRC
 
+
+* FRAME/startup
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq frame-title-format (list (format "%s %%S: %%j " (system-name))
+                              '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
+(find-file "~/Dropbox/emacs/settings.org")
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(setq inhibit-startup-screen t)
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+
+(setq calendar-daylight-savings-starts '(3 11 year))
+(setq calendar-daylight-savings-ends: '(11 4 year))
+
+#+END_SRC
+* text selection
+#+BEGIN_SRC emacs-lisp :tangle yes
+   (setq org-support-shift-select (quote always))
+
+   (delete-selection-mode) ;allows to delete selected text by typing
+
+   (defun xah-select-current-block ()
+     "Select the current block of text between blank lines.
+
+     URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
+     Version 2016-07-22"
+     (interactive)
+     (let (-p1)
+       (progn
+         (if (re-search-backward "\n[ \t]*\n" nil "move")
+             (progn (re-search-forward "\n[ \t]*\n")
+                    (setq -p1 (point)))
+           (setq -p1 (point)))
+         (re-search-forward "\n[ \t]*\n" nil "move"))
+       (set-mark -p1)))
+
+   (defun xah-select-block ()
+     "Select the current/next block of text between blank lines.
+     If region is active, extend selection downward by block.
+
+     URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
+     Version 2016-07-22"
+     (interactive)
+     (if (region-active-p)
+         (re-search-forward "\n[ \t]*\n" nil "move")
+       (xah-select-current-block)))
+
+
+
+#+END_SRC
+
 #+RESULTS:
-: [252]
+: xah-select-block
+* text files
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
+
+#+END_SRC
+
+#+RESULTS:
+: ((\.txt$ . org-mode) (\.hva\' . latex-mode) (\.drv\' . latex-mode) (\.[Cc][Ss][Vv]\' . csv-mode) (\.ledger\' . ledger-mode) (/git-rebase-todo\' . git-rebase-mode) (\.gpg\(~\|\.~[0-9]+~\)?\' nil epa-file) (\.elc\' . elisp-byte-code-mode) (\.zst\' nil jka-compr) (\.dz\' nil jka-compr) (\.xz\' nil jka-compr) (\.lzma\' nil jka-compr) (\.lz\' nil jka-compr) (\.g?z\' nil jka-compr) (\.bz2\' nil jka-compr) (\.Z\' nil jka-compr) (\.vr[hi]?\' . vera-mode) (\(?:\.\(?:rbw?\|ru\|rake\|thor\|jbuilder\|rabl\|gemspec\|podspec\)\|/\(?:Gem\|Rake\|Cap\|Thor\|Puppet\|Berks\|Vagrant\|Guard\|Pod\)file\)\' . ruby-mode) (\.re?st\' . rst-mode) (\.py[iw]?\' . python-mode) (\.less\' . less-css-mode) (\.scss\' . scss-mode) (\.awk\' . awk-mode) (\.\(u?lpc\|pike\|pmod\(\.in\)?\)\' . pike-mode) (\.idl\' . idl-mode) (\.java\' . java-mode) (\.m\' . objc-mode) (\.ii\' . c++-mode) (\.i\' . c-mode) (\.lex\' . c-mode) (\.y\(acc\)?\' . c-mode) (\.h\' . c-or-c++-mode) (\.c\' . c-mode) (\.\(CC?\|HH?\)\' . c++-mode) (\.[ch]\(pp\|xx\|\+\+\)\' . c++-mode) (\.\(cc\|hh\)\' . c++-mode) (\.\(bat\|cmd\)\' . bat-mode) (\.[sx]?html?\(\.[a-zA-Z_]+\)?\' . mhtml-mode) (\.svgz?\' . image-mode) (\.svgz?\' . xml-mode) (\.x[bp]m\' . image-mode) (\.x[bp]m\' . c-mode) (\.p[bpgn]m\' . image-mode) (\.tiff?\' . image-mode) (\.gif\' . image-mode) (\.png\' . image-mode) (\.jpe?g\' . image-mode) (\.te?xt\' . text-mode) (\.[tT]e[xX]\' . tex-mode) (\.ins\' . tex-mode) (\.ltx\' . latex-mode) (\.dtx\' . doctex-mode) (\.org\' . org-mode) (\.el\' . emacs-lisp-mode) (Project\.ede\' . emacs-lisp-mode) (\.\(scm\|stk\|ss\|sch\)\' . scheme-mode) (\.l\' . lisp-mode) (\.li?sp\' . lisp-mode) (\.[fF]\' . fortran-mode) (\.for\' . fortran-mode) (\.p\' . pascal-mode) (\.pas\' . pascal-mode) (\.\(dpr\|DPR\)\' . delphi-mode) (\.ad[abs]\' . ada-mode) (\.ad[bs].dg\' . ada-mode) (\.\([pP]\([Llm]\|erl\|od\)\|al\)\' . perl-mode) (Imakefile\' . makefile-imake-mode) (Makeppfile\(?:\.mk\)?\' . makefile-makepp-mode) (\.makepp\' . makefile-makepp-mode) (\.mk\' . makefile-gmake-mode) (\.make\' . makefile-gmake-mode) ([Mm]akefile\' . makefile-gmake-mode) (\.am\' . makefile-automake-mode) (\.texinfo\' . texinfo-mode) (\.te?xi\' . texinfo-mode) (\.[sS]\' . asm-mode) (\.asm\' . asm-mode) (\.css\' . css-mode) (\.mixal\' . mixal-mode) (\.gcov\' . compilation-mode) (/\.[a-z0-9-]*gdbinit . gdb-script-mode) (-gdb\.gdb . gdb-script-mode) ([cC]hange\.?[lL]og?\' . change-log-mode) ([cC]hange[lL]og[-.][0-9]+\' . change-log-mode) (\$CHANGE_LOG\$\.TXT . change-log-mode) (\.scm\.[0-9]*\' . scheme-mode) (\.[ckz]?sh\'\|\.shar\'\|/\.z?profile\' . sh-mode) (\.bash\' . sh-mode) (\(/\|\`\)\.\(bash_\(profile\|history\|log\(in\|out\)\)\|z?log\(in\|out\)\)\' . sh-mode) (\(/\|\`\)\.\(shrc\|zshrc\|m?kshrc\|bashrc\|t?cshrc\|esrc\)\' . sh-mode) (\(/\|\`\)\.\([kz]shenv\|xinitrc\|startxrc\|xsession\)\' . sh-mode) (\.m?spec\' . sh-mode) (\.m[mes]\' . nroff-mode) (\.man\' . nroff-mode) (\.sty\' . latex-mode) (\.cl[so]\' . latex-mode) (\.bbl\' . latex-mode) (\.bib\' . bibtex-mode) (\.bst\' . bibtex-style-mode) (\.sql\' . sql-mode) (\.m[4c]\' . m4-mode) (\.mf\' . metafont-mode) (\.mp\' . metapost-mode) (\.vhdl?\' . vhdl-mode) (\.article\' . text-mode) (\.letter\' . text-mode) (\.i?tcl\' . tcl-mode) (\.exp\' . tcl-mode) (\.itk\' . tcl-mode) (\.icn\' . icon-mode) (\.sim\' . simula-mode) (\.mss\' . scribe-mode) (\.f9[05]\' . f90-mode) (\.f0[38]\' . f90-mode) (\.indent\.pro\' . fundamental-mode) (\.\(pro\|PRO\)\' . idlwave-mode) (\.srt\' . srecode-template-mode) (\.prolog\' . prolog-mode) (\.tar\' . tar-mode) (\.\(arc\|zip\|lzh\|lha\|zoo\|[jew]ar\|xpi\|rar\|cbr\|7z\|ARC\|ZIP\|LZH\|LHA\|ZOO\|[JEW]AR\|XPI\|RAR\|CBR\|7Z\)\' . archive-mode) (\.oxt\' . archive-mode) (\.\(deb\|[oi]pk\)\' . archive-mode) (\`/tmp/Re . text-mode) (/Message[0-9]*\' . text-mode) (\`/tmp/fol/ . text-mode) (\.oak\' . scheme-mode) (\.sgml?\' . sgml-mode) (\.x[ms]l\' . xml-mode) (\.dbk\' . xml-mode) (\.dtd\' . sgml-mode) (\.ds\(ss\)?l\' . dsssl-mode) (\.jsm?\' . javascript-mode) (\.json\' . javascript-mode) (\.jsx\' . js-jsx-mode) (\.[ds]?vh?\' . verilog-mode) (\.by\' . bovine-grammar-mode) (\.wy\' . wisent-grammar-mode) ([:/\]\..*\(emacs\|gnus\|viper\)\' . emacs-lisp-mode) (\`\..*emacs\' . emacs-lisp-mode) ([:/]_emacs\' . emacs-lisp-mode) (/crontab\.X*[0-9]+\' . shell-script-mode) (\.ml\' . lisp-mode) (\.ld[si]?\' . ld-script-mode) (ld\.?script\' . ld-script-mode) (\.xs\' . c-mode) (\.x[abdsru]?[cnw]?\' . ld-script-mode) (\.zone\' . dns-mode) (\.soa\' . dns-mode) (\.asd\' . lisp-mode) (\.\(asn\|mib\|smi\)\' . snmp-mode) (\.\(as\|mi\|sm\)2\' . snmpv2-mode) (\.\(diffs?\|patch\|rej\)\' . diff-mode) (\.\(dif\|pat\)\' . diff-mode) (\.[eE]?[pP][sS]\' . ps-mode) (\.\(?:PDF\|DVI\|OD[FGPST]\|DOCX?\|XLSX?\|PPTX?\|pdf\|djvu\|dvi\|od[fgpst]\|docx?\|xlsx?\|pptx?\)\' . doc-view-mode-maybe) (configure\.\(ac\|in\)\' . autoconf-mode) (\.s\(v\|iv\|ieve\)\' . sieve-mode) (BROWSE\' . ebrowse-tree-mode) (\.ebrowse\' . ebrowse-tree-mode) (#\*mail\* . mail-mode) (\.g\' . antlr-mode) (\.mod\' . m2-mode) (\.ses\' . ses-mode) (\.docbook\' . sgml-mode) (\.com\' . dcl-mode) (/config\.\(?:bat\|log\)\' . fundamental-mode) (\.\(?:[iI][nN][iI]\|[lL][sS][tT]\|[rR][eE][gG]\|[sS][yY][sS]\)\' . conf-mode) (\.la\' . conf-unix-mode) (\.ppd\' . conf-ppd-mode) (java.+\.conf\' . conf-javaprop-mode) (\.properties\(?:\.[a-zA-Z0-9._-]+\)?\' . conf-javaprop-mode) (\.toml\' . conf-toml-mode) (\.desktop\' . conf-desktop-mode) (\`/etc/\(?:DIR_COLORS\|ethers\|.?fstab\|.*hosts\|lesskey\|login\.?de\(?:fs\|vperm\)\|magic\|mtab\|pam\.d/.*\|permissions\(?:\.d/.+\)?\|protocols\|rpc\|services\)\' . conf-space-mode) (\`/etc/\(?:acpid?/.+\|aliases\(?:\.d/.+\)?\|default/.+\|group-?\|hosts\..+\|inittab\|ksysguarddrc\|opera6rc\|passwd-?\|shadow-?\|sysconfig/.+\)\' . conf-mode) ([cC]hange[lL]og[-.][-0-9a-z]+\' . change-log-mode) (/\.?\(?:gitconfig\|gnokiirc\|hgrc\|kde.*rc\|mime\.types\|wgetrc\)\' . conf-mode) (/\.\(?:enigma\|gltron\|gtk\|hxplayer\|net\|neverball\|qt/.+\|realplayer\|scummvm\|sversion\|sylpheed/.+\|xmp\)rc\' . conf-mode) (/\.\(?:gdbtkinit\|grip\|orbital/.+txt\|rhosts\|tuxracer/options\)\' . conf-mode) (/\.?X\(?:default\|resource\|re\)s\> . conf-xdefaults-mode) (/X11.+app-defaults/\|\.ad\' . conf-xdefaults-mode) (/X11.+locale/.+/Compose\' . conf-colon-mode) (/X11.+locale/compose\.dir\' . conf-javaprop-mode) (\.~?[0-9]+\.[0-9][-.0-9]*~?\' nil t) (\.\(?:orig\|in\|[bB][aA][kK]\)\' nil t) ([/.]c\(?:on\)?f\(?:i?g\)?\(?:\.[a-zA-Z0-9._-]+\)?\' . conf-mode-maybe) (\.[1-9]\' . nroff-mode) (\.tgz\' . tar-mode) (\.tbz2?\' . tar-mode) (\.txz\' . tar-mode) (\.tzst\' . tar-mode))
+
+* csv 
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(setq csv-separators '(":" "	"))
+
+
+
+(setq org-table-default-size "2x1")
+#+END_SRC
+
+#+RESULTS:
+: 2x1
 
 * img display
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -135,6 +177,10 @@ file:~/.emacs
                 ("b" "[/]"))
 
    (add-to-list 'org-structure-template-alist '
+                ("m"  "**** SHOT\nSCRIPT:\nSOUND:\nIMAGE:\n"))
+
+
+   (add-to-list 'org-structure-template-alist '
                 ("s"  "#+BEGIN_SRC emacs-lisp :tangle yes\n\n?\n\n#+END_SRC"))
    (add-to-list 'org-structure-template-alist '
                 ("x"  "#+BEGIN_SRC xml \n\n?\n\n#+END_SRC"))
@@ -146,9 +192,7 @@ file:~/.emacs
 #+END_SRC
 
 #+RESULTS:
-| xc | <!-- ? -->           |
-| eh | :EXPORT_FILE_NAME: ? |
-
+| m | **** SHOT |
 
 
 * display
@@ -170,7 +214,7 @@ file:~/.emacs
 #+END_SRC
 
 #+RESULTS:
-: t
+: transpose-windows
 
 * bookmarks
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -283,6 +327,7 @@ file:~/.emacs
 
 # * Emacs functionality
 
+
 * EDITING
 
 ** text editing
@@ -308,44 +353,7 @@ file:~/.emacs
    (setq org-src-tab-acts-natively t)
 
 #+END_SRC
-*** text selection
-#+BEGIN_SRC emacs-lisp :tangle yes
-   (setq org-support-shift-select (quote always))
 
-   (delete-selection-mode) ;allows to delete selected text by typing
-
-   (defun xah-select-current-block ()
-     "Select the current block of text between blank lines.
-
-     URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
-     Version 2016-07-22"
-     (interactive)
-     (let (-p1)
-       (progn
-         (if (re-search-backward "\n[ \t]*\n" nil "move")
-             (progn (re-search-forward "\n[ \t]*\n")
-                    (setq -p1 (point)))
-           (setq -p1 (point)))
-         (re-search-forward "\n[ \t]*\n" nil "move"))
-       (set-mark -p1)))
-
-   (defun xah-select-block ()
-     "Select the current/next block of text between blank lines.
-     If region is active, extend selection downward by block.
-
-     URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
-     Version 2016-07-22"
-     (interactive)
-     (if (region-active-p)
-         (re-search-forward "\n[ \t]*\n" nil "move")
-       (xah-select-current-block)))
-
-
-
-#+END_SRC
-
-#+RESULTS:
-: xah-select-block
 ** text appearance
 *** fonts
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -374,7 +382,7 @@ file:~/.emacs
    (use-package org-bullets
      :init
      (add-hook 'org-mode-hook 
-               (lambda () (org-bullets-mode 1)))
+	       (lambda () (org-bullets-mode 1)))
      (setq org-bullets-bullet-list 
            (quote ("◉""〉""⚬" "»" "⏵" "⊹"  "⯮" "⊸" "∞" "⛯"   ))))
    (setq org-list-demote-modify-bullet
@@ -530,7 +538,6 @@ Iosevka Term SS09
 #+END_SRC
 
 #+RESULTS:
-| nxml-prolog-literal-content-face | ((t (:foreground green))) |
 
 *** formatting
 **** text formatting
@@ -547,7 +554,7 @@ Iosevka Term SS09
 
    (setq blink-matching-paren-dont-ignore-comments nil)
 
-(require 'smart-quotes) 
+;(require 'smart-quotes) 
 
 
 (add-to-list 'insert-pair-alist (list ?\* ?\*))
@@ -620,7 +627,6 @@ Iosevka Term SS09
 
 (setq custom-safe-themes (quote
    ("365d9553de0e0d658af60cff7b8f891ca185a2d7ba3fc6d29aadba69f5194c7f" "10e231624707d46f7b2059cc9280c332f7c7a530ebc17dba7e506df34c5332c4" default)))
-
 * buffers
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun kill-other-buffers ()
@@ -709,6 +715,18 @@ M-x describe-current-coding-system
 
 #+RESULTS:
 : lawlist-read-buffer-file-coding-system
+* color 1
+  :PROPERTIES:
+  :VISIBILITY: ALL
+  :END:
+** color 2
+*** color 3
+**** color 4
+***** color 5
+****** color 7
+******* color 8
+******** color 9
+********* color 10
 
 * web
 
@@ -718,7 +736,7 @@ M-x describe-current-coding-system
       (let* ((title (plist-get eww-data :title))
       (url   (plist-get eww-data :url))
       (result (concat "*eww-" 
-               (or title Norton Guide reader     
+	       (or title Norton Guide reader     
 		 (if (string-match "://" url)
                    (substring url (match-beginning 0))
                    url)) "*")))
@@ -890,6 +908,7 @@ M-x describe-current-coding-system
 #+RESULTS:
 : United States
 
+
 * Testing pond
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -913,27 +932,6 @@ M-x describe-current-coding-system
 #+END_SRC
 
 #+RESULTS:
-
-* FRAME/startup
-#+BEGIN_SRC emacs-lisp :tangle yes
-(setq frame-title-format (list (format "%s %%S: %%j " (system-name))
-                              '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
-(find-file "~/Dropbox/emacs/settings.org")
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-(setq inhibit-startup-screen t)
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-
-(setq calendar-daylight-savings-starts '(3 11 year))
-(setq calendar-daylight-savings-ends: '(11 4 year))
-
-#+END_SRC
-
-#+RESULTS:
-| 11 | 4 | year |
 
 * Saving files | MAGIT
 (setq auto-revert-interval 50400)
@@ -971,14 +969,6 @@ M-x describe-current-coding-system
 (setq debug-on-error nil)
 
 #+END_SRC
-
-
-
-
-
-
-
-
 * REFERENCE/STUDY
 ** org-ref
 
@@ -1322,292 +1312,270 @@ M-x describe-current-coding-system
 
 
 
+
+
+
+
 * ORG
-#+BEGIN_SRC emacs-lisp :tangle yes
-   (require 'cl) 
-   (setq org-return-follows-link nil)
-   (setq org-log-into-drawer t)
-   (setq org-enforce-todo-dependencies t)
-   (setq org-agenda-use-tag-inheritance nil)
-   (setq org-use-tag-inheritance nil)
+ #+BEGIN_SRC emacs-lisp :tangle yes
+    (require 'cl) 
+    (setq org-return-follows-link nil)
+    (setq org-log-into-drawer t)
+    (setq org-enforce-todo-dependencies t)
+    (setq org-agenda-use-tag-inheritance nil)
+    (setq org-use-tag-inheritance nil)
 
 
-(require 'org-inlinetask)
-(setq org-inlinetask-min-level 7)
-#+END_SRC
-
+ (require 'org-inlinetask)
+ (setq org-inlinetask-min-level 7)
+ #+END_SRC
 ** org-gcal
    
-#+BEGIN_SRC emacs-lisp :tangle yes
+ #+BEGIN_SRC emacs-lisp :tangle yes
 
-(use-package calfw)
-(use-package calfw-org)
-(use-package calfw-gcal)
-(use-package calfw-cal)
-(setq package-check-signature nil)
-(setq org-gcal-down-days '120)
+ (use-package calfw)
+ (use-package calfw-org)
+ (use-package calfw-gcal)
+ (use-package calfw-cal)
+ (setq package-check-signature nil)
+ (setq org-gcal-down-days '120)
 
 
 
-(defun my-open-calendar ()
-  (interactive)
-  (cfw:open-calendar-buffer
-   :contents-sources
-   (list
-    (cfw:org-create-source "cornflower blue")  ; orgmode source
-    (cfw:cal-create-source "light goldenrod") ; diary source
-   ))) 
+ (defun my-open-calendar ()
+   (interactive)
+   (cfw:open-calendar-buffer
+    :contents-sources
+    (list
+     (cfw:org-create-source "cornflower blue")  ; orgmode source
+     (cfw:cal-create-source "light goldenrod") ; diary source
+    ))) 
 
-(setq calendar-week-start-day 1)
+ (setq calendar-week-start-day 1)
 
-;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
+ ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
 
-#+END_SRC
+ #+END_SRC
 
-#+RESULTS:
-: 1
+ #+RESULTS:
+ : 1
 
 ** org-agenda
 *** agenda files                              
 
-#+BEGIN_SRC emacs-lisp :tangle yes
-   (setq org-agenda-files (quote
-                           ("~/Dropbox/Zettelkasten/inbox.org" 
-                            "~/Dropbox/Zettelkasten/lis.org"  
-                            "~/Dropbox/Zettelkasten/ndd.org"
-                            "~/Dropbox/Zettelkasten/gcal.org" 
-                            "~/Dropbox/Zettelkasten/journal.org"
-                            "~/Dropbox/Zettelkasten/work.org"
-                            "~/Dropbox/Zettelkasten/budget.org"
-                            "~/Dropbox/Zettelkasten/personal.org"
+ #+BEGIN_SRC emacs-lisp :tangle yes
+    (setq org-agenda-files (quote
+                            ("~/Dropbox/Zettelkasten/inbox.org" 
+                             "~/Dropbox/Zettelkasten/lis.org"  
+                             "~/Dropbox/Zettelkasten/ndd.org"
+                             "~/Dropbox/Zettelkasten/gcal.org" 
+                             "~/Dropbox/Zettelkasten/journal.org"
+                             "~/Dropbox/Zettelkasten/work.org"
+                             "~/Dropbox/Zettelkasten/budget.org"
+                             "~/Dropbox/Zettelkasten/personal.org"
                      
-                            "~/Dropbox/Zettelkasten/notes.org")))
+                             "~/Dropbox/Zettelkasten/notes.org")))
 
 
 
-(setq  org-agenda-sorting-strategy 
-'((agenda time-up)
-  (todo priority-down category-keep)
-  (tags priority-down category-keep)
-  (search category-keep)))
+ (setq  org-agenda-sorting-strategy 
+ '((agenda time-up)
+   (todo priority-down category-keep)
+   (tags priority-down category-keep)
+   (search category-keep)))
 
-#+END_SRC
+ #+END_SRC
 
-# #+RESULTS:
-# | agenda | time-up       |               |
-# | todo   | priority-down | category-keep |
-# | tags   | priority-down | category-keep |
-# | search | category-keep |               |
+ # #+RESULTS:
+ # | agenda | time-up       |               |
+ # | todo   | priority-down | category-keep |
+ # | tags   | priority-down | category-keep |
+ # | search | category-keep |               |
 
 *** inside the main agenda view
 
-(setq org-agenda-entry-text-leaders: "   . ")
-(setq org-agenda-entry-text-maxlines 1)
-(setq org-agenda-deadline-leaders: '("DUE:" "In %3d d.:" "%2d d. ago:"))
-(setq org-agenda-scheduled-leaders  '("!" "%2dx past due: "))
+ (setq org-agenda-entry-text-leaders: "   . ")
+ (setq org-agenda-entry-text-maxlines 1)
+ (setq org-agenda-deadline-leaders: '("DUE:" "In %3d d.:" "%2d d. ago:"))
+ (setq org-agenda-scheduled-leaders  '("!" "%2dx past due: "))
      
 
-(setq org-agenda-export-html-style nil)
-;skips
-(setq org-agenda-skip-timestamp-if-deadline-is-shown nil)
+ (setq org-agenda-export-html-style nil)
+ ;skips
+ (setq org-agenda-skip-timestamp-if-deadline-is-shown nil)
 
-      (setq org-agenda-skip-additional-timestamps-same-entry t)
-(setq org-agenda-todo-ignore-deadlines nil)
-(setq org-agenda-skip-scheduled-delay-if-deadline 'post-deadline)
-(setq org-agenda-skip-scheduled-if-deadline-is-shown nil)
-
-
+       (setq org-agenda-skip-additional-timestamps-same-entry t)
+ (setq org-agenda-todo-ignore-deadlines nil)
+ (setq org-agenda-skip-scheduled-delay-if-deadline 'post-deadline)
+ (setq org-agenda-skip-scheduled-if-deadline-is-shown nil)
 
 
 
-#+BEGIN_SRC emacs-lisp :tangle yes
-   (setq org-log-done 'note)
-   (setq org-agenda-skip-deadline-if-done t)
-   (setq org-agenda-skip-timestamp-if-done t)
-   (setq org-agenda-skip-scheduled-if-done t)
-   (setq org-agenda-current-time-string "✸✸✸✸✸✸ NOW ✸✸✸✸✸✸✸✸✸✸")
-   (setq org-agenda-time-grid 
-         '((daily weekly today require-timed remove-match)
-           (800 1000 1200 1400 1600 1800 2000)
-           "......" "----------------"))
-   (setq org-agenda-start-with-clockreport-mode t)
-   (setq org-agenda-span (quote 8))
-   (setq org-agenda-jump-prefer-future t)
-   (setq org-agenda-window-setup (quote other-frame))
-   (setq org-agenda-with-colors t)
-   (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
-   (setq org-agenda-start-on-weekday nil)
-(setq org-deadline-warning-days 4)
-#+END_SRC
 
-#+RESULTS:
-: 4
 
-# #+RESULTS:
-# : note
+ #+BEGIN_SRC emacs-lisp :tangle yes
+    (setq org-log-done 'note)
+    (setq org-agenda-skip-deadline-if-done t)
+    (setq org-agenda-skip-timestamp-if-done t)
+    (setq org-agenda-skip-scheduled-if-done t)
+    (setq org-agenda-current-time-string "✸✸✸✸✸✸ NOW ✸✸✸✸✸✸✸✸✸✸")
+    (setq org-agenda-time-grid 
+          '((daily weekly today require-timed remove-match)
+            (800 1000 1200 1400 1600 1800 2000)
+            "......" "----------------"))
+    (setq org-agenda-start-with-clockreport-mode t)
+    (setq org-agenda-span (quote 8))
+    (setq org-agenda-jump-prefer-future t)
+    (setq org-agenda-window-setup (quote other-frame))
+    (setq org-agenda-with-colors t)
+    (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+    (setq org-agenda-start-on-weekday nil)
+ (setq org-deadline-warning-days 4)
+ #+END_SRC
+
+ #+RESULTS:
+ : 4
+
+ # #+RESULTS:
+ # : note
 
 *** custom agenda views
-#+BEGIN_SRC emacs-lisp :tangle yes
+ #+BEGIN_SRC emacs-lisp :tangle yes
 
-            org-agenda-custom-commands '(("n" "Agenda and all TODOs" ((agenda "")     (alltodo ""))))
+             org-agenda-custom-commands '(("n" "Agenda and all TODOs" ((agenda "")     (alltodo ""))))
 
-            (setq org-agenda-custom-commands 
-                  '(("s" todo "NEXT|◔")
-                    ("d" "Undated tasks " alltodo ""              ((org-agenda-todo-ignore-with-date t))
-             )))
+             (setq org-agenda-custom-commands 
+                   '(("s" todo "NEXT|◔")
+                     ("d" "Undated tasks " alltodo ""              ((org-agenda-todo-ignore-with-date t))
+              )))
 
-            (setq org-stuck-projects '("/PROJECT" ("NEXT") nil ""))
- (setq org-log-note-clock-out nil)
-#+END_SRC
+             (setq org-stuck-projects '("/PROJECT" ("NEXT") nil ""))
+  (setq org-log-note-clock-out nil)
+ #+END_SRC
 
-# #+RESULTS:
-
-
-
-# '("+LEVEL=2/-DONE"
-#   ("TODO" "NEXT" "NEXTACTION")
-#   nil "")
+ # #+RESULTS:
 
 
-#  (setq org-agenda-custom-commands 
 
-#            '(("d" "Undated tasks" alltodo "" 
-#              ((org-agenda-todo-ignore-with-date t))
-#              ((org-agenda-max-entries 5))))
-#       )
+ # '("+LEVEL=2/-DONE"
+ #   ("TODO" "NEXT" "NEXTACTION")
+ #   nil "")
 
-# (setq org-agenda-custom-commands
-#       '(("x" agenda)
-#         ("y" agenda*)
-#         ("w" todo "WAITING")
-#         ("W" todo-tree "WAITING")
-#         ("u" tags "+boss-urgent")
-#         ("v" tags-todo "+boss-urgent")
-#         ("U" tags-tree "+boss-urgent")
-#         ("f" occur-tree "\\<FIXME\\>")
-#         ("h" . "HOME+Name tags searches") ; description for "h" prefix
-#         ("hl" tags "+home+Lisa")
-#         ("hp" tags "+home+Peter")
-#         ("hk" tags "+home+Kim")))
+
+ #  (setq org-agenda-custom-commands 
+
+ #            '(("d" "Undated tasks" alltodo "" 
+ #              ((org-agenda-todo-ignore-with-date t))
+ #              ((org-agenda-max-entries 5))))
+ #       )
+
+ # (setq org-agenda-custom-commands
+ #       '(("x" agenda)
+ #         ("y" agenda*)
+ #         ("w" todo "WAITING")
+ #         ("W" todo-tree "WAITING")
+ #         ("u" tags "+boss-urgent")
+ #         ("v" tags-todo "+boss-urgent")
+ #         ("U" tags-tree "+boss-urgent")
+ #         ("f" occur-tree "\\<FIXME\\>")
+ #         ("h" . "HOME+Name tags searches") ; description for "h" prefix
+ #         ("hl" tags "+home+Lisa")
+ #         ("hp" tags "+home+Peter")
+ #         ("hk" tags "+home+Kim")))
 *** todo keywords 
-              ;(setq org-agenda-dim-blocked-tasks t)
+               ;(setq org-agenda-dim-blocked-tasks t)
+ #+BEGIN_SRC emacs-lisp :tangle yes
+
+
+    (setq org-todo-keywords '((sequence  "TODO(t)" "NEXT(n)" "◔(s)" "|" "✓(d!)")
+                              (sequence "습관(h)" "PROJECT(p)" "?(w!)" "|" "☓(c!)")))
+
+    (setq org-todo-keyword-faces '(("습관" :foreground "dodger blue")
+                                   ("PROJECT" :foreground "chartreuse" :weight bold  )
+                                   ("NEXT" :foreground "blue2" :background "white" :weight bold :family "fira mono")
+
+                                   ("◔" :foreground "magenta1")
+                                   ("?" :foreground "yellow") 
+                                   ("✓" :foreground "chocolate" )
+                                   ("☓" :foreground "gainsboro")))
+
+
+
+ #+END_SRC
+
+ #+RESULTS:
+ | 습관    | :foreground | dodger blue |             |       |         |      |         |           |
+ | PROJECT | :foreground | chartreuse  | :weight     | bold  |         |      |         |           |
+ | NEXT    | :foreground | blue2       | :background | white | :weight | bold | :family | fira mono |
+ | ◔       | :foreground | magenta1    |             |       |         |      |         |           |
+ | ?       | :foreground | yellow      |             |       |         |      |         |           |
+ | ✓       | :foreground | chocolate   |             |       |         |      |         |           |
+ | ☓       | :foreground | gainsboro   |             |       |         |      |         |           |
+
+ # #+RESULTS:
+ # | 습관    | :foreground | dodger blue |             |       |         |      |         |           |
+ # | PROJECT | :foreground | chartreuse  | :weight     | bold  |         |      |         |           |
+ # | NEXT    | :foreground | blue2       | :background | white | :weight | bold | :family | fira mono |
+ # | ◔       | :foreground | magenta1    |             |       |         |      |         |           |
+ # | ?       | :foreground | yellow      |             |       |         |      |         |           |
+ # | ✓       | :foreground | chocolate   |             |       |         |      |         |           |
+ # | ☓       | :foreground | gainsboro   |             |       |         |      |         |           |
+
+
+ #   (setq org-todo-state-tags-triggers'(
+ #         ("PROJECT"   ("project" . t))
+ # 		       ("TODO" ("todo" . t))))
+*** exporting
+
+(setq  org-agenda-export-html-style 
+"      <style type=\"text/css\">\n          p {width:100px; font-weight: normal; color: gray; }\n          .org-agenda-structure {\n width:100px;\n             font-size: 150%;\n             color: blue;\n             font-weight: 600;\n          }\n          .org-todo {\n             color: #cc6666;\n             font-weight: bold;\n          }\n          .org-agenda-done {\n             color: #339933;\n          }\n          .org-done {\n             color: #339933;\n          }\n          .title { text-align: center; }\n          .todo, .deadline { color: red; }\n          .done { color: green;  }\n       </style>")
+
+
 #+BEGIN_SRC emacs-lisp :tangle yes
-
-
-   (setq org-todo-keywords '((sequence  "TODO(t)" "NEXT(n)" "◔(s)" "|" "✓(d!)")
-                             (sequence "습관(h)" "PROJECT(p)" "?(w!)" "|" "☓(c!)")))
-
-   (setq org-todo-keyword-faces '(("습관" :foreground "dodger blue")
-                                  ("PROJECT" :foreground "chartreuse" :weight bold  )
-                                  ("NEXT" :foreground "blue2" :background "white" :weight bold :family "fira mono")
-
-                                  ("◔" :foreground "magenta1")
-                                  ("?" :foreground "yellow") 
-                                  ("✓" :foreground "chocolate" )
-                                  ("☓" :foreground "gainsboro")))
-
-
-
 #+END_SRC
 
 #+RESULTS:
-| 습관    | :foreground | dodger blue |             |       |         |      |         |           |
-| PROJECT | :foreground | chartreuse  | :weight     | bold  |         |      |         |           |
-| NEXT    | :foreground | blue2       | :background | white | :weight | bold | :family | fira mono |
-| ◔       | :foreground | magenta1    |             |       |         |      |         |           |
-| ?       | :foreground | yellow      |             |       |         |      |         |           |
-| ✓       | :foreground | chocolate   |             |       |         |      |         |           |
-| ☓       | :foreground | gainsboro   |             |       |         |      |         |           |
+#+begin_example
+      <style type="text/css">
+          p {width:100px; font-weight: normal; color: gray; }
+          .org-agenda-structure {
+ width:100px;
+             font-size: 150%;
+             color: blue;
+             font-weight: 600;
+          }
+          .org-todo {
+             color: #cc6666;
+             font-weight: bold;
+          }
+          .org-agenda-done {
+             color: #339933;
+          }
+          .org-done {
+             color: #339933;
+          }
+          .title { text-align: center; }
+          .todo, .deadline { color: red; }
+          .done { color: green;  }
+       </style>
+#+end_example
 
-# #+RESULTS:
-# | 습관    | :foreground | dodger blue |             |       |         |      |         |           |
-# | PROJECT | :foreground | chartreuse  | :weight     | bold  |         |      |         |           |
-# | NEXT    | :foreground | blue2       | :background | white | :weight | bold | :family | fira mono |
-# | ◔       | :foreground | magenta1    |             |       |         |      |         |           |
-# | ?       | :foreground | yellow      |             |       |         |      |         |           |
-# | ✓       | :foreground | chocolate   |             |       |         |      |         |           |
-# | ☓       | :foreground | gainsboro   |             |       |         |      |         |           |
-
-
-#   (setq org-todo-state-tags-triggers'(
-#         ("PROJECT"   ("project" . t))
-# 		       ("TODO" ("todo" . t))))
 ** org-plus-contrib
-#+BEGIN_SRC emacs-lisp :tangle yes
+ #+BEGIN_SRC emacs-lisp :tangle yes
 
 
 
-#+END_SRC
+ #+END_SRC
 ** org-toc: table of contents
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+ #+BEGIN_SRC emacs-lisp :tangle yes
 
-(use-package toc-org)
-;; (if (require 'toc-org nil t)
-;;     (add-hook 'org-mode-hook 'toc-org-enable)
-;;     (warn "toc-org not found"))
-#+END_SRC
-** org-clock
-#+BEGIN_SRC emacs-lisp :tangle yes
-   ;; Resume clocking task when emacs is restarted
-   (org-clock-persistence-insinuate)
-   ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
-   ;(setq org-clock-continuously t)
-   (setq org-clock-history-length 30)
-   ;; Resume clocking task on clock-in if the clock is open
-   ;(setq org-clock-in-resume nil)
+ (use-package toc-org)
+ ;; (if (require 'toc-org nil t)
+ ;;     (add-hook 'org-mode-hook 'toc-org-enable)
+ ;;     (warn "toc-org not found"))
+ #+END_SRC
 
-   ;; Separate drawers for clocking and logs
-   (setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
-   ;; Save clock data and state changes and notes in the LOGBOOK drawer
-   (setq org-clock-persist-file "~/Dropbox/emacs/.emacs.d/org-clock-save.el")
-   ;(setq org-clock-persist-file "~/Dropbox/emacs/.emacs.d/org-clock-save.el")
-   (setq org-clock-into-drawer t)
-   ;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
-
-;(setq org-clock-in-switch-to-state "◔")
-
-
-   ; C-u C-c C-x C-i d
-   (setq org-clock-out-remove-zero-time-clocks t)
-   ;; Clock out when moving task to a done state
-   (setq org-clock-out-when-done t)
-   ;; Save the running clock and all clock history when exiting Emacs, load it on startup
-   (setq org-clock-persist t)
-   ;; Do not prompt to resume an active clock
-   (setq org-clock-persist-query-resume nil)
-   ;; Enable auto clock resolution for finding open clocks
-   (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
-   ;; Include current clocking task in clock reports
-   (setq org-clock-report-include-clocking-task t)
-   (setq org-clock-mode-line-total (quote current))
-
-   (setq org-clock-clocked-in-display (quote both))
-
-   (setq org-clock-clocktable-default-properties '(:scope subtree  :maxlevel 4 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 ))
-
-   (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :tcolumns 2 :fileskip0 t :narrow 30))
-   ;(add-hook 'org-clock-in-hook 'org-add-note)
-   (defun my-org-clock-select-task ()
-     (interactive)
-     (org-clock-select-task))
-
-   (setq org-clocktable-defaults '(:maxlevel 2 :scope subtree :fileskip0 t))
-
-#+END_SRC
-
-#+RESULTS:
-| :maxlevel | 2 | :scope | subtree | :fileskip0 | t |
-
-(setq org-clock-clocktable-default-properties '(:maxlevel 2 :scope ("lis.org" "inbox.org" "ndd.org" "work.org" "budget.org")  :fileskip0 t :link t :emphasize t))
-#+RESULTS:
-: both
-
-** org-drill
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-;(use-package org-drill)
-#+END_SRC
 ** Org-refile
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1616,7 +1584,7 @@ M-x describe-current-coding-system
 
   (setq org-refile-targets '((nil :maxlevel . 3)
                              (org-agenda-files :maxlevel . 2)
-                       ))
+		       ))
 
   (setq org-outline-path-complete-in-steps nil) 
 
@@ -1638,7 +1606,7 @@ M-x describe-current-coding-system
 
  (setq org-modules '(org-bbdb
                       org-gnus
-                      org-drill
+                    
                       org-info
                       org-jsinfo
                       org-habit
@@ -1658,6 +1626,10 @@ M-x describe-current-coding-system
 (eval-after-load 'org '(org-load-modules-maybe t))
 
 #+END_SRC
+
+#+RESULTS:
+: t
+
 ** Org-capture
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -1745,3 +1717,132 @@ M-x describe-current-coding-system
 
 #+RESULTS:
 
+** org-clock
+
+
+ (defun bh/punch-in (arg)
+   "Start continuous clocking and set the default task to the
+ selected task.  If no task is selected set the Organization task
+ as the default task."
+   (interactive "p")
+   (setq bh/keep-clock-running t)
+   (if (equal major-mode 'org-agenda-mode)
+       ;;
+       ;; We're in the agenda
+       ;;
+       (let* ((marker (org-get-at-bol 'org-hd-marker))
+              (tags (org-with-point-at marker (org-get-tags-at))))
+         (if (and (eq arg 4) tags)
+             (org-agenda-clock-in '(16))
+           (bh/clock-in-organization-task-as-default)))
+     ;;
+     ;; We are not in the agenda
+     ;;
+     (save-restriction
+       (widen)
+       ; Find the tags on the current task
+       (if (and (equal major-mode 'org-mode) (not (org-before-first-heading-p)) (eq arg 4))
+           (org-clock-in '(16))
+         (bh/clock-in-organization-task-as-default)))))
+
+ (defun bh/punch-out ()
+   (interactive)
+   (setq bh/keep-clock-running nil)
+   (when (org-clock-is-active)
+     (org-clock-out))
+   (org-agenda-remove-restriction-lock))
+
+ (defun bh/clock-in-default-task ()
+   (save-excursion
+     (org-with-point-at org-clock-default-task
+       (org-clock-in))))
+
+ (defun bh/clock-in-parent-task ()
+   "Move point to the parent (project) task if any and clock in"
+   (let ((parent-task))
+     (save-excursion
+       (save-restriction
+         (widen)
+         (while (and (not parent-task) (org-up-heading-safe))
+           (when (member (nth 2 (org-heading-components)) org-todo-keywords-1)
+             (setq parent-task (point))))
+         (if parent-task
+             (org-with-point-at parent-task
+               (org-clock-in))
+           (when bh/keep-clock-running
+             (bh/clock-in-default-task)))))))
+
+ (defvar bh/organization-task-id "admin-task")
+
+ (defun bh/clock-in-organization-task-as-default ()
+   (interactive)
+   (org-with-point-at (org-id-find bh/organization-task-id 'marker)
+     (org-clock-in '(16))))
+
+ (defun bh/clock-out-maybe ()
+   (when (and bh/keep-clock-running
+              (not org-clock-clocking-in)
+              (marker-buffer org-clock-default-task)
+              (not org-clock-resolving-clocks-due-to-idleness))
+     (bh/clock-in-parent-task)))
+
+ (add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
+
+
+
+
+
+ #+BEGIN_SRC emacs-lisp :tangle yes
+    ;; Resume clocking task when emacs is restarted
+    (org-clock-persistence-insinuate)
+    ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
+    ;(setq org-clock-continuously t)
+    (setq org-clock-history-length 30)
+    ;; Resume clocking task on clock-in if the clock is open
+    ;(setq org-clock-in-resume nil)
+
+    ;; Separate drawers for clocking and logs
+    (setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
+    ;; Save clock data and state changes and notes in the LOGBOOK drawer
+    (setq org-clock-persist-file "~/Dropbox/emacs/.emacs.d/org-clock-save.el")
+    ;(setq org-clock-persist-file "~/Dropbox/emacs/.emacs.d/org-clock-save.el")
+    (setq org-clock-into-drawer t)
+    ;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
+
+ ;(setq org-clock-in-switch-to-state "◔")
+
+
+    ; C-u C-c C-x C-i d
+    (setq org-clock-out-remove-zero-time-clocks t)
+    ;; Clock out when moving task to a done state
+    (setq org-clock-out-when-done t)
+    ;; Save the running clock and all clock history when exiting Emacs, load it on startup
+    (setq org-clock-persist t)
+    ;; Do not prompt to resume an active clock
+    (setq org-clock-persist-query-resume nil)
+    ;; Enable auto clock resolution for finding open clocks
+    (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
+    ;; Include current clocking task in clock reports
+    (setq org-clock-report-include-clocking-task t)
+    (setq org-clock-mode-line-total (quote current))
+
+    (setq org-clock-clocked-in-display (quote both))
+
+    (setq org-clock-clocktable-default-properties '(:scope subtree  :maxlevel 4 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 ))
+
+    (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :tcolumns 2 :fileskip0 t :narrow 30))
+    ;(add-hook 'org-clock-in-hook 'org-add-note)
+    (defun my-org-clock-select-task ()
+      (interactive)
+      (org-clock-select-task))
+
+    (setq org-clocktable-defaults '(:maxlevel 2 :scope subtree :fileskip0 t))
+
+ #+END_SRC
+
+ #+RESULTS:
+ | :maxlevel | 2 | :scope | subtree | :fileskip0 | t |
+
+ (setq org-clock-clocktable-default-properties '(:maxlevel 2 :scope ("lis.org" "inbox.org" "ndd.org" "work.org" "budget.org")  :fileskip0 t :link t :emphasize t))
+ #+RESULTS:
+ : both
