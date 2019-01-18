@@ -1,3 +1,4 @@
+
 file:~/.emacs
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -69,7 +70,7 @@ file:~/.emacs
 #+BEGIN_SRC emacs-lisp :tangle yes
 (setq frame-title-format (list (format "%s %%S: %%j " (system-name))
                               '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
-(find-file "~/Dropbox/emacs/settings.org")
+(find-file "~/Sync/emacs/settings.org")
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq inhibit-startup-screen t)
 (setq split-height-threshold nil)
@@ -219,12 +220,12 @@ file:~/.emacs
 * bookmarks
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-(setq bookmark-default-file "~/Dropbox/emacs/bookmarks")
+(setq bookmark-default-file "~/Sync/emacs/bookmarks")
 
 #+END_SRC
 
 #+RESULTS:
-: ~/Dropbox/emacs/bookmarks
+: ~/Sync/emacs/bookmarks
 
 * openwith
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -272,7 +273,7 @@ file:~/.emacs
 
      :ensure t)
 
- (setq deft-directory "~/Dropbox/Zettelkasten/")
+ (setq deft-directory "~/Sync/Zettelkasten/")
  (setq deft-default-extension "org")
 (setq deft-time-format " %b-%Y %H:%M")
  (setq deft-use-filename-as-title t)
@@ -439,15 +440,14 @@ file:~/.emacs
 
   
 
-
-
-  '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :family "iosevka term ss09"))))                    
-  '(org-level-1 ((t (:inherit nil :foreground "gray"  :height 1.0 :family "futura"))))
-    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
-    '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 0.90))))
-    '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 0.90))))
+    '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 230 :width normal :family "ubuntu mono"))))                    
+  '(org-level-1 ((t (:inherit nil :foreground "gray"  :height 1.5 :family "futura"))))
+    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 1.3))))
+    '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 1.2))))
+    '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 1.0))))
     '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
     '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
+
 
 
 
@@ -457,14 +457,15 @@ Iosevka Term SS09
 #+BEGIN_SRC emacs-lisp :tangle yes
 
     (custom-set-faces 
-
-    '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 180 :width normal :family "Iosevka Term SS09"))))                    
-  '(org-level-1 ((t (:inherit nil :foreground "gray"  :height 1.5 :family "futura"))))
-    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 1.3))))
-    '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 1.2))))
-    '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 1.0))))
+  '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :family "iosevka term ss09"))))                    
+  '(org-level-1 ((t (:inherit nil :foreground "gray"  :height 1.0 :family "futura"))))
+    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
+    '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 0.90))))
+    '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 0.90))))
     '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
     '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
+
+
 
 
 
@@ -521,7 +522,7 @@ Iosevka Term SS09
     '(org-priority ((t (:foreground "gold" :weight bold))))
     '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
     '(org-scheduled ((t (:foreground "DarkOliveGreen3"))))
-    '(org-scheduled-previously ((t (:foreground "seashell1" :weight bold))))
+    '(org-scheduled-previously ((t (:foreground "seashell1" :weight normal))))
     '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
     '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
     '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
@@ -538,6 +539,7 @@ Iosevka Term SS09
 #+END_SRC
 
 #+RESULTS:
+| nxml-prolog-literal-content-face | ((t (:foreground green))) |
 
 *** formatting
 **** text formatting
@@ -803,7 +805,7 @@ M-x describe-current-coding-system
 ** message view
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq mu4e-attachment-dir "~/Dropbox/Zettelkasten/QCSpring2018/misc")
+(setq mu4e-attachment-dir "~/Sync/Zettelkasten/QCSpring2018/misc")
 
 (setq shr-color-visible-luminance-min 50) 
 (setq shr-color-visible-distance-min 5)
@@ -877,11 +879,11 @@ M-x describe-current-coding-system
 (setq mu4e-trash-folder  "/Trash")
 (setq mu4e-refile-folder "/All")
 (setq mu4e-maildir "~/Maildir")
-(setq mu4e-attachment-dir "~/Dropbox")
+(setq mu4e-attachment-dir "~/Sync")
 #+END_SRC 
 
 #+RESULTS:
-: ~/Dropbox
+: ~/Sync
 
 ** bbdb
 
@@ -927,7 +929,7 @@ M-x describe-current-coding-system
     '(org-bbdb-anniversary-field (quote birthday) nil (bbdb))
     '(org-catch-invisible-edits (quote smart))
     '(org-datetree-add-timestamp (quote inactive))
-    '(org-default-notes-file "~/Dropbox/Zettelkasten/inbox.org")
+    '(org-default-notes-file "~/Sync/Zettelkasten/inbox.org")
    )
 #+END_SRC
 
@@ -950,7 +952,7 @@ M-x describe-current-coding-system
    (use-package magit
      :ensure t
      :init (progn
-             (setq magit-repository-directories '("~/Dropbox/emacs/" "~/Dropbox/Zettelkasten/"))))
+             (setq magit-repository-directories '("~/Sync/emacs/" "~/Sync/Zettelkasten/"))))
 
 #+END_SRC
 
@@ -975,16 +977,16 @@ M-x describe-current-coding-system
 #+BEGIN_SRC emacs-lisp :tangle yes
 
 (use-package org-ref)
-(setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
+(setq reftex-default-bibliography '("~/Sync/Zettelkasten/references.bib"))
 
 ;; see org-ref for use of these variables
-(setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/notes.org"
-      org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
-      org-ref-pdf-directory "~/Dropbox/Zettelkasten/PDFs/")
+(setq org-ref-bibliography-notes "~/Sync/Zettelkasten/notes.org"
+      org-ref-default-bibliography '("~/Sync/Zettelkasten/references.bib")
+      org-ref-pdf-directory "~/Sync/Zettelkasten/PDFs/")
 
-(setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
-      bibtex-completion-library-path "~/Dropbox/Zettelkasten/PDFs"
-      bibtex-completion-notes-path "~/Dropbox/Zettelkasten/notes.org")
+(setq bibtex-completion-bibliography "~/Sync/Zettelkasten/references.bib"
+      bibtex-completion-library-path "~/Sync/Zettelkasten/PDFs"
+      bibtex-completion-notes-path "~/Sync/Zettelkasten/notes.org")
 
 ;; open pdf with system pdf viewer (works on mac)
 (setq bibtex-completion-pdf-open-function
@@ -1029,7 +1031,7 @@ M-x describe-current-coding-system
 #+RESULTS:
 ** bibtex citations
 #+BEGIN_SRC emacs-lisp :tangle yes
-         (setq ebib-bib-search-dirs '("~/Dropbox/Zettelkasten"))
+         (setq ebib-bib-search-dirs '("~/Sync/Zettelkasten"))
 
       
 #+END_SRC
@@ -1364,25 +1366,25 @@ M-x describe-current-coding-system
 *** agenda files                              
 
  #+BEGIN_SRC emacs-lisp :tangle yes
-    (setq org-agenda-files (quote
-                            ("~/Dropbox/Zettelkasten/inbox.org" 
-                             "~/Dropbox/Zettelkasten/lis.org"  
-                             "~/Dropbox/Zettelkasten/ndd.org"
-                             "~/Dropbox/Zettelkasten/gcal.org" 
-                             "~/Dropbox/Zettelkasten/journal.org"
-                             "~/Dropbox/Zettelkasten/work.org"
-                             "~/Dropbox/Zettelkasten/budget.org"
-                             "~/Dropbox/Zettelkasten/personal.org"
-                     
-                             "~/Dropbox/Zettelkasten/notes.org")))
+       (setq org-agenda-files (quote
+			       ("~/Sync/Zettelkasten/inbox.org" 
+				"~/Sync/Zettelkasten/lis.org"  
+				"~/Sync/Zettelkasten/ndd.org"
+				"~/Sync/Zettelkasten/gcal.org" 
+				"~/Sync/Zettelkasten/journal.org"
+				"~/Sync/Zettelkasten/work.org"
+				"~/Sync/Zettelkasten/budget.org"
+				"~/Sync/Zettelkasten/personal.org"
+			    "~/Sync/Zettelkasten/org.org"
+				"~/Sync/Zettelkasten/notes.org")))
 
 
 
- (setq  org-agenda-sorting-strategy 
- '((agenda time-up)
-   (todo priority-down category-keep)
-   (tags priority-down category-keep)
-   (search category-keep)))
+    (setq  org-agenda-sorting-strategy 
+    '((agenda time-up)
+      (todo priority-down category-keep)
+      (tags priority-down category-keep)
+      (search category-keep)))
 
  #+END_SRC
 
@@ -1424,7 +1426,7 @@ M-x describe-current-coding-system
             (800 1000 1200 1400 1600 1800 2000)
             "......" "----------------"))
     (setq org-agenda-start-with-clockreport-mode t)
-    (setq org-agenda-span (quote 8))
+    (setq org-agenda-span (quote 4))
     (setq org-agenda-jump-prefer-future t)
     (setq org-agenda-window-setup (quote other-frame))
     (setq org-agenda-with-colors t)
@@ -1584,7 +1586,7 @@ M-x describe-current-coding-system
 
   (setq org-refile-targets '((nil :maxlevel . 3)
                              (org-agenda-files :maxlevel . 2)
-		       ))
+		      ))
 
   (setq org-outline-path-complete-in-steps nil) 
 
@@ -1633,11 +1635,11 @@ M-x describe-current-coding-system
 ** Org-capture
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (setq org-capture-templates '(("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n" :prepend t)
-                                 ("j" "journal" entry (file+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> \n\n%?\n\n" :kill-buffer nil ) 
-                                 ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
+   (setq org-capture-templates '(("t" "todo" entry (file "~/Sync/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n" :prepend t)
+                                 ("j" "journal" entry (file+datetree "~/Sync/Zettelkasten/journal.org") "** %<%H:%M> \n\n%?\n\n" :kill-buffer nil ) 
+                                 ("c" "calendar" entry (file "~/Sync/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
 
-                                 ("e" "expense" table-line (file+headline "~/Dropbox/Zettelkasten/budget.org" "Expenses to be filed") "|%t|%^{amount}|%a|%^{category|LIS|Food|Transportation|Clothing}|%?|" :append t :kill-buffer nil)
+                                 ("e" "expense" table-line (file+headline "~/Sync/Zettelkasten/budget.org" "Expenses to be filed") "|%t|%^{amount}|%a|%^{category|LIS|Food|Transportation|Clothing}|%?|" :append t :kill-buffer nil)
                                  ))
 
 
@@ -1646,13 +1648,13 @@ M-x describe-current-coding-system
 #+END_SRC
 
 #+RESULTS:
-| t | todo | entry | (file ~/Dropbox/Zettelkasten/inbox.org) | * TODO %? |
+| t | todo | entry | (file ~/Sync/Zettelkasten/inbox.org) | * TODO %? |
 
-       ;("l" "logging" entry (file+datetree "~/Dropbox/Zettelkasten/journal.org" :kill-buffer nil)
+       ;("l" "logging" entry (file+datetree "~/Sync/Zettelkasten/journal.org" :kill-buffer nil)
                                            ;"** %? %T" :kill-buffer nil) 
-                                           ;  ("j" "jobs" table-line (file+headline "~/Dropbox/Zettelkasten/lis.org" "Jobs")
+                                           ;  ("j" "jobs" table-line (file+headline "~/Sync/Zettelkasten/lis.org" "Jobs")
                                            ;  "|%t|%A|%^{How far?}|%^{How much?}|" :append t) 
-;                                     ("r" "recommendation" table-line (file+headline "~/Dropbox/Zettelkasten/recommendations.org" "Books")
+;                                     ("r" "recommendation" table-line (file+headline "~/Sync/Zettelkasten/recommendations.org" "Books")
                                            ;                                     "|%t|%A||%?|" :append t :kill-buffer t)
 ** org-habit
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1673,7 +1675,7 @@ M-x describe-current-coding-system
 
 #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package org-brain :ensure t)
-      (setq org-brain-path "~/Dropbox/Zettelkasten/")
+      (setq org-brain-path "~/Sync/Zettelkasten/")
    (setq org-id-track-globally t)
 (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
 (setq org-brain-visualize-default-choices 'all)
@@ -1685,14 +1687,14 @@ M-x describe-current-coding-system
 ** org-archive
  #+BEGIN_SRC emacs-lisp :tangle yes
 
-(setq org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/")
-;(setq org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks")
+(setq org-archive-location "~/Sync/Zettelkasten/journal.org::datetree/")
+;(setq org-archive-location "~/Sync/Zettelkasten/journal.org::datetree/* Finished tasks")
    
 
  #+END_SRC
 
  #+RESULTS:
- : ~/Dropbox/Zettelkasten/journal.org::datetree/
+ : ~/Sync/Zettelkasten/journal.org::datetree/
 
 ** org-mode structure templates
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1718,6 +1720,10 @@ M-x describe-current-coding-system
 #+RESULTS:
 
 ** org-clock
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+
 
 
  (defun bh/punch-in (arg)
@@ -1789,7 +1795,10 @@ M-x describe-current-coding-system
  (add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
 
 
+#+END_SRC
 
+#+RESULTS:
+| org-clock-remove-empty-clock-drawer | bh/clock-out-maybe |
 
 
  #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1804,8 +1813,8 @@ M-x describe-current-coding-system
     ;; Separate drawers for clocking and logs
     (setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
     ;; Save clock data and state changes and notes in the LOGBOOK drawer
-    (setq org-clock-persist-file "~/Dropbox/emacs/.emacs.d/org-clock-save.el")
-    ;(setq org-clock-persist-file "~/Dropbox/emacs/.emacs.d/org-clock-save.el")
+    (setq org-clock-persist-file "~/Sync/emacs/.emacs.d/org-clock-save.el")
+    ;(setq org-clock-persist-file "~/Sync/emacs/.emacs.d/org-clock-save.el")
     (setq org-clock-into-drawer t)
     ;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
 
