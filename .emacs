@@ -23,14 +23,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(annotate-annotation-column 100)
- '(bibtex-autokey-name-separator "_")
  '(bibtex-autokey-name-year-separator ":")
  '(bibtex-autokey-year-length 4)
  '(org-agenda-persistent-filter t)
  '(org-bbdb-anniversary-field (quote birthday) nil (bbdb))
  '(org-catch-invisible-edits (quote smart))
  '(org-datetree-add-timestamp (quote inactive))
- '(org-default-notes-file "~/Sync/Zettelkasten/inbox.org")
+ '(org-default-notes-file "~/Sync/Zettelkasten/notes.org")
+ '(visual-fill-column-width 100)
  '(org-emphasis-alist
    (quote
     (("!"

@@ -4,60 +4,86 @@ file:~/.emacs
 #+BEGIN_SRC emacs-lisp :tangle yes
 #+END_SRC
 
+
+
+* system specific
+
+
+[[*custom-set-faces][custom-set-faces]]
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+   (setq mu4e-headers-fields
+         '( (:human-date    .  15)    ;; alternatively, use :human-date
+            (:flags         .   5)
+            (:from          .  20)
+;            (:thread-subject       . 70 )
+            (:thread-subject       . 120 )
+
+            )) 
+ (setq visual-fill-column-width 100)
+(setq fill-flowed-encode-column 80)
+(setq message-fill-column nil)
+
+#+END_SRC
+
+#+RESULTS:
+
 * Key bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
-                                                    ;   (global-set-key (kbd "C-.") 'org-todo)
-                                                    ;   (global-unset-key (kbd "C-c C-d"))
-                                                    ;      (global-set-key (kbd "<f1>") 'org-capture)
-                                                    ;            (global-set-key (kbd "<f2>") 'org-clock-in)
-                                                    ;  (global-set-key (kbd "<f7>") 'org-agenda)
+						    ;   (global-set-key (kbd "C-.") 'org-todo)
+						    ;   (global-unset-key (kbd "C-c C-d"))
+						    ;      (global-set-key (kbd "<f1>") 'org-capture)
+						    ;            (global-set-key (kbd "<f2>") 'org-clock-in)
+						    ;  (global-set-key (kbd "<f7>") 'org-agenda)
 
 
-            (global-unset-key (kbd "C-z"))     
+	    (global-unset-key (kbd "C-z"))     
       (global-unset-key (kbd "M-c"))
 
-            (global-set-key (kbd "C-<kp-6>") 'xah-select-block)
 
 
 
-            (bind-keys ("C-+"   . text-scale-increase)
-                       ("C--"   . text-scale-decrease)
-                       ("C-c l" . org-store-link)
-                       ("C-."   . org-todo)
-                       ("C-x /" . shrink-window-horizontally)
-                       ("C-c a" . org-agenda)
-                       ("C-x ." . org-archive-subtree-default)
-                       ("C-c n" . org-schedule)
-                       ("M-="   . count-words)
-                       ("M-x"   . helm-M-x)
-                       ("M-_" . insert-pair)
-                       ("M-*" . insert-pair)
-                       ("M-\/" . insert-pair)
-                    ("C-c b" . list-bookmarks)
+	    (bind-keys ("C-+"   . text-scale-increase)
+		       ("C--"   . text-scale-decrease)
 
-                       ([f1] . org-capture)
-                       ([f2] . org-clock-in)
-                       ([f3]  . helm-buffers-list)           
-                       ([f4] . org-refile)
+		       ("C-c l" . org-store-link)
+		       ("C-."   . org-todo)
+		       ("C-x /" . shrink-window-horizontally)
+		       ("C-c a" . org-agenda)
+		       ("C-x ." . org-archive-subtree-default)
+		       ("C-c n" . org-schedule)
+		       ("M-="   . count-words)
+		       ("M-x"   . helm-M-x)
+		       ("M-_" . insert-pair)
+		       ("M-*" . insert-pair)
+		       ("M-\/" . insert-pair)
+		    
+		    ("C-c b" . list-bookmarks)
+		 ("C-c p" . bh/punch-in )
+		       ([f1] . org-capture)
+		       ([f2] . org-clock-in)
+		       ([f3]  . helm-buffers-list)           
+		       ([f4] . org-refile)
 		    ([f5] . helm-projectile)
-                       ([f6] . helm-bibtex-with-local-bibliography)
-                       ([f7] . org-agenda)
-                       ([f8] . deft)
-                       )
+		       ([f6] . helm-bibtex-with-local-bibliography)
+		       ([f7] . org-agenda)
+		       ([f8] . deft)
 
+		       )
 
-                                                    ;   (global-set-key (kbd "C-c <f2>") #'my-org-clock-select-task)
+	    (global-set-key (kbd "C-<kp-6>") 'xah-select-block)
+						    ;   (global-set-key (kbd "C-c <f2>") #'my-org-clock-select-task)
 
-            (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-            (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-            (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-            (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-            (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-            (define-key key-translation-map (kbd "C--") (kbd "–"))
+	    (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+	    (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+	    (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+	    (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+	    (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+	    (define-key key-translation-map (kbd "C--") (kbd "–"))
 
-            (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-            (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
-            (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+	    (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+	    (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
+	    (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
    (define-key key-translation-map (kbd "C-c s") (kbd "ß"))
    (define-key key-translation-map (kbd "C-c o") (kbd "ö"))
 
@@ -65,16 +91,18 @@ file:~/.emacs
    (define-key key-translation-map (kbd "C-c u") (kbd "ü"))
 #+END_SRC
 
+#+RESULTS:
+: [252]
 
 * FRAME/startup
 #+BEGIN_SRC emacs-lisp :tangle yes
 (setq frame-title-format (list (format "%s %%S: %%j " (system-name))
                               '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 (find-file "~/Sync/emacs/settings.org")
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq inhibit-startup-screen t)
-(setq split-height-threshold nil)
-(setq split-width-threshold 0)
+;(setq split-height-threshold nil)
+(setq split-width-threshold 9999)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -82,7 +110,38 @@ file:~/.emacs
 (setq calendar-daylight-savings-starts '(3 11 year))
 (setq calendar-daylight-savings-ends: '(11 4 year))
 
+
+(defun test-emacs ()
+  "Test if emacs starts correctly."
+  (interactive)
+  (if (eq last-command this-command)
+      (save-buffers-kill-terminal)
+    (require 'async)
+    (async-start
+     (lambda () (shell-command-to-string
+                 "emacs --batch --eval \"
+(condition-case e
+    (progn
+      (load \\\"~/.emacs.d/init.el\\\")
+      (message \\\"-OK-\\\"))
+  (error
+   (message \\\"ERROR!\\\")
+   (signal (car e) (cdr e))))\""))
+     `(lambda (output)
+        (if (string-match "-OK-" output)
+            (when ,(called-interactively-p 'any)
+              (message "All is well"))
+          (switch-to-buffer-other-window "*startup error*")
+          (delete-region (point-min) (point-max))
+          (insert output)
+          (search-backward "ERROR!"))))))
+
+
 #+END_SRC
+
+#+RESULTS:
+: test-emacs
+
 * text selection
 #+BEGIN_SRC emacs-lisp :tangle yes
    (setq org-support-shift-select (quote always))
@@ -166,34 +225,54 @@ file:~/.emacs
 : ((emacs-lisp . t) (css . t))
 
 * templates
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-   (add-to-list 'org-structure-template-alist '
-                ("r" "- [ ] downloaded\n- [ ] added to bibtex file\n- [ ] read\n- [ ] notes"))
-
-   (add-to-list 'org-structure-template-alist '
-                ("736" "- [ ] downloaded\n- [ ] added to bibtex file\n-[ ] writing prompt\n- [ ] read\n- [ ] notes\n- [ ] post reflection\n- [ ] respond to 3 posts"))
-
-   (add-to-list 'org-structure-template-alist '
-                ("b" "[/]"))
-
-   (add-to-list 'org-structure-template-alist '
-                ("m"  "**** SHOT\nSCRIPT:\nSOUND:\nIMAGE:\n"))
-
-
-   (add-to-list 'org-structure-template-alist '
-                ("s"  "#+BEGIN_SRC emacs-lisp :tangle yes\n\n?\n\n#+END_SRC"))
    (add-to-list 'org-structure-template-alist '
                 ("x"  "#+BEGIN_SRC xml \n\n?\n\n#+END_SRC"))
+:PROPERTIES:
 
-   (add-to-list 'org-structure-template-alist '
-                ("xc"  "<!-- ? -->"))
+:END:
+#+BEGIN_SRC emacs-lisp :tangle yes
 
-   (add-to-list 'org-structure-template-alist (list "p" (concat ":PROPERTIES:\n" "?\n" ":END:"))) 
+	 (add-to-list 'org-structure-template-alist '
+		      ("r" "- [ ] downloaded\n- [ ] added to bibtex file\n- [ ] read\n- [ ] notes"))
+
+	 (add-to-list 'org-structure-template-alist '
+		      ("s"  "#+BEGIN_SRC emacs-lisp :tangle yes\n\n?\n\n#+END_SRC"))
+
+	 (add-to-list 'org-structure-template-alist '
+		      ("xc"  "<!-- ? -->"))
+	 (add-to-list 'org-structure-template-alist (list "p" (concat ":PROPERTIES:\n" "?\n" ":END:"))) 
+
+      (add-to-list 'org-structure-template-alist ' ("c"    
+"#+BEGIN: clocktable :scope agenda :tags \"-ourhome-break\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t \n
+#+END:
+
+#+BEGIN: clocktable :scope agenda :tags \"ourhome\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t
+#+END:\n
+
+#+BEGIN: clocktable :scope agenda :tags \"break\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t\n
+#+END:"))
+
+
+
+	 (add-to-list 'org-structure-template-alist '
+		      ("j"  
+":PROPERTIES:
+:LOCATION:
+:START:
+:DURATION:
+:END:
+
+
+
+   "))
+
+
 #+END_SRC
 
 #+RESULTS:
-| m | **** SHOT |
+| c | #+BEGIN: clocktable :scope agenda :tags "-ourhome-break" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t |
+
+
 
 
 * display
@@ -221,49 +300,11 @@ file:~/.emacs
 #+BEGIN_SRC emacs-lisp :tangle yes
 
 (setq bookmark-default-file "~/Sync/emacs/bookmarks")
-
+(setq bookmark-save-flag 1)
 #+END_SRC
 
 #+RESULTS:
-: ~/Sync/emacs/bookmarks
-
-* openwith
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package openwith
-  :config (progn
-            (when (require 'openwith nil 'noerror)
-              (setq openwith-associations
-                    (list
-                     ;; (list (openwith-make-extension-regexp
-                     ;;        '("mpg" "mpeg" "mp3" "mp4"
-                     ;;          "avi" "wmv" "wav" "mov" "flv"
-                     ;;          "ogm" "ogg" "mkv"))
-                     ;;       "audacious"
-                     ;;       '(file))
-                     ;; (list (openwith-make-extension-regexp
-                     ;;        '("xbm" "pbm" "pgm" "ppm" "pnm"
-                     ;;          "png" "bmp" "tif" "jpeg" "jpg"))
-                     ;;       "gpicview"
-                     ;;       '(file))
-                    ;; (list (openwith-make-extension-regexp
-                      ;;      '("pdf"))
-                        ;;   "zathura"
-                          ;; '(file))
-                     (list (openwith-make-extension-regexp
-                            '("doc" "docx"))
-                           "wps"
-                           '(file))
-                     ))
-              (openwith-mode 1)))
-:ensure t)
-
-#+END_SRC
-
-#+RESULTS:
-: t
-
-   (require 'openwith)
-   (openwith-mode t)
+: 1
 
 * navigating files
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -328,7 +369,6 @@ file:~/.emacs
 
 # * Emacs functionality
 
-
 * EDITING
 
 ** text editing
@@ -385,7 +425,7 @@ file:~/.emacs
      (add-hook 'org-mode-hook 
 	       (lambda () (org-bullets-mode 1)))
      (setq org-bullets-bullet-list 
-           (quote ("◉""〉""⚬" "»" "⏵" "⊹"  "⯮" "⊸" "∞" "⛯"   ))))
+           (quote ("◉""〉""⚬" "»" "✧"   ))))
    (setq org-list-demote-modify-bullet
          '(("+" . "-") ("-" . "+") ))
    (setq org-list-allow-alphabetical t)
@@ -438,102 +478,103 @@ file:~/.emacs
 
 *** custom-set-faces
 
-  
-
-    '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 230 :width normal :family "ubuntu mono"))))                    
-  '(org-level-1 ((t (:inherit nil :foreground "gray"  :height 1.5 :family "futura"))))
-    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 1.3))))
-    '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 1.2))))
-    '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 1.0))))
-    '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
-    '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
-
-
-
-
-     
+   
 Iosevka Term SS09
+
+
+'(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :family "iosevka term ss09"))))                    
+
+
+'(org-level-1 ((t (:inherit variable-pitch  :foreground "gray"  :height 0.952))))
+'(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.90))))
+'(org-level-3 ((t (:inherit variable-pitch :foreground "gray" :height 0.9))))
+'(org-level-4 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.9))))
+'(org-level-5 ((t (:inherit variable-pitch :foreground "gray"))))
+'(org-level-6 ((t (:inherit variable-pitch :foreground "light goldenrod"))))
+
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-    (custom-set-faces 
-  '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :family "iosevka term ss09"))))                    
-  '(org-level-1 ((t (:inherit nil :foreground "gray"  :height 1.0 :family "futura"))))
-    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.95))))
-    '(org-level-3 ((t (:inherit variable-pitch :foreground "skyblue1" :height 0.90))))
-    '(org-level-4 ((t (:inherit variable-pitch :foreground "darkolivegreen1" :height 0.90))))
-    '(org-level-5 ((t (:inherit variable-pitch :foreground "MediumOrchid1"))))
-    '(org-level-6 ((t (:inherit variable-pitch :foreground "tomato"))))
+	    (custom-set-faces 
+
+
+      '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 200 :width normal :family "ubuntu mono"))))   
+       '(org-level-1 ((t (:inherit variable-pitch  :foreground "gray"  :height 1.1))))
+	 '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 1.0))))
+	 '(org-level-3 ((t (:inherit variable-pitch :foreground "gray" :height 1.0))))
+	 '(org-level-4 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 1.0))))
+	 '(org-level-5 ((t (:inherit variable-pitch :foreground "gray"))))
+	 '(org-level-6 ((t (:inherit variable-pitch :foreground "light goldenrod"))))
 
 
 
 
+   '(fringe ((t (:background "#242728"))))
+	  ; '(highlight ((t (:weight bold))))
+	    '(lazy-highlight ((t (:inherit highlight :background "black"))))
+	    '(link ((t (:foreground "#06d8ff" :underline t :weight normal))))
+	    '(helm-selection ((t (:inherit bold :background "black" :foreground "magenta" :underline t))))
+	'(custom-face-tag ((t (:height 1.2 :weight regular :inherit variable-pitch))))
+	    '(custom-variable-tag ((t (:inherit variable-pitch :foreground "gold" :height 1.1))))
+	    '(org-agenda-calendar-event ((t (:foreground "light gray"))))
+	    '(org-agenda-clocking ((t (:box (:line-width 2 :color "magenta" :style released-button)))))
+	    '(org-agenda-current-time ((t (:foreground "OliveDrab3"))))
+	    '(org-agenda-date ((t (:background "light steel blue" :foreground "midnight blue" :inverse-video nil :box (:line-width 20 :color "#242728") :overline nil :slant normal :weight normal :height 1.2))))
 
- '(fringe ((t (:background "#242728"))))
-  ; '(highlight ((t (:weight bold))))
-    '(lazy-highlight ((t (:inherit highlight :background "black"))))
-    '(link ((t (:foreground "#06d8ff" :underline t :weight normal))))
-    '(helm-selection ((t (:inherit bold :background "black" :foreground "magenta" :underline t))))
-'(custom-face-tag ((t (:height 1.2 :weight regular :inherit variable-pitch))))
-    '(custom-variable-tag ((t (:inherit variable-pitch :foreground "gold" :height 1.1))))
-    '(org-agenda-calendar-event ((t (:foreground "light gray"))))
-    '(org-agenda-clocking ((t (:box (:line-width 2 :color "magenta" :style released-button)))))
-    '(org-agenda-current-time ((t (:foreground "OliveDrab3"))))
-    '(org-agenda-date ((t (:background "light steel blue" :foreground "midnight blue" :inverse-video nil :box (:line-width 20 :color "#242728") :overline nil :slant normal :weight normal :height 1.2))))
+	'(org-agenda-done ((t
+	  (:slant italic :foreground "dark orange"))))
 
-'(org-agenda-done ((t
-  (:slant italic :foreground "dark orange"))))
+	'(org-mode-line-clock ((t
+	  (:background "gold" :height .75 :foreground "black"))) )
 
-'(org-mode-line-clock ((t
-  (:background "gold" :height .75 :foreground "black"))) )
-
-    '(mode-line ((t (:background "darkgray" :height 120 :foreground "black" :inverse-video nil :box (:line-width 1 :color "#35393b" :style unspecified)))))
-
-
-
-    '(org-agenda-date-today ((t (:inherit org-agenda-date :background "#242728" :foreground "gold" :inverse-video t :overline nil :weight bold))))
-    '(org-agenda-date-weekend ((((class color) (min-colors 257)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "deep pink" :weight unspecified :underline t :overline nil :box (:line-width 20 :color "#242728"))) (((class color) (min-colors 89)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "red" :weight unspecified :underline t :overline nil :box 1))))
-    '(org-archived ((t (:foreground "saddle brown" :weight normal))))
-    '(org-block ((t (:foreground "gainsboro"))))
-    '(org-clock-overlay ((t (:background "dim gray"))))
-    '(org-date ((t (:foreground "steel blue" :underline t))))
-    '(org-default ((t (:inherit default))))
-    '(org-done ((t (:foreground "dark gray" :weight normal))))
-    '(org-ellipsis ((t (:foreground "#6A6D70" :height 0.5))))
+	    '(mode-line ((t (:background "darkgray" :height 120 :foreground "black" :inverse-video nil :box (:line-width 1 :color "#35393b" :style unspecified)))))
 
 
 
- ;   '(org-habit-alert-future-face ((t (:background "yellow" :foreground "black"))))
-  '(org-habit-overdue-face ((t (:background "#F20055" :foreground "white"))))
- '(org-habit-ready-face ((t (:background "#63de5d" :foreground "white"))))
-
-  '(org-habit-overdue-future-face ((t (:background "#8b668b" :foreground "white"))))
-'(org-habit-clear-face ((t
-  (:foreground "white" :background "DodgerBlue1"))))
-
-    '(org-inlinetask ((t (:foreground "dodger blue"))))
-    '(org-link ((t (:foreground "LightSteelBlue3" :underline t :family "nova mono"))))
-
-    '(org-list-dt ((t (:foreground "black" :overline "thistle" :background "thistle" :underline nil :box (:line-width 1 :color "thistle")))))
+	    '(org-agenda-date-today ((t (:inherit org-agenda-date :background "#242728" :foreground "gold" :inverse-video t :overline nil :weight bold))))
+	    '(org-agenda-date-weekend ((((class color) (min-colors 257)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "deep pink" :weight unspecified :underline t :overline nil :box (:line-width 20 :color "#242728"))) (((class color) (min-colors 89)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "red" :weight unspecified :underline t :overline nil :box 1))))
+	    '(org-archived ((t (:foreground "saddle brown" :weight normal))))
+	    '(org-block ((t (:foreground "gainsboro"))))
+	    '(org-clock-overlay ((t (:background "dim gray"))))
+	    '(org-date ((t (:foreground "steel blue" :underline t))))
+	    '(org-default ((t (:inherit default))))
+	    '(org-done ((t (:foreground "dark gray" :weight normal))))
+	    '(org-ellipsis ((t (:foreground "#6A6D70" :height 0.5))))
 
 
 
+	 ;   '(org-habit-alert-future-face ((t (:background "yellow" :foreground "black"))))
+	  '(org-habit-overdue-face ((t (:background "#F20055" :foreground "white"))))
+	 '(org-habit-ready-face ((t (:background "#63de5d" :foreground "white"))))
 
-    '(org-priority ((t (:foreground "gold" :weight bold))))
-    '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
-    '(org-scheduled ((t (:foreground "DarkOliveGreen3"))))
-    '(org-scheduled-previously ((t (:foreground "seashell1" :weight normal))))
-    '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
-    '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
-    '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
-    '(org-todo ((t ( :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
-    '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
-    '(org-warning ((t (:foreground "goldenrod1" :underline nil :weight normal))))
-    '(secondary-selection ((t (:background "gray14" :foreground "pale green"))))
-    '(variable-pitch ((t (:family "futura" )))))
+	  '(org-habit-overdue-future-face ((t (:background "#8b668b" :foreground "white"))))
+	'(org-habit-clear-face ((t
+	  (:foreground "white" :background "DodgerBlue1"))))
 
-'(nxml-prolog-literal-content-face ((t
-  (:foreground "green" ))))
+	    '(org-inlinetask ((t (:foreground "dodger blue"))))
+	    '(org-link ((t (:foreground "LightSteelBlue3"  :underline t ))))
+
+	    '(org-list-dt ((t (:foreground "black" :overline "thistle" :background "thistle" :underline nil :box (:line-width 1 :color "thistle")))))
+
+	'(org-table ((t :foreground "dim gray" )))
+	;'(org-meta-line ((t :foreground "dim gray" :background "gainsboro")))
+
+
+	    '(org-priority ((t (:foreground "gold" :weight bold))))
+	    '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
+	    '(org-scheduled ((t (:foreground "DarkOliveGreen3"))))
+	    '(org-scheduled-previously ((t (:foreground "seashell1" :weight normal))))
+	    '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
+	    '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
+	    '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
+	    '(org-todo ((t ( :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
+	    '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
+	    '(org-warning ((t (:foreground "goldenrod1" :underline nil :weight normal))))
+	    '(secondary-selection ((t (:background "gray14" :foreground "pale green"))))
+	    '(variable-pitch ((t (:family "futura" )))))
+
+	'(nxml-prolog-literal-content-face ((t
+	  (:foreground "green" ))))
 
 
 #+END_SRC
@@ -733,7 +774,9 @@ M-x describe-current-coding-system
 * web
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq browse-url-browser-function 'browse-url-default-browser)
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "chromium-browser")
+
 (defun my-set-eww-buffer-title ()
       (let* ((title (plist-get eww-data :title))
       (url   (plist-get eww-data :url))
@@ -767,6 +810,7 @@ M-x describe-current-coding-system
 #+END_SRC
 
 #+RESULTS:
+: shr-fill-line
 
 * mu4e
 
@@ -790,7 +834,7 @@ M-x describe-current-coding-system
 (visual-fill-column-mode 1))
 
 (add-hook 'mu4e-view-mode-hook #'vfcm-on)
-
+ (setq visual-fill-column-width 100)
 (defun no-auto-fill ()
   "Turn off auto-fill-mode."
   (auto-fill-mode -1))
@@ -805,7 +849,7 @@ M-x describe-current-coding-system
 ** message view
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq mu4e-attachment-dir "~/Sync/Zettelkasten/QCSpring2018/misc")
+(setq mu4e-attachment-dir "/home/betsy/Sync/Spring 2019/")
 
 (setq shr-color-visible-luminance-min 50) 
 (setq shr-color-visible-distance-min 5)
@@ -813,6 +857,14 @@ M-x describe-current-coding-system
 (setq message-yank-prefix ""
       message-yank-empty-prefix ""
       message-yank-cited-prefix "")
+
+(setq w3m-default-desplay-inline-images t)
+  (defun mu4e-action-view-in-w3m ()
+    "View the body of the message in emacs w3m."
+    (interactive)
+    (w3m-browse-url (concat "file://"
+        (mu4e~write-body-to-html (mu4e-message-at-point t)))))
+
 
 ;; customize the reply-quote-string
 (setq message-citation-line-format "\n\nOn %a %d %b %Y at %R, %f wrote:\n")
@@ -830,20 +882,12 @@ M-x describe-current-coding-system
 
 ** headers view
 
+
+
 #+BEGIN_SRC emacs-lisp :tangle yes
    (setq org-mu4e-link-query-in-headers-mode nil)
    ;(setq mu4e-update-interval 60)
    ;(setq mu4e-index-update-in-background t)
-   (setq mu4e-headers-fields
-         '( (:human-date    .  15)    ;; alternatively, use :human-date
-            (:flags         .   5)
-            (:from          .  20)
-;            (:thread-subject       . 90 )
-            (:thread-subject       . 120 )
-
-            )) 
-   ;; alternatively, use :thre
-      ;; ;;  ;; ad-subject
    (setq mu4e-view-prefer-html t)
    (setq mu4e-headers-skip-duplicates t)
    (setq mu4e-headers-auto-update t)
@@ -910,7 +954,6 @@ M-x describe-current-coding-system
 #+RESULTS:
 : United States
 
-
 * Testing pond
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -971,6 +1014,48 @@ M-x describe-current-coding-system
 (setq debug-on-error nil)
 
 #+END_SRC
+* openwith
+#+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package openwith
+    :config (progn
+              (when (require 'openwith nil 'noerror)
+                (setq openwith-associations
+                      (list
+     ;                   (list (openwith-make-extension-regexp
+    ;                           '("mpg" "mpeg" "mp3" "mp4"
+      ;                           "avi" "wmv" "wav" "mov" "flv"
+       ;                          "ogm" "ogg" "mkv"))
+        ;                      "audacious"
+         ;                     '(file))
+    ;                    (list (openwith-make-extension-regexp
+     ;                          '("xbm" "pbm" "pgm" "ppm" "pnm"
+      ;                           "png" "bmp" "tif" "jpeg" "jpg"))
+       ;                       "gpicview"
+        ;                      '(file))
+;                       (list (openwith-make-extension-regexp
+ ;                             '("pdf"))
+  ;                           "zathura"
+   ;                          '(file))
+                       (list (openwith-make-extension-regexp
+                              '("doc" "docx"))
+                             "libreoffice"
+                             '(file))
+
+
+                       (list (openwith-make-extension-regexp
+                              '("html"))
+                             "chromium-browser"
+                             '(file))
+
+                       ))
+                (openwith-mode 1)))
+   :ensure t)
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * REFERENCE/STUDY
 ** org-ref
 
@@ -1317,7 +1402,6 @@ M-x describe-current-coding-system
 
 
 
-
 * ORG
  #+BEGIN_SRC emacs-lisp :tangle yes
     (require 'cl) 
@@ -1361,6 +1445,24 @@ M-x describe-current-coding-system
 
  #+RESULTS:
  : 1
+
+** org-depend
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(defun mm/org-insert-trigger ()
+  "Automatically insert chain-find-next trigger when entry becomes NEXT"
+  (cond ((equal org-state "NEXT")
+         (unless org-depend-doing-chain-find-next
+           (org-set-property "TRIGGER" "chain-find-next(NEXT,from-top,todo-only,priority-up,effort-down)")))
+        ((not (member org-state org-done-keywords))
+         (org-delete-property "TRIGGER"))))
+
+(add-hook 'org-after-todo-state-change-hook 'mm/org-insert-trigger)
+
+#+END_SRC
+
+#+RESULTS:
+| mm/org-insert-trigger | org-clock-out-if-current |
 
 ** org-agenda
 *** agenda files                              
@@ -1428,7 +1530,7 @@ M-x describe-current-coding-system
     (setq org-agenda-start-with-clockreport-mode t)
     (setq org-agenda-span (quote 4))
     (setq org-agenda-jump-prefer-future t)
-    (setq org-agenda-window-setup (quote other-frame))
+    (setq org-agenda-window-setup (quote only-frame))
     (setq org-agenda-with-colors t)
     (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
     (setq org-agenda-start-on-weekday nil)
@@ -1494,8 +1596,7 @@ M-x describe-current-coding-system
 
     (setq org-todo-keyword-faces '(("습관" :foreground "dodger blue")
                                    ("PROJECT" :foreground "chartreuse" :weight bold  )
-                                   ("NEXT" :foreground "blue2" :background "white" :weight bold :family "fira mono")
-
+                                   ("NEXT" :foreground "dodgerblue"   :family "fira mono")
                                    ("◔" :foreground "magenta1")
                                    ("?" :foreground "yellow") 
                                    ("✓" :foreground "chocolate" )
@@ -1506,13 +1607,13 @@ M-x describe-current-coding-system
  #+END_SRC
 
  #+RESULTS:
- | 습관    | :foreground | dodger blue |             |       |         |      |         |           |
- | PROJECT | :foreground | chartreuse  | :weight     | bold  |         |      |         |           |
- | NEXT    | :foreground | blue2       | :background | white | :weight | bold | :family | fira mono |
- | ◔       | :foreground | magenta1    |             |       |         |      |         |           |
- | ?       | :foreground | yellow      |             |       |         |      |         |           |
- | ✓       | :foreground | chocolate   |             |       |         |      |         |           |
- | ☓       | :foreground | gainsboro   |             |       |         |      |         |           |
+ | 습관    | :foreground | dodger blue |         |           |
+ | PROJECT | :foreground | chartreuse  | :weight | bold      |
+ | NEXT    | :foreground | dodgerblue  | :family | fira mono |
+ | ◔       | :foreground | magenta1    |         |           |
+ | ?       | :foreground | yellow      |         |           |
+ | ✓       | :foreground | chocolate   |         |           |
+ | ☓       | :foreground | gainsboro   |         |           |
 
  # #+RESULTS:
  # | 습관    | :foreground | dodger blue |             |       |         |      |         |           |
@@ -1608,7 +1709,7 @@ M-x describe-current-coding-system
 
  (setq org-modules '(org-bbdb
                       org-gnus
-                    
+                    org-depend
                       org-info
                       org-jsinfo
                       org-habit
@@ -1635,7 +1736,7 @@ M-x describe-current-coding-system
 ** Org-capture
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (setq org-capture-templates '(("t" "todo" entry (file "~/Sync/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n" :prepend t)
+   (setq org-capture-templates '(("t" "todo" entry (file "~/Sync/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n\n" :prepend t)
                                  ("j" "journal" entry (file+datetree "~/Sync/Zettelkasten/journal.org") "** %<%H:%M> \n\n%?\n\n" :kill-buffer nil ) 
                                  ("c" "calendar" entry (file "~/Sync/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
 
@@ -1687,14 +1788,14 @@ M-x describe-current-coding-system
 ** org-archive
  #+BEGIN_SRC emacs-lisp :tangle yes
 
-(setq org-archive-location "~/Sync/Zettelkasten/journal.org::datetree/")
-;(setq org-archive-location "~/Sync/Zettelkasten/journal.org::datetree/* Finished tasks")
+;(setq org-archive-location "~/Sync/Zettelkasten/journal.org::datetree/")
+(setq org-archive-location "~/Sync/Zettelkasten/journal.org::datetree/* Finished tasks")
    
 
  #+END_SRC
 
  #+RESULTS:
- : ~/Sync/Zettelkasten/journal.org::datetree/
+ : ~/Sync/Zettelkasten/journal.org::datetree/* Finished tasks
 
 ** org-mode structure templates
 #+BEGIN_SRC emacs-lisp :tangle yes
