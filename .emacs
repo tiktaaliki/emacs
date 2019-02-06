@@ -1,6 +1,7 @@
 (package-initialize)
 
 (require 'package)
+(require 'org-install)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
@@ -15,6 +16,13 @@
 (setq use-package-always-ensure t)
 
 (eval-when-compile (require 'use-package))
+    (use-package org-bullets
+      :init
+      (add-hook 'org-mode-hook 
+  	      (lambda () (org-bullets-mode 1)))
+      (setq org-bullets-bullet-list 
+            (quote ("◉""〉""⚬" "»" "✧"   ))))
+
 (org-babel-load-file "~/Sync/emacs/settings.org")
 (org-babel-load-file "~/Sync/emacs/pi.org")
 (custom-set-variables
