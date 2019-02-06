@@ -22,7 +22,7 @@
   	      (lambda () (org-bullets-mode 1)))
       (setq org-bullets-bullet-list 
             (quote ("◉""〉""⚬" "»" "✧"   ))))
-
+(setq org-ellipsis " ⬎ " )
 (org-babel-load-file "~/Sync/emacs/settings.org")
 (org-babel-load-file "~/Sync/emacs/pi.org")
 (custom-set-variables
