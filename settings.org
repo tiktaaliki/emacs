@@ -350,7 +350,7 @@ Iosevka Term SS09
        (setq org-clock-into-drawer t)
        ;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
 
-    ;(setq org-clock-in-switch-to-state "◔")
+    ;(setq org-clock-in-switch-to-state "--")
 
 
        ; C-u C-c C-x C-i d
@@ -1674,7 +1674,7 @@ CLOCK: [2019-02-06 Wed 14:34]--[2019-02-06 Wed 14:36] =>  0:02
 ;(setq org-agenda-custom-commands '(("n" "Agenda and all TODOs" ((agenda "")     (alltodo ""))))
 
                 (setq org-agenda-custom-commands 
-                      '(("s" todo "NEXT|◔")
+                      '(("s" todo "NEXT|--")
                         ("d" "Undated tasks " alltodo ""              ((org-agenda-todo-ignore-with-date t))
                  )))
 
@@ -1686,16 +1686,16 @@ CLOCK: [2019-02-06 Wed 14:34]--[2019-02-06 Wed 14:36] =>  0:02
     #+BEGIN_SRC emacs-lisp :tangle yes
 
 
-       (setq org-todo-keywords '((sequence  "TODO(t)" "NEXT(n)" "◔(s)" "|" "✓(d!)")
-                                 (sequence "습관(h)" "PROJECT(p)" "?(w!)" "|" "☓(c!)")))
+       (setq org-todo-keywords '((sequence  "TODO(t)" "NEXT(n)" "--(s)" "|" "DONE(d!)")
+                                 (sequence "습관(h)" "PROJECT(p)" "?(w!)" "|" "x(c!)")))
 
        (setq org-todo-keyword-faces '(("습관" :foreground "dodger blue")
                                       ("PROJECT" :foreground "chartreuse" :weight bold  )
                                       ("NEXT" :foreground "dodgerblue"   :family "fira mono")
-                                      ("◔" :foreground "magenta1")
+                                      ("--" :foreground "magenta1")
                                       ("?" :foreground "yellow") 
-                                      ("✓" :foreground "chocolate" )
-                                      ("☓" :foreground "gainsboro")))
+                                      ("DONE" :foreground "chocolate" )
+                                      ("x" :foreground "gainsboro")))
 
 
        (setq org-enforce-todo-dependencies t)
@@ -1711,6 +1711,9 @@ CLOCK: [2019-02-06 Wed 14:34]--[2019-02-06 Wed 14:36] =>  0:02
    (add-hook 'org-after-todo-state-change-hook 'mm/org-insert-trigger)
 
     #+END_SRC
+
+    #+RESULTS:
+    | mm/org-insert-trigger | org-clock-out-if-current |
 
 
 
