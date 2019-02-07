@@ -66,9 +66,7 @@ Iosevka Term SS09
 
 
 
-'(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :family "iosevka term ss09"))))                    
-
-
+'(default ((t ( :height 150  :family "iosevka term ss09"))))                    
 
     '(org-level-1 ((t (:inherit variable-pitch  :foreground "gray"  :height 1.0))))
     '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 1.0))))
@@ -82,7 +80,7 @@ Iosevka Term SS09
 
    (custom-set-faces 
 
-    '(default ((t (:inherit nil :stipple nil :background "#242728" :foreground "bisque1" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 250 :width normal :family "ubuntu mono"))))   
+    '(default ((t ( :background "#242728" :foreground "bisque1"  :height 250  :family "ubuntu mono"))))   
     '(org-level-1 ((t (:inherit variable-pitch  :foreground "gray"  :height 0.952))))
     '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.90))))
     '(org-level-3 ((t (:inherit variable-pitch :foreground "gray" :height 0.9))))
@@ -338,7 +336,7 @@ Iosevka Term SS09
        (org-clock-persistence-insinuate)
        ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
        ;(setq org-clock-continuously t)
-       (setq org-clock-history-length 30)
+       (setq org-clock-history-length 302)
        ;; Resume clocking task on clock-in if the clock is open
        ;(setq org-clock-in-resume nil)
 
@@ -581,7 +579,8 @@ Iosevka Term SS09
          (rename-buffer result t)))
 
   (add-hook 'eww-after-render-hook 'my-set-eww-buffer-title)
-
+(add-hook 'eww-after-render-hook 'visual-fill-column-mode)
+(add-hook 'eww-after-render-hook 'visual-line-mode)
 
   (defun shr-html2text ()
     "Replacement for standard html2text using shr."
@@ -1686,29 +1685,30 @@ CLOCK: [2019-02-06 Wed 14:34]--[2019-02-06 Wed 14:36] =>  0:02
     #+BEGIN_SRC emacs-lisp :tangle yes
 
 
-       (setq org-todo-keywords '((sequence  "TODO(t)" "NEXT(n)" "--(s)" "|" "DONE(d!)")
-                                 (sequence "습관(h)" "PROJECT(p)" "?(w!)" "|" "x(c!)")))
+           (setq org-todo-keywords '((sequence  "TODO(t)" "NEXT(n)" "--(s)" "|" "DONE(d!)")
+                                     (sequence "습관(h)" "PROJECT(p)" "?(w!)" "|" "x(c!)")))
 
-       (setq org-todo-keyword-faces '(("습관" :foreground "dodger blue")
-                                      ("PROJECT" :foreground "chartreuse" :weight bold  )
-                                      ("NEXT" :foreground "dodgerblue"   :family "fira mono")
-                                      ("--" :foreground "magenta1")
-                                      ("?" :foreground "yellow") 
-                                      ("DONE" :foreground "chocolate" )
-                                      ("x" :foreground "gainsboro")))
+           (setq org-todo-keyword-faces '(("습관" :foreground "dodger blue")
+				            ("TODO" :foreground "#ccccff")
+                                          ("PROJECT" :foreground "chartreuse" :weight bold  )
+                                          ("NEXT" :foreground "red" )
+                                          ("--" :foreground "magenta1")
+                                          ("?" :foreground "yellow") 
+                                          ("DONE" :foreground "dim gray" )
+                                          ("x" :foreground "dim gray")))
 
 
-       (setq org-enforce-todo-dependencies t)
+           (setq org-enforce-todo-dependencies t)
 
-   (defun mm/org-insert-trigger ()
-     "Automatically insert chain-find-next trigger when entry becomes NEXT"
-     (cond ((equal org-state "NEXT")
-            (unless org-depend-doing-chain-find-next
-              (org-set-property "TRIGGER" "chain-find-next(NEXT,from-top,todo-only,priority-up,effort-down)")))
-           ((not (member org-state org-done-keywords))
-            (org-delete-property "TRIGGER"))))
+       (defun mm/org-insert-trigger ()
+         "Automatically insert chain-find-next trigger when entry becomes NEXT"
+         (cond ((equal org-state "NEXT")
+                (unless org-depend-doing-chain-find-next
+                  (org-set-property "TRIGGER" "chain-find-next(NEXT,from-top,todo-only,priority-up,effort-down)")))
+               ((not (member org-state org-done-keywords))
+                (org-delete-property "TRIGGER"))))
 
-   (add-hook 'org-after-todo-state-change-hook 'mm/org-insert-trigger)
+       (add-hook 'org-after-todo-state-change-hook 'mm/org-insert-trigger)
 
     #+END_SRC
 
