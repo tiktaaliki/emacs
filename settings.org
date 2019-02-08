@@ -1,167 +1,651 @@
-
-
 file:~/.emacs
 
-[[*custom-set-faces][custom-set-faces]]
-
+* usability
 #+BEGIN_SRC emacs-lisp :tangle yes
-    (setq mu4e-headers-fields
-	  '( (:human-date    .  15)    ;; alternatively, use :human-date
-	     (:flags         .   5)
-	     (:from          .  20)
-;	     (:thread-subject       . 70 )
-             (:thread-subject       . 120 )
-	     )) 
+    (setq initial-major-mode 'org-mode)
+    (setq org-support-shift-select (quote always))
+    (delete-selection-mode) ;allows to delete selected text by typing
+    (fset 'yes-or-no-p 'y-or-n-p)
+      
 
 
-#+END_SRC
-
-* better defaults
-#+BEGIN_SRC emacs-lisp :tangle yes
-     (setq initial-major-mode 'org-mode)
-    (setq visible-bell nil)
-      (setq org-support-shift-select (quote always))
-      (delete-selection-mode) ;allows to delete selected text by typing
-
-      (fset 'yes-or-no-p 'y-or-n-p)
-      (use-package org-bullets
-        :init
-        (add-hook 'org-mode-hook 
-                (lambda () (org-bullets-mode 1)))
-        (setq org-bullets-bullet-list 
-              (quote ("◉""〉""⚬" "»" "✧"   ))))
-   (setq sentence-end-double-space nil)
-
-      (use-package smartparens
+	(use-package smartparens
         :init
         (show-smartparens-global-mode 1))
-      (smartparens-global-mode 1)
-      (setq show-paren-style 'expression)
+	(smartparens-global-mode 1)
+	(setq show-paren-style 'expression)
 
 
-      (setq blink-matching-paren-dont-ignore-comments nil)
+(setq blink-matching-paren-dont-ignore-comments nil)
 
-   (set-fringe-mode '(50 . 50))
-    (setq org-startup-indented t)
-    (setq org-hide-emphasis-markers t)
-    (setq org-hide-leading-stars t) 
-    (setq org-startup-with-inline-images t)
-    (setq org-startup-align-all-tables t)
-    (setq org-startup-folded t)
 
-#+END_SRC
-* themes
-#+BEGIN_SRC emacs-lisp :tangle yes
 
-   (use-package darkokai-theme
-      :ensure t
-      :config (load-theme 'darkokai t))
 
 
 #+END_SRC
-* custom-set-faces
-'(default ((t ( :height 150  :family "iosevka term ss09"))))                    
-
-    '(org-level-1 ((t (:inherit variable-pitch  :foreground "gray"  :height 1.0))))
-    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 1.0))))
-    '(org-level-3 ((t (:inherit variable-pitch :foreground "gray" :height 1.0))))
-    '(org-level-4 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 1.0))))
-    '(org-level-5 ((t (:inherit variable-pitch :foreground "gray"))))
-    '(org-level-6 ((t (:inherit variable-pitch :foreground "light goldenrod"))))
-
-
+* convenience
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (custom-set-faces 
+(setq visible-bell nil)
+(setq org-startup-indented t)
+(setq org-hide-emphasis-markers t)
+(setq org-hide-leading-stars t) 
+(setq org-startup-with-inline-images t)
+(setq org-startup-align-all-tables t)
+(setq org-startup-folded t)
+(setq org-ellipsis " ⬎ " )
+(use-package org-bullets
+        :init 
+        (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))) (setq org-bullets-bullet-list (quote ("◉""»""⚬"  "✧""▸"   ))))
+	
 
-    '(default ((t ( :background "#242728" :foreground "bisque1"  :height 225  :family "ubuntu mono"))))   
-    '(org-level-1 ((t (:inherit variable-pitch  :foreground "gray"  :height 0.952))))
-    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.90))))
-    '(org-level-3 ((t (:inherit variable-pitch :foreground "gray" :height 0.9))))
-    '(org-level-4 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.9))))
-    '(org-level-5 ((t (:inherit variable-pitch :foreground "gray"))))
-    '(org-level-6 ((t (:inherit variable-pitch :foreground "light goldenrod"))))
+(setq sentence-end-double-space nil)
+#+END_SRC
 
+#+RESULTS:
 
-    '(variable-pitch ((t (:family "exo" )))))
+* Key bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+   (global-unset-key (kbd "C-z"))     
+   (global-unset-key (kbd "M-c"))
 
-    '(fringe ((t (:background "#242728"))))
-					   ; '(highlight ((t (:weight bold))))
-    '(lazy-highlight ((t (:inherit highlight :background "black"))))
-    '(link ((t (:foreground "#06d8ff" :underline t :weight normal))))
-    '(helm-selection ((t (:inherit bold :background "black" :foreground "magenta" :underline t))))
-    '(custom-face-tag ((t (:height 1.2 :weight regular :inherit variable-pitch))))
-    '(custom-variable-tag ((t (:inherit variable-pitch :foreground "gold" :height 1.1))))
-    '(org-agenda-calendar-event ((t (:foreground "light gray"))))
-    '(org-agenda-clocking ((t (:box (:line-width 2 :color "magenta" :style released-button)))))
-    '(org-agenda-current-time ((t (:foreground "OliveDrab3"))))
-    '(org-agenda-date ((t (:background "light steel blue" :foreground "midnight blue" :inverse-video nil :box (:line-width 20 :color "#242728") :overline nil :slant normal :weight normal :height 1.2))))
-
-    '(org-agenda-done ((t(:slant italic :foreground "dark orange"))))
-
-    '(org-mode-line-clock ((t(:background "gold" :height .75 :foreground "black"))) )
-
-    '(mode-line ((t (:background "darkgray" :family "futura" :height .75   :foreground "black" :inverse-video nil :box (:line-width 1 :color "#35393b" :style unspecified)))))
-
- 
-
-    '(org-agenda-date-today ((t (:inherit org-agenda-date :background "#242728" :foreground "gold" :inverse-video t :overline nil :weight bold))))
-    '(org-agenda-date-weekend ((((class color) (min-colors 257)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "deep pink" :weight unspecified :underline t :overline nil :box (:line-width 20 :color "#242728"))) (((class color) (min-colors 89)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "red" :weight unspecified :underline t :overline nil :box 1))))
-    '(org-archived ((t (:foreground "saddle brown" :weight normal))))
-    '(org-block ((t (:foreground "gainsboro"))))
-    '(org-clock-overlay ((t (:background "dim gray"))))
-    '(org-date ((t (:foreground "steel blue" :underline t))))
-    '(org-default ((t (:inherit default))))
-    '(org-done ((t (:foreground "dark gray" :weight normal))))
-    '(org-ellipsis ((t (:foreground "gray"  :height 1.0))))
-
-
-
-					   ;   '(org-habit-alert-future-face ((t (:background "yellow" :foreground "black"))))
-    '(org-habit-overdue-face ((t (:background "#F20055" :foreground "white"))))
-    '(org-habit-ready-face ((t (:background "#63de5d" :foreground "white"))))
-
-    '(org-habit-overdue-future-face ((t (:background "#8b668b" :foreground "white"))))
-    '(org-habit-clear-face ((t
-			     (:foreground "white" :background "DodgerBlue1"))))
-
-    '(org-inlinetask ((t (:foreground "dodger blue"))))
-    '(org-link ((t (:foreground "LightSteelBlue3"  :underline t ))))
-
-    '(org-list-dt ((t (:foreground "black" :overline "thistle" :background "thistle" :underline nil :box (:line-width 1 :color "thistle")))))
-
-    '(org-table ((t :foreground "dim gray" )))
-					   ;'(org-meta-line ((t :foreground "dim gray" :background "gainsboro")))
+   (bind-keys ("C-+"   . text-scale-increase)
+	      ("C--"   . text-scale-decrease)
+	      ("C-c l" . org-store-link)
+	      ("C-."   . org-todo)
+	      ("C-x /" . shrink-window-horizontally)
+	      ("C-x ." . org-archive-subtree-default)
+	      ("C-c n" . org-schedule)
+	      ("M-="   . count-words)
+	      ("M-x"   . helm-M-x)
+	      ("M-_" . insert-pair)
+	      ("M-*" . insert-pair)
+	      ("M-\/" . insert-pair)
+	      ("C-c b" . list-bookmarks)
+	      ("C-c p" . bh/punch-in )
+	      ("C-<kp-6>" . xah-select-block)
+	      ("C-x j" . helm-org-in-buffer-headings)
+	      ("C-c a" . helm-org-agenda-files-headings)
+	      ([f1] . org-capture)
+	      ([f2] . org-clock-in)
+	      ([f3] . helm-buffers-list)           
+	      ([f4] . org-refile)
+	      ([f5] . helm-projectile)
+	      ([f6] . helm-bibtex-with-local-bibliography)
+	      ([f7] . org-agenda)
+	      ([f8] . deft)
+	      ([f9] . org-tree-to-indirect-buffer))
 
 
-    '(org-priority ((t (:foreground "gold" :weight bold))))
-    '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
-    '(org-scheduled ((t (:foreground "DarkOliveGreen3"))))
-    '(org-scheduled-previously ((t (:foreground "seashell1" :weight normal))))
-    '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
-    '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
-    '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
-    '(org-todo ((t ( :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
-    '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
-    '(org-warning ((t (:foreground "goldenrod1" :underline nil :weight normal))))
-    '(secondary-selection ((t (:background "gray14" :foreground "pale green"))))
+   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+   (define-key key-translation-map (kbd "C--") (kbd "–"))
 
+   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
+   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+   (define-key key-translation-map (kbd "C-c s") (kbd "ß"))
+   (define-key key-translation-map (kbd "C-c o") (kbd "ö"))
 
-   '(nxml-prolog-literal-content-face ((t
-					(:foreground "green" ))))
+   (define-key key-translation-map (kbd "C-c a") (kbd "ä"))
+   (define-key key-translation-map (kbd "C-c u") (kbd "ü"))
+
+#+END_SRC
+
+#+RESULTS:
+: [252]
+
+* file navigating
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (setq bookmark-default-file "~/Sync/emacs/bookmarks")
+   (setq bookmark-save-flag 1)
+
+   (use-package ido)
+   (ido-mode t)
+
+   (use-package deft
+     :ensure t)
+   (setq deft-directory "~/Sync/Zettelkasten/")
+   (setq deft-default-extension "org")
+   (setq deft-time-format " %b-%Y %H:%M")
+   (setq deft-use-filename-as-title t)
+   (setq deft-new-file-format "%Y%b%d")
+   (setq deft-text-mode 'org-mode)
+   (setq deft-file-naming-rules '((noslash . "-")
+				  (nospace . "-")
+				  (case-fn . downcase))) 
+   (setq deft-recursive t)
+   (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
+   (setq deft-auto-save-interval 1.0)
+   (add-hook 'after-init-hook 'deft)
+   (add-hook 'after-init-hook 'org-clock-persistence-insinuate)
+
+   (use-package helm
+     :config (helm-mode 1))
+    (use-package projectile)
+    (use-package helm-projectile)
+#+END_SRC
+
+* structure editing
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (setq org-special-ctrl-a/e t)
+(setq org-cycle-separator-lines 0)
+   ;this allows me to collapse a subtree when not on its headline
+   (setq org-cycle-emulate-tab 'white)
+    (defun xah-select-current-block ()
+      "Select the current block of text between blank lines.
+
+		URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
+		Version 2016-07-22"
+      (interactive)
+      (let (-p1)
+	(progn
+	  (if (re-search-backward "\n[ \t]*\n" nil "move")
+	      (progn (re-search-forward "\n[ \t]*\n")
+		     (setq -p1 (point)))
+	    (setq -p1 (point)))
+	  (re-search-forward "\n[ \t]*\n" nil "move"))
+	(set-mark -p1)))
+
+    (defun xah-select-block ()
+      "Select the current/next block of text between blank lines.
+		If region is active, extend selection downward by block.
+
+		URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
+		Version 2016-07-22"
+      (interactive)
+      (if (region-active-p)
+	  (re-search-forward "\n[ \t]*\n" nil "move")
+	(xah-select-current-block)))
 
 
 #+END_SRC
 
 #+RESULTS:
-| nxml-prolog-literal-content-face | ((t (:foreground green))) |
+: xah-select-block
 
-* text markup
-#+BEGIN_SRC emacs-lisp :tangle yes
+* structure templates
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+   (add-to-list 'org-structure-template-alist (list "eh" (concat ":EXPORT_FILE_NAME: ?\n" ":EXPORT_TITLE:\n" ":EXPORT_OPTIONS: toc:nil html-postamble:nil num:nil")))
+
+     (add-to-list 'org-structure-template-alist '
+		  ("r" "- [ ] downloaded\n- [ ] added to bibtex file\n- [ ] read\n- [ ] notes"))
+
+     (add-to-list 'org-structure-template-alist '
+		  ("s"  "#+BEGIN_SRC emacs-lisp :tangle yes\n\n?\n\n#+END_SRC"))
+
+     (add-to-list 'org-structure-template-alist '
+		  ("xc"  "<!-- ? -->"))
+     (add-to-list 'org-structure-template-alist (list "p" (concat ":PROPERTIES:\n" "?\n" ":END:"))) 
+
+     (add-to-list 'org-structure-template-alist ' ("c"    
+						   "#+BEGIN: clocktable :scope agenda :tags \"-ourhome-break\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t \n
+     ,#+END:
+
+     ,#+BEGIN: clocktable :scope agenda :tags \"ourhome\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t
+     ,#+END:\n
+
+     ,#+BEGIN: clocktable :scope agenda :tags \"break\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t\n
+     ,#+END:"))
+
+
 
 
 
 #+END_SRC
+* capture templates
+   #+BEGIN_SRC emacs-lisp :tangle yes
+
+      (setq org-capture-templates '(("t" "todo" entry (file "~/Sync/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n\n" :prepend t)
+                                    ("j" "journal" entry (file+datetree "~/Sync/Zettelkasten/journal.org") "** %<%H:%M> \n\n%?\n\n" :kill-buffer nil ) 
+                                    ("c" "calendar" entry (file "~/Sync/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
+
+                                    ("e" "expense" table-line (file+headline "~/Sync/Zettelkasten/budget.org" "Expenses to be filed") "|%t|%^{amount}|%a|%^{category|LIS|Food|Transportation|Clothing}|%?|" :append t :kill-buffer nil)
+                                    ))
+
+
+
+
+   #+END_SRC
+   
+* window management
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+;undo and redo changes in window configuration eg go to previous buffer 
+    (winner-mode 1)
+
+ (defun transpose-windows ()
+   (interactive)
+   (let ((this-buffer (window-buffer (selected-window)))
+         (other-buffer (prog2
+                           (other-window +1)
+                           (window-buffer (selected-window))
+                         (other-window -1))))
+     (switch-to-buffer other-buffer)
+     (switch-to-buffer-other-window this-buffer)
+     (other-window -1)))
+
+
+
+(defun toggle-window-split ()
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((this-win-buffer (window-buffer))
+         (next-win-buffer (window-buffer (next-window)))
+         (this-win-edges (window-edges (selected-window)))
+         (next-win-edges (window-edges (next-window)))
+         (this-win-2nd (not (and (<= (car this-win-edges)
+                     (car next-win-edges))
+                     (<= (cadr this-win-edges)
+                     (cadr next-win-edges)))))
+         (splitter
+          (if (= (car this-win-edges)
+             (car (window-edges (next-window))))
+          'split-window-horizontally
+        'split-window-vertically)))
+    (delete-other-windows)
+    (let ((first-win (selected-window)))
+      (funcall splitter)
+      (if this-win-2nd (other-window 1))
+      (set-window-buffer (selected-window) this-win-buffer)
+      (set-window-buffer (next-window) next-win-buffer)
+      (select-window first-win)
+      (if this-win-2nd (other-window 1))))))
+
+(global-set-key (kbd "C-x |") 'toggle-window-split)
+
+#+END_SRC
+* buffer management
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(defun kill-other-buffers ()
+     "Kill all other buffers."
+     (interactive)
+     (mapc 'kill-buffer 
+           (delq (current-buffer) 
+                 (remove-if-not 'buffer-file-name (buffer-list)))))
+
+
+#+END_SRC
+
+* REFERENCE/STUDY
+** org-ref
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+  (use-package org-ref)
+  (setq reftex-default-bibliography '("~/Sync/Zettelkasten/references.bib"))
+
+  ;; see org-ref for use of these variables
+  (setq org-ref-bibliography-notes "~/Sync/Zettelkasten/notes.org"
+        org-ref-default-bibliography '("~/Sync/Zettelkasten/references.bib")
+        org-ref-pdf-directory "~/Sync/Zettelkasten/PDFs/")
+
+  (setq bibtex-completion-bibliography "~/Sync/Zettelkasten/references.bib"
+        bibtex-completion-library-path "~/Sync/Zettelkasten/PDFs"
+        bibtex-completion-notes-path "~/Sync/Zettelkasten/notes.org")
+
+  ;; open pdf with system pdf viewer (works on mac)
+  (setq bibtex-completion-pdf-open-function
+    (lambda (fpath)
+      (start-process "open" "*open*" "open" fpath)))
+
+
+  (setq pdf-view-continuous nil)
+
+  (setq bibtex-autokey-year-title-separator "")
+  (setq bibtex-autokey-titleword-length 0)
+
+
+  (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). ${title}.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}\n:END:")
+
+
+
+  #+END_SRC
+  (setq org-ref-bibliography-entry-format '(("article" . "%a. (%y). %t. <i>%j</i>, <i>%v</i>(%n), %p. %D")
+    ("book" . "%a. (%y). /%t/. %r: %u.")
+    ("techreport" . "%a. (%y). /%t/. %r: %i. Retrieved from %U")
+    ("proceedings" . "%e, %t in %S, %U (%y).")
+  ("online" . "%a. (%y). %t. Retrieved from %U")
+    ("inproceedings" . "%a, %t, %p, in %b, edited by %e, %u (%y)")))
+  #+RESULTS:
+  : ((article . %a. (%y). %t. <i>%j</i>, <i>%v</i>(%n), %p. %D) (book . %a. (%y). /%t/. %r: %u.) (techreport . %a. (%y). /%t/. %r: %i. Retrieved from %U) (proceedings . %e, %t in %S, %U (%y).) (online . %a. (%y). %t. Retrieved from %U) (inproceedings . %a, %t, %p, in %b, edited by %e, %u (%y)))
+
+
+** org noter
+  #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package org-noter
+       :ensure t
+       :config (setq org-noter-property-doc-file "INTERLEAVE_PDF")
+       (setq org-noter-property-note-location "INTERLEAVE_PAGE_NOTE") 
+       (setq org-noter-notes-window-location 'other-frame)
+       (setq org-noter-default-heading-title "p. $p$") 
+       (setq org-noter-auto-save-last-location t))
+
+  (use-package interleave)
+
+
+  #+END_SRC
+
+  #+RESULTS:
+** bibtex citations
+  #+BEGIN_SRC emacs-lisp :tangle yes
+           (setq ebib-bib-search-dirs '("~/Sync/Zettelkasten"))
+
+      
+  #+END_SRC
+     (setq bibtex-BibTeX-entry-alist
+           '(("Article" "Article in Journal"
+              (("author")
+               ("year")                 
+               ("title" "Title of the article (BibTeX converts it to lowercase)")
+               ("journal")      
+               ("volume" "Volume of the journal")
+               ("number" "Number of the journal (only allowed if entry contains volume)")
+               ("pages" "Pages in the journal")
+               ("month")
+               ("note")))
+             ("InProceedings" "Article in Conference Proceedings"
+              (("author")
+               ("title" "Title of the article in proceedings (BibTeX converts it to lowercase)"))
+              (("booktitle" "Name of the conference proceedings")
+               ("year"))
+              (("editor")
+               ("volume" "Volume of the conference proceedings in the series")
+               ("number" "Number of the conference proceedings in a small series (overwritten by volume)")
+               ("series" "Series in which the conference proceedings appeared")
+               ("pages" "Pages in the conference proceedings")
+               ("month")
+               ("address")
+               ("organization" "Sponsoring organization of the conference")
+               ("publisher" "Publishing company, its location")
+               ("note")))
+             ("InCollection" "Article in a Collection"
+              (("author")
+               ("title" "Title of the article in book (BibTeX converts it to lowercase)")
+               ("booktitle" "Name of the book"))
+              (("publisher")
+               ("year"))
+              (("editor")
+               ("volume" "Volume of the book in the series")
+               ("number" "Number of the book in a small series (overwritten by volume)")
+               ("series" "Series in which the book appeared")
+               ("type" "Word to use instead of \"chapter\"")
+               ("chapter" "Chapter in the book")
+               ("pages" "Pages in the book")
+               ("edition" "Edition of the book as a capitalized English word")
+               ("month")
+               ("address")
+               ("note")))
+             ("InBook" "Chapter or Pages in a Book"
+              (("author" nil nil 0)
+               ("editor" nil nil 0)
+               ("title" "Title of the book")
+               ("chapter" "Chapter in the book"))
+              (("publisher")
+               ("year"))
+              (("volume" "Volume of the book in the series")
+               ("number" "Number of the book in a small series (overwritten by volume)")
+               ("series" "Series in which the book appeared")
+               ("type" "Word to use instead of \"chapter\"")
+               ("address")
+               ("edition" "Edition of the book as a capitalized English word")
+               ("month")
+               ("pages" "Pages in the book")
+               ("note")))
+             ("Proceedings" "Conference Proceedings"
+              (("title" "Title of the conference proceedings")
+               ("year"))
+              nil
+              (("booktitle" "Title of the proceedings for cross references")
+               ("editor")
+               ("volume" "Volume of the conference proceedings in the series")
+               ("number" "Number of the conference proceedings in a small series (overwritten by volume)")
+               ("series" "Series in which the conference proceedings appeared")
+               ("address")
+               ("month")
+               ("organization" "Sponsoring organization of the conference")
+               ("publisher" "Publishing company, its location")
+               ("note")))
+             ("Book" "Book"
+              (("author" nil nil 0)
+               ("editor" nil nil 0)
+               ("title" "Title of the book"))
+              (("publisher")
+               ("year"))
+              (("volume" "Volume of the book in the series")
+               ("number" "Number of the book in a small series (overwritten by volume)")
+               ("series" "Series in which the book appeared")
+               ("address")
+               ("edition" "Edition of the book as a capitalized English word")
+               ("month")
+               ("note")))
+             ("Booklet" "Booklet (Bound, but no Publisher)"
+              (("title" "Title of the booklet (BibTeX converts it to lowercase)"))
+              nil
+              (("author")
+               ("howpublished" "The way in which the booklet was published")
+               ("address")
+               ("month")
+               ("year")
+               ("note")))
+             ("PhdThesis" "PhD. Thesis"
+              (("author")
+               ("title" "Title of the PhD. thesis")
+               ("school" "School where the PhD. thesis was written")
+               ("year"))
+              nil
+              (("type" "Type of the PhD. thesis")
+               ("address" "Address of the school (if not part of field \"school\") or country")
+               ("month")
+               ("note")))
+             ("MastersThesis" "Master's Thesis"
+              (("author")
+               ("title" "Title of the master's thesis (BibTeX converts it to lowercase)")
+               ("school" "School where the master's thesis was written")
+               ("year"))
+              nil
+              (("type" "Type of the master's thesis (if other than \"Master's thesis\")")
+               ("address" "Address of the school (if not part of field \"school\") or country")
+               ("month")
+               ("note")))
+             ("TechReport" "Technical Report"
+              (("author")
+               ("title" "Title of the technical report (BibTeX converts it to lowercase)")
+               ("institution" "Sponsoring institution of the report")
+               ("year"))
+              nil
+              (("type" "Type of the report (if other than \"technical report\")")
+               ("number" "Number of the technical report")
+               ("address")
+               ("month")
+               ("note")))
+             ("Manual" "Technical Manual"
+              (("title" "Title of the manual"))
+              nil
+              (("author")
+               ("organization" "Publishing organization of the manual")
+               ("address")
+               ("edition" "Edition of the manual as a capitalized English word")
+               ("month")
+               ("year")
+               ("note")))
+             ("Unpublished" "Unpublished"
+              (("author")
+               ("title" "Title of the unpublished work (BibTeX converts it to lowercase)")
+               ("note"))
+              nil
+              (("month")
+               ("year")))
+
+           ;;   ("Online" "Online"
+           ;;    (("author")
+           ;;     ("title" "Title of the unpublished work (BibTeX converts it to lowercase)")
+           ;;     ("note"))
+           ;;     ("institution" "Sponsoring institution of the report")
+           ;;    nil
+           ;;    (("month")
+           ;;     ("year")
+           ;;     ("url")
+
+           ;; ))
+
+            ("Misc" "Miscellaneo
+     us" nil nil
+              (("author")
+               ("title" "Title of the work (BibTeX converts it to lowercase)")
+               ("howpublished" "The way in which the work was published")
+               ("month")
+               ("year")
+               ("note")))))
+
+
+
+        (setq  bibtex-BibTeX-field-alist 
+        '(("author" "Author1 [and Author2 ...] [and others]")
+          ("editor" "Editor1 [and Editor2 ...] [and others]")
+          ("journal" "Name of the journal (use string, remove braces)")
+          ("year" "Year of publication")
+          ("month" "Month of the publication as a string (remove braces)")
+          ("note" "Remarks to be put at the end of the \\bibitem")
+          ("publisher" "Publishing company")
+          ("address" "Address of the publisher")
+          ("url" "URL")
+       ("title" "title")
+        ))
+
+     (setq  org-ref-formatted-citation-formats '(("text"
+        ("article" . "${author}. (${year}). ${title}. ${journal}, ${volume}(${number}), pp. ${pages}.  ${doi}")
+        ("inproceedings" . "${author}, ${title}, In ${editor}, ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
+        ("book" . "${author}, ${title} (${year}), ${address}: ${publisher}.")
+        ("phdthesis" . "${author}, ${title} (Doctoral dissertation) (${year}). ${school}, ${address}.")
+        ("inbook" . "${author}, ${title}, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
+        ("incollection" . "${author}, ${title}, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
+        ("proceedings" . "${editor} (Eds.), ${booktitle} (${year}). ${address}: ${publisher}.")
+        ("unpublished" . "${author}, ${title} (${year}). Unpublished manuscript.")
+        ("online" . "")
+        (nil . "${author}, ${title} (${year})."))
+       ("org"
+        ("article" . "${author}, /${title}/, ${journal}, *${volume}(${number})*, ${pages} (${year}). ${doi}")
+        ("inproceedings" . "${author}, /${title}/, In ${editor}, ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
+        ("book" . "${author}, /${title}/ (${year}), ${address}: ${publisher}.")
+        ("phdthesis" . "${author}, /${title}/ (Doctoral dissertation) (${year}). ${school}, ${address}.")
+        ("inbook" . "${author}, /${title}/, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
+        ("incollection" . "${author}, /${title}/, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
+        ("proceedings" . "${editor} (Eds.), _${booktitle}_ (${year}). ${address}: ${publisher}.")
+        ("unpublished" . "${author}, /${title}/ (${year}). Unpublished manuscript.")
+        (nil . "${author}, /${title}/ (${year})."))))
+
+     (setq org-ref-title-case-types '(
+                                      "article" 
+                                      "book"))
+  #+RESULTS:
+
+* org-agenda
+** agenda files                              
+
+    #+BEGIN_SRC emacs-lisp :tangle yes
+          (setq org-agenda-files (quote
+                               ("~/Sync/Zettelkasten/inbox.org" 
+                                "~/Sync/Zettelkasten/lis.org"  
+                                "~/Sync/Zettelkasten/ndd.org"
+                                "~/Sync/Zettelkasten/gcal.org" 
+                                "~/Sync/Zettelkasten/journal.org"
+                                "~/Sync/Zettelkasten/work.org"
+                                "~/Sync/Zettelkasten/budget.org"
+                                "~/Sync/Zettelkasten/personal.org"
+                            "~/Sync/Zettelkasten/org.org"
+                                "~/Sync/Zettelkasten/notes.org")))
+
+
+
+       (setq  org-agenda-sorting-strategy 
+       '((agenda time-up)
+         (todo priority-down category-keep)
+         (tags priority-down category-keep)
+         (search category-keep)))
+
+       (setq org-log-done 'note)
+       (setq org-agenda-skip-deadline-if-done t)
+       (setq org-agenda-skip-timestamp-if-done t)
+       (setq org-agenda-skip-scheduled-if-done t)
+       (setq org-agenda-current-time-string "✸✸✸✸✸✸ NOW ✸✸✸✸✸✸✸✸✸✸")
+       (setq org-agenda-time-grid 
+             '((daily weekly today require-timed remove-match)
+               (800 1000 1200 1400 1600 1800 2000)
+               "......" "----------------"))
+       (setq org-agenda-start-with-clockreport-mode t)
+       (setq org-agenda-span (quote 4))
+       (setq org-agenda-jump-prefer-future t)
+       (setq org-agenda-window-setup (quote only-frame))
+       (setq org-agenda-with-colors t)
+       (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+       (setq org-agenda-start-on-weekday nil)
+    (setq org-deadline-warning-days 4)
+    #+END_SRC
+
+    #+RESULTS:
+    : 4
+
+    +RESULTS:
+    # : note
+
+** custom agenda views
+    #+BEGIN_SRC emacs-lisp :tangle yes
+
+;(setq org-agenda-custom-commands '(("n" "Agenda and all TODOs" ((agenda "")     (alltodo ""))))
+
+                (setq org-agenda-custom-commands 
+                      '(("s" todo "NEXT|--")
+                        ("d" "Undated tasks " alltodo ""              ((org-agenda-todo-ignore-with-date t))
+                 )))
+
+                (setq org-stuck-projects '("/PROJECT" ("NEXT") nil ""))
+     (setq org-log-note-clock-out nil)
+    #+END_SRC
+* todo keywords 
+                  ;(setq org-agenda-dim-blocked-tasks t)
+
+(setq org-todo-keywords '((sequence  "TODO(t)" "NEXT(n)" "--(s)" "|" "DONE(d!)")
+                                       (sequence "습관(h)" "PROJECT(p)" "?(w!)" "|" "x(c!)")))
+(setq org-todo-keyword-faces '(("습관" :foreground "dodger blue")
+                                            ("TODO" :foreground "lavenderblush4")
+                                           ("PROJECT" :foreground "gray40" :weight bold :underline t  )
+                                            ("NEXT" :foreground "red" )
+                                   ("--" :foreground "magenta1")
+           ("?" :foreground "yellow") 
+ ("DONE" :foreground "dim gray" )
+                          ("x" :foreground "dim gray")))
+
+
+
+    #+BEGIN_SRC emacs-lisp :tangle yes
+
+
+       (setq org-enforce-todo-dependencies t)
+
+        (defun mm/org-insert-trigger ()
+           "Automatically insert chain-find-next trigger when entry becomes NEXT"
+           (cond ((equal org-state "NEXT")
+                  (unless org-depend-doing-chain-find-next
+                    (org-set-property "TRIGGER" "chain-find-next(NEXT,from-top,todo-only,priority-up,effort-down)")))
+                 ((not (member org-state org-done-keywords))
+                  (org-delete-property "TRIGGER"))))
+
+         (add-hook 'org-after-todo-state-change-hook 'mm/org-insert-trigger)
+
+    #+END_SRC
+
+    #+RESULTS:
+    | org-clock-out-if-current | mm/org-insert-trigger |
+
+
 
 * font rendering and encoding
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -265,41 +749,7 @@ file:~/.emacs
 
 
 #+END_SRC
-* structure editing
-#+BEGIN_SRC emacs-lisp :tangle yes
 
-   (setq org-special-ctrl-a/e t)
-
-   ;this allows me to collapse a subtree when not on its headline
-   (setq org-cycle-emulate-tab 'white)
-    (defun xah-select-current-block ()
-      "Select the current block of text between blank lines.
-
-		URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
-		Version 2016-07-22"
-      (interactive)
-      (let (-p1)
-	(progn
-	  (if (re-search-backward "\n[ \t]*\n" nil "move")
-	      (progn (re-search-forward "\n[ \t]*\n")
-		     (setq -p1 (point)))
-	    (setq -p1 (point)))
-	  (re-search-forward "\n[ \t]*\n" nil "move"))
-	(set-mark -p1)))
-
-    (defun xah-select-block ()
-      "Select the current/next block of text between blank lines.
-		If region is active, extend selection downward by block.
-
-		URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
-		Version 2016-07-22"
-      (interactive)
-      (if (region-active-p)
-	  (re-search-forward "\n[ \t]*\n" nil "move")
-	(xah-select-current-block)))
-
-
-#+END_SRC
 * org-table
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -684,103 +1134,6 @@ file:~/.emacs
 
 
 #+END_SRC
-** org-emphasis-alist
-
- #+BEGIN_SRC  emacs-lisp :tangle yes
- (custom-set-variables
-
- '(org-emphasis-alist
-    (quote
-     (("!"
-       (quote
-        (:weight bold :family "consolas" :foreground "red3" :background "slategray3"))
-       verbatim)
-      ("*"
-       (quote
-        (:weight bold :foreground "orchid")))
-      ("/"
-       (quote
-        (:slant italic :foreground "darkorchid1")))
-      ("_"
-       (quote
-        (:underline t :foreground "orangered" :weight bold )))
-      ("=" org-verbatim verbatim)
-      ("~" org-code verbatim)
-      ("+"
-       (quote
-        (:strike-through "chartreuse" :weight bold)))
-      ("@"
-       (quote
-        (:weight bold :foreground "chartreuse")
-        verbatim)))))
- )
-
- #+END_SRC
-
- # # #+RESULTS:
-* Key bindings
-:LOGBOOK:
-CLOCK: [2019-02-06 Wed 14:34]--[2019-02-06 Wed 14:36] =>  0:02
-:END:
-#+BEGIN_SRC emacs-lisp :tangle yes
-   ;; (global-set-key (kbd "C-.") 'org-todo)
-   ;; (global-unset-key (kbd "C-c C-d"))
-   ;; (global-set-key (kbd "<f1>") 'org-capture)
-   ;; (global-set-key (kbd "<f2>") 'org-clock-in)
-   ;; (global-set-key (kbd "<f7>") 'org-agenda)
-
-
-   (global-unset-key (kbd "C-z"))     
-   (global-unset-key (kbd "M-c"))
-
-   (bind-keys ("C-+"   . text-scale-increase)
-	      ("C--"   . text-scale-decrease)
-	      ("C-c l" . org-store-link)
-	      ("C-."   . org-todo)
-	      ("C-x /" . shrink-window-horizontally)
-	      ("C-x ." . org-archive-subtree-default)
-	      ("C-c n" . org-schedule)
-	      ("M-="   . count-words)
-	      ("M-x"   . helm-M-x)
-	      ("M-_" . insert-pair)
-	      ("M-*" . insert-pair)
-	      ("M-\/" . insert-pair)
-	      ("C-c b" . list-bookmarks)
-	      ("C-c p" . bh/punch-in )
-	      ("C-<kp-6>" . xah-select-block)
-("C-x j" . helm-org-in-buffer-headings)
-("C-c a" . helm-org-agenda-files-headings)
-	      ([f1] . org-capture)
-	      ([f2] . org-clock-in)
-	      ([f3] . helm-buffers-list)           
-	      ([f4] . org-refile)
-	      ([f5] . helm-projectile)
-	      ([f6] . helm-bibtex-with-local-bibliography)
-	      ([f7] . org-agenda)
-	      ([f8] . deft)
-	      ([f9] . org-tree-to-indirect-buffer))
-
-
-   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-   (define-key key-translation-map (kbd "C--") (kbd "–"))
-
-   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
-   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
-   (define-key key-translation-map (kbd "C-c s") (kbd "ß"))
-   (define-key key-translation-map (kbd "C-c o") (kbd "ö"))
-
-   (define-key key-translation-map (kbd "C-c a") (kbd "ä"))
-   (define-key key-translation-map (kbd "C-c u") (kbd "ü"))
-
-#+END_SRC
-
-#+RESULTS:
-: [252]
 
 * file conversions: org-babel, pandoc, etc.
  #+BEGIN_SRC emacs-lisp :tangle yes
@@ -795,148 +1148,7 @@ CLOCK: [2019-02-06 Wed 14:34]--[2019-02-06 Wed 14:36] =>  0:02
 
  #+END_SRC
 
-* file navigating
-#+BEGIN_SRC emacs-lisp :tangle yes
 
-   (setq bookmark-default-file "~/Sync/emacs/bookmarks")
-   (setq bookmark-save-flag 1)
-
-   (use-package ido)
-   (ido-mode t)
-
-   (use-package deft
-     :ensure t)
-   (setq deft-directory "~/Sync/Zettelkasten/")
-   (setq deft-default-extension "org")
-   (setq deft-time-format " %b-%Y %H:%M")
-   (setq deft-use-filename-as-title t)
-   (setq deft-new-file-format "%Y%b%d")
-   (setq deft-text-mode 'org-mode)
-   (setq deft-file-naming-rules '((noslash . "-")
-				  (nospace . "-")
-				  (case-fn . downcase))) 
-   (setq deft-recursive t)
-   (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
-   (setq deft-auto-save-interval 1.0)
-   (add-hook 'after-init-hook 'deft)
-   (add-hook 'after-init-hook 'org-clock-persistence-insinuate)
-
-   (use-package helm
-     :config (helm-mode 1))
-    (use-package projectile)
-    (use-package helm-projectile)
-#+END_SRC
-
-* structure templates
-
-
-    (add-to-list 'org-structure-template-alist '
-                  ("x"  "#+BEGIN_SRC xml \n\n?\n\n#+END_SRC"))"))
-
-
-  #+BEGIN_SRC emacs-lisp :tangle yes
-
-   (add-to-list 'org-structure-template-alist (list "eh" (concat ":EXPORT_FILE_NAME: ?\n" ":EXPORT_TITLE:\n" ":EXPORT_OPTIONS: toc:nil html-postamble:nil num:nil")))
-
-     (add-to-list 'org-structure-template-alist '
-		  ("r" "- [ ] downloaded\n- [ ] added to bibtex file\n- [ ] read\n- [ ] notes"))
-
-     (add-to-list 'org-structure-template-alist '
-		  ("s"  "#+BEGIN_SRC emacs-lisp :tangle yes\n\n?\n\n#+END_SRC"))
-
-     (add-to-list 'org-structure-template-alist '
-		  ("xc"  "<!-- ? -->"))
-     (add-to-list 'org-structure-template-alist (list "p" (concat ":PROPERTIES:\n" "?\n" ":END:"))) 
-
-     (add-to-list 'org-structure-template-alist ' ("c"    
-						   "#+BEGIN: clocktable :scope agenda :tags \"-ourhome-break\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t \n
-     ,#+END:
-
-     ,#+BEGIN: clocktable :scope agenda :tags \"ourhome\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t
-     ,#+END:\n
-
-     ,#+BEGIN: clocktable :scope agenda :tags \"break\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t\n
-     ,#+END:"))
-
-
-
-
-
-#+END_SRC
-* capture templates
-   #+BEGIN_SRC emacs-lisp :tangle yes
-
-      (setq org-capture-templates '(("t" "todo" entry (file "~/Sync/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n\n" :prepend t)
-                                    ("j" "journal" entry (file+datetree "~/Sync/Zettelkasten/journal.org") "** %<%H:%M> \n\n%?\n\n" :kill-buffer nil ) 
-                                    ("c" "calendar" entry (file "~/Sync/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
-
-                                    ("e" "expense" table-line (file+headline "~/Sync/Zettelkasten/budget.org" "Expenses to be filed") "|%t|%^{amount}|%a|%^{category|LIS|Food|Transportation|Clothing}|%?|" :append t :kill-buffer nil)
-                                    ))
-
-
-
-
-   #+END_SRC
-   
-* window management
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-;undo and redo changes in window configuration eg go to previous buffer 
-    (winner-mode 1)
-
- (defun transpose-windows ()
-   (interactive)
-   (let ((this-buffer (window-buffer (selected-window)))
-         (other-buffer (prog2
-                           (other-window +1)
-                           (window-buffer (selected-window))
-                         (other-window -1))))
-     (switch-to-buffer other-buffer)
-     (switch-to-buffer-other-window this-buffer)
-     (other-window -1)))
-
-
-
-(defun toggle-window-split ()
-  (interactive)
-  (if (= (count-windows) 2)
-      (let* ((this-win-buffer (window-buffer))
-         (next-win-buffer (window-buffer (next-window)))
-         (this-win-edges (window-edges (selected-window)))
-         (next-win-edges (window-edges (next-window)))
-         (this-win-2nd (not (and (<= (car this-win-edges)
-                     (car next-win-edges))
-                     (<= (cadr this-win-edges)
-                     (cadr next-win-edges)))))
-         (splitter
-          (if (= (car this-win-edges)
-             (car (window-edges (next-window))))
-          'split-window-horizontally
-        'split-window-vertically)))
-    (delete-other-windows)
-    (let ((first-win (selected-window)))
-      (funcall splitter)
-      (if this-win-2nd (other-window 1))
-      (set-window-buffer (selected-window) this-win-buffer)
-      (set-window-buffer (next-window) next-win-buffer)
-      (select-window first-win)
-      (if this-win-2nd (other-window 1))))))
-
-(global-set-key (kbd "C-x |") 'toggle-window-split)
-
-#+END_SRC
-* buffer management
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-(defun kill-other-buffers ()
-     "Kill all other buffers."
-     (interactive)
-     (mapc 'kill-buffer 
-           (delq (current-buffer) 
-                 (remove-if-not 'buffer-file-name (buffer-list)))))
-
-
-#+END_SRC
 * file encoding
  C-h C RET
  M-x describe-current-coding-system
@@ -1038,17 +1250,22 @@ CLOCK: [2019-02-06 Wed 14:34]--[2019-02-06 Wed 14:36] =>  0:02
    "Turn off auto-fill-mode."
    (auto-fill-mode -1))
 
- (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
+
+
+(add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
   ; (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
   #+END_SRC
   
   #+RESULTS:
   | no-auto-fill |
-
+  
 ** message view
 
   #+BEGIN_SRC emacs-lisp :tangle yes
   (setq mu4e-attachment-dir "/home/betsy/Sync/Spring 2019/")
+
+
+
 
   (setq shr-color-visible-luminance-min 50) 
   (setq shr-color-visible-distance-min 5)
@@ -1102,6 +1319,15 @@ CLOCK: [2019-02-06 Wed 14:34]--[2019-02-06 Wed 14:36] =>  0:02
 
 
   #+BEGIN_SRC emacs-lisp :tangle yes
+
+    (setq mu4e-headers-fields
+	  '( (:human-date    .  15)    ;; alternatively, use :human-date
+	     (:flags         .   5)
+	     (:from          .  20)
+;	     (:thread-subject       . 70 )
+             (:thread-subject       . 120 )
+	     )) 
+
      (setq org-mu4e-link-query-in-headers-mode nil)
      ;(setq mu4e-update-interval 60)
      ;(setq mu4e-index-update-in-background t)
@@ -1212,19 +1438,9 @@ CLOCK: [2019-02-06 Wed 14:34]--[2019-02-06 Wed 14:36] =>  0:02
 #+END_SRC
 
 * Autosave-backup-git
-  (setq auto-revert-interval 50400)
+
   #+BEGIN_SRC emacs-lisp :tangle yes
 
-     (global-auto-revert-mode t)
-     (setq auto-revert-interval 5)
-     (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-     (setq delete-old-versions -1)
-     (setq version-control t)
-     (setq vc-make-backup-files t)
-     (setq auto-save-file-name-transforms nil)
-     (setq auto-save-interval 5)
-  (setq auto-save-visited t)
-     (setq auto-save-visited-file-name t)
      (use-package magit
        :ensure t
        :init (progn
@@ -1338,376 +1554,4 @@ CLOCK: [2019-02-06 Wed 14:34]--[2019-02-06 Wed 14:36] =>  0:02
 
   #+RESULTS:
   : t
-
-* REFERENCE/STUDY
-** org-ref
-
-  #+BEGIN_SRC emacs-lisp :tangle yes
-
-  (use-package org-ref)
-  (setq reftex-default-bibliography '("~/Sync/Zettelkasten/references.bib"))
-
-  ;; see org-ref for use of these variables
-  (setq org-ref-bibliography-notes "~/Sync/Zettelkasten/notes.org"
-        org-ref-default-bibliography '("~/Sync/Zettelkasten/references.bib")
-        org-ref-pdf-directory "~/Sync/Zettelkasten/PDFs/")
-
-  (setq bibtex-completion-bibliography "~/Sync/Zettelkasten/references.bib"
-        bibtex-completion-library-path "~/Sync/Zettelkasten/PDFs"
-        bibtex-completion-notes-path "~/Sync/Zettelkasten/notes.org")
-
-  ;; open pdf with system pdf viewer (works on mac)
-  (setq bibtex-completion-pdf-open-function
-    (lambda (fpath)
-      (start-process "open" "*open*" "open" fpath)))
-
-
-  (setq pdf-view-continuous nil)
-
-  (setq bibtex-autokey-year-title-separator "")
-  (setq bibtex-autokey-titleword-length 0)
-
-
-  (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). ${title}.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}\n:END:")
-
-
-
-  #+END_SRC
-  (setq org-ref-bibliography-entry-format '(("article" . "%a. (%y). %t. <i>%j</i>, <i>%v</i>(%n), %p. %D")
-    ("book" . "%a. (%y). /%t/. %r: %u.")
-    ("techreport" . "%a. (%y). /%t/. %r: %i. Retrieved from %U")
-    ("proceedings" . "%e, %t in %S, %U (%y).")
-  ("online" . "%a. (%y). %t. Retrieved from %U")
-    ("inproceedings" . "%a, %t, %p, in %b, edited by %e, %u (%y)")))
-  #+RESULTS:
-  : ((article . %a. (%y). %t. <i>%j</i>, <i>%v</i>(%n), %p. %D) (book . %a. (%y). /%t/. %r: %u.) (techreport . %a. (%y). /%t/. %r: %i. Retrieved from %U) (proceedings . %e, %t in %S, %U (%y).) (online . %a. (%y). %t. Retrieved from %U) (inproceedings . %a, %t, %p, in %b, edited by %e, %u (%y)))
-
-
-** org noter
-  #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package org-noter
-       :ensure t
-       :config (setq org-noter-property-doc-file "INTERLEAVE_PDF")
-       (setq org-noter-property-note-location "INTERLEAVE_PAGE_NOTE") 
-       (setq org-noter-notes-window-location 'other-frame)
-       (setq org-noter-default-heading-title "p. $p$") 
-       (setq org-noter-auto-save-last-location t))
-
-  (use-package interleave)
-
-
-  #+END_SRC
-
-  #+RESULTS:
-** bibtex citations
-  #+BEGIN_SRC emacs-lisp :tangle yes
-           (setq ebib-bib-search-dirs '("~/Sync/Zettelkasten"))
-
-      
-  #+END_SRC
-     (setq bibtex-BibTeX-entry-alist
-           '(("Article" "Article in Journal"
-              (("author")
-               ("year")                 
-               ("title" "Title of the article (BibTeX converts it to lowercase)")
-               ("journal")      
-               ("volume" "Volume of the journal")
-               ("number" "Number of the journal (only allowed if entry contains volume)")
-               ("pages" "Pages in the journal")
-               ("month")
-               ("note")))
-             ("InProceedings" "Article in Conference Proceedings"
-              (("author")
-               ("title" "Title of the article in proceedings (BibTeX converts it to lowercase)"))
-              (("booktitle" "Name of the conference proceedings")
-               ("year"))
-              (("editor")
-               ("volume" "Volume of the conference proceedings in the series")
-               ("number" "Number of the conference proceedings in a small series (overwritten by volume)")
-               ("series" "Series in which the conference proceedings appeared")
-               ("pages" "Pages in the conference proceedings")
-               ("month")
-               ("address")
-               ("organization" "Sponsoring organization of the conference")
-               ("publisher" "Publishing company, its location")
-               ("note")))
-             ("InCollection" "Article in a Collection"
-              (("author")
-               ("title" "Title of the article in book (BibTeX converts it to lowercase)")
-               ("booktitle" "Name of the book"))
-              (("publisher")
-               ("year"))
-              (("editor")
-               ("volume" "Volume of the book in the series")
-               ("number" "Number of the book in a small series (overwritten by volume)")
-               ("series" "Series in which the book appeared")
-               ("type" "Word to use instead of \"chapter\"")
-               ("chapter" "Chapter in the book")
-               ("pages" "Pages in the book")
-               ("edition" "Edition of the book as a capitalized English word")
-               ("month")
-               ("address")
-               ("note")))
-             ("InBook" "Chapter or Pages in a Book"
-              (("author" nil nil 0)
-               ("editor" nil nil 0)
-               ("title" "Title of the book")
-               ("chapter" "Chapter in the book"))
-              (("publisher")
-               ("year"))
-              (("volume" "Volume of the book in the series")
-               ("number" "Number of the book in a small series (overwritten by volume)")
-               ("series" "Series in which the book appeared")
-               ("type" "Word to use instead of \"chapter\"")
-               ("address")
-               ("edition" "Edition of the book as a capitalized English word")
-               ("month")
-               ("pages" "Pages in the book")
-               ("note")))
-             ("Proceedings" "Conference Proceedings"
-              (("title" "Title of the conference proceedings")
-               ("year"))
-              nil
-              (("booktitle" "Title of the proceedings for cross references")
-               ("editor")
-               ("volume" "Volume of the conference proceedings in the series")
-               ("number" "Number of the conference proceedings in a small series (overwritten by volume)")
-               ("series" "Series in which the conference proceedings appeared")
-               ("address")
-               ("month")
-               ("organization" "Sponsoring organization of the conference")
-               ("publisher" "Publishing company, its location")
-               ("note")))
-             ("Book" "Book"
-              (("author" nil nil 0)
-               ("editor" nil nil 0)
-               ("title" "Title of the book"))
-              (("publisher")
-               ("year"))
-              (("volume" "Volume of the book in the series")
-               ("number" "Number of the book in a small series (overwritten by volume)")
-               ("series" "Series in which the book appeared")
-               ("address")
-               ("edition" "Edition of the book as a capitalized English word")
-               ("month")
-               ("note")))
-             ("Booklet" "Booklet (Bound, but no Publisher)"
-              (("title" "Title of the booklet (BibTeX converts it to lowercase)"))
-              nil
-              (("author")
-               ("howpublished" "The way in which the booklet was published")
-               ("address")
-               ("month")
-               ("year")
-               ("note")))
-             ("PhdThesis" "PhD. Thesis"
-              (("author")
-               ("title" "Title of the PhD. thesis")
-               ("school" "School where the PhD. thesis was written")
-               ("year"))
-              nil
-              (("type" "Type of the PhD. thesis")
-               ("address" "Address of the school (if not part of field \"school\") or country")
-               ("month")
-               ("note")))
-             ("MastersThesis" "Master's Thesis"
-              (("author")
-               ("title" "Title of the master's thesis (BibTeX converts it to lowercase)")
-               ("school" "School where the master's thesis was written")
-               ("year"))
-              nil
-              (("type" "Type of the master's thesis (if other than \"Master's thesis\")")
-               ("address" "Address of the school (if not part of field \"school\") or country")
-               ("month")
-               ("note")))
-             ("TechReport" "Technical Report"
-              (("author")
-               ("title" "Title of the technical report (BibTeX converts it to lowercase)")
-               ("institution" "Sponsoring institution of the report")
-               ("year"))
-              nil
-              (("type" "Type of the report (if other than \"technical report\")")
-               ("number" "Number of the technical report")
-               ("address")
-               ("month")
-               ("note")))
-             ("Manual" "Technical Manual"
-              (("title" "Title of the manual"))
-              nil
-              (("author")
-               ("organization" "Publishing organization of the manual")
-               ("address")
-               ("edition" "Edition of the manual as a capitalized English word")
-               ("month")
-               ("year")
-               ("note")))
-             ("Unpublished" "Unpublished"
-              (("author")
-               ("title" "Title of the unpublished work (BibTeX converts it to lowercase)")
-               ("note"))
-              nil
-              (("month")
-               ("year")))
-
-           ;;   ("Online" "Online"
-           ;;    (("author")
-           ;;     ("title" "Title of the unpublished work (BibTeX converts it to lowercase)")
-           ;;     ("note"))
-           ;;     ("institution" "Sponsoring institution of the report")
-           ;;    nil
-           ;;    (("month")
-           ;;     ("year")
-           ;;     ("url")
-
-           ;; ))
-
-            ("Misc" "Miscellaneo
-     us" nil nil
-              (("author")
-               ("title" "Title of the work (BibTeX converts it to lowercase)")
-               ("howpublished" "The way in which the work was published")
-               ("month")
-               ("year")
-               ("note")))))
-
-
-
-        (setq  bibtex-BibTeX-field-alist 
-        '(("author" "Author1 [and Author2 ...] [and others]")
-          ("editor" "Editor1 [and Editor2 ...] [and others]")
-          ("journal" "Name of the journal (use string, remove braces)")
-          ("year" "Year of publication")
-          ("month" "Month of the publication as a string (remove braces)")
-          ("note" "Remarks to be put at the end of the \\bibitem")
-          ("publisher" "Publishing company")
-          ("address" "Address of the publisher")
-          ("url" "URL")
-       ("title" "title")
-        ))
-
-     (setq  org-ref-formatted-citation-formats '(("text"
-        ("article" . "${author}. (${year}). ${title}. ${journal}, ${volume}(${number}), pp. ${pages}.  ${doi}")
-        ("inproceedings" . "${author}, ${title}, In ${editor}, ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
-        ("book" . "${author}, ${title} (${year}), ${address}: ${publisher}.")
-        ("phdthesis" . "${author}, ${title} (Doctoral dissertation) (${year}). ${school}, ${address}.")
-        ("inbook" . "${author}, ${title}, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
-        ("incollection" . "${author}, ${title}, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
-        ("proceedings" . "${editor} (Eds.), ${booktitle} (${year}). ${address}: ${publisher}.")
-        ("unpublished" . "${author}, ${title} (${year}). Unpublished manuscript.")
-        ("online" . "")
-        (nil . "${author}, ${title} (${year})."))
-       ("org"
-        ("article" . "${author}, /${title}/, ${journal}, *${volume}(${number})*, ${pages} (${year}). ${doi}")
-        ("inproceedings" . "${author}, /${title}/, In ${editor}, ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
-        ("book" . "${author}, /${title}/ (${year}), ${address}: ${publisher}.")
-        ("phdthesis" . "${author}, /${title}/ (Doctoral dissertation) (${year}). ${school}, ${address}.")
-        ("inbook" . "${author}, /${title}/, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
-        ("incollection" . "${author}, /${title}/, In ${editor} (Eds.), ${booktitle} (pp. ${pages}) (${year}). ${address}: ${publisher}.")
-        ("proceedings" . "${editor} (Eds.), _${booktitle}_ (${year}). ${address}: ${publisher}.")
-        ("unpublished" . "${author}, /${title}/ (${year}). Unpublished manuscript.")
-        (nil . "${author}, /${title}/ (${year})."))))
-
-     (setq org-ref-title-case-types '(
-                                      "article" 
-                                      "book"))
-  #+RESULTS:
-
-* org-agenda
-** agenda files                              
-
-    #+BEGIN_SRC emacs-lisp :tangle yes
-          (setq org-agenda-files (quote
-                               ("~/Sync/Zettelkasten/inbox.org" 
-                                "~/Sync/Zettelkasten/lis.org"  
-                                "~/Sync/Zettelkasten/ndd.org"
-                                "~/Sync/Zettelkasten/gcal.org" 
-                                "~/Sync/Zettelkasten/journal.org"
-                                "~/Sync/Zettelkasten/work.org"
-                                "~/Sync/Zettelkasten/budget.org"
-                                "~/Sync/Zettelkasten/personal.org"
-                            "~/Sync/Zettelkasten/org.org"
-                                "~/Sync/Zettelkasten/notes.org")))
-
-
-
-       (setq  org-agenda-sorting-strategy 
-       '((agenda time-up)
-         (todo priority-down category-keep)
-         (tags priority-down category-keep)
-         (search category-keep)))
-
-       (setq org-log-done 'note)
-       (setq org-agenda-skip-deadline-if-done t)
-       (setq org-agenda-skip-timestamp-if-done t)
-       (setq org-agenda-skip-scheduled-if-done t)
-       (setq org-agenda-current-time-string "✸✸✸✸✸✸ NOW ✸✸✸✸✸✸✸✸✸✸")
-       (setq org-agenda-time-grid 
-             '((daily weekly today require-timed remove-match)
-               (800 1000 1200 1400 1600 1800 2000)
-               "......" "----------------"))
-       (setq org-agenda-start-with-clockreport-mode t)
-       (setq org-agenda-span (quote 4))
-       (setq org-agenda-jump-prefer-future t)
-       (setq org-agenda-window-setup (quote only-frame))
-       (setq org-agenda-with-colors t)
-       (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
-       (setq org-agenda-start-on-weekday nil)
-    (setq org-deadline-warning-days 4)
-    #+END_SRC
-
-    #+RESULTS:
-    : 4
-
-    +RESULTS:
-    # : note
-
-** custom agenda views
-    #+BEGIN_SRC emacs-lisp :tangle yes
-
-;(setq org-agenda-custom-commands '(("n" "Agenda and all TODOs" ((agenda "")     (alltodo ""))))
-
-                (setq org-agenda-custom-commands 
-                      '(("s" todo "NEXT|--")
-                        ("d" "Undated tasks " alltodo ""              ((org-agenda-todo-ignore-with-date t))
-                 )))
-
-                (setq org-stuck-projects '("/PROJECT" ("NEXT") nil ""))
-     (setq org-log-note-clock-out nil)
-    #+END_SRC
-* todo keywords 
-                  ;(setq org-agenda-dim-blocked-tasks t)
-    #+BEGIN_SRC emacs-lisp :tangle yes
-
-
-           (setq org-todo-keywords '((sequence  "TODO(t)" "NEXT(n)" "--(s)" "|" "DONE(d!)")
-                                     (sequence "습관(h)" "PROJECT(p)" "?(w!)" "|" "x(c!)")))
-
-           (setq org-todo-keyword-faces '(("습관" :foreground "dodger blue")
-				            ("TODO" :foreground "#ccccff")
-                                          ("PROJECT" :foreground "chartreuse" :weight bold  )
-                                          ("NEXT" :foreground "red" )
-                                          ("--" :foreground "magenta1")
-                                          ("?" :foreground "yellow") 
-                                          ("DONE" :foreground "dim gray" )
-                                          ("x" :foreground "dim gray")))
-
-
-           (setq org-enforce-todo-dependencies t)
-
-       (defun mm/org-insert-trigger ()
-         "Automatically insert chain-find-next trigger when entry becomes NEXT"
-         (cond ((equal org-state "NEXT")
-                (unless org-depend-doing-chain-find-next
-                  (org-set-property "TRIGGER" "chain-find-next(NEXT,from-top,todo-only,priority-up,effort-down)")))
-               ((not (member org-state org-done-keywords))
-                (org-delete-property "TRIGGER"))))
-
-       (add-hook 'org-after-todo-state-change-hook 'mm/org-insert-trigger)
-
-    #+END_SRC
-
-    #+RESULTS:
-    | mm/org-insert-trigger | org-clock-out-if-current |
-
-
 
