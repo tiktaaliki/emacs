@@ -1,0 +1,60 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+((".Xmodmap"
+ (filename . "~/.Xmodmap")
+ (front-context-string)
+ (rear-context-string . "d mod4 = Hyper_L")
+ (position . 51))
+("gallium.org"
+ (filename . "~/Sync/emacs/gallium.org")
+ (front-context-string . "\n\n#+BEGIN_SRC \n\n")
+ (rear-context-string)
+ (position . 1))
+("rc.lua"
+ (filename . "~/.config/awesome/rc.lua")
+ (front-context-string . "-- Standard awes")
+ (rear-context-string)
+ (position . 1))
+("Sync"
+ (filename . "~/Sync/")
+ (front-context-string . "emacs\n  -rw-----")
+ (rear-context-string . "96 Feb  6 16:18 ")
+ (position . 224))
+("709"
+ (filename . "~/Sync/Spring 2019/709/")
+ (front-context-string . "709 ChecklistRev")
+ (rear-context-string . "97 Jan 29 16:14 ")
+ (position . 236))
+("emacs"
+ (filename . "~/Sync/emacs/")
+ (front-context-string . "bookmarks\n  -rw-")
+ (rear-context-string . "95 Feb  6 12:01 ")
+ (position . 223))
+("org-capture-last-stored-marker"
+ (filename . "~/Sync/Zettelkasten/journal.org")
+ (front-context-string . "*** TODO getting")
+ (rear-context-string . "05 Tue 10:00>\n\n\n")
+ (position . 656155))
+("Spring 2019 folder"
+ (filename . "~/Sync/Spring 2019/")
+ (front-context-string . "709\n  -rwxrwxr-x")
+ (rear-context-string . "96 Jan 30 17:21 ")
+ (position . 222))
+("i3 config"
+ (filename . "~/.config/i3/config")
+ (front-context-string . "# This file has ")
+ (rear-context-string)
+ (position . 1))
+("org-refile-last-stored"
+ (filename . "~/Sync/Zettelkasten/inbox.org")
+ (front-context-string . "** TODO figure o")
+ (rear-context-string . "DO clip nails \n\n")
+ (position . 41603))
+("org-capture-last-stored"
+ (filename . "~/Sync/Zettelkasten/personal.org")
+ (front-context-string . "- [2019-02-11 Mo")
+ (rear-context-string . ":END:\n* Health \n")
+ (position . 20134))
+)
