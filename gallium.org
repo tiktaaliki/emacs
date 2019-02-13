@@ -56,52 +56,54 @@
 #+END_SRC
 * Key bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (global-unset-key (kbd "C-z"))     
-   (global-unset-key (kbd "M-c"))
+      (global-unset-key (kbd "C-z"))     
+      (global-unset-key (kbd "M-c"))
+   (define-key (current-global-map) [remap flyspell-auto-correct-word] 'org-todo)
+      (global-unset-key (kbd "S-SPC"))
+      (bind-keys ("C-+"   . text-scale-increase)
+                 ("C--"   . text-scale-decrease)
+                 ("C-c l" . org-store-link)
+	      ("C-c k" . toggle-korean-input-method)
+                 ("C-."   . org-todo)
+                 ("C-x /" . shrink-window-horizontally)
+                 ("C-x ." . org-archive-subtree-default)
+                 ("C-c n" . org-schedule)
+                 ("M-="   . count-words)
+                 ("M-x"   . helm-M-x)
+                 ("M-_" . insert-pair)
+                 ("M-*" . insert-pair)
+                 ("M-\/" . insert-pair)
+                 ("C-c b" . list-bookmarks)
+                 ("C-c p" . bh/punch-in )
+                 ("C-<kp-6>" . xah-select-block)
+                 ("C-x j" . helm-org-in-buffer-headings)
+                 ("C-c a" . helm-org-agenda-files-headings)
+                 ([f1] . org-capture)
+                 ([f2] . org-clock-in)
+                 ([f3] . helm-buffers-list)           
+                 ([f4] . org-refile)
+                 ([f5] . helm-projectile)
+                 ([f6] . helm-bibtex-with-local-bibliography)
+                 ([f7] . org-agenda)
+                 ([f8] . deft)
+                 ([f9] . org-tree-to-indirect-buffer))
 
-   (bind-keys ("C-+"   . text-scale-increase)
-	      ("C--"   . text-scale-decrease)
-	      ("C-c l" . org-store-link)
-	      ("C-."   . org-todo)
-	      ("C-x /" . shrink-window-horizontally)
-	      ("C-x ." . org-archive-subtree-default)
-	      ("C-c n" . org-schedule)
-	      ("M-="   . count-words)
-	      ("M-x"   . helm-M-x)
-	      ("M-_" . insert-pair)
-	      ("M-*" . insert-pair)
-	      ("M-\/" . insert-pair)
-	      ("C-c b" . list-bookmarks)
-	      ("C-c p" . bh/punch-in )
-	      ("C-<kp-6>" . xah-select-block)
-	      ("C-x j" . helm-org-in-buffer-headings)
-	      ("C-c a" . helm-org-agenda-files-headings)
-	      ([f1] . org-capture)
-	      ([f2] . org-clock-in)
-	      ([f3] . helm-buffers-list)           
-	      ([f4] . org-refile)
-	      ([f5] . helm-projectile)
-	      ([f6] . helm-bibtex-with-local-bibliography)
-	      ([f7] . org-agenda)
-	      ([f8] . deft)
-	      ([f9] . org-tree-to-indirect-buffer))
 
+      (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+      (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+      (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+      (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+      (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+      (define-key key-translation-map (kbd "C--") (kbd "–"))
 
-   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-   (define-key key-translation-map (kbd "C--") (kbd "–"))
+      (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+      (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
+      (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+      (define-key key-translation-map (kbd "C-c s") (kbd "ß"))
+      (define-key key-translation-map (kbd "C-c o") (kbd "ö"))
 
-   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
-   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
-   (define-key key-translation-map (kbd "C-c s") (kbd "ß"))
-   (define-key key-translation-map (kbd "C-c o") (kbd "ö"))
-
-   (define-key key-translation-map (kbd "C-c a") (kbd "ä"))
-   (define-key key-translation-map (kbd "C-c u") (kbd "ü"))
+      (define-key key-translation-map (kbd "C-c a") (kbd "ä"))
+      (define-key key-translation-map (kbd "C-c u") (kbd "ü"))
 
 #+END_SRC
 
@@ -148,14 +150,15 @@
 
       (setq org-capture-templates '(("t" "todo" entry (file "~/Sync/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n\n" :prepend t)
                                     ("j" "journal" entry (file+datetree "~/Sync/Zettelkasten/journal.org") "** %<%H:%M> \n\n%?\n\n" :kill-buffer nil ) 
-			      ;%U is inactive date and timestamp
+                              ;%U is inactive date and timestamp
                               ("l" "emacs log" item (file+headline "~/Sync/Zettelkasten/org.org" "Emacs config changes") "%U %?" :prepend t) 
+
                               ("h" "health" item (file+headline "~/Sync/Zettelkasten/personal.org" "Health") "%U %?" :prepend t) 
 
+			("f" "finances" item (file+headline "~/Sync/Zettelkasten/inbox.org" "Income/Expenses") "%U %?" :prepend t)
 
 
-
-                                    ("c" "calendar" entry (file "~/Sync/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
+                                    ("c" "calendar" entry (file "~/Sync/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:")
 
                                     ("e" "expense" table-line (file+headline "~/Sync/Zettelkasten/budget.org" "Expenses to be filed") "|%t|%^{amount}|%a|%^{category|LIS|Food|Transportation|Clothing}|%?|" :append t :kill-buffer nil)
                                     ))
@@ -236,8 +239,27 @@
      ,#+BEGIN: clocktable :scope agenda :tags \"break\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t\n
      ,#+END:"))
 
+#+BEGIN_SRC emacs-lisp :tangle yes
 
+(use-package yasnippet                  ; Snippets
+  :ensure t
+  :config
+  (validate-setq
+   yas-verbosity 1                      ; No need to be so verbose
+   yas-wrap-around-region t)
 
+  (with-eval-after-load 'yasnippet
+    (validate-setq yas-snippet-dirs '(yasnippet-snippets-dir)))
+
+  (yas-reload-all)
+  (yas-global-mode))
+
+(use-package yasnippet-snippets         ; Collection of snippets
+  :ensure t)
+
+#+END_SRC
+
+#+RESULTS:
 
 
 
@@ -703,7 +725,7 @@
    (setq frame-title-format (list (format "%s %%S: %%j " (system-name))
 				  '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
-   (find-file "~/Sync/emacs/settings.org")
+   (find-file "~/Sync/emacs/gallium.org")
    (add-to-list 'default-frame-alist '(fullscreen . maximized))
    (setq inhibit-startup-screen t)
 					   ;(setq split-height-threshold nil)
@@ -717,6 +739,9 @@
 
 
 #+END_SRC
+
+#+RESULTS:
+
 * debugging
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -840,9 +865,12 @@
 
 					   ;spellcheck
    (use-package flyspell-correct-helm)
-
+(add-hook 'org-mode-hook 'turn-on-flyspell)
 
 #+END_SRC
+
+#+RESULTS:
+| turn-on-flyspell | org-clock-load | (closure (org-agenda-skip-regexp org-table1-hline-regexp org-table-tab-recognizes-table.el org-table-dataline-regexp org-table-any-border-regexp org-agenda-restriction-lock-overlay org-agenda-overriding-restriction org-agenda-diary-file org-complex-heading-regexp t) nil (setq imenu-create-index-function (quote org-imenu-get-tree))) | (closure (org-mouse-rest t) nil (setq org-mouse-context-menu-function (quote org-mouse-context-menu)) (if (memq (quote context-menu) org-mouse-features) (progn (org-defkey org-mouse-map [mouse-3] nil) (org-defkey org-mode-map [mouse-3] (quote org-mouse-show-context-menu)))) (org-defkey org-mode-map [down-mouse-1] (quote org-mouse-down-mouse)) (if (memq (quote context-menu) org-mouse-features) (progn (org-defkey org-mouse-map [C-drag-mouse-1] (quote org-mouse-move-tree)) (org-defkey org-mouse-map [C-down-mouse-1] (quote org-mouse-move-tree-start)))) (if (memq (quote yank-link) org-mouse-features) (progn (org-defkey org-mode-map [S-mouse-2] (quote org-mouse-yank-link)) (org-defkey org-mode-map [drag-mouse-3] (quote org-mouse-yank-link)))) (if (memq (quote move-tree) org-mouse-features) (progn (org-defkey org-mouse-map [drag-mouse-3] (quote org-mouse-move-tree)) (org-defkey org-mouse-map [down-mouse-3] (quote org-mouse-move-tree-start)))) (if (memq (quote activate-stars) org-mouse-features) (progn (font-lock-add-keywords nil (list (cons org-outline-regexp (quote (0 (` (face org-link mouse-face highlight keymap (, org-mouse-map))) (quote prepend))))) t))) (if (memq (quote activate-bullets) org-mouse-features) (progn (font-lock-add-keywords nil (quote ((^[ 	]*\([-+*]\ | [0-9]+[.)]\) + (1 (` (face org-link keymap (, org-mouse-map) mouse-face highlight)) (quote prepend))))) t))) (if (memq (quote activate-checkboxes) org-mouse-features) (progn (font-lock-add-keywords nil (quote ((^[ 	]*\([-+*]\ | [0-9]+[.)]\) +\(\[[ X]\]\) (2 (` (face bold keymap (, org-mouse-map) mouse-face highlight)) t)))) t))) (progn (ad-add-advice (quote org-open-at-point) (quote (org-mouse-open-at-point nil t (advice lambda nil (let ((context (org-context))) (cond ((assq :headline-stars context) (org-cycle)) ((assq :checkbox context) (org-toggle-checkbox)) ((assq :item-bullet context) (let ((org-cycle-include-plain-lists t)) (org-cycle))) ((org-footnote-at-reference-p) nil) (t ad-do-it)))))) (quote around) (quote nil)) (ad-activate (quote org-open-at-point) nil) (quote org-open-at-point))) | org-ref-org-menu | (lambda nil (org-bullets-mode 1)) | (closure (org--rds reftex-docstruct-symbol orgtbl-line-start-regexp org-element-greater-elements org-table-coordinate-overlays org-table-auto-blank-field org-clock-history org-agenda-current-date org-with-time org-defdecode org-def org-read-date-inactive org-ans2 org-ans1 org-columns-current-fmt-compiled org-clock-current-task org-clock-effort org-agenda-skip-function org-agenda-skip-comment-trees org-agenda-archives-mode org-end-time-was-given org-time-was-given org-log-note-extra org-log-note-purpose org-log-post-message org-last-inserted-timestamp org-last-changed-timestamp org-entry-property-inherited-from org-blocked-by-checkboxes org-state org-agenda-headline-snapshot-before-repeat org-capture-last-stored-marker org-agenda-start-on-weekday org-agenda-buffer-tmp-name clean-buffer-list-kill-buffer-names org-id-link-to-org-use-id org-agenda-buffer-name org-priority-regexp buffer-face-mode-face org-mode-map org-tbl-menu org-org-menu org-struct-menu org-entities org-last-state org-id-track-globally org-clock-start-time texmathp-why remember-data-file org-agenda-tags-todo-honor-ignore-options iswitchb-temp-buflist calc-embedded-open-mode calc-embedded-open-formula calc-embedded-close-formula align-mode-rules-list org-emphasis-alist org-emphasis-regexp-components org-export-registered-backends org-modules org-babel-load-languages org-indent-indentation-per-level org-element-paragraph-separate ffap-url-regexp org-inlinetask-min-level t) nil (add-hook (quote change-major-mode-hook) (quote org-show-all) (quote append) (quote local))) | (closure (org-bracket-link-regexp org-src-window-setup *this* org-babel-confirm-evaluate-answer-no org-src-preserve-indentation org-src-lang-modes org-link-file-path-type org-edit-src-content-indentation org-babel-library-of-babel t) nil (add-hook (quote change-major-mode-hook) (quote org-babel-show-result-all) (quote append) (quote local))) | org-babel-result-hide-spec | org-babel-hide-all-hashes |
 
 
 
@@ -1200,11 +1228,7 @@
 
 ** headers view
 
-
-
-  #+BEGIN_SRC emacs-lisp :tangle yes
-
-    (setq mu4e-headers-fields
+   (setq mu4e-headers-fields
 	  '( (:human-date    .  15)    ;; alternatively, use :human-date
 	     (:flags         .   5)
 	     (:from          .  20)
@@ -1212,6 +1236,10 @@
              (:thread-subject       . 120 )
 	     )) 
 
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+ 
      (setq org-mu4e-link-query-in-headers-mode nil)
      ;(setq mu4e-update-interval 60)
      ;(setq mu4e-index-update-in-background t)
@@ -1272,11 +1300,11 @@
       :contents-sources
       (list
        (cfw:org-create-source "cornflower blue")  ; orgmode source
-       (cfw:cal-create-source "light goldenrod") ; diary source
+;       (cfw:cal-create-source "light goldenrod") ; diary source
       ))) 
 
-    (setq calendar-daylight-savings-starts '(3 11 year))
-    (setq calendar-daylight-savings-ends: '(11 4 year))
+ ;   (setq calendar-daylight-savings-starts '(3 11 year))
+  ;  (setq calendar-daylight-savings-ends: '(11 4 year))
    (setq calendar-week-start-day 1)
 
 
@@ -1284,6 +1312,9 @@
 
 
    #+END_SRC
+
+   #+RESULTS:
+   : 1
 
   
 * org misc
