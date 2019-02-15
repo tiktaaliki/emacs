@@ -10,6 +10,37 @@
 
 #+END_SRC
 
+* latex
+#+BEGIN_SRC emacs-lisp :tangle yes
+(require 'company-auctex)
+(company-auctex-init)
+
+
+(use-package tex :ensure auctex)
+
+     (setq TeX-auto-save t)
+     (setq TeX-parse-self t)
+
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* completion
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+ (require 'company-bibtex)
+ (add-to-list 'company-backends 'company-bibtex)
+
+  (setq company-bibtex-bibliography
+   '("~/Zettelkasten/references.bib"))
+
+
+#+END_SRC
+
+#+RESULTS:
+| ~/Zettelkasten/references.bib |
 
 * convenience
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -56,9 +87,14 @@
 #+END_SRC
 * Key bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
+
+(eval-after-load "flyspell"
+  '(define-key flyspell-mode-map (kbd "C-.") nil))
+
+
       (global-unset-key (kbd "C-z"))     
       (global-unset-key (kbd "M-c"))
-   (define-key (current-global-map) [remap flyspell-auto-correct-word] 'org-todo)
+
       (global-unset-key (kbd "S-SPC"))
       (bind-keys ("C-+"   . text-scale-increase)
                  ("C--"   . text-scale-decrease)
@@ -86,7 +122,9 @@
                  ([f6] . helm-bibtex-with-local-bibliography)
                  ([f7] . org-agenda)
                  ([f8] . deft)
-                 ([f9] . org-tree-to-indirect-buffer))
+                 ([f9] . org-tree-to-indirect-buffer)
+([f12] . kill-buffer)
+)
 
 
       (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
@@ -141,6 +179,8 @@
     (use-package projectile)
     (use-package helm-projectile)
 #+END_SRC
+
+#+RESULTS:
 
 
 
@@ -1157,7 +1197,7 @@
  (visual-fill-column-mode 1))
 
  (add-hook 'mu4e-view-mode-hook #'vfcm-on)
-  (setq visual-fill-column-width 100)
+;  (setq visual-fill-column-width 100)
  (defun no-auto-fill ()
    "Turn off auto-fill-mode."
    (auto-fill-mode -1))
@@ -1479,7 +1519,7 @@
        (org-clock-persistence-insinuate)
        ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
        ;(setq org-clock-continuously t)
-       (setq org-clock-history-length 302)
+;       (setq org-clock-history-length 302)
        ;; Resume clocking task on clock-in if the clock is open
        ;(setq org-clock-in-resume nil)
 

@@ -34,7 +34,7 @@
  '(bibtex-autokey-titlewords 0)
  '(bibtex-autokey-year-length 4)
  '(delete-by-moving-to-trash t)
- '(fill-column 100)
+ '(fill-column 150)
  '(fringe-mode 100 nil (fringe))
  '(global-visual-fill-column-mode t)
  '(global-visual-line-mode t)
@@ -45,37 +45,68 @@
  '(mu4e-headers-fields (quote ((:human-date . 10) (:from . 22) (:subject))))
  '(mu4e-headers-visible-columns 200)
  '(mu4e-split-view (quote vertical))
+ '(org-archive-location
+   "~/Sync/Zettelkasten/journal.org::datetree/* Finished tasks")
+ '(org-clock-history-length 35)
  '(org-log-refile (quote time))
  '(org-refile-allow-creating-parent-nodes (quote confirm))
  '(org-structure-template-alist
    (quote
-    (("a" . "export ascii")
-     ("c" . "center")
-     ("C" . "comment")
-     ("e" . "example")
-     ("E" . "export")
-     ("h" . "export html")
-     ("l" . "export latex")
-     ("q" . "quote")
-     ("s" . "src")
-     ("v" . "verse"))))
+    (("s" "#+BEGIN_SRC ?
+
+#+END_SRC")
+     ("e" "#+BEGIN_EXAMPLE
+?
+#+END_EXAMPLE")
+     ("q" "#+BEGIN_QUOTE
+?
+#+END_QUOTE")
+     ("v" "#+BEGIN_VERSE
+?
+#+END_VERSE")
+     ("V" "#+BEGIN_VERBATIM
+?
+#+END_VERBATIM")
+     ("c" "#+BEGIN: clocktable :scope agenda :match \"-ourhome-break\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 20 :tcolumns 2 :indent t #+END")
+     ("C" "#+BEGIN_COMMENT
+?
+#+END_COMMENT")
+     ("l" "#+BEGIN_EXPORT latex
+?
+#+END_EXPORT")
+     ("L" "#+LaTeX: ")
+     ("h" "#+BEGIN_EXPORT html
+?
+#+END_EXPORT")
+     ("H" "#+HTML: ")
+     ("a" "#+BEGIN_EXPORT ascii
+?
+#+END_EXPORT")
+     ("A" "#+ASCII: ")
+     ("p" ":PROPERTIES: 
+?
+:END:")
+     ("i" "#+INDEX: ?")
+     ("I" "#+INCLUDE: %file ?")
+     ("" ""))))
  '(org-todo-keyword-faces
    (quote
     (("habit" :foreground "dodger blue" :height 0.9)
      ("TODO" :foreground "#0059b3" :height 0.9)
      ("PROJECT" :foreground "#38471f" :weight bold :underline t :height 0.75)
      ("NEXT" :foreground "red" :weight bold :height 0.9)
-     ("--" :foreground "magenta1" :height 0.9)
+     ("[~]" :foreground "#cc0066" :weight bold :height 0.9)
      ("?" :foreground "salmon" :height 0.9)
      ("DONE" :foreground "dim gray" :height 0.75)
      ("x" :foreground "dim gray" :height 0.75))))
  '(org-todo-keywords
    (quote
-    ((sequence "TODO(t)" "NEXT(n)" "--(s)" "|" "DONE(d!)" "x(c!)")
+    ((sequence "TODO(t)" "NEXT(n)" "[~](s)" "|" "DONE(d!)" "x(c!)")
      (sequence "habit(h)" "PROJECT(p)" "?(w!)"))))
+ '(org-trello-current-prefix-keybinding "C-c o")
  '(package-selected-packages
    (quote
-    (yasnippet-snippets yasnippet ledger-mode org-gcal writeroom-mode use-package smartparens org-ref org-noter org-bullets olivetti magit interleave helm-projectile flyspell-correct-helm deft company calfw-org calfw-gcal calfw-cal calfw bbdb)))
+    (org-trello ox-pandoc pandoc company-bibtex company-auctex auctex yasnippet-snippets yasnippet ledger-mode org-gcal writeroom-mode use-package smartparens org-ref org-noter org-bullets olivetti magit interleave helm-projectile flyspell-correct-helm deft company calfw-org calfw-gcal calfw-cal calfw bbdb)))
  '(pdf-view-continuous nil)
  '(projectile-mode t nil (projectile))
  '(savehist-mode t)
@@ -88,7 +119,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#e1d5c0" :foreground "#432109" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 203 :width normal :foundry "CYEL" :family "Iosevka Term SS09"))))
+ '(default ((t (:inherit nil :stipple nil :background "#e1d5c0" :foreground "#432109" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 190 :width normal :foundry "CYEL" :family "Iosevka Term SS09"))))
  '(fringe ((t (:inherit default))))
  '(mu4e-unread-face ((t (:foreground "midnight blue" :weight bold))))
  '(org-agenda-date ((t (:inherit variable-pitch :background "pale green"))))
@@ -96,10 +127,11 @@
  '(org-checkbox-statistics-done ((t (:inherit org-done :height 0.85))))
  '(org-done ((t (:foreground "ForestGreen"))))
  '(org-ellipsis ((t (:foreground "DarkGoldenrod" :underline nil))))
- '(org-level-1 ((t (:inherit variable-pitch :height 1.2))))
- '(org-level-2 ((t (:inherit org-level-1 :height 0.9))))
- '(org-level-3 ((t (:inherit default :foreground "black"))))
- '(org-level-4 ((t (:inherit org-level-3 :foreground "royal blue"))))
+ '(org-level-1 ((t (:weight bold :height 1.2 :family "arima madurai"))))
+ '(org-level-2 ((t (:inherit variable-pitch :height 1.1))))
+ '(org-level-3 ((t (:inherit default :foreground "#333333" :height 1.1))))
+ '(org-level-4 ((t (:inherit org-level-3 :foreground "#0f3d0f"))))
+ '(org-list-dt ((t (:background "gold" :weight bold))))
  '(org-scheduled-previously ((t (:foreground "dim gray"))))
  '(org-special-keyword ((t (:foreground "peachpuff4" :height 0.85))))
  '(org-tag ((t (:inherit default :foreground "dark violet" :height 0.8))))

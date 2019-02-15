@@ -1,4 +1,247 @@
 ﻿
+* UNICODE
+Unified Canadian Aboriginal Syllabics Extended
+
+ᢰᢱᢲᢳᢴᢵᢶᢷᢸᢹᢺᢻᢼᢽᢾᢿᣀᣁᣂᣃᣄᣅᣆᣇᣈᣉᣊᣋᣌᣍᣎᣏᣐᣑᣒᣓᣔᣕᣖᣗᣘᣙᣚᣛᣜᣝᣞᣟᣠᣡᣢᣣᣤᣥᣦᣧᣨᣩᣪᣫᣬᣭᣮᣯᣰᣱᣲᣳᣴᣵ
+
+Sundanese Supplement
+
+᳀᳁᳂᳃᳄᳅᳆᳇
+
+Mathematical Operators
+∀∁∂∃∄∅∆∇∈∉∊∋∌∍∎∏2210∐∑−∓∔∕∖∗∘∙√∛∜∝∞∟2220∠∡∢∣∤∥∦∧∨∩∪∫∬∭∮∯2230∰∱∲∳∴∵∶∷∸∹∺∻∼∽∾∿2240≀≁≂≃≄≅≆≇≈≉≊≋≌≍≎≏2250≐≑≒≓≔≕≖≗≘≙≚≛≜≝≞≟2260≠≡≢≣≤≥≦≧≨≩≪≫≬≭≮≯2270≰≱≲≳≴≵≶≷≸≹≺≻≼≽≾≿2280⊀⊁⊂⊃⊄⊅⊆⊇⊈⊉⊊⊋⊌⊍⊎⊏2290⊐⊑⊒⊓⊔⊕⊖⊗⊘⊙⊚⊛⊜⊝⊞⊟22A0⊠⊡⊢⊣⊤⊥⊦⊧⊨⊩⊪⊫⊬⊭⊮⊯22B0⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊿22C0⋀⋁⋂⋃⋄⋅⋆⋇⋈⋉⋊⋋⋌⋍⋎⋏22D0⋐⋑⋒⋓⋔⋕⋖⋗⋘⋙⋚⋛⋜⋝⋞⋟22E0⋠⋡⋢⋣⋤⋥⋦⋧⋨⋩⋪⋫⋬⋭⋮⋯22F0⋰⋱⋲⋳⋴⋵⋶⋷⋸⋹⋺⋻⋼⋽⋾⋿
+
+Miscellaneous Technical
+⌀⌁⌂⌃⌄⌅⌆⌇⌈⌉⌊⌋⌌⌍⌎⌏2310⌐⌑⌒⌓⌔⌕⌖⌗⌘⌙⌚⌛⌜⌝⌞⌟2320⌠⌡⌢⌣⌤⌥⌦⌧⌨〈〉⌫⌬⌭⌮⌯2330⌰⌱⌲⌳⌴⌵⌶⌷⌸⌹⌺⌻⌼⌽⌾⌿2340⍀⍁⍂⍃⍄⍅⍆⍇⍈⍉⍊⍋⍌⍍⍎⍏2350⍐⍑⍒⍓⍔⍕⍖⍗⍘⍙⍚⍛⍜⍝⍞⍟2360⍠⍡⍢⍣⍤⍥⍦⍧⍨⍩⍪⍫⍬⍭⍮⍯2370⍰⍱⍲⍳⍴⍵⍶⍷⍸⍹⍺⍻⍼⍽⍾⍿2380⎀⎁⎂⎃⎄⎅⎆⎇⎈⎉⎊⎋⎌⎍⎎⎏2390⎐⎑⎒⎓⎔⎕⎖⎗⎘⎙⎚⎛⎜⎝⎞⎟23A0⎠⎡⎢⎣⎤⎥⎦⎧⎨⎩⎪⎫⎬⎭⎮⎯23B0⎰⎱⎲⎳⎴⎵⎶⎷⎸⎹⎺⎻⎼⎽⎾⎿23C0⏀⏁⏂⏃⏄⏅⏆⏇⏈⏉⏊⏋⏌⏍⏎⏏23D0⏐⏑⏒⏓⏔⏕⏖⏗⏘⏙⏚⏛⏜⏝⏞⏟23E0⏠⏡⏢⏣⏤⏥⏦⏧⏨⏩⏪⏫⏬⏭⏮⏯23F0⏰⏱⏲⏳⏴⏵⏶⏷⏸⏹⏺⏻⏼⏽⏾⏿
+
+
+Geometric Shapes
+A0■□▢▣▤▥▦▧▨▩▪▫▬▭▮▯25B0▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿25C0◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●25D0◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟25E0◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯25F0◰◱◲◳◴◵◶◷◸◹◺◻◼◽◾◿
+Miscellaneous Symbols
+0123456789ABCDEF
+2600☀☁☂☃☄★☆☇☈☉☊☋☌☍☎☏2610☐☑☒x☔☕☖☗☘☙☚☛☜☝☞☟2620☠☡☢☣☤☥☦☧☨☩☪☫☬☭☮☯2630☰☱☲☳☴☵☶☷☸☹☺☻☼☽☾☿2640♀♁♂♃♄♅♆♇♈♉♊♋♌♍♎♏2650♐♑♒♓♔♕♖♗♘♙♚♛♜♝♞♟2660♠♡♢♣♤♥♦♧♨♩♪♫♬♭♮♯2670♰♱♲♳♴♵♶♷♸♹♺♻♼♽♾♿2680⚀⚁⚂⚃⚄⚅⚆⚇⚈⚉⚊⚋⚌⚍⚎⚏2690⚐⚑⚒⚓⚔⚕⚖⚗⚘⚙⚚⚛⚜⚝⚞⚟26A0⚠⚡⚢⚣⚤⚥⚦⚧⚨⚩⚪⚫⚬⚭⚮⚯26B0⚰⚱⚲⚳⚴⚵⚶⚷⚸⚹⚺⚻⚼⚽⚾⚿26C0⛀⛁⛂⛃⛄⛅⛆⛇⛈⛉⛊⛋⛌⛍⛎⛏26D0⛐⛑⛒⛓⛔⛕⛖⛗⛘⛙⛚⛛⛜⛝⛞⛟26E0⛠⛡⛢⛣⛤⛥⛦⛧⛨⛩⛪⛫⛬⛭⛮⛯26F0⛰⛱⛲⛳⛴⛵⛶⛷⛸⛹⛺⛻⛼⛽⛾⛿
+
+Dingbats
+0✀✁✂✃✄✅✆✇✈✉✊✋✌✍✎✏2710✐✑✒DONE✔✕✖✗✘✙✚✛✜✝✞✟2720✠✡✢✣✤✥✦✧✨✩✪✫✬✭✮✯2730✰✱✲✳✴✵✶✷✸✹✺✻✼✽✾✿2740❀❁❂❃❄❅❆❇❈❉❊❋❌❍❎❏2750❐❑❒❓❔❕❖❗❘❙❚❛❜❝❞❟2760❠❡❢❣❤❥❦❧❨❩❪❫❬❭❮❯2770❰❱❲❳❴❵❶❷❸❹❺❻❼❽❾❿2780➀➁➂➃➄➅➆➇➈➉➊➋➌➍➎➏2790➐➑➒➓➔➕➖➗➘➙➚➛➜➝➞➟27A0➠➡➢➣➤➥➦➧➨➩➪➫➬➭➮➯27B0➰➱➲➳➴➵➶➷➸➹➺➻➼➽➾➿
+
+Miscellaneous Mathematical Symbols-A
+⟀⟁⟂⟃⟄⟅⟆⟇⟈⟉⟊⟋⟌⟍⟎⟏27D0⟐⟑⟒⟓⟔⟕⟖⟗⟘⟙⟚⟛⟜⟝⟞⟟27E0⟠⟡⟢⟣⟤⟥⟦⟧⟨⟩⟪⟫⟬⟭⟮⟯
+Supplemental Arrows-A
+0123456789ABCDEF
+27F0⟰⟱⟲⟳⟴⟵⟶⟷⟸⟹⟺⟻⟼⟽⟾⟿
+Braille Patterns
+Supplemental Arrows-B
+Miscellaneous Mathematical Symbols-B
+⦀⦁⦂⦃⦄⦅⦆⦇⦈⦉⦊⦋⦌⦍⦎⦏2990⦐⦑⦒⦓⦔⦕⦖⦗⦘⦙⦚⦛⦜⦝⦞⦟29A0⦠⦡⦢⦣⦤⦥⦦⦧⦨⦩⦪⦫⦬⦭⦮⦯29B0⦰⦱⦲⦳⦴⦵⦶⦷⦸⦹⦺⦻⦼⦽⦾⦿29C0⧀⧁⧂⧃⧄⧅⧆⧇⧈⧉⧊⧋⧌⧍⧎⧏29D0⧐⧑⧒⧓⧔⧕⧖⧗⧘⧙⧚⧛⧜⧝⧞⧟29E0⧠⧡⧢⧣⧤⧥⧦⧧⧨⧩⧪⧫⧬⧭⧮⧯29F0⧰⧱⧲⧳⧴⧵⧶⧷⧸⧹⧺⧻⧼⧽⧾⧿
+Supplemental Mathematical Operators
+0123456789ABCDEF
+2A00⨀⨁⨂⨃⨄⨅⨆⨇⨈⨉⨊⨋⨌⨍⨎⨏2A10⨐⨑⨒⨓⨔⨕⨖⨗⨘⨙⨚⨛⨜⨝⨞⨟2A20⨠⨡⨢⨣⨤⨥⨦⨧⨨⨩⨪⨫⨬⨭⨮⨯2A30⨰⨱⨲⨳⨴⨵⨶⨷⨸⨹⨺⨻⨼⨽⨾⨿2A40⩀⩁⩂⩃⩄⩅⩆⩇⩈⩉⩊⩋⩌⩍⩎⩏2A50⩐⩑⩒⩓⩔⩕⩖⩗⩘⩙⩚⩛⩜⩝⩞⩟2A60⩠⩡⩢⩣⩤⩥⩦⩧⩨⩩⩪⩫⩬⩭⩮⩯2A70⩰⩱⩲⩳⩴⩵⩶⩷⩸⩹⩺⩻⩼⩽⩾⩿2A80⪀⪁⪂⪃⪄⪅⪆⪇⪈⪉⪊⪋⪌⪍⪎⪏2A90⪐⪑⪒⪓⪔⪕⪖⪗⪘⪙⪚⪛⪜⪝⪞⪟2AA0⪠⪡⪢⪣⪤⪥⪦⪧⪨⪩⪪⪫⪬⪭⪮⪯2AB0⪰⪱⪲⪳⪴⪵⪶⪷⪸⪹⪺⪻⪼⪽⪾⪿2AC0⫀⫁⫂⫃⫄⫅⫆⫇⫈⫉⫊⫋⫌⫍⫎⫏2AD0⫐⫑⫒⫓⫔⫕⫖⫗⫘⫙⫚⫛⫝̸⫝⫞⫟2AE0⫠⫡⫢⫣⫤⫥⫦⫧⫨⫩⫪⫫⫬⫭⫮⫯2AF0⫰⫱⫲⫳⫴⫵⫶⫷⫸⫹⫺⫻⫼⫽⫾⫿
+Miscellaneous Symbols and Arrows
+0123456789ABCDEF
+2B00⬀⬁⬂⬃⬄⬅⬆⬇⬈⬉⬊⬋⬌⬍⬎⬏2B10⬐⬑⬒⬓⬔⬕⬖⬗⬘⬙⬚⬛⬜⬝⬞⬟2B20⬠⬡⬢⬣⬤⬥⬦⬧⬨⬩⬪⬫⬬⬭⬮⬯2B30⬰⬱⬲⬳⬴⬵⬶⬷⬸⬹⬺⬻⬼⬽⬾⬿2B40⭀⭁⭂⭃⭄⭅⭆⭇⭈⭉⭊⭋⭌⭍⭎⭏2B50⭐⭑⭒⭓⭔⭕⭖⭗⭘⭙⭚⭛⭜⭝⭞⭟2B60⭠⭡⭢⭣⭤⭥⭦⭧⭨⭩⭪⭫⭬⭭⭮⭯2B70⭰⭱⭲⭳  ⭶⭷⭸⭹⭺⭻⭼⭽⭾⭿2B80⮀⮁⮂⮃⮄⮅⮆⮇⮈⮉⮊⮋⮌⮍⮎⮏2B90⮐⮑⮒⮓⮔⮕  ⮘⮙⮚⮛⮜⮝⮞⮟2BA0⮠⮡⮢⮣⮤⮥⮦⮧⮨⮩⮪⮫⮬⮭⮮⮯2BB0⮰⮱⮲⮳⮴⮵⮶⮷⮸⮹   ⮽⮾⮿2BC0⯀⯁⯂⯃⯄⯅⯆⯇⯈ ⯊⯋⯌⯍⯎⯏2BD0⯐⯑⯒             2BE0            ⯬⯭⯮⯯2BF0             
+
+Tifinagh
+ⴰⴱⴲⴳⴴⴵⴶⴷⴸⴹⴺⴻⴼⴽⴾⴿ2D40ⵀⵁⵂⵃⵄⵅⵆⵇⵈⵉⵊⵋⵌⵍⵎⵏ2D50ⵐⵑⵒⵓⵔⵕⵖⵗⵘⵙⵚⵛⵜⵝⵞⵟ2D60ⵠⵡⵢⵣⵤⵥⵦⵧ       ⵯ2D70
+⵰
+Supplemental Punctuation
+0123456789ABCDEF
+2E00⸀⸁⸂⸃⸄⸅⸆⸇⸈⸉⸊⸋⸌⸍⸎⸏2E10⸐⸑⸒⸓⸔⸕⸖⸗⸘⸙⸚⸛⸜⸝⸞⸟2E20⸠⸡⸢⸣⸤⸥⸦⸧⸨⸩⸪⸫⸬⸭⸮ⸯ2E30⸰⸱⸲⸳⸴⸵⸶⸷⸸⸹⸺⸻⸼⸽⸾⸿2E40⹀⹁⹂⹃⹄⹅⹆⹇⹈⹉
+CJK Radicals Supplement
+Kangxi Radicals
+Ideographic Description Characters
+CJK Symbols and Punctuation
+Hiragana
+Katakana
+Bopomofo
+Hangul Compatibility Jamo
+Kanbun
+Bopomofo Extended
+CJK Strokes
+Katakana Phonetic Extensions
+Enclosed CJK Letters and Months
+CJK Compatibility
+CJK Unified Ideographs Extension A
+Yijing Hexagram Symbols
+CJK Unified Ideographs
+Yi Syllables
+Yi Radicals
+Lisu
+Vai
+Cyrillic Extended-B
+Bamum
+Modifier Tone Letters
+Latin Extended-D
+Syloti Nagri
+Common Indic Number Forms
+Phags-pa
+Saurashtra
+Devanagari Extended
+Kayah Li
+Rejang
+Hangul Jamo Extended-A
+Javanese
+Myanmar Extended-B
+Cham
+Myanmar Extended-A
+Tai Viet
+Meetei Mayek Extensions
+Ethiopic Extended-A
+Latin Extended-E
+Cherokee Supplement
+Meetei Mayek
+Hangul Syllables
+Hangul Jamo Extended-B
+High Surrogates
+High Private Use Surrogates
+Low Surrogates
+Private Use Area
+CJK Compatibility Ideographs
+Alphabetic Presentation Forms
+Arabic Presentation Forms-A
+Variation Selectors
+Vertical Forms
+Combining Half Marks
+CJK Compatibility Forms
+Small Form Variants
+Arabic Presentation Forms-B
+Halfwidth and Fullwidth Forms
+Specials
+Linear B Syllabary
+Linear B Ideograms
+Aegean Numbers
+Ancient Greek Numbers
+Ancient Symbols
+Phaistos Disc
+Lycian
+Carian
+Coptic Epact Numbers
+Old Italic
+Gothic
+Old Permic
+Ugaritic
+Old Persian
+Deseret
+Shavian
+Osmanya
+Osage
+Elbasan
+Caucasian Albanian
+Linear A
+Cypriot Syllabary
+Imperial Aramaic
+Palmyrene
+Nabataean
+Hatran
+Phoenician
+Lydian
+Meroitic Hieroglyphs
+Meroitic Cursive
+Kharoshthi
+Old South Arabian
+Old North Arabian
+Manichaean
+Avestan
+Inscriptional Parthian
+Inscriptional Pahlavi
+Psalter Pahlavi
+Old Turkic
+Old Hungarian
+Rumi Numeral Symbols
+Brahmi
+Kaithi
+Sora Sompeng
+Chakma
+Mahajani
+Sharada
+Sinhala Archaic Numbers
+Khojki
+Multani
+Khudawadi
+Grantha
+Newa
+Tirhuta
+Siddham
+Modi
+Mongolian Supplement
+Takri
+Ahom
+Warang Citi
+Zanabazar Square
+Soyombo
+Pau Cin Hau
+Bhaiksuki
+Marchen
+Masaram Gondi
+Cuneiform
+Cuneiform Numbers and Punctuation
+Early Dynastic Cuneiform
+Egyptian Hieroglyphs
+Anatolian Hieroglyphs
+Bamum Supplement
+Mro
+Bassa Vah
+Pahawh Hmong
+Miao
+Ideographic Symbols and Punctuation
+Tangut
+Tangut Components
+Kana Supplement
+Kana Extended-A
+Nushu
+Duployan
+Shorthand Format Controls
+Byzantine Musical Symbols
+Musical Symbols
+Ancient Greek Musical Notation
+Tai Xuan Jing Symbols
+Counting Rod Numerals
+Mathematical Alphanumeric Symbols
+Sutton SignWriting
+Glagolitic Supplement
+Mende Kikakui
+Adlam
+Arabic Mathematical Alphabetic Symbols
+Mahjong Tiles
+Domino Tiles
+Playing Cards
+Enclosed Alphanumeric Supplement
+Enclosed Ideographic Supplement
+Miscellaneous Symbols and Pictographs
+Emoticons (Emoji)
+Ornamental Dingbats
+Transport and Map Symbols
+Alchemical Symbols
+Geometric Shapes Extended
+Supplemental Arrows-C
+Supplemental Symbols and Pictographs
+CJK Unified Ideographs Extension B
+CJK Unified Ideographs Extension C
+CJK Unified Ideographs Extension D
+CJK Unified Ideographs Extension E
+CJK Unified Ideographs Extension F
+CJK Compatibility Ideographs Supplement
+Tags
+Variation Selectors Supplement
+
+
+arrows
+
+← ↑ → ↓ ↔ ↕ ↖ ↗ ↘ ↙ ▲ ▼ ◀ ▶ ➔ ➘ ➙ ➚ ➛ ➜ ➝ ➞ ➟ ➠ ➡ ➢ ➣ ➤ ➥ ➦ ↪ ↩ ↚ ↛ ↜ ↝ ↞ ↟ ↠ ↡ ↢ ↣ ↤ ↦ ↥ ↧ ↨ ↫ ↬ ↭ ↮ ↯ ↰ ↱ ↲ ↴ ↳ ↵ ↶ ↷ ↸ ↹ ↺ ↻ ⟲ ⟳ ↼ ↽ ↾ ↿ ⇀ ⇁ ⇂ ⇃ ⇄ ⇅ ⇆ ⇇ ⇐ ⇑ ⇒ ⇓ ⇔ ⇌ ⇍ ⇏ ⇕ ⇖ ⇗ ⇘ ⇙ ⇙ ⇳ ⇚ ⇛ ⇜ ⇝ ⇞ ⇟ ⇟ ⇟ ⇠ ⇡ ⇢ ⇣ ⇤ ⇥ ⇦ ⇨ ⇩ ⇪ ⇧ ⇫ ⇬ ⇭ ⇮ ⇯ ⇰ ⇱ ⇲ ⇴ ⇵ ⇶ ⇷ ⇸ ⇹ ⇺ ⇺ ⇻ ⇼ ⇽ ⇾ ⇿ ⟰ ⟱ ⟴ ⟵ ⟶ ⟷ ⟸ ⟹ ⟽ ⟾ ⟺ ⟻ ⟼ ⟿ ⤀ ⤁ ⤅ ⤂ ⤃ ⤄ ⤆ ⤇ ⤈ ⤉ ⤊ ⤋ ⤌ ⤍ ⤎ ⤏ ⤐ ⤑ ⤒ ⤓ ⤔ ⤕ ⤖ ⤗ ⤘ ⤙ ⤙ ⤚ ⤛ ⤜ ⤝ ⤞ ⤡ ⤢ ⤣ ⤤ ⤥ ⤦ ⤧ ⤨ ⤩ ⤪ ⤭ ⤮ ⤯ ⤰ ⤱ ⤲ ⤳ ⤻ ⤸ ⤾ ⤿ ⤺ ⤼ ⤽ ⤴ ⤵ ⤶ ⤷ ⤹ ⥀ ⥁ ⥂ ⥃ ⥄ ⥅ ⥆ ⥇ ⥈ ⥉ ⥒ ⥓ ⥔ ⥕ ⥖ ⥗ ⥘ ⥙ ⥚ ⥛ ⥜ ⥝ ⥞ ⥟ ⥠ ⥡ ⥢ ⥣ ⥤ ⥥ ⥦ ⥧ ⥨ ⥩ ⥪ ⥫ ⥬ ⥭ ⥮ ⥯ ⥰ ⥱ ⥲ ⥳ ⥴ ⥵ ⥶ ⥷ ⥸ ⥹ ⥺ ⥻ ➧ ➨ ➩ ➪ ➫ ➬ ➭ ➮ ➯ ➱ ➲ ➳ ➴ ➵ ➶ ➷ ➸ ➹ ➺ ➻ ➼ ➽ ➾ ⬅ ⬆ ⬇ ⏎ ⬎ ⬏ ⬐ ⬑ ☈ ☇ ⍃ ⍄ ⍇ ⍈ ⍐ ⍗ ⍌ ⍓ ⍍ ⍔ ⍏ ⍖ ⍅ ⍆ ⬈ ⬉ ⬊ ⬋ ⬌ ⬍ ⬀ ⬁ ⬂ ⬃ ⬄
+
+
+special symbols
+« » ❝ ❞ × ⦂ ⁃ ‐ ‑ ‒ � – ⎯ — ― ~ ⁓ • ° % ‰ ‱ & ⅋ § ÷ ± ‼ ¡ ¿ ⸮ ⁇ ⁉ ⁈ ‽ ⸘ ¼ ½ ¾ ² ³ ⅕ ⅙ ⅛ © ® ™ ℠ ℻ ℅ ℁ ⅍ ¶ ⁋ ≠ √ � ∛ ∜ ∞ β Φ Σ € ₤ ＄ ♀ ♂ ⚢ ⚣ ⌘ ♲ ♻ ☺ ★ ↑ ↓
+
+Runic
+
+ᚠᚡᚢᚣᚤᚥᚦᚧᚨᚩᚪᚫᚬᚭᚮᚯᚰᚱᚲᚳᚴᚵᚶᚷᚸᚹᚺᚻᚼᚽᚾᚿ16C0ᛀᛁᛂᛃᛄᛅᛆᛇᛈᛉᛊᛋᛌᛍᛎᛏᛐᛑᛒᛓᛔᛕᛖᛗᛘᛙᛚᛛᛜᛝᛞᛟᛠᛡᛢᛣᛤᛥᛦᛧᛨᛩᛪ᛫᛬᛭ᛮᛯᛰ
+
+
+
+
+
+
+
 ○◔◑◕●
 ⌾⭗☉⌾◎◉⨀◎⌾◉◍⊗⊛•○∙⊛⁕✱೦೧ ൦❄⊕⊖⊗⊘⊙⊚⊛⊜⊝∘∙◉⏺○◍◎●◐◑◒◓◔◕◦◯◴◵◶◷☉
 ⚪⚫⚬◐
