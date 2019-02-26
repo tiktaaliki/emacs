@@ -121,7 +121,7 @@
  '(default ((t (:inherit nil :stipple nil :background "#f7f3ee" :foreground "#432109" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :foundry "simp" :family "Hack"))))
  '(fringe ((t (:inherit default :background "#f7f3ee"))))
  '(org-level-1 ((t (:foreground "#cb4b16" :height 1.3 :family "amita"))))
- '(org-list-dt ((t (:background "moccasin" :underline t :weight bold))))
+ '(org-list-dt ((t (:background "green yellow" :underline nil :weight bold))))
  '(org-special-keyword ((t (:foreground "#93a1a1" :weight normal :height 0.85))))
  '(org-tag ((t (:inherit default :weight normal :height 0.85))))
  '(variable-pitch ((t (:foreground "black" :height 1.0 :family "exo")))))
