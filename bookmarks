@@ -1,8 +1,18 @@
-;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8 -*- 
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-((".Xmodmap"
+(("709 Subtree"
+ (filename . "~/Sync/Zettelkasten/inbox.org")
+ (front-context-string . "d Information St")
+ (rear-context-string . "ch in Library an")
+ (position . 86439))
+("Downloads"
+ (filename . "~/Downloads/")
+ (front-context-string . "  /home/betsy/Do")
+ (rear-context-string)
+ (position . 1))
+(".Xmodmap"
  (filename . "~/.Xmodmap")
  (front-context-string)
  (rear-context-string . "d mod4 = Hyper_L")
@@ -33,10 +43,10 @@
  (rear-context-string . "95 Feb  6 12:01 ")
  (position . 223))
 ("org-capture-last-stored-marker"
- (filename . "~/Sync/Zettelkasten/journal.org")
- (front-context-string . "*** TODO getting")
- (rear-context-string . "05 Tue 10:00>\n\n\n")
- (position . 656155))
+ (filename . "~/Sync/Zettelkasten/inbox.org")
+ (front-context-string . "** ! cook 된장찌개\n:")
+ (rear-context-string . " Amahi website.\n")
+ (position . 58733))
 ("Spring 2019 folder"
  (filename . "~/Sync/Spring 2019/")
  (front-context-string . "709\n  -rwxrwxr-x")
@@ -48,13 +58,13 @@
  (rear-context-string)
  (position . 1))
 ("org-refile-last-stored"
- (filename . "~/Sync/Zettelkasten/inbox.org")
- (front-context-string . "*** DONE start t")
- (rear-context-string . " =>  0:02\n:END:\n")
- (position . 53268))
+ (filename . "~/Sync/Zettelkasten/notes.org")
+ (front-context-string . "* Blouin, F. X.,")
+ (rear-context-string . " =>  0:09\n:END:\n")
+ (position . 1368982))
 ("org-capture-last-stored"
- (filename . "~/Sync/Zettelkasten/inbox.org")
- (front-context-string . "* NEXT edit Ka-e")
- (rear-context-string)
- (position . 1))
+ (filename . "~/Sync/Zettelkasten/journal.org")
+ (front-context-string . "**** getting rea")
+ (rear-context-string . "D:\n**** set up \n")
+ (position . 182818))
 )
