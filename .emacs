@@ -13,7 +13,7 @@
 
 ;(setq custom-file "~/Sync/emacs/custom.el")
 
-;(setq use-package-verbose t)
+(setq use-package-verbose t)
 (setq use-package-always-ensure t)
 
 (eval-when-compile (require 'use-package))
@@ -83,18 +83,18 @@
  '(org-special-ctrl-a/e t)
  '(org-todo-keyword-faces
    (quote
-    (("habit" :foreground "dodger blue" :height 0.9)
-     ("TODO" :foreground "#0059b3" :height 0.9)
+    (("habit" :foreground "dodger blue" :height 0.85)
+     ("TODO" :foreground "#0059b3" :height 0.85)
      ("PROJECT" :foreground "#38471f" :weight bold :underline t :height 0.75)
-     ("NEXT" :foreground "red" :weight bold :height 0.9)
-     ("~!~" :foreground "#cc0066" :weight bold :height 0.9)
+     ("NEXT" :foreground "red" :weight bold :height 0.85)
+     ("!~!" :foreground "#cc0066" :weight bold :height 1.0)
      ("?" :foreground "salmon" :height 0.9)
      ("DONE" :foreground "dim gray" :height 0.75)
      ("x" :foreground "dim gray" :height 0.75)
-     ("!!!" :foreground "#cc0066" :weight bold :height 0.9))))
+     ("!!!" :foreground "#cc0066" :weight bold :height 1.0))))
  '(org-todo-keywords
    (quote
-    ((sequence "TODO(t)" "NEXT(n)" "~!~(s)" "!!!(i)" "|" "DONE(d!)" "x(c!)")
+    ((sequence "TODO(t)" "NEXT(n)" "!~!(s)" "!!!(i)" "|" "DONE(d!)" "x(c!)")
      (sequence "habit(h)" "PROJECT(p)" "?(w!)"))))
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(org-trello-files (quote ("~/Zettelkasten/recipes.org")) nil (org-trello))
@@ -119,6 +119,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#f7f3ee" :foreground "#432109" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :foundry "simp" :family "Hack"))))
- '(fringe ((t (:inherit default))))
+ '(fringe ((t (:inherit default :background "#f7f3ee"))))
  '(org-level-1 ((t (:foreground "#cb4b16" :height 1.3 :family "amita"))))
+ '(org-list-dt ((t (:background "moccasin" :underline t :weight bold))))
+ '(org-special-keyword ((t (:foreground "#93a1a1" :weight normal :height 0.85))))
+ '(org-tag ((t (:inherit default :weight normal :height 0.85))))
  '(variable-pitch ((t (:foreground "black" :height 1.0 :family "exo")))))
