@@ -4,11 +4,15 @@
 
 #+END_SRC
 #+BEGIN_SRC emacs-lisp :tangle yes
-
+(use-package centered-window-mode)
+(use-package centered-cursor-mode)
 
 
 
 #+END_SRC
+
+#+RESULTS:
+
 * solarized
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -145,7 +149,7 @@
                  ([f7] . org-agenda)
                  ([f8] . deft)
                  ([f9] . org-tree-to-indirect-buffer)
-([f12] . kill-buffer)
+([f12] . bury-buffer)
 )
 
 
@@ -211,7 +215,7 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
 
       (setq org-capture-templates '(("t" "todo" entry (file "~/Sync/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n\n" :prepend t)
-                                    ("j" "journal" entry (file+datetree "~/Sync/Zettelkasten/journal.org") "** %? %<%H:%M> \n\n\n\n" :kill-buffer nil :clock-in t ) 
+                                    ("j" "journal" entry (file+datetree "~/Sync/Zettelkasten/journal.org") "** %? %<%H:%M> \n\n\n\n" :kill-buffer nil :clock-in t :clock-keep t ) 
                               ;%U is inactive date and timestamp
                               ("l" "emacs log" item (file+headline "~/Sync/Zettelkasten/org.org" "Emacs config changes") "%U %?" :prepend t) 
 
@@ -226,7 +230,13 @@
                                     ))
 
 
+;this prevents org-capture from replacing any windows. it just adds. 
+(defun my-org-capture-place-template-dont-delete-windows (oldfun args)
+  (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
+    (apply oldfun args)))
 
+(with-eval-after-load "org-capture"
+  (advice-add 'org-capture-place-template :around 'my-org-capture-place-template-dont-delete-windows))
 
    #+END_SRC
 
@@ -375,10 +385,10 @@
   ;; see org-ref for use of these variables
   (setq org-ref-bibliography-notes "~/Sync/Zettelkasten/notes.org"
         org-ref-default-bibliography '("~/Sync/Zettelkasten/references.bib")
-        org-ref-pdf-directory "~/Sync/Zettelkasten/PDFs/")
+        org-ref-pdf-directory "~/Sync/Spring 2019/PDFs/")
 
   (setq bibtex-completion-bibliography "~/Sync/Zettelkasten/references.bib"
-        bibtex-completion-library-path "~/Sync/Zettelkasten/PDFs"
+
         bibtex-completion-notes-path "~/Sync/Zettelkasten/notes.org")
 
   ;; open pdf with system pdf viewer (works on mac)
@@ -389,8 +399,8 @@
 
 ;  (setq pdf-view-continuous nil)
 
-  (setq bibtex-autokey-year-title-separator "")
-  (setq bibtex-autokey-titleword-length 0)
+;  (setq bibtex-autokey-year-title-separator "")
+ ; (setq bibtex-autokey-titleword-length 0)
 
 
   (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). ${title}.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}\n:END:")
@@ -398,6 +408,15 @@
 
 
   #+END_SRC
+
+  #+RESULTS:
+  : 
+  : * ${author} (${year}). ${title}.
+  : :PROPERTIES:
+  : :Custom_ID: ${=key=}
+  : :CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}
+  : :END:
+
   (setq org-ref-bibliography-entry-format '(("article" . "%a. (%y). %t. <i>%j</i>, <i>%v</i>(%n), %p. %D")
     ("book" . "%a. (%y). /%t/. %r: %u.")
     ("techreport" . "%a. (%y). /%t/. %r: %i. Retrieved from %U")
@@ -643,15 +662,16 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
           (setq org-agenda-files (quote
                                ("~/Sync/Zettelkasten/inbox.org" 
-                                "~/Sync/Zettelkasten/lis.org"  
+       "~/Sync/Zettelkasten/lis.org"  
                                 "~/Sync/Zettelkasten/ndd.org"
                                 "~/Sync/Zettelkasten/gcal.org" 
                                 "~/Sync/Zettelkasten/journal.org"
                                 "~/Sync/Zettelkasten/work.org"
                                 "~/Sync/Zettelkasten/budget.org"
                                 "~/Sync/Zettelkasten/personal.org"
-                            "~/Sync/Zettelkasten/org.org"
-                                "~/Sync/Zettelkasten/notes.org")))
+"~/Sync/Zettelkasten/org.org"
+                           "~/Sync/Zettelkasten/notes.org"
+)))
 
 
 
@@ -997,16 +1017,16 @@
 (add-hook 'eww-after-render-hook 'visual-fill-column-mode)
 (add-hook 'eww-after-render-hook 'visual-line-mode)
 
-  (defun shr-html2text ()
-    "Replacement for standard html2text using shr."
-    (interactive)
-    (let ((dom (libxml-parse-html-region (point-min) (point-max)))
-          (shr-width fill-column)
-          (shr-inhibit-images t)
-          (shr-bullet " "))
-          (erase-buffer)
-          (shr-insert-document dom)
-          (goto-char (point-min))))
+;  (defun shr-html2text ()
+ ;   "Replacement for standard html2text using shr."
+  ;  (interactive)
+   ; (let ((dom (libxml-parse-html-region (point-min) (point-max)))
+    ;      (shr-width fill-column)
+    ;      (shr-inhibit-images t)
+     ;     (shr-bullet " "))
+      ;    (erase-buffer)
+       ;   (shr-insert-document dom)
+        ;  (goto-char (point-min))))
 
   (eval-after-load 'shr  
        '(progn (setq shr-width -1)  
@@ -1129,24 +1149,23 @@
  #+BEGIN_SRC  emacs-lisp :tangle yes
     (set-language-environment "UTF-8")
     (set-default-coding-systems 'utf-8)
+    (prefer-coding-system 'utf-8)
+   (setq-default buffer-file-coding-system 'utf-8)
+
+(setq coding-system-for-read 'utf-8)
+(setq coding-system-for-write 'utf-8)
+    (add-to-list 'file-coding-system-alist '("\\.tex" . utf-8) )
+    (add-to-list 'file-coding-system-alist '("\\.txt" . utf-8) )
+    (add-to-list 'file-coding-system-alist '("\\.el" . utf-8) )
+    (add-to-list 'file-coding-system-alist '("\\.scratch" . utf-8) )
+    (add-to-list 'file-coding-system-alist '("user_prefs" . utf-8) )
+
+    (add-to-list 'process-coding-system-alist '("\\.txt" . utf-8) )
+
+    (add-to-list 'network-coding-system-alist '("\\.txt" . utf-8) )
 
 
-    (add-to-list 'file-coding-system-alist '("\\.tex" . utf-8-unix) )
-    (add-to-list 'file-coding-system-alist '("\\.txt" . utf-8-unix) )
-    (add-to-list 'file-coding-system-alist '("\\.el" . utf-8-unix) )
-    (add-to-list 'file-coding-system-alist '("\\.scratch" . utf-8-unix) )
-    (add-to-list 'file-coding-system-alist '("user_prefs" . utf-8-unix) )
 
-    (add-to-list 'process-coding-system-alist '("\\.txt" . utf-8-unix) )
-
-    (add-to-list 'network-coding-system-alist '("\\.txt" . utf-8-unix) )
-
-    (prefer-coding-system 'utf-8-unix)
-    (set-default-coding-systems 'utf-8-unix)
-    (set-terminal-coding-system 'utf-8-unix)
-    (set-keyboard-coding-system 'utf-8-unix)
-    (set-selection-coding-system 'utf-8-unix)
-    (setq-default buffer-file-coding-system 'utf-8-unix)
 
     ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
     (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
@@ -1194,45 +1213,57 @@
 
  #+END_SRC
 
+ #+RESULTS:
+ : lawlist-read-buffer-file-coding-system
+
 
 
 * mu4e
 
  #+BEGIN_SRC emacs-lisp :tangle yes
-          (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") 
-         ; (use-package mu4e) 
-         ; (use-package mu4e-contrib)
-       (require 'mu4e)
-       (require 'org-mu4e)
-          ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-          (setq mu4e-sent-messages-behavior 'delete)
-          (setq message-kill-buffer-on-exit t)
-          (setq mu4e-change-filenames-when-moving t)
-          (setq mu4e-compose-format-flowed t)
-          (setq smtpmail-default-smtp-server "smtp.gmail.com")
+              (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") 
+             ; (use-package mu4e) 
+             ; (use-package mu4e-contrib)
+           (require 'mu4e)
+           (require 'org-mu4e)
+              ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+              (setq mu4e-sent-messages-behavior 'delete)
+              (setq message-kill-buffer-on-exit t)
+              (setq mu4e-change-filenames-when-moving t)
+              (setq mu4e-compose-format-flowed t)
+              (setq smtpmail-default-smtp-server "smtp.gmail.com")
        (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
        (add-hook 'mu4e-view-mode-hook 'visual-fill-column-mode)
 
- (defun vfcm-on ()
- ;turn on visual fill column mode
- (visual-fill-column-mode 1))
+    ;;  (defun vfcm-on ()
+    ;;  ;turn on visual fill column mode
+    ;;  (visual-fill-column-mode 1))
 
- (add-hook 'mu4e-view-mode-hook #'vfcm-on)
-;  (setq visual-fill-column-width 100)
- (defun no-auto-fill ()
-   "Turn off auto-fill-mode."
-   (auto-fill-mode -1))
+    ;; (add-hook 'mu4e-view-mode-hook #'vfcm-on)
 
-(defun vcfm-off ()
-;turn off visual fill column mode
-(visual-fill-column-mode nil))
 
-(add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
-  ; (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
+
+
+    ;  (setq visual-fill-column-width 100)
+
+     (defun no-auto-fill ()
+       "Turn off auto-fill-mode."
+       (auto-fill-mode -1))
+
+
+
+
+
+    (defun vcfm-off ()
+    ;turn off visual fill column mode
+    (visual-fill-column-mode nil))
+
+    (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
+    (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
   #+END_SRC
   
   #+RESULTS:
-  | no-auto-fill |
+  | lambda | nil | (visual-line-mode -1) |
   
 ** message view
 

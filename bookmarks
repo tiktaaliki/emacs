@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("709 Subtree"
+(("PDFs"
+ (filename . "~/Sync/Spring 2019/PDFs/")
+ (front-context-string . "\n  -rwxr--r-- 1 ")
+ (rear-context-string . "al archives).pdf")
+ (position . 1432))
+("709 Subtree"
  (filename . "~/Sync/Zettelkasten/inbox.org")
  (front-context-string . "d Information St")
  (rear-context-string . "ch in Library an")
@@ -44,9 +49,9 @@
  (position . 223))
 ("org-capture-last-stored-marker"
  (filename . "~/Sync/Zettelkasten/inbox.org")
- (front-context-string . "** ! cook 된장찌개\n:")
- (rear-context-string . " Amahi website.\n")
- (position . 58733))
+ (front-context-string . "** TODO add to h")
+ (rear-context-string . "Thank you,\nDoug\n")
+ (position . 194227))
 ("Spring 2019 folder"
  (filename . "~/Sync/Spring 2019/")
  (front-context-string . "709\n  -rwxrwxr-x")
@@ -58,13 +63,13 @@
  (rear-context-string)
  (position . 1))
 ("org-refile-last-stored"
- (filename . "~/Sync/Zettelkasten/notes.org")
- (front-context-string . "* Blouin, F. X.,")
- (rear-context-string . " =>  0:09\n:END:\n")
- (position . 1368982))
+ (filename . "~/Sync/Zettelkasten/inbox.org")
+ (front-context-string . "** TODO add to h")
+ (rear-context-string . "Thank you,\nDoug\n")
+ (position . 194227))
 ("org-capture-last-stored"
  (filename . "~/Sync/Zettelkasten/journal.org")
- (front-context-string . "**** getting rea")
- (rear-context-string . "D:\n**** set up \n")
- (position . 182818))
+ (front-context-string . "**** call w/dr l")
+ (rear-context-string . "19-03-17 Sunday\n")
+ (position . 256651))
 )

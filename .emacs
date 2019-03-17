@@ -3,6 +3,7 @@
 (require 'package)
 (require 'org-install)
 (add-to-list 'load-path "~/Sync/emacs/.emacs.d/lisp/")
+(add-to-list 'load-path "~/Sync/emacs/.emacs.d/snippets")
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
@@ -40,7 +41,7 @@
  '(erc-notifications-mode t)
  '(fill-column 100)
  '(fill-flowed-encode-column 5000)
- '(fringe-mode 25 nil (fringe))
+ '(fringe-mode 15 nil (fringe))
  '(global-visual-fill-column-mode t)
  '(global-visual-line-mode t)
  '(helm-M-x-always-save-history t)
@@ -57,10 +58,16 @@
  '(mu4e-get-mail-command "mbsync -aV")
  '(mu4e-headers-date-format "%b-%d")
  '(mu4e-headers-fields (quote ((:human-date . 10) (:from . 22) (:subject))))
+ '(mu4e-headers-found-hook nil)
+ '(mu4e-headers-search-hook nil)
  '(mu4e-headers-visible-columns 200)
  '(mu4e-hide-index-messages t)
+ '(mu4e-index-update-in-background nil)
  '(mu4e-split-view (quote horizontal))
- '(mu4e-update-interval 20)
+ '(mu4e-update-interval 20000)
+ '(mu4e-view-mode-hook
+   (quote
+    (turn-on-visual-line-mode visual-line-mode visual-fill-column-mode)))
  '(nov-pre-html-render-hook (quote (visual-line-mode)))
  '(nov-text-width 5)
  '(org-agenda-block-separator 45)
@@ -78,6 +85,7 @@
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-eww org-gnus org-habit org-id org-info org-inlinetask org-tempo org-w3m org-eshell org-annotate-file org-bookmark org-checklist org-choose org-collector org-depend org-drill org-invoice org-learn org-registry org-screenshot org-velocity org-wikinodes org-jsinfo org-habit org-irc org-mouse org-protocol org-annotate-file org-eval org-expiry org-interactive-query org-man org-collector org-panel org-screen org-toc)))
+ '(org-ref-pdf-directory "~/Sync/Spring 2019/PDFs/")
  '(org-refile-allow-creating-parent-nodes (quote confirm))
  '(org-refile-use-cache t)
  '(org-special-ctrl-a/e t)
@@ -91,7 +99,9 @@
      ("?" :foreground "salmon" :height 0.9)
      ("DONE" :foreground "dim gray" :height 0.75)
      ("x" :foreground "dim gray" :height 0.75)
-     ("!!!" :foreground "#cc0066" :weight bold :height 1.0))))
+     ("!!!" :foreground "#ff0080" :box
+      (:line-width 1 :color "grey75" :style released-button)
+      :weight bold :height 1.0))))
  '(org-todo-keywords
    (quote
     ((sequence "TODO(t)" "NEXT(n)" "!~!(s)" "!!!(i)" "|" "DONE(d!)" "x(c!)")
@@ -100,7 +110,7 @@
  '(org-trello-files (quote ("~/Zettelkasten/recipes.org")) nil (org-trello))
  '(package-selected-packages
    (quote
-    (solarized-theme solarized dired+ helm-org-rifle counsel wpuzzle nov wc-mode ox-reveal html-preview org-chef org-trello ox-pandoc pandoc company-bibtex company-auctex auctex yasnippet-snippets yasnippet ledger-mode org-gcal writeroom-mode use-package smartparens org-ref org-noter org-bullets olivetti magit interleave helm-projectile flyspell-correct-helm deft company calfw-org calfw-gcal calfw-cal calfw bbdb)))
+    (centered-cursor-mode centered-window-mode solarized-theme solarized dired+ helm-org-rifle counsel wpuzzle nov wc-mode ox-reveal html-preview org-chef org-trello ox-pandoc pandoc company-bibtex company-auctex auctex yasnippet-snippets yasnippet ledger-mode org-gcal writeroom-mode use-package smartparens org-ref org-noter org-bullets olivetti magit interleave helm-projectile flyspell-correct-helm deft company calfw-org calfw-gcal calfw-cal calfw bbdb)))
  '(pdf-view-continuous nil)
  '(projectile-globally-ignored-directories
    (quote
@@ -118,10 +128,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#f7f3ee" :foreground "#432109" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :foundry "simp" :family "Hack"))))
+ '(default ((t (:inherit nil :stipple nil :foreground "#432109" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :foundry "simp" :family "Hack"))))
  '(fringe ((t (:inherit default :background "#f7f3ee"))))
- '(org-level-1 ((t (:foreground "#cb4b16" :height 1.3 :family "amita"))))
+ '(mu4e-header-face ((t (:inherit default))))
+ '(mu4e-unread-face ((t (:foreground "#859900" :weight bold))))
+ '(org-checkbox-statistics-todo ((t (:inherit org-todo :weight normal))))
+ '(org-level-1 ((t (:inherit variable-pitch :foreground "#b84514" :weight bold :height 1.3 :family "amita"))))
+ '(org-level-2 ((t (:inherit variable-pitch :foreground "#424d00" :height 1.0))))
+ '(org-level-3 ((t (:inherit variable-pitch :foreground "#14476c" :height 1.0))))
+ '(org-level-4 ((t (:inherit variable-pitch :foreground "#664d00" :height 1.0))))
  '(org-list-dt ((t (:background "green yellow" :underline nil :weight bold))))
  '(org-special-keyword ((t (:foreground "#93a1a1" :weight normal :height 0.85))))
  '(org-tag ((t (:inherit default :weight normal :height 0.85))))
- '(variable-pitch ((t (:foreground "black" :height 1.0 :family "exo")))))
+ '(variable-pitch ((t (:foreground "black" :height 1.1 :family "exo")))))

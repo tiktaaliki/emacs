@@ -1,5 +1,72 @@
 
-file:~/.emacs
+
+#+BEGIN_SRC 
+
+#+END_SRC
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package centered-window-mode)
+(use-package centered-cursor-mode)
+
+
+
+#+END_SRC
+
+#+RESULTS:
+
+* solarized
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(use-package solarized
+
+  :init (load-theme 'solarized-light 'no-confirm)
+  :config
+)
+
+
+
+#+END_SRC
+
+#+RESULTS:
+
+* latex
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package company-auctex)
+(company-auctex-init)
+
+
+(use-package tex :ensure auctex)
+
+     (setq TeX-auto-save t)
+     (setq TeX-parse-self t)
+
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* html preview
+#+BEGIN_SRC emacs-lisp :tangle yes 
+
+;(use-package html-preview)
+#+END_SRC
+
+#+RESULTS:
+
+* completion
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(use-package company-bibtex)
+ (add-to-list 'company-backends 'company-bibtex)
+
+ (setq company-bibtex-bibliography
+ '("~/Zettelkasten/references.bib"))
+
+
+#+END_SRC
+
+#+RESULTS:
+| ~/Zettelkasten/references.bib |
 
 * convenience
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -15,16 +82,15 @@ file:~/.emacs
 (use-package org-bullets
         :init 
         (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))) (setq org-bullets-bullet-list (quote ("◉""»""⚬"  "✧""▸"   ))))
-	
-
 (setq sentence-end-double-space nil)
 #+END_SRC
 
 #+RESULTS:
 
+
 * usability
 #+BEGIN_SRC emacs-lisp :tangle yes
-yy    (setq initial-major-mode 'org-mode)
+    (setq initial-major-mode 'org-mode)
     (setq org-support-shift-select (quote always))
     (delete-selection-mode) ;allows to delete selected text by typing
     (fset 'yes-or-no-p 'y-or-n-p)
@@ -47,52 +113,61 @@ yy    (setq initial-major-mode 'org-mode)
 #+END_SRC
 * Key bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (global-unset-key (kbd "C-z"))     
-   (global-unset-key (kbd "M-c"))
 
-   (bind-keys ("C-+"   . text-scale-increase)
-	      ("C--"   . text-scale-decrease)
-	      ("C-c l" . org-store-link)
-	      ("C-."   . org-todo)
-	      ("C-x /" . shrink-window-horizontally)
-	      ("C-x ." . org-archive-subtree-default)
-	      ("C-c n" . org-schedule)
-	      ("M-="   . count-words)
-	      ("M-x"   . helm-M-x)
-	      ("M-_" . insert-pair)
-	      ("M-*" . insert-pair)
-	      ("M-\/" . insert-pair)
-	      ("C-c b" . list-bookmarks)
-	      ("C-c p" . bh/punch-in )
-	      ("C-<kp-6>" . xah-select-block)
-	      ("C-x j" . helm-org-in-buffer-headings)
-	      ("C-c a" . helm-org-agenda-files-headings)
-	      ([f1] . org-capture)
-	      ([f2] . org-clock-in)
-	      ([f3] . helm-buffers-list)           
-	      ([f4] . org-refile)
-	      ([f5] . helm-projectile)
-	      ([f6] . helm-bibtex-with-local-bibliography)
-	      ([f7] . org-agenda)
-	      ([f8] . deft)
-	      ([f9] . org-tree-to-indirect-buffer))
+(eval-after-load "flyspell"
+  '(define-key flyspell-mode-map (kbd "C-.") nil))
 
 
-   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-   (define-key key-translation-map (kbd "C--") (kbd "–"))
+      (global-unset-key (kbd "C-z"))     
+      (global-unset-key (kbd "M-c"))
 
-   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
-   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
-   (define-key key-translation-map (kbd "C-c s") (kbd "ß"))
-   (define-key key-translation-map (kbd "C-c o") (kbd "ö"))
+      (global-unset-key (kbd "S-SPC"))
+      (bind-keys ("C-+"   . text-scale-increase)
+                 ("C--"   . text-scale-decrease)
+                 ("C-c l" . org-store-link)
+	      ("C-c k" . toggle-korean-input-method)
+                 ("C-."   . org-todo)
+                 ("C-x /" . shrink-window-horizontally)
+                 ("C-x ." . org-archive-subtree-default)
+                 ("C-c n" . org-schedule)
+                 ("M-="   . count-words)
+                 ("M-x"   . helm-M-x)
+                 ("M-_" . insert-pair)
+                 ("M-*" . insert-pair)
+                 ("M-\/" . insert-pair)
+                 ("C-c b" . list-bookmarks)
+                 ("C-c p" . bh/punch-in )
+                 ("C-<kp-6>" . xah-select-block)
+                 ("C-x j" . helm-org-in-buffer-headings)
+                 ("C-c a" . helm-org-agenda-files-headings)
+                 ([f1] . org-capture)
+                 ([f2] . org-clock-in)
+                 ([f3] . helm-buffers-list)           
+                 ([f4] . org-refile)
+                 ([f5] . helm-projectile)
+                 ([f6] . helm-bibtex-with-local-bibliography)
+                 ([f7] . org-agenda)
+                 ([f8] . deft)
+                 ([f9] . org-tree-to-indirect-buffer)
+([f12] . bury-buffer)
+)
 
-   (define-key key-translation-map (kbd "C-c a") (kbd "ä"))
-   (define-key key-translation-map (kbd "C-c u") (kbd "ü"))
+
+      (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+      (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+      (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+      (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+      (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+      (define-key key-translation-map (kbd "C--") (kbd "–"))
+
+      (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+      (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
+      (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+      (define-key key-translation-map (kbd "C-c s") (kbd "ß"))
+      (define-key key-translation-map (kbd "C-c o") (kbd "ö"))
+
+      (define-key key-translation-map (kbd "C-c a") (kbd "ä"))
+      (define-key key-translation-map (kbd "C-c u") (kbd "ü"))
 
 #+END_SRC
 
@@ -104,7 +179,7 @@ yy    (setq initial-major-mode 'org-mode)
 
    (setq bookmark-default-file "~/Sync/emacs/bookmarks")
    (setq bookmark-save-flag 1)
-
+(use-package dired+)
    (use-package ido)
    (ido-mode t)
 
@@ -131,6 +206,8 @@ yy    (setq initial-major-mode 'org-mode)
     (use-package helm-projectile)
 #+END_SRC
 
+#+RESULTS:
+
 
 
 
@@ -138,16 +215,33 @@ yy    (setq initial-major-mode 'org-mode)
    #+BEGIN_SRC emacs-lisp :tangle yes
 
       (setq org-capture-templates '(("t" "todo" entry (file "~/Sync/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n\n" :prepend t)
-                                    ("j" "journal" entry (file+datetree "~/Sync/Zettelkasten/journal.org") "** %<%H:%M> \n\n%?\n\n" :kill-buffer nil ) 
-                                    ("c" "calendar" entry (file "~/Sync/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:\n\n")
+                                    ("j" "journal" entry (file+datetree "~/Sync/Zettelkasten/journal.org") "** %? %<%H:%M> \n\n\n\n" :kill-buffer nil :clock-in t :clock-keep t ) 
+                              ;%U is inactive date and timestamp
+                              ("l" "emacs log" item (file+headline "~/Sync/Zettelkasten/org.org" "Emacs config changes") "%U %?" :prepend t) 
+
+                              ("h" "health" item (file+headline "~/Sync/Zettelkasten/personal.org" "Health") "%U %?" :prepend t) 
+
+			("f" "finances" item (file+headline "~/Sync/Zettelkasten/inbox.org" "Income/Expenses") "%U %?" :prepend t)
+
+
+                                    ("c" "calendar" entry (file "~/Sync/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:")
 
                                     ("e" "expense" table-line (file+headline "~/Sync/Zettelkasten/budget.org" "Expenses to be filed") "|%t|%^{amount}|%a|%^{category|LIS|Food|Transportation|Clothing}|%?|" :append t :kill-buffer nil)
                                     ))
 
 
+;this prevents org-capture from replacing any windows. it just adds. 
+(defun my-org-capture-place-template-dont-delete-windows (oldfun args)
+  (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
+    (apply oldfun args)))
 
+(with-eval-after-load "org-capture"
+  (advice-add 'org-capture-place-template :around 'my-org-capture-place-template-dont-delete-windows))
 
    #+END_SRC
+
+   #+RESULTS:
+   | t | todo | entry | (file ~/Sync/Zettelkasten/inbox.org) | * TODO %? |
    
 
 
@@ -156,10 +250,10 @@ yy    (setq initial-major-mode 'org-mode)
 * structure editing
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (setq org-special-ctrl-a/e t)
+;   (setq org-special-ctrl-a/e t)
 (setq org-cycle-separator-lines 0)
    ;this allows me to collapse a subtree when not on its headline
-   (setq org-cycle-emulate-tab 'white)
+;   (setq org-cycle-emulate-tab 'white)
     (defun xah-select-current-block ()
       "Select the current block of text between blank lines.
 
@@ -192,36 +286,32 @@ yy    (setq initial-major-mode 'org-mode)
 #+RESULTS:
 : xah-select-block
 
-* structure templates
-  #+BEGIN_SRC emacs-lisp :tangle yes
+* yasnippet
 
-   (add-to-list 'org-structure-template-alist (list "eh" (concat ":EXPORT_FILE_NAME: ?\n" ":EXPORT_TITLE:\n" ":EXPORT_OPTIONS: toc:nil html-postamble:nil num:nil")))
+#+BEGIN_SRC emacs-lisp :tangle yes
 
-     (add-to-list 'org-structure-template-alist '
-		  ("r" "- [ ] downloaded\n- [ ] added to bibtex file\n- [ ] read\n- [ ] notes"))
+(use-package yasnippet                  ; Snippets
+  :ensure t
+  :config
+  (validate-setq
+   yas-verbosity 1                      ; No need to be so verbose
+   yas-wrap-around-region t)
 
-     (add-to-list 'org-structure-template-alist '
-		  ("s"  "#+BEGIN_SRC emacs-lisp :tangle yes\n\n?\n\n#+END_SRC"))
+  (with-eval-after-load 'yasnippet
+    (validate-setq yas-snippet-dirs '(yasnippet-snippets-dir)))
 
-     (add-to-list 'org-structure-template-alist '
-		  ("xc"  "<!-- ? -->"))
-     (add-to-list 'org-structure-template-alist (list "p" (concat ":PROPERTIES:\n" "?\n" ":END:"))) 
+  (yas-reload-all)
+  (yas-global-mode))
 
-     (add-to-list 'org-structure-template-alist ' ("c"    
-						   "#+BEGIN: clocktable :scope agenda :tags \"-ourhome-break\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t \n
-     ,#+END:
-
-     ,#+BEGIN: clocktable :scope agenda :tags \"ourhome\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t
-     ,#+END:\n
-
-     ,#+BEGIN: clocktable :scope agenda :tags \"break\" :maxlevel 5 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 :indent t\n
-     ,#+END:"))
-
-
-
-
+(use-package yasnippet-snippets         ; Collection of snippets
+  :ensure t)
 
 #+END_SRC
+
+#+RESULTS:
+
+
+
 * window management
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -295,10 +385,10 @@ yy    (setq initial-major-mode 'org-mode)
   ;; see org-ref for use of these variables
   (setq org-ref-bibliography-notes "~/Sync/Zettelkasten/notes.org"
         org-ref-default-bibliography '("~/Sync/Zettelkasten/references.bib")
-        org-ref-pdf-directory "~/Sync/Zettelkasten/PDFs/")
+        org-ref-pdf-directory "~/Sync/Spring 2019/PDFs/")
 
   (setq bibtex-completion-bibliography "~/Sync/Zettelkasten/references.bib"
-        bibtex-completion-library-path "~/Sync/Zettelkasten/PDFs"
+
         bibtex-completion-notes-path "~/Sync/Zettelkasten/notes.org")
 
   ;; open pdf with system pdf viewer (works on mac)
@@ -307,10 +397,10 @@ yy    (setq initial-major-mode 'org-mode)
       (start-process "open" "*open*" "open" fpath)))
 
 
-  (setq pdf-view-continuous nil)
+;  (setq pdf-view-continuous nil)
 
-  (setq bibtex-autokey-year-title-separator "")
-  (setq bibtex-autokey-titleword-length 0)
+;  (setq bibtex-autokey-year-title-separator "")
+ ; (setq bibtex-autokey-titleword-length 0)
 
 
   (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). ${title}.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}\n:END:")
@@ -318,6 +408,15 @@ yy    (setq initial-major-mode 'org-mode)
 
 
   #+END_SRC
+
+  #+RESULTS:
+  : 
+  : * ${author} (${year}). ${title}.
+  : :PROPERTIES:
+  : :Custom_ID: ${=key=}
+  : :CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}
+  : :END:
+
   (setq org-ref-bibliography-entry-format '(("article" . "%a. (%y). %t. <i>%j</i>, <i>%v</i>(%n), %p. %D")
     ("book" . "%a. (%y). /%t/. %r: %u.")
     ("techreport" . "%a. (%y). /%t/. %r: %i. Retrieved from %U")
@@ -561,43 +660,44 @@ yy    (setq initial-major-mode 'org-mode)
 ** agenda files                              
 
     #+BEGIN_SRC emacs-lisp :tangle yes
-          (setq org-agenda-files (quote
-                               ("~/Sync/Zettelkasten/inbox.org" 
-                                "~/Sync/Zettelkasten/lis.org"  
-                                "~/Sync/Zettelkasten/ndd.org"
-                                "~/Sync/Zettelkasten/gcal.org" 
-                                "~/Sync/Zettelkasten/journal.org"
-                                "~/Sync/Zettelkasten/work.org"
-                                "~/Sync/Zettelkasten/budget.org"
-                                "~/Sync/Zettelkasten/personal.org"
-                            "~/Sync/Zettelkasten/org.org"
-                                "~/Sync/Zettelkasten/notes.org")))
+                 (setq org-agenda-files (quote
+                                      ("~/Sync/Zettelkasten/inbox.org" 
+                                       "~/Sync/Zettelkasten/lis.org"  
+                                       "~/Sync/Zettelkasten/ndd.org"
+                                       "~/Sync/Zettelkasten/gcal.org" 
+                                       "~/Sync/Zettelkasten/journal.org"
+                                       "~/Sync/Zettelkasten/work.org"
+                                       "~/Sync/Zettelkasten/budget.org"
+                                       "~/Sync/Zettelkasten/personal.org"
+                                       "~/Sync/Zettelkasten/org.org"
+                                       "~/Sync/Zettelkasten/notes.org"
+       )))
 
 
 
-       (setq  org-agenda-sorting-strategy 
-       '((agenda time-up)
-         (todo priority-down category-keep)
-         (tags priority-down category-keep)
-         (search category-keep)))
+              (setq  org-agenda-sorting-strategy 
+              '((agenda time-up)
+                (todo priority-down category-keep)
+                (tags priority-down category-keep)
+                (search category-keep)))
 
-       (setq org-log-done 'note)
-       (setq org-agenda-skip-deadline-if-done t)
-       (setq org-agenda-skip-timestamp-if-done t)
-       (setq org-agenda-skip-scheduled-if-done t)
-       (setq org-agenda-current-time-string "✸✸✸✸✸✸ NOW ✸✸✸✸✸✸✸✸✸✸")
-       (setq org-agenda-time-grid 
-             '((daily weekly today require-timed remove-match)
-               (800 1000 1200 1400 1600 1800 2000)
-               "......" "----------------"))
-       (setq org-agenda-start-with-clockreport-mode t)
-       (setq org-agenda-span (quote 4))
-       (setq org-agenda-jump-prefer-future t)
-       (setq org-agenda-window-setup (quote only-frame))
-       (setq org-agenda-with-colors t)
-       (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
-       (setq org-agenda-start-on-weekday nil)
-    (setq org-deadline-warning-days 4)
+              (setq org-log-done 'note)
+              (setq org-agenda-skip-deadline-if-done t)
+              (setq org-agenda-skip-timestamp-if-done t)
+              (setq org-agenda-skip-scheduled-if-done t)
+              (setq org-agenda-current-time-string "✸✸✸✸✸✸ NOW ✸✸✸✸✸✸✸✸✸✸")
+           ;   (setq org-agenda-time-grid 
+            ;        '((daily weekly today require-timed remove-match)
+             ;         (800 1000 1200 1400 1600 1800 2000)
+              ;        "......" "----------------"))
+              (setq org-agenda-start-with-clockreport-mode t)
+              (setq org-agenda-span (quote day))
+              (setq org-agenda-jump-prefer-future t)
+              (setq org-agenda-window-setup (quote only-frame))
+              (setq org-agenda-with-colors t)
+              (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+              (setq org-agenda-start-on-weekday nil)
+           (setq org-deadline-warning-days 4)
     #+END_SRC
 
     #+RESULTS:
@@ -609,16 +709,23 @@ yy    (setq initial-major-mode 'org-mode)
 ** custom agenda views
     #+BEGIN_SRC emacs-lisp :tangle yes
 
-;(setq org-agenda-custom-commands '(("n" "Agenda and all TODOs" ((agenda "")     (alltodo ""))))
+       (setq org-agenda-custom-commands '(
+                                          ("x" agenda)
+                                          ("y" agenda*) ;only entries w/times 
+                                          ("n" "next/in progress" todo "TODO")
+                                          ("u" "Undated tasks" todo "" ((org-agenda-todo-ignore-with-date t)))
+                                          ("s" "not yet scheduled" todo "" ((org-agenda-todo-ignore-scheduled t)))
+				              ("d" "day + tasks" ((todo "!")(agenda "") (todo "NEXT")(todo "~")))
 
-                (setq org-agenda-custom-commands 
-                      '(("s" todo "NEXT|--")
-                        ("d" "Undated tasks " alltodo ""              ((org-agenda-todo-ignore-with-date t))
-                 )))
 
-                (setq org-stuck-projects '("/PROJECT" ("NEXT") nil ""))
-     (setq org-log-note-clock-out nil)
+                    ))
+
+                                                                (setq org-stuck-projects '("/PROJECT" ("NEXT") nil ""))
+                                                     (setq org-log-note-clock-out nil)
     #+END_SRC
+
+    #+RESULTS:
+
 * todo keywords 
                   ;(setq org-agenda-dim-blocked-tasks t)
 
@@ -657,6 +764,7 @@ yy    (setq initial-major-mode 'org-mode)
 
 
 
+
 * font rendering and encoding
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -683,12 +791,12 @@ yy    (setq initial-major-mode 'org-mode)
    (setq frame-title-format (list (format "%s %%S: %%j " (system-name))
 				  '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
-   (find-file "~/Sync/emacs/settings.org")
+   (find-file "~/Sync/emacs/gallium.org")
    (add-to-list 'default-frame-alist '(fullscreen . maximized))
    (setq inhibit-startup-screen t)
 					   ;(setq split-height-threshold nil)
 					   ; prefer horizontal split. 
-   (setq split-width-threshold 9999)
+;   (setq split-width-threshold 9999)
 
    (tool-bar-mode -1)
    (menu-bar-mode -1)
@@ -697,6 +805,9 @@ yy    (setq initial-major-mode 'org-mode)
 
 
 #+END_SRC
+
+#+RESULTS:
+
 * debugging
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -733,20 +844,20 @@ yy    (setq initial-major-mode 'org-mode)
 #+BEGIN_SRC emacs-lisp :tangle yes
 
 
-      (setq fill-column 100)
+    ;  (setq fill-column 100)
 
 
-      (global-visual-line-mode 1) 
-      (use-package visual-fill-column
-	:ensure t)
+     ; (global-visual-line-mode 1) 
+      ;(use-package visual-fill-column
+;	:ensure t)
 
       (add-hook 'deft-mode-hook #'visual-line-mode)
 
-      (setq visual-fill-column-center-text t)
+ ;     (setq visual-fill-column-center-text t)
 
-     (setq fill-flowed-encode-column 80)
-     (setq message-fill-column nil)
-     (setq visual-fill-column-center-text t)
+  ;   (setq fill-flowed-encode-column 80)
+   ;  (setq message-fill-column nil)
+    ; (setq visual-fill-column-center-text t)
 
    ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
        (defun unfill-paragraph (&optional region)
@@ -820,9 +931,11 @@ yy    (setq initial-major-mode 'org-mode)
 
 					   ;spellcheck
    (use-package flyspell-correct-helm)
-
+;(add-hook 'org-mode-hook 'turn-on-flyspell)
 
 #+END_SRC
+
+#+RESULTS:
 
 
 
@@ -831,6 +944,22 @@ yy    (setq initial-major-mode 'org-mode)
 #+BEGIN_SRC emacs-lisp :tangle yes
 
    (setq org-return-follows-link nil)
+
+#+END_SRC
+
+* org-chef
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package org-chef
+  :ensure t)
+#+END_SRC
+
+#+RESULTS:
+* org-trello
+#+BEGIN_SRC emacs-lisp :tangle yes 
+(use-package org-trello)
+
+
+(custom-set-variables '(org-trello-files '("~/Zettelkasten/recipes.org")))
 
 #+END_SRC
 * tested ok
@@ -842,7 +971,7 @@ yy    (setq initial-major-mode 'org-mode)
     (setq org-image-actual-width 350)
     (setq org-sparse-tree-default-date-type 'all)
 
-(setq org-ellipsis " ⬎ " )
+
 					    ;(require 'smart-quotes) 
 
 
@@ -872,7 +1001,7 @@ yy    (setq initial-major-mode 'org-mode)
 
   #+BEGIN_SRC emacs-lisp :tangle yes
   (setq browse-url-browser-function 'browse-url-generic
-        browse-url-generic-program "chromium-browser")
+        browse-url-generic-program "firefox")
 
   (defun my-set-eww-buffer-title ()
         (let* ((title (plist-get eww-data :title))
@@ -888,16 +1017,16 @@ yy    (setq initial-major-mode 'org-mode)
 (add-hook 'eww-after-render-hook 'visual-fill-column-mode)
 (add-hook 'eww-after-render-hook 'visual-line-mode)
 
-  (defun shr-html2text ()
-    "Replacement for standard html2text using shr."
-    (interactive)
-    (let ((dom (libxml-parse-html-region (point-min) (point-max)))
-          (shr-width fill-column)
-          (shr-inhibit-images t)
-          (shr-bullet " "))
-          (erase-buffer)
-          (shr-insert-document dom)
-          (goto-char (point-min))))
+;  (defun shr-html2text ()
+ ;   "Replacement for standard html2text using shr."
+  ;  (interactive)
+   ; (let ((dom (libxml-parse-html-region (point-min) (point-max)))
+    ;      (shr-width fill-column)
+    ;      (shr-inhibit-images t)
+     ;     (shr-bullet " "))
+      ;    (erase-buffer)
+       ;   (shr-insert-document dom)
+        ;  (goto-char (point-min))))
 
   (eval-after-load 'shr  
        '(progn (setq shr-width -1)  
@@ -1090,43 +1219,54 @@ yy    (setq initial-major-mode 'org-mode)
 * mu4e
 
  #+BEGIN_SRC emacs-lisp :tangle yes
-          (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") 
-         ; (use-package mu4e) 
-         ; (use-package mu4e-contrib)
-       (require 'mu4e)
-       (require 'org-mu4e)
-          ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-          (setq mu4e-sent-messages-behavior 'delete)
-          (setq message-kill-buffer-on-exit t)
-          (setq mu4e-change-filenames-when-moving t)
-          (setq mu4e-compose-format-flowed t)
-          (setq smtpmail-default-smtp-server "smtp.gmail.com")
+              (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") 
+             ; (use-package mu4e) 
+             ; (use-package mu4e-contrib)
+           (require 'mu4e)
+           (require 'org-mu4e)
+              ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+              (setq mu4e-sent-messages-behavior 'delete)
+              (setq message-kill-buffer-on-exit t)
+              (setq mu4e-change-filenames-when-moving t)
+              (setq mu4e-compose-format-flowed t)
+              (setq smtpmail-default-smtp-server "smtp.gmail.com")
        (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
        (add-hook 'mu4e-view-mode-hook 'visual-fill-column-mode)
 
- (defun vfcm-on ()
- ;turn on visual fill column mode
- (visual-fill-column-mode 1))
+    ;;  (defun vfcm-on ()
+    ;;  ;turn on visual fill column mode
+    ;;  (visual-fill-column-mode 1))
 
- (add-hook 'mu4e-view-mode-hook #'vfcm-on)
-  (setq visual-fill-column-width 100)
- (defun no-auto-fill ()
-   "Turn off auto-fill-mode."
-   (auto-fill-mode -1))
+    ;; (add-hook 'mu4e-view-mode-hook #'vfcm-on)
 
 
 
-(add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
-  ; (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
+
+    ;  (setq visual-fill-column-width 100)
+
+     (defun no-auto-fill ()
+       "Turn off auto-fill-mode."
+       (auto-fill-mode -1))
+
+
+
+
+
+    (defun vcfm-off ()
+    ;turn off visual fill column mode
+    (visual-fill-column-mode nil))
+
+    (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
+    (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
   #+END_SRC
   
   #+RESULTS:
-  | no-auto-fill |
+  | lambda | nil | (visual-line-mode -1) |
   
 ** message view
 
   #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq mu4e-attachment-dir "/home/betsy/Sync/Spring 2019/")
+;  (setq mu4e-attachment-dir "/home/betsy/Sync/Spring 2019/")
 
 
 
@@ -1180,11 +1320,7 @@ yy    (setq initial-major-mode 'org-mode)
 
 ** headers view
 
-
-
-  #+BEGIN_SRC emacs-lisp :tangle yes
-
-    (setq mu4e-headers-fields
+   (setq mu4e-headers-fields
 	  '( (:human-date    .  15)    ;; alternatively, use :human-date
 	     (:flags         .   5)
 	     (:from          .  20)
@@ -1192,6 +1328,10 @@ yy    (setq initial-major-mode 'org-mode)
              (:thread-subject       . 120 )
 	     )) 
 
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+ 
      (setq org-mu4e-link-query-in-headers-mode nil)
      ;(setq mu4e-update-interval 60)
      ;(setq mu4e-index-update-in-background t)
@@ -1252,11 +1392,11 @@ yy    (setq initial-major-mode 'org-mode)
       :contents-sources
       (list
        (cfw:org-create-source "cornflower blue")  ; orgmode source
-       (cfw:cal-create-source "light goldenrod") ; diary source
+;       (cfw:cal-create-source "light goldenrod") ; diary source
       ))) 
 
-    (setq calendar-daylight-savings-starts '(3 11 year))
-    (setq calendar-daylight-savings-ends: '(11 4 year))
+ ;   (setq calendar-daylight-savings-starts '(3 11 year))
+  ;  (setq calendar-daylight-savings-ends: '(11 4 year))
    (setq calendar-week-start-day 1)
 
 
@@ -1264,6 +1404,9 @@ yy    (setq initial-major-mode 'org-mode)
 
 
    #+END_SRC
+
+   #+RESULTS:
+   : 1
 
   
 * org misc
@@ -1334,7 +1477,7 @@ yy    (setq initial-major-mode 'org-mode)
   #+BEGIN_SRC emacs-lisp :tangle yes
   (pdf-tools-install)
 
-  (eval-after-load 'org '(require 'org-pdfview))
+; (eval-after-load 'org '(require 'org-pdfview))
 
   (use-package pdf-tools)
   (use-package org-pdfview)
@@ -1428,7 +1571,7 @@ yy    (setq initial-major-mode 'org-mode)
        (org-clock-persistence-insinuate)
        ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
        ;(setq org-clock-continuously t)
-       (setq org-clock-history-length 302)
+;       (setq org-clock-history-length 302)
        ;; Resume clocking task on clock-in if the clock is open
        ;(setq org-clock-in-resume nil)
 
@@ -1465,6 +1608,48 @@ yy    (setq initial-major-mode 'org-mode)
        ;(add-hook 'org-clock-in-hook 'org-add-note)
 
        (setq org-clocktable-defaults '(:maxlevel 2 :scope subtree :fileskip0 t))
+
+    #+END_SRC
+    
+
+** custom clock functions 
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+       (defun my-org-clock-select-task ()
+         (interactive)
+         (org-clock-select-task))
+
+
+   (use-package org-clock-convenience
+     :ensure t
+     :bind (:map org-agenda-mode-map
+		 ("<S-up>" . org-clock-convenience-timestamp-up)
+		 ("<S-down>" . org-clock-convenience-timestamp-down)
+		 ("e" . org-clock-convenience-fill-gap)
+		 ("o" . org-clock-convenience-fill-gap-both)))
+
+(defun dfeich/helm-org-clock-in (marker)
+  "Clock into the item at MARKER"
+  (with-current-buffer (marker-buffer marker)
+    (goto-char (marker-position marker))
+    (org-clock-in)))
+(eval-after-load 'helm-org
+  '(nconc helm-org-headings-actions
+          (list
+           (cons "Clock into task" #'dfeich/helm-org-clock-in))))
+
+
+
+(setq helm-org-headings-actions '(
+("Go to heading" . helm-org-goto-marker)
+("Clock into task" . dfeich/helm-org-clock-in)
+  ("Open in indirect buffer 'C-c i'" . helm-org--open-heading-in-indirect-buffer)
+  ("Refile heading(s) (multiple-marked-to-selected, or current-to-selected) 'C-c w'" . helm-org--refile-heading-to)
+  ("Insert link to this heading 'C-c l'" . helm-org-insert-link-to-heading-at-marker)
+  )
+)
+
+
 
 
     (defun bh/punch-in (arg)
@@ -1536,47 +1721,8 @@ yy    (setq initial-major-mode 'org-mode)
     (add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
 
 
-    #+END_SRC
-    
 
+#+END_SRC
 
-       (defun my-org-clock-select-task ()
-         (interactive)
-         (org-clock-select-task))
-
-
-   (use-package org-clock-convenience
-     :ensure t
-     :bind (:map org-agenda-mode-map
-		 ("<S-up>" . org-clock-convenience-timestamp-up)
-		 ("<S-down>" . org-clock-convenience-timestamp-down)
-		 ("ö" . org-clock-convenience-fill-gap)
-		 ("é" . org-clock-convenience-fill-gap-both)))
-
-(defun dfeich/helm-org-clock-in (marker)
-  "Clock into the item at MARKER"
-  (with-current-buffer (marker-buffer marker)
-    (goto-char (marker-position marker))
-    (org-clock-in)))
-(eval-after-load 'helm-org
-  '(nconc helm-org-headings-actions
-          (list
-           (cons "Clock into task" #'dfeich/helm-org-clock-in))))
-
-
-
-(setq helm-org-headings-actions '(
-("Go to heading" . helm-org-goto-marker)
-("Clock into task" . dfeich/helm-org-clock-in)
-  ("Open in indirect buffer 'C-c i'" . helm-org--open-heading-in-indirect-buffer)
-  ("Refile heading(s) (multiple-marked-to-selected, or current-to-selected) 'C-c w'" . helm-org--refile-heading-to)
-  ("Insert link to this heading 'C-c l'" . helm-org-insert-link-to-heading-at-marker)
-  )
-)
-
-
-
-
-
-
-
+#+RESULTS:
+| org-clock-remove-empty-clock-drawer | bh/clock-out-maybe |
