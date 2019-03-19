@@ -133,7 +133,7 @@
  '(mu4e-header-face ((t (:inherit default))))
  '(mu4e-unread-face ((t (:foreground "#859900" :weight bold))))
  '(org-checkbox-statistics-todo ((t (:inherit org-todo :weight normal))))
- '(org-level-1 ((t (:inherit variable-pitch :foreground "#b84514" :weight bold :height 1.3 :family "amita"))))
+ '(org-level-1 ((t (:inherit variable-pitch :foreground "#b84514" :weight bold :height 1.0 :family "arima madurai"))))
  '(org-level-2 ((t (:inherit variable-pitch :foreground "#424d00" :height 1.0))))
  '(org-level-3 ((t (:inherit variable-pitch :foreground "#14476c" :height 1.0))))
  '(org-level-4 ((t (:inherit variable-pitch :foreground "#664d00" :height 1.0))))
