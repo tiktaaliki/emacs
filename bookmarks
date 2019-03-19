@@ -69,7 +69,7 @@
  (position . 194227))
 ("org-capture-last-stored"
  (filename . "~/Sync/Zettelkasten/journal.org")
- (front-context-string . "**** call w/dr l")
- (rear-context-string . "19-03-17 Sunday\n")
- (position . 256651))
+ (front-context-string . "**** 읽기\n:LOGBOOK")
+ (rear-context-string . "9-03-19 Tuesday\n")
+ (position . 260406))
 )
