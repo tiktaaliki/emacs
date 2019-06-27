@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("PDFs"
+(("Yoon_709_Assignment-6.tex"
+ (filename . "~/Sync/Spring 2019/709/Assignments/Assignment_6/Yoon_709_Assignment-6.tex")
+ (front-context-string . "\n\n\n\n\n\n\n\n\\bibliog")
+ (rear-context-string . "nter{page}{1}\n\n\n")
+ (position . 840))
+("PDFs"
  (filename . "~/Sync/Spring 2019/PDFs/")
  (front-context-string . "\n  -rwxr--r-- 1 ")
  (rear-context-string . "al archives).pdf")
@@ -63,13 +68,13 @@
  (rear-context-string)
  (position . 1))
 ("org-refile-last-stored"
- (filename . "~/Sync/Zettelkasten/inbox.org")
- (front-context-string . "** TODO add to h")
- (rear-context-string . "Thank you,\nDoug\n")
- (position . 194227))
+ (filename . "~/Sync/Zettelkasten/projects.org")
+ (front-context-string . "* clean up boy's")
+ (rear-context-string . " of readability\n")
+ (position . 36757))
 ("org-capture-last-stored"
- (filename . "~/Sync/Zettelkasten/journal.org")
- (front-context-string . "**** 읽기\n:LOGBOOK")
- (rear-context-string . "9-03-19 Tuesday\n")
- (position . 260406))
+ (filename . "~/Sync/Zettelkasten/inbox.org")
+ (front-context-string . "* TODO process p")
+ (rear-context-string . "e ‘C-0 C-c C-w’\n")
+ (position . 34))
 )

@@ -214,7 +214,7 @@
 * capture templates
    #+BEGIN_SRC emacs-lisp :tangle yes
 
-      (setq org-capture-templates '(("t" "todo" entry (file "~/Sync/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n\n" :prepend t)
+      (setq org-capture-templates '(("t" "todo" entry (file "~/Sync/Zettelkasten/inbox.org") "-  %? \n%a\n\n\n" :prepend t)
                                     ("j" "journal" entry (file+datetree "~/Sync/Zettelkasten/journal.org") "** %? %<%H:%M> \n\n\n\n" :kill-buffer nil :clock-in t :clock-keep t ) 
                               ;%U is inactive date and timestamp
                               ("l" "emacs log" item (file+headline "~/Sync/Zettelkasten/org.org" "Emacs config changes") "%U %?" :prepend t) 
@@ -241,7 +241,6 @@
    #+END_SRC
 
    #+RESULTS:
-   | t | todo | entry | (file ~/Sync/Zettelkasten/inbox.org) | * TODO %? |
    
 
 
@@ -660,19 +659,6 @@
 ** agenda files                              
 
     #+BEGIN_SRC emacs-lisp :tangle yes
-                 (setq org-agenda-files (quote
-                                      ("~/Sync/Zettelkasten/inbox.org" 
-                                       "~/Sync/Zettelkasten/lis.org"  
-                                       "~/Sync/Zettelkasten/ndd.org"
-                                       "~/Sync/Zettelkasten/gcal.org" 
-                                       "~/Sync/Zettelkasten/journal.org"
-                                       "~/Sync/Zettelkasten/work.org"
-                                       "~/Sync/Zettelkasten/budget.org"
-                                       "~/Sync/Zettelkasten/personal.org"
-                                       "~/Sync/Zettelkasten/org.org"
-                                       "~/Sync/Zettelkasten/notes.org"
-       )))
-
 
 
               (setq  org-agenda-sorting-strategy 
@@ -904,9 +890,13 @@
 
      (setq org-refile-use-outline-path (quote file))
 
-     (setq org-refile-targets '((nil :maxlevel . 3)
-                                (org-agenda-files :maxlevel . 2)
-   		      ))
+    
+
+(setq org-refile-targets (quote (("~/Sync/Zettelkasten/notes.org" :maxlevel . 1)
+                                 ("~/Sync/Zettelkasten/ndd.org" :level . 1)
+       ("~/Sync/Zettelkasten/projects.org" :maxlevel . 2)
+       ("~/Sync/Zettelkasten/personal.org" :level . 1)
+                                 ("~/Sync/Zettelkasten/lis.org" :level . 2))))
 
      (setq org-outline-path-complete-in-steps nil) 
 
@@ -920,6 +910,10 @@
    (setq org-archive-location "~/Sync/Zettelkasten/journal.org::datetree/* Finished tasks")
   
 #+END_SRC
+
+#+RESULTS:
+: ~/Sync/Zettelkasten/journal.org::datetree/* Finished tasks
+
 * spell-check, auto-complete
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -959,9 +953,12 @@
 (use-package org-trello)
 
 
-(custom-set-variables '(org-trello-files '("~/Zettelkasten/recipes.org")))
+(custom-set-variables '(org-trello-files '("~/Zettelkasten/projects.org")))
 
 #+END_SRC
+
+#+RESULTS:
+
 * tested ok
 ** misc
  #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1063,27 +1060,8 @@
       (setq org-inlinetask-min-level 7)
 
    #+END_SRC
-*** org-gcal
-   
 
-  
-   
-
-    #+END_SRC
-
-    #+RESULTS:
-    : ~/Sync/Zettelkasten/journal.org::datetree/* Finished tasks
-
-   ** org-mode structure templates
-   #+BEGIN_SRC emacs-lisp :tangle yes
-
-
-   #+END_SRC
-
-   #+RESULTS:
-   | eh | :EXPORT_FILE_NAME: ? |
-
-   ** org-tags
+*** org-tags
    #+BEGIN_SRC emacs-lisp :tangle yes
 
    (setq org-complete-tags-always-offer-all-agenda-tags t)

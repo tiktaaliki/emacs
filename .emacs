@@ -41,13 +41,15 @@
  '(erc-notifications-mode t)
  '(fill-column 100)
  '(fill-flowed-encode-column 5000)
- '(fringe-mode 15 nil (fringe))
+ '(fringe-mode 50 nil (fringe))
+ '(global-auto-revert-mode t)
  '(global-visual-fill-column-mode t)
  '(global-visual-line-mode t)
  '(helm-M-x-always-save-history t)
  '(helm-M-x-reverse-history nil)
  '(helm-move-to-line-cycle-in-source nil)
  '(helm-org-rifle-show-path nil)
+ '(history-delete-duplicates t)
  '(inhibit-eol-conversion t)
  '(menu-bar-mode nil)
  '(mu4e-attachment-dir "~/Sync/Spring 2019")
@@ -80,6 +82,7 @@
    "~/Sync/Zettelkasten/journal.org::datetree/* Finished tasks")
  '(org-clock-history-length 35)
  '(org-ctrl-k-protect-subtree (quote error))
+ '(org-fast-tag-selection-single-key t)
  '(org-goto-interface (quote outline-path-completion))
  '(org-log-refile (quote time))
  '(org-modules
@@ -89,6 +92,7 @@
  '(org-refile-allow-creating-parent-nodes (quote confirm))
  '(org-refile-use-cache t)
  '(org-special-ctrl-a/e t)
+ '(org-tags-column 0)
  '(org-todo-keyword-faces
    (quote
     (("habit" :foreground "dodger blue" :height 0.85)
@@ -108,6 +112,7 @@
      (sequence "habit(h)" "PROJECT(p)" "?(w!)"))))
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(org-trello-files (quote ("~/Zettelkasten/recipes.org")) nil (org-trello))
+ '(org-use-fast-tag-selection nil)
  '(package-selected-packages
    (quote
     (centered-cursor-mode centered-window-mode solarized-theme solarized dired+ helm-org-rifle counsel wpuzzle nov wc-mode ox-reveal html-preview org-chef org-trello ox-pandoc pandoc company-bibtex company-auctex auctex yasnippet-snippets yasnippet ledger-mode org-gcal writeroom-mode use-package smartparens org-ref org-noter org-bullets olivetti magit interleave helm-projectile flyspell-correct-helm deft company calfw-org calfw-gcal calfw-cal calfw bbdb)))
@@ -128,16 +133,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :foreground "#432109" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :foundry "simp" :family "Hack"))))
- '(fringe ((t (:inherit default :background "#f7f3ee"))))
+ '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#432109" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :foundry "simp" :family "Hack"))))
+ '(fringe ((t (:inherit default))))
  '(mu4e-header-face ((t (:inherit default))))
  '(mu4e-unread-face ((t (:foreground "#859900" :weight bold))))
  '(org-checkbox-statistics-todo ((t (:inherit org-todo :weight normal))))
- '(org-level-1 ((t (:inherit variable-pitch :foreground "#b84514" :weight bold :height 1.0 :family "arima madurai"))))
- '(org-level-2 ((t (:inherit variable-pitch :foreground "#424d00" :height 1.0))))
+ '(org-level-1 ((t (:inherit default :foreground "black" :weight normal :height 1.1))))
+ '(org-level-2 ((t (:inherit default :foreground "#424d00" :height 1.0))))
  '(org-level-3 ((t (:inherit variable-pitch :foreground "#14476c" :height 1.0))))
  '(org-level-4 ((t (:inherit variable-pitch :foreground "#664d00" :height 1.0))))
  '(org-list-dt ((t (:background "green yellow" :underline nil :weight bold))))
  '(org-special-keyword ((t (:foreground "#93a1a1" :weight normal :height 0.85))))
- '(org-tag ((t (:inherit default :weight normal :height 0.85))))
+ '(org-tag ((t (:inherit default :foreground "navy" :overline t :underline t :weight bold :height 0.85))))
  '(variable-pitch ((t (:foreground "black" :height 1.1 :family "exo")))))
