@@ -2,36 +2,21 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-((".mbsyncrc"
+((".emacs"
+ (filename . "~/Dropbox/emacs/.emacs")
+ (front-context-string . "(package-initial")
+ (rear-context-string)
+ (position . 1))
+(".mbsyncrc"
  (filename . "~/.mbsyncrc")
  (front-context-string . "IMAPAccount gmai")
  (rear-context-string)
  (position . 1))
-("EDRA"
- (filename . "~/Sync/2019/EDRA/")
- (front-context-string . "EDRAFullPapers_M")
- (rear-context-string . "88 Sep  8 15:41 ")
- (position . 226))
 ("Calibre Library"
  (filename . "~/Calibre Library/")
  (front-context-string . "Ajahn Brahm Fore")
  (rear-context-string . "96 Aug  3 22:01 ")
  (position . 235))
-("Library"
- (filename . "~/Sync/Library/")
- (front-context-string . "[Coulthard,_Glen")
- (rear-context-string . "14 Nov 16 14:54 ")
- (position . 416))
-("2019"
- (filename . "~/Sync/2019/")
- (front-context-string . "  /home/betsy/Sy")
- (rear-context-string)
- (position . 1))
-("PDFs"
- (filename . "~/Sync/Spring 2019/PDFs/")
- (front-context-string . "\n  -rwxr--r-- 1 ")
- (rear-context-string . "al archives).pdf")
- (position . 1432))
 ("Downloads"
  (filename . "~/Downloads/")
  (front-context-string . "  /home/betsy/Do")
@@ -47,16 +32,6 @@
  (front-context-string . "-- Standard awes")
  (rear-context-string)
  (position . 1))
-("Sync"
- (filename . "~/Sync/")
- (front-context-string . "emacs\n  -rw-----")
- (rear-context-string . "96 Feb  6 16:18 ")
- (position . 224))
-("emacs"
- (filename . "~/Sync/emacs/")
- (front-context-string . "bookmarks\n  -rw-")
- (rear-context-string . "95 Feb  6 12:01 ")
- (position . 223))
 ("org-capture-last-stored-marker"
  (filename . "~/Sync/Zettelkasten/inbox.org")
  (front-context-string . "** TODO add to h")
@@ -68,10 +43,10 @@
  (rear-context-string)
  (position . 1))
 ("org-refile-last-stored"
- (filename . "~/Sync/Zettelkasten/notes.org")
- (front-context-string . "** Alberto Rios ")
- (rear-context-string . "v=ktE_3PrJZO0\n\n\n")
- (position . 512780))
+ (filename . "~/Sync/Zettelkasten/personal.org")
+ (front-context-string . "*** Tahini/Tamar")
+ (rear-context-string . "h for dipping.\n\n")
+ (position . 160346))
 ("org-capture-last-stored"
  (filename . "~/Sync/Zettelkasten/inbox.org")
  (front-context-string . "* TODO give JT y")
