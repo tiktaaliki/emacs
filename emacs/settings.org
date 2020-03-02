@@ -1,0 +1,1556 @@
+
+
+
+#+BEGIN_SRC 
+
+#+END_SRC
+#+BEGIN_SRC emacs-lisp :tangle yes
+;(use-package centered-window-mode)
+(use-package centered-cursor-mode)
+
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+;; backwards compatibility as default-buffer-file-coding-system
+;; is deprecated in 23.2.
+(if (boundp 'buffer-file-coding-system)
+    (setq-default buffer-file-coding-system 'utf-8)
+  (setq default-buffer-file-coding-system 'utf-8))
+
+;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+#+end_src 
+
+#+RESULTS:
+| UTF8_STRING | COMPOUND_TEXT | TEXT | STRING |
+
+* ov-highlight
+#+BEGIN_SRC 
+
+#+END_SRC
+
+* theme
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package doom-themes
+:ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-one t)
+
+  ;; Enable flashing mode-line on errors
+;  (doom-themes-visual-bell-config)
+  
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+  (doom-themes-treemacs-config)
+  
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+#+end_src
+
+* latex
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package company-auctex)
+(company-auctex-init)
+
+
+(use-package tex :ensure auctex)
+
+     (setq TeX-auto-save t)
+     (setq TeX-parse-self t)
+
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* html preview
+#+BEGIN_SRC emacs-lisp :tangle yes 
+
+;(use-package html-preview)
+#+END_SRC
+
+#+RESULTS:
+
+
+
+* convenience
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (setq visible-bell nil)
+   (setq org-startup-indented t)
+   (setq org-hide-emphasis-markers t)
+   (setq org-hide-leading-stars t) 
+   (setq org-startup-with-inline-images t)
+   (setq org-startup-align-all-tables t)
+   (setq org-startup-folded t)
+   (setq org-ellipsis " ⬎ " )
+   (use-package org-bullets
+           :ensure t
+           :init 
+           (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))) (setq org-bullets-bullet-list (quote ("◉""»""⚬"  "✧""▸"   ))))
+   (setq sentence-end-double-space nil)
+
+    (defun insert-timestamp (prefix)
+       "Insert the current date. With prefix-argument, use ISO format. With
+      two prefix arguments, write out the day and month name."
+       (interactive "P")
+       (let ((format (cond
+                      ((not prefix) "%Y%m%d-%H%M")
+                      ((equal prefix '(4)) "%Y-%m-%d")
+                      ((equal prefix '(16)) "%A, %d. %B %Y")))
+            )
+         (insert (format-time-string format))))
+#+END_SRC
+
+#+RESULTS:
+: insert-timestamp
+
+
+* usability
+#+BEGIN_SRC emacs-lisp :tangle yes
+    (setq initial-major-mode 'org-mode)
+    (setq org-support-shift-select (quote always))
+    (delete-selection-mode) ;allows to delete selected text by typing
+    (fset 'yes-or-no-p 'y-or-n-p)
+      
+
+
+	(use-package smartparens
+:ensure t
+        :init
+        (show-smartparens-global-mode 1))
+	(smartparens-global-mode 1)
+	(setq show-paren-style 'expression)
+
+
+(setq blink-matching-paren-dont-ignore-comments nil)
+
+
+
+
+
+#+END_SRC
+
+#+RESULTS:
+
+* Key bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (eval-after-load "flyspell"
+     '(define-key flyspell-mode-map (kbd "C-.") nil))
+
+
+         (global-unset-key (kbd "C-z"))     
+         (global-unset-key (kbd "M-c"))
+
+         (global-unset-key (kbd "S-SPC"))
+         (bind-keys ("C-+"   . text-scale-increase)
+                    ("C--"   . text-scale-decrease)
+                    ("C-c l" . org-store-link)
+                 ("C-c k" . toggle-korean-input-method)
+                    ("C-."   . org-todo)
+                    ("C-x /" . shrink-window-horizontally)
+                    ("C-x ." . org-archive-subtree-default)
+                    ("C-c n" . org-schedule)
+                    ("M-="   . count-words)
+                    ("M-x"   . helm-M-x)
+                    ("M-_" . insert-pair)
+                    ("M-*" . insert-pair)
+                    ("M-\/" . insert-pair)
+                    ("C-c b" . list-bookmarks)
+
+                    ("C-<kp-6>" . xah-select-block)
+                    ("C-x j" . helm-org-in-buffer-headings)
+		 ("C-c i" . insert-timestamp)
+                    ("C-c a" . helm-org-agenda-files-headings)
+                    ([f1] . org-capture)
+                    ([f2] . org-clock-in)
+                    ([f3] . helm-buffers-list)           
+                    ([f4] . org-refile)
+                    ([f5] . helm-projectile)
+                    ([f6] . helm-bibtex-with-local-bibliography)
+                    ([f7] . org-agenda)
+                    ([f8] . deft)
+                    ([f9] . org-tree-to-indirect-buffer)
+   ([f12] . bury-buffer)
+   )
+
+
+         (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+         (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+         (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+         (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+         (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+         (define-key key-translation-map (kbd "C--") (kbd "–"))
+
+         (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+         (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
+         (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+         (define-key key-translation-map (kbd "C-c s") (kbd "ß"))
+         (define-key key-translation-map (kbd "C-c o") (kbd "ö"))
+
+         (define-key key-translation-map (kbd "C-c a") (kbd "ä"))
+         (define-key key-translation-map (kbd "C-c u") (kbd "ü"))
+
+#+END_SRC
+
+#+RESULTS:
+: [252]
+
+* file navigating
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (setq bookmark-default-file "~/Dropbox/emacs/bookmarks")
+   (setq bookmark-save-flag 1)
+   (use-package ido
+:ensure t
+)
+   (ido-mode t)
+
+   (use-package deft
+     :ensure t)
+   (setq deft-directory "~/Dropbox/Zettelkasten/")
+   (setq deft-default-extension "org")
+   (setq deft-time-format " %b-%Y %H:%M")
+   (setq deft-use-filename-as-title t)
+   (setq deft-new-file-format "%Y%b%d")
+   (setq deft-text-mode 'org-mode)
+   (setq deft-file-naming-rules '((noslash . "-")
+				  (nospace . "-")
+				  (case-fn . downcase))) 
+   (setq deft-recursive nil)
+   (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
+   (setq deft-auto-save-interval 1.0)
+   (add-hook 'after-init-hook 'deft)
+   (add-hook 'after-init-hook 'org-clock-persistence-insinuate)
+
+   (use-package helm
+:ensure t
+     :config (helm-mode 1))
+    (use-package projectile
+:ensure t
+)
+    (use-package helm-projectile
+:ensure t
+)
+
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+#+END_SRC
+
+#+RESULTS:
+: projectile-command-map
+
+
+
+
+* capture templates
+
+
+
+
+      (setq org-capture-templates '((
+
+
+
+
+                                    )))
+
+
+
+
+
+
+   #+BEGIN_SRC emacs-lisp :tangle yes
+
+(setq org-capture-templates
+      '(
+("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> %? \n\n\n\n"  :clock-in t :clock-keep t :kill-buffer nil ) 
+                                         
+   ("e" "calendar" entry (file "~/Dropbox/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n:location: %^{location}\n\n\n:END:\n\n")
+
+("f" "finances" item (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Income/Expenses") "%U %?" :prepend t)
+
+("g" "GI log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "GI log") "%U %?" :prepend t) 
+
+("h" "meditation log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Meditation log") "%?" :prepend t) 
+
+("j" "journal" item (id "journal") "\n%U\n%?" :prepend t  :clock-in t :kill-buffer nil :clock-keep nil ) 
+
+("k" "look up later" checkitem (file+headline "~/Dropbox/Zettelkasten/inbox.org" "things to look up") " [ ] %?" :prepend t) 
+
+("l" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
+
+("m" "james" checkitem (file+headline "~/Dropbox/Zettelkasten/projects.org" "James") " [ ] %?" :prepend t :clock-in t :clock-keep nil)
+                          
+
+("n" "Completed next actions" item (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Completed next actions") "%?" :prepend t) 
+
+("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n\n" :prepend t)
+
+
+))
+
+
+
+
+                                              ;this prevents org-capture from replacing any windows. it just adds. 
+      (defun my-org-capture-place-template-dont-delete-windows (oldfun args)
+        (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
+          (apply oldfun args)))
+
+      (with-eval-after-load "org-capture"
+        (advice-add 'org-capture-place-template :around 'my-org-capture-place-template-dont-delete-windows))
+
+   #+END_SRC
+
+   #+RESULTS:
+
+   ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:")
+
+
+
+
+
+* structure editing
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+;   (setq org-special-ctrl-a/e t)
+(setq org-cycle-separator-lines 0)
+   ;this allows me to collapse a subtree when not on its headline
+;   (setq org-cycle-emulate-tab 'white)
+    (defun xah-select-current-block ()
+      "Select the current block of text between blank lines.
+
+		URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
+		Version 2016-07-22"
+      (interactive)
+      (let (-p1)
+	(progn
+	  (if (re-search-backward "\n[ \t]*\n" nil "move")
+	      (progn (re-search-forward "\n[ \t]*\n")
+		     (setq -p1 (point)))
+	    (setq -p1 (point)))
+	  (re-search-forward "\n[ \t]*\n" nil "move"))
+	(set-mark -p1)))
+
+    (defun xah-select-block ()
+      "Select the current/next block of text between blank lines.
+		If region is active, extend selection downward by block.
+
+		URL `http://ergoemacs.org/emacs/modernization_mark-word.html'
+		Version 2016-07-22"
+      (interactive)
+      (if (region-active-p)
+	  (re-search-forward "\n[ \t]*\n" nil "move")
+	(xah-select-current-block)))
+
+
+#+END_SRC
+
+#+RESULTS:
+: xah-select-block
+
+* yasnippet
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(use-package yasnippet                  ; Snippets
+ )
+(use-package yasnippet-snippets         ; Collection of snippets
+  :ensure t)
+
+#+END_SRC
+
+#+RESULTS:
+
+
+
+* window management
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+;undo and redo changes in window configuration eg go to previous buffer 
+    (winner-mode 1)
+
+ (defun transpose-windows ()
+   (interactive)
+   (let ((this-buffer (window-buffer (selected-window)))
+         (other-buffer (prog2
+                           (other-window +1)
+                           (window-buffer (selected-window))
+                         (other-window -1))))
+     (switch-to-buffer other-buffer)
+     (switch-to-buffer-other-window this-buffer)
+     (other-window -1)))
+
+
+
+(defun toggle-window-split ()
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((this-win-buffer (window-buffer))
+         (next-win-buffer (window-buffer (next-window)))
+         (this-win-edges (window-edges (selected-window)))
+         (next-win-edges (window-edges (next-window)))
+         (this-win-2nd (not (and (<= (car this-win-edges)
+                     (car next-win-edges))
+                     (<= (cadr this-win-edges)
+                     (cadr next-win-edges)))))
+         (splitter
+          (if (= (car this-win-edges)
+             (car (window-edges (next-window))))
+          'split-window-horizontally
+        'split-window-vertically)))
+    (delete-other-windows)
+    (let ((first-win (selected-window)))
+      (funcall splitter)
+      (if this-win-2nd (other-window 1))
+      (set-window-buffer (selected-window) this-win-buffer)
+      (set-window-buffer (next-window) next-win-buffer)
+      (select-window first-win)
+      (if this-win-2nd (other-window 1))))))
+
+(global-set-key (kbd "C-x |") 'toggle-window-split)
+
+#+END_SRC
+
+#+RESULTS:
+: toggle-window-split
+
+* buffer management
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(defun kill-other-buffers ()
+     "Kill all other buffers."
+     (interactive)
+     (mapc 'kill-buffer 
+           (delq (current-buffer) 
+                 (remove-if-not 'buffer-file-name (buffer-list)))))
+
+
+#+END_SRC
+
+#+RESULTS:
+: kill-other-buffers
+
+
+
+* REFERENCE/STUDY
+** org-ref
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+  (use-package org-ref)
+  (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
+
+  ;; see org-ref for use of these variables
+  (setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/notes.org"
+        org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
+        org-ref-pdf-directory "~/Dropbox/Spring 2019/PDFs/")
+
+  (setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
+
+        bibtex-completion-notes-path "~/Dropbox/Zettelkasten/notes.org")
+
+  ;; open pdf with system pdf viewer (works on mac)
+  (setq bibtex-completion-pdf-open-function
+    (lambda (fpath)
+      (start-process "open" "*open*" "open" fpath)))
+
+
+;  (setq pdf-view-continuous nil)
+
+;  (setq bibtex-autokey-year-title-separator "")
+ ; (setq bibtex-autokey-titleword-length 0)
+
+
+  (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). ${title}.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}\n:END:")
+
+
+
+  #+END_SRC
+
+  #+RESULTS:
+  : 
+  : * ${author} (${year}). ${title}.
+  : :PROPERTIES:
+  : :Custom_ID: ${=key=}
+  : :CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}
+  : :END:
+
+  (setq org-ref-bibliography-entry-format '(("article" . "%a. (%y). %t. <i>%j</i>, <i>%v</i>(%n), %p. %D")
+    ("book" . "%a. (%y). /%t/. %r: %u.")
+    ("techreport" . "%a. (%y). /%t/. %r: %i. Retrieved from %U")
+    ("proceedings" . "%e, %t in %S, %U (%y).")
+  ("online" . "%a. (%y). %t. Retrieved from %U")
+    ("inproceedings" . "%a, %t, %p, in %b, edited by %e, %u (%y)")))
+  #+RESULTS:
+  : ((article . %a. (%y). %t. <i>%j</i>, <i>%v</i>(%n), %p. %D) (book . %a. (%y). /%t/. %r: %u.) (techreport . %a. (%y). /%t/. %r: %i. Retrieved from %U) (proceedings . %e, %t in %S, %U (%y).) (online . %a. (%y). %t. Retrieved from %U) (inproceedings . %a, %t, %p, in %b, edited by %e, %u (%y)))
+
+
+** org noter
+  #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package org-noter
+       :ensure t
+       :config (setq org-noter-property-doc-file "INTERLEAVE_PDF")
+       (setq org-noter-property-note-location "INTERLEAVE_PAGE_NOTE") 
+       (setq org-noter-notes-window-location 'other-frame)
+       (setq org-noter-default-heading-title "p. $p$") 
+       (setq org-noter-auto-save-last-location t))
+
+  (use-package interleave)
+
+
+  #+END_SRC
+
+  #+RESULTS:
+
+* org-agenda
+** agenda files                              
+
+    #+BEGIN_SRC emacs-lisp :tangle yes
+
+
+              (setq  org-agenda-sorting-strategy 
+              '((agenda time-up)
+                (todo priority-down category-keep)
+                (tags priority-down category-keep)
+                (search category-keep)))
+
+              (setq org-log-done 'note)
+              (setq org-agenda-skip-deadline-if-done t)
+              (setq org-agenda-skip-timestamp-if-done t)
+              (setq org-agenda-skip-scheduled-if-done t)
+              (setq org-agenda-current-time-string "✸✸✸✸✸✸ NOW ✸✸✸✸✸✸✸✸✸✸")
+           ;   (setq org-agenda-time-grid 
+            ;        '((daily weekly today require-timed remove-match)
+             ;         (800 1000 1200 1400 1600 1800 2000)
+              ;        "......" "----------------"))
+              (setq org-agenda-start-with-clockreport-mode t)
+              (setq org-agenda-span (quote day))
+              (setq org-agenda-jump-prefer-future t)
+              (setq org-agenda-window-setup (quote only-frame))
+              (setq org-agenda-with-colors t)
+              (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+              (setq org-agenda-start-on-weekday nil)
+;           (setq org-deadline-warning-days 4)
+    #+END_SRC
+
+    #+RESULTS:
+    : 4
+
+    +RESULTS:
+    # : note
+
+** custom agenda views
+
+       (setq org-agenda-custom-commands '(
+                                          ("x" agenda)
+                                          ("y" agenda*) ;only entries w/times 
+                                          ("n" "next/in progress" (todo "NEXT")(todo "!~!"))
+                                          ("u" "Undated tasks" todo "" ((org-agenda-todo-ignore-with-date t)))
+                                          ("s" "not yet scheduled" todo "" ((org-agenda-todo-ignore-scheduled t)))
+				              
+("d" "day + tasks" ((todo "!")(agenda "") (todo "NEXT")(todo "!~!")))
+
+
+                    ))
+
+    #+BEGIN_SRC emacs-lisp :tangle yes
+
+                                                                       (setq org-stuck-projects '("/PROJECT" ("NEXT") nil ""))
+                                                            (setq org-log-note-clock-out nil)
+
+
+    #+END_SRC
+
+    #+RESULTS:
+
+
+* todo keywords 
+                  ;(setq org-agenda-dim-blocked-tasks t)
+
+(setq org-todo-keywords '((sequence  "TODO(t)" "NEXT(n)" "--(s)" "|" "DONE(d!)")
+                                       (sequence "습관(h)" "PROJECT(p)" "?(w!)" "|" "x(c!)")))
+(setq org-todo-keyword-faces '(("습관" :foreground "dodger blue")
+                                            ("TODO" :foreground "lavenderblush4")
+                                           ("PROJECT" :foreground "gray40" :weight bold :underline t  )
+                                            ("NEXT" :foreground "red" )
+                                   ("--" :foreground "magenta1")
+           ("?" :foreground "yellow") 
+ ("DONE" :foreground "dim gray" )
+                          ("x" :foreground "dim gray")))
+
+
+
+    #+BEGIN_SRC emacs-lisp :tangle yes
+
+
+       (setq org-enforce-todo-dependencies t)
+
+
+    #+END_SRC
+
+    #+RESULTS:
+    : t
+
+(use-package org-depend)
+        (defun mm/org-insert-trigger ()
+           "Automatically insert chain-find-next trigger when entry becomes NEXT"
+           (cond ((equal org-state "NEXT")
+                  (org-set-property "TRIGGER" "chain-siblings(NEXT)"))
+                 ((not (member org-state org-done-keywords))
+                  (org-delete-property "TRIGGER"))))
+
+         (add-hook 'org-after-todo-state-change-hook 'mm/org-insert-trigger)
+
+
+* font rendering and encoding
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+		     '("NanumBarunGothic" . "unicode-bmp" ))
+   (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
+		     '("NanumBarunGothic" . "unicode-bmp"))
+   (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
+		     (font-spec :family "DejaVu Sans Mono" :size 20)) 
+
+   (setq use-default-font-for-symbols nil)
+
+   (use-package unicode-fonts
+     :ensure t
+     :disabled t
+     :init (unicode-fonts-setup))
+
+
+#+END_SRC
+
+#+RESULTS:
+
+* emacs startup
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (setq frame-title-format (list (format "%s %%S: %%j " (system-name))
+				  '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
+
+ (find-file "~/Dropbox/emacs/settings.org")
+   (add-to-list 'default-frame-alist '(fullscreen . maximized))
+   (setq inhibit-startup-screen t)
+					   ;(setq split-height-threshold nil)
+					   ; prefer horizontal split. 
+;   (setq split-width-threshold 9999)
+
+   (tool-bar-mode -1)
+   (menu-bar-mode -1)
+   (scroll-bar-mode -1)
+
+
+
+#+END_SRC
+
+#+RESULTS:
+
+
+* debugging
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+
+ (defun test-emacs ()
+   "Test if emacs starts correctly."
+   (interactive)
+   (if (eq last-command this-command)
+       (save-buffers-kill-terminal)
+     (require 'async)
+     (async-start
+      (lambda () (shell-command-to-string
+                  "emacs --batch --eval \"
+ (condition-case e
+     (progn
+       (load \\\"~/.emacs.d/init.el\\\")
+       (message \\\"-OK-\\\"))
+   (error
+    (message \\\"ERROR!\\\")
+    (signal (car e) (cdr e))))\""))
+      `(lambda (output)
+         (if (string-match "-OK-" output)
+             (when ,(called-interactively-p 'any)
+               (message "All is well"))
+           (switch-to-buffer-other-window "*startup error*")
+           (delete-region (point-min) (point-max))
+           (insert output)
+           (search-backward "ERROR!"))))))
+
+
+
+#+END_SRC
+
+#+RESULTS:
+: test-emacs
+
+* filling
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+
+    ;  (setq fill-column 100)
+
+
+     ; (global-visual-line-mode 1) 
+      ;(use-package visual-fill-column
+;	:ensure t)
+
+      (add-hook 'deft-mode-hook #'visual-line-mode)
+
+ ;     (setq visual-fill-column-center-text t)
+
+  ;   (setq fill-flowed-encode-column 80)
+   ;  (setq message-fill-column nil)
+    ; (setq visual-fill-column-center-text t)
+
+   ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
+       (defun unfill-paragraph (&optional region)
+	 "Takes a multi-line paragraph and makes it into a single line of text."
+	 (interactive (progn (barf-if-buffer-read-only) '(t)))
+	 (let ((fill-column (point-max))
+	       ;; This would override `fill-column' if it's an integer.
+	       (emacs-lisp-docstring-fill-column t))
+	   (fill-paragraph nil region)))
+
+
+#+END_SRC
+
+#+RESULTS:
+: unfill-paragraph
+
+* org-table
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+
+
+#+END_SRC
+
+#+RESULTS:
+: 2x1
+
+
+
+
+
+
+
+
+
+
+* org-list
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+    (setq org-list-demote-modify-bullet
+          '(("+" . "-") ("-" . "+") ))
+    (setq org-list-allow-alphabetical t)
+    (setq org-list-indent-offset 1)
+    (setq org-checkbox-hierarchical-statistics t)
+
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* org-refile
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+     (setq org-refile-use-outline-path (quote file))
+
+    
+
+(setq org-refile-targets (quote (("~/Dropbox/Zettelkasten/notes.org" :maxlevel . 1)
+                                 ("~/Dropbox/Zettelkasten/ndd.org" :level . 1)
+       ("~/Dropbox/Zettelkasten/projects.org" :maxlevel . 2)
+       ("~/Dropbox/Zettelkasten/personal.org" :level . 1)
+ ("~/Dropbox/Zettelkasten/someday.org" :level . 1)
+                                 ("~/Dropbox/Zettelkasten/lis.org" :level . 2))))
+
+     (setq org-outline-path-complete-in-steps nil) 
+
+   ; Refile in a single go
+
+   ;  (global-set-key (kbd "<f4>") 'org-refile)
+
+     (setq org-refile-allow-creating-parent-nodes 'confirm)
+
+ ;(setq org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/")
+   (setq org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks")
+  
+#+END_SRC
+
+#+RESULTS:
+: ~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks
+
+* spell-check, auto-complete
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+					   ;autocompletion
+   (use-package company
+     :ensure t
+     :init (global-company-mode)
+     :config (company-mode 1))     
+
+					   ;spellcheck
+   (use-package flyspell-correct-helm)
+;(add-hook 'org-mode-hook 'turn-on-flyspell)
+
+#+END_SRC
+
+#+RESULTS:
+
+
+
+
+* org-link
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (setq org-return-follows-link nil)
+
+#+END_SRC
+
+#+RESULTS:
+
+* org-chef
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package org-chef
+ )
+#+END_SRC
+
+#+RESULTS:
+
+* org-trello
+#+BEGIN_SRC emacs-lisp :tangle yes 
+;(use-package org-trello)
+
+
+;(custom-set-variables '(org-trello-files '("~/Zettelkasten/projects.org")))
+
+#+END_SRC
+
+#+RESULTS:
+
+* tested ok
+** misc
+ #+BEGIN_SRC emacs-lisp :tangle yes
+
+
+ ;(setq csv-separators '(":" "	"))
+    ;(setq org-image-actual-width 350)
+    ;(setq org-sparse-tree-default-date-type 'all)
+
+
+					    ;(require 'smart-quotes) 
+
+
+;    (add-to-list 'insert-pair-alist (list ?\* ?\*))
+ ;   (add-to-list 'insert-pair-alist (list ?\_ ?\_))
+  ;  (add-to-list 'insert-pair-alist (list ?\/ ?\/))
+					    ;   (add-to-list 'insert-pair-alist (list ?\" ?\"))
+
+
+ #+END_SRC
+
+ #+RESULTS:
+
+ 
+** color 1
+   :PROPERTIES:
+   :VISIBILITY: ALL
+   :END:
+  ** color 2
+  *** color 3
+  **** color 4
+  ***** color 5
+  ****** color 7
+  ******* color 8
+  ******** color 9
+  ********* color 10
+
+** web
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+  (setq browse-url-browser-function 'browse-url-generic
+        browse-url-generic-program "firefox")
+
+  (defun my-set-eww-buffer-title ()
+        (let* ((title (plist-get eww-data :title))
+        (url   (plist-get eww-data :url))
+        (result (concat "*eww-" 
+   	      (or title Norton Guide reader     
+   		(if (string-match "://" url)
+                     (substring url (match-beginning 0))
+                     url)) "*")))
+         (rename-buffer result t)))
+
+  (add-hook 'eww-after-render-hook 'my-set-eww-buffer-title)
+(add-hook 'eww-after-render-hook 'visual-fill-column-mode)
+(add-hook 'eww-after-render-hook 'visual-line-mode)
+
+;  (defun shr-html2text ()
+ ;   "Replacement for standard html2text using shr."
+  ;  (interactive)
+   ; (let ((dom (libxml-parse-html-region (point-min) (point-max)))
+    ;      (shr-width fill-column)
+    ;      (shr-inhibit-images t)
+     ;     (shr-bullet " "))
+      ;    (erase-buffer)
+       ;   (shr-insert-document dom)
+        ;  (goto-char (point-min))))
+
+  (eval-after-load 'shr  
+       '(progn (setq shr-width -1)  
+               (defun shr-fill-text (text) text)  
+               (defun shr-fill-lines (start end) nil)  
+               (defun shr-fill-line () nil)))
+
+  #+END_SRC
+
+  #+RESULTS:
+
+
+
+
+** Troubleshooting
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+  (setq debug-on-error nil)
+
+  #+END_SRC
+
+  #+RESULTS:
+
+** ORG
+   #+BEGIN_SRC emacs-lisp :tangle yes
+
+      (require 'cl) 
+
+      ;Non-nil means insert state change notes and time stamps into a drawer.
+      (setq org-log-into-drawer t)
+
+
+      (require 'org-inlinetask)
+      (setq org-inlinetask-min-level 7)
+
+   #+END_SRC
+
+   #+RESULTS:
+   : 7
+
+*** org-tags
+   #+BEGIN_SRC emacs-lisp :tangle yes
+
+   (setq org-complete-tags-always-offer-all-agenda-tags t)
+   ;(setq org-tags-column -80)
+   (setq org-tags-match-list-sublevels (quote indented))
+   (setq tags-add-tables nil)
+
+   #+END_SRC
+
+   #+RESULTS:
+
+
+
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+(defun test-emacs ()
+  "Test if emacs starts correctly."
+  (interactive)
+  (if (eq last-command this-command)
+      (save-buffers-kill-terminal)
+    (require 'async)
+    (async-start
+     (lambda () (shell-command-to-string
+                 "emacs --batch --eval \"
+(condition-case e
+    (progn
+      (load \\\"~/.emacs.d/init.el\\\")
+      (message \\\"-OK-\\\"))
+  (error
+   (message \\\"ERROR!\\\")
+   (signal (car e) (cdr e))))\""))
+     `(lambda (output)
+        (if (string-match "-OK-" output)
+            (when ,(called-interactively-p 'any)
+              (message "All is well"))
+          (switch-to-buffer-other-window "*startup error*")
+          (delete-region (point-min) (point-max))
+          (insert output)
+          (search-backward "ERROR!"))))))
+
+
+#+END_SRC
+
+#+RESULTS:
+: test-emacs
+
+* file conversions: org-babel, pandoc, etc.
+ #+BEGIN_SRC emacs-lisp :tangle yes
+
+   (setq org-babel-load-languages '((emacs-lisp . t)
+				    (css . t)))
+     (setq org-edit-src-content-indentation 3)
+;   If non-nil, the effect of TAB in a code block is as if it were issued in the language major mode buffer.
+    (setq org-src-tab-acts-natively t)
+
+ (add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
+
+ #+END_SRC
+
+ #+RESULTS:
+ : ((\.txt$ . org-mode) (\.odc\' . archive-mode) (\.odf\' . archive-mode) (\.odi\' . archive-mode) (\.otp\' . archive-mode) (\.odp\' . archive-mode) (\.otg\' . archive-mode) (\.odg\' . archive-mode) (\.ots\' . archive-mode) (\.ods\' . archive-mode) (\.odm\' . archive-mode) (\.ott\' . archive-mode) (\.odt\' . archive-mode) (\.hva\' . latex-mode) (\.drv\' . latex-mode) (\.ledger\' . ledger-mode) (/git-rebase-todo\' . git-rebase-mode) (\.md\' . markdown-mode) (\.markdown\' . markdown-mode) (\.gpg\(~\|\.~[0-9]+~\)?\' nil epa-file) (\.elc\' . elisp-byte-code-mode) (\.zst\' nil jka-compr) (\.dz\' nil jka-compr) (\.xz\' nil jka-compr) (\.lzma\' nil jka-compr) (\.lz\' nil jka-compr) (\.g?z\' nil jka-compr) (\.bz2\' nil jka-compr) (\.Z\' nil jka-compr) (\.vr[hi]?\' . vera-mode) (\(?:\.\(?:rbw?\|ru\|rake\|thor\|jbuilder\|rabl\|gemspec\|podspec\)\|/\(?:Gem\|Rake\|Cap\|Thor\|Puppet\|Berks\|Vagrant\|Guard\|Pod\)file\)\' . ruby-mode) (\.re?st\' . rst-mode) (\.py[iw]?\' . python-mode) (\.less\' . less-css-mode) (\.scss\' . scss-mode) (\.awk\' . awk-mode) (\.\(u?lpc\|pike\|pmod\(\.in\)?\)\' . pike-mode) (\.idl\' . idl-mode) (\.java\' . java-mode) (\.m\' . objc-mode) (\.ii\' . c++-mode) (\.i\' . c-mode) (\.lex\' . c-mode) (\.y\(acc\)?\' . c-mode) (\.h\' . c-or-c++-mode) (\.c\' . c-mode) (\.\(CC?\|HH?\)\' . c++-mode) (\.[ch]\(pp\|xx\|\+\+\)\' . c++-mode) (\.\(cc\|hh\)\' . c++-mode) (\.\(bat\|cmd\)\' . bat-mode) (\.[sx]?html?\(\.[a-zA-Z_]+\)?\' . mhtml-mode) (\.svgz?\' . image-mode) (\.svgz?\' . xml-mode) (\.x[bp]m\' . image-mode) (\.x[bp]m\' . c-mode) (\.p[bpgn]m\' . image-mode) (\.tiff?\' . image-mode) (\.gif\' . image-mode) (\.png\' . image-mode) (\.jpe?g\' . image-mode) (\.te?xt\' . text-mode) (\.[tT]e[xX]\' . tex-mode) (\.ins\' . tex-mode) (\.ltx\' . latex-mode) (\.dtx\' . doctex-mode) (\.org\' . org-mode) (\.el\' . emacs-lisp-mode) (Project\.ede\' . emacs-lisp-mode) (\.\(scm\|stk\|ss\|sch\)\' . scheme-mode) (\.l\' . lisp-mode) (\.li?sp\' . lisp-mode) (\.[fF]\' . fortran-mode) (\.for\' . fortran-mode) (\.p\' . pascal-mode) (\.pas\' . pascal-mode) (\.\(dpr\|DPR\)\' . delphi-mode) (\.ad[abs]\' . ada-mode) (\.ad[bs].dg\' . ada-mode) (\.\([pP]\([Llm]\|erl\|od\)\|al\)\' . perl-mode) (Imakefile\' . makefile-imake-mode) (Makeppfile\(?:\.mk\)?\' . makefile-makepp-mode) (\.makepp\' . makefile-makepp-mode) (\.mk\' . makefile-gmake-mode) (\.make\' . makefile-gmake-mode) ([Mm]akefile\' . makefile-gmake-mode) (\.am\' . makefile-automake-mode) (\.texinfo\' . texinfo-mode) (\.te?xi\' . texinfo-mode) (\.[sS]\' . asm-mode) (\.asm\' . asm-mode) (\.css\' . css-mode) (\.mixal\' . mixal-mode) (\.gcov\' . compilation-mode) (/\.[a-z0-9-]*gdbinit . gdb-script-mode) (-gdb\.gdb . gdb-script-mode) ([cC]hange\.?[lL]og?\' . change-log-mode) ([cC]hange[lL]og[-.][0-9]+\' . change-log-mode) (\$CHANGE_LOG\$\.TXT . change-log-mode) (\.scm\.[0-9]*\' . scheme-mode) (\.[ckz]?sh\'\|\.shar\'\|/\.z?profile\' . sh-mode) (\.bash\' . sh-mode) (\(/\|\`\)\.\(bash_\(profile\|history\|log\(in\|out\)\)\|z?log\(in\|out\)\)\' . sh-mode) (\(/\|\`\)\.\(shrc\|zshrc\|m?kshrc\|bashrc\|t?cshrc\|esrc\)\' . sh-mode) (\(/\|\`\)\.\([kz]shenv\|xinitrc\|startxrc\|xsession\)\' . sh-mode) (\.m?spec\' . sh-mode) (\.m[mes]\' . nroff-mode) (\.man\' . nroff-mode) (\.sty\' . latex-mode) (\.cl[so]\' . latex-mode) (\.bbl\' . latex-mode) (\.bib\' . bibtex-mode) (\.bst\' . bibtex-style-mode) (\.sql\' . sql-mode) (\.m[4c]\' . m4-mode) (\.mf\' . metafont-mode) (\.mp\' . metapost-mode) (\.vhdl?\' . vhdl-mode) (\.article\' . text-mode) (\.letter\' . text-mode) (\.i?tcl\' . tcl-mode) (\.exp\' . tcl-mode) (\.itk\' . tcl-mode) (\.icn\' . icon-mode) (\.sim\' . simula-mode) (\.mss\' . scribe-mode) (\.f9[05]\' . f90-mode) (\.f0[38]\' . f90-mode) (\.indent\.pro\' . fundamental-mode) (\.\(pro\|PRO\)\' . idlwave-mode) (\.srt\' . srecode-template-mode) (\.prolog\' . prolog-mode) (\.tar\' . tar-mode) (\.\(arc\|zip\|lzh\|lha\|zoo\|[jew]ar\|xpi\|rar\|cbr\|7z\|ARC\|ZIP\|LZH\|LHA\|ZOO\|[JEW]AR\|XPI\|RAR\|CBR\|7Z\)\' . archive-mode) (\.oxt\' . archive-mode) (\.\(deb\|[oi]pk\)\' . archive-mode) (\`/tmp/Re . text-mode) (/Message[0-9]*\' . text-mode) (\`/tmp/fol/ . text-mode) (\.oak\' . scheme-mode) (\.sgml?\' . sgml-mode) (\.x[ms]l\' . xml-mode) (\.dbk\' . xml-mode) (\.dtd\' . sgml-mode) (\.ds\(ss\)?l\' . dsssl-mode) (\.jsm?\' . javascript-mode) (\.json\' . javascript-mode) (\.jsx\' . js-jsx-mode) (\.[ds]?vh?\' . verilog-mode) (\.by\' . bovine-grammar-mode) (\.wy\' . wisent-grammar-mode) ([:/\]\..*\(emacs\|gnus\|viper\)\' . emacs-lisp-mode) (\`\..*emacs\' . emacs-lisp-mode) ([:/]_emacs\' . emacs-lisp-mode) (/crontab\.X*[0-9]+\' . shell-script-mode) (\.ml\' . lisp-mode) (\.ld[si]?\' . ld-script-mode) (ld\.?script\' . ld-script-mode) (\.xs\' . c-mode) (\.x[abdsru]?[cnw]?\' . ld-script-mode) (\.zone\' . dns-mode) (\.soa\' . dns-mode) (\.asd\' . lisp-mode) (\.\(asn\|mib\|smi\)\' . snmp-mode) (\.\(as\|mi\|sm\)2\' . snmpv2-mode) (\.\(diffs?\|patch\|rej\)\' . diff-mode) (\.\(dif\|pat\)\' . diff-mode) (\.[eE]?[pP][sS]\' . ps-mode) (\.\(?:PDF\|DVI\|OD[FGPST]\|DOCX?\|XLSX?\|PPTX?\|pdf\|djvu\|dvi\|od[fgpst]\|docx?\|xlsx?\|pptx?\)\' . doc-view-mode-maybe) (configure\.\(ac\|in\)\' . autoconf-mode) (\.s\(v\|iv\|ieve\)\' . sieve-mode) (BROWSE\' . ebrowse-tree-mode) (\.ebrowse\' . ebrowse-tree-mode) (#\*mail\* . mail-mode) (\.g\' . antlr-mode) (\.mod\' . m2-mode) (\.ses\' . ses-mode) (\.docbook\' . sgml-mode) (\.com\' . dcl-mode) (/config\.\(?:bat\|log\)\' . fundamental-mode) (\.\(?:[iI][nN][iI]\|[lL][sS][tT]\|[rR][eE][gG]\|[sS][yY][sS]\)\' . conf-mode) (\.la\' . conf-unix-mode) (\.ppd\' . conf-ppd-mode) (java.+\.conf\' . conf-javaprop-mode) (\.properties\(?:\.[a-zA-Z0-9._-]+\)?\' . conf-javaprop-mode) (\.toml\' . conf-toml-mode) (\.desktop\' . conf-desktop-mode) (\`/etc/\(?:DIR_COLORS\|ethers\|.?fstab\|.*hosts\|lesskey\|login\.?de\(?:fs\|vperm\)\|magic\|mtab\|pam\.d/.*\|permissions\(?:\.d/.+\)?\|protocols\|rpc\|services\)\' . conf-space-mode) (\`/etc/\(?:acpid?/.+\|aliases\(?:\.d/.+\)?\|default/.+\|group-?\|hosts\..+\|inittab\|ksysguarddrc\|opera6rc\|passwd-?\|shadow-?\|sysconfig/.+\)\' . conf-mode) ([cC]hange[lL]og[-.][-0-9a-z]+\' . change-log-mode) (/\.?\(?:gitconfig\|gnokiirc\|hgrc\|kde.*rc\|mime\.types\|wgetrc\)\' . conf-mode) (/\.\(?:enigma\|gltron\|gtk\|hxplayer\|net\|neverball\|qt/.+\|realplayer\|scummvm\|sversion\|sylpheed/.+\|xmp\)rc\' . conf-mode) (/\.\(?:gdbtkinit\|grip\|orbital/.+txt\|rhosts\|tuxracer/options\)\' . conf-mode) (/\.?X\(?:default\|resource\|re\)s\> . conf-xdefaults-mode) (/X11.+app-defaults/\|\.ad\' . conf-xdefaults-mode) (/X11.+locale/.+/Compose\' . conf-colon-mode) (/X11.+locale/compose\.dir\' . conf-javaprop-mode) (\.~?[0-9]+\.[0-9][-.0-9]*~?\' nil t) (\.\(?:orig\|in\|[bB][aA][kK]\)\' nil t) ([/.]c\(?:on\)?f\(?:i?g\)?\(?:\.[a-zA-Z0-9._-]+\)?\' . conf-mode-maybe) (\.[1-9]\' . nroff-mode) (\.tgz\' . tar-mode) (\.tbz2?\' . tar-mode) (\.txz\' . tar-mode) (\.tzst\' . tar-mode))
+
+
+* file encoding
+ C-h C RET
+ M-x describe-current-coding-system
+
+ #+BEGIN_SRC  emacs-lisp :tangle yes
+    (set-language-environment "UTF-8")
+    (set-default-coding-systems 'utf-8)
+
+
+    (add-to-list 'file-coding-system-alist '("\\.tex" . utf-8-unix) )
+    (add-to-list 'file-coding-system-alist '("\\.txt" . utf-8-unix) )
+    (add-to-list 'file-coding-system-alist '("\\.el" . utf-8-unix) )
+    (add-to-list 'file-coding-system-alist '("\\.scratch" . utf-8-unix) )
+    (add-to-list 'file-coding-system-alist '("user_prefs" . utf-8-unix) )
+
+    (add-to-list 'process-coding-system-alist '("\\.txt" . utf-8-unix) )
+
+    (add-to-list 'network-coding-system-alist '("\\.txt" . utf-8-unix) )
+
+    (prefer-coding-system 'utf-8-unix)
+    (set-default-coding-systems 'utf-8-unix)
+    (set-terminal-coding-system 'utf-8-unix)
+    (set-keyboard-coding-system 'utf-8-unix)
+    (set-selection-coding-system 'utf-8-unix)
+    (setq-default buffer-file-coding-system 'utf-8-unix)
+
+    ;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+    (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
+    ;; mnemonic for utf-8 is "U", which is defined in the mule.el
+    (setq eol-mnemonic-dos ":CRLF")
+    (setq eol-mnemonic-mac ":CR")
+    (setq eol-mnemonic-undecided ":?")
+    (setq eol-mnemonic-unix ":LF")
+
+    (defalias 'read-buffer-file-coding-system 'lawlist-read-buffer-file-coding-system)
+    (defun lawlist-read-buffer-file-coding-system ()
+      (let* ((bcss (find-coding-systems-region (point-min) (point-max)))
+	     (css-table
+	      (unless (equal bcss '(undecided))
+		(append '("dos" "unix" "mac")
+			(delq nil (mapcar (lambda (cs)
+					    (if (memq (coding-system-base cs) bcss)
+						(symbol-name cs)))
+					  coding-system-list)))))
+	     (combined-table
+	      (if css-table
+		  (completion-table-in-turn css-table coding-system-alist)
+		coding-system-alist))
+	     (auto-cs
+	      (unless find-file-literally
+		(save-excursion
+		  (save-restriction
+		    (widen)
+		    (goto-char (point-min))
+		    (funcall set-auto-coding-function
+			     (or buffer-file-name "") (buffer-size))))))
+	     (preferred 'utf-8-unix)
+	     (default 'utf-8-unix)
+	     (completion-ignore-case t)
+	     (completion-pcm--delim-wild-regex ; Let "u8" complete to "utf-8".
+	      (concat completion-pcm--delim-wild-regex
+		      "\\|\\([[:alpha:]]\\)[[:digit:]]"))
+	     (cs (completing-read
+		  (format "Coding system for saving file (default %s): " default)
+		  combined-table
+		  nil t nil 'coding-system-history
+		  (if default (symbol-name default)))))
+	(unless (zerop (length cs)) (intern cs))))
+
+ #+END_SRC
+
+ #+RESULTS:
+ : lawlist-read-buffer-file-coding-system
+
+
+
+* mu4e
+
+ #+BEGIN_SRC emacs-lisp :tangle yes
+              (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") 
+             ; (use-package mu4e) 
+             ; (use-package mu4e-contrib)
+           (require 'mu4e)
+           (require 'org-mu4e)
+              ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+              (setq mu4e-sent-messages-behavior 'delete)
+              (setq message-kill-buffer-on-exit t)
+              (setq mu4e-change-filenames-when-moving t)
+              (setq mu4e-compose-format-flowed t)
+              (setq smtpmail-default-smtp-server "smtp.gmail.com")
+       (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
+       (add-hook 'mu4e-view-mode-hook 'visual-fill-column-mode)
+
+    ;;  (defun vfcm-on ()
+    ;;  ;turn on visual fill column mode
+    ;;  (visual-fill-column-mode 1))
+
+    ;; (add-hook 'mu4e-view-mode-hook #'vfcm-on)
+
+
+
+
+    ;  (setq visual-fill-column-width 100)
+
+     (defun no-auto-fill ()
+       "Turn off auto-fill-mode."
+       (auto-fill-mode -1))
+
+
+
+
+
+    (defun vcfm-off ()
+    ;turn off visual fill column mode
+    (visual-fill-column-mode nil))
+
+    (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
+    (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
+  #+END_SRC
+  
+  #+RESULTS:
+  
+** message view
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+;  (setq mu4e-attachment-dir "/home/betsy/Dropbox/Spring 2019/")
+
+
+
+
+  (setq shr-color-visible-luminance-min 50) 
+  (setq shr-color-visible-distance-min 5)
+  ;(setq mu4e-view-html-plaintext-ratio-heuristic 'most-positive-fixnum)
+  (setq message-yank-prefix ""
+        message-yank-empty-prefix ""
+        message-yank-cited-prefix "")
+
+  (setq w3m-default-desplay-inline-images t)
+    (defun mu4e-action-view-in-w3m ()
+      "View the body of the message in emacs w3m."
+      (interactive)
+      (w3m-browse-url (concat "file://"
+          (mu4e~write-body-to-html (mu4e-message-at-point t)))))
+
+
+  ;; customize the reply-quote-string
+  (setq message-citation-line-format "\n\nOn %a %d %b %Y at %R, %f wrote:\n")
+  ;; choose to use the formatted string
+  (setq message-citation-line-function 'message-insert-formatted-citation-line)
+
+
+  (setq mu4e-view-scroll-to-next nil)
+
+  (add-hook 'message-mode-hook 'visual-fill-column-mode)
+
+
+  (use-package bbdb)
+
+  (bbdb-initialize)
+  (autoload 'bbdb-insinuate-mu4e "bbdb-mu4e")
+  (bbdb-initialize 'message 'mu4e)
+
+  (setq bbdb-mail-user-agent 'mu4e-user-agent)
+  ;(setq mu4e-view-mode-hook 'bbdb-mua-auto-update visual-line-mode)
+  (setq mu4e-compose-complete-addresses t)
+  (setq bbdb-mua-pop-up t)
+  (setq bbdb-mua-pop-up-window-size 5)
+  (setq mu4e-view-show-addresses t)  
+  (setq bbdb-default-country "United States")
+
+
+
+  #+END_SRC
+
+  #+RESULTS:
+  : United States
+
+** headers view
+
+   (setq mu4e-headers-fields
+	  '( (:human-date    .  15)    ;; alternatively, use :human-date
+	     (:flags         .   5)
+	     (:from          .  20)
+;	     (:thread-subject       . 70 )
+             (:thread-subject       . 120 )
+	     )) 
+
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+ 
+     (setq org-mu4e-link-query-in-headers-mode nil)
+     ;(setq mu4e-update-interval 60)
+     ;(setq mu4e-index-update-in-background t)
+     (setq mu4e-view-prefer-html t)
+     (setq mu4e-headers-skip-duplicates t)
+     (setq mu4e-headers-auto-update t)
+     (setq mu4e-view-show-addresses t)
+     (setq mu4e-headers-date-format "%x")
+     (setq mu4e-headers-time-format "%H:%M")
+  #+END_SRC
+
+  #+RESULTS:
+  : %H:%M
+
+** settings
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+    ;; allow for updating mail using 'U' in the main view:
+  (setq mu4e-get-mail-command "true")
+
+  #+END_SRC 
+
+  #+RESULTS:
+  : true
+
+** folders
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+  (setq mu4e-maildir-shortcuts
+    '( ("/INBOX"  . ?i)
+   	("/Sent"   . ?s)
+   	("/Trash"  . ?t)
+   	("/All"    . ?a)))
+
+  (setq mu4e-drafts-folder "/Drafts")
+  (setq mu4e-sent-folder   "/Sent")
+  (setq mu4e-trash-folder  "/Trash")
+  (setq mu4e-refile-folder "/All")
+  (setq mu4e-maildir "~/Maildir")
+  (setq mu4e-attachment-dir "~/Dropbox")
+  #+END_SRC 
+
+  #+RESULTS:
+  : ~/Dropbox
+
+  
+
+* Autosave-backup-git
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+     (use-package magit
+       :ensure t
+       :init (progn
+               (setq magit-repository-directories '("~/Dropbox/emacs/" "~/Dropbox/Zettelkasten/"))))
+
+  #+END_SRC
+
+  #+RESULTS:
+
+* writing environment
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+     (use-package writeroom-mode)
+     (setq writeroom-extra-line-spacing 2)
+     (setq writeroom-restore-window-config t)
+     (setq writeroom-major-modes '(text-mode org-mode))
+  (setq writeroom-fullscreen-effect 'maximized)
+                                            ;  global-writeroom-mode t
+
+     (use-package olivetti)
+  #+END_SRC
+
+  #+RESULTS:
+* pdf-tools
+
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+  (pdf-tools-install)
+
+; (eval-after-load 'org '(require 'org-pdfview))
+
+  (use-package pdf-tools)
+  (use-package org-pdfview)
+
+  (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
+  (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
+
+
+  (add-to-list 'org-file-apps 
+               '("\\.pdf\\'" . (lambda (file link)
+                                       (org-pdfview-open link))))
+  #+END_SRC
+
+  #+RESULTS:
+  : ((\.pdf\' lambda (file link) (org-pdfview-open link)) (\.pdf::\([[:digit:]]+\)\' . org-pdfview-open) (\.pdf\' . org-pdfview-open) (auto-mode . emacs) (\.mm\' . default) (\.x?html?\' . default) (\.pdf\' . default))
+
+
+
+
+
+
+
+* auctex
+
+
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+       (setq-default TeX-master nil)
+
+  (setq TeX-view-program-selection
+  '(((output-dvi has-no-display-manager)
+     "dvi2tty")
+    ((output-dvi style-pstricks)
+     "dvips and gv")
+    (output-dvi "xdvi")
+    (output-pdf "PDF Tools")
+    (output-html "xdg-open")))
+
+
+
+
+
+  #+RESULTS:
+* openwith                                                             :feb6:
+  #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package openwith
+      :config (progn
+                (when (require 'openwith nil 'noerror)
+                  (setq openwith-associations
+                        (list
+       ;                   (list (openwith-make-extension-regexp
+      ;                           '("mpg" "mpeg" "mp3" "mp4"
+        ;                           "avi" "wmv" "wav" "mov" "flv"
+         ;                          "ogm" "ogg" "mkv"))
+          ;                      "audacious"
+           ;                     '(file))
+      ;                    (list (openwith-make-extension-regexp
+       ;                          '("xbm" "pbm" "pgm" "ppm" "pnm"
+        ;                           "png" "bmp" "tif" "jpeg" "jpg"))
+         ;                       "gpicview"
+          ;                      '(file))
+  ;                       (list (openwith-make-extension-regexp
+   ;                             '("pdf"))
+    ;                           "zathura"
+     ;                          '(file))
+                         (list (openwith-make-extension-regexp
+                                '("doc" "docx" "ppt" "xls" "xlsx" "pptx"))
+                               "libreoffice"
+                               '(file))
+
+                         ))
+                  (openwith-mode 1)))
+     :ensure t)
+
+  #+END_SRC
+
+  #+RESULTS:
+  : t
+
+
+
+* org-gcal & other calendar stuff
+   #+BEGIN_SRC emacs-lisp :tangle yes
+
+   (use-package calfw)
+   (use-package calfw-org)
+   (use-package calfw-gcal)
+   (use-package calfw-cal)
+   (setq package-check-signature nil)
+   (setq org-gcal-down-days '30)
+   ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
+
+
+   (defun my-open-calendar ()
+     (interactive)
+     (cfw:open-calendar-buffer
+      :contents-sources
+      (list
+       (cfw:org-create-source "cornflower blue")  ; orgmode source
+;       (cfw:cal-create-source "light goldenrod") ; diary source
+      ))) 
+
+ ;   (setq calendar-daylight-savings-starts '(3 11 year))
+  ;  (setq calendar-daylight-savings-ends: '(11 4 year))
+   (setq calendar-week-start-day 1)
+
+
+
+
+
+   #+END_SRC
+
+   #+RESULTS:
+   : 1
+
+  
+* org misc
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+    (setq org-modules '(org-bbdb
+                         org-gnus
+                       org-depend
+                         org-info
+                         org-jsinfo
+                         org-habit
+                         org-irc
+                         org-mouse
+                         org-protocol
+                         org-annotate-file
+                         org-eval
+                         org-expiry
+                         org-interactive-query
+                         org-man
+                         org-collector
+                         org-panel
+                         org-screen
+                         org-toc))
+
+   (eval-after-load 'org '(org-load-modules-maybe t))
+
+    (setq org-habit-following-days 5)
+      (setq org-habit-show-habits-only-for-today t)
+      (setq  org-habit-show-all-today t)
+      (setq org-habit-preceding-days 12)
+                                              ;   (setq org-habit-completed-glyph 128504)
+      (setq org-habit-show-done-always-green t)
+      (setq org-habit-graph-column 60)
+
+#+END_SRC
+
+#+RESULTS:
+: 60
+
+
+
+
+
+* custom clock functions 
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+       (defun my-org-clock-select-task ()
+         (interactive)
+         (org-clock-select-task))
+
+
+   (use-package org-clock-convenience
+     :ensure t
+     :bind (:map org-agenda-mode-map
+		 ("<S-up>" . org-clock-convenience-timestamp-up)
+		 ("<S-down>" . org-clock-convenience-timestamp-down)
+		 ("e" . org-clock-convenience-fill-gap)
+		 ("o" . org-clock-convenience-fill-gap-both)))
+
+(defun dfeich/helm-org-clock-in (marker)
+  "Clock into the item at MARKER"
+  (with-current-buffer (marker-buffer marker)
+    (goto-char (marker-position marker))
+    (org-clock-in)))
+(eval-after-load 'helm-org
+  '(nconc helm-org-headings-actions
+          (list
+           (cons "Clock into task" #'dfeich/helm-org-clock-in))))
+
+
+
+(setq helm-org-headings-actions '(
+("Go to heading" . helm-org-goto-marker)
+("Clock into task" . dfeich/helm-org-clock-in)
+  ("Open in indirect buffer 'C-c i'" . helm-org--open-heading-in-indirect-buffer)
+  ("Refile heading(s) (multiple-marked-to-selected, or current-to-selected) 'C-c w'" . helm-org--refile-heading-to)
+  ("Insert link to this heading 'C-c l'" . helm-org-insert-link-to-heading-at-marker)
+  )
+)
+
+
+
+
+
+#+END_SRC
+
+#+RESULTS:
+: ((Go to heading . helm-org-goto-marker) (Clock into task . dfeich/helm-org-clock-in) (Open in indirect buffer 'C-c i' . helm-org--open-heading-in-indirect-buffer) (Refile heading(s) (multiple-marked-to-selected, or current-to-selected) 'C-c w' . helm-org--refile-heading-to) (Insert link to this heading 'C-c l' . helm-org-insert-link-to-heading-at-marker))
+
+* ********************
+* org-clock
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (org-clock-persistence-insinuate)
+
+
+   (setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
+   (setq org-clock-into-drawer t)
+   (setq org-clock-out-remove-zero-time-clocks t)
+
+   (setq org-clock-out-when-done t)
+
+       (setq org-clocktable-defaults '(:maxlevel 2 :scope subtree :fileskip0 t))
+    (setq org-clock-report-include-clocking-task t)
+       (setq org-clock-mode-line-total (quote current))
+
+       (setq org-clock-clocked-in-display (quote both))
+
+#+END_SRC
+
+   (setq org-clock-persist t)
+  
+       ;; Resume clocking task when emacs is restarted
+
+       ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
+       ;(setq org-clock-continuously t)
+;       (setq org-clock-history-length 302)
+       ;; Resume clocking task on clock-in if the clock is open
+       ;(setq org-clock-in-resume nil)
+
+       ;; Separate drawers for clocking and logs
+      
+       ;; Save clock data and state changes and notes in the LOGBOOK drawer
+;       (setq org-clock-persist-file "~/Dropbox/emacs/.emacs.d/org-clock-save.el")
+       ;(setq org-clock-persist-file "~/Dropbox/emacs/.emacs.d/org-clock-save.el")
+
+       ;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
+
+    ;(setq org-clock-in-switch-to-state "--")
+
+
+       ; C-u C-c C-x C-i d
+      
+       ;; Clock out when moving task to a done state
+   
+       ;; Save the running clock and all clock history when exiting Emacs, load it on startup
+
+       ;; Do not prompt to resume an active clock
+       (setq org-clock-persist-query-resume nil)
+       ;; Enable auto clock resolution for finding open clocks
+       (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
+       ;; Include current clocking task in clock reports
+   
+       (setq org-clock-clocktable-default-properties '(:scope subtree  :maxlevel 4 :link t :emphasize t :fileskip0 t :block today :narrow 30 :tcolumns 2 ))
+
+       (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 2 :tcolumns 2 :fileskip0 t :narrow 30 :block today))
+       ;(add-hook 'org-clock-in-hook 'org-add-note)
+
+
+
+   
