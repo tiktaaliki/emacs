@@ -2,7 +2,35 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-((".emacs"
+(("2020"
+ (filename . "~/Dropbox/2020/")
+ (front-context-string . "  /home/betsy/Dr")
+ (rear-context-string)
+ (position . 1))
+("settings.org"
+ (filename . "~/Dropbox/emacs/settings.org")
+ (front-context-string . "\n\n\n#+BEGIN_SRC \n")
+ (rear-context-string)
+ (position . 1))
+("i3 config"
+ (filename . "~/.config/i3/config")
+ (front-context-string . "exec emacs\nexec ")
+ (rear-context-string . "exec syncthing\n#")
+ (position . 1711))
+("sircur.pdf"
+ (filename . "~/Dropbox/Library/sircur.pdf")
+ (position . 1)
+ (page . 1)
+ (slice)
+ (size . fit-height)
+ (origin 0.0 . 0.0)
+ (handler . pdf-view-bookmark-jump-handler))
+("Library"
+ (filename . "~/Dropbox/Library/")
+ (front-context-string . "  /home/betsy/Dr")
+ (rear-context-string)
+ (position . 1))
+(".emacs"
  (filename . "~/Dropbox/emacs/.emacs")
  (front-context-string . "(package-initial")
  (rear-context-string)
@@ -37,19 +65,14 @@
  (front-context-string . "** TODO add to h")
  (rear-context-string . "Thank you,\nDoug\n")
  (position . 194227))
-("i3 config"
- (filename . "~/.config/i3/config")
- (front-context-string . "# This file has ")
- (rear-context-string)
- (position . 1))
 ("org-refile-last-stored"
- (filename . "~/Sync/Zettelkasten/personal.org")
- (front-context-string . "*** Tahini/Tamar")
- (rear-context-string . "h for dipping.\n\n")
- (position . 160346))
+ (filename . "~/Dropbox/Zettelkasten/notes.org")
+ (front-context-string . "** Nir Eyal, /In")
+ (rear-context-string . "***\n* Readings \n")
+ (position . 1389))
 ("org-capture-last-stored"
- (filename . "~/Sync/Zettelkasten/inbox.org")
- (front-context-string . "* TODO give JT y")
- (rear-context-string)
- (position . 2))
+ (filename . "~/Dropbox/Zettelkasten/inbox.org")
+ (front-context-string . "* TODO why does ")
+ (rear-context-string . "ime blocking*]]\n")
+ (position . 59295))
 )
