@@ -4,39 +4,28 @@
 
 [[file:custom2.el][file:~/Dropbox/emacs/custom2.el]]
 
+[[file:custom2.el][file:~/Dropbox/emacs/parkinglot.org]]
+
 * better defaults
+
+** emacs defaults
 #+BEGIN_SRC emacs-lisp :tangle yes
    (setq visible-bell nil)
-   (setq org-startup-indented t)
-   (add-hook 'org-mode-hook (lambda () (org-indent-mode 1)))
-   (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
-   (add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
-   (setq org-hide-emphasis-markers t)
-   (setq org-hide-leading-stars t) 
-   (setq org-startup-with-inline-images t)
-   (setq org-startup-align-all-tables t)
-   (setq org-startup-folded t)
-   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-
-;   (setq line-spacing 0.5)
    (add-to-list 'default-frame-alist '(fullscreen . maximized))
    (tool-bar-mode -1)
    (menu-bar-mode -1)
    (setq inhibit-startup-screen t)
    (scroll-bar-mode -1)
    (setq initial-major-mode 'org-mode)
-   (setq org-support-shift-select (quote always))
    (delete-selection-mode) ;allows to delete selected text by typing
    (fset 'yes-or-no-p 'y-or-n-p)
-   (setq org-cycle-separator-lines 0)
-
+ 
    (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
                      '("NanumBarunpen" . "unicode-bmp" ))
    (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
                      '("NanumBarunpen" . "unicode-bmp"))
    (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
                      (font-spec :family "DejaVu Sans Mono" :size 20)) 
-
 
    (setq use-default-font-for-symbols nil)
 
@@ -50,6 +39,27 @@
    (setq global-visual-line-mode t)
 
 #+END_SRC
+** org defaults
+#+BEGIN_SRC emacs-lisp :tangle yes
+   (setq org-startup-indented t)
+   (add-hook 'org-mode-hook (lambda () (org-indent-mode 1)))
+   (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
+   (add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
+   (setq org-hide-emphasis-markers t)
+   (setq org-hide-leading-stars t) 
+   (setq org-startup-with-inline-images t)
+   (setq org-startup-align-all-tables t)
+   (setq org-startup-folded t)
+   (setq org-special-ctrl-a/e (quote (t . t)))
+   (use-package org-bullets)
+   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+   (setq org-catch-invisible-edits (quote smart))
+   (setq org-show-context-detail t)
+   (setq org-cycle-separator-lines 0)
+   (setq org-support-shift-select (quote always))
+
+
+#+END_SRC
 
 #+RESULTS:
 : t
@@ -59,63 +69,64 @@
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (eval-after-load "flyspell"
-     '(define-key flyspell-mode-map (kbd "C-.") nil))
+      (eval-after-load "flyspell"
+        '(define-key flyspell-mode-map (kbd "C-.") nil))
 
 
 
-   (global-set-key (kbd "C-x |") 'toggle-window-split)
+      (global-set-key (kbd "C-x |") 'toggle-window-split)
 
-   (global-unset-key (kbd "C-z"))     
-   (global-unset-key (kbd "M-c"))
+      (global-unset-key (kbd "C-z"))     
+      (global-unset-key (kbd "M-c"))
 
-   (global-unset-key (kbd "S-SPC"))
-   (bind-keys ("C-+"   . text-scale-increase)
-              ("C--"   . text-scale-decrease)
-              ("C-c l" . org-store-link)
-              ("C-c k" . toggle-korean-input-method)
-              ("C-."   . org-todo)
-              ("C-x /" . shrink-window-horizontally)
-              ("C-x ." . org-archive-subtree-default)
-              ("C-c n" . org-schedule)
-              ("M-="   . count-words)
-              ("M-x"   . helm-M-x)
+      (global-unset-key (kbd "S-SPC"))
+      (bind-keys ("C-+"   . text-scale-increase)
+                 ("C--"   . text-scale-decrease)
+                 ("C-c l" . org-store-link)
+                 ("C-c k" . toggle-korean-input-method)
+                 ("C-."   . org-todo)
+                 ("C-x /" . shrink-window-horizontally)
+                 ("C-x ." . org-archive-subtree-default)
+                 ("C-c n" . org-schedule)
+                 ("M-="   . count-words)
+                 ("M-x"   . helm-M-x)
 
-              ("C-c b" . list-bookmarks)
-              ("C-a" . org-beginning-of-line)
-              ("C-e" . org-end-of-line)
-              ("C-k" . org-kill-line)
-              ("C-<kp-6>" . xah-select-block)
-              ("C-x j" . helm-org-in-buffer-headings)
-              ("C-c i" . insert-timestamp)
-              ("C-c a" . helm-org-agenda-files-headings)
-              ("C-c C-x C-r" . org-clock-report)
-              ([f1] . org-capture)
-              ([f2] . org-clock-in)
-              ([f3] . helm-buffers-list)           
-              ([f4] . org-refile)
-              ([f5] . helm-projectile)
-              ([f6] . helm-bibtex-with-local-bibliography)
-              ([f7] . org-agenda)
-              ([f8] . deft)
-              ([f9] . org-set-startup-visibility)
-              ([f12] . bury-buffer)
+                 ("C-c b" . list-bookmarks)
+                 ("C-a" . org-beginning-of-line)
+                 ("C-e" . org-end-of-line)
+                 ("C-k" . org-kill-line)
+                 ("C-<kp-6>" . xah-select-block)
+              ;   ("C-x j" . helm-org-in-buffer-headings)
+                 ("C-c i" . insert-timestamp)
+               ;  ("C-c a" . helm-org-agenda-files-headings)
+                 ("C-c C-x C-r" . org-clock-report)
+                 ([f1] . org-capture)
+                 ([f2] . org-clock-in)
+                 ([f3] . helm-buffers-list)           
+                 ([f4] . org-refile)
+                 ([f5] . helm-projectile)
+                 ([f6] . helm-bibtex-with-local-bibliography)
+                 ([f7] . org-agenda)
+                 ([f8] . deft)
+              ;   ([f9] . org-set-startup-visibility)
+                 ([f10] . org-narrow-to-subtree)
+                 ([f12] . bury-buffer)
 
-              )
+                 )
 
-;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
- ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+   ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+    ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
-   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-   (define-key key-translation-map (kbd "C-_") (kbd "–"))
+      (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+      (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+      (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+      (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+      (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+      (define-key key-translation-map (kbd "C-_") (kbd "–"))
 
-   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
-   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+      (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+      (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
+      (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
 
 
 #+END_SRC
@@ -161,36 +172,53 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (set-face-attribute 'default nil :family "Fantasque sans mono" :height 250 :weight 'normal  :foreground "#ebdcb2"); honeydew  d5d6d2 faefd4
-   (set-face-attribute 'org-level-1 nil :weight 'regular :foreground "#6ab187" :inherit 'default :height 1.25 :weight 'bold) ;lagoon
-   (set-face-attribute 'org-level-2 nil :inherit 'org-level-1 :foreground "#9a9eab" :height 0.95 :weight 'regular) ;  
-   (set-face-attribute 'org-level-3 nil :inherit 'org-level-2 :foreground "#68829e" :height 0.95) ; 
-   (set-face-attribute 'org-level-4 nil :inherit 'org-level-3 :foreground "#6ab187" :height 0.95) ;    a3bd38
-   (set-face-attribute 'org-level-5 nil :inherit 'org-level-4 :foreground "#9a9eab")
-   (set-face-attribute 'org-level-6 nil :inherit 'org-level-5 :foreground "#68829e")
+      (set-face-attribute 'default nil :family "Fantasque sans mono" :height 250 :weight 'normal  :foreground "#ebdcb2"); honeydew  d5d6d2 faefd4
+      (set-face-attribute 'org-level-1 nil :weight 'regular :foreground "#6ab187" :inherit 'default :height 1.0 :weight 'bold) ;lagoon
+      (set-face-attribute 'org-level-2 nil :inherit 'org-level-1 :foreground "#9a9eab" :height 1.0 :weight 'regular) ;  
+      (set-face-attribute 'org-level-3 nil :inherit 'org-level-2 :foreground "#68829e" :height 1.0) ; 
+      (set-face-attribute 'org-level-4 nil :inherit 'org-level-3 :foreground "#6ab187" :height 1.0) ;    a3bd38
+      (set-face-attribute 'org-level-5 nil :inherit 'org-level-4 :foreground "#9a9eab")
+      (set-face-attribute 'org-level-6 nil :inherit 'org-level-5 :foreground "#68829e")
 
 
-   (set-face-attribute 'org-todo nil :weight 'normal :family "nova mono" :height 0.8)
-   (set-face-attribute 'org-link nil :weight 'normal :foreground "#81715e" :family "monofur") ;grecian blue  2988bc
-   (set-face-attribute 'org-tag nil :height 0.8)
-   (set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :height 0.8 :foreground "#ff4447") ;raspberry
-   (set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
-   (set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
-   (set-face-attribute 'org-special-keyword nil :height 0.8)
-   (set-face-attribute 'org-date nil :underline t :foreground "#a1d6e2" :family "monofur" )
-   (set-face-attribute 'bold nil :weight 'bold :foreground "#f0810f") ; f0810f ffbb00 de7a22
-   (set-face-attribute 'italic nil :slant 'italic :foreground "#fa6775") ;bubblegum 
-   (set-face-attribute 'org-agenda-diary nil :foreground "#a4cabc" )
-   (set-face-attribute 'org-ellipsis nil :foreground "#a4cabc" :strike-through nil)
-   (set-face-attribute 'org-headline-done nil :foreground "#5B6268" :strike-through t)
+      (set-face-attribute 'org-todo nil :weight 'normal :family "nova mono" :height 0.9)
+      (set-face-attribute 'org-link nil :weight 'normal :foreground "#81715e" :family "monofur") ;grecian blue  2988bc
+     
+      (set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :height 0.8 :foreground "#ff4447") ;raspberry
+      (set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
+      (set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
+      (set-face-attribute 'org-special-keyword nil :height 0.8)
+      (set-face-attribute 'org-date nil :underline t :foreground "#a1d6e2" :family "monofur" )
+      (set-face-attribute 'bold nil :weight 'bold :foreground "#f0810f") ; f0810f ffbb00 de7a22
+      (set-face-attribute 'italic nil :slant 'italic :foreground "#fa6775") ;bubblegum 
+      (set-face-attribute 'org-agenda-diary nil :foreground "#a4cabc" )
+      (set-face-attribute 'org-ellipsis nil :foreground "#a4cabc" :strike-through nil)
+      (set-face-attribute 'org-headline-done nil :foreground "#5B6268" :strike-through t)
+   (set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
+      (set-face-attribute 'underline nil :foreground "#89da59" :underline t) ;warm gray
+      (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
 
-   (set-face-attribute 'underline nil :foreground "#89da59" :underline t) ;warm gray
-   (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
-;dismissed colors: 426e86, steel blue
+
+ (setq org-todo-keyword-faces
+            (quote
+             (("NEXT" :weight bold :inherit org-todo :foreground "magenta")
+              ("?" :weight bold :underline nil :inherit org-todo :foreground "yellow")
+              ("IN-PROGRESS" :weight bold :underline nil :inherit org-todo :foreground "#00CFFA")
+              ("HOLD" :weight regular :underline nil :inherit org-todo :foreground "midnight blue")
+              ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#e8a735")
+              ("⟐" :weight bold :underline nil :inherit org-todo :foreground "seagreen")
+              )))
+   ;dismissed colors: 426e86, steel blue
    #+END_SRC
 
 #+RESULTS:
-
+| NEXT        | :weight | bold    | :inherit   | org-todo | :foreground | magenta  |             |               |
+| ?           | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | yellow        |
+| IN-PROGRESS | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | #00CFFA       |
+| HOLD        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | midnight blue |
+| TODO        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | #e8a735       |
+| ⟐           | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | seagreen      |
+ (set-face-attribute 'org-tag nil :height 0.8)
 * file navigating
 #+BEGIN_SRC emacs-lisp :tangle yes
 (diredp-toggle-find-file-reuse-dir 1)
@@ -227,11 +255,6 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
    (use-package helm
      :ensure t
      :config (helm-mode 1))
-
-
-
-
-
 
 
  (setq helm-M-x-always-save-history t)
@@ -357,211 +380,45 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
 
 
 
-* org-mode
+* *org-mode*
+
+** org navigation
+#+BEGIN_SRC emacs-lisp :tangle yes
+      (setq org-id-link-to-org-use-id (quote create-if-interactive))
+      (setq org-id-method (quote org))
+      (setq org-return-follows-link nil)
+  (setq org-goto-interface (quote outline-path-completion))
+
+
+#+END_SRC
 ** org-misc
    #+BEGIN_SRC emacs-lisp :tangle yes
- (setq org-id-link-to-org-use-id (quote create-if-interactive))
- (setq org-id-method (quote org))
-
-(setq org-modules
-   (quote
-    (ol-bibtex ol-eww org-habit org-id org-protocol ol-w3m ol-bookmark org-checklist org-depend org-registry)))
-
-   (require 'cl) 
-
-                                              ;Non-nil means insert state change notes and time stamps into a drawer.
-      (setq org-log-into-drawer t)
-
-
-;      (require 'org-inlinetask)
-      (setq org-inlinetask-min-level 7)
-
-
-      (setq org-return-follows-link nil)
-
-
+      (setq org-modules
+            (quote
+             (ol-bibtex ol-eww org-habit org-id org-protocol ol-w3m ol-bookmark org-checklist org-depend org-registry)))
+      (require 'cl) 
       (setq org-babel-load-languages '((emacs-lisp . t)
                                        (css . t)))
-
       (setq org-edit-src-content-indentation 3)
                                               ;   If non-nil, the effect of TAB in a code block is as if it were issued in the language major mode buffer.
       (setq org-src-tab-acts-natively t)
-
       (add-to-list 'auto-mode-alist '("\\.txt$" . org-mode))
-
-
-      (setq org-list-demote-modify-bullet
-            '(("+" . "-") ("-" . "+") ))
-      (setq org-list-allow-alphabetical t)
-      (setq org-list-indent-offset 1)
-      (setq org-list=description-max-indent 5)
-
-
- (setq org-agenda-clockreport-parameter-plist
-   (quote
-    (:link t :maxlevel 4 :narrow 25 :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
- (setq org-agenda-dim-blocked-tasks t)
- (setq org-agenda-files
-   (quote
-    ("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/lis.org" "~/Dropbox/Zettelkasten/ndd.org" "~/Dropbox/Zettelkasten/notes.org")))
- (setq org-agenda-include-diary t)
- (setq org-agenda-inhibit-startup nil)
- (setq org-agenda-time-grid
-   (quote
-    ((daily weekly today remove-match)
-     (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200 2300)
-     "......" "----------------")))
-
-
- (setq org-archive-location
-   "~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks")
- (setq org-archive-reversed-order t)
-
- (setq org-attach-id-dir "/home/betsy/Dropbox/2020")
- (setq org-attach-method (quote ln))
- (setq org-attach-store-link-p t)
- (setq org-bullets-bullet-list (quote ( "⚫"  "⛭"    "⏵"  "☆"  "○"     "⯎"    "⚬" )))
-;  "∙" "✧" "▸" "⯏"  "•"   "⭐" "‣"  "⯈"  "▷" "⧽" "⬤" ⭗ "⚪" "◉"
- (setq org-catch-invisible-edits (quote smart))
- (setq org-checkbox-hierarchical-statistics nil)
- (setq org-clock-clocktable-default-properties
-   (quote
-    (:maxlevel 4 :block today :hidefiles t :tcolumns 1 :narrow 30 :level nil :link t)))
- (setq org-clock-history-length 35)
-
-
- (setq org-clock-in-resume t)
-
-
- (setq org-clock-in-switch-to-state nil)
-
-
- (setq org-refile-allow-creating-parent-nodes (quote confirm))
-
- (setq org-refile-use-cache t)
- (setq org-remove-highlights-with-change nil)
- (setq org-reverse-note-order t)
- (setq org-show-context-detail
-   (quote
-    ((agenda . ancestors)
-     (bookmark-jump . ancestors)
-     (isearch . ancestors)
-     (default . ancestors))))
- (setq org-special-ctrl-a/e (quote (t . t)))
- (setq org-startup-folded t)
-
-
-
-
-
- (setq org-clock-persist t)
- (setq org-clock-persist-query-resume nil)
- (setq org-clock-sound t)
- (setq org-clocktable-defaults (quote (:maxlevel 4 :scope subtree)))
- (setq org-columns-default-format "%50ITEM %TODO %3PRIORITY %TAGS")
- (setq org-columns-default-format-for-agenda "%50ITEM %TODO %3PRIORITY %TAGS %CLOCKSUM")
- (setq org-ctrl-k-protect-subtree (quote error))
- (setq org-directory "~/Dropbox/Zettelkasten")
- (setq org-ellipsis " ⬎ ")
- (setq org-log-done (quote time))
- (setq org-enforce-todo-checkbox-dependencies nil)
- (setq org-export-with-author nil)
- (setq org-export-with-toc nil)
-
- (setq org-goto-interface (quote outline-path-completion))
-
-
-
-
-
-
- (setq org-todo-keyword-faces
-   (quote
-    (("NEXT" :weight bold :inherit org-todo :foreground "magenta")
-     ("?" :weight bold :underline nil :inherit org-todo :foreground "yellow")
-     ("IN-PROGRESS" :weight bold :underline nil :inherit org-todo :foreground "#00CFFA")
-     ("HOLD" :weight regular :underline nil :inherit org-todo :foreground "midnight blue")
-     ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#e8a735")
-     ("⟐" :weight bold :underline nil :inherit org-todo :foreground "seagreen")
-)))
- (setq org-todo-keywords
-   (quote
-    ((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(i)" "?(w)" "|" "DONE(d)" "x(c)")
-     (sequence "HOLD(h)" "⟐(r)" "|" "DONE(d)"))))
-
-
- (setq org-tag-faces
-   (quote
-    (("admin" :inherit org-tag :foreground "yellow")
-     ("focus" :inherit org-tag :foreground "magenta")
-     ("home" :inherit org-tag :foreground "cyan"))))
-
-  (setq org-fast-tag-selection-single-key t)
- (setq org-use-fast-tag-selection (quote auto))
-
+      (setq org-attach-id-dir "/home/betsy/Dropbox/Zettelkasten/attachments")
+      (setq org-attach-method (quote ln))
+      (setq org-attach-store-link-p t)
+      (setq org-remove-highlights-with-change nil)
+      (setq org-reverse-note-order t)
+      (setq org-columns-default-format "%50ITEM %TODO %3PRIORITY %TAGS")
+      (setq org-columns-default-format-for-agenda "%50ITEM %TODO %3PRIORITY %TAGS %CLOCKSUM")
+      (setq org-ctrl-k-protect-subtree (quote error))
+      (setq org-directory "~/Dropbox/Zettelkasten")
+      (setq org-ellipsis " ⬎ ")
+          (setq org-export-with-author nil)
+      (setq org-export-with-toc nil)
+    
    #+END_SRC
 
    #+RESULTS:
-   : auto
-
-
-
-
-
-** org-ref
-
-  #+BEGIN_SRC emacs-lisp :tangle yes
-
-     (use-package org-ref
-       :defer t)
-     (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
-
-     ;; see org-ref for use of these variables
-     (setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/notes.org"
-           org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
-           org-ref-pdf-directory "~/Dropbox/Library/")
-     (setq org-ref-pdf-directory "~/Dropbox/Library")
-     (setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
-
-           bibtex-completion-notes-path "~/Dropbox/Zettelkasten/notes.org")
-     (setq org-ref-prefer-bracket-links t)
-     ;; open pdf with system pdf viewer (works on mac)
-     (setq bibtex-completion-pdf-open-function
-           (lambda (fpath)
-             (start-process "open" "*open*" "open" fpath)))
-
-
-                                             ;  (setq pdf-view-continuous nil)
-
-                                             ;  (setq bibtex-autokey-year-title-separator "")
-                                             ; (setq bibtex-autokey-titleword-length 0)
-
-
-     (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). ${title}.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}\n:END:")
-
-     (setq bibtex-maintain-sorted-entries t)
-
-     (use-package org-noter
-       :ensure t
-       :defer t
-       :config (setq org-noter-property-doc-file "INTERLEAVE_PDF")
-       (setq org-noter-property-note-location "INTERLEAVE_PAGE_NOTE") 
-                                             ;       (setq org-noter-notes-window-location 'other-frame)
-                                             ;      (setq org-noter-default-heading-title "p. $p$") 
-       (setq org-noter-auto-save-last-location t))
-
-     (use-package interleave 
-       :defer t
-       )
-
-
-  #+END_SRC
-
-  #+RESULTS:
-
-
-
-
 ** org-agenda
                            
 
@@ -590,9 +447,158 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
        (setq org-agenda-start-on-weekday nil)
 
 
+      (setq org-agenda-clockreport-parameter-plist
+            (quote
+             (:link t :maxlevel 4 :narrow 25 :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
+      (setq org-agenda-dim-blocked-tasks t)
+      (setq org-agenda-files
+            (quote
+             ("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/lis.org" "~/Dropbox/Zettelkasten/ndd.org" "~/Dropbox/Zettelkasten/notes.org"  "~/Dropbox/Zettelkasten/personal.org" )))
+      (setq org-agenda-include-diary t)
+      (setq org-agenda-inhibit-startup nil)
+      (setq org-agenda-time-grid
+            (quote
+             ((daily weekly today remove-match)
+              (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200 2300)
+              "......" "----------------")))
 
 
-       (defun kiwon/org-agenda-redo-in-other-window ()
+
+
+       (setq org-stuck-projects '("/TODO" ("NEXT") nil ""))
+       (setq org-log-note-clock-out nil)
+
+
+
+       (setq org-stuck-projects '("/TODO" ("NEXT") nil ""))
+       (setq org-log-note-clock-out nil)
+
+       (setq org-agenda-custom-commands
+
+
+;RETURN ALL NEXT & IN PROGRESS EXCEPT FOR THOSE TAGGED LIS 
+             '(
+
+               ("b" "Timeblocking"
+                ((agenda "" 
+                         ((org-agenda-span 1)
+                          (org-agenda-clockreport-mode nil)
+                          ))
+                 (todo "⟐"))
+                )
+
+;RETURN ANY TODO ITEMS WTIHOUT TAGS
+               ("k" "all untagged TODOs" tags-todo "-{.*}")
+
+  ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
+             ("d" "2d agenda + undated ADMIN tasks" 
+                ((agenda "" 
+                         ((org-agenda-span 2)
+                          (org-agenda-clockreport-mode nil)
+                          (org-agenda-time-grid nil)))
+                 (tags-todo "admin|email|browser"))
+
+                ((org-agenda-todo-ignore-scheduled t)))
+
+        ("f" "2d agenda + undated FOCUS tasks" 
+                ((agenda "" 
+                         ((org-agenda-span 2)
+                          (org-agenda-clockreport-mode nil)
+                          (org-agenda-time-grid nil)))
+
+(tags-todo "focus")
+
+)
+
+                ((org-agenda-todo-ignore-scheduled t)))
+
+
+        ("h" "2d agenda + undated HOME & misc tasks" 
+                ((agenda "" 
+                         ((org-agenda-span 2)
+                          (org-agenda-clockreport-mode nil)
+                          (org-agenda-time-grid nil)))
+           (tags-todo "home")
+(tags-todo "-focus-admin-home-lis")
+)
+
+                ((org-agenda-todo-ignore-scheduled t)))
+
+
+
+;RETURN ALL LIS TASKS
+  ("l" "lis"
+                ((agenda "" 
+                         ((org-agenda-span 1)
+                          
+                          ))
+                 (tags-todo "lis"  ))
+                ((org-agenda-todo-ignore-with-date t)))
+  
+
+
+
+
+))
+    #+END_SRC
+
+    #+RESULTS:
+    | b | Timeblocking                          | ((agenda  ((org-agenda-span 1) (org-agenda-clockreport-mode nil))) (todo ⟐))                                                                      |                                        |           |                                        |
+    | k | all untagged TODOs                    | tags-todo                                                                                                                                         | -{.*}                                  |           |                                        |
+    | d | 2d agenda + undated ADMIN tasks       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo admin                                    | email                                  | browser)) | ((org-agenda-todo-ignore-scheduled t)) |
+    | f | 2d agenda + undated FOCUS tasks       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo focus))                                  | ((org-agenda-todo-ignore-scheduled t)) |           |                                        |
+    | h | 2d agenda + undated HOME & misc tasks | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo home) (tags-todo -focus-admin-home-lis)) | ((org-agenda-todo-ignore-scheduled t)) |           |                                        |
+    | l | lis                                   | ((agenda  ((org-agenda-span 1))) (tags-todo lis))                                                                                                 | ((org-agenda-todo-ignore-with-date t)) |           |                                        |
+
+("n" "all next and in-progress" tags-todo "TODO=\"NEXT\"-lis|TODO=\"IN-PROGRESS\"-lis")
+               ("d" "Agenda + all unscheduled todos"
+                ((agenda "" 
+                         ((org-agenda-span 7)
+                          (org-agenda-clockreport-mode nil)
+                          ))
+                 (todo "NEXT|IN-PROGRESS" ) 
+                 (todo "TODO" ))
+                ((org-agenda-todo-ignore-scheduled t))	                 )
+
+               ("f" "Agenda + unscheduled focus items"
+                ((agenda "" 
+                         ((org-agenda-span 2)
+                          (org-agenda-clockreport-mode nil)
+                          (org-agenda-time-grid nil)))
+                 (tags-todo "focus"  ))
+                ((org-agenda-todo-ignore-scheduled t)))
+
+               ("m" "Agenda + unscheduled admin items"
+                ((agenda "" 
+                         ((org-agenda-span 2)
+                          (org-agenda-clockreport-mode nil)
+                          (org-agenda-time-grid nil)))
+                 (tags-todo "admin" 
+                            ((org-agenda-todo-ignore-scheduled t)) )
+                 ))
+
+               ("h" "Agenda + unscheduled home items"
+                ((agenda "" 
+                         ((org-agenda-span 2)
+                          (org-agenda-clockreport-mode nil)
+                          (org-agenda-time-grid nil)))
+                 (tags-todo "home"  ))
+                ((org-agenda-todo-ignore-with-date t)))
+
+               ("p" "print view" agenda ""
+                ((ps-number-of-columns 2)
+                 (ps-landscape-mode t)
+                 (org-agenda-prefix-format " [ ] ")
+                 (org-agenda-with-colors nil)
+                 (org-agenda-start-withclockreport-mode nil)
+                 (org-agenda-clockreport-mode nil)
+                 (org-agenda-remove-tags t))                )
+
+               ))
+
+
+
+     (defun kiwon/org-agenda-redo-in-other-window ()
          "Call org-agenda-redo function even in the non-agenda buffer."
          (interactive)
          (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
@@ -602,36 +608,15 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
 
 
 
-
-       (setq org-stuck-projects '("/TODO" ("NEXT") nil ""))
-       (setq org-log-note-clock-out nil)
-
-       (setq org-agenda-custom-commands
-             '(("n" "all next and in-progress" todo "NEXT|IN-PROGRESS")
-
-               ("u" "All undated tasks" todo ""
-                ((org-agenda-todo-ignore-with-date t)))
-               ("f" "All focus items" tags-todo "focus")
-	               ("d" "All admin items" tags-todo "admin")
-               ("p" "print view" agenda ""
-                ((ps-number-of-columns 2)
-                 (ps-landscape-mode t)
-                 (org-agenda-prefix-format " [ ] ")
-                 (org-agenda-with-colors nil)
-                 (org-agenda-start-withclockreport-mode nil)
-                 (org-agenda-clockreport-mode nil)
-                 (org-agenda-remove-tags t))
-                )
-
-               ))
-    #+END_SRC
-
-    #+RESULTS:
-    | n | all next and in-progress | todo      | NEXT  | IN-PROGRESS                                                                                                                                                                                                             |
-    | u | All undated tasks        | todo      |       | ((org-agenda-todo-ignore-with-date t))                                                                                                                                                                                  |
-    | f | All focus items          | tags-todo | focus |                                                                                                                                                                                                                         |
-    | d | All admin items          | tags-todo | admin |                                                                                                                                                                                                                         |
-    | p | print view               | agenda    |       | ((ps-number-of-columns 2) (ps-landscape-mode t) (org-agenda-prefix-format  [ ] ) (org-agenda-with-colors nil) (org-agenda-start-withclockreport-mode nil) (org-agenda-clockreport-mode nil) (org-agenda-remove-tags t)) |
+    | n | all next and in-progress         | todo                                                                                                                                                    | NEXT                                   | IN-PROGRESS                                                                                                                                                                                                             |
+    | k | all TODOs                        | todo                                                                                                                                                    | TODO                                   |                                                                                                                                                                                                                         |
+    | u | agenda + All undated tasks       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (todo ))                                                  | ((org-agenda-todo-ignore-scheduled t)) |                                                                                                                                                                                                                         |
+    | r | Agenda + rituals and routines    | ((agenda  ((org-agenda-span 1) (org-agenda-clockreport-mode nil))) (tags timeblocking))                                                                 | ((org-agenda-todo-ignore-timestamp t)) |                                                                                                                                                                                                                         |
+    | d | Agenda + all unscheduled todos   | ((agenda  ((org-agenda-span 7) (org-agenda-clockreport-mode nil))) (todo NEXT                                                                           | IN-PROGRESS) (todo TODO))              | ((org-agenda-todo-ignore-scheduled t))                                                                                                                                                                                  |
+    | f | Agenda + unscheduled focus items | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo focus))                                        | ((org-agenda-todo-ignore-scheduled t)) |                                                                                                                                                                                                                         |
+    | m | Agenda + unscheduled admin items | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo admin ((org-agenda-todo-ignore-scheduled t)))) |                                        |                                                                                                                                                                                                                         |
+    | h | Agenda + unscheduled home items  | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo home))                                         | ((org-agenda-todo-ignore-with-date t)) |                                                                                                                                                                                                                         |
+    | p | print view                       | agenda                                                                                                                                                  |                                        | ((ps-number-of-columns 2) (ps-landscape-mode t) (org-agenda-prefix-format  [ ] ) (org-agenda-with-colors nil) (org-agenda-start-withclockreport-mode nil) (org-agenda-clockreport-mode nil) (org-agenda-remove-tags t)) |
 
 
 
@@ -639,19 +624,71 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
 ** org-tags
    #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (setq org-complete-tags-always-offer-all-agenda-tags t)
-   ;(setq org-tags-column -80)
-   (setq org-tags-match-list-sublevels (quote indented))
-   (setq tags-add-tables nil)
+      (setq org-complete-tags-always-offer-all-agenda-tags nil)
+      (setq org-tags-match-list-sublevels (quote indented))
+      (setq tags-add-tables nil)
+      (setq org-fast-tag-selection-single-key t)
+      (setq org-use-fast-tag-selection (quote auto))
+
+      (setq org-tag-alist '( ("lis" . ?l)
+                             (:startgroup)
+                             ("focus" . ?f)
+                             ("admin" . ?a)
+                             ("home" . ?h)
+                             (:endgroup)
+                             (:startgroup)
+                             ("focus" . ?f)
+                             (:grouptags)
+                             ("read" . ?r)
+                             ("write" . ?w)
+                             ("notes" . ?n)
+                             (:endgroup)
+                             (:startgroup)
+                             ("admin" . ?a)
+
+                             (:grouptags)
+                             ("email" . ?e)
+                             ("browser" . ?b)
+                             (:endgroup)
+                             (:startgroup)
+                             ("home" . ?h)
+
+                             (:grouptags)
+                             ("kitchen" . ?k)
+                             ("laundry" . ?d)
+                             ("cleaning" . ?c)
+                             (:endgroup)
+                             ))
+
+
+
 
    #+END_SRC
 
    #+RESULTS:
+   : ((lis . 108) (:startgroup) (focus . 102) (admin . 97) (home . 104) (:endgroup) (:startgroup) (focus . 102) (:grouptags) (read . 114) (write . 119) (notes . 110) (:endgroup) (:startgroup) (admin . 97) (:grouptags) (email . 101) (browser . 98) (:endgroup) (:startgroup) (home . 104) (:grouptags) (kitchen . 107) (laundry . 100) (cleaning . 99) (:endgroup))
+
+#+TAGS: { MODE : admin(a) home(h) focus(f) lis(l) }
+#+TAGS: { admin : email(e) browser(b) }
+#+TAGS: { focus : read(r) notes(n) }
+#+TAGS: { home : kitchen(k) laundry cleaning }
 
 
 
+** org-todo
+#+BEGIN_SRC emacs-lisp :tangle yes
+      (setq org-todo-keywords
+            (quote
+             ((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(i)" "?(w)" "|" "DONE(d)" "x(c)")
+              (sequence "HOLD(h)" "⟐(r)" "|" "DONE(d)"))))
 
-** checkboxes and todo states
+  (setq org-log-done (quote time))
+      (setq org-enforce-todo-checkbox-dependencies nil)
+
+#+END_SRC
+
+** org-list, bullets, checkboxes
+*** checkboxes and todo states
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -685,24 +722,82 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
 
 #+RESULTS:
 | my/org-checkbox-todo |
-
-
-
-
-** org-chef
+*** plain lists & bullets
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package org-chef
-:defer t
- )
+      (setq org-list-demote-modify-bullet
+            '(("+" . "-") ("-" . "+") ))
+      (setq org-list-allow-alphabetical t)
+      (setq org-list-indent-offset 1)
+      (setq org-list=description-max-indent 5)
+      (setq org-bullets-bullet-list (quote ( "⚫"  "★"  "○"   "◆"    "⟐"  "☆"            "⚬" )))
+;   "•"    "‣"    "⏵""▷" "⧽"  "♦""◇"    "◉" "⬤"〇⭕ "⨀"  "⬤" "ᐅ"  "〇"      "⚬" )))
+;○◔◑◕●⌾⭗☉⌾◎◉⨀◎⌾◉◍⊗⊛•○∙⊛⁕✱ ൦❄⊕⊖⊗⊘⊙⊚⊛⊜⊝∘∙◉⏺○◍◎●◐◑◒◓◔◕◦◯◴◵◶◷☉⚪⚫⚬◐
+
+; too tall: "⬥"  "⯈" "⚫" "∙" ⬤ ✶ "✧" "▸" "⯏"  "⭗"   "⛭" "⚪"  "⭐"  "⏵" 
+     (setq org-inlinetask-min-level 7)
+     (setq org-checkbox-hierarchical-statistics nil)
+
 #+END_SRC
 
 #+RESULTS:
 
+** org-capture
+:LOGBOOK:
+CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
+:END:
+
+
+
+
+   #+BEGIN_SRC emacs-lisp :tangle yes
+
+      (server-start)
+      (require 'org-protocol)
+      (require 'org-protocol-capture-html)
+      (setq org-protocol-default-template-key "w")
+
+
+
+            (setq org-capture-templates
+                  '(
+                    ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> %? \n\n\n\n"  :clock-in t :clock-keep t :kill-buffer nil ) 
+
+                    ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U\n%? \n\n\n\n"  :clock-in t :clock-keep nil :kill-buffer nil :append t) 
+
+                    ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT} \n %^t\n%?%a")
+
+                    ("l" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
+
+                    ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n\n" :prepend nil)
+
+                    ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
+                     "* TODO %? %a\n%U\n%:initial\n" )
+
+
+                    ))
+
+
+
+
+                                                    ;this prevents org-capture from replacing any windows. it just adds. 
+            (defun my-org-capture-place-template-dont-delete-windows (oldfun args)
+              (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
+                (apply oldfun args)))
+
+            (with-eval-after-load "org-capture"
+              (advice-add 'org-capture-place-template :around 'my-org-capture-place-template-dont-delete-windows))
+
+   #+END_SRC
+
+   #+RESULTS:
+
+   ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:")
+   "~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks"
 
 ** org-clock
 #+BEGIN_SRC emacs-lisp :tangle yes
 
- 
+       (setq org-log-into-drawer t)
 
 
 
@@ -763,9 +858,27 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
        (setq org-clock-mode-line-total (quote current))
 
        (setq org-clock-clocked-in-display (quote both))
+      (setq org-clock-clocktable-default-properties
+            (quote
+             (:maxlevel 4 :block today :hidefiles t :tcolumns 1 :narrow 30 :level nil :link t)))
+      (setq org-clock-history-length 15)
+
+
+;      (setq org-clock-in-resume t)
+
+
+      (setq org-clock-in-switch-to-state nil)
+     (setq org-clock-persist 'history)
+;      (org-clock-persistence-insinuate)
+      (setq org-clock-persist-query-resume nil)
+      (setq org-clock-sound t)
+      (setq org-clocktable-defaults (quote (:maxlevel 4 :scope subtree)))
 
 
 #+END_SRC
+
+#+RESULTS:
+| :maxlevel | 4 | :scope | subtree |
 
 
 
@@ -779,11 +892,14 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
 
 
 
-** org-refile
+** org-refile and archiving
 #+BEGIN_SRC emacs-lisp :tangle yes
-
+    (setq org-refile-allow-creating-parent-nodes (quote confirm))
    (setq org-refile-use-outline-path (quote file))
-
+      (setq org-archive-location
+            "~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks")
+      (setq org-archive-reversed-order t)
+      (setq org-refile-use-cache t)
 
    (setq org-refile-targets (quote (("~/Dropbox/Zettelkasten/notes.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 1)
@@ -816,53 +932,69 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
 
 
   #+RESULTS:
-** org-capture
+** org-chef
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package org-chef
+:defer t
+ )
+#+END_SRC
+
+#+RESULTS:
+
+
+** org-ref
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+     (use-package org-ref
+       :defer t)
+     (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
+
+     ;; see org-ref for use of these variables
+     (setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/notes.org"
+           org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
+           org-ref-pdf-directory "~/Dropbox/Library/")
+     (setq org-ref-pdf-directory "~/Dropbox/Library")
+     (setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
+
+           bibtex-completion-notes-path "~/Dropbox/Zettelkasten/notes.org")
+     (setq org-ref-prefer-bracket-links t)
+     ;; open pdf with system pdf viewer (works on mac)
+     (setq bibtex-completion-pdf-open-function
+           (lambda (fpath)
+             (start-process "open" "*open*" "open" fpath)))
+
+
+                                             ;  (setq pdf-view-continuous nil)
+
+                                             ;  (setq bibtex-autokey-year-title-separator "")
+                                             ; (setq bibtex-autokey-titleword-length 0)
+
+
+     (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). ${title}.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}\n:END:")
+
+     (setq bibtex-maintain-sorted-entries t)
+
+     (use-package org-noter
+       :ensure t
+       :defer t
+       :config (setq org-noter-property-doc-file "INTERLEAVE_PDF")
+       (setq org-noter-property-note-location "INTERLEAVE_PAGE_NOTE") 
+                                             ;       (setq org-noter-notes-window-location 'other-frame)
+                                             ;      (setq org-noter-default-heading-title "p. $p$") 
+       (setq org-noter-auto-save-last-location t))
+
+     (use-package interleave 
+       :defer t
+       )
+
+
+  #+END_SRC
+
+  #+RESULTS:
 
 
 
-   #+BEGIN_SRC emacs-lisp :tangle yes
-
-      (server-start)
-      (require 'org-protocol)
-      (require 'org-protocol-capture-html)
-      (setq org-protocol-default-template-key "w")
-
-
-            (setq org-capture-templates
-                  '(
-                    ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> %? \n\n\n\n"  :clock-in t :clock-keep t :kill-buffer nil ) 
-
-                    ("j" "journal" item (id "journal") "\n%U\n%?" :prepend t  :clock-in t :kill-buffer nil :clock-keep nil ) 
-
-                    ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT} \n %^t")
-                    ("l" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
-
-
-
-                    ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n\n" :prepend nil)
-
-                    ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
-                     "* TODO %? %a\n%U\n%:initial\n" )
-
-
-                    ))
-
-
-
-
-                                                    ;this prevents org-capture from replacing any windows. it just adds. 
-            (defun my-org-capture-place-template-dont-delete-windows (oldfun args)
-              (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
-                (apply oldfun args)))
-
-            (with-eval-after-load "org-capture"
-              (advice-add 'org-capture-place-template :around 'my-org-capture-place-template-dont-delete-windows))
-
-   #+END_SRC
-
-   #+RESULTS:
-
-   ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:")
 
 * calendar & calfw
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -896,7 +1028,7 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
    #+END_SRC
 
    #+RESULTS:
-   : 1
+   : ~/Dropbox/Zettelkasten/diary
 
   
 
@@ -942,7 +1074,7 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
 
   #+BEGIN_SRC emacs-lisp :tangle yes
      (setq browse-url-browser-function 'browse-url-generic
-           browse-url-generic-program "firefox")
+           browse-url-generic-program "brave-browser")
 
      (defun my-set-eww-buffer-title ()
        (let* ((title (plist-get eww-data :title))
@@ -965,14 +1097,14 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
                (defun shr-fill-lines (start end) nil)  
                (defun shr-fill-line () nil)))
 
- (setq browse-url-browser-function (quote browse-url-firefox))
+ (setq browse-url-browser-function (quote browse-url-default-browser))
  (setq browse-url-firefox-new-window-is-tab t)
 
 
   #+END_SRC
 
   #+RESULTS:
-  : shr-fill-line
+  : t
 
 
 
@@ -984,7 +1116,7 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
     (set-language-environment "UTF-8")
     (set-default-coding-systems 'utf-8)
 
- (setq inhibit-eol-conversion t)
+ (setq inhibit-eol-conversion nil)
 
     (add-to-list 'file-coding-system-alist '("\\.tex" . utf-8-unix) )
     (add-to-list 'file-coding-system-alist '("\\.txt" . utf-8-unix) )
@@ -1067,8 +1199,8 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
  (setq auto-save-visited-file-name t)
  (setq auto-save-visited-mode t)
  (setq dired-auto-revert-buffer (quote dired-directory-changed-p))
-
-
+(setq auto-save-interval 300)
+(setq auto-save-timeout 5)
  (setq global-auto-revert-mode t)
 
   #+END_SRC
@@ -1195,6 +1327,175 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
 
 
 
+
+
+
+* mu4e
+
+ #+BEGIN_SRC emacs-lisp :tangle yes
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+             ; (use-package mu4e) 
+             ; (use-package mu4e-contrib)
+           (require 'mu4e)
+           (require 'org-mu4e)
+              ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+              (setq mu4e-sent-messages-behavior 'delete)
+              (setq message-kill-buffer-on-exit t)
+              (setq mu4e-change-filenames-when-moving t)
+              (setq mu4e-compose-format-flowed t)
+              (setq smtpmail-default-smtp-server "smtp.gmail.com")
+(setq mu4e-get-mail-command "mbsync -aV")
+       (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
+       (add-hook 'mu4e-view-mode-hook 'visual-fill-column-mode)
+
+    ;;  (defun vfcm-on ()
+    ;;  ;turn on visual fill column mode
+    ;;  (visual-fill-column-mode 1))
+
+    ;; (add-hook 'mu4e-view-mode-hook #'vfcm-on)
+
+
+
+
+    ;  (setq visual-fill-column-width 100)
+
+     (defun no-auto-fill ()
+       "Turn off auto-fill-mode."
+       (auto-fill-mode -1))
+
+
+
+
+
+    (defun vcfm-off ()
+    ;turn off visual fill column mode
+    (visual-fill-column-mode nil))
+
+    (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
+    (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
+  #+END_SRC
+  
+  #+RESULTS:
+  | lambda | nil | (visual-line-mode -1) |
+  
+** message view
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+;  (setq mu4e-attachment-dir "/home/betsy/Dropbox/Spring 2019/")
+
+
+
+
+  (setq shr-color-visible-luminance-min 50) 
+  (setq shr-color-visible-distance-min 5)
+  ;(setq mu4e-view-html-plaintext-ratio-heuristic 'most-positive-fixnum)
+  (setq message-yank-prefix ""
+        message-yank-empty-prefix ""
+        message-yank-cited-prefix "")
+
+  (setq w3m-default-desplay-inline-images t)
+    (defun mu4e-action-view-in-w3m ()
+      "View the body of the message in emacs w3m."
+      (interactive)
+      (w3m-browse-url (concat "file://"
+          (mu4e~write-body-to-html (mu4e-message-at-point t)))))
+
+
+  ;; customize the reply-quote-string
+  (setq message-citation-line-format "\n\nOn %a %d %b %Y at %R, %f wrote:\n")
+  ;; choose to use the formatted string
+  (setq message-citation-line-function 'message-insert-formatted-citation-line)
+
+
+  (setq mu4e-view-scroll-to-next nil)
+
+  (add-hook 'message-mode-hook 'visual-fill-column-mode)
+
+
+  (use-package bbdb)
+
+  (bbdb-initialize)
+  (autoload 'bbdb-insinuate-mu4e "bbdb-mu4e")
+  (bbdb-initialize 'message 'mu4e)
+
+  (setq bbdb-mail-user-agent 'mu4e-user-agent)
+  ;(setq mu4e-view-mode-hook 'bbdb-mua-auto-update visual-line-mode)
+  (setq mu4e-compose-complete-addresses t)
+  (setq bbdb-mua-pop-up t)
+  (setq bbdb-mua-pop-up-window-size 5)
+  (setq mu4e-view-show-addresses t)  
+  (setq bbdb-default-country "United States")
+
+
+
+  #+END_SRC
+
+  #+RESULTS:
+  : United States
+
+** headers view
+
+ 
+
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+     (setq mu4e-headers-fields
+           '( (:human-date    .  15)    ;; alternatively, use :human-date
+              (:flags         .   5)
+              (:from          .  20)
+              (:thread-subject       . 70 )
+                                             ;             (:thread-subject       . 120 )
+              )) 
+     (setq org-mu4e-link-query-in-headers-mode nil)
+     (setq mu4e-update-interval 300)
+     (setq mu4e-use-fancy-chars nil)
+                                             ;(setq mu4e-index-update-in-background t)
+     (setq mu4e-view-prefer-html t)
+     (setq mu4e-headers-skip-duplicates t)
+     (setq mu4e-headers-auto-update t)
+     (setq mu4e-view-show-addresses t)
+     (setq mu4e-headers-date-format "%x")
+     (setq mu4e-headers-time-format "%H:%M")
+  #+END_SRC
+
+  #+RESULTS:
+  : %H:%M
+
+** settings
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+    ;; allow for updating mail using 'U' in the main view:
+  (setq mu4e-get-mail-command "true")
+
+  #+END_SRC 
+
+  #+RESULTS:
+  : true
+
+** folders
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+  (setq mu4e-maildir-shortcuts
+    '( ("/INBOX"  . ?i)
+   	("/Sent"   . ?s)
+   	("/Trash"  . ?t)
+   	("/All"    . ?a)))
+
+  (setq mu4e-drafts-folder "/Drafts")
+  (setq mu4e-sent-folder   "/Sent")
+  (setq mu4e-trash-folder  "/Trash")
+  (setq mu4e-refile-folder "/All")
+  (setq mu4e-maildir "~/Maildir")
+  (setq mu4e-attachment-dir "~/Dropbox/2020")
+  #+END_SRC 
+
+  #+RESULTS:
+  : ~/Dropbox/2020
+
+  
 
 
 

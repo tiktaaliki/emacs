@@ -2,7 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("2020"
+(("manjaro mbsync config file"
+ (filename . "~/.mbsyncrc")
+ (front-context-string . "IMAPAccount gmai")
+ (rear-context-string)
+ (position . 1))
+("manjaro i3 config"
+ (filename . "~/.i3/config")
+ (front-context-string . "# i3 config file")
+ (rear-context-string)
+ (position . 1))
+("2020"
  (filename . "~/Dropbox/2020/")
  (front-context-string . "  /home/betsy/Dr")
  (rear-context-string)
@@ -35,11 +45,6 @@
  (front-context-string . "(package-initial")
  (rear-context-string)
  (position . 1))
-(".mbsyncrc"
- (filename . "~/.mbsyncrc")
- (front-context-string . "IMAPAccount gmai")
- (rear-context-string)
- (position . 1))
 ("Calibre Library"
  (filename . "~/Calibre Library/")
  (front-context-string . "Ajahn Brahm Fore")
@@ -61,18 +66,18 @@
  (rear-context-string)
  (position . 1))
 ("org-capture-last-stored-marker"
- (filename . "~/Sync/Zettelkasten/inbox.org")
- (front-context-string . "** TODO add to h")
- (rear-context-string . "Thank you,\nDoug\n")
- (position . 194227))
+ (filename . "~/Dropbox/Zettelkasten/cal.org")
+ (front-context-string . "** OER and disab")
+ (rear-context-string . "QgVnRsFMNcgKl\n\n\n")
+ (position . 9709))
 ("org-refile-last-stored"
- (filename . "~/Dropbox/Zettelkasten/notes.org")
- (front-context-string . "** Nir Eyal, /In")
- (rear-context-string . "***\n* Readings \n")
- (position . 1389))
+ (filename . "~/Dropbox/Zettelkasten/cal.org")
+ (front-context-string . "** wet'suwet'en ")
+ (rear-context-string)
+ (position . 15))
 ("org-capture-last-stored"
- (filename . "~/Dropbox/Zettelkasten/inbox.org")
- (front-context-string . "* TODO why does ")
- (rear-context-string . "ime blocking*]]\n")
- (position . 59295))
+ (filename . "~/Dropbox/Zettelkasten/journal.org")
+ (front-context-string . "**** 12:17 editi")
+ (rear-context-string . "hive][Archive]]\n")
+ (position . 334724))
 )

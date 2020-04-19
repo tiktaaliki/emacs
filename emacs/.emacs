@@ -11,6 +11,7 @@
   (package-install 'use-package))
 
 (add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
+
 (setq custom-file "~/Dropbox/emacs/custom.el")
 ;(setq custom-file "~/Dropbox/emacs/custom2.el")
 (load custom-file)
@@ -32,6 +33,7 @@
 (load "org-protocol-capture-html")
 (load "ereader")
 (load "org-book")
+(load "org-depend")
 ;(load "zoom-frm")
 ;(load "ov-highlight")
 (setq use-package-verbose t)
