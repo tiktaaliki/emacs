@@ -1,0 +1,78 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("2020"
+ (filename . "~/Dropbox/2020/")
+ (front-context-string . "  /home/betsy/Dr")
+ (rear-context-string)
+ (position . 1))
+("settings.org"
+ (filename . "~/Dropbox/emacs/settings.org")
+ (front-context-string . "\n\n\n#+BEGIN_SRC \n")
+ (rear-context-string)
+ (position . 1))
+("i3 config"
+ (filename . "~/.config/i3/config")
+ (front-context-string . "exec emacs\nexec ")
+ (rear-context-string . "exec syncthing\n#")
+ (position . 1711))
+("sircur.pdf"
+ (filename . "~/Dropbox/Library/sircur.pdf")
+ (position . 1)
+ (page . 1)
+ (slice)
+ (size . fit-height)
+ (origin 0.0 . 0.0)
+ (handler . pdf-view-bookmark-jump-handler))
+("Library"
+ (filename . "~/Dropbox/Library/")
+ (front-context-string . "  /home/betsy/Dr")
+ (rear-context-string)
+ (position . 1))
+(".emacs"
+ (filename . "~/Dropbox/emacs/.emacs")
+ (front-context-string . "(package-initial")
+ (rear-context-string)
+ (position . 1))
+(".mbsyncrc"
+ (filename . "~/.mbsyncrc")
+ (front-context-string . "IMAPAccount gmai")
+ (rear-context-string)
+ (position . 1))
+("Calibre Library"
+ (filename . "~/Calibre Library/")
+ (front-context-string . "Ajahn Brahm Fore")
+ (rear-context-string . "96 Aug  3 22:01 ")
+ (position . 235))
+("Downloads"
+ (filename . "~/Downloads/")
+ (front-context-string . "  /home/betsy/Do")
+ (rear-context-string)
+ (position . 1))
+(".Xmodmap"
+ (filename . "~/.Xmodmap")
+ (front-context-string)
+ (rear-context-string . "d mod4 = Hyper_L")
+ (position . 51))
+("rc.lua"
+ (filename . "~/.config/awesome/rc.lua")
+ (front-context-string . "-- Standard awes")
+ (rear-context-string)
+ (position . 1))
+("org-capture-last-stored-marker"
+ (filename . "~/Sync/Zettelkasten/inbox.org")
+ (front-context-string . "** TODO add to h")
+ (rear-context-string . "Thank you,\nDoug\n")
+ (position . 194227))
+("org-refile-last-stored"
+ (filename . "~/Dropbox/Zettelkasten/notes.org")
+ (front-context-string . "** Nir Eyal, /In")
+ (rear-context-string . "***\n* Readings \n")
+ (position . 1389))
+("org-capture-last-stored"
+ (filename . "~/Dropbox/Zettelkasten/inbox.org")
+ (front-context-string . "* TODO why does ")
+ (rear-context-string . "ime blocking*]]\n")
+ (position . 59295))
+)
