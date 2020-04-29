@@ -34,12 +34,15 @@
 (load "ereader")
 (load "org-book")
 (load "org-depend")
+(load "bookmark+")
+(load "org-contacts")
 ;(load "zoom-frm")
 ;(load "ov-highlight")
 (setq use-package-verbose t)
 (setq use-package-always-ensure t)
 
 (eval-when-compile (require 'use-package))
+
 
 (org-babel-load-file "~/Dropbox/emacs/settings.org")
 ;(org-babel-load-file "~/Sync/emacs/gallium.org")
