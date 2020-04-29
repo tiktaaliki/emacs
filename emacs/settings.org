@@ -166,60 +166,6 @@
 
 
 
-* faces 
-:LOGBOOK:
-CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
-:END:
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-      (set-face-attribute 'default nil :family "Fantasque sans mono" :height 250 :weight 'normal  :foreground "#ebdcb2"); honeydew  d5d6d2 faefd4
-      (set-face-attribute 'org-level-1 nil :weight 'regular :foreground "#6ab187" :inherit 'default :height 1.0 :weight 'bold) ;lagoon
-      (set-face-attribute 'org-level-2 nil :inherit 'org-level-1 :foreground "#9a9eab" :height 1.0 :weight 'regular) ;  
-      (set-face-attribute 'org-level-3 nil :inherit 'org-level-2 :foreground "#68829e" :height 1.0) ; 
-      (set-face-attribute 'org-level-4 nil :inherit 'org-level-3 :foreground "#6ab187" :height 1.0) ;    a3bd38
-      (set-face-attribute 'org-level-5 nil :inherit 'org-level-4 :foreground "#9a9eab")
-      (set-face-attribute 'org-level-6 nil :inherit 'org-level-5 :foreground "#68829e")
-
-
-      (set-face-attribute 'org-todo nil :weight 'normal :family "nova mono" :height 0.9)
-      (set-face-attribute 'org-link nil :weight 'normal :foreground "#81715e" :family "monofur") ;grecian blue  2988bc
-     
-      (set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :height 0.8 :foreground "#ff4447") ;raspberry
-      (set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
-      (set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
-      (set-face-attribute 'org-special-keyword nil :height 0.8)
-      (set-face-attribute 'org-date nil :underline t :foreground "#a1d6e2" :family "monofur" )
-      (set-face-attribute 'bold nil :weight 'bold :foreground "#f0810f") ; f0810f ffbb00 de7a22
-      (set-face-attribute 'italic nil :slant 'italic :foreground "#fa6775") ;bubblegum 
-      (set-face-attribute 'org-agenda-diary nil :foreground "#a4cabc" )
-      (set-face-attribute 'org-ellipsis nil :foreground "#a4cabc" :strike-through nil)
-      (set-face-attribute 'org-headline-done nil :foreground "#5B6268" :strike-through t)
-   (set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
-      (set-face-attribute 'underline nil :foreground "#89da59" :underline t) ;warm gray
-      (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
-
-
- (setq org-todo-keyword-faces
-            (quote
-             (("NEXT" :weight bold :inherit org-todo :foreground "magenta")
-              ("?" :weight bold :underline nil :inherit org-todo :foreground "yellow")
-              ("IN-PROGRESS" :weight bold :underline nil :inherit org-todo :foreground "#00CFFA")
-              ("HOLD" :weight regular :underline nil :inherit org-todo :foreground "midnight blue")
-              ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#e8a735")
-              ("⟐" :weight bold :underline nil :inherit org-todo :foreground "seagreen")
-              )))
-   ;dismissed colors: 426e86, steel blue
-   #+END_SRC
-
-#+RESULTS:
-| NEXT        | :weight | bold    | :inherit   | org-todo | :foreground | magenta  |             |               |
-| ?           | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | yellow        |
-| IN-PROGRESS | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | #00CFFA       |
-| HOLD        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | midnight blue |
-| TODO        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | #e8a735       |
-| ⟐           | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | seagreen      |
- (set-face-attribute 'org-tag nil :height 0.8)
 * file navigating
 #+BEGIN_SRC emacs-lisp :tangle yes
 (diredp-toggle-find-file-reuse-dir 1)
@@ -651,23 +597,26 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
                              ("home" . ?h)
                              (:endgroup)
                              (:startgroup)
-                             ("focus" . ?f)
+                             ("CONSUME")
                              (:grouptags)
-                             ("read" . ?r)
-                             ("write" . ?w)
-                             ("notes" . ?n)
+                             ("read")
+                             ("watch")
+                             ("listen")
+                             (:endgroup)
+                        (:startgroup)
+                             ("CREATE")
+                             (:grouptags)
+                             ("write")
+                             ("notes")
+
                              (:endgroup)
                              (:startgroup)
-                             ("admin" . ?a)
 
-                             (:grouptags)
+
+                      
                              ("email" . ?e)
                              ("browser" . ?b)
-                             (:endgroup)
-                             (:startgroup)
-                             ("home" . ?h)
 
-                             (:grouptags)
                              ("kitchen" . ?k)
                              ("laundry" . ?d)
                              ("cleaning" . ?c)
@@ -680,7 +629,7 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
    #+END_SRC
 
    #+RESULTS:
-   : ((lis . 108) (:startgroup) (focus . 102) (admin . 97) (home . 104) (:endgroup) (:startgroup) (focus . 102) (:grouptags) (read . 114) (write . 119) (notes . 110) (:endgroup) (:startgroup) (admin . 97) (:grouptags) (email . 101) (browser . 98) (:endgroup) (:startgroup) (home . 104) (:grouptags) (kitchen . 107) (laundry . 100) (cleaning . 99) (:endgroup))
+   : ((lis . 108) (:startgroup) (focus . 102) (admin . 97) (home . 104) (:endgroup) (:startgroup) (CONSUME) (:grouptags) (read) (watch) (listen) (:endgroup) (:startgroup) (CREATE) (:grouptags) (write) (notes) (:endgroup) (:startgroup) (email . 101) (browser . 98) (kitchen . 107) (laundry . 100) (cleaning . 99) (:endgroup))
 
 #+TAGS: { MODE : admin(a) home(h) focus(f) lis(l) }
 #+TAGS: { admin : email(e) browser(b) }
@@ -1519,3 +1468,57 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
 
 
 
+* faces 
+:LOGBOOK:
+CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
+:END:
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+      (set-face-attribute 'default nil :family "Fantasque sans mono" :height 250 :weight 'normal  :foreground "#ebdcb2"); honeydew  d5d6d2 faefd4
+      (set-face-attribute 'org-level-1 nil :weight 'regular :foreground "#6ab187" :inherit 'default :height 1.0 :weight 'bold) ;lagoon
+      (set-face-attribute 'org-level-2 nil :inherit 'org-level-1 :foreground "#9a9eab" :height 1.0 :weight 'regular) ;  
+      (set-face-attribute 'org-level-3 nil :inherit 'org-level-2 :foreground "#68829e" :height 1.0) ; 
+      (set-face-attribute 'org-level-4 nil :inherit 'org-level-3 :foreground "#6ab187" :height 1.0) ;    a3bd38
+      (set-face-attribute 'org-level-5 nil :inherit 'org-level-4 :foreground "#9a9eab")
+      (set-face-attribute 'org-level-6 nil :inherit 'org-level-5 :foreground "#68829e")
+
+
+      (set-face-attribute 'org-todo nil :weight 'normal :family "nova mono" :height 0.9)
+      (set-face-attribute 'org-link nil :weight 'normal :foreground "#81715e" :family "monofur") ;grecian blue  2988bc
+     
+      (set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :height 0.8 :foreground "#ff4447") ;raspberry
+      (set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
+      (set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
+      (set-face-attribute 'org-special-keyword nil :height 0.8)
+      (set-face-attribute 'org-date nil :underline t :foreground "#a1d6e2" :family "monofur" )
+      (set-face-attribute 'bold nil :weight 'bold :foreground "#f0810f") ; f0810f ffbb00 de7a22
+      (set-face-attribute 'italic nil :slant 'italic :foreground "#fa6775") ;bubblegum 
+      (set-face-attribute 'org-agenda-diary nil :foreground "#a4cabc" )
+      (set-face-attribute 'org-ellipsis nil :foreground "#a4cabc" :strike-through nil)
+      (set-face-attribute 'org-headline-done nil :foreground "#5B6268" :strike-through t)
+   (set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
+      (set-face-attribute 'underline nil :foreground "#89da59" :underline t) ;warm gray
+      (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
+
+
+ (setq org-todo-keyword-faces
+            (quote
+             (("NEXT" :weight bold :inherit org-todo :foreground "magenta")
+              ("?" :weight bold :underline nil :inherit org-todo :foreground "yellow")
+              ("IN-PROGRESS" :weight bold :underline nil :inherit org-todo :foreground "#00CFFA")
+              ("HOLD" :weight regular :underline nil :inherit org-todo :foreground "midnight blue")
+              ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#e8a735")
+              ("⟐" :weight bold :underline nil :inherit org-todo :foreground "seagreen")
+              )))
+   ;dismissed colors: 426e86, steel blue
+   #+END_SRC
+
+#+RESULTS:
+| NEXT        | :weight | bold    | :inherit   | org-todo | :foreground | magenta  |             |               |
+| ?           | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | yellow        |
+| IN-PROGRESS | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | #00CFFA       |
+| HOLD        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | midnight blue |
+| TODO        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | #e8a735       |
+| ⟐           | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | seagreen      |
+ (set-face-attribute 'org-tag nil :height 0.8)
