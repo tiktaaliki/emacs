@@ -643,12 +643,14 @@
       (setq org-todo-keywords
             (quote
              ((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(i)" "?(w)" "|" "DONE(d)" "x(c)")
-              (sequence "HOLD(h)" "⟐(r)" "|" "DONE(d)"))))
+              (sequence "HOLD(h)" "HABIT(r)" "PROJ(p)" "|" "DONE(d)"))))
 
   (setq org-log-done (quote time))
       (setq org-enforce-todo-checkbox-dependencies nil)
 
 #+END_SRC
+
+#+RESULTS:
 
 ** org-list, bullets, checkboxes
 *** checkboxes and todo states
@@ -1507,18 +1509,18 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
              (("NEXT" :weight bold :inherit org-todo :foreground "magenta")
               ("?" :weight bold :underline nil :inherit org-todo :foreground "yellow")
               ("IN-PROGRESS" :weight bold :underline nil :inherit org-todo :foreground "#00CFFA")
-              ("HOLD" :weight regular :underline nil :inherit org-todo :foreground "midnight blue")
+              ("PROJ" :weight regular :underline nil :inherit org-todo :foreground "purple")
               ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#e8a735")
-              ("⟐" :weight bold :underline nil :inherit org-todo :foreground "seagreen")
+              ("HABIT" :weight bold :underline nil :inherit org-todo :foreground "coral")
               )))
    ;dismissed colors: 426e86, steel blue
    #+END_SRC
 
 #+RESULTS:
-| NEXT        | :weight | bold    | :inherit   | org-todo | :foreground | magenta  |             |               |
-| ?           | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | yellow        |
-| IN-PROGRESS | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | #00CFFA       |
-| HOLD        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | midnight blue |
-| TODO        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | #e8a735       |
-| ⟐           | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | seagreen      |
+| NEXT        | :weight | bold    | :inherit   | org-todo | :foreground | magenta  |             |         |
+| ?           | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | yellow  |
+| IN-PROGRESS | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | #00CFFA |
+| PROJ        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | purple  |
+| TODO        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | #e8a735 |
+| HABIT       | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | coral   |
  (set-face-attribute 'org-tag nil :height 0.8)
