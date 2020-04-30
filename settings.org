@@ -315,6 +315,13 @@
     ;; (add-hook 'mu4e-view-mode-hook #'vfcm-on)
 
 
+;; Call EWW to display HTML messages
+(defun jcs-view-in-eww (msg)
+  (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
+
+;; Arrange to view messages in either the default browser or EWW
+(add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+(add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
 
 
     ;  (setq visual-fill-column-width 100)
