@@ -1,10 +1,9 @@
 * NEW snippets
 #+begin_src emacs-lisp :tangle yes
 (setq display-time-mode t)
-(setq fill-column 120)
 (setq fill-flowed-encode-column 1000)
 (setq org-contacts-files (quote ("~/Dropbox/Zettelkasten/contacts.org")))
- (setq org-timer-display (quote both))
+(setq org-timer-display (quote both))
 (setq org-use-property-inheritance t)
 
 #+end_src
@@ -101,8 +100,6 @@
 
 #+begin_src emacs-lisp :tangle yes
 
-   (global-set-key (kbd "C-x |") 'toggle-window-split)
-
    (global-unset-key (kbd "C-z"))     
    (global-unset-key (kbd "M-c"))
 
@@ -110,7 +107,7 @@
    (bind-keys ("C-+"   . text-scale-increase)
               ("C--"   . text-scale-decrease)
               ("C-c l" . org-store-link)
-                                           ;                 ("C-c k" . toggle-korean-input-method)
+                                          ;                 ("C-c k" . toggle-korean-input-method)
               ("C-."   . org-todo)
               ("C-x /" . shrink-window-horizontally)
               ("C-x ." . org-archive-subtree-default)
@@ -172,6 +169,18 @@
     (setq mu4e-change-filenames-when-moving t)
     (setq mu4e-compose-format-flowed t)
 
+
+;; Call EWW to display HTML messages
+ (defun jcs-view-in-eww (msg)
+   (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
+ 
+ ;; Arrange to view messages in either the default browser or EWW
+ (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+ (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
+ 
+ ;; From Ben Maughan: Get some Org functionality in compose buffer
+ (add-hook 'message-mode-hook 'turn-on-orgtbl)
+; (add-hook 'message-mode-hook 'turn-on-orgstruct++)
 
     (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
     (add-hook 'mu4e-view-mode-hook 'visual-fill-column-mode)

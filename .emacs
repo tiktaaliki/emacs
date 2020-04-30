@@ -2,8 +2,8 @@
   (require 'package)
   (unless (assoc-default "melpa" package-archives)
     (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
-  (unless (assoc-default "melpa-stable" package-archives)
-    (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t))
+;  (unless (assoc-default "melpa-stable" package-archives)
+ ;   (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t))
   (unless (assoc-default "org" package-archives)
     (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
@@ -43,7 +43,7 @@
      (set-face-attribute 'org-date nil :underline t :foreground "#a1d6e2" :family "monofur" )
      (set-face-attribute 'org-agenda-diary nil :foreground "#a4cabc" )
      (set-face-attribute 'org-ellipsis nil :foreground "#a4cabc" :strike-through nil)
-     (set-face-attribute 'org-headline-done nil :foreground "#5B6268" :strike-through t)
+
   (set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
      (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
 
