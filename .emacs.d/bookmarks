@@ -1,0 +1,37 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(#1=(#("org-capture-last-stored" 0 23
+      (bmkp-full-record #1#))
+    (annotation)
+    (tags)
+    (filename . "~/Dropbox/Zettelkasten/journal.org")
+    (buffer-name . "journal.org")
+    (front-context-string . "**** 16:15 test ")
+    (rear-context-string . "-04-30 Thursday\n")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(24235 12799 378967 543000))
+    (created . #2#)
+    (position . 56452))
+#1=(#("testing.org" 0 11
+      (bmkp-full-record #1#))
+    (filename . "~/Dropbox/emacs/testing.org")
+    (front-context-string . "* window managem")
+    (rear-context-string)
+    (position . 1))
+#1=(#("settings.org" 0 12
+      (bmkp-full-record #1#))
+    (filename . "~/Dropbox/emacs/settings.org")
+    (front-context-string . "\n\n\n#+BEGIN_SRC \n")
+    (rear-context-string)
+    (position . 1))
+#1=(#(".emacs" 0 6
+      (bmkp-full-record #1#))
+    (filename . "~/Dropbox/emacs/.emacs")
+    (front-context-string . "(package-initial")
+    (rear-context-string)
+    (position . 1))
+)
