@@ -906,7 +906,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
                   '(
                     ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> %? \n\n\n\n"  :clock-in t :clock-keep t :kill-buffer nil ) 
 
-                    ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal %U :journal: \n\n%? \n\n\n\n"  :clock-in t :clock-keep nil :kill-buffer nil :append t) 
+                    ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"  :clock-in t :resume t :clock-keep nil :kill-buffer nil :append t) 
 
                     ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT} \n %^t\n%?%a")
 
