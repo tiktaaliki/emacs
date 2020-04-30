@@ -233,6 +233,63 @@
 : t
 
 
+* usability
+
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+
+
+   (use-package smartparens
+     :ensure t
+     :defer t
+     :init
+     (show-smartparens-global-mode 1))
+   (smartparens-global-mode 1)
+   (setq show-paren-style 'expression)
+
+   (sp-local-pair 'org-mode "/" "/" :actions '(wrap))
+   (sp-local-pair 'org-mode "_" "_" :actions '(wrap))
+   (sp-local-pair 'org-mode "*" "*" :actions '(wrap))
+   (sp-local-pair 'org-mode "+" "+" :actions '(wrap))
+   (sp-local-pair 'org-mode "~" "~" :actions '(wrap))
+   (sp-local-pair 'org-mode "=" "=" :actions '(wrap))
+   (sp-local-pair 'org-mode "-" "-" :actions '(wrap))
+   (sp-pair "'" nil :actions :rem)
+
+
+   (setq blink-matching-paren-dont-ignore-comments nil)
+
+                                           ;autocompletion
+   (use-package company
+     :ensure t
+     :init (global-company-mode)
+     :config (company-mode 1))     
+
+                                           ;spellcheck
+   (use-package flyspell-correct-helm)
+
+#+END_SRC
+
+#+RESULTS:
+
+   (setq electric-pair-pairs
+         (quote
+          ((34 . 34)
+           (8216 . 8217)
+           (8220 . 8221)
+           (42 . 42)
+           (95 . 95)
+           (47 . 47)
+           (126 . 126)
+           (43 . 43))))
+
+
+
+
+
+
+
 * mu4e
 
  #+BEGIN_SRC emacs-lisp :tangle yes
@@ -408,63 +465,6 @@
 
 
 
-* usability
-
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-
-
-   (use-package smartparens
-     :ensure t
-     :defer t
-     :init
-     (show-smartparens-global-mode 1))
-   (smartparens-global-mode 1)
-   (setq show-paren-style 'expression)
-
-   (sp-local-pair 'org-mode "/" "/" :actions '(wrap))
-   (sp-local-pair 'org-mode "_" "_" :actions '(wrap))
-   (sp-local-pair 'org-mode "*" "*" :actions '(wrap))
-   (sp-local-pair 'org-mode "+" "+" :actions '(wrap))
-   (sp-local-pair 'org-mode "~" "~" :actions '(wrap))
-   (sp-local-pair 'org-mode "=" "=" :actions '(wrap))
-   (sp-local-pair 'org-mode "-" "-" :actions '(wrap))
-   (sp-pair "'" nil :actions :rem)
-
-
-   (setq blink-matching-paren-dont-ignore-comments nil)
-
-                                           ;autocompletion
-   (use-package company
-     :ensure t
-     :init (global-company-mode)
-     :config (company-mode 1))     
-
-                                           ;spellcheck
-   (use-package flyspell-correct-helm)
-
-#+END_SRC
-
-#+RESULTS:
-
-   (setq electric-pair-pairs
-         (quote
-          ((34 . 34)
-           (8216 . 8217)
-           (8220 . 8221)
-           (42 . 42)
-           (95 . 95)
-           (47 . 47)
-           (126 . 126)
-           (43 . 43))))
-
-
-
-
-
-
-
 * window management
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -592,7 +592,7 @@
       (setq org-agenda-dim-blocked-tasks t)
       (setq org-agenda-files
             (quote
-             ("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/journal.org"   "~/Dropbox/Zettelkasten/projects.org" )))
+             ("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/habits.org"   "~/Dropbox/Zettelkasten/projects.org" )))
       (setq org-agenda-include-diary t)
       (setq org-agenda-inhibit-startup nil)
       (setq org-agenda-time-grid
@@ -782,7 +782,7 @@
                              ("watch")
                              ("listen")
                              (:endgroup)
-                        (:startgroup)
+                             (:startgroup)
                              ("CREATE")
                              (:grouptags)
                              ("write")
@@ -792,7 +792,7 @@
                              (:startgroup)
 
 
-                      
+
                              ("email" . ?e)
                              ("browser" . ?b)
 
@@ -821,8 +821,8 @@
 #+BEGIN_SRC emacs-lisp :tangle yes
       (setq org-todo-keywords
             (quote
-             ((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(i)" "?(w)" "|" "DONE(d)" "x(c)")
-              (sequence "HOLD(h)" "HABIT(r)" "PROJ(p)" "|" "DONE(d)"))))
+             ((sequence "TODO(t)" "NEXT(n)" "IN-PROGRESS(i)" "WAIT(w)" "|" "DONE(d)" "x(c)")
+              (sequence "HABIT(h)" "BLOCK(b)"  "PROJ(p)" "|" "DONE(d)"))))
 
   (setq org-log-done (quote time))
       (setq org-enforce-todo-checkbox-dependencies nil)
@@ -1491,50 +1491,55 @@ CLOCK: [2020-03-18 Wed 09:42]--[2020-03-18 Wed 09:44] =>  0:02
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-      (set-face-attribute 'default nil :family "Fantasque sans mono" :height 250 :weight 'normal  :foreground "#ebdcb2"); honeydew  d5d6d2 faefd4
-      (set-face-attribute 'org-level-1 nil :weight 'regular :foreground "#6ab187" :inherit 'default :height 1.0 :weight 'bold) ;lagoon
-      (set-face-attribute 'org-level-2 nil :inherit 'org-level-1 :foreground "#9a9eab" :height 1.0 :weight 'regular) ;  
-      (set-face-attribute 'org-level-3 nil :inherit 'org-level-2 :foreground "#68829e" :height 1.0) ; 
-      (set-face-attribute 'org-level-4 nil :inherit 'org-level-3 :foreground "#6ab187" :height 1.0) ;    a3bd38
-      (set-face-attribute 'org-level-5 nil :inherit 'org-level-4 :foreground "#9a9eab")
-      (set-face-attribute 'org-level-6 nil :inherit 'org-level-5 :foreground "#68829e")
+            (set-face-attribute 'default nil :family "Fantasque sans mono" :height 250 :weight 'normal  :foreground "#ebdcb2"); honeydew  d5d6d2 faefd4
+            (set-face-attribute 'org-level-1 nil :weight 'regular :foreground "#6ab187" :inherit 'default :height 1.0 :weight 'bold) ;lagoon
+            (set-face-attribute 'org-level-2 nil :inherit 'org-level-1 :foreground "#9a9eab" :height 1.0 :weight 'regular) ;  
+            (set-face-attribute 'org-level-3 nil :inherit 'org-level-2 :foreground "#68829e" :height 1.0) ; 
+            (set-face-attribute 'org-level-4 nil :inherit 'org-level-3 :foreground "#6ab187" :height 1.0) ;    a3bd38
+            (set-face-attribute 'org-level-5 nil :inherit 'org-level-4 :foreground "#9a9eab")
+            (set-face-attribute 'org-level-6 nil :inherit 'org-level-5 :foreground "#68829e")
 
 
-      (set-face-attribute 'org-todo nil :weight 'normal :family "nova mono" :height 0.9)
-      (set-face-attribute 'org-link nil :weight 'normal :foreground "firebrick" :family "monofur") ;grecian blue  2988bc
+            (set-face-attribute 'org-todo nil :weight 'normal :family "nova mono" :height 0.9)
+            (set-face-attribute 'org-link nil :weight 'normal :foreground "maroon1" :family "monofur") ;grecian blue  2988bc
      
-      (set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :height 0.8 :foreground "#ff4447") ;raspberry
-      (set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
-      (set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
-      (set-face-attribute 'org-special-keyword nil :height 0.8)
-      (set-face-attribute 'org-date nil :underline t :foreground "#a1d6e2" :family "monofur" )
-      (set-face-attribute 'bold nil :weight 'bold :foreground "#f0810f") ; f0810f ffbb00 de7a22
-      (set-face-attribute 'italic nil :slant 'italic :foreground "#fa6775") ;bubblegum 
-      (set-face-attribute 'org-agenda-diary nil :foreground "#a4cabc" )
-      (set-face-attribute 'org-ellipsis nil :foreground "#a4cabc" :strike-through nil)
-      (set-face-attribute 'org-headline-done nil :foreground "#5B6268" :strike-through t)
-   (set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
-      (set-face-attribute 'underline nil :foreground "#89da59" :underline t) ;warm gray
-      (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
+            (set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :height 0.8 :foreground "#ff4447") ;raspberry
+            (set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
+            (set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
+            (set-face-attribute 'org-special-keyword nil :height 0.8)
+            (set-face-attribute 'org-date nil :underline t :foreground "#a1d6e2" :family "monofur" )
+            (set-face-attribute 'bold nil :weight 'bold :foreground "#f0810f") ; f0810f ffbb00 de7a22
+            (set-face-attribute 'italic nil :slant 'italic :foreground "#fa6775") ;bubblegum 
+            (set-face-attribute 'org-agenda-diary nil :foreground "#a4cabc" )
+            (set-face-attribute 'org-ellipsis nil :foreground "#a4cabc" :strike-through nil)
+            (set-face-attribute 'org-headline-done nil :foreground "#5B6268" :strike-through t)
+         (set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
+            (set-face-attribute 'underline nil :foreground "#89da59" :underline t) ;warm gray
+            (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
 
 
- (setq org-todo-keyword-faces
-            (quote
-             (("NEXT" :weight bold :inherit org-todo :foreground "magenta")
-              ("?" :weight bold :underline nil :inherit org-todo :foreground "yellow")
-              ("IN-PROGRESS" :weight bold :underline nil :inherit org-todo :foreground "#00CFFA")
-              ("PROJ" :weight regular :underline nil :inherit org-todo :foreground "purple")
-              ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#e8a735")
-              ("HABIT" :weight bold :underline nil :inherit org-todo :foreground "coral")
-              )))
-   ;dismissed colors: 426e86, steel blue
+       (setq org-todo-keyword-faces
+                  (quote
+                   (("NEXT" :weight bold :inherit org-todo :foreground "magenta")
+                    ("?" :weight bold :underline nil :inherit org-todo :foreground "yellow")
+                    ("IN-PROGRESS" :weight bold :underline nil :inherit org-todo :foreground "#00CFFA")
+                    ("PROJ" :weight regular :underline nil :inherit org-todo :foreground "purple")
+                    ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#e8a735")
+                    ("HABIT" :weight bold :underline nil :inherit org-todo :foreground "coral")
+                    )))
+         ;dismissed colors: 426e86, steel blue
+
+
+
+      (setq org-tag-faces
+            '(("admin" :inherit org-tag  :foreground "yellow")
+              ("focus" :inherit org-tag  :foreground "magenta")
+              ("home" :inherit org-tag  :foreground "green")
+   ))
    #+END_SRC
 
 #+RESULTS:
-| NEXT        | :weight | bold    | :inherit   | org-todo | :foreground | magenta  |             |         |
-| ?           | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | yellow  |
-| IN-PROGRESS | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | #00CFFA |
-| PROJ        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | purple  |
-| TODO        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | #e8a735 |
-| HABIT       | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | coral   |
+| admin | :inherit | org-tag | :foreground | yellow  |
+| focus | :inherit | org-tag | :foreground | magenta |
+| home  | :inherit | org-tag | :foreground | green   |
  (set-face-attribute 'org-tag nil :height 0.8)
