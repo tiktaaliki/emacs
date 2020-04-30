@@ -1,3 +1,17 @@
+* NEW snippets
+#+begin_src emacs-lisp :tangle yes
+(setq display-time-mode t)
+(setq fill-column 120)
+(setq fill-flowed-encode-column 1000)
+(setq org-contacts-files (quote ("~/Dropbox/Zettelkasten/contacts.org")))
+ (setq org-timer-display (quote both))
+(setq org-use-property-inheritance t)
+
+#+end_src
+
+#+RESULTS:
+: t
+
 * emacs mechanics
 #+begin_src emacs-lisp :tangle yes
    (setq visible-bell nil)
@@ -426,6 +440,11 @@
 
 
 
+* chronos
+#+begin_src emacs-lisp :tangle yes
+   (setq chronos-notification-time 120)
+   (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+#+end_src
 * org-startup-defaults
 
 
@@ -450,7 +469,6 @@
 
 #+END_SRC
 * *org-mode*
-
 ** org navigation
 #+BEGIN_SRC emacs-lisp :tangle yes
       (setq org-id-link-to-org-use-id (quote create-if-interactive))
@@ -489,93 +507,68 @@
 
    #+RESULTS:
 ** org-agenda
-                           
+*** org-agenda settings
+      #+begin_src emacs-lisp :tangle yes
 
+
+
+         (setq  org-agenda-sorting-strategy 
+                '((agenda time-up)
+                  (todo priority-down category-keep)
+                  (tags priority-down category-keep)
+                  (search category-keep)))
+         (setq org-agenda-tags-todo-honor-ignore-options t)
+         (setq org-agenda-use-tag-inheritance t)
+        
+         (setq org-agenda-skip-deadline-if-done t)
+         (setq org-agenda-skip-timestamp-if-done t)
+         (setq org-agenda-skip-scheduled-if-done t)
+         (setq org-agenda-current-time-string "✸✸✸✸✸")
+
+         (setq org-agenda-start-with-clockreport-mode t)
+         (setq org-agenda-span (quote day))
+         (setq org-agenda-jump-prefer-future t)
+
+         (setq org-agenda-with-colors t)
+         (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+         (setq org-agenda-start-on-weekday nil)
+
+
+         (setq org-agenda-clockreport-parameter-plist
+               (quote
+                (:link t :maxlevel 4 :narrow 25 :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
+         (setq org-agenda-dim-blocked-tasks t)
+         (setq org-agenda-files
+               (quote
+                ("~/Dropbox/Zettelkasten/inbox.org" 
+                 "~/Dropbox/Zettelkasten/cal.org"
+                 "~/Dropbox/Zettelkasten/journal.org"
+                 "~/Dropbox/Zettelkasten/habits.org"   
+                 "~/Dropbox/Zettelkasten/projects.org"
+                 )))
+         (setq org-agenda-include-diary t)
+         (setq org-agenda-inhibit-startup nil)
+         (setq org-agenda-time-grid
+               (quote
+                ((daily weekly today remove-match)
+                 (900  1200 1500  1800  2100 )
+                 "......" "----------------")))
+
+         (defun kiwon/org-agenda-redo-in-other-window ()
+           "Call org-agenda-redo function even in the non-agenda buffer."
+           (interactive)
+           (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
+             (when agenda-window
+               (with-selected-window agenda-window (org-agenda-redo)))))
+         (run-at-time nil 300 'kiwon/org-agenda-redo-in-other-window)
+
+
+      #+end_src                     
+*** org-agenda custom commands
     #+BEGIN_SRC emacs-lisp :tangle yes
 
-       (setq org-enforce-todo-dependencies t)
-
-       (setq  org-agenda-sorting-strategy 
-              '((agenda time-up)
-                (todo priority-down category-keep)
-                (tags priority-down category-keep)
-                (search category-keep)))
-
-
-       (setq org-agenda-skip-deadline-if-done t)
-       (setq org-agenda-skip-timestamp-if-done t)
-       (setq org-agenda-skip-scheduled-if-done t)
-       (setq org-agenda-current-time-string "✸✸✸✸✸")
-
-       (setq org-agenda-start-with-clockreport-mode t)
-       (setq org-agenda-span (quote day))
-       (setq org-agenda-jump-prefer-future t)
-
-       (setq org-agenda-with-colors t)
-       (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
-       (setq org-agenda-start-on-weekday nil)
-
-
-      (setq org-agenda-clockreport-parameter-plist
-            (quote
-             (:link t :maxlevel 4 :narrow 25 :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
-      (setq org-agenda-dim-blocked-tasks t)
-      (setq org-agenda-files
-            (quote
-             ("~/Dropbox/Zettelkasten/inbox.org" 
-"~/Dropbox/Zettelkasten/cal.org"
-"~/Dropbox/Zettelkasten/journal.org"
- "~/Dropbox/Zettelkasten/habits.org"   
-"~/Dropbox/Zettelkasten/projects.org"
- )))
-      (setq org-agenda-include-diary t)
-      (setq org-agenda-inhibit-startup nil)
-      (setq org-agenda-time-grid
-            (quote
-             ((daily weekly today remove-match)
-              (900  1200 1500  1800  2100 )
-              "......" "----------------")))
-
-
-(defvar my/org-habit-show-graphs-everywhere t
-  "If non-nil, show habit graphs in all types of agenda buffers.
-
-Normally, habits display consistency graphs only in
-\"agenda\"-type agenda buffers, not in other types of agenda
-buffers.  Set this variable to any non-nil variable to show
-consistency graphs in all Org mode agendas.")
-
-(defun my/org-agenda-mark-habits ()
-  "Mark all habits in current agenda for graph display.
-
-This function enforces `my/org-habit-show-graphs-everywhere' by
-marking all habits in the current agenda as such.  When run just
-before `org-agenda-finalize' (such as by advice; unfortunately,
-`org-agenda-finalize-hook' is run too late), this has the effect
-of displaying consistency graphs for these habits.
-
-When `my/org-habit-show-graphs-everywhere' is nil, this function
-has no effect."
-  (when (and my/org-habit-show-graphs-everywhere
-         (not (get-text-property (point) 'org-series)))
-    (let ((cursor (point))
-          item data) 
-      (while (setq cursor (next-single-property-change cursor 'org-marker))
-        (setq item (get-text-property cursor 'org-marker))
-        (when (and item (org-is-habit-p item)) 
-          (with-current-buffer (marker-buffer item)
-            (setq data (org-habit-parse-todo item))) 
-          (put-text-property cursor
-                             (next-single-property-change cursor 'org-marker)
-                             'org-habit-p data))))))
-
-(advice-add #'org-agenda-finalize :before #'my/org-agenda-mark-habits)
-
-
-
-
        (setq org-stuck-projects '("/TODO" ("NEXT") nil ""))
-       (setq org-log-note-clock-out nil)
+
 
        (setq org-agenda-custom-commands
 
@@ -657,74 +650,6 @@ has no effect."
     | h | 2d agenda + undated HOME & misc tasks | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo home) (tags-todo -focus-admin-home-lis)) | ((org-agenda-todo-ignore-scheduled t)) |                                         |                                        |
     | l | lis                                   | ((agenda  ((org-agenda-span 1))) (tags-todo lis))                                                                                                 | ((org-agenda-todo-ignore-with-date t)) |                                         |                                        |
 
-("n" "all next and in-progress" tags-todo "TODO=\"NEXT\"-lis|TODO=\"IN-PROGRESS\"-lis")
-               ("d" "Agenda + all unscheduled todos"
-                ((agenda "" 
-                         ((org-agenda-span 7)
-                          (org-agenda-clockreport-mode nil)
-                          ))
-                 (todo "NEXT|IN-PROGRESS" ) 
-                 (todo "TODO" ))
-                ((org-agenda-todo-ignore-scheduled t))	                 )
-
-               ("f" "Agenda + unscheduled focus items"
-                ((agenda "" 
-                         ((org-agenda-span 2)
-                          (org-agenda-clockreport-mode nil)
-                          (org-agenda-time-grid nil)))
-                 (tags-todo "focus"  ))
-                ((org-agenda-todo-ignore-scheduled t)))
-
-               ("m" "Agenda + unscheduled admin items"
-                ((agenda "" 
-                         ((org-agenda-span 2)
-                          (org-agenda-clockreport-mode nil)
-                          (org-agenda-time-grid nil)))
-                 (tags-todo "admin" 
-                            ((org-agenda-todo-ignore-scheduled t)) )
-                 ))
-
-               ("h" "Agenda + unscheduled home items"
-                ((agenda "" 
-                         ((org-agenda-span 2)
-                          (org-agenda-clockreport-mode nil)
-                          (org-agenda-time-grid nil)))
-                 (tags-todo "home"  ))
-                ((org-agenda-todo-ignore-with-date t)))
-
-               ("p" "print view" agenda ""
-                ((ps-number-of-columns 2)
-                 (ps-landscape-mode t)
-                 (org-agenda-prefix-format " [ ] ")
-                 (org-agenda-with-colors nil)
-                 (org-agenda-start-withclockreport-mode nil)
-                 (org-agenda-clockreport-mode nil)
-                 (org-agenda-remove-tags t))                )
-
-               ))
-
-
-
-     (defun kiwon/org-agenda-redo-in-other-window ()
-         "Call org-agenda-redo function even in the non-agenda buffer."
-         (interactive)
-         (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
-           (when agenda-window
-             (with-selected-window agenda-window (org-agenda-redo)))))
-       (run-at-time nil 300 'kiwon/org-agenda-redo-in-other-window)
-
-
-
-    | n | all next and in-progress         | todo                                                                                                                                                    | NEXT                                   | IN-PROGRESS                                                                                                                                                                                                             |
-    | k | all TODOs                        | todo                                                                                                                                                    | TODO                                   |                                                                                                                                                                                                                         |
-    | u | agenda + All undated tasks       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (todo ))                                                  | ((org-agenda-todo-ignore-scheduled t)) |                                                                                                                                                                                                                         |
-    | r | Agenda + rituals and routines    | ((agenda  ((org-agenda-span 1) (org-agenda-clockreport-mode nil))) (tags timeblocking))                                                                 | ((org-agenda-todo-ignore-timestamp t)) |                                                                                                                                                                                                                         |
-    | d | Agenda + all unscheduled todos   | ((agenda  ((org-agenda-span 7) (org-agenda-clockreport-mode nil))) (todo NEXT                                                                           | IN-PROGRESS) (todo TODO))              | ((org-agenda-todo-ignore-scheduled t))                                                                                                                                                                                  |
-    | f | Agenda + unscheduled focus items | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo focus))                                        | ((org-agenda-todo-ignore-scheduled t)) |                                                                                                                                                                                                                         |
-    | m | Agenda + unscheduled admin items | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo admin ((org-agenda-todo-ignore-scheduled t)))) |                                        |                                                                                                                                                                                                                         |
-    | h | Agenda + unscheduled home items  | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo home))                                         | ((org-agenda-todo-ignore-with-date t)) |                                                                                                                                                                                                                         |
-    | p | print view                       | agenda                                                                                                                                                  |                                        | ((ps-number-of-columns 2) (ps-landscape-mode t) (org-agenda-prefix-format  [ ] ) (org-agenda-with-colors nil) (org-agenda-start-withclockreport-mode nil) (org-agenda-clockreport-mode nil) (org-agenda-remove-tags t)) |
-
 
 
 
@@ -787,14 +712,14 @@ has no effect."
 
 ** org-todo
 #+BEGIN_SRC emacs-lisp :tangle yes
-      (setq org-todo-keywords
-            (quote
-             ((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "x(c)")
-              (sequence  "HABIT(h)"  "BLOCK(b)" "PROJ(p)" "|" "DONE(d)"))))
-
-  (setq org-log-done (quote time))
-      (setq org-enforce-todo-checkbox-dependencies nil)
-
+   (setq org-todo-keywords
+         (quote
+          ((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "x(c)")
+           (sequence  "HABIT(h)"  "BLOCK(b)" "PROJ(p)" "|" "DONE(d)"))))
+(setq org-edna-mode t)
+   (setq org-log-done (quote time))
+   (setq org-enforce-todo-checkbox-dependencies nil)
+   (setq org-enforce-todo-dependencies t)
 #+END_SRC
 
 #+RESULTS:
@@ -802,10 +727,48 @@ has no effect."
 ** org-habit
 #+begin_src emacs-lisp :tangle yes
 (setq org-habit-graph-column 60)
+(setq org-habit-show-all-today nil)
+(setq org-habit-show-habits-only-for-today t)
+
+(defvar my/org-habit-show-graphs-everywhere t
+  "If non-nil, show habit graphs in all types of agenda buffers.
+
+Normally, habits display consistency graphs only in
+\"agenda\"-type agenda buffers, not in other types of agenda
+buffers.  Set this variable to any non-nil variable to show
+consistency graphs in all Org mode agendas.")
+
+(defun my/org-agenda-mark-habits ()
+  "Mark all habits in current agenda for graph display.
+
+This function enforces `my/org-habit-show-graphs-everywhere' by
+marking all habits in the current agenda as such.  When run just
+before `org-agenda-finalize' (such as by advice; unfortunately,
+`org-agenda-finalize-hook' is run too late), this has the effect
+of displaying consistency graphs for these habits.
+
+When `my/org-habit-show-graphs-everywhere' is nil, this function
+has no effect."
+  (when (and my/org-habit-show-graphs-everywhere
+         (not (get-text-property (point) 'org-series)))
+    (let ((cursor (point))
+          item data) 
+      (while (setq cursor (next-single-property-change cursor 'org-marker))
+        (setq item (get-text-property cursor 'org-marker))
+        (when (and item (org-is-habit-p item)) 
+          (with-current-buffer (marker-buffer item)
+            (setq data (org-habit-parse-todo item))) 
+          (put-text-property cursor
+                             (next-single-property-change cursor 'org-marker)
+                             'org-habit-p data))))))
+
+(advice-add #'org-agenda-finalize :before #'my/org-agenda-mark-habits)
+
+
 #+end_src
 
 #+RESULTS:
-: 60
+: t
 
 ** org-list, bullets, checkboxes
 *** checkboxes and todo states
@@ -930,7 +893,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
        (setq org-log-into-drawer t)
 
 
-
+ (setq org-log-note-clock-out nil)
     (defun insert-timestamp (prefix)
        "Insert the current date. With prefix-argument, use ISO format. With
       two prefix arguments, write out the day and month name."
@@ -1116,11 +1079,21 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
      (use-package interleave 
        :defer t
        )
+(setq org-noter-always-create-frame t)
+(setq org-noter-auto-save-last-location t)
+(setq org-noter-default-heading-title "p. $p$")
+(setq org-noter-default-notes-file-names (quote ("~/Dropbox/Zettelkasten/readings.org")))
+(setq org-noter-doc-split-fraction (quote (0.75 . 0.75)))
+(setq org-noter-insert-note-no-questions t)
+(setq org-noter-kill-frame-at-session-end nil)
+(setq org-noter-notes-search-path (quote ("~/Dropbox/Zettelkasten/")))
+(setq org-noter-notes-window-location (quote horizontal-split))
 
 
   #+END_SRC
 
   #+RESULTS:
+  : horizontal-split
 
 
 

@@ -4,7 +4,26 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(chronos-expiry-functions
+   (quote
+    (chronos-sound-notify chronos-message-notify chronos-buffer-notify)))
+ '(display-time-mode t)
  '(line-spacing 0.2)
+ '(mode-line-format
+   (quote
+    ("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
+     (vc-mode vc-mode)
+     "  " mode-line-misc-info mode-line-modes mode-line-end-spaces)))
+ '(mouse-wheel-scroll-amount (quote (2 ((shift) . 1) ((control)))))
+ '(org-emphasis-alist
+   (quote
+    (("*" bold)
+     ("/" italic)
+     ("_" underline)
+     ("=" org-verbatim verbatim)
+     ("~" org-code verbatim)
+     ("+"
+      (:background "#acd0c0" :foreground "black" :family "monofur" :weight bold)))))
  '(org-modules
    (quote
     (ol-bibtex ol-eww org-habit org-id org-protocol ol-w3m)))
