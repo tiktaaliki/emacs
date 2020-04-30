@@ -873,8 +873,8 @@
       (setq org-list-allow-alphabetical t)
       (setq org-list-indent-offset 1)
       (setq org-list=description-max-indent 5)
-      (setq org-bullets-bullet-list (quote ( "⚫"  "★"  "○"   "◆"    "⟐"  "☆"            "⚬" )))
-;   "•"    "‣"    "⏵""▷" "⧽"  "♦""◇"    "◉" "⬤"〇⭕ "⨀"  "⬤" "ᐅ"  "〇"      "⚬" )))
+      (setq org-bullets-bullet-list (quote ( "⚫" "⯌"   "○"   "◆"  "☆"            "⚬" )))
+;   "•"    "‣"    "⏵""▷" "⧽"  "♦""◇"    "◉" "⬤"〇⭕ "⨀"  "★" "⬤" "ᐅ"  "〇"     "⟐"     "⚬" )))
 ;○◔◑◕●⌾⭗☉⌾◎◉⨀◎⌾◉◍⊗⊛•○∙⊛⁕✱ ൦❄⊕⊖⊗⊘⊙⊚⊛⊜⊝∘∙◉⏺○◍◎●◐◑◒◓◔◕◦◯◴◵◶◷☉⚪⚫⚬◐
 
 ; too tall: "⬥"  "⯈" "⚫" "∙" ⬤ ✶ "✧" "▸" "⯏"  "⭗"   "⛭" "⚪"  "⭐"  "⏵" 
