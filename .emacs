@@ -1,50 +1,24 @@
+(eval-when-compile
+  (require 'package)
+  (unless (assoc-default "melpa" package-archives)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
+  (unless (assoc-default "melpa-stable" package-archives)
+    (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t))
+  (unless (assoc-default "org" package-archives)
+    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+  
+  (package-initialize)
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (require 'use-package)
+  (setq use-package-always-ensure t))
 
-(package-initialize)
+(require 'org)
 
-(require 'package)
-(require 'org-install)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+(org-babel-load-file "~/Dropbox/emacs/config.org")
+;(setq custom-file "~/Dropbox/emacs/custom.el")
 
-(add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
-
-(setq custom-file "~/Dropbox/emacs/custom.el")
-;(setq custom-file "~/Dropbox/emacs/custom2.el")
-(load custom-file)
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-;; backwards compatibility as default-buffer-file-coding-system
-;; is deprecated in 23.2.
-(if (boundp 'buffer-file-coding-system)
-    (setq-default buffer-file-coding-system 'utf-8)
-  (setq default-buffer-file-coding-system 'utf-8))
-
-;; Treat clipboard input as UTF-8 string first; compound text next, etc.
-(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-
-(load "dired+")
-(load "org-pdfview")
-(load "org-protocol-capture-html")
-(load "ereader")
-(load "org-book")
-(load "org-depend")
-(load "bookmark+")
-(load "org-contacts")
-;(load "zoom-frm")
-;(load "ov-highlight")
-(setq use-package-verbose t)
-(setq use-package-always-ensure t)
-
-(eval-when-compile (require 'use-package))
-
-
-(org-babel-load-file "~/Dropbox/emacs/settings.org")
-;(org-babel-load-file "~/Sync/emacs/gallium.org")
-(org-babel-load-file "~/Dropbox/emacs/pi.org")
-
+;(load custom-file)
+    (setq mu4e-get-mail-command "mbsync -aV") 
