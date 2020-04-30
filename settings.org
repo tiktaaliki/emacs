@@ -912,6 +912,10 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
 
                     ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
 
+  ("l" "look up" entry (id "5br4n6815pi0") "* %? \n%U\n  \n%a\n\n\n" :prepend nil)
+
+
+
                     ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n\n" :prepend nil)
 
   ("n" "note" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil)
