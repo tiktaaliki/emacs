@@ -17,8 +17,8 @@
    (setq confirm-kill-emacs (quote y-or-n-p))
 
 
-(set-fringe-mode '(50 . 50))
-(setq ring-bell-function (quote ignore))
+   (set-fringe-mode '(50 . 50))
+   (setq ring-bell-function (quote ignore))
 
 
 #+end_src
@@ -26,7 +26,7 @@
 #+RESULTS:
 : ignore
 
-* BETTER DEFAULTS
+* font/coding/wrapping
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -52,6 +52,22 @@
    (setq global-visual-line-mode t)
 
 
+   (eval-after-load "flyspell"
+     '(define-key flyspell-mode-map (kbd "C-.") nil))
+
+
+
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
+
+* load external files
+
+#+begin_src emacs-lisp :tangle yes
+
    (add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
    (add-to-list 'load-path "~/Dropbox/emacs/")
    (load "pi")
@@ -65,10 +81,11 @@
    (load "org-contacts")
 
 
-   (eval-after-load "flyspell"
-     '(define-key flyspell-mode-map (kbd "C-.") nil))
+#+end_src
 
+* keybindings
 
+#+begin_src emacs-lisp :tangle yes
 
    (global-set-key (kbd "C-x |") 'toggle-window-split)
 
@@ -125,12 +142,7 @@
    (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
    (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
 
-
-#+END_SRC
-
-#+RESULTS:
-: t
-
+#+end_src
 * mu4e
 
  #+BEGIN_SRC emacs-lisp :tangle yes
@@ -414,7 +426,7 @@
 
 
 
-
+* org-startup-defaults
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1457,57 +1469,6 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
 
 
 
-* faces 
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-      (set-face-attribute 'default nil :family "Fantasque sans mono" :height 250 :weight 'normal  :foreground "#ebdcb2"); honeydew  d5d6d2 faefd4
-      (set-face-attribute 'org-level-1 nil :weight 'regular :foreground "#6ab187" :inherit 'default :height 1.0 :weight 'bold) ;lagoon
-      (set-face-attribute 'org-level-2 nil :inherit 'org-level-1 :foreground "#9a9eab" :height 1.0 :weight 'regular) ;  
-      (set-face-attribute 'org-level-3 nil :inherit 'org-level-2 :foreground "#68829e" :height 1.0) ; 
-      (set-face-attribute 'org-level-4 nil :inherit 'org-level-3 :foreground "#6ab187" :height 1.0) ;    a3bd38
-      (set-face-attribute 'org-level-5 nil :inherit 'org-level-4 :foreground "#9a9eab")
-      (set-face-attribute 'org-level-6 nil :inherit 'org-level-5 :foreground "#68829e")
-
-
-      (set-face-attribute 'org-todo nil :weight 'normal :family "nova mono" :height 0.9)
-      (set-face-attribute 'org-link nil :weight 'normal :foreground "firebrick" :family "monofur") ;grecian blue  2988bc
-     
-      (set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :height 0.8 :foreground "#ff4447") ;raspberry
-      (set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
-      (set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
-      (set-face-attribute 'org-special-keyword nil :height 0.8)
-      (set-face-attribute 'org-date nil :underline t :foreground "#a1d6e2" :family "monofur" )
-      (set-face-attribute 'bold nil :weight 'bold :foreground "#f0810f") ; f0810f ffbb00 de7a22
-      (set-face-attribute 'italic nil :slant 'italic :foreground "#fa6775") ;bubblegum 
-      (set-face-attribute 'org-agenda-diary nil :foreground "#a4cabc" )
-      (set-face-attribute 'org-ellipsis nil :foreground "#a4cabc" :strike-through nil)
-      (set-face-attribute 'org-headline-done nil :foreground "#5B6268" :strike-through t)
-   (set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
-      (set-face-attribute 'underline nil :foreground "#89da59" :underline t) ;warm gray
-      (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
-
-
- (setq org-todo-keyword-faces
-            (quote
-             (("NEXT" :weight bold :inherit org-todo :foreground "magenta")
-              ("?" :weight bold :underline nil :inherit org-todo :foreground "yellow")
-              ("IN-PROGRESS" :weight bold :underline nil :inherit org-todo :foreground "#00CFFA")
-              ("PROJ" :weight regular :underline nil :inherit org-todo :foreground "purple")
-              ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#e8a735")
-              ("HABIT" :weight bold :underline nil :inherit org-todo :foreground "coral")
-              )))
-   ;dismissed colors: 426e86, steel blue
-   #+END_SRC
-
-#+RESULTS:
-| NEXT        | :weight | bold    | :inherit   | org-todo | :foreground | magenta  |             |         |
-| ?           | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | yellow  |
-| IN-PROGRESS | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | #00CFFA |
-| PROJ        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | purple  |
-| TODO        | :weight | regular | :underline | nil      | :inherit    | org-todo | :foreground | #e8a735 |
-| HABIT       | :weight | bold    | :underline | nil      | :inherit    | org-todo | :foreground | coral   |
- (set-face-attribute 'org-tag nil :height 0.8)
 * theme
 
 
