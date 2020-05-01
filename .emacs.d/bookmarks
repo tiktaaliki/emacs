@@ -2,32 +2,32 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("org-capture-last-stored" 0 23
+(#1=(#("i3 config" 0 9
+      (bmkp-full-record #1#))
+    (filename . "~/.i3/config")
+    (buffer-name . "config")
+    (front-context-string . "# i3 config file")
+    (rear-context-string)
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 3)
+    (time 24236 12772 779188 892000)
+    (created 24235 43573 21625 779000)
+    (position . 1))
+#1=(#("org-capture-last-stored" 0 23
       (bmkp-full-record #1#))
     (annotation)
     (tags)
-    (filename . "~/Dropbox/Zettelkasten/personal.org")
-    (buffer-name . "personal.org")
-    (front-context-string . "- [2020-04-30 Th")
-    (rear-context-string . "ges\n:LOGBOOK:\n\n\n")
+    (filename . "~/Dropbox/Zettelkasten/inbox.org")
+    (buffer-name . "inbox.org")
+    (front-context-string . "* TODO  [[file:/")
+    (rear-context-string . "view OC agenda \n")
     (front-context-region-string)
     (rear-context-region-string)
     (visits . 0)
-    (time . #2=(24235 29691 858495 969000))
+    (time . #2=(24236 24219 740255 50000))
     (created . #2#)
-    (position . 7947))
-#1=(#("testing.org" 0 11
-      (bmkp-full-record #1#))
-    (filename . "~/Dropbox/emacs/testing.org")
-    (front-context-string . "* window managem")
-    (rear-context-string)
-    (position . 1))
-#1=(#("settings.org" 0 12
-      (bmkp-full-record #1#))
-    (filename . "~/Dropbox/emacs/settings.org")
-    (front-context-string . "\n\n\n#+BEGIN_SRC \n")
-    (rear-context-string)
-    (position . 1))
+    (position . 926))
 #1=(#(".emacs" 0 6
       (bmkp-full-record #1#))
     (filename . "~/Dropbox/emacs/.emacs")
