@@ -6,10 +6,85 @@
 (setq org-timer-display (quote both))
 (setq org-use-property-inheritance t)
 
+
+(defhydra hydra-org (:color red :columns 3)
+  "Org Mode Movements"
+  ("n" outline-next-visible-heading "next heading")
+  ("p" outline-previous-visible-heading "prev heading")
+  ("N" org-forward-heading-same-level "next heading at same level")
+  ("P" org-backward-heading-same-level "prev heading at same level")
+  ("u" outline-up-heading "up heading")
+("r" org-refile "refile")
+  ("g" org-goto "goto" :exit t))
+
+
+
+ (defhydra hydra-window ()
+   "
+Movement^^        ^Split^         ^Switch^		^Resize^
+----------------------------------------------------------------
+_h_ ←       	_v_ertical    	_b_uffer		_q_ shrink
+_j_ ↓        	_x_ horizontal	_f_ind files	_w_ balance
+_k_ ↑        	_z_ undo      	_a_ce 1		_e_nlarge
+_l_ →        	_Z_ reset      	_s_wap		_r_ split toggle
+_F_ollow		_D_lt Other   	_S_ave		max_i_mize
+_SPC_ cancel	_o_nly this   	_d_elete	
+"
+   ("h" windmove-left )
+   ("j" windmove-down )
+   ("k" windmove-up )
+   ("l" windmove-right )
+   ("q" shrink-window-horizontally)
+   ("w" balance-windows)
+   ("e" enlarge-window)
+   ("r" window-split-toggle)
+   ("b" helm-mini)
+   ("f" helm-find-files)
+   ("F" follow-mode)
+   ("a" (lambda ()
+          (interactive)
+          (ace-window 1)
+          (add-hook 'ace-window-end-once-hook
+                    'hydra-window/body))
+       )
+   ("v" (lambda ()
+          (interactive)
+          (split-window-right)
+          (windmove-right))
+       )
+   ("x" (lambda ()
+          (interactive)
+          (split-window-below)
+          (windmove-down))
+       )
+   ("s" (lambda ()
+          (interactive)
+          (ace-window 4)
+          (add-hook 'ace-window-end-once-hook
+                    'hydra-window/body)))
+   ("S" save-buffer)
+   ("d" delete-window)
+   ("D" (lambda ()
+          (interactive)
+          (ace-window 16)
+          (add-hook 'ace-window-end-once-hook
+                    'hydra-window/body))
+       )
+   ("o" delete-other-windows)
+   ("i" ace-maximize-window)
+   ("z" (progn
+          (winner-undo)
+          (setq this-command 'winner-undo))
+   )
+   ("Z" winner-redo)
+   ("SPC" nil)
+   )
+
+
 #+end_src
 
 #+RESULTS:
-: t
+: hydra-org/body
 
 * emacs mechanics
 #+begin_src emacs-lisp :tangle yes
@@ -103,23 +178,27 @@
    (global-unset-key (kbd "C-z"))     
    (global-unset-key (kbd "M-c"))
 
+
+(define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+(define-key org-mode-map (kbd "C-e") 'org-end-of-line)
    (global-unset-key (kbd "S-SPC"))
    (bind-keys ("C-+"   . text-scale-increase)
               ("C--"   . text-scale-decrease)
               ("C-c l" . org-store-link)
                                           ;                 ("C-c k" . toggle-korean-input-method)
               ("C-."   . org-todo)
-              ("C-x /" . shrink-window-horizontally)
+;              ("C-x /" . shrink-window-horizontally)
               ("C-x ." . org-archive-subtree-default)
               ("C-c n" . org-schedule)
               ("M-="   . count-words)
               ("M-x"   . helm-M-x)
 
               ("C-c b" . list-bookmarks)
-              ("C-a" . org-beginning-of-line)
-              ("C-e" . org-end-of-line)
+          ;    ("C-a" . org-beginning-of-line)
+            
+           ;   ("C-e" . org-end-of-line)
               ("C-k" . org-kill-line)
-              ("C-<kp-6>" . xah-select-block)
+;              ("C-<kp-6>" . xah-select-block)
                                            ;   ("C-x j" . helm-org-in-buffer-headings)
               ("C-c i" . insert-timestamp)
                                            ;  ("C-c a" . helm-org-agenda-files-headings)
@@ -154,6 +233,10 @@
    (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
 
 #+end_src
+
+#+RESULTS:
+: [8756]
+
 * mu4e
 
  #+BEGIN_SRC emacs-lisp :tangle yes
