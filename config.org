@@ -198,7 +198,7 @@ _SPC_ cancel	_o_nly this   	_d_elete
    )
 
 #+end_src
-** buffers
+** between buffers
 #+begin_src emacs-lisp :tangle yes
 
 
@@ -237,6 +237,15 @@ _SPC_ cancel	_o_nly this   	_d_elete
 
 
 #+end_src
+** in buffers
+#+begin_src emacs-lisp :tangle yes
+(eval-after-load "helm"
+'(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
+#+end_src
+
+#+RESULTS:
+: ace-jump-helm-line
+
 * accessibility
 #+begin_src emacs-lisp :tangle yes
 (defhydra hydra-zoom (:color amaranth)  "zoom"
@@ -474,7 +483,8 @@ T - tag prefix
 
    (global-unset-key (kbd "C-z"))     
    (global-unset-key (kbd "M-c"))
-
+;(define-key org-mode-map (kbd "C-0 C-c C-w") 'org-refile-cache-clear)
+(define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
 (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
 (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
    (global-unset-key (kbd "S-SPC"))
@@ -1271,7 +1281,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
 
   ("n" "note" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil)
 
-
+  ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
 
 
 
@@ -1403,12 +1413,14 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
    (setq org-refile-use-outline-path (quote file))
       (setq org-archive-location
             "~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks")
-      (setq org-archive-reversed-order t)
+      (setq org-archive-reversed-order nil)
       (setq org-refile-use-cache t)
 
    (setq org-refile-targets (quote (("~/Dropbox/Zettelkasten/notes.org" :maxlevel . 1)
+                                    ("~/Dropbox/Zettelkasten/projects.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
+                                    ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/someday.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 1)
@@ -1428,7 +1440,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
 #+END_SRC
 
 #+RESULTS:
-: ~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks
+: confirm
 
 
 

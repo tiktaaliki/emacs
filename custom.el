@@ -45,12 +45,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#282c34" :foreground "#ebdcb2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 250 :width normal :foundry "PfEd" :family "Fantasque Sans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "#282c34" :foreground "#ebdcb2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 200 :width normal :foundry "PfEd" :family "Fantasque Sans Mono"))))
  '(bold ((t (:foreground "medium orchid" :weight bold))))
  '(bold-italic ((t (:inherit italic))))
  '(diredp-dir-name ((t (:foreground "RoyalBlue2" :weight bold))))
  '(org-done ((t (:inherit org-headline-done))))
  '(org-headline-done ((t (:foreground "#5B6268" :strike-through t))))
+ '(org-level-1 ((t (:inherit default :foreground "#6ab187" :weight normal :height 1.1))))
+ '(org-level-2 ((t (:inherit org-level-1 :foreground "#9a9eab" :weight normal :height 0.9))))
  '(org-link ((t (:inherit link :foreground "chocolate" :weight normal :family "monofur"))))
  '(org-todo ((t (:foreground "#98be65" :weight normal :family "nova mono"))))
  '(underline ((t (:foreground "#89da59" :underline t))))
