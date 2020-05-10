@@ -1,4 +1,15 @@
+* set language environment hydra 
+#+begin_src emacs-lisp :tangle yes
+(defhydra hydra-korean (:color amaranth)  "korean"
+  ("s" set-language-environment "set language")
+  ("q" nil "quit" :color blue))
 
+
+
+#+end_src
+
+#+RESULTS:
+: hydra-korean/body
 
 * load external files
 
@@ -249,12 +260,13 @@ _SPC_ cancel	_o_nly this   	_d_elete
 * accessibility
 #+begin_src emacs-lisp :tangle yes
 (defhydra hydra-zoom (:color amaranth)  "zoom"
-  ("+" text-scale-increase "in")
+  ("=" text-scale-increase "in")
   ("-" text-scale-decrease "out")
   ("0" (text-scale-adjust 0) "reset")
+("o" (other-window) "other window")
   ("q" nil "quit" :color blue))
 
-(global-set-key (kbd "C-+") 'hydra-zoom/body)
+(global-set-key (kbd "C-=") 'hydra-zoom/body)
 
 #+end_src
 
@@ -264,8 +276,10 @@ _SPC_ cancel	_o_nly this   	_d_elete
 * HYDRAS
 #+begin_src emacs-lisp :tangle yes
 
-(defhydra hydra-org (:color red :columns 3)
-  "Org Mode Movements"
+(defhydra hydra-org (:color amaranth :columns 3)
+  "Org Mode Movements
+
+"
   ("n" outline-next-visible-heading "next heading")
   ("p" outline-previous-visible-heading "prev heading")
   ("N" org-forward-heading-same-level "next heading at same level")
@@ -275,7 +289,12 @@ _SPC_ cancel	_o_nly this   	_d_elete
 ("y" yank "paste")
   ("l" helm-show-kill-ring "list" :color blue)  
 ("r" org-refile "refile")
-  ("g" org-goto "goto" :exit t))
+("t" org-todo "todo")
+("s" show-subtree "expand subtree")
+("a" org-archive-subtree "archive")
+  ("g" org-goto "goto" :exit t)
+("q" nil "quit" :color blue)
+)
 
 
 
@@ -331,6 +350,9 @@ _n_: Navigate           _._: mark position _/_: jump to mark
 
 
 #+end_src
+
+#+RESULTS:
+: goto/body
 
 * DIRED
 
@@ -481,63 +503,63 @@ T - tag prefix
 
 #+begin_src emacs-lisp :tangle yes
 
-   (global-unset-key (kbd "C-z"))     
-   (global-unset-key (kbd "M-c"))
-;(define-key org-mode-map (kbd "C-0 C-c C-w") 'org-refile-cache-clear)
-(define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-(define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-(define-key org-mode-map (kbd "C-e") 'org-end-of-line)
-   (global-unset-key (kbd "S-SPC"))
-   (bind-keys 
-;("C-+"   . text-scale-increase)
-     ;         ("C--"   . text-scale-decrease)
-              ("C-c l" . org-store-link)
-                                          ;                 ("C-c k" . toggle-korean-input-method)
-              ("C-."   . org-todo)
-;              ("C-x /" . shrink-window-horizontally)
-              ("C-x ." . org-archive-subtree-default)
-              ("C-c n" . org-schedule)
-              ("M-="   . count-words)
-              ("M-x"   . helm-M-x)
+      (global-unset-key (kbd "C-z"))     
+      (global-unset-key (kbd "M-c"))
+   ;(define-key org-mode-map (kbd "C-0 C-c C-w") 'org-refile-cache-clear)
+   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+   (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+      (global-unset-key (kbd "S-SPC"))
+      (bind-keys 
+   ;("C-+"   . text-scale-increase)
+        ;         ("C--"   . text-scale-decrease)
+                 ("C-c l" . org-store-link)
+                 ("M-z" . ace-jump-mode)                                          ;                 ("C-c k" . toggle-korean-input-method)
+                 ("C-."   . org-todo)
+   ;              ("C-x /" . shrink-window-horizontally)
+                 ("C-x ." . org-archive-subtree-default)
+                 ("C-c n" . org-schedule)
+                 ("M-="   . count-words)
+                 ("M-x"   . helm-M-x)
 
-              ("C-c b" . list-bookmarks)
-          ;    ("C-a" . org-beginning-of-line)
+                 ("C-c b" . list-bookmarks)
+             ;    ("C-a" . org-beginning-of-line)
             
-           ;   ("C-e" . org-end-of-line)
-              ("C-k" . org-kill-line)
-;              ("C-<kp-6>" . xah-select-block)
-                                           ;   ("C-x j" . helm-org-in-buffer-headings)
-              ("C-c i" . insert-timestamp)
-                                           ;  ("C-c a" . helm-org-agenda-files-headings)
-              ("C-c C-x C-r" . org-clock-report)
-              ([f1] . org-capture)
-              ([f2] . org-clock-in)
-              ([f3] . helm-buffers-list)           
-              ([f4] . org-refile)
-              ([f5] . helm-projectile)
-              ([f6] . helm-bibtex-with-local-bibliography)
-              ([f7] . org-agenda)
-              ([f8] . deft)
-              ([f9] . helm-org-rifle-current-buffer)
-              ([f10] . org-narrow-to-subtree)
-              ([f11] . kill-buffer)
-              ([f12] . bury-buffer)
+              ;   ("C-e" . org-end-of-line)
+                 ("C-k" . org-kill-line)
+   ;              ("C-<kp-6>" . xah-select-block)
+                                              ;   ("C-x j" . helm-org-in-buffer-headings)
+                 ("C-c i" . insert-timestamp)
+                                              ;  ("C-c a" . helm-org-agenda-files-headings)
+                 ("C-c C-x C-r" . org-clock-report)
+                 ([f1] . org-capture)
+                 ([f2] . org-clock-in)
+                 ([f3] . helm-buffers-list)           
+                 ([f4] . org-refile)
+                 ([f5] . helm-projectile)
+                 ([f6] . helm-bibtex-with-local-bibliography)
+                 ([f7] . org-agenda)
+                 ([f8] . deft)
+                 ([f9] . helm-org-rifle-current-buffer)
+                 ([f10] . org-narrow-to-subtree)
+                 ([f11] . kill-buffer)
+                 ([f12] . bury-buffer)
 
-              )
+                 )
 
-                                           ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-                                           ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+                                              ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+                                              ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
-   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-   (define-key key-translation-map (kbd "C-_") (kbd "–"))
+      (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+      (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+      (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+      (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+      (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+      (define-key key-translation-map (kbd "C-_") (kbd "–"))
 
-   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
-   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+      (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+      (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
+      (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
 
 #+end_src
 
@@ -777,7 +799,11 @@ T - tag prefix
 #+begin_src emacs-lisp :tangle yes
    (setq chronos-notification-time 120)
    (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+(use-package org-alert)
 #+end_src
+
+#+RESULTS:
+
 * org-startup-defaults
 
 
@@ -843,7 +869,7 @@ T - tag prefix
 *** org-agenda settings
       #+begin_src emacs-lisp :tangle yes
 
-
+(setq org-agenda-window-setup 'current-window)
 
          (setq  org-agenda-sorting-strategy 
                 '((agenda time-up)
@@ -897,89 +923,94 @@ T - tag prefix
 
 
       #+end_src                     
+
+      #+RESULTS:
+      : [nil 24247 26980 691750 300 kiwon/org-agenda-redo-in-other-window nil nil 149000]
+
 *** org-agenda custom commands
     #+BEGIN_SRC emacs-lisp :tangle yes
 
-       (setq org-stuck-projects '("/TODO" ("NEXT") nil ""))
+                          (setq org-stuck-projects '("/TODO" ("NEXT") nil ""))
+
+                          (setq org-agenda-custom-commands '(
+                                  ("h" "Habits" 
+                                   tags-todo "STYLE=\"habit\"" 
+                                   ((org-agenda-overriding-header "Habits")))
+                                  ("b" "Timeblocking"
+                                   ((agenda "" 
+                                            ((org-agenda-span 2)
+                                             (org-agenda-clockreport-mode nil)
+                                             ))
+                                    (todo "BLOCK")))
+                                  ("k" "all untagged TODOs" tags-todo "-{.*}")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
+                                  ("e" "all TODOs" todo "TODO")
+                                
+                                  ("g" "all UNSCHEDULED todos" 
+                                   ((agenda "" 
+                                            ((org-agenda-span 2)
+                                             (org-agenda-clockreport-mode nil)))
+                                    (todo "TODO"))
+
+                                   ((org-agenda-todo-ignore-scheduled t)))
+                                                                  ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
+                                  ("d" "2d agenda + undated ADMIN tasks" 
+                                   ((agenda "" 
+                                            ((org-agenda-span 2)
+                                             (org-agenda-clockreport-mode nil)))
+                                    (tags-todo "admin|email|browser"))
+
+                                   ((org-agenda-todo-ignore-scheduled t)))
+
+                                  ("f" "2d agenda + undated FOCUS tasks" 
+                                   ((agenda "" 
+                                            ((org-agenda-span 2)
+                                             (org-agenda-clockreport-mode nil)
+                                             ))
+
+                                    (tags-todo "focus")
+
+                                    )
+
+                                   ((org-agenda-todo-ignore-scheduled t)))
 
 
-       (setq org-agenda-custom-commands
+                                  ("h" "2d agenda + undated HOME & misc tasks" 
+                                   ((agenda "" 
+                                            ((org-agenda-span 2)
+                                             (org-agenda-clockreport-mode nil)
+                                             (org-agenda-time-grid nil)))
+                                    (tags-todo "home")
+                                    (tags-todo "-focus-admin-home-lis")
+                                    )
 
-
-;RETURN ALL NEXT & IN PROGRESS EXCEPT FOR THOSE TAGGED LIS 
-             '(
-
-("h" "Habits" tags-todo "STYLE=\"habit\"" ((org-agenda-overriding-header "Habits")))
-
-               ("b" "Timeblocking"
-                ((agenda "" 
-                         ((org-agenda-span 1)
-                          (org-agenda-clockreport-mode nil)
-                          ))
-                 (todo "BLOCK"))
-                )
-
-;RETURN ANY TODO ITEMS WTIHOUT TAGS
-               ("k" "all untagged TODOs" tags-todo "-{.*}")
-
-  ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
-             ("d" "2d agenda + undated ADMIN tasks" 
-                ((agenda "" 
-                         ((org-agenda-span 2)
-                          (org-agenda-clockreport-mode nil)
-                          (org-agenda-time-grid nil)))
-                 (tags-todo "admin|email|browser"))
-
-                ((org-agenda-todo-ignore-scheduled t)))
-
-        ("f" "2d agenda + undated FOCUS tasks" 
-                ((agenda "" 
-                         ((org-agenda-span 2)
-                          (org-agenda-clockreport-mode nil)
-                          (org-agenda-time-grid nil)))
-
-(tags-todo "focus")
-
-)
-
-                ((org-agenda-todo-ignore-scheduled t)))
-
-
-        ("h" "2d agenda + undated HOME & misc tasks" 
-                ((agenda "" 
-                         ((org-agenda-span 2)
-                          (org-agenda-clockreport-mode nil)
-                          (org-agenda-time-grid nil)))
-           (tags-todo "home")
-(tags-todo "-focus-admin-home-lis")
-)
-
-                ((org-agenda-todo-ignore-scheduled t)))
-
-
-
-;RETURN ALL LIS TASKS
-  ("l" "lis"
-                ((agenda "" 
-                         ((org-agenda-span 1)
-                          
-                          ))
-                 (tags-todo "lis"  ))
-                ((org-agenda-todo-ignore-with-date t)))
-  
+                                   ((org-agenda-todo-ignore-scheduled t)))
 
 
 
+                                                                  ;RETURN ALL LIS TASKS
+                                  ("l" "lis"
+                                   ((agenda "" 
+                                            ((org-agenda-span 1)
 
-))
+                                             ))
+                                    (tags-todo "lis"  ))
+                                   ((org-agenda-todo-ignore-with-date t)))
+
+
+
+
+
+                                  ))
     #+END_SRC
 
     #+RESULTS:
     | h | Habits                                | tags-todo                                                                                                                                         | STYLE="habit"                          | ((org-agenda-overriding-header Habits)) |                                        |
-    | b | Timeblocking                          | ((agenda  ((org-agenda-span 1) (org-agenda-clockreport-mode nil))) (todo BLOCK))                                                                  |                                        |                                         |                                        |
+    | b | Timeblocking                          | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo BLOCK))                                                                  |                                        |                                         |                                        |
     | k | all untagged TODOs                    | tags-todo                                                                                                                                         | -{.*}                                  |                                         |                                        |
-    | d | 2d agenda + undated ADMIN tasks       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo admin                                    | email                                  | browser))                               | ((org-agenda-todo-ignore-scheduled t)) |
-    | f | 2d agenda + undated FOCUS tasks       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo focus))                                  | ((org-agenda-todo-ignore-scheduled t)) |                                         |                                        |
+    | e | all TODOs                             | todo                                                                                                                                              | TODO                                   |                                         |                                        |
+    | g | all UNSCHEDULED todos                 | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo TODO))                                                                   | ((org-agenda-todo-ignore-scheduled t)) |                                         |                                        |
+    | d | 2d agenda + undated ADMIN tasks       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (tags-todo admin                                                               | email                                  | browser))                               | ((org-agenda-todo-ignore-scheduled t)) |
+    | f | 2d agenda + undated FOCUS tasks       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (tags-todo focus))                                                             | ((org-agenda-todo-ignore-scheduled t)) |                                         |                                        |
     | h | 2d agenda + undated HOME & misc tasks | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil) (org-agenda-time-grid nil))) (tags-todo home) (tags-todo -focus-admin-home-lis)) | ((org-agenda-todo-ignore-scheduled t)) |                                         |                                        |
     | l | lis                                   | ((agenda  ((org-agenda-span 1))) (tags-todo lis))                                                                                                 | ((org-agenda-todo-ignore-with-date t)) |                                         |                                        |
 *** ORG-AGENDA HYDRA!
@@ -993,31 +1024,31 @@ Org agenda (_q_uit)
 
 ^Clock^      ^Visit entry^              ^Date^             ^Other^
 ^-----^----  ^-----------^------------  ^----^-----------  ^-----^---------
-_ci_ in      _SPC_ in other window      _ds_ schedule      _gr_ reload
+_ci_ in      _SPC_ in other window      _s_ schedule      _r_ reload
 _co_ out     _TAB_ & go to location     _dd_ set deadline  _._  go to today
 _cq_ cancel  _RET_ & del other windows  _dt_ timestamp     _gd_ go to date
-_cj_ jump    _o_   link                 _+_  do later      ^^
-^^           ^^                         _-_  do earlier    ^^
+_cj_ jump    _o_   link                 _+_  do later      _n_ next line
+^^           ^^                         _-_  do earlier    _p_ previous line
 ^^           ^^                         ^^                 ^^
 ^View^          ^Filter^                 ^Headline^         ^Toggle mode^
 ^----^--------  ^------^---------------  ^--------^-------  ^-----------^----
-_vd_ day        _ft_ by tag              _ht_ set status    _tf_ follow
-_vw_ week       _fr_ refine by tag       _hk_ kill          _tl_ log
-_vt_ fortnight  _fc_ by category         _hr_ refile        _ta_ archive trees
-_vm_ month      _fh_ by top headline     _hA_ archive       _tA_ archive files
-_vy_ year       _fx_ by regexp           _h:_ set tags      _tr_ clock report
-_vn_ next span  _fd_ delete all filters  _hp_ set priority  _td_ diaries
+_vd_ day        _ft_ by tag              _t_odo     _mf_ follow
+_vw_ week       _fr_ refine by tag                 _ml_ log
+_vt_ fortnight  _fc_ by category         _hr_ refile        _ma_ archive trees
+_vm_ month      _fh_ by top headline     _hA_ archive       _mA_ archive files
+_vy_ year       _fx_ by regexp           _,_ set tags      _mr_ clock report
+_vn_ next span  _fd_ delete all filters  _hp_ set priority  _md_ diaries
 _vp_ prev span  ^^                       ^^                 ^^
 _vr_ reset      ^^                       ^^                 ^^
-^^              ^^                       ^^                 ^^
+_n_ view ^^              ^^                       ^^                 ^^
 "
   ;; Entry
   ("hA" org-agenda-archive-default)
-  ("hk" org-agenda-kill)
+;  ("hk" org-agenda-kill)
   ("hp" org-agenda-priority)
   ("hr" org-agenda-refile)
-  ("h:" org-agenda-set-tags)
-  ("ht" org-agenda-todo)
+  ("," org-agenda-set-tags)
+  ("t" org-agenda-todo)
   ;; Visit entry
   ("o"   link-hint-open-link :exit t)
   ("<tab>" org-agenda-goto :exit t)
@@ -1029,8 +1060,9 @@ _vr_ reset      ^^                       ^^                 ^^
   ("dd" org-agenda-deadline)
   ("+" org-agenda-do-date-later)
   ("-" org-agenda-do-date-earlier)
-  ("ds" org-agenda-schedule :color red)
+  ("s" org-agenda-schedule :color red)
   ;; View
+("<f7>" org-agenda)
   ("vd" org-agenda-day-view)
   ("vw" org-agenda-week-view)
   ("vt" org-agenda-fortnight-view)
@@ -1040,12 +1072,12 @@ _vr_ reset      ^^                       ^^                 ^^
   ("vp" org-agenda-earlier)
   ("vr" org-agenda-reset-view)
   ;; Toggle mode
-  ("ta" org-agenda-archives-mode)
-  ("tA" (org-agenda-archives-mode 'files))
-  ("tr" org-agenda-clockreport-mode)
-  ("tf" org-agenda-follow-mode)
-  ("tl" org-agenda-log-mode)
-  ("td" org-agenda-toggle-diary)
+  ("ma" org-agenda-archives-mode)
+  ("mA" (org-agenda-archives-mode 'files))
+  ("mr" org-agenda-clockreport-mode)
+  ("mf" org-agenda-follow-mode)
+  ("ml" org-agenda-log-mode)
+  ("md" org-agenda-toggle-diary)
   ;; Filter
   ("fc" org-agenda-filter-by-category)
   ("fx" org-agenda-filter-by-regexp)
@@ -1061,8 +1093,10 @@ _vr_ reset      ^^                       ^^                 ^^
   ;; Other
   ("q" nil :exit t)
   ("gd" org-agenda-goto-date)
+  ("n" next-line)
+  ("p" previous-line)
   ("." org-agenda-goto-today)
-  ("gr" org-agenda-redo))
+  ("r" org-agenda-redo))
 
 #+end_src
 
@@ -1072,44 +1106,49 @@ _vr_ reset      ^^                       ^^                 ^^
 ** org-tags
    #+BEGIN_SRC emacs-lisp :tangle yes
 
-      (setq org-complete-tags-always-offer-all-agenda-tags nil)
-      (setq org-tags-match-list-sublevels (quote indented))
-      (setq tags-add-tables nil)
-      (setq org-fast-tag-selection-single-key t)
-      (setq org-use-fast-tag-selection (quote auto))
+                      (setq org-complete-tags-always-offer-all-agenda-tags nil)
+                      (setq org-tags-match-list-sublevels (quote indented))
+                      (setq tags-add-tables nil)
+                      (setq org-fast-tag-selection-single-key t)
+                      (setq org-use-fast-tag-selection (quote auto))
 
-      (setq org-tag-alist '( ("lis" . ?l)
-                             (:startgroup)
-                             ("focus" . ?f)
-                             ("admin" . ?a)
-                             ("home" . ?h)
-                             (:endgroup)
-                             (:startgroup)
-                             ("CONSUME")
-                             (:grouptags)
-                             ("read")
-                             ("watch")
-                             ("listen")
-                             (:endgroup)
-                        (:startgroup)
-                             ("CREATE")
-                             (:grouptags)
-                             ("write")
-                             ("notes")
+                      (setq org-tag-alist '( ("lis" . ?l)
+                                             (:startgroup)
+                                             ("focus" . ?f)
+                                             ("admin" . ?a)
+                                             ("home" . ?h)
+                                             ("block" . ?b)
+                                             ("habit" . ?r)
+                                             (:endgroup)
 
-                             (:endgroup)
-                             (:startgroup)
+                                             (:startgroup)
+                                             ("CREATE")
+                                             (:grouptags)
+                                             ("write")
+                                             ("notes")
+                                             ("study")
+
+                                             (:endgroup)
+                                             (:startgroup)
+                                             ("INGEST")
+                                             (:grouptags)
+                                             ("read")
+                                             ("watch")
+                                             ("listen")
+                                             (:endgroup)
+
+                                             (:startgroup)
 
 
-                      
-                             ("email" . ?e)
-                             ("browser" . ?b)
 
-                             ("kitchen" . ?k)
-                             ("laundry" . ?d)
-                             ("cleaning" . ?c)
-                             (:endgroup)
-                             ))
+                                             ("email" . ?e)
+                                             ("browser" . ?b)
+
+                                             ("kitchen" . ?k)
+                                             ("laundry" . ?d)
+                                             ("cleaning" . ?c)
+                                             (:endgroup)
+                                             ))
 
 
 
@@ -1117,7 +1156,7 @@ _vr_ reset      ^^                       ^^                 ^^
    #+END_SRC
 
    #+RESULTS:
-   : ((lis . 108) (:startgroup) (focus . 102) (admin . 97) (home . 104) (:endgroup) (:startgroup) (CONSUME) (:grouptags) (read) (watch) (listen) (:endgroup) (:startgroup) (CREATE) (:grouptags) (write) (notes) (:endgroup) (:startgroup) (email . 101) (browser . 98) (kitchen . 107) (laundry . 100) (cleaning . 99) (:endgroup))
+   : ((lis . 108) (:startgroup) (focus . 102) (admin . 97) (home . 104) (block . 98) (habit . 114) (:endgroup) (:startgroup) (CREATE) (:grouptags) (write) (notes) (study) (:endgroup) (:startgroup) (INGEST) (:grouptags) (read) (watch) (listen) (:endgroup) (:startgroup) (email . 101) (browser . 98) (kitchen . 107) (laundry . 100) (cleaning . 99) (:endgroup))
 
 #+TAGS: { MODE : admin(a) home(h) focus(f) lis(l) }
 #+TAGS: { admin : email(e) browser(b) }
@@ -1130,11 +1169,11 @@ _vr_ reset      ^^                       ^^                 ^^
 #+BEGIN_SRC emacs-lisp :tangle yes
    (setq org-todo-keywords
          (quote
-          ((sequence "TODO(t)"  "|" "DONE(d)" "x(c)")
-           (sequence  "HABIT(h)"  "|" "DONE(d)")
-           (sequence   "BLOCK(b)" "|" "DONE(d)")
-           (sequence   "PROJ(p)" "|" "DONE(d)")
-           (sequence   "WAIT(w)" "|" "DONE(d)")
+          ((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" )
+           (type "AREA(a)" "PROJ(p)"  "HABIT(h)" "BLOCK(b)"  "|" "DONE(d)")
+(sequence "|" "x(c)")
+
+
 
 )))
 (setq org-edna-mode t)
@@ -1260,9 +1299,14 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
       (require 'org-protocol)
       (require 'org-protocol-capture-html)
       (setq org-protocol-default-template-key "w")
-
-
-
+;anki
+(setq select-enable-clipboard t
+      x-select-enable-primary nil)
+  (defun anki-editor-push-tree ()
+    "Push all notes under a tree."
+    (interactive)
+    (anki-editor-push-notes '(4))
+)
             (setq org-capture-templates
                   '(
                     ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> %? \n\n\n\n" :clock-in t :clock-keep t :kill-buffer nil ) 
@@ -1272,14 +1316,18 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
                     ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT} \n %^t\n%?%a")
 
                     ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
+  ("f" "Anki flashcards"
+              entry
+              (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf")
+              "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+
 
   ("l" "look up" entry (id "5br4n6815pi0") "* %? \n%U\n  \n%a\n\n\n" :prepend nil)
+("m" "meditation" table-line (id "otljx3605ni0") "|%t | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
+           
+                    ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n%x\n\n" :prepend nil)
 
-
-
-                    ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n\n\n" :prepend nil)
-
-  ("n" "note" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil)
+  ("n" "note" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* %^{TOPIC}\n%U\n%? \n%a\n\n\n" :prepend nil)
 
   ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
 
@@ -1416,12 +1464,13 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
       (setq org-archive-reversed-order nil)
       (setq org-refile-use-cache t)
 
-   (setq org-refile-targets (quote (("~/Dropbox/Zettelkasten/notes.org" :maxlevel . 1)
+   (setq org-refile-targets (quote (("~/Dropbox/Zettelkasten/notes.org" :maxlevel . 2)
                                     ("~/Dropbox/Zettelkasten/projects.org" :maxlevel . 1)
+                                    ("~/Dropbox/Zettelkasten/habits.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
                                     ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 1)
-                                    ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 1)
+                                    ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
                                     ("~/Dropbox/Zettelkasten/someday.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/cal.org" :maxlevel . 2)
@@ -1626,7 +1675,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
                (defun shr-fill-lines (start end) nil)  
                (defun shr-fill-line () nil)))
 
- (setq browse-url-browser-function (quote eww-browse-url))
+ (setq browse-url-browser-function (quote browse-url-firefox))
  (setq browse-url-firefox-new-window-is-tab t)
 
 
@@ -1864,7 +1913,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
     ("/home/betsy/.emacs.d/snippets" yasnippet-snippets-dir)))
 
 
-(defhydra hydra-yasnippet (:color blue :hint nil)
+(defhydra hydra-yasnippet (:color red :hint nil)
   "
               ^YASnippets^
 --------------------------------------------
@@ -1873,11 +1922,11 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
  _g_lobal  _d_irectory    _i_nsert
  _m_inor   _f_ile         _t_ryout
  _e_xtra   _l_ist         _n_ew
-         _a_ll
+          reload _a_ll
 "
   ("d" yas-load-directory)
   ("e" yas-activate-extra-mode)
-  ("i" yas-insert-snippet)
+  ("i" yas-insert-snippet :color blue)
   ("f" yas-visit-snippet-file :color blue)
   ("n" yas-new-snippet)
   ("t" yas-tryout-snippet)
@@ -1916,7 +1965,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
                                              ;                           "zathura"
                                              ;                          '(file))
                           (list (openwith-make-extension-regexp
-                                 '("doc" "docx" "ppt" "xls" "xlsx" "pptx"))
+                                 '("doc" "doc"x "ppt" "xls" "xlsx" "pptx"))
                                 "libreoffice"
                                 '(file))
 
@@ -1927,6 +1976,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
   #+END_SRC
 
   #+RESULTS:
+  : t
 
 
 

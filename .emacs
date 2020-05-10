@@ -48,4 +48,4 @@
   (set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
      (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
 
-(put 'digit-argument 'disabled t)
+(put 'digit-argument 'disabled nil)
