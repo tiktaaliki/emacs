@@ -40,10 +40,10 @@
      (set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :height 0.8 :foreground "#ff4447") ;raspberry
      (set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
      (set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
-     (set-face-attribute 'org-special-keyword nil :height 0.8)
-     (set-face-attribute 'org-date nil :underline t :foreground "#a1d6e2" :family "monofur" )
+;     (set-face-attribute 'org-special-keyword nil :height 0.8)
+ ;    (set-face-attribute 'org-date nil :underline t :foreground "#a1d6e2" :family "monofur" )
      (set-face-attribute 'org-agenda-diary nil :foreground "#a4cabc" )
-     (set-face-attribute 'org-ellipsis nil :foreground "#a4cabc" :strike-through nil)
+;     (set-face-attribute 'org-ellipsis nil :foreground "#a4cabc" :strike-through nil)
 
   (set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
      (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
