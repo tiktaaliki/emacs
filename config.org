@@ -16,7 +16,7 @@
 #+begin_src emacs-lisp :tangle yes
 
    (add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
-   (add-to-list 'load-ptah "~/Dropbox/emacs/")
+   (add-to-list 'load-path "~/Dropbox/emacs/")
    (load "pi")
    (load "dired+")
    (load "org-pdfview")
@@ -857,17 +857,17 @@
                                            ; (setq org-pomodoro-finished-sound-args "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
    (setq org-pomodoro-short-break-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav" )
    (setq org-pomodoro-long-break-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav" )
-   (setq org-pomodoro-ticking-sound-p nil)
-   (setq org-pomodoro-manual-break t)
-   (setq org-pomodoro-clock-break t)
+   (setq org-pomodoro-ticking-sound-p t)
+   (setq org-pomodoro-manual-break nil)
+   (setq org-pomodoro-clock-break nil)
 
 
 (use-package pomidor)
 (setq pomidor-save-session-file "~/Dropbox/emacs/.emacs.d/pomidor-session.json")
 (setq pomidor-sound-break-over "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
 
-(setq pomidor-sound-tick t)
-(setq pomidor-sound-tack t)
+;(setq pomidor-sound-tick t)
+;(setq pomidor-sound-tack t)
    #+end_src
 
 #+RESULTS:
@@ -976,7 +976,7 @@
 
    (setq org-agenda-clockreport-parameter-plist
          (quote
-          (:link t :maxlevel 4 :narrow 25 :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
+          (:link t :maxlevel 4 :narrow 25 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
    (setq org-agenda-dim-blocked-tasks t)
    (setq org-agenda-files
          (quote
@@ -1006,12 +1006,12 @@
 #+end_src                     
 
 #+RESULTS:
-: [nil 24247 26980 691750 300 kiwon/org-agenda-redo-in-other-window nil nil 149000]
+: [nil 24269 43769 514881 300 kiwon/org-agenda-redo-in-other-window nil nil 349000]
 
 *** org-agenda custom commands
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (setq org-stuck-projects '("/TODO|PROJ" ("NEXT") ))
+   (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
 
    (setq org-agenda-custom-commands '(
 
@@ -1026,9 +1026,7 @@
 
                                       ("k" "all untagged TODOs" tags-todo "-{.*}/-HABIT-BLOCK")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
 
-                                      ("e" "all TODOs" tags-todo "-audiovisual+/TODO|PROJ|NEXT"
-                                       ((org-agenda-todo-ignore-scheduled t)))
-                                      ("v" "all AV tasks" tags-todo "+audiovisual"
+                                      ("e" "all TODOs" tags-todo "/TODO|PROJ|NEXT|IN-PROG"
                                        ((org-agenda-todo-ignore-scheduled t)))
 
 
@@ -1047,13 +1045,12 @@
 #+END_SRC
 
 #+RESULTS:
-| h | Habits                | tags-todo                                                                        | STYLE="habit"      | ((org-agenda-overriding-header Habits)) |      |                                        |
-| b | Timeblocking          | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo BLOCK)) |                    |                                         |      |                                        |
-| k | all untagged TODOs    | tags-todo                                                                        | -{.*}/-HABIT-BLOCK |                                         |      |                                        |
-| e | all TODOs             | tags-todo                                                                        | -audiovisual+/TODO | PROJ                                    | NEXT | ((org-agenda-todo-ignore-scheduled t)) |
-| v | all AV tasks          | tags-todo                                                                        | +audiovisual       | ((org-agenda-todo-ignore-scheduled t))  |      |                                        |
-| h | all HOLD items        | todo                                                                             | HOLD               |                                         |      |                                        |
-| g | all UNSCHEDULED todos | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo TODO    | NEXT))             | ((org-agenda-todo-ignore-scheduled t))  |      |                                        |
+| h | Habits                | tags-todo                                                                        | STYLE="habit"      | ((org-agenda-overriding-header Habits)) |      |         |                                        |
+| b | Timeblocking          | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo BLOCK)) |                    |                                         |      |         |                                        |
+| k | all untagged TODOs    | tags-todo                                                                        | -{.*}/-HABIT-BLOCK |                                         |      |         |                                        |
+| e | all TODOs             | tags-todo                                                                        | /TODO              | PROJ                                    | NEXT | IN-PROG | ((org-agenda-todo-ignore-scheduled t)) |
+| h | all HOLD items        | todo                                                                             | HOLD               |                                         |      |         |                                        |
+| g | all UNSCHEDULED todos | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo TODO    | NEXT))             | ((org-agenda-todo-ignore-scheduled t))  |      |         |                                        |
 *** ORG-AGENDA HYDRA!
 #+begin_src emacs-lisp :tangle yes
    ;; Hydra for org agenda (graciously taken from Spacemacs)
@@ -1153,32 +1150,52 @@
    (setq org-fast-tag-selection-single-key t)
    (setq org-use-fast-tag-selection (quote auto))
 
-   (setq org-tag-alist '( 
-                         (:startgroup)
-                         ("ndd" . ?n)
-                         ("sysadmin" . ?s)
-                         ("home" . ?h)
-                         ("lis" . ?l)
-                         ("csi" . ?c)
-                         ("bcc" . ?b)
+   (setq org-tag-persistent-alist '( 
+                                    (:startgroup)
+                                    ("ndd" . ?n)
+                                    ("sysadmin" . ?s)
+                                    ("home" . ?h)
+                                    ("lis" . ?l)
+                                    ("self")
+                                    (:endgroup)
+
+                                    (:startgroup)
+                                    ("research" . ?e)
+                                    ("intake")
+                                    ("ingest" . ?i)                                              
+                                    ("write" . ?w)
+                                    ("admin" . ?a)
+                                    (:endgroup)
+
+                                    (:startgrouptag)
+                                    ("lis")
+                                    (:grouptags)
+                                    ("bcc")
+                                    ("csi")
+                                    ("job")
+                                    (:endgrouptag)
 
 
-                         (:endgroup)
 
-                         (:startgroup)
-                         ("audiovisual" . ?v)
-                         ("read" . ?r)
-                         ("research" . ?e)
-                         ("ingest" . ?i)                                              
-                         ("create" . ?w)
-                         ("admin" . ?a)
-                         ("cleaning")
-                         ("cooking")
+                                    (:startgrouptag)
+                                    ("intake")
+                                    (:grouptags)
+                                    ("read" . ?r)
+                                    ("watch")
+                                    ("listen")
+                                    (:endgrouptag)
 
-                         (:endgroup)
+                                    (:startgrouptag)
+                                    ("home")
+                                    (:grouptags)
+                                    ("food")
+                                    ("cleaning")
+                                    ("journal")
+                                    (:endgrouptag)
 
 
-                         ))
+
+                                    ))
 
 
 
@@ -1186,7 +1203,7 @@
 #+END_SRC
 
 #+RESULTS:
-: ((:startgroup) (ndd . 110) (sysadmin . 115) (home . 104) (lis . 108) (csi . 99) (bcc . 98) (:endgroup) (:startgroup) (audiovisual . 118) (read . 114) (research . 101) (ingest . 105) (create . 119) (admin . 97) (cleaning) (cooking) (:endgroup))
+: ((:startgroup) (ndd . 110) (sysadmin . 115) (home . 104) (lis . 108) (self) (:endgroup) (:startgroup) (research . 101) (intake) (ingest . 105) (write . 119) (admin . 97) (:endgroup) (:startgrouptag) (lis) (:grouptags) (bcc) (csi) (job) (:endgrouptag) (:startgrouptag) (intake) (:grouptags) (read . 114) (watch) (listen) (:endgrouptag) (:startgrouptag) (home) (:grouptags) (food) (cleaning) (journal) (:endgrouptag))
 
 #+TAGS: { MODE : admin(a) home(h) focus(f) lis(l) }
 #+TAGS: { admin : email(e) browser(b) }
@@ -1199,9 +1216,8 @@
 #+BEGIN_SRC emacs-lisp :tangle yes
    (setq org-todo-keywords
          (quote
-          ((sequence "TODO(t)" "NEXT(n)" "WAIT(w)" "|" "DONE(d)" )
-           (sequence "HABIT(h)"  "|" "DONE(d)")
-           (type "AREA(a)" "PROJ(p)"  "HOLD(o)" "BLOCK(b)"  "|" "DONE(d)")
+          ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "WAIT(w)" "|" "DONE(d)" )
+           (type "AREA(a)" "PROJ(p)"  "HABIT(h)"   "HOLD(o)" "BLOCK(b)"  "|" "DONE(d)")
            (sequence "|" "x(c)")
 
 
@@ -1352,7 +1368,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
 
            ("n" "note" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* %^{TOPIC}\n%U\n%? \n%a\n\n\n" :prepend nil)
 
-           ("p" "pomodoro" table-line (id "6w81f6q04qi0") "| %u | %^{Pomodoro #} | %^{Minutes} | %^{Task} | %^{Area of focus|ndd|lis|home|sysadmin|} |%^{Mode}| %^{Quality} | %^{Notes}|"  )
+           ("p" "pomodoro" table-line (id "6w81f6q04qi0") "| %^{Day & time} | | %^{Task} | %^{Area of focus|ndd|lis|home|sysadmin|} |%^{Mode}|  %^{Notes}|"  )
 
            ("r" "reading log" table-line (id "em87rza1mni0") "|%^{Author}|%^{Title}|%u| " )
 
@@ -1454,7 +1470,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
    (setq org-clock-clocked-in-display (quote both))
    (setq org-clock-clocktable-default-properties
          (quote
-          (:maxlevel 4 :block today :hidefiles t :tcolumns 1 :narrow 30 :level nil :link t)))
+          (:maxlevel 4 :block today :hidefiles t :tags t :match * :tcolumns 1 :narrow 30 :level nil :link t)))
    (setq org-clock-history-length 15)
 
 
