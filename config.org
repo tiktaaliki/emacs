@@ -253,6 +253,7 @@
 #+begin_src emacs-lisp :tangle yes
    (eval-after-load "helm"
      '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
+
 #+end_src
 
 #+RESULTS:
@@ -277,79 +278,73 @@
 * HYDRAS
 #+begin_src emacs-lisp :tangle yes
 
-      (defhydra hydra-org (:color amaranth :columns 3)
-        "Org Mode Movements
-
-      "
-        ("n" outline-next-visible-heading "next heading")
-        ("p" outline-previous-visible-heading "prev heading")
-        ("N" org-forward-heading-same-level "next heading at same level")
-        ("P" org-backward-heading-same-level "prev heading at same level")
-        ("u" outline-up-heading "up heading")
-        ("k" kill-region "kill region")
-        ("y" yank "paste")
-        ("l" helm-show-kill-ring "list" :color blue)  
-        ("r" org-refile "refile")
-        ("t" org-todo "todo")
-        ("g" org-set-tags-command "tags")
-        ("s" show-subtree "expand subtree")
-        ("h" hide-subtree "collapse subtree")
-        ("a" org-archive-subtree "archive")
-        ("G" org-goto "goto" :exit t)
-        ("q" nil "quit" :color blue)
-        )
+         (defhydra hydra-org (:color amaranth :columns 3)
+           "Org Mode Movements"
+           ("n" outline-next-visible-heading "next heading")
+           ("p" outline-previous-visible-heading "prev heading")
+           ("N" org-forward-heading-same-level "next heading at same level")
+           ("P" org-backward-heading-same-level "prev heading at same level")
+           ("u" outline-up-heading "up heading")
+           ("k" kill-region "kill region")
+           ("y" yank "paste")
+           ("l" helm-show-kill-ring "list" :color blue)  
+           ("r" org-refile "refile")
+           ("t" org-todo "todo")
+           ("g" org-set-tags-command "tags")
+           ("s" show-subtree "expand subtree")
+           ("h" hide-subtree "collapse subtree")
+           ("a" org-archive-subtree "archive")
+           ("G" org-goto "goto" :exit t)
+           ("q" nil "quit" :color blue)
+           )
 
 
 
 
-      (defhydra goto (:color blue :hint nil)
-        "
-      Goto:
-      ^Char^              ^Word^                ^org^                    ^search^
-      ^^^^^^^^---------------------------------------------------------------------------
-      _c_: 2 chars        _w_: word by char     _h_: headline in buffer  _o_: helm-occur
-      _C_: char           _W_: some word        _a_: heading in agenda   _p_: helm-swiper
-      _L_: char in line   _s_: subword by char  _q_: swoop org buffers   _f_: search forward
-      ^  ^                _S_: some subword     ^ ^                      _b_: search backward
-      -----------------------------------------------------------------------------------
-      _B_: helm-buffers       _l_: avy-goto-line
-      _m_: helm-mini          _i_: ace-window
-      _R_: helm-recentf
+         (defhydra goto (:color blue :hint nil)
+           "
+         Goto:
+         ^Char^              ^Word^                ^org^                    ^search^
+         ^^^^^^^^---------------------------------------------------------------------------
+         _c_: 2 chars        _w_: word by char     _h_: headline in buffer  _o_: helm-occur
+         _C_: char           _W_: some word        _a_: heading in agenda   _p_: helm-swoop
+         _L_: char in line   _s_: subword by char  _q_: swoop org buffers   _f_: search forward
+         ^  ^                _S_: some subword     ^ ^                      _b_: search backward
+         -----------------------------------------------------------------------------------
+         _B_: helm-buffers       _l_: avy-goto-line
+         _m_: helm-mini          _i_: ace-window
+         _R_: helm-recentf
 
-      _n_: Navigate           _._: mark position _/_: jump to mark
-      "
-        ("c" avy-goto-char-2)
-        ("C" avy-goto-char)
-        ("L" avy-goto-char-in-line)
-        ("w" avy-goto-word-1)
-        ;; jump to beginning of some word
-        ("W" avy-goto-word-0)
-        ;; jump to subword starting with a char
-        ("s" avy-goto-subword-1)
-        ;; jump to some subword
-        ("S" avy-goto-subword-0)
+         _n_: Navigate           _._: mark position _/_: jump to mark
+         "
+           ("c" avy-goto-char-2)
+           ("C" avy-goto-char)
+           ("L" avy-goto-char-in-line)
+           ("w" avy-goto-word-1)
+           ;; jump to beginning of some word
+           ("W" avy-goto-word-0)
+           ;; jump to subword starting with a char
+           ("s" avy-goto-subword-1)
+           ;; jump to some subword
+           ("S" avy-goto-subword-0)
+           ("l" avy-goto-line)
+           ("i" ace-window)
+           ("h" helm-org-headlines)
+           ("a" helm-org-agenda-files-headings)
+           ("q" helm-multi-swoop-org)
+           ("o" helm-occur)
+           ("p" helm-swoop)
+   ;        ("p" swiper-helm)
+           ("f" isearch-forward)
+           ("b" isearch-backward)
+           ("." org-mark-ring-push :color red)
+           ("/" org-mark-ring-goto :color blue)
+           ("B" helm-buffers-list)
+           ("m" helm-mini)
+           ("R" helm-recentf)
+           ("n" hydra-navigate/body))
 
-        ("l" avy-goto-line)
-        ("i" ace-window)
-
-        ("h" helm-org-headlines)
-        ("a" helm-org-agenda-files-headings)
-        ("q" helm-multi-swoop-org)
-
-        ("o" helm-occur)
-        ("p" swiper-helm)
-
-        ("f" isearch-forward)
-        ("b" isearch-backward)
-
-        ("." org-mark-ring-push :color red)
-        ("/" org-mark-ring-goto :color blue)
-        ("B" helm-buffers-list)
-        ("m" helm-mini)
-        ("R" helm-recentf)
-        ("n" hydra-navigate/body))
-
-      (global-set-key (kbd "s-g") 'goto/body)
+         (global-set-key (kbd "s-g") 'goto/body)
 
 
 #+end_src
@@ -508,6 +503,7 @@
 
    (global-unset-key (kbd "C-z"))     
    (global-unset-key (kbd "M-c"))
+   (global-unset-key (kbd "C-v "))
    (define-key org-mode-map (kbd "C-0 C-c C-w") 'org-refile-cache-clear)
    (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
    (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
@@ -684,7 +680,7 @@
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-
+(setq mu4e-headers-include-related nil)
    (setq mu4e-headers-fields
          '( (:human-date    .  15)    ;; alternatively, use :human-date
             (:flags         .   5)
@@ -887,11 +883,11 @@
    (setq org-startup-align-all-tables t)
    (setq org-startup-folded t)
    (setq org-special-ctrl-a/e (quote (t . t)))
-   (use-package org-bullets)
-   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+;   (use-package org-bullets)
+ ;  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
    (setq org-catch-invisible-edits (quote smart))
    (setq org-cycle-separator-lines 0)
-   (setq org-support-shift-select (quote always))
+   (setq org-support-shift-select t) 
    (setq org-show-context-detail '(
                                    (agenda . canonical)
                                    (bookmark-jump . canonical)
@@ -1018,17 +1014,25 @@
                                       ("h" "Habits" tags-todo "STYLE=\"habit\"" 
                                        ((org-agenda-overriding-header "Habits")))
 
-                                      ("b" "Timeblocking" ((agenda "" 
+                                      ("b" "Timeblocking" (
+                                                           (agenda "" 
                                                                    ((org-agenda-span 2)
                                                                     (org-agenda-clockreport-mode nil)
                                                                     ))
-                                                           (todo "BLOCK")))
+                                                           (todo "BLOCK")
+                                                           )
+                                       )
 
                                       ("k" "all untagged TODOs" tags-todo "-{.*}/-HABIT-BLOCK")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
 
-                                      ("e" "all TODOs" tags-todo "/TODO|PROJ|NEXT|IN-PROG"
-                                       ((org-agenda-todo-ignore-scheduled t)))
 
+                                      ("e" "all todos/projects/etc." ((todo "IN-PROG")
+                                                                      (todo "NEXT")
+                                                                      (tags-todo "-watch-listen+/TODO")
+                                                                      (todo "PROJ")
+								   (tags-todo "watch|listen")
+                                                                      )
+                                       )
 
 
                                       ("h" "all HOLD items" todo "HOLD")
@@ -1045,12 +1049,12 @@
 #+END_SRC
 
 #+RESULTS:
-| h | Habits                | tags-todo                                                                        | STYLE="habit"      | ((org-agenda-overriding-header Habits)) |      |         |                                        |
-| b | Timeblocking          | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo BLOCK)) |                    |                                         |      |         |                                        |
-| k | all untagged TODOs    | tags-todo                                                                        | -{.*}/-HABIT-BLOCK |                                         |      |         |                                        |
-| e | all TODOs             | tags-todo                                                                        | /TODO              | PROJ                                    | NEXT | IN-PROG | ((org-agenda-todo-ignore-scheduled t)) |
-| h | all HOLD items        | todo                                                                             | HOLD               |                                         |      |         |                                        |
-| g | all UNSCHEDULED todos | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo TODO    | NEXT))             | ((org-agenda-todo-ignore-scheduled t))  |      |         |                                        |
+| h | Habits                  | tags-todo                                                                                | STYLE="habit"      | ((org-agenda-overriding-header Habits)) |
+| b | Timeblocking            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo BLOCK))         |                    |                                         |
+| k | all untagged TODOs      | tags-todo                                                                                | -{.*}/-HABIT-BLOCK |                                         |
+| e | all todos/projects/etc. | ((todo IN-PROG) (todo NEXT) (tags-todo -watch-listen+/TODO) (todo PROJ) (tags-todo watch | listen))           |                                         |
+| h | all HOLD items          | todo                                                                                     | HOLD               |                                         |
+| g | all UNSCHEDULED todos   | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo TODO            | NEXT))             | ((org-agenda-todo-ignore-scheduled t))  |
 *** ORG-AGENDA HYDRA!
 #+begin_src emacs-lisp :tangle yes
    ;; Hydra for org agenda (graciously taken from Spacemacs)
@@ -1315,18 +1319,23 @@
 | my/org-checkbox-todo |
 *** plain lists & bullets
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (setq org-list-demote-modify-bullet
-         '(("+" . "-") ("-" . "+") ))
-   (setq org-list-allow-alphabetical t)
-   (setq org-list-indent-offset 1)
-   (setq org-list=description-max-indent 5)
-   (setq org-bullets-bullet-list (quote ( "⚫" "⧽" "○" "⯌"     "◆"  "☆"            "⚬" )))
-                                           ;   "•"    "‣"    "⏵""▷"   "♦""◇"    "◉" "⬤"〇⭕ "⨀"  "★" "⬤" "ᐅ"  "〇"     "⟐"     "⚬" )))
-                                           ;○◔◑◕●⌾⭗☉⌾◎◉⨀◎⌾◉◍⊗⊛•○∙⊛⁕✱ ൦❄⊕⊖⊗⊘⊙⊚⊛⊜⊝∘∙◉⏺○◍◎●◐◑◒◓◔◕◦◯◴◵◶◷☉⚪⚫⚬◐
+   (require 'org-superstar)
+   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
-                                           ; too tall: "⬥"  "⯈" "⚫" "∙" ⬤ ✶ "✧" "▸" "⯏"  "⭗"   "⛭" "⚪"  "⭐"  "⏵" 
-   (setq org-inlinetask-min-level 7)
-   (setq org-checkbox-hierarchical-statistics nil)
+ (setq org-list-demote-modify-bullet
+          '(("+" . "-") ("-" . "+") ("*" . "+")))
+    ;  (setq org-list-demote-modify-bullet
+     ;       '(("+" . "-") ("-" . "+") ))
+      (setq org-list-allow-alphabetical t)
+      (setq org-list-indent-offset 1)
+      (setq org-list=description-max-indent 5)
+    ;  (setq org-bullets-bullet-list (quote ( "⚫" "⧽" "○" "⯌"     "◆"  "☆"            "⚬" )))
+                                              ;   "•"    "‣"    "⏵""▷"   "♦""◇"    "◉" "⬤"〇⭕ "⨀"  "★" "⬤" "ᐅ"  "〇"     "⟐"     "⚬" )))
+                                              ;○◔◑◕●⌾⭗☉⌾◎◉⨀◎⌾◉◍⊗⊛•○∙⊛⁕✱ ൦❄⊕⊖⊗⊘⊙⊚⊛⊜⊝∘∙◉⏺○◍◎●◐◑◒◓◔◕◦◯◴◵◶◷☉⚪⚫⚬◐
+
+                                              ; too tall: "⬥"  "⯈" "⚫" "∙" ⬤ ✶ "✧" "▸" "⯏"  "⭗"   "⛭" "⚪"  "⭐"  "⏵" 
+      (setq org-inlinetask-min-level 7)
+      (setq org-checkbox-hierarchical-statistics nil)
 
 #+END_SRC
 
@@ -1334,6 +1343,7 @@
 
 ** org-capture
 :LOGBOOK:
+CLOCK: [2020-05-31 Sun 18:07]--[2020-05-31 Sun 18:32] =>  0:25
 CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
 :END:
 
@@ -1352,11 +1362,11 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
          '(
            ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> %? \n\n\n\n" :clock-in t :clock-keep t :kill-buffer nil ) 
 
-           ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT} \n %^t\n%?%a")
+           ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT} \n %^t\n%a\n%?")
 
            ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
 
-           ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: %^{TYPE|Basic (and reversed card)|Basic}\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+           ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
 
            ("F" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
 
@@ -1368,7 +1378,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
 
            ("n" "note" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* %^{TOPIC}\n%U\n%? \n%a\n\n\n" :prepend nil)
 
-           ("p" "pomodoro" table-line (id "6w81f6q04qi0") "| %^{Day & time} | | %^{Task} | %^{Area of focus|ndd|lis|home|sysadmin|} |%^{Mode}|  %^{Notes}|"  )
+           ("p" "pomodoro" table-line (id "6w81f6q04qi0") "| %^{Day & time} | %^{How many pomodoros?} | %^{Task} | %^{Area of focus|ndd|lis|home|sysadmin|} |%^{Mode}|  %^{Notes}|" :table-line-pos "I+1" )
 
            ("r" "reading log" table-line (id "em87rza1mni0") "|%^{Author}|%^{Title}|%u| " )
 
@@ -1938,50 +1948,52 @@ M-x describe-current-coding-system
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-(use-package yasnippet                  ; Snippets
- )
-(use-package yasnippet-snippets         ; Collection of snippets
-  :ensure t)
+   (use-package yasnippet                  ; Snippets
+    )
 
 
 
-(use-package yankpad
-  :ensure t
-  :defer 10
-  :init
-  (setq yankpad-file "~/Dropbox/Zettelkasten/yankpad.org")
+   (use-package yankpad
+     :ensure t
+     :defer 10
+     :init
+     (setq yankpad-file "~/Dropbox/Zettelkasten/yankpad.org")
  
  
- )
+    )
 
- (setq yankpad-respect-current-org-level nil)
- (setq yas-global-mode t)
- (setq yas-snippet-dirs
-   (quote
-    ("/home/betsy/.emacs.d/snippets" yasnippet-snippets-dir)))
+    (setq yankpad-respect-current-org-level nil)
+    (setq yas-global-mode t)
+    (setq yas-snippet-dirs
+      (quote
+       ("/home/betsy/.emacs.d/snippets")))
 
 
-(defhydra hydra-yasnippet (:color red :hint nil)
-  "
-              ^YASnippets^
---------------------------------------------
-  Modes:    Load/Visit:    Actions:
+   (defhydra hydra-yasnippet (:color red :hint nil)
+     "
+                 ^YASnippets^
+   --------------------------------------------
+     Modes:    Load/Visit:    Actions:
 
- _g_lobal  _d_irectory    _i_nsert
- _m_inor   _f_ile         _t_ryout
- _e_xtra   _l_ist         _n_ew
-          reload _a_ll
-"
-  ("d" yas-load-directory)
-  ("e" yas-activate-extra-mode)
-  ("i" yas-insert-snippet :color blue)
-  ("f" yas-visit-snippet-file :color blue)
-  ("n" yas-new-snippet)
-  ("t" yas-tryout-snippet)
-  ("l" yas-describe-tables)
-  ("g" yas/global-mode :color red)
-  ("m" yas/minor-mode :color red)
-  ("a" yas-reload-all))
+    _g_lobal  _d_irectory    _i_nsert
+    _m_inor   _f_ile         _t_ryout
+    _e_xtra   _l_ist         _n_ew
+             reload _a_ll
+   "
+("n" down "done")
+("p" down "up")
+      ("N" outline-next-visible-heading "next heading")
+      ("P" outline-previous-visible-heading "prev heading")
+     ("d" yas-load-directory)
+     ("e" yas-activate-extra-mode)
+     ("i" yas-insert-snippet)
+     ("f" yas-visit-snippet-file :color blue)
+     ("n" yas-new-snippet)
+     ("t" yas-tryout-snippet)
+     ("l" yas-describe-tables)
+     ("g" yas/global-mode :color red)
+     ("m" yas/minor-mode :color red)
+     ("a" yas-reload-all))
 
 #+END_SRC
 

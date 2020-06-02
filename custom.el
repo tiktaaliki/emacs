@@ -34,9 +34,11 @@
  '(org-habit-show-habits-only-for-today nil)
  '(org-modules
    (quote
-    (ol-bibtex ol-eww org-habit org-id org-protocol ol-w3m org-collector org-notify)))
+    (ol-bibtex ol-eww org-habit org-id org-protocol org-tempo ol-w3m org-collector org-notify)))
  '(org-pomodoro-keep-killed-pomodoro-time t)
  '(org-pomodoro-ticking-sound-states (quote (:pomodoro)))
+ '(org-superstar-item-bullet-alist (quote ((43 . 10148) (45 . 8226) (_ . -))))
+ '(org-support-shift-select t)
  '(org-tag-faces
    (quote
     (("ndd" :inherit org-tag :foreground "yellow green")
@@ -55,6 +57,13 @@
      ("journal" :inherit org-tag :foreground "dark orange")
      ("cleaning" :inherit org-tag :foreground "dark orange")
      ("job" :inherit org-tag :foreground "dark orange"))))
+ '(org-tempo-keywords-alist
+   (quote
+    (("L" . "latex")
+     ("H" . "html")
+     ("A" . "ascii")
+     ("i" . "index")
+     ("q" . "quote"))))
  '(org-todo-keyword-faces
    (quote
     (("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
@@ -67,7 +76,7 @@
  '(org-web-tools-pandoc-sleep-time 1.0)
  '(package-selected-packages
    (quote
-    (org-clock-convenience tomatinho pomidor org-pomodoro org-plus-contrib crux org-noter pdf-view-restore org-alert anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle eyebrowse org-download which-key ace-jump-helm-line ace-link expand-region yasnippet-snippets yankpad w3m visual-fill-column unicode-fonts ssh-agency spotify speed-type smartparens slack rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-preview-html org-pdfview org-edna org-cliplink org-chef org-bullets org-bookmark-heading openwith nov multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-spotify helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm ereader doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-window centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game)))
+    (ereader nov org-superstar yasnippet-snippets org-clock-convenience tomatinho pomidor org-pomodoro org-plus-contrib crux org-noter pdf-view-restore org-alert anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle eyebrowse org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency spotify speed-type smartparens slack rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-preview-html org-pdfview org-edna org-cliplink org-chef org-bullets org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-spotify helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-window centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game)))
  '(pdf-annot-default-annotation-properties
    (quote
     ((t
@@ -105,6 +114,7 @@
  '(org-level-1 ((t (:inherit default :foreground "#6ab187" :weight normal :height 1.1))))
  '(org-level-2 ((t (:inherit org-level-1 :foreground "#9a9eab" :weight normal :height 0.9))))
  '(org-link ((t (:inherit link :foreground "chocolate" :weight normal :family "monofur"))))
+ '(org-quote ((t (:background "#23272e" :foreground "sandy brown" :slant normal))))
  '(org-special-keyword ((t (:foreground "#83898d" :height 0.9))))
  '(org-tag ((t (:foreground "#83898d" :weight normal :height 0.8))))
  '(org-tag-group ((t (:inherit nil :foreground "dodger blue"))))
