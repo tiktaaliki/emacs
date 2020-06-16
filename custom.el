@@ -37,7 +37,7 @@
     (ol-bibtex ol-eww org-habit org-id org-protocol org-tempo ol-w3m org-collector org-notify)))
  '(org-pomodoro-keep-killed-pomodoro-time t)
  '(org-pomodoro-ticking-sound-states (quote (:pomodoro)))
- '(org-superstar-item-bullet-alist (quote ((43 . 10148) (45 . 8226) (_ . -))))
+ '(org-superstar-item-bullet-alist (quote ((42 . 10148) (43 . 8226) (45 . 8211))))
  '(org-support-shift-select t)
  '(org-tag-faces
    (quote
