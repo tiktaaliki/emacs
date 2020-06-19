@@ -355,6 +355,10 @@
 * DIRED
 
 #+begin_src emacs-lisp :tangle yes
+(eval-after-load "dired-aux"
+   '(add-to-list 'dired-compress-file-suffixes 
+                 '("\\.zip\\'" ".zip" "unzip")))
+
    (diredp-toggle-find-file-reuse-dir 1)
    (defhydra hydra-dired (:hint nil :color pink)
      "
@@ -1028,9 +1032,15 @@
 
                                       ("e" "all todos/projects/etc." ((todo "IN-PROG")
                                                                       (todo "NEXT")
-                                                                      (tags-todo "-watch-listen+/TODO")
+                                                                      (tags-todo "-read-research-lis-ingest-home-sysadmin-hold+/TODO-HABIT")
+
+								   (tags-todo "read")
+								   (tags-todo "ingest")
+								   (tags-todo "research")
+								   (tags-todo "lis")
+								   (tags-todo "home")
+								   (tags-todo "sysadmin")
                                                                       (todo "PROJ")
-								   (tags-todo "watch|listen")
                                                                       )
                                        )
 
@@ -1049,12 +1059,22 @@
 #+END_SRC
 
 #+RESULTS:
-| h | Habits                  | tags-todo                                                                                | STYLE="habit"      | ((org-agenda-overriding-header Habits)) |
-| b | Timeblocking            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo BLOCK))         |                    |                                         |
-| k | all untagged TODOs      | tags-todo                                                                                | -{.*}/-HABIT-BLOCK |                                         |
-| e | all todos/projects/etc. | ((todo IN-PROG) (todo NEXT) (tags-todo -watch-listen+/TODO) (todo PROJ) (tags-todo watch | listen))           |                                         |
-| h | all HOLD items          | todo                                                                                     | HOLD               |                                         |
-| g | all UNSCHEDULED todos   | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo TODO            | NEXT))             | ((org-agenda-todo-ignore-scheduled t))  |
+| h | Habits                  | tags-todo                                                                                                                                                                                                                    | STYLE="habit"      | ((org-agenda-overriding-header Habits)) |
+| b | Timeblocking            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo BLOCK))                                                                                                                                             |                    |                                         |
+| k | all untagged TODOs      | tags-todo                                                                                                                                                                                                                    | -{.*}/-HABIT-BLOCK |                                         |
+| e | all todos/projects/etc. | ((todo IN-PROG) (todo NEXT) (tags-todo -read-research-lis-ingest-home-sysadmin-hold+/TODO-HABIT) (tags-todo read) (tags-todo ingest) (tags-todo research) (tags-todo lis) (tags-todo home) (tags-todo sysadmin) (todo PROJ)) |                    |                                         |
+| h | all HOLD items          | todo                                                                                                                                                                                                                         | HOLD               |                                         |
+| g | all UNSCHEDULED todos   | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo TODO                                                                                                                                                | NEXT))             | ((org-agenda-todo-ignore-scheduled t))  |
+
+     ("e" "all todos/projects/etc." ((todo "IN-PROG")
+                                                                      (todo "NEXT")
+                                                                      (tags-todo "-watch-listen+/TODO")
+                                                                      (todo "PROJ")
+								   (tags-todo "watch|listen")
+                                                                      )
+                                       )
+
+
 *** ORG-AGENDA HYDRA!
 #+begin_src emacs-lisp :tangle yes
    ;; Hydra for org agenda (graciously taken from Spacemacs)
