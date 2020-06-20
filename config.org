@@ -1855,7 +1855,7 @@ M-x describe-current-coding-system
  (setq auto-save-visited-file-name t)
  (setq auto-save-visited-mode t)
  (setq dired-auto-revert-buffer (quote dired-directory-changed-p))
-(setq auto-save-interval 300)
+(setq auto-save-interval 10)
 (setq auto-save-timeout 5)
  (setq global-auto-revert-mode t)
 
