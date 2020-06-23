@@ -1382,7 +1382,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
          '(
            ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> %? \n\n\n\n" :clock-in t :clock-keep t :kill-buffer nil ) 
 
-           ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT} \n %^t\n%a\n%?")
+           ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT}\n%^t\n%a\n%?")
 
            ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
 
