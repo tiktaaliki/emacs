@@ -3,7 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "/home/betsy/Dropbox/emacs/.emacs.d/bookmarks")
  '(chronos-expiry-functions
    (quote
     (chronos-sound-notify chronos-message-notify chronos-buffer-notify)))
@@ -37,7 +37,8 @@
     (ol-bibtex ol-eww org-habit org-id org-protocol org-tempo ol-w3m org-collector org-notify)))
  '(org-pomodoro-keep-killed-pomodoro-time t)
  '(org-pomodoro-ticking-sound-states (quote (:pomodoro)))
- '(org-superstar-item-bullet-alist (quote ((42 . 8211) (43 . 8226) (45 . 10148))))
+ '(org-superstar-item-bullet-alist (quote ((42 . 8211) (43 . 10148) (45 . 8226))))
+ '(org-superstar-prettify-item-bullets t)
  '(org-support-shift-select t)
  '(org-tag-faces
    (quote
@@ -72,7 +73,8 @@
      ("HABIT" :weight regular :underline nil :inherit org-todo :foreground "brown")
      ("AREA" :weight bold :underline t :inherit org-todo :foreground "dodger blue")
      ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "magenta")
-     ("IN-PROG" :weight regular :underline nil :inherit org-todo :foreground "lightcyan1" :background "royalblue1"))))
+     ("IN-PROG" :weight regular :underline nil :inherit org-todo :foreground "royalblue1")
+     ("TODAY" :weight regular :underline nil :inherit org-todo :background "dodger blue" :foreground "white"))))
  '(org-web-tools-pandoc-sleep-time 1.0)
  '(package-selected-packages
    (quote
@@ -102,10 +104,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#282c34" :foreground "#ebdcb2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 250 :width normal :foundry "PfEd" :family "Fantasque Sans Mono"))))
  '(bold ((t (:foreground "medium orchid" :weight bold))))
  '(bold-italic ((t (:inherit italic))))
  '(diredp-dir-name ((t (:foreground "RoyalBlue2" :weight bold))))
+ '(fringe ((t (:background "#282c34"))))
  '(italic ((t (:foreground "orchid" :slant italic))))
  '(org-date ((t (:underline t :height 1.0 :family "monofur"))))
  '(org-done ((t (:inherit org-headline-done))))
@@ -113,7 +115,9 @@
  '(org-headline-done ((t (:foreground "#5B6268" :strike-through t))))
  '(org-level-1 ((t (:inherit default :foreground "#6ab187" :weight normal :height 1.1))))
  '(org-level-2 ((t (:inherit org-level-1 :foreground "#9a9eab" :weight normal :height 0.9))))
+ '(org-level-4 ((t (:inherit org-level-3 :foreground "light coral" :height 1.0))))
  '(org-link ((t (:inherit link :foreground "chocolate" :weight normal :family "monofur"))))
+ '(org-list-dt ((t (:inherit default :foreground "#51afef"))))
  '(org-quote ((t (:background "#23272e" :foreground "sandy brown" :slant normal))))
  '(org-special-keyword ((t (:foreground "#83898d" :height 0.9))))
  '(org-tag ((t (:foreground "#83898d" :weight normal :height 0.8))))

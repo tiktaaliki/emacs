@@ -465,32 +465,34 @@
 
 * font/coding/wrapping
 
-
 #+BEGIN_SRC emacs-lisp :tangle yes
 
 
 
-   (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                     '("NanumBarunpen" . "unicode-bmp" ))
-   (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
-                     '("NanumBarunpen" . "unicode-bmp"))
-   (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
-                     (font-spec :family "DejaVu Sans Mono" :size 20)) 
+         (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+                           '("NanumBarunpen" . "unicode-bmp" )
 
-   (setq use-default-font-for-symbols nil)
+                           )
+         (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
+                           '("NanumBarunpen" . "unicode-bmp"))
+       ;  (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
+        ;                   (font-spec :size 30)) 
 
-   (use-package unicode-fonts
-     :ensure t
-     :defer t
-     :init (unicode-fonts-setup))
+         (setq use-default-font-for-symbols nil)
 
 
-   (setq global-visual-fill-column-mode t)
-   (setq global-visual-line-mode t)
+         (use-package unicode-fonts
+           :ensure t
+           :defer t
+           :init (unicode-fonts-setup))
 
 
-   (eval-after-load "flyspell"
-     '(define-key flyspell-mode-map (kbd "C-.") nil))
+         (setq global-visual-fill-column-mode t)
+         (setq global-visual-line-mode t)
+
+
+         (eval-after-load "flyspell"
+           '(define-key flyspell-mode-map (kbd "C-.") nil))
 
 
 
@@ -498,7 +500,6 @@
 #+END_SRC
 
 #+RESULTS:
-: t
 
 
 * keybindings
@@ -1028,18 +1029,20 @@
                                        )
 
                                       ("k" "all untagged TODOs" tags-todo "-{.*}/-HABIT-BLOCK")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
+("t" "stuff to do TODAY"  todo "TODAY"  )
 
-
-                                      ("e" "all todos/projects/etc." ((todo "IN-PROG")
+                                      ("e" "all todos/projects/etc." (
+                                                                      (todo "TODAY")
+                                                                      (todo "IN-PROG")
                                                                       (todo "NEXT")
                                                                       (tags-todo "-read-research-lis-ingest-home-sysadmin-hold+/TODO-HABIT")
 
-								   (tags-todo "read")
-								   (tags-todo "ingest")
-								   (tags-todo "research")
-								   (tags-todo "lis")
-								   (tags-todo "home")
-								   (tags-todo "sysadmin")
+                                                                      (tags-todo "read-/-HOLD-WAIT")
+                                                                      (tags-todo "ingest-/-HOLD-WAIT")
+                                                                      (tags-todo "research")
+                                                                      (tags-todo "lis-/-HOLD-WAIT")
+                                                                      (tags-todo "home-/-HABIT-WAIT")
+                                                                      (tags-todo "sysadmin")
                                                                       (todo "PROJ")
                                                                       )
                                        )
@@ -1059,12 +1062,13 @@
 #+END_SRC
 
 #+RESULTS:
-| h | Habits                  | tags-todo                                                                                                                                                                                                                    | STYLE="habit"      | ((org-agenda-overriding-header Habits)) |
-| b | Timeblocking            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo BLOCK))                                                                                                                                             |                    |                                         |
-| k | all untagged TODOs      | tags-todo                                                                                                                                                                                                                    | -{.*}/-HABIT-BLOCK |                                         |
-| e | all todos/projects/etc. | ((todo IN-PROG) (todo NEXT) (tags-todo -read-research-lis-ingest-home-sysadmin-hold+/TODO-HABIT) (tags-todo read) (tags-todo ingest) (tags-todo research) (tags-todo lis) (tags-todo home) (tags-todo sysadmin) (todo PROJ)) |                    |                                         |
-| h | all HOLD items          | todo                                                                                                                                                                                                                         | HOLD               |                                         |
-| g | all UNSCHEDULED todos   | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo TODO                                                                                                                                                | NEXT))             | ((org-agenda-todo-ignore-scheduled t))  |
+| h | Habits                  | tags-todo                                                                                                                                                                                                                                                                              | STYLE="habit"      | ((org-agenda-overriding-header Habits)) |
+| b | Timeblocking            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo BLOCK))                                                                                                                                                                                                       |                    |                                         |
+| k | all untagged TODOs      | tags-todo                                                                                                                                                                                                                                                                              | -{.*}/-HABIT-BLOCK |                                         |
+| t | stuff to do TODAY       | todo                                                                                                                                                                                                                                                                                   | TODAY              |                                         |
+| e | all todos/projects/etc. | ((todo TODAY) (todo IN-PROG) (todo NEXT) (tags-todo -read-research-lis-ingest-home-sysadmin-hold+/TODO-HABIT) (tags-todo read-/-HOLD-WAIT) (tags-todo ingest-/-HOLD-WAIT) (tags-todo research) (tags-todo lis-/-HOLD-WAIT) (tags-todo home-/-HABIT-WAIT) (tags-todo sysadmin) (todo PROJ)) |                    |                                         |
+| h | all HOLD items          | todo                                                                                                                                                                                                                                                                                   | HOLD               |                                         |
+| g | all UNSCHEDULED todos   | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo TODO                                                                                                                                                                                                          | NEXT))             | ((org-agenda-todo-ignore-scheduled t))  |
 
      ("e" "all todos/projects/etc." ((todo "IN-PROG")
                                                                       (todo "NEXT")
@@ -1240,8 +1244,8 @@
 #+BEGIN_SRC emacs-lisp :tangle yes
    (setq org-todo-keywords
          (quote
-          ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "WAIT(w)" "|" "DONE(d)" )
-           (type "AREA(a)" "PROJ(p)"  "HABIT(h)"   "HOLD(o)" "BLOCK(b)"  "|" "DONE(d)")
+          ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "TODAY(o)" "WAIT(w)" "|" "DONE(d)" )
+           (type "AREA(a)" "PROJ(p)"  "HABIT(h)"   "HOLD(l)" "BLOCK(b)"  "|" "DONE(d)")
            (sequence "|" "x(c)")
 
 
@@ -1339,7 +1343,7 @@
 | my/org-checkbox-todo |
 *** plain lists & bullets
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (require 'org-superstar)
+   (use-package org-superstar)
    (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
  (setq org-list-demote-modify-bullet

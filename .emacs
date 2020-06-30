@@ -29,7 +29,7 @@
   ;   (set-face-attribute 'org-level-1 nil :foreground "#6ab187" :inherit 'default :height 1.1 :weight 'bold) ;lagoon
    ;  (set-face-attribute 'org-level-2 nil :inherit 'org-level-1 :foreground "#9a9eab" :height 0.9 :weight 'bold) ;  
      (set-face-attribute 'org-level-3 nil :inherit 'org-level-2 :foreground "#68829e" :height 1.0) ; 
-     (set-face-attribute 'org-level-4 nil :inherit 'org-level-3 :foreground "#6ab187" :height 1.0) ;    a3bd38
+     ;(set-face-attribute 'org-level-4 nil :inherit 'org-level-3 :foreground "#6ab187" :height 1.0) ;    a3bd38
      (set-face-attribute 'org-level-5 nil :inherit 'org-level-4 :foreground "#9a9eab")
      (set-face-attribute 'org-level-6 nil :inherit 'org-level-5 :foreground "#68829e")
 
