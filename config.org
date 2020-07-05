@@ -715,11 +715,26 @@
 
    ;; allow for updating mail using 'U' in the main view:
    (setq mu4e-get-mail-command "true")
+;(setq mail-user-agent 'mu4e-user-agent)
+ (use-package org-msg)
+ (setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
+	org-msg-startup "hidestars indent inlineimages"
+;	org-msg-greeting-fmt "\nHi *%s*,\n\n"
+	org-msg-greeting-name-limit 3
+	org-msg-text-plain-alternative t
+	org-msg-signature "
+
+ In solidarity,
+
+ #+begin_signature
+ -- *Betsy (she/they)* \\\\
+ #+end_signature")
+ (org-msg-mode)
 
 #+END_SRC 
 
 #+RESULTS:
-: true
+: t
 
 ** folders
 
