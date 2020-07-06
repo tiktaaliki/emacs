@@ -1419,7 +1419,7 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
 
            ("p" "pomodoro" table-line (id "6w81f6q04qi0") "| %^{Day & time} | %^{How many pomodoros?} | %^{Task} | %^{Area of focus|ndd|lis|home|sysadmin|} |%^{Mode}|  %^{Notes}|" :table-line-pos "I+1" )
 
-           ("r" "reading log" table-line (id "em87rza1mni0") "|%^{Author}|%^{Title}|%u| " )
+           ("r" "reading log" table-line (id "em87rza1mni0") "|%^{Author}|%^{Title}|%^{Started}|" :table-line-pos "I+1" )
 
            ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n" :prepend nil)
 
@@ -1465,8 +1465,8 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
          two prefix arguments, write out the day and month name."
      (interactive "P")
      (let ((format (cond
-                    ((not prefix) "%Y%m%d-%H%M")
-                    ((equal prefix '(4)) "%Y-%m-%d")
+                    ((not prefix) "%Y.%m%d")
+                    ((equal prefix '(4)) "%Y-%m-%d-%H%M")
                     ((equal prefix '(16)) "%A, %d. %B %Y")))
            )
        (insert (format-time-string format))))
