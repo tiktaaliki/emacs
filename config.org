@@ -887,7 +887,7 @@
    #+end_src
 
 #+RESULTS:
-: t
+: ~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav
 
 * org-startup-defaults
 
@@ -1025,6 +1025,9 @@
 : [nil 24269 43769 514881 300 kiwon/org-agenda-redo-in-other-window nil nil 349000]
 
 *** org-agenda custom commands
+:LOGBOOK:
+CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
+:END:
 #+BEGIN_SRC emacs-lisp :tangle yes
 
    (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
@@ -1068,7 +1071,7 @@
                                       ("g" "all UNSCHEDULED todos" ((agenda "" 
                                                                             ((org-agenda-span 2)
                                                                              (org-agenda-clockreport-mode nil)))
-                                                                    (todo "TODO|NEXT"))
+                                                                    (todo "NEXT|TODAY|IN-PROG"))
                                        ((org-agenda-todo-ignore-scheduled t)))
                                            ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
 
@@ -1077,13 +1080,13 @@
 #+END_SRC
 
 #+RESULTS:
-| h | Habits                  | tags-todo                                                                                                                                                                                                                                                                              | STYLE="habit"      | ((org-agenda-overriding-header Habits)) |
-| b | Timeblocking            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo BLOCK))                                                                                                                                                                                                       |                    |                                         |
-| k | all untagged TODOs      | tags-todo                                                                                                                                                                                                                                                                              | -{.*}/-HABIT-BLOCK |                                         |
-| t | stuff to do TODAY       | todo                                                                                                                                                                                                                                                                                   | TODAY              |                                         |
-| e | all todos/projects/etc. | ((todo TODAY) (todo IN-PROG) (todo NEXT) (tags-todo -read-research-lis-ingest-home-sysadmin-hold+/TODO-HABIT) (tags-todo read-/-HOLD-WAIT) (tags-todo ingest-/-HOLD-WAIT) (tags-todo research) (tags-todo lis-/-HOLD-WAIT) (tags-todo home-/-HABIT-WAIT) (tags-todo sysadmin) (todo PROJ)) |                    |                                         |
-| h | all HOLD items          | todo                                                                                                                                                                                                                                                                                   | HOLD               |                                         |
-| g | all UNSCHEDULED todos   | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo TODO                                                                                                                                                                                                          | NEXT))             | ((org-agenda-todo-ignore-scheduled t))  |
+| h | Habits                  | tags-todo                                                                                                                                                                                                                                                                              | STYLE="habit"      | ((org-agenda-overriding-header Habits)) |                                        |
+| b | Timeblocking            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo BLOCK))                                                                                                                                                                                                       |                    |                                         |                                        |
+| k | all untagged TODOs      | tags-todo                                                                                                                                                                                                                                                                              | -{.*}/-HABIT-BLOCK |                                         |                                        |
+| t | stuff to do TODAY       | todo                                                                                                                                                                                                                                                                                   | TODAY              |                                         |                                        |
+| e | all todos/projects/etc. | ((todo TODAY) (todo IN-PROG) (todo NEXT) (tags-todo -read-research-lis-ingest-home-sysadmin-hold+/TODO-HABIT) (tags-todo read-/-HOLD-WAIT) (tags-todo ingest-/-HOLD-WAIT) (tags-todo research) (tags-todo lis-/-HOLD-WAIT) (tags-todo home-/-HABIT-WAIT) (tags-todo sysadmin) (todo PROJ)) |                    |                                         |                                        |
+| h | all HOLD items          | todo                                                                                                                                                                                                                                                                                   | HOLD               |                                         |                                        |
+| g | all UNSCHEDULED todos   | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT                                                                                                                                                                                                          | TODAY              | IN-PROG))                               | ((org-agenda-todo-ignore-scheduled t)) |
 
      ("e" "all todos/projects/etc." ((todo "IN-PROG")
                                                                       (todo "NEXT")
