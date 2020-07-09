@@ -877,6 +877,8 @@
    (setq org-pomodoro-manual-break nil)
    (setq org-pomodoro-clock-break nil)
 
+  (setq helm-chronos-standard-timers
+	'(	   "    25/Pomodoro:  + 5/Pomodoro: Rest"))
 
 (use-package pomidor)
 (setq pomidor-save-session-file "~/Dropbox/emacs/.emacs.d/pomidor-session.json")
