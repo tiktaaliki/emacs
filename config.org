@@ -881,13 +881,13 @@
 (use-package pomidor)
 (setq pomidor-save-session-file "~/Dropbox/emacs/.emacs.d/pomidor-session.json")
 (setq pomidor-sound-break-over "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-
-;(setq pomidor-sound-tick t)
-;(setq pomidor-sound-tack t)
+(setq pomidor-sound-overwork "~/Dropbox/emacs/.emacs.d/overwork.wav")
+(setq pomidor-sound-tick "~/Dropbox/emacs/.emacs.d/tick.wav")
+(setq pomidor-sound-tack "~/Dropbox/emacs/.emacs.d/tack.wav")
    #+end_src
 
 #+RESULTS:
-: ~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav
+: ~/Dropbox/emacs/.emacs.d/tack.wav
 
 * org-startup-defaults
 
@@ -1711,6 +1711,31 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
   
 
 
+
+* org-roam
+#+begin_src emacs-lisp :tangle yes
+
+(use-package org-roam
+      :ensure t
+      :hook
+      (after-init . org-roam-mode)
+      :custom
+      (org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
+      :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n g" . org-roam-graph-show))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert))
+              (("C-c n I" . org-roam-insert-immediate))))
+
+
+
+
+#+end_src
+
+#+RESULTS:
+: org-roam-insert-immediate
 
 * debugging
 #+BEGIN_SRC emacs-lisp :tangle yes

@@ -3,7 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "/home/betsy/Dropbox/emacs/.emacs.d/bookmarks")
  '(chronos-expiry-functions
    (quote
     (chronos-sound-notify chronos-message-notify chronos-buffer-notify)))
@@ -78,7 +78,7 @@
  '(org-web-tools-pandoc-sleep-time 1.0)
  '(package-selected-packages
    (quote
-    (pomidor org-msg ereader nov org-superstar yasnippet-snippets org-clock-convenience tomatinho org-pomodoro org-plus-contrib crux org-noter pdf-view-restore org-alert anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle eyebrowse org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency spotify speed-type smartparens slack rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-preview-html org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-spotify helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-window centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game)))
+    (company-org-roam org-roam org-roam-bibtex pomidor org-msg ereader nov org-superstar yasnippet-snippets org-clock-convenience tomatinho org-pomodoro org-plus-contrib crux org-noter pdf-view-restore org-alert anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle eyebrowse org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency spotify speed-type smartparens slack rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-preview-html org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-spotify helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-window centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game)))
  '(pdf-annot-default-annotation-properties
    (quote
     ((t
@@ -97,12 +97,6 @@
  '(pdf-annot-list-listed-types
    (quote
     (file free-text highlight square squiggly strike-out text underline)))
- '(pomidor-sound-overwork
-   "~/Dropbox/emacs/.emacs.d/elpa/pomidor-20200513.10543.1054/overwork.wav")
- '(pomidor-sound-tack
-   "~/Dropbox/emacs/.emacs.d/elpa/pomidor-20200513.1054/tack.wav")
- '(pomidor-sound-tick
-   "~/Dropbox/emacs/.emacs.d/elpa/pomidor-20200513.1054/tick.wav")
  '(sentence-end-double-space nil))
  
 (custom-set-faces
