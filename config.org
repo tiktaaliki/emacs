@@ -37,860 +37,6 @@
 #+RESULTS:
 : t
 
-* navigating
-** DEFT 
-#+begin_src emacs-lisp :tangle yes
-   (use-package deft
-     :ensure t)
-   (setq deft-directory "~/Dropbox/Zettelkasten/")
-   (setq deft-default-extension "org")
-   (setq deft-time-format " %b-%Y %H:%M")
-   (setq deft-use-filename-as-title t)
-   (setq deft-new-file-format "%Y%b%d")
-   (setq deft-text-mode 'org-mode)
-   (setq deft-file-naming-rules '((noslash . "-")
-                                  (nospace . "-")
-                                  (case-fn . downcase))) 
-   (setq deft-recursive nil)
-   (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
-   (setq deft-auto-save-interval 1.0)
-   (add-hook 'after-init-hook 'deft)
-   (add-hook 'deft-mode-hook #'visual-line-mode)
-
-
-#+end_src
-** HELM
-#+begin_src emacs-lisp :tangle yes
-   (use-package helm
-     :ensure t
-     :config (helm-mode 1))
-   (setq history-delete-duplicates t)
-
-   (setq helm-M-x-always-save-history t)
-   (setq helm-M-x-reverse-history nil)
-   (setq helm-bibtex-full-frame nil)
-   (setq helm-display-buffer-default-height 22)
-   (setq helm-full-frame nil)
-   (setq helm-help-full-frame nil)
-   (setq helm-move-to-line-cycle-in-source nil)
-   (setq helm-org-rifle-show-path nil)
-   (setq helm-split-window-inside-p t)
-
-#+end_src
-
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-   (setq bookmark-save-flag 1)
-   (use-package ido
-     :ensure t
-     :defer t
-     )
-   (ido-mode t)
-
-   (use-package projectile
-     :ensure t
-     )
-   (use-package helm-projectile
-     :ensure t
-     )
-
-   (projectile-mode +1)
-
-#+END_SRC
-
-#+RESULTS:
-: t
-** windows
-
-*** window functions
-#+BEGIN_SRC emacs-lisp :tangle yes
-   (eyebrowse-mode t)
-                                           ;undo and redo changes in window configuration eg go to previous buffer 
-   (winner-mode 1)
-
-   (defun transpose-windows ()
-     (interactive)
-     (let ((this-buffer (window-buffer (selected-window)))
-           (other-buffer (prog2
-                             (other-window +1)
-                             (window-buffer (selected-window))
-                           (other-window -1))))
-       (switch-to-buffer other-buffer)
-       (switch-to-buffer-other-window this-buffer)
-       (other-window -1)))
-
-
-
-   (setq frame-title-format (list (format "%s %%S: %%j " (system-name))
-                                  '(buffer-file-name "%f" (dired-directory dired-directory "%b"))
-                                  ))
-
-   (defun window-split-toggle ()
-     "Toggle between horizontal and vertical split with two windows."
-     (interactive)
-     (if (> (length (window-list)) 2)
-         (error "Can't toggle with more than 2 windows!")
-       (let ((func (if (window-full-height-p)
-                       #'split-window-vertically
-                     #'split-window-horizontally)))
-         (delete-other-windows)
-         (funcall func)
-         (save-selected-window
-           (other-window 1)
-           (switch-to-buffer (other-buffer))))))
-
-#+END_SRC
-
-#+RESULTS:
-: window-split-toggle
-
-*** window HYDRA
-#+begin_src emacs-lisp :tangle yes
-
-
-   (defhydra hydra-window ()
-     "
-   Movement^^        ^Split^         ^Switch^		^Resize^
-   ----------------------------------------------------------------
-   _h_ ←       	_v_ertical    	_b_uffer		_q_ shrink
-   _j_ ↓        	_x_ horizontal	_f_ind files	_w_ balance
-   _k_ ↑        	_z_ undo      	_a_ce 1		_e_nlarge
-   _l_ →        	_Z_ reset      	_s_wap		_r_ split toggle
-   _F_ollow		_D_lt Other   	_S_ave		max_i_mize
-   _SPC_ cancel	_o_nly this   	_d_elete	
-   "
-     ("h" windmove-left )
-     ("j" windmove-down )
-     ("k" windmove-up )
-     ("l" windmove-right )
-     ("q" shrink-window-horizontally)
-     ("w" balance-windows)
-     ("e" enlarge-window)
-     ("r" window-split-toggle)
-     ("b" helm-mini)
-     ("f" helm-find-files)
-     ("F" follow-mode)
-     ("a" (lambda ()
-            (interactive)
-            (ace-window 1)
-            (add-hook 'ace-window-end-once-hook
-                      'hydra-window/body))
-      )
-     ("v" (lambda ()
-            (interactive)
-            (split-window-right)
-            (windmove-right))
-      )
-     ("x" (lambda ()
-            (interactive)
-            (split-window-below)
-            (windmove-down))
-      )
-     ("s" (lambda ()
-            (interactive)
-            (ace-window 4)
-            (add-hook 'ace-window-end-once-hook
-                      'hydra-window/body)))
-     ("S" save-buffer)
-     ("d" delete-window)
-     ("D" (lambda ()
-            (interactive)
-            (ace-window 16)
-            (add-hook 'ace-window-end-once-hook
-                      'hydra-window/body))
-      )
-     ("o" delete-other-windows)
-     ("i" ace-maximize-window)
-     ("z" (progn
-            (winner-undo)
-            (setq this-command 'winner-undo))
-      )
-     ("Z" winner-redo)
-     ("SPC" nil)
-     )
-
-#+end_src
-** between buffers
-#+begin_src emacs-lisp :tangle yes
-
-
-
-   (defhydra hydra-buffer-menu (:color pink
-                                       :hint nil)
-     "
-   ^Mark^             ^Unmark^           ^Actions^          ^Search
-   ^^^^^^^^-----------------------------------------------------------------
-   _m_: mark          _u_: unmark        _x_: execute       _R_: re-isearch
-   _s_: save          _U_: unmark up     _b_: bury          _I_: isearch
-   _d_: delete        ^ ^                _g_: refresh       _O_: multi-occur
-   _D_: delete up     ^ ^                _T_: files only: % -28`Buffer-menu-files-only
-   _~_: modified
-   "
-     ("m" Buffer-menu-mark)
-     ("u" Buffer-menu-unmark)
-     ("U" Buffer-menu-backup-unmark)
-     ("d" Buffer-menu-delete)
-     ("D" Buffer-menu-delete-backwards)
-     ("s" Buffer-menu-save)
-     ("~" Buffer-menu-not-modified)
-     ("x" Buffer-menu-execute)
-     ("b" Buffer-menu-bury)
-     ("g" revert-buffer)
-     ("T" Buffer-menu-toggle-files-only)
-     ("O" Buffer-menu-multi-occur :color blue)
-     ("I" Buffer-menu-isearch-buffers :color blue)
-     ("R" Buffer-menu-isearch-buffers-regexp :color blue)
-     ("c" nil "cancel")
-     ("v" Buffer-menu-select "select" :color blue)
-     ("o" Buffer-menu-other-window "other-window" :color blue)
-     ("q" quit-window "quit" :color blue))
-
-   (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
-
-
-#+end_src
-** in buffers
-#+begin_src emacs-lisp :tangle yes
-   (eval-after-load "helm"
-     '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
-
-#+end_src
-
-#+RESULTS:
-: ace-jump-helm-line
-
-* accessibility
-#+begin_src emacs-lisp :tangle yes
-   (defhydra hydra-zoom (:color amaranth)  "zoom"
-     ("=" text-scale-increase "in")
-     ("-" text-scale-decrease "out")
-     ("0" (text-scale-adjust 0) "reset")
-     ("o" (other-window) "other window")
-     ("q" nil "quit" :color blue))
-
-   (global-set-key (kbd "C-=") 'hydra-zoom/body)
-
-#+end_src
-
-#+RESULTS:
-: hydra-zoom/body
-
-* HYDRAS
-#+begin_src emacs-lisp :tangle yes
-
-         (defhydra hydra-org (:color amaranth :columns 3)
-           "Org Mode Movements"
-           ("n" outline-next-visible-heading "next heading")
-           ("p" outline-previous-visible-heading "prev heading")
-           ("N" org-forward-heading-same-level "next heading at same level")
-           ("P" org-backward-heading-same-level "prev heading at same level")
-           ("u" outline-up-heading "up heading")
-           ("k" kill-region "kill region")
-           ("y" yank "paste")
-           ("l" helm-show-kill-ring "list" :color blue)  
-           ("r" org-refile "refile")
-           ("t" org-todo "todo")
-           ("g" org-set-tags-command "tags")
-           ("s" show-subtree "expand subtree")
-           ("h" hide-subtree "collapse subtree")
-           ("a" org-archive-subtree "archive")
-           ("G" org-goto "goto" :exit t)
-           ("q" nil "quit" :color blue)
-           )
-
-
-
-
-         (defhydra goto (:color blue :hint nil)
-           "
-         Goto:
-         ^Char^              ^Word^                ^org^                    ^search^
-         ^^^^^^^^---------------------------------------------------------------------------
-         _c_: 2 chars        _w_: word by char     _h_: headline in buffer  _o_: helm-occur
-         _C_: char           _W_: some word        _a_: heading in agenda   _p_: helm-swoop
-         _L_: char in line   _s_: subword by char  _q_: swoop org buffers   _f_: search forward
-         ^  ^                _S_: some subword     ^ ^                      _b_: search backward
-         -----------------------------------------------------------------------------------
-         _B_: helm-buffers       _l_: avy-goto-line
-         _m_: helm-mini          _i_: ace-window
-         _R_: helm-recentf
-
-         _n_: Navigate           _._: mark position _/_: jump to mark
-         "
-           ("c" avy-goto-char-2)
-           ("C" avy-goto-char)
-           ("L" avy-goto-char-in-line)
-           ("w" avy-goto-word-1)
-           ;; jump to beginning of some word
-           ("W" avy-goto-word-0)
-           ;; jump to subword starting with a char
-           ("s" avy-goto-subword-1)
-           ;; jump to some subword
-           ("S" avy-goto-subword-0)
-           ("l" avy-goto-line)
-           ("i" ace-window)
-           ("h" helm-org-headlines)
-           ("a" helm-org-agenda-files-headings)
-           ("q" helm-multi-swoop-org)
-           ("o" helm-occur)
-           ("p" helm-swoop)
-   ;        ("p" swiper-helm)
-           ("f" isearch-forward)
-           ("b" isearch-backward)
-           ("." org-mark-ring-push :color red)
-           ("/" org-mark-ring-goto :color blue)
-           ("B" helm-buffers-list)
-           ("m" helm-mini)
-           ("R" helm-recentf)
-           ("n" hydra-navigate/body))
-
-         (global-set-key (kbd "s-g") 'goto/body)
-
-
-#+end_src
-
-#+RESULTS:
-: goto/body
-
-* DIRED
-
-#+begin_src emacs-lisp :tangle yes
-(eval-after-load "dired-aux"
-   '(add-to-list 'dired-compress-file-suffixes 
-                 '("\\.zip\\'" ".zip" "unzip")))
-
-   (diredp-toggle-find-file-reuse-dir 1)
-   (defhydra hydra-dired (:hint nil :color pink)
-     "
-   _+_ mkdir          _v_iew           _m_ark             _(_ details        _i_nsert-subdir    wdired
-   _C_opy             _O_ view other   _U_nmark all       _)_ omit-mode      _$_ hide-subdir    C-x C-q : edit
-   _D_elete           _o_pen other     _u_nmark           _l_ redisplay      _w_ kill-subdir    C-c C-c : commit
-   _R_ename           _M_ chmod        _t_oggle           _g_ revert buf     _e_ ediff          C-c ESC : abort
-   _Y_ rel symlink    _G_ chgrp        _E_xtension mark   _s_ort             _=_ pdiff
-   _S_ymlink          ^ ^              _F_ind marked      _._ toggle hydra   \\ flyspell
-   _r_sync            ^ ^              ^ ^                ^ ^                _?_ summary
-   _z_ compress-file  _A_ find regexp
-   _Z_ compress       _Q_ repl regexp
-
-   T - tag prefix
-   "
-     ("\\" dired-do-ispell)
-     ("(" dired-hide-details-mode)
-     (")" dired-omit-mode)
-     ("+" dired-create-directory)
-     ("=" diredp-ediff)         ;; smart diff
-     ("?" dired-summary)
-     ("$" diredp-hide-subdir-nomove)
-     ("A" dired-do-find-regexp)
-     ("C" dired-do-copy)        ;; Copy all marked files
-     ("D" dired-do-delete)
-     ("E" dired-mark-extension)
-     ("e" dired-ediff-files)
-     ("F" dired-do-find-marked-files)
-     ("G" dired-do-chgrp)
-     ("g" revert-buffer)        ;; read all directories again (refresh)
-     ("i" dired-maybe-insert-subdir)
-     ("l" dired-do-redisplay)   ;; relist the marked or singel directory
-     ("M" dired-do-chmod)
-     ("m" dired-mark)
-     ("O" dired-display-file)
-     ("o" dired-find-file-other-window)
-     ("Q" dired-do-find-regexp-and-replace)
-     ("R" dired-do-rename)
-     ("r" dired-do-rsynch)
-     ("S" dired-do-symlink)
-     ("s" dired-sort-toggle-or-edit)
-     ("t" dired-toggle-marks)
-     ("U" dired-unmark-all-marks)
-     ("u" dired-unmark)
-     ("v" dired-view-file)      ;; q to exit, s to search, = gets line #
-     ("w" dired-kill-subdir)
-     ("Y" dired-do-relsymlink)
-     ("z" diredp-compress-this-file)
-     ("Z" dired-do-compress)
-     ("q" nil)
-     ("." nil :color blue))
-
-   (define-key dired-mode-map "." 'hydra-dired/body)
-
-
-#+end_src
-#+RESULTS:
-: hydra-dired/body
-
-* NEW snippets
-#+begin_src emacs-lisp :tangle yes
-   (setq display-time-mode t)
-   (setq fill-flowed-encode-column 1000)
-   (setq org-contacts-files (quote ("~/Dropbox/Zettelkasten/contacts.org")))
-   (setq org-timer-display (quote both))
-
-
-
-
-
-
-#+end_src
-
-#+RESULTS:
-: hydra-org/body
-
-* emacs mechanics
-#+begin_src emacs-lisp :tangle yes
-   (setq visible-bell nil)
-   (add-to-list 'default-frame-alist '(fullscreen . maximized))
-   (setq inhibit-startup-screen t)
-
-   (tool-bar-mode -1)
-   (menu-bar-mode -1)
-   (scroll-bar-mode -1)
-
-   (setq initial-major-mode 'org-mode)
-
-   (delete-selection-mode) ;allows to delete selected text by typing
-
-   (fset 'yes-or-no-p 'y-or-n-p)
-
-   (setq confirm-kill-emacs (quote y-or-n-p))
-
-
-   (set-fringe-mode '(50 . 50))
-   (setq ring-bell-function (quote ignore))
-
-
-#+end_src
-
-#+RESULTS:
-: ignore
-
-* font/coding/wrapping
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-
-
-         (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                           '("NanumBarunpen" . "unicode-bmp" )
-
-                           )
-         (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
-                           '("NanumBarunpen" . "unicode-bmp"))
-       ;  (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
-        ;                   (font-spec :size 30)) 
-
-         (setq use-default-font-for-symbols nil)
-
-
-         (use-package unicode-fonts
-           :ensure t
-           :defer t
-           :init (unicode-fonts-setup))
-
-
-         (setq global-visual-fill-column-mode t)
-         (setq global-visual-line-mode t)
-
-
-         (eval-after-load "flyspell"
-           '(define-key flyspell-mode-map (kbd "C-.") nil))
-
-
-
-
-#+END_SRC
-
-#+RESULTS:
-
-
-* keybindings
-
-#+begin_src emacs-lisp :tangle yes
-
-   (global-unset-key (kbd "C-z"))     
-   (global-unset-key (kbd "M-c"))
-   (global-unset-key (kbd "C-v "))
-   (define-key org-mode-map (kbd "C-0 C-c C-w") 'org-refile-cache-clear)
-   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-   (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
-   (global-unset-key (kbd "S-SPC"))
-   (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
-   (global-set-key (kbd "<f1>") 'org-capture)
-   (define-key dired-mode-map (kbd "<f1>") 'org-capture)
-   (bind-keys 
-                                           ;("C-+"   . text-scale-increase)
-                                           ;   a      ("C--"   . text-scale-decrease)
-    ("C-c l" . org-store-link)
-    ("M-z" . ace-jump-mode)                                          ;                 ("C-c k" . toggle-korean-input-method)
-    ("C-."   . org-todo)
-                                           ;              ("C-x /" . shrink-window-horizontally)
-    ("C-x ." . org-archive-subtree-default)
-                                           ;       ("C-c n" . org-schedule)
-    ("M-="   . count-words)
-    ("M-x"   . helm-M-x)
-
-    ("C-c b" . list-bookmarks)
-                                           ;    ("C-a" . org-beginning-of-line)
-    ([Hangul] . toggle-input-method)
-                                           ;   ("C-e" . org-end-of-line)
-    ("C-k" . org-kill-line)
-    ("C-c g" . org-id-goto)
-                                           ;              ("C-<kp-6>" . xah-select-block)
-                                           ;   ("C-x j" . helm-org-in-buffer-headings)
-    ("C-c i" . insert-timestamp)
-                                           ;  ("C-c a" . helm-org-agenda-files-headings)
-    ("C-c C-x C-r" . org-clock-report)
-    ([f1] . org-capture)
-    ([f2] . org-clock-in)
-    ([f3] . helm-buffers-list)           
-    ([f4] . org-refile)
-    ([f5] . helm-projectile)
-    ([f6] . helm-bibtex-with-local-bibliography)
-    ([f7] . org-agenda)
-    ([f8] . deft)
-    ([f9] . helm-org-rifle-current-buffer)
-    ([f10] . org-narrow-to-subtree)
-    ([f11] . org-id-goto)
-    ([f12] . bury-buffer)
-
-    )
-
-
-
-                                           ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-                                           ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-
-   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-   (define-key key-translation-map (kbd "C-_") (kbd "–"))
-
-   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
-   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
-
-#+end_src
-
-#+RESULTS:
-: [8756]
-
-* mu4e
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-                                           ; (use-package mu4e) 
-                                           ; (use-package mu4e-contrib)
-   (require 'mu4e)
-   (require 'org-mu4e)
-   ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-
-   (setq mu4e-sent-messages-behavior 'delete)
-   (setq message-kill-buffer-on-exit t)
-   (setq mu4e-change-filenames-when-moving t)
-   (setq mu4e-compose-format-flowed t)
-
-   (setq mu4e-hide-index-messages t)
-   ;; Call EWW to display HTML messages
-                                           ;(defun jcs-view-in-eww (msg)
-                                           ; (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
-
-   ;; Arrange to view messages in either the default browser or EWW
-   (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
-                                           ; (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
-
-   ;; From Ben Maughan: Get some Org functionality in compose buffer
-   (add-hook 'message-mode-hook 'turn-on-orgtbl)
-                                           ; (add-hook 'message-mode-hook 'turn-on-orgstruct++)
-
-   (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
-   (add-hook 'mu4e-view-mode-hook 'visual-fill-column-mode)
-
-   (defun no-auto-fill ()
-     "Turn off auto-fill-mode."
-     (auto-fill-mode -1))
-
-
-   (defun vcfm-off ()
-                                           ;turn off visual fill column mode
-     (visual-fill-column-mode nil))
-
-   (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
-   (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
-
-   (setq mu4e-compose-dont-reply-to-self t)
-   (setq mu4e-confirm-quit nil)
-   (setq mu4e-display-update-status-in-modeline nil)
-   (setq mu4e-index-lazy-check t)
-
-
-   (setq mu4e-bookmarks
-         (quote
-          ((:name "Inbox" :query "maildir:/INBOX" :key 117)
-           (:name "Today's messages" :query "date:today..now" :key 116)
-           (:name "Last 7 days" :query "date:7d..now" :show-unread t :key 119)
-           (:name "Messages with images" :query "mime:image/*" :key 112))))
-#+END_SRC
-  
-#+RESULTS:
-| :name | Inbox                | :query | maildir:/INBOX  | :key         | 117 |      |     |
-| :name | Today's messages     | :query | date:today..now | :key         | 116 |      |     |
-| :name | Last 7 days          | :query | date:7d..now    | :show-unread |   t | :key | 119 |
-| :name | Messages with images | :query | mime:image/*    | :key         | 112 |      |     |
-  
-** message view
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-                                           ;  (setq mu4e-attachment-dir "/home/betsy/Dropbox/Spring 2019/")
-
-
-
-
-   (setq shr-color-visible-luminance-min 50) 
-   (setq shr-color-visible-distance-min 5)
-                                           ;(setq mu4e-view-html-plaintext-ratio-heuristic 'most-positive-fixnum)
-   (setq message-yank-prefix ""
-         message-yank-empty-prefix ""
-         message-yank-cited-prefix "")
-
-   (setq w3m-default-desplay-inline-images t)
-   (defun mu4e-action-view-in-w3m ()
-     "View the body of the message in emacs w3m."
-     (interactive)
-     (w3m-browse-url (concat "file://"
-                             (mu4e~write-body-to-html (mu4e-message-at-point t)))))
-
-
-   ;; customize the reply-quote-string
-   (setq message-citation-line-format "\n\nOn %a %d %b %Y at %R, %f wrote:\n")
-   ;; choose to use the formatted string
-   (setq message-citation-line-function 'message-insert-formatted-citation-line)
-
-
-   (setq mu4e-view-scroll-to-next nil)
-
-   (add-hook 'message-mode-hook 'visual-fill-column-mode)
-
-
-
-#+END_SRC
-
-#+RESULTS:
-: United States
-
-** headers view
-
- 
-
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(setq mu4e-headers-include-related nil)
-   (setq mu4e-headers-fields
-         '( (:human-date    .  15)    ;; alternatively, use :human-date
-            (:flags         .   5)
-            (:from          .  20)
-            (:thread-subject       . 70 )
-                                           ;             (:thread-subject       . 120 )
-            )) 
-   (setq org-mu4e-link-query-in-headers-mode nil)
-   (setq mu4e-update-interval 300)
-   (setq mu4e-use-fancy-chars nil)
-   (setq mu4e-index-update-in-background t)
-   (setq mu4e-view-prefer-html t)
-   (setq mu4e-headers-skip-duplicates t)
-   (setq mu4e-headers-auto-update t)
-   (setq mu4e-view-show-addresses t)
-   (setq mu4e-view-show-images t)
-   (setq mu4e-headers-date-format "%x")
-   (setq mu4e-headers-time-format "%H:%M")
-#+END_SRC
-
-#+RESULTS:
-: %H:%M
-
-** settings
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-   ;; allow for updating mail using 'U' in the main view:
-   (setq mu4e-get-mail-command "true")
-;(setq mail-user-agent 'mu4e-user-agent)
- (use-package org-msg)
- (setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
-	org-msg-startup "hidestars indent inlineimages"
-;	org-msg-greeting-fmt "\nHi *%s*,\n\n"
-	org-msg-greeting-name-limit 3
-	org-msg-text-plain-alternative t
-	org-msg-signature "
-
- In solidarity,
-
- #+begin_signature
- -- *Betsy (she/they)* \\\\
- #+end_signature")
- (org-msg-mode)
-
-#+END_SRC 
-
-#+RESULTS:
-: t
-
-** folders
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-   (setq mu4e-maildir-shortcuts
-         '( ("/INBOX"  . ?i)
-            ("/Sent"   . ?s)
-            ("/Trash"  . ?t)
-            ("/All"    . ?a)))
-
-   (setq mu4e-drafts-folder "/Drafts")
-   (setq mu4e-sent-folder   "/Sent")
-   (setq mu4e-trash-folder  "/Trash")
-   (setq mu4e-refile-folder "/All")
-   (setq mu4e-maildir "~/Maildir")
-   (setq mu4e-attachment-dir "~/Dropbox/2020")
-#+END_SRC 
-
-#+RESULTS:
-: ~/Dropbox/2020
-
-  
-
-
-
-
-
-
-
-
-* usability
-
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-
-
-   (use-package smartparens
-     :ensure t
-     :defer t
-     :init
-     (show-smartparens-global-mode 1))
-   (smartparens-global-mode 1)
-   (setq show-paren-style 'expression)
-
-   (sp-local-pair 'org-mode "/" "/" :actions '(wrap))
-   (sp-local-pair 'org-mode "_" "_" :actions '(wrap))
-   (sp-local-pair 'org-mode "*" "*" :actions '(wrap))
-   (sp-local-pair 'org-mode "+" "+" :actions '(wrap))
-   (sp-local-pair 'org-mode "~" "~" :actions '(wrap))
-   (sp-local-pair 'org-mode "=" "=" :actions '(wrap))
-   (sp-local-pair 'org-mode "-" "-" :actions '(wrap))
-   (sp-pair "'" nil :actions :rem)
-
-
-   (setq blink-matching-paren-dont-ignore-comments nil)
-
-                                           ;autocompletion
-   (use-package company
-     :ensure t
-     :init (global-company-mode)
-     :config (company-mode 1))     
-
-                                           ;spellcheck
-   (use-package flyspell-correct-helm)
-
-#+END_SRC
-
-#+RESULTS:
-
-(setq electric-pair-pairs
-(quote
-((34 . 34)
-(8216 . 8217)
-(8220 . 8221)
-(42 . 42)
-(95 . 95)
-(47 . 47)
-(126 . 126)
-(43 . 43))))
-
-
-
-
-* anki
-#+begin_src emacs-lisp :tangle yes
-   (setq select-enable-clipboard t
-         x-select-enable-primary nil)
-   (use-package anki-editor
-     :after org
-     :hook (org-capture-after-finalize . anki-editor-reset-cloze-number) ; Reset cloze-number after each capture.
-     :config
-     (setq anki-editor-create-decks t)
-     (defun anki-editor-cloze-region-auto-incr (&optional arg)
-       "Cloze region without hint and increase card number."
-       (interactive)
-       (anki-editor-cloze-region my-anki-editor-cloze-number "")
-       (setq my-anki-editor-cloze-number (1+ my-anki-editor-cloze-number))
-       (forward-sexp))
-     (defun anki-editor-cloze-region-dont-incr (&optional arg)
-       "Cloze region without hint using the previous card number."
-       (interactive)
-       (anki-editor-cloze-region (1- my-anki-editor-cloze-number) "")
-       (forward-sexp))
-     (defun anki-editor-reset-cloze-number (&optional arg)
-       "Reset cloze number to ARG or 1"
-       (interactive)
-       (setq my-anki-editor-cloze-number (or arg 1)))
-     (defun anki-editor-push-tree ()
-       "Push all notes under a tree."
-       (interactive)
-       (anki-editor-push-notes '(4))
-       (anki-editor-reset-cloze-number))
-     ;; Initialize
-     (anki-editor-reset-cloze-number)
-     )
-
-
-
-
-
-
-#+end_src
-
-#+RESULTS:
-| anki-editor-reset-cloze-number | yankpad--remove-id-from-yankpad-capture |
-
-* chronos
-#+begin_src emacs-lisp :tangle yes
-   (setq chronos-notification-time 120)
-   (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-   (use-package org-alert)
-
-   (use-package org-pomodoro) (setq org-pomodoro-finished-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-                                           ; (setq org-pomodoro-finished-sound-args "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-   (setq org-pomodoro-short-break-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav" )
-   (setq org-pomodoro-long-break-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav" )
-   (setq org-pomodoro-ticking-sound-p t)
-   (setq org-pomodoro-manual-break nil)
-   (setq org-pomodoro-clock-break nil)
-
-  (setq helm-chronos-standard-timers
-	'(	   "    25/Pomodoro:  + 5/Pomodoro: Rest"))
-
-(use-package pomidor)
-(setq pomidor-save-session-file "~/Dropbox/emacs/.emacs.d/pomidor-session.json")
-(setq pomidor-sound-break-over "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-(setq pomidor-sound-overwork "~/Dropbox/emacs/.emacs.d/overwork.wav")
-(setq pomidor-sound-tick "~/Dropbox/emacs/.emacs.d/tick.wav")
-(setq pomidor-sound-tack "~/Dropbox/emacs/.emacs.d/tack.wav")
-   #+end_src
-
-#+RESULTS:
-: ~/Dropbox/emacs/.emacs.d/tack.wav
-
 * org-startup-defaults
 
 
@@ -923,8 +69,7 @@
 
 #+RESULTS:
 : ((agenda . canonical) (bookmark-jump . canonical) (isearch . canonical) (default . minimal))
-
-* *org-mode*
+* org-mode
 ** org navigation
 #+BEGIN_SRC emacs-lisp :tangle yes
    (setq org-id-link-to-org-use-id (quote create-if-interactive))
@@ -1385,78 +530,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 #+RESULTS:
 
-** org-capture
-:LOGBOOK:
-CLOCK: [2020-05-31 Sun 18:07]--[2020-05-31 Sun 18:32] =>  0:25
-CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
-:END:
 
-
-
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-   (server-start)
-   (require 'org-protocol)
-   (require 'org-protocol-capture-html)
-   (setq org-protocol-default-template-key "w")
-
-
-   (setq org-capture-templates
-         '(
-           ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> %? \n\n\n\n" :clock-in t :clock-keep t :kill-buffer nil ) 
-
-           ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT}\n%^t\n%a\n%?")
-
-           ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
-
-           ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
-
-           ("F" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
-
-           ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
-
-           ("l" "look up" entry (id "5br4n6815pi0") "* %? \n%U\n  \n%a\n\n\n" :prepend nil)
-
-           ("m" "meditation" table-line (id "otljx3605ni0") "|%u | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
-
-           ("n" "note" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* %^{TOPIC}\n%U\n%? \n%a\n\n\n" :prepend nil)
-
-           ("p" "pomodoro" table-line (id "6w81f6q04qi0") "| %^{Day & time} | %^{How many pomodoros?} | %^{Task} | %^{Area of focus|ndd|lis|home|sysadmin|} |%^{Mode}|  %^{Notes}|" :table-line-pos "I+1" )
-
-           ("r" "reading log" table-line (id "em87rza1mni0") "|%^{Author}|%^{Title}|%^{Started}|" :table-line-pos "I+1" )
-
-           ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n" :prepend nil)
-
-
-           ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
-
-
-           ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
-            "* TODO %? %a\n%U\n%:initial\n" )
-
-
-           ))
-
-
-
-
-
-
-                                           ;this prevents org-capture from replacing any windows. it just adds. 
-   (defun my-org-capture-place-template-dont-delete-windows (oldfun args)
-     (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
-       (apply oldfun args)))
-
-   (with-eval-after-load "org-capture"
-     (advice-add 'org-capture-place-template :around 'my-org-capture-place-template-dont-delete-windows))
-
-#+END_SRC
-
-#+RESULTS:
-
-("c" "calendar" entry (file "~/Dropbox/Zettelkasten/gcal.org" ) "* %?\n\n%^T\n\n:PROPERTIES:\n\n:link: %a\n:location: %^{location}\n\n\n:END:")
-"~/Dropbox/Zettelkasten/journal.org::datetree/* Finished tasks"
 
 ** org-clock
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1675,69 +749,303 @@ CLOCK: [2020-04-01 Wed 13:43]--[2020-04-01 Wed 13:45] =>  0:02
 
 	   
 
-
-* calendar & calfw
+** org-capture
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (use-package calfw)
-   (use-package calfw-org)
-                                           ;   (use-package calfw-gcal)
-   (use-package calfw-cal)
-   (setq package-check-signature nil)
-                                           ;  (setq org-gcal-down-days '30)
-                                           ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
+(server-start)
+     (require 'org-protocol)
+     (require 'org-protocol-capture-html)
+     (setq org-protocol-default-template-key "w")
+
+     (setq org-capture-templates
+           '(
+             ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> %? \n\n\n\n" :clock-in t :clock-keep t :kill-buffer nil ) 
+
+             ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT}\n%^t\n%a\n%?")
+
+             ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
+
+             ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+
+             ("F" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
+
+             ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
+
+             ("l" "look up" entry (id "5br4n6815pi0") "* %? \n%U\n  \n%a\n\n\n" :prepend nil)
+
+             ("m" "meditation" table-line (id "otljx3605ni0") "|%u | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
+
+             ("n" "note" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* %^{TOPIC}\n%U\n%? \n%a\n\n\n" :prepend nil)
+
+             ("p" "pomodoro" table-line (id "6w81f6q04qi0") "| %^{Day & time} | %^{How many pomodoros?} | %^{Task} | %^{Area of focus|ndd|lis|home|sysadmin|} |%^{Mode}|  %^{Notes}|" :table-line-pos "I+1" )
+
+             ("r" "reading log" table-line (id "em87rza1mni0") "|%^{Author}|%^{Title}|%^{Started}|" :table-line-pos "I+1" )
+
+             ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n" :prepend nil)
 
 
-   (defun my-open-calendar ()
-     (interactive)
-     (cfw:open-calendar-buffer
-      :contents-sources
-      (list
-       (cfw:org-create-source "pale green")  ; orgmode source
-       (cfw:cal-create-source "light goldenrod") ; diary source
-       ))) 
-   (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
-                                           ;   (setq calendar-daylight-savings-starts '(3 11 year))
-                                           ;  (setq calendar-daylight-savings-ends: '(11 4 year))
-   (setq calendar-week-start-day 1)
-
-   (setq diary-file "~/Dropbox/Zettelkasten/diary")
+             ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
 
 
+             ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
+              "* TODO %? %a\n%U\n%:initial\n" )
+
+
+             ))
+
+
+      (defun my-org-capture-place-template-dont-delete-windows (oldfun args)
+       (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
+         (apply oldfun args)))
+
+                                             ;this prevents org-capture from replacing any windows. it just adds. 
+    
+#+END_SRC
+
+     (with-eval-after-load "org-capture"
+       (advice-add 'org-capture-place-template :around 'my-org-capture-place-template-dont-delete-windows))
+
+
+* navigating
+** DEFT 
+#+begin_src emacs-lisp :tangle yes
+   (use-package deft
+     :ensure t)
+   (setq deft-directory "~/Dropbox/Zettelkasten/")
+   (setq deft-default-extension "org")
+   (setq deft-time-format " %b-%Y %H:%M")
+   (setq deft-use-filename-as-title t)
+   (setq deft-new-file-format "%Y%b%d")
+   (setq deft-text-mode 'org-mode)
+   (setq deft-file-naming-rules '((noslash . "-")
+                                  (nospace . "-")
+                                  (case-fn . downcase))) 
+   (setq deft-recursive nil)
+   (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
+   (setq deft-auto-save-interval 1.0)
+   (add-hook 'after-init-hook 'deft)
+   (add-hook 'deft-mode-hook #'visual-line-mode)
+
+
+#+end_src
+** HELM
+#+begin_src emacs-lisp :tangle yes
+   (use-package helm
+     :ensure t
+     :config (helm-mode 1))
+   (setq history-delete-duplicates t)
+
+   (setq helm-M-x-always-save-history t)
+   (setq helm-M-x-reverse-history nil)
+   (setq helm-bibtex-full-frame nil)
+   (setq helm-display-buffer-default-height 22)
+   (setq helm-full-frame nil)
+   (setq helm-help-full-frame nil)
+   (setq helm-move-to-line-cycle-in-source nil)
+   (setq helm-org-rifle-show-path nil)
+   (setq helm-split-window-inside-p t)
+
+#+end_src
+
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+   (setq bookmark-save-flag 1)
+   (use-package ido
+     :ensure t
+     :defer t
+     )
+   (ido-mode t)
+
+   (use-package projectile
+     :ensure t
+     )
+   (use-package helm-projectile
+     :ensure t
+     )
+
+   (projectile-mode +1)
 
 #+END_SRC
 
 #+RESULTS:
-: ~/Dropbox/Zettelkasten/diary
+: t
+** windows
 
-  
+*** window functions
+#+BEGIN_SRC emacs-lisp :tangle yes
+   (eyebrowse-mode t)
+                                           ;undo and redo changes in window configuration eg go to previous buffer 
+   (winner-mode 1)
+
+   (defun transpose-windows ()
+     (interactive)
+     (let ((this-buffer (window-buffer (selected-window)))
+           (other-buffer (prog2
+                             (other-window +1)
+                             (window-buffer (selected-window))
+                           (other-window -1))))
+       (switch-to-buffer other-buffer)
+       (switch-to-buffer-other-window this-buffer)
+       (other-window -1)))
 
 
 
-* org-roam
+   (setq frame-title-format (list (format "%s %%S: %%j " (system-name))
+                                  '(buffer-file-name "%f" (dired-directory dired-directory "%b"))
+                                  ))
+
+   (defun window-split-toggle ()
+     "Toggle between horizontal and vertical split with two windows."
+     (interactive)
+     (if (> (length (window-list)) 2)
+         (error "Can't toggle with more than 2 windows!")
+       (let ((func (if (window-full-height-p)
+                       #'split-window-vertically
+                     #'split-window-horizontally)))
+         (delete-other-windows)
+         (funcall func)
+         (save-selected-window
+           (other-window 1)
+           (switch-to-buffer (other-buffer))))))
+
+#+END_SRC
+
+#+RESULTS:
+: window-split-toggle
+
+*** window HYDRA
 #+begin_src emacs-lisp :tangle yes
 
-(use-package org-roam
-      :ensure t
-      :hook
-      (after-init . org-roam-mode)
-      :custom
-      (org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
-      :bind (:map org-roam-mode-map
-              (("C-c n l" . org-roam)
-               ("C-c n f" . org-roam-find-file)
-               ("C-c n g" . org-roam-graph-show))
-              :map org-mode-map
-              (("C-c n i" . org-roam-insert))
-              (("C-c n I" . org-roam-insert-immediate))))
+
+   (defhydra hydra-window ()
+     "
+   Movement^^        ^Split^         ^Switch^		^Resize^
+   ----------------------------------------------------------------
+   _h_ ←       	_v_ertical    	_b_uffer		_q_ shrink
+   _j_ ↓        	_x_ horizontal	_f_ind files	_w_ balance
+   _k_ ↑        	_z_ undo      	_a_ce 1		_e_nlarge
+   _l_ →        	_Z_ reset      	_s_wap		_r_ split toggle
+   _F_ollow		_D_lt Other   	_S_ave		max_i_mize
+   _SPC_ cancel	_o_nly this   	_d_elete	
+   "
+     ("h" windmove-left )
+     ("j" windmove-down )
+     ("k" windmove-up )
+     ("l" windmove-right )
+     ("q" shrink-window-horizontally)
+     ("w" balance-windows)
+     ("e" enlarge-window)
+     ("r" window-split-toggle)
+     ("b" helm-mini)
+     ("f" helm-find-files)
+     ("F" follow-mode)
+     ("a" (lambda ()
+            (interactive)
+            (ace-window 1)
+            (add-hook 'ace-window-end-once-hook
+                      'hydra-window/body))
+      )
+     ("v" (lambda ()
+            (interactive)
+            (split-window-right)
+            (windmove-right))
+      )
+     ("x" (lambda ()
+            (interactive)
+            (split-window-below)
+            (windmove-down))
+      )
+     ("s" (lambda ()
+            (interactive)
+            (ace-window 4)
+            (add-hook 'ace-window-end-once-hook
+                      'hydra-window/body)))
+     ("S" save-buffer)
+     ("d" delete-window)
+     ("D" (lambda ()
+            (interactive)
+            (ace-window 16)
+            (add-hook 'ace-window-end-once-hook
+                      'hydra-window/body))
+      )
+     ("o" delete-other-windows)
+     ("i" ace-maximize-window)
+     ("z" (progn
+            (winner-undo)
+            (setq this-command 'winner-undo))
+      )
+     ("Z" winner-redo)
+     ("SPC" nil)
+     )
+
+#+end_src
+** between buffers
+#+begin_src emacs-lisp :tangle yes
 
 
 
+   (defhydra hydra-buffer-menu (:color pink
+                                       :hint nil)
+     "
+   ^Mark^             ^Unmark^           ^Actions^          ^Search
+   ^^^^^^^^-----------------------------------------------------------------
+   _m_: mark          _u_: unmark        _x_: execute       _R_: re-isearch
+   _s_: save          _U_: unmark up     _b_: bury          _I_: isearch
+   _d_: delete        ^ ^                _g_: refresh       _O_: multi-occur
+   _D_: delete up     ^ ^                _T_: files only: % -28`Buffer-menu-files-only
+   _~_: modified
+   "
+     ("m" Buffer-menu-mark)
+     ("u" Buffer-menu-unmark)
+     ("U" Buffer-menu-backup-unmark)
+     ("d" Buffer-menu-delete)
+     ("D" Buffer-menu-delete-backwards)
+     ("s" Buffer-menu-save)
+     ("~" Buffer-menu-not-modified)
+     ("x" Buffer-menu-execute)
+     ("b" Buffer-menu-bury)
+     ("g" revert-buffer)
+     ("T" Buffer-menu-toggle-files-only)
+     ("O" Buffer-menu-multi-occur :color blue)
+     ("I" Buffer-menu-isearch-buffers :color blue)
+     ("R" Buffer-menu-isearch-buffers-regexp :color blue)
+     ("c" nil "cancel")
+     ("v" Buffer-menu-select "select" :color blue)
+     ("o" Buffer-menu-other-window "other-window" :color blue)
+     ("q" quit-window "quit" :color blue))
+
+   (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
+
+
+#+end_src
+** in buffers
+#+begin_src emacs-lisp :tangle yes
+   (eval-after-load "helm"
+     '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
 
 #+end_src
 
 #+RESULTS:
-: org-roam-insert-immediate
+: ace-jump-helm-line
+
+* accessibility
+#+begin_src emacs-lisp :tangle yes
+   (defhydra hydra-zoom (:color amaranth)  "zoom"
+     ("=" text-scale-increase "in")
+     ("-" text-scale-decrease "out")
+     ("0" (text-scale-adjust 0) "reset")
+     ("o" (other-window) "other window")
+     ("q" nil "quit" :color blue))
+
+   (global-set-key (kbd "C-=") 'hydra-zoom/body)
+
+#+end_src
+
+#+RESULTS:
+: hydra-zoom/body
+
+
+
 
 * debugging
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2070,6 +1378,667 @@ M-x describe-current-coding-system
 : hydra-yasnippet/body
 
 
+
+
+* HYDRAS
+#+begin_src emacs-lisp :tangle yes
+
+         (defhydra hydra-org (:color amaranth :columns 3)
+           "Org Mode Movements"
+           ("n" outline-next-visible-heading "next heading")
+           ("p" outline-previous-visible-heading "prev heading")
+           ("N" org-forward-heading-same-level "next heading at same level")
+           ("P" org-backward-heading-same-level "prev heading at same level")
+           ("u" outline-up-heading "up heading")
+           ("k" kill-region "kill region")
+           ("y" yank "paste")
+           ("l" helm-show-kill-ring "list" :color blue)  
+           ("r" org-refile "refile")
+           ("t" org-todo "todo")
+           ("g" org-set-tags-command "tags")
+           ("s" show-subtree "expand subtree")
+           ("h" hide-subtree "collapse subtree")
+           ("a" org-archive-subtree "archive")
+           ("G" org-goto "goto" :exit t)
+           ("q" nil "quit" :color blue)
+           )
+
+
+
+
+         (defhydra goto (:color blue :hint nil)
+           "
+         Goto:
+         ^Char^              ^Word^                ^org^                    ^search^
+         ^^^^^^^^---------------------------------------------------------------------------
+         _c_: 2 chars        _w_: word by char     _h_: headline in buffer  _o_: helm-occur
+         _C_: char           _W_: some word        _a_: heading in agenda   _p_: helm-swoop
+         _L_: char in line   _s_: subword by char  _q_: swoop org buffers   _f_: search forward
+         ^  ^                _S_: some subword     ^ ^                      _b_: search backward
+         -----------------------------------------------------------------------------------
+         _B_: helm-buffers       _l_: avy-goto-line
+         _m_: helm-mini          _i_: ace-window
+         _R_: helm-recentf
+
+         _n_: Navigate           _._: mark position _/_: jump to mark
+         "
+           ("c" avy-goto-char-2)
+           ("C" avy-goto-char)
+           ("L" avy-goto-char-in-line)
+           ("w" avy-goto-word-1)
+           ;; jump to beginning of some word
+           ("W" avy-goto-word-0)
+           ;; jump to subword starting with a char
+           ("s" avy-goto-subword-1)
+           ;; jump to some subword
+           ("S" avy-goto-subword-0)
+           ("l" avy-goto-line)
+           ("i" ace-window)
+           ("h" helm-org-headlines)
+           ("a" helm-org-agenda-files-headings)
+           ("q" helm-multi-swoop-org)
+           ("o" helm-occur)
+           ("p" helm-swoop)
+   ;        ("p" swiper-helm)
+           ("f" isearch-forward)
+           ("b" isearch-backward)
+           ("." org-mark-ring-push :color red)
+           ("/" org-mark-ring-goto :color blue)
+           ("B" helm-buffers-list)
+           ("m" helm-mini)
+           ("R" helm-recentf)
+           ("n" hydra-navigate/body))
+
+         (global-set-key (kbd "s-g") 'goto/body)
+
+
+#+end_src
+
+#+RESULTS:
+: goto/body
+
+* DIRED
+
+#+begin_src emacs-lisp :tangle yes
+(eval-after-load "dired-aux"
+   '(add-to-list 'dired-compress-file-suffixes 
+                 '("\\.zip\\'" ".zip" "unzip")))
+
+   (diredp-toggle-find-file-reuse-dir 1)
+   (defhydra hydra-dired (:hint nil :color pink)
+     "
+   _+_ mkdir          _v_iew           _m_ark             _(_ details        _i_nsert-subdir    wdired
+   _C_opy             _O_ view other   _U_nmark all       _)_ omit-mode      _$_ hide-subdir    C-x C-q : edit
+   _D_elete           _o_pen other     _u_nmark           _l_ redisplay      _w_ kill-subdir    C-c C-c : commit
+   _R_ename           _M_ chmod        _t_oggle           _g_ revert buf     _e_ ediff          C-c ESC : abort
+   _Y_ rel symlink    _G_ chgrp        _E_xtension mark   _s_ort             _=_ pdiff
+   _S_ymlink          ^ ^              _F_ind marked      _._ toggle hydra   \\ flyspell
+   _r_sync            ^ ^              ^ ^                ^ ^                _?_ summary
+   _z_ compress-file  _A_ find regexp
+   _Z_ compress       _Q_ repl regexp
+
+   T - tag prefix
+   "
+     ("\\" dired-do-ispell)
+     ("(" dired-hide-details-mode)
+     (")" dired-omit-mode)
+     ("+" dired-create-directory)
+     ("=" diredp-ediff)         ;; smart diff
+     ("?" dired-summary)
+     ("$" diredp-hide-subdir-nomove)
+     ("A" dired-do-find-regexp)
+     ("C" dired-do-copy)        ;; Copy all marked files
+     ("D" dired-do-delete)
+     ("E" dired-mark-extension)
+     ("e" dired-ediff-files)
+     ("F" dired-do-find-marked-files)
+     ("G" dired-do-chgrp)
+     ("g" revert-buffer)        ;; read all directories again (refresh)
+     ("i" dired-maybe-insert-subdir)
+     ("l" dired-do-redisplay)   ;; relist the marked or singel directory
+     ("M" dired-do-chmod)
+     ("m" dired-mark)
+     ("O" dired-display-file)
+     ("o" dired-find-file-other-window)
+     ("Q" dired-do-find-regexp-and-replace)
+     ("R" dired-do-rename)
+     ("r" dired-do-rsynch)
+     ("S" dired-do-symlink)
+     ("s" dired-sort-toggle-or-edit)
+     ("t" dired-toggle-marks)
+     ("U" dired-unmark-all-marks)
+     ("u" dired-unmark)
+     ("v" dired-view-file)      ;; q to exit, s to search, = gets line #
+     ("w" dired-kill-subdir)
+     ("Y" dired-do-relsymlink)
+     ("z" diredp-compress-this-file)
+     ("Z" dired-do-compress)
+     ("q" nil)
+     ("." nil :color blue))
+
+   (define-key dired-mode-map "." 'hydra-dired/body)
+
+
+#+end_src
+#+RESULTS:
+: hydra-dired/body
+
+* NEW snippets
+#+begin_src emacs-lisp :tangle yes
+   (setq display-time-mode t)
+   (setq fill-flowed-encode-column 1000)
+   (setq org-contacts-files (quote ("~/Dropbox/Zettelkasten/contacts.org")))
+   (setq org-timer-display (quote both))
+
+
+
+
+
+
+#+end_src
+
+#+RESULTS:
+: hydra-org/body
+
+* emacs mechanics
+#+begin_src emacs-lisp :tangle yes
+   (setq visible-bell nil)
+   (add-to-list 'default-frame-alist '(fullscreen . maximized))
+   (setq inhibit-startup-screen t)
+
+   (tool-bar-mode -1)
+   (menu-bar-mode -1)
+   (scroll-bar-mode -1)
+
+   (setq initial-major-mode 'org-mode)
+
+   (delete-selection-mode) ;allows to delete selected text by typing
+
+   (fset 'yes-or-no-p 'y-or-n-p)
+
+   (setq confirm-kill-emacs (quote y-or-n-p))
+
+
+   (set-fringe-mode '(50 . 50))
+   (setq ring-bell-function (quote ignore))
+
+
+#+end_src
+
+#+RESULTS:
+: ignore
+
+* font/coding/wrapping
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+
+
+         (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+                           '("NanumBarunpen" . "unicode-bmp" )
+
+                           )
+         (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
+                           '("NanumBarunpen" . "unicode-bmp"))
+       ;  (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
+        ;                   (font-spec :size 30)) 
+
+         (setq use-default-font-for-symbols nil)
+
+
+         (use-package unicode-fonts
+           :ensure t
+           :defer t
+           :init (unicode-fonts-setup))
+
+
+         (setq global-visual-fill-column-mode t)
+         (setq global-visual-line-mode t)
+
+
+         (eval-after-load "flyspell"
+           '(define-key flyspell-mode-map (kbd "C-.") nil))
+
+
+
+
+#+END_SRC
+
+#+RESULTS:
+
+
+* calendar & calfw
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (use-package calfw)
+   (use-package calfw-org)
+                                           ;   (use-package calfw-gcal)
+   (use-package calfw-cal)
+   (setq package-check-signature nil)
+                                           ;  (setq org-gcal-down-days '30)
+                                           ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
+
+
+   (defun my-open-calendar ()
+     (interactive)
+     (cfw:open-calendar-buffer
+      :contents-sources
+      (list
+       (cfw:org-create-source "pale green")  ; orgmode source
+       (cfw:cal-create-source "light goldenrod") ; diary source
+       ))) 
+   (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
+                                           ;   (setq calendar-daylight-savings-starts '(3 11 year))
+                                           ;  (setq calendar-daylight-savings-ends: '(11 4 year))
+   (setq calendar-week-start-day 1)
+
+   (setq diary-file "~/Dropbox/Zettelkasten/diary")
+
+
+
+#+END_SRC
+
+#+RESULTS:
+: ~/Dropbox/Zettelkasten/diary
+
+  
+
+
+
+* keybindings
+
+#+begin_src emacs-lisp :tangle yes
+
+   (global-unset-key (kbd "C-z"))     
+   (global-unset-key (kbd "M-c"))
+   (global-unset-key (kbd "C-v "))
+   (define-key org-mode-map (kbd "C-0 C-c C-w") 'org-refile-cache-clear)
+   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+   (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+   (global-unset-key (kbd "S-SPC"))
+   (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
+   (global-set-key (kbd "<f1>") 'org-capture)
+   (define-key dired-mode-map (kbd "<f1>") 'org-capture)
+   (bind-keys 
+                                           ;("C-+"   . text-scale-increase)
+                                           ;   a      ("C--"   . text-scale-decrease)
+    ("C-c l" . org-store-link)
+    ("M-z" . ace-jump-mode)                                          ;                 ("C-c k" . toggle-korean-input-method)
+    ("C-."   . org-todo)
+                                           ;              ("C-x /" . shrink-window-horizontally)
+    ("C-x ." . org-archive-subtree-default)
+                                           ;       ("C-c n" . org-schedule)
+    ("M-="   . count-words)
+    ("M-x"   . helm-M-x)
+
+    ("C-c b" . list-bookmarks)
+                                           ;    ("C-a" . org-beginning-of-line)
+    ([Hangul] . toggle-input-method)
+                                           ;   ("C-e" . org-end-of-line)
+    ("C-k" . org-kill-line)
+    ("C-c g" . org-id-goto)
+                                           ;              ("C-<kp-6>" . xah-select-block)
+                                           ;   ("C-x j" . helm-org-in-buffer-headings)
+    ("C-c i" . insert-timestamp)
+                                           ;  ("C-c a" . helm-org-agenda-files-headings)
+    ("C-c C-x C-r" . org-clock-report)
+    ([f1] . org-capture)
+    ([f2] . org-clock-in)
+    ([f3] . helm-buffers-list)           
+    ([f4] . org-refile)
+    ([f5] . helm-projectile)
+    ([f6] . helm-bibtex-with-local-bibliography)
+    ([f7] . org-agenda)
+    ([f8] . deft)
+    ([f9] . helm-org-rifle-current-buffer)
+    ([f10] . org-narrow-to-subtree)
+    ([f11] . org-id-goto)
+    ([f12] . bury-buffer)
+
+    )
+
+
+
+                                           ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+                                           ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+   (define-key key-translation-map (kbd "C-_") (kbd "–"))
+
+   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
+   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+
+#+end_src
+
+#+RESULTS:
+: [8756]
+
+* mu4e
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+                                           ; (use-package mu4e) 
+                                           ; (use-package mu4e-contrib)
+   (require 'mu4e)
+   (require 'org-mu4e)
+   ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+
+   (setq mu4e-sent-messages-behavior 'delete)
+   (setq message-kill-buffer-on-exit t)
+   (setq mu4e-change-filenames-when-moving t)
+   (setq mu4e-compose-format-flowed t)
+
+   (setq mu4e-hide-index-messages t)
+   ;; Call EWW to display HTML messages
+                                           ;(defun jcs-view-in-eww (msg)
+                                           ; (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
+
+   ;; Arrange to view messages in either the default browser or EWW
+   (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+                                           ; (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
+
+   ;; From Ben Maughan: Get some Org functionality in compose buffer
+   (add-hook 'message-mode-hook 'turn-on-orgtbl)
+                                           ; (add-hook 'message-mode-hook 'turn-on-orgstruct++)
+
+   (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
+   (add-hook 'mu4e-view-mode-hook 'visual-fill-column-mode)
+
+   (defun no-auto-fill ()
+     "Turn off auto-fill-mode."
+     (auto-fill-mode -1))
+
+
+   (defun vcfm-off ()
+                                           ;turn off visual fill column mode
+     (visual-fill-column-mode nil))
+
+   (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
+   (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
+
+   (setq mu4e-compose-dont-reply-to-self t)
+   (setq mu4e-confirm-quit nil)
+   (setq mu4e-display-update-status-in-modeline nil)
+   (setq mu4e-index-lazy-check t)
+
+
+   (setq mu4e-bookmarks
+         (quote
+          ((:name "Inbox" :query "maildir:/INBOX" :key 117)
+           (:name "Today's messages" :query "date:today..now" :key 116)
+           (:name "Last 7 days" :query "date:7d..now" :show-unread t :key 119)
+           (:name "Messages with images" :query "mime:image/*" :key 112))))
+#+END_SRC
+  
+#+RESULTS:
+| :name | Inbox                | :query | maildir:/INBOX  | :key         | 117 |      |     |
+| :name | Today's messages     | :query | date:today..now | :key         | 116 |      |     |
+| :name | Last 7 days          | :query | date:7d..now    | :show-unread |   t | :key | 119 |
+| :name | Messages with images | :query | mime:image/*    | :key         | 112 |      |     |
+  
+** message view
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+                                           ;  (setq mu4e-attachment-dir "/home/betsy/Dropbox/Spring 2019/")
+
+
+
+
+   (setq shr-color-visible-luminance-min 50) 
+   (setq shr-color-visible-distance-min 5)
+                                           ;(setq mu4e-view-html-plaintext-ratio-heuristic 'most-positive-fixnum)
+   (setq message-yank-prefix ""
+         message-yank-empty-prefix ""
+         message-yank-cited-prefix "")
+
+   (setq w3m-default-desplay-inline-images t)
+   (defun mu4e-action-view-in-w3m ()
+     "View the body of the message in emacs w3m."
+     (interactive)
+     (w3m-browse-url (concat "file://"
+                             (mu4e~write-body-to-html (mu4e-message-at-point t)))))
+
+
+   ;; customize the reply-quote-string
+   (setq message-citation-line-format "\n\nOn %a %d %b %Y at %R, %f wrote:\n")
+   ;; choose to use the formatted string
+   (setq message-citation-line-function 'message-insert-formatted-citation-line)
+
+
+   (setq mu4e-view-scroll-to-next nil)
+
+   (add-hook 'message-mode-hook 'visual-fill-column-mode)
+
+
+
+#+END_SRC
+
+#+RESULTS:
+: United States
+
+** headers view
+
+ 
+
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq mu4e-headers-include-related nil)
+   (setq mu4e-headers-fields
+         '( (:human-date    .  15)    ;; alternatively, use :human-date
+            (:flags         .   5)
+            (:from          .  20)
+            (:thread-subject       . 70 )
+                                           ;             (:thread-subject       . 120 )
+            )) 
+   (setq org-mu4e-link-query-in-headers-mode nil)
+   (setq mu4e-update-interval 300)
+   (setq mu4e-use-fancy-chars nil)
+   (setq mu4e-index-update-in-background t)
+   (setq mu4e-view-prefer-html t)
+   (setq mu4e-headers-skip-duplicates t)
+   (setq mu4e-headers-auto-update t)
+   (setq mu4e-view-show-addresses t)
+   (setq mu4e-view-show-images t)
+   (setq mu4e-headers-date-format "%x")
+   (setq mu4e-headers-time-format "%H:%M")
+#+END_SRC
+
+#+RESULTS:
+: %H:%M
+
+** settings
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   ;; allow for updating mail using 'U' in the main view:
+   (setq mu4e-get-mail-command "true")
+;(setq mail-user-agent 'mu4e-user-agent)
+ (use-package org-msg)
+ (setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
+	org-msg-startup "hidestars indent inlineimages"
+;	org-msg-greeting-fmt "\nHi *%s*,\n\n"
+	org-msg-greeting-name-limit 3
+	org-msg-text-plain-alternative t
+	org-msg-signature "
+
+ In solidarity,
+
+ #+begin_signature
+ -- *Betsy (she/they)* \\\\
+ #+end_signature")
+ (org-msg-mode)
+
+#+END_SRC 
+
+#+RESULTS:
+: t
+
+** folders
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (setq mu4e-maildir-shortcuts
+         '( ("/INBOX"  . ?i)
+            ("/Sent"   . ?s)
+            ("/Trash"  . ?t)
+            ("/All"    . ?a)))
+
+   (setq mu4e-drafts-folder "/Drafts")
+   (setq mu4e-sent-folder   "/Sent")
+   (setq mu4e-trash-folder  "/Trash")
+   (setq mu4e-refile-folder "/All")
+   (setq mu4e-maildir "~/Maildir")
+   (setq mu4e-attachment-dir "~/Dropbox/2020")
+#+END_SRC 
+
+#+RESULTS:
+: ~/Dropbox/2020
+
+  
+
+
+
+
+
+
+
+
+* usability
+
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+
+
+   (use-package smartparens
+     :ensure t
+     :defer t
+     :init
+     (show-smartparens-global-mode 1))
+   (smartparens-global-mode 1)
+   (setq show-paren-style 'expression)
+
+   (sp-local-pair 'org-mode "/" "/" :actions '(wrap))
+   (sp-local-pair 'org-mode "_" "_" :actions '(wrap))
+   (sp-local-pair 'org-mode "*" "*" :actions '(wrap))
+   (sp-local-pair 'org-mode "+" "+" :actions '(wrap))
+   (sp-local-pair 'org-mode "~" "~" :actions '(wrap))
+   (sp-local-pair 'org-mode "=" "=" :actions '(wrap))
+   (sp-local-pair 'org-mode "-" "-" :actions '(wrap))
+   (sp-pair "'" nil :actions :rem)
+
+
+   (setq blink-matching-paren-dont-ignore-comments nil)
+
+                                           ;autocompletion
+   (use-package company
+     :ensure t
+     :init (global-company-mode)
+     :config (company-mode 1))     
+
+                                           ;spellcheck
+   (use-package flyspell-correct-helm)
+
+#+END_SRC
+
+#+RESULTS:
+
+(setq electric-pair-pairs
+(quote
+((34 . 34)
+(8216 . 8217)
+(8220 . 8221)
+(42 . 42)
+(95 . 95)
+(47 . 47)
+(126 . 126)
+(43 . 43))))
+
+
+
+
+
+* anki
+#+begin_src emacs-lisp :tangle yes
+   (setq select-enable-clipboard t
+         x-select-enable-primary nil)
+   (use-package anki-editor
+     :after org
+     :hook (org-capture-after-finalize . anki-editor-reset-cloze-number) ; Reset cloze-number after each capture.
+     :config
+     (setq anki-editor-create-decks t)
+     (defun anki-editor-cloze-region-auto-incr (&optional arg)
+       "Cloze region without hint and increase card number."
+       (interactive)
+       (anki-editor-cloze-region my-anki-editor-cloze-number "")
+       (setq my-anki-editor-cloze-number (1+ my-anki-editor-cloze-number))
+       (forward-sexp))
+     (defun anki-editor-cloze-region-dont-incr (&optional arg)
+       "Cloze region without hint using the previous card number."
+       (interactive)
+       (anki-editor-cloze-region (1- my-anki-editor-cloze-number) "")
+       (forward-sexp))
+     (defun anki-editor-reset-cloze-number (&optional arg)
+       "Reset cloze number to ARG or 1"
+       (interactive)
+       (setq my-anki-editor-cloze-number (or arg 1)))
+     (defun anki-editor-push-tree ()
+       "Push all notes under a tree."
+       (interactive)
+       (anki-editor-push-notes '(4))
+       (anki-editor-reset-cloze-number))
+     ;; Initialize
+     (anki-editor-reset-cloze-number)
+     )
+
+
+
+
+
+
+#+end_src
+
+#+RESULTS:
+| anki-editor-reset-cloze-number | yankpad--remove-id-from-yankpad-capture |
+
+* chronos
+#+begin_src emacs-lisp :tangle yes
+   (setq chronos-notification-time 120)
+   (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+   (use-package org-alert)
+
+(defun chronos-switch-buffer-notify (c)
+"Switch to the chronos buffer when timer expires"
+(switch-to-buffer "chronos"))
+
+   (use-package org-pomodoro) (setq org-pomodoro-finished-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+                                           ; (setq org-pomodoro-finished-sound-args "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+   (setq org-pomodoro-short-break-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav" )
+   (setq org-pomodoro-long-break-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav" )
+   (setq org-pomodoro-ticking-sound-p t)
+   (setq org-pomodoro-manual-break nil)
+   (setq org-pomodoro-clock-break nil)
+
+  (setq helm-chronos-standard-timers
+	'(	   "    25/END pomodoro  + 5/END break"))
+
+(use-package pomidor)
+(setq pomidor-save-session-file "~/Dropbox/emacs/.emacs.d/pomidor-session.json")
+(setq pomidor-sound-break-over "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+(setq pomidor-sound-overwork "~/Dropbox/emacs/.emacs.d/overwork.wav")
+(setq pomidor-sound-tick "~/Dropbox/emacs/.emacs.d/tick.wav")
+(setq pomidor-sound-tack "~/Dropbox/emacs/.emacs.d/tack.wav")
+   #+end_src
+
+#+RESULTS:
+: ~/Dropbox/emacs/.emacs.d/tack.wav
+
 * openwith                                                       
   #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package openwith
@@ -2151,6 +2120,40 @@ M-x describe-current-coding-system
 
 
 
+
+* org-roam
+#+begin_src emacs-lisp :tangle yes
+
+(use-package org-roam
+      :ensure t
+      :hook
+      (org-load . org-roam-mode)
+      :custom
+      (org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
+      :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n g" . org-roam-graph-show))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert))
+              (("C-c n I" . org-roam-insert-immediate))))
+
+
+(setq org-roam-capture-templates '(
+
+("d" "default" plain #'org-roam--capture-get-point "%?" :file-name "${slug}" :head "#+title: ${title}
+" :unnarrowed t)
+("l" "lit" plain #'org-roam--capture-get-point "%?" :file-name "lit/${slug}" :head "#+setupfile:./hugo_setup.org\n#+hugo_slug: ${slug}\n#+title: ${title}\n" :unnarrowed t)
+
+))
+
+
+#+end_src
+
+#+RESULTS:
+| d           | default | plain | (function org-roam--capture-get-point) | %? | :file-name | ${slug}     | :head | #+title: ${title}            |
+| :unnarrowed | t       |       |                                        |    |            |             |       |                              |
+| l           | lit     | plain | (function org-roam--capture-get-point) | %? | :file-name | lit/${slug} | :head | #+setupfile:./hugo_setup.org |
 
 * theme
 
