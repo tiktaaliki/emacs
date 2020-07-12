@@ -1231,8 +1231,8 @@ M-x describe-current-coding-system
 
      (use-package pdf-tools :defer t)
      (use-package org-pdfview :defer t)
-     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
-     (add-hook 'pdf-view-mode-hook (lambda () (centered-window-mode 0)))
+;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
+
      (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
      (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
 
