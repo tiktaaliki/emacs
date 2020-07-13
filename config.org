@@ -2009,31 +2009,37 @@ M-x describe-current-coding-system
 
 * chronos
 #+begin_src emacs-lisp :tangle yes
-   (setq chronos-notification-time 120)
-   (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-   (use-package org-alert)
+      (setq chronos-notification-time 120)
+      (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+      (use-package org-alert)
 
-(defun chronos-switch-buffer-notify (c)
-"Switch to the chronos buffer when timer expires"
-(switch-to-buffer "chronos"))
+   (defun chronos-switch-buffer-notify (c)
+   "Switch to the chronos buffer when timer expires"
+   (switch-to-buffer "chronos"))
 
-   (use-package org-pomodoro) (setq org-pomodoro-finished-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-                                           ; (setq org-pomodoro-finished-sound-args "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-   (setq org-pomodoro-short-break-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav" )
-   (setq org-pomodoro-long-break-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav" )
-   (setq org-pomodoro-ticking-sound-p t)
-   (setq org-pomodoro-manual-break nil)
-   (setq org-pomodoro-clock-break nil)
+      (use-package org-pomodoro) (setq org-pomodoro-finished-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+                                              ; (setq org-pomodoro-finished-sound-args "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+      (setq org-pomodoro-short-break-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav" )
+      (setq org-pomodoro-long-break-sound "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav" )
+      (setq org-pomodoro-ticking-sound-p t)
+      (setq org-pomodoro-manual-break nil)
+      (setq org-pomodoro-clock-break nil)
 
-  (setq helm-chronos-standard-timers
-	'(	   "    25/END pomodoro  + 5/END break"))
+     (setq helm-chronos-standard-timers
+           '(	   "    25/END pomodoro + 5/END break"
+		   "    25/END pomodoro 1 + 5/END break 1 + 25/END pomodoro 2 + 5/END break 2 + 25/END pomodoro 3 + 5/END break 3 + 25/END pomodoro 4 + 5/END break 4"
 
-(use-package pomidor)
-(setq pomidor-save-session-file "~/Dropbox/emacs/.emacs.d/pomidor-session.json")
-(setq pomidor-sound-break-over "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-(setq pomidor-sound-overwork "~/Dropbox/emacs/.emacs.d/overwork.wav")
-(setq pomidor-sound-tick "~/Dropbox/emacs/.emacs.d/tick.wav")
-(setq pomidor-sound-tack "~/Dropbox/emacs/.emacs.d/tack.wav")
+
+   )
+
+   )
+
+   (use-package pomidor)
+   (setq pomidor-save-session-file "~/Dropbox/emacs/.emacs.d/pomidor-session.json")
+   (setq pomidor-sound-break-over "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+   (setq pomidor-sound-overwork "~/Dropbox/emacs/.emacs.d/overwork.wav")
+   (setq pomidor-sound-tick "~/Dropbox/emacs/.emacs.d/tick.wav")
+   (setq pomidor-sound-tack "~/Dropbox/emacs/.emacs.d/tack.wav")
    #+end_src
 
 #+RESULTS:
