@@ -779,7 +779,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
              ("p" "pomodoro" table-line (id "6w81f6q04qi0") "| %^{Day & time} | %^{How many pomodoros?} | %^{Task} | %^{Area of focus|ndd|lis|home|sysadmin|} |%^{Mode}|  %^{Notes}|" :table-line-pos "I+1" )
 
-             ("r" "reading log" table-line (id "em87rza1mni0") "|%^{Author}|%^{Title}|%^{Started}|" :table-line-pos "I+1" )
+             ("r" "reading log" table-line (id "em87rza1mni0") "|%^{Author}|%^{Title}|%^{Finished}|" :table-line-pos "I+1" )
 
              ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n" :prepend nil)
 
@@ -801,6 +801,9 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                              ;this prevents org-capture from replacing any windows. it just adds. 
     
 #+END_SRC
+
+#+RESULTS:
+: my-org-capture-place-template-dont-delete-windows
 
      (with-eval-after-load "org-capture"
        (advice-add 'org-capture-place-template :around 'my-org-capture-place-template-dont-delete-windows))

@@ -3,7 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "/home/betsy/Dropbox/emacs/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(chronos-expiry-functions
    (quote
     (chronos-sound-notify chronos-message-notify chronos-buffer-notify)))
@@ -39,7 +39,7 @@
  '(org-pomodoro-ticking-sound-states (quote (:pomodoro)))
  '(org-superstar-item-bullet-alist (quote ((42 . 8211) (43 . 10148) (45 . 8226))))
  '(org-superstar-prettify-item-bullets t)
- '(org-support-shift-select t)
+ '(org-support-shift-select (quote always))
  '(org-tag-faces
    (quote
     (("ndd" :inherit org-tag :foreground "yellow green")
