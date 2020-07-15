@@ -508,23 +508,25 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 | my/org-checkbox-todo |
 *** plain lists & bullets
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package org-superstar)
-   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+     (use-package org-superstar)
+     (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+(setq org-superstar-headline-bullets-list '("◉" "○" "❤"  "◆"  "⭆" ) )
 
- (setq org-list-demote-modify-bullet
-          '(("+" . "-") ("-" . "+") ("*" . "+")))
-    ;  (setq org-list-demote-modify-bullet
-     ;       '(("+" . "-") ("-" . "+") ))
-      (setq org-list-allow-alphabetical t)
-      (setq org-list-indent-offset 1)
-      (setq org-list=description-max-indent 5)
-    ;  (setq org-bullets-bullet-list (quote ( "⚫" "⧽" "○" "⯌"     "◆"  "☆"            "⚬" )))
-                                              ;   "•"    "‣"    "⏵""▷"   "♦""◇"    "◉" "⬤"〇⭕ "⨀"  "★" "⬤" "ᐅ"  "〇"     "⟐"     "⚬" )))
-                                              ;○◔◑◕●⌾⭗☉⌾◎◉⨀◎⌾◉◍⊗⊛•○∙⊛⁕✱ ൦❄⊕⊖⊗⊘⊙⊚⊛⊜⊝∘∙◉⏺○◍◎●◐◑◒◓◔◕◦◯◴◵◶◷☉⚪⚫⚬◐
 
-                                              ; too tall: "⬥"  "⯈" "⚫" "∙" ⬤ ✶ "✧" "▸" "⯏"  "⭗"   "⛭" "⚪"  "⭐"  "⏵" 
-      (setq org-inlinetask-min-level 7)
-      (setq org-checkbox-hierarchical-statistics nil)
+   (setq org-list-demote-modify-bullet
+            '(("+" . "-") ("-" . "+") ("*" . "+")))
+      ;  (setq org-list-demote-modify-bullet
+       ;       '(("+" . "-") ("-" . "+") ))
+        (setq org-list-allow-alphabetical t)
+        (setq org-list-indent-offset 1)
+        (setq org-list=description-max-indent 5)
+      ;  (setq org-bullets-bullet-list (quote ( "⚫" "⧽" "○" "⯌"     "◆"  "☆"            "⚬" )))
+                                                ;   "•"    "‣"    "⏵""▷"   "♦""◇"    "◉" "⬤"〇⭕ "⨀"  "★" "⬤" "ᐅ"  "〇"     "⟐"     "⚬" )))
+                                                ;○◔◑◕●⌾⭗☉⌾◎◉⨀◎⌾◉◍⊗⊛•○∙⊛⁕✱ ൦❄⊕⊖⊗⊘⊙⊚⊛⊜⊝∘∙◉⏺○◍◎●◐◑◒◓◔◕◦◯◴◵◶◷☉⚪⚫⚬◐
+
+                                                ; too tall: "⬥"  "⯈" "⚫" "∙" ⬤ ✶ "✧" "▸" "⯏"  "⭗"   "⛭" "⚪"  "⭐"  "⏵" 
+        (setq org-inlinetask-min-level 7)
+        (setq org-checkbox-hierarchical-statistics nil)
 
 #+END_SRC
 
@@ -807,6 +809,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
      (with-eval-after-load "org-capture"
        (advice-add 'org-capture-place-template :around 'my-org-capture-place-template-dont-delete-windows))
+
 
 
 * navigating
