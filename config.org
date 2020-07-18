@@ -349,15 +349,20 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                     ("sysadmin" . ?s)
                                     ("home" . ?h)
                                     ("lis" . ?l)
-                                    ("self")
+                                    ("mentat" . ?m)
                                     (:endgroup)
 
+                                    (:startgrouptag)
+                                    ("sysadmin")
+                                    (:grouptags)
+                                    ("emacs" . ?e)
+                                    ("system")
+                                    (:endgrouptag)
+
                                     (:startgroup)
-                                    ("research" . ?e)
-                                    ("intake")
-                                    ("ingest" . ?i)                                              
-                                    ("write" . ?w)
                                     ("admin" . ?a)
+                                    ("discovery" . ?d)
+                                    ("intake" . ?i)                                   
                                     (:endgroup)
 
                                     (:startgrouptag)
@@ -368,14 +373,21 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                     ("job")
                                     (:endgrouptag)
 
+                                    (:startgrouptag)
+                                    ("mentat")
+                                    (:grouptags)
+                                    ("korean")
+                                    ("process")
+                                    ("deepwork")
+                                    (:endgrouptag)
 
 
                                     (:startgrouptag)
                                     ("intake")
                                     (:grouptags)
-                                    ("read" . ?r)
-                                    ("watch")
                                     ("listen")
+                                    ("read" . ?r)
+                                    ("watch" . ?w)
                                     (:endgrouptag)
 
                                     (:startgrouptag)
@@ -383,7 +395,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                     (:grouptags)
                                     ("food")
                                     ("cleaning")
-                                    ("journal")
+                                    ("self")
                                     (:endgrouptag)
 
 
@@ -396,7 +408,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 #+END_SRC
 
 #+RESULTS:
-: ((:startgroup) (ndd . 110) (sysadmin . 115) (home . 104) (lis . 108) (self) (:endgroup) (:startgroup) (research . 101) (intake) (ingest . 105) (write . 119) (admin . 97) (:endgroup) (:startgrouptag) (lis) (:grouptags) (bcc) (csi) (job) (:endgrouptag) (:startgrouptag) (intake) (:grouptags) (read . 114) (watch) (listen) (:endgrouptag) (:startgrouptag) (home) (:grouptags) (food) (cleaning) (journal) (:endgrouptag))
+: ((:startgroup) (ndd . 110) (sysadmin . 115) (home . 104) (lis . 108) (mentat . 109) (:endgroup) (:startgrouptag) (sysadmin) (:grouptags) (emacs . 101) (system) (:endgrouptag) (:startgroup) (admin . 97) (discovery . 100) (intake . 105) (:endgroup) (:startgrouptag) (lis) (:grouptags) (bcc) (csi) (job) (:endgrouptag) (:startgrouptag) (mentat) (:grouptags) (korean) (process) (deepwork) (:endgrouptag) (:startgrouptag) (intake) (:grouptags) (listen) (read . 114) (watch . 119) (:endgrouptag) (:startgrouptag) (home) (:grouptags) (food) (cleaning) (self) (:endgrouptag))
 
 #+TAGS: { MODE : admin(a) home(h) focus(f) lis(l) }
 #+TAGS: { admin : email(e) browser(b) }
@@ -775,19 +787,9 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
              ("l" "look up" entry (id "5br4n6815pi0") "* %? \n%U\n  \n%a\n\n\n" :prepend nil)
 
-             ("m" "meditation" table-line (id "otljx3605ni0") "|%u | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
-
-             ("n" "note" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* %^{TOPIC}\n%U\n%? \n%a\n\n\n" :prepend nil)
-
-             ("p" "pomodoro" table-line (id "6w81f6q04qi0") "| %^{Day & time} | %^{How many pomodoros?} | %^{Task} | %^{Area of focus|ndd|lis|home|sysadmin|} |%^{Mode}|  %^{Notes}|" :table-line-pos "I+1" )
-
-             ("r" "reading log" table-line (id "em87rza1mni0") "|%^{Author}|%^{Title}|%^{Finished}|" :table-line-pos "I+1" )
-
              ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n" :prepend nil)
 
-
              ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
-
 
              ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
               "* TODO %? %a\n%U\n%:initial\n" )
@@ -809,6 +811,13 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
      (with-eval-after-load "org-capture"
        (advice-add 'org-capture-place-template :around 'my-org-capture-place-template-dont-delete-windows))
+
+          ;   ("m" "meditation" table-line (id "otljx3605ni0") "|%u | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
+
+           ;  ("n" "note" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* %^{TOPIC}\n%U\n%? \n%a\n\n\n" :prepend nil)
+
+            ; ("p" "pomodoro" table-line (id "6w81f6q04qi0") "| %^{Day & time} | %^{How many pomodoros?} | %^{Task} | %^{Area of focus|ndd|lis|home|sysadmin|} |%^{Mode}|  %^{Notes}|" :table-line-pos "I+1" )
+ ("r" "reading log" table-line (id "em87rza1mni0") "|%^{Author}|%^{Title}|%^{Finished}|" :table-line-pos "I+1" )
 
 
 
