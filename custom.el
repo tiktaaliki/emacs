@@ -39,7 +39,7 @@
  '(org-pomodoro-ticking-sound-states (quote (:pomodoro)))
  '(org-superstar-item-bullet-alist (quote ((42 . 8211) (43 . 10148) (45 . 8226))))
  '(org-superstar-prettify-item-bullets t)
- '(org-support-shift-select (quote always))
+ '(org-support-shift-select t)
  '(org-tag-faces
    (quote
     (("ndd" :inherit org-tag :foreground "yellow green")
@@ -76,9 +76,12 @@
      ("IN-PROG" :weight regular :underline nil :inherit org-todo :foreground "royalblue1")
      ("TODAY" :weight regular :underline nil :inherit org-todo :background "dodger blue" :foreground "white"))))
  '(org-web-tools-pandoc-sleep-time 1.0)
+ '(org-wild-notifier-alert-time (quote (1)))
+ '(org-wild-notifier-keyword-whitelist nil)
+ '(org-wild-notifier-mode t)
  '(package-selected-packages
    (quote
-    (company-org-roam org-roam org-roam-bibtex pomidor org-msg ereader nov org-superstar yasnippet-snippets org-clock-convenience tomatinho org-pomodoro org-plus-contrib crux org-noter pdf-view-restore org-alert anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle eyebrowse org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency spotify speed-type smartparens slack rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-preview-html org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-spotify helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-window centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game)))
+    (org org-wild-notifier company-org-roam org-roam org-roam-bibtex pomidor org-msg ereader nov org-superstar yasnippet-snippets org-clock-convenience tomatinho org-pomodoro org-plus-contrib crux org-noter pdf-view-restore org-alert anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle eyebrowse org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency spotify speed-type smartparens slack rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-preview-html org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-spotify helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-window centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game)))
  '(pdf-annot-default-annotation-properties
    (quote
     ((t
