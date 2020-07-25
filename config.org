@@ -361,6 +361,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
                                     (:startgroup)
                                     ("admin" . ?a)
+				 ("email")
                                     ("discovery" . ?d)
                                     ("intake" . ?i)                                   
                                     (:endgroup)
@@ -408,7 +409,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 #+END_SRC
 
 #+RESULTS:
-: ((:startgroup) (ndd . 110) (sysadmin . 115) (home . 104) (lis . 108) (mentat . 109) (:endgroup) (:startgrouptag) (sysadmin) (:grouptags) (emacs . 101) (system) (:endgrouptag) (:startgroup) (admin . 97) (discovery . 100) (intake . 105) (:endgroup) (:startgrouptag) (lis) (:grouptags) (bcc) (csi) (job) (:endgrouptag) (:startgrouptag) (mentat) (:grouptags) (korean) (process) (deepwork) (:endgrouptag) (:startgrouptag) (intake) (:grouptags) (listen) (read . 114) (watch . 119) (:endgrouptag) (:startgrouptag) (home) (:grouptags) (food) (cleaning) (self) (:endgrouptag))
+: ((:startgroup) (ndd . 110) (sysadmin . 115) (home . 104) (lis . 108) (mentat . 109) (:endgroup) (:startgrouptag) (sysadmin) (:grouptags) (emacs . 101) (system) (:endgrouptag) (:startgroup) (admin . 97) (email) (discovery . 100) (intake . 105) (:endgroup) (:startgrouptag) (lis) (:grouptags) (bcc) (csi) (job) (:endgrouptag) (:startgrouptag) (mentat) (:grouptags) (korean) (process) (deepwork) (:endgrouptag) (:startgrouptag) (intake) (:grouptags) (listen) (read . 114) (watch . 119) (:endgrouptag) (:startgrouptag) (home) (:grouptags) (food) (cleaning) (self) (:endgrouptag))
 
 #+TAGS: { MODE : admin(a) home(h) focus(f) lis(l) }
 #+TAGS: { admin : email(e) browser(b) }
@@ -1358,7 +1359,7 @@ M-x describe-current-coding-system
     (setq yas-global-mode t)
     (setq yas-snippet-dirs
       (quote
-       ("/home/betsy/.emacs.d/snippets")))
+       ("/home/betsy/Dropbox/emacs/.emacs.d/snippets")))
 
 
    (defhydra hydra-yasnippet (:color red :hint nil)

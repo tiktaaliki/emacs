@@ -21,6 +21,9 @@
    (quote
     (("\\.\\(?:docx?\\|pptx?\\|xls?\\)$" "libreoffice"
       (file)))))
+ '(org-agenda-files
+   (quote
+    ("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/habits.org" "~/Dropbox/Zettelkasten/projects.org")))
  '(org-emphasis-alist
    (quote
     (("*" bold)
