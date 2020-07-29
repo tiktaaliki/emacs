@@ -655,7 +655,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
    (setq org-refile-use-cache t)
 
    (setq org-refile-targets (quote (("~/Dropbox/Zettelkasten/notes.org" :maxlevel . 2)
-                                    ("~/Dropbox/Zettelkasten/projects.org" :maxlevel . 2)
+                                    ("~/Dropbox/Zettelkasten/projects.org" :maxlevel . 4)
                                     ("~/Dropbox/Zettelkasten/habits.org" :maxlevel . 2)
                                     ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/bookmarks.org" :maxlevel . 1)
@@ -1547,14 +1547,14 @@ M-x describe-current-coding-system
    (setq org-timer-display (quote both))
 
 
-
+(global-activity-watch-mode)
 
 
 
 #+end_src
 
 #+RESULTS:
-: hydra-org/body
+: t
 
 * emacs mechanics
 #+begin_src emacs-lisp :tangle yes
