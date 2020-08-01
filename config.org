@@ -1,15 +1,3 @@
-* set language environment hydra 
-#+begin_src emacs-lisp :tangle yes
-(defhydra hydra-korean (:color amaranth)  "korean"
-  ("s" set-language-environment "set language")
-  ("q" nil "quit" :color blue))
-
-
-
-#+end_src
-
-#+RESULTS:
-: hydra-korean/body
 
 * load external files
 
@@ -36,6 +24,94 @@
 
 #+RESULTS:
 : t
+* keybindings
+
+#+begin_src emacs-lisp :tangle yes
+
+   (global-unset-key (kbd "C-z"))     
+   (global-unset-key (kbd "M-c"))
+   (global-unset-key (kbd "C-v "))
+   (define-key org-mode-map (kbd "C-0 C-c C-w") 'org-refile-cache-clear)
+   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+   (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+   (global-unset-key (kbd "S-SPC"))
+   (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
+   (global-set-key (kbd "<f1>") 'org-capture)
+   (define-key dired-mode-map (kbd "<f1>") 'org-capture)
+   (bind-keys 
+                                           ;("C-+"   . text-scale-increase)
+                                           ;   a      ("C--"   . text-scale-decrease)
+    ("C-c l" . org-store-link)
+    ("M-z" . ace-jump-mode)                                          ;                 ("C-c k" . toggle-korean-input-method)
+    ("C-."   . org-todo)
+                                           ;              ("C-x /" . shrink-window-horizontally)
+    ("C-x ." . org-archive-subtree-default)
+                                           ;       ("C-c n" . org-schedule)
+("M-o" . other-window)
+    ("M-="   . count-words)
+    ("M-x"   . helm-M-x)
+
+    ("C-c b" . list-bookmarks)
+                                           ;    ("C-a" . org-beginning-of-line)
+    ([Hangul] . toggle-input-method)
+                                           ;   ("C-e" . org-end-of-line)
+    ("C-k" . org-kill-line)
+    ("C-c g" . org-id-goto)
+                                           ;              ("C-<kp-6>" . xah-select-block)
+                                           ;   ("C-x j" . helm-org-in-buffer-headings)
+    ("C-c i" . insert-timestamp)
+                                           ;  ("C-c a" . helm-org-agenda-files-headings)
+    ("C-c C-x C-r" . org-clock-report)
+    ([f1] . org-capture)
+    ([f2] . org-clock-in)
+    ([f3] . helm-buffers-list)           
+    ([f4] . org-refile)
+    ([f5] . helm-projectile)
+    ([f6] . helm-bibtex-with-local-bibliography)
+    ([f7] . org-agenda)
+    ([f8] . deft)
+    ([f9] . helm-org-rifle-current-buffer)
+    ([f10] . org-narrow-to-subtree)
+    ([f11] . org-id-goto)
+    ([f12] . bury-buffer)
+
+    )
+
+
+
+                                           ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+                                           ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+   (define-key key-translation-map (kbd "C-_") (kbd "–"))
+
+   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
+   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+
+#+end_src
+
+#+RESULTS:
+: [8756]
+
+
+* set language environment hydra 
+#+begin_src emacs-lisp :tangle yes
+(defhydra hydra-korean (:color amaranth)  "korean"
+  ("s" set-language-environment "set language")
+  ("q" nil "quit" :color blue))
+
+
+
+#+end_src
+
+#+RESULTS:
+: hydra-korean/body
 
 * org-startup-defaults
 
@@ -1661,79 +1737,6 @@ M-x describe-current-coding-system
 
 
 
-* keybindings
-
-#+begin_src emacs-lisp :tangle yes
-
-   (global-unset-key (kbd "C-z"))     
-   (global-unset-key (kbd "M-c"))
-   (global-unset-key (kbd "C-v "))
-   (define-key org-mode-map (kbd "C-0 C-c C-w") 'org-refile-cache-clear)
-   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-   (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
-   (global-unset-key (kbd "S-SPC"))
-   (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
-   (global-set-key (kbd "<f1>") 'org-capture)
-   (define-key dired-mode-map (kbd "<f1>") 'org-capture)
-   (bind-keys 
-                                           ;("C-+"   . text-scale-increase)
-                                           ;   a      ("C--"   . text-scale-decrease)
-    ("C-c l" . org-store-link)
-    ("M-z" . ace-jump-mode)                                          ;                 ("C-c k" . toggle-korean-input-method)
-    ("C-."   . org-todo)
-                                           ;              ("C-x /" . shrink-window-horizontally)
-    ("C-x ." . org-archive-subtree-default)
-                                           ;       ("C-c n" . org-schedule)
-    ("M-="   . count-words)
-    ("M-x"   . helm-M-x)
-
-    ("C-c b" . list-bookmarks)
-                                           ;    ("C-a" . org-beginning-of-line)
-    ([Hangul] . toggle-input-method)
-                                           ;   ("C-e" . org-end-of-line)
-    ("C-k" . org-kill-line)
-    ("C-c g" . org-id-goto)
-                                           ;              ("C-<kp-6>" . xah-select-block)
-                                           ;   ("C-x j" . helm-org-in-buffer-headings)
-    ("C-c i" . insert-timestamp)
-                                           ;  ("C-c a" . helm-org-agenda-files-headings)
-    ("C-c C-x C-r" . org-clock-report)
-    ([f1] . org-capture)
-    ([f2] . org-clock-in)
-    ([f3] . helm-buffers-list)           
-    ([f4] . org-refile)
-    ([f5] . helm-projectile)
-    ([f6] . helm-bibtex-with-local-bibliography)
-    ([f7] . org-agenda)
-    ([f8] . deft)
-    ([f9] . helm-org-rifle-current-buffer)
-    ([f10] . org-narrow-to-subtree)
-    ([f11] . org-id-goto)
-    ([f12] . bury-buffer)
-
-    )
-
-
-
-                                           ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-                                           ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-
-   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-   (define-key key-translation-map (kbd "C-_") (kbd "–"))
-
-   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
-   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
-
-#+end_src
-
-#+RESULTS:
-: [8756]
 
 * mu4e
 
