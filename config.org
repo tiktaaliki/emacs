@@ -27,72 +27,78 @@
 * keybindings
 
 #+begin_src emacs-lisp :tangle yes
-
-   (global-unset-key (kbd "C-z"))     
-   (global-unset-key (kbd "M-c"))
-   (global-unset-key (kbd "C-v "))
-   (define-key org-mode-map (kbd "C-0 C-c C-w") 'org-refile-cache-clear)
-   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-   (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
-   (global-unset-key (kbd "S-SPC"))
-   (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
-   (global-set-key (kbd "<f1>") 'org-capture)
-   (define-key dired-mode-map (kbd "<f1>") 'org-capture)
-   (bind-keys 
-                                           ;("C-+"   . text-scale-increase)
-                                           ;   a      ("C--"   . text-scale-decrease)
-    ("C-c l" . org-store-link)
-    ("M-z" . ace-jump-mode)                                          ;                 ("C-c k" . toggle-korean-input-method)
-    ("C-."   . org-todo)
-                                           ;              ("C-x /" . shrink-window-horizontally)
-    ("C-x ." . org-archive-subtree-default)
-                                           ;       ("C-c n" . org-schedule)
-("M-o" . other-window)
-    ("M-="   . count-words)
-    ("M-x"   . helm-M-x)
-
-    ("C-c b" . list-bookmarks)
-                                           ;    ("C-a" . org-beginning-of-line)
-    ([Hangul] . toggle-input-method)
-                                           ;   ("C-e" . org-end-of-line)
-    ("C-k" . org-kill-line)
-    ("C-c g" . org-id-goto)
-                                           ;              ("C-<kp-6>" . xah-select-block)
-                                           ;   ("C-x j" . helm-org-in-buffer-headings)
-    ("C-c i" . insert-timestamp)
-                                           ;  ("C-c a" . helm-org-agenda-files-headings)
-    ("C-c C-x C-r" . org-clock-report)
-    ([f1] . org-capture)
-    ([f2] . org-clock-in)
-    ([f3] . helm-buffers-list)           
-    ([f4] . org-refile)
-    ([f5] . helm-projectile)
-    ([f6] . helm-bibtex-with-local-bibliography)
-    ([f7] . org-agenda)
-    ([f8] . deft)
-    ([f9] . helm-org-rifle-current-buffer)
-    ([f10] . org-narrow-to-subtree)
-    ([f11] . org-id-goto)
-    ([f12] . bury-buffer)
-
-    )
+(global-unset-key (kbd "<up>"))
+(global-unset-key (kbd "<down>"))
+(global-unset-key (kbd "<right>"))
+(global-unset-key (kbd "<left>"))
 
 
 
-                                           ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-                                           ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+      (global-unset-key (kbd "C-z"))     
+      (global-unset-key (kbd "M-c"))
+      (global-unset-key (kbd "C-v "))
+      (define-key org-mode-map (kbd "C-0 C-c C-w") 'org-refile-cache-clear)
+      (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+      (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+      (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+      (global-unset-key (kbd "S-SPC"))
+      (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
+      (global-set-key (kbd "<f1>") 'org-capture)
+      (define-key dired-mode-map (kbd "<f1>") 'org-capture)
+      (bind-keys 
+                                              ;("C-+"   . text-scale-increase)
+                                              ;   a      ("C--"   . text-scale-decrease)
+       ("C-c l" . org-store-link)
+       ("M-z" . ace-jump-mode)                                          ;                 ("C-c k" . toggle-korean-input-method)
+       ("C-."   . org-todo)
+                                              ;              ("C-x /" . shrink-window-horizontally)
+       ("C-x ." . org-archive-subtree-default)
+                                              ;       ("C-c n" . org-schedule)
+       ("M-o" . other-window)
+       ("M-="   . count-words)
+       ("M-x"   . helm-M-x)
 
-   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-   (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-   (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-   (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-   (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-   (define-key key-translation-map (kbd "C-_") (kbd "–"))
+       ("C-c b" . list-bookmarks)
+                                              ;    ("C-a" . org-beginning-of-line)
+       ([Hangul] . toggle-input-method)
+                                              ;   ("C-e" . org-end-of-line)
+       ("C-k" . org-kill-line)
+       ("C-c g" . org-id-goto)
+                                              ;              ("C-<kp-6>" . xah-select-block)
+                                              ;   ("C-x j" . helm-org-in-buffer-headings)
+       ("C-c i" . insert-timestamp)
+                                              ;  ("C-c a" . helm-org-agenda-files-headings)
+       ("C-c C-x C-r" . org-clock-report)
+       ([f1] . org-capture)
+       ([f2] . org-clock-in)
+       ([f3] . helm-buffers-list)           
+       ([f4] . org-refile)
+       ([f5] . helm-projectile)
+       ([f6] . helm-bibtex-with-local-bibliography)
+       ([f7] . org-agenda)
+       ([f8] . deft)
+       ([f9] . helm-org-rifle-current-buffer)
+       ([f10] . org-narrow-to-subtree)
+       ([f11] . org-id-goto)
+       ([f12] . bury-buffer)
 
-   (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
-   (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+       )
+
+
+
+                                              ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+                                              ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+      (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+      (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+      (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+      (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+      (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+      (define-key key-translation-map (kbd "C-_") (kbd "–"))
+
+      (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+      (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
+      (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
 
 #+end_src
 
@@ -127,8 +133,8 @@
    (setq org-startup-align-all-tables t)
    (setq org-startup-folded t)
    (setq org-special-ctrl-a/e (quote (t . t)))
-;   (use-package org-bullets)
- ;  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+                                           ;   (use-package org-bullets)
+                                           ;  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
    (setq org-catch-invisible-edits (quote smart))
    (setq org-cycle-separator-lines 0)
    (setq org-support-shift-select t) 
@@ -253,63 +259,76 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 :END:
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
+          ;        (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
 
-   (setq org-agenda-custom-commands '(
+                  (setq org-agenda-custom-commands '(
+                                                          ;habits
+                                                     ("h" "Habits" tags-todo "STYLE=\"habit\"" 
+                                                      ((org-agenda-overriding-header "Habits")))
+                                                          ;timeblocking
+                                                     ("b" "Timeblocking" ((agenda "" 
+                                                                                  ((org-agenda-span 2)
+                                                                                   (org-agenda-clockreport-mode nil)))
+                                                                          (todo "AREA")))
+                                                          ;RETURN ANY TODO ITEMS WTIHOUT TAGS
+                                                     ("k" "all untagged TODOs" tags-todo "-{.*}/-HABIT-BLOCK")  
+                                             
+                                                  
 
-                                      ("h" "Habits" tags-todo "STYLE=\"habit\"" 
-                                       ((org-agenda-overriding-header "Habits")))
-
-                                      ("b" "Timeblocking" (
-                                                           (agenda "" 
-                                                                   ((org-agenda-span 2)
-                                                                    (org-agenda-clockreport-mode nil)
-                                                                    ))
-                                                           (todo "BLOCK")
-                                                           )
-                                       )
-
-                                      ("k" "all untagged TODOs" tags-todo "-{.*}/-HABIT-BLOCK")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
-("t" "stuff to do TODAY"  todo "TODAY"  )
-
-                                      ("e" "all todos/projects/etc." (
-                                                                      (todo "TODAY")
-                                                                      (todo "IN-PROG")
-                                                                      (todo "NEXT")
-                                                                      (tags-todo "-read-research-lis-ingest-home-sysadmin-hold+/TODO-HABIT")
-
-                                                                      (tags-todo "read-/-HOLD-WAIT")
-                                                                      (tags-todo "ingest-/-HOLD-WAIT")
-                                                                      (tags-todo "research")
-                                                                      (tags-todo "lis-/-HOLD-WAIT")
-                                                                      (tags-todo "home-/-HABIT-WAIT")
-                                                                      (tags-todo "sysadmin")
-                                                                      (todo "PROJ")
-                                                                      )
-                                       )
+                                                  
+   ("o" "todos by mode"(
+   (tags-todo "email-/-HABIT-HOLD-WAIT")
+   (tags-todo "intake-/-HABIT-WAIT-HOLD")
+   (tags-todo "focus-/-HABIT-WAIT-HOLD")
+   (tags-todo "admin-/-HABIT-WAIT-HOLD")
+   (tags-todo "discovery-/-HABIT-WAIT-HOLD")
+   (tags-todo "integrate-/-HABIT-WAIT-HOLD")
+   ))
 
 
-                                      ("h" "all HOLD items" todo "HOLD")
+   ("j" "home todos" (
+   (tags-todo "cooking-Style=\"habit\"")
+   (tags-todo "cleaning-Style=\"habit\"")
+   (tags-todo "self-Style=\"habit\"")
+   ))
 
-                                      ("g" "all UNSCHEDULED todos" ((agenda "" 
-                                                                            ((org-agenda-span 2)
-                                                                             (org-agenda-clockreport-mode nil)))
-                                                                    (todo "NEXT|TODAY|IN-PROG"))
-                                       ((org-agenda-todo-ignore-scheduled t)))
-                                           ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
+("n" "ndd" (
+(tags-todo "ndd+admin")
+(tags-todo "ndd+email")
+(tags-todo "ndd+focus")
+(tags-todo "ndd-admin-email-focus")
+))
 
 
-                                      ))
+                                                  ("p" "projects and areas" (
+                                                                             (todo "PROJ")
+                                                                             (todo "AREA")))
+
+
+
+                                                     ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
+                                                          ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
+                                                     ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" 
+                                                                                           ((org-agenda-span 2)
+                                                                                            (org-agenda-clockreport-mode nil)))
+                                                                                   (todo "NEXT|TODAY|IN-PROG"))
+                                                      ((org-agenda-todo-ignore-scheduled t)))
+
+
+
+                                                     ))
 #+END_SRC
 
 #+RESULTS:
-| h | Habits                  | tags-todo                                                                                                                                                                                                                                                                              | STYLE="habit"      | ((org-agenda-overriding-header Habits)) |                                        |
-| b | Timeblocking            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo BLOCK))                                                                                                                                                                                                       |                    |                                         |                                        |
-| k | all untagged TODOs      | tags-todo                                                                                                                                                                                                                                                                              | -{.*}/-HABIT-BLOCK |                                         |                                        |
-| t | stuff to do TODAY       | todo                                                                                                                                                                                                                                                                                   | TODAY              |                                         |                                        |
-| e | all todos/projects/etc. | ((todo TODAY) (todo IN-PROG) (todo NEXT) (tags-todo -read-research-lis-ingest-home-sysadmin-hold+/TODO-HABIT) (tags-todo read-/-HOLD-WAIT) (tags-todo ingest-/-HOLD-WAIT) (tags-todo research) (tags-todo lis-/-HOLD-WAIT) (tags-todo home-/-HABIT-WAIT) (tags-todo sysadmin) (todo PROJ)) |                    |                                         |                                        |
-| h | all HOLD items          | todo                                                                                                                                                                                                                                                                                   | HOLD               |                                         |                                        |
-| g | all UNSCHEDULED todos   | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT                                                                                                                                                                                                          | TODAY              | IN-PROG))                               | ((org-agenda-todo-ignore-scheduled t)) |
+| h | Habits               | tags-todo                                                                                                                                                                                                                    | STYLE="habit"      | ((org-agenda-overriding-header Habits))                                       |       |           |                                        |
+| b | Timeblocking         | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo AREA))                                                                                                                                              |                    |                                                                               |       |           |                                        |
+| k | all untagged TODOs   | tags-todo                                                                                                                                                                                                                    | -{.*}/-HABIT-BLOCK |                                                                               |       |           |                                        |
+| o | todos by mode        | ((tags-todo email-/-HABIT-HOLD-WAIT) (tags-todo intake-/-HABIT-WAIT-HOLD) (tags-todo focus-/-HABIT-WAIT-HOLD) (tags-todo admin-/-HABIT-WAIT-HOLD) (tags-todo discovery-/-HABIT-WAIT-HOLD) (tags-todo integrate-/-HABIT-WAIT-HOLD)) |                    |                                                                               |       |           |                                        |
+| j | home todos           | ((tags-todo cooking-Style="habit") (tags-todo cleaning-Style="habit") (tags-todo self-Style="habit"))                                                                                                                        |                    |                                                                               |       |           |                                        |
+| n | ndd                  | ((tags-todo ndd+admin) (tags-todo ndd+email) (tags-todo ndd+focus) (tags-todo ndd-admin-email-focus))                                                                                                                        |                    |                                                                               |       |           |                                        |
+| p | projects and areas   | ((todo PROJ) (todo AREA))                                                                                                                                                                                                    |                    |                                                                               |       |           |                                        |
+| h | all HOLD/WAIT items  | todo                                                                                                                                                                                                                         | HOLD               | WAIT                                                                          |       |           |                                        |
+| g | all UNSCHEDULED NEXT | TODAY                                                                                                                                                                                                                        | IN-PROG            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT | TODAY | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |
 
      ("e" "all todos/projects/etc." ((todo "IN-PROG")
                                                                       (todo "NEXT")
@@ -318,6 +337,21 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 								   (tags-todo "watch|listen")
                                                                       )
                                        )
+
+   ("e" "all todos/projects/etc." tags-todo "-email-intake-admin-discovery-focus-integrate-cooking-cleaning-self-/-HABIT-WAIT-HOLD-PROJ-AREA")
+
+
+
+
+      ("i" "todos by area" (
+      (tags-todo "ndd")
+      (tags-todo "mentat-/-HOLD-WAIT")
+      (tags-todo "sysadmin-/-HOLD-WAIT")
+      (tags-todo "lis-/-HOLD-WAIT")
+      (tags-todo "home-/-HABIT-WAIT")
+      )
+)
+
 
 
 *** ORG-AGENDA HYDRA!
@@ -429,21 +463,25 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                     (:endgroup)
 
                                     (:startgrouptag)
-                                    ("sysadmin")
+                                    ("sysadmin" . ?s)
                                     (:grouptags)
                                     ("emacs" . ?e)
                                     ("system")
                                     (:endgrouptag)
 
-                                    (:startgroup)
+(:startgroup)
                                     ("admin" . ?a)
-				 ("email")
+                                    ("focus" . ?f)
+                                    (:endgroup)
+                                    (:startgroup)
+                                    ("email")
                                     ("discovery" . ?d)
-                                    ("intake" . ?i)                                   
+                                    ("intake" . ?i)
+                                    ("integrate")
                                     (:endgroup)
 
                                     (:startgrouptag)
-                                    ("lis")
+                                    ("lis" . ?l)
                                     (:grouptags)
                                     ("bcc")
                                     ("csi")
@@ -451,11 +489,11 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                     (:endgrouptag)
 
                                     (:startgrouptag)
-                                    ("mentat")
+                                    ("mentat" . ?m)
                                     (:grouptags)
                                     ("korean")
-                                    ("process")
-                                    ("deepwork")
+
+
                                     (:endgrouptag)
 
 
@@ -468,9 +506,9 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                     (:endgrouptag)
 
                                     (:startgrouptag)
-                                    ("home")
+                                    ("home" . ?h)
                                     (:grouptags)
-                                    ("food")
+                                    ("cooking")
                                     ("cleaning")
                                     ("self")
                                     (:endgrouptag)
@@ -485,7 +523,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 #+END_SRC
 
 #+RESULTS:
-: ((:startgroup) (ndd . 110) (sysadmin . 115) (home . 104) (lis . 108) (mentat . 109) (:endgroup) (:startgrouptag) (sysadmin) (:grouptags) (emacs . 101) (system) (:endgrouptag) (:startgroup) (admin . 97) (email) (discovery . 100) (intake . 105) (:endgroup) (:startgrouptag) (lis) (:grouptags) (bcc) (csi) (job) (:endgrouptag) (:startgrouptag) (mentat) (:grouptags) (korean) (process) (deepwork) (:endgrouptag) (:startgrouptag) (intake) (:grouptags) (listen) (read . 114) (watch . 119) (:endgrouptag) (:startgrouptag) (home) (:grouptags) (food) (cleaning) (self) (:endgrouptag))
+: ((:startgroup) (ndd . 110) (sysadmin . 115) (home . 104) (lis . 108) (mentat . 109) (:endgroup) (:startgrouptag) (sysadmin . 115) (:grouptags) (emacs . 101) (system) (:endgrouptag) (:startgroup) (admin . 97) (focus . 102) (:endgroup) (:startgroup) (email) (discovery . 100) (intake . 105) (integrate) (:endgroup) (:startgrouptag) (lis . 108) (:grouptags) (bcc) (csi) (job) (:endgrouptag) (:startgrouptag) (mentat . 109) (:grouptags) (korean) (:endgrouptag) (:startgrouptag) (intake) (:grouptags) (listen) (read . 114) (watch . 119) (:endgrouptag) (:startgrouptag) (home . 104) (:grouptags) (cooking) (cleaning) (self) (:endgrouptag))
 
 #+TAGS: { MODE : admin(a) home(h) focus(f) lis(l) }
 #+TAGS: { admin : email(e) browser(b) }
@@ -856,7 +894,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
              ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
 
-             ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+             ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
 
              ("F" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
 
@@ -2045,8 +2083,9 @@ M-x describe-current-coding-system
       (setq org-pomodoro-clock-break nil)
 
      (setq helm-chronos-standard-timers
-           '(	   "    25/END pomodoro + 5/END break"
-		   "    25/END pomodoro 1 + 5/END break 1 + 25/END pomodoro 2 + 5/END break 2 + 25/END pomodoro 3 + 5/END break 3 + 25/END pomodoro 4 + 5/END break 4"
+           '(	   "25/END pomodoro + 5/END break"
+		   "50/END pomodoro + 5/get back to work"
+                 "25/END pomodoro 1 + 5/END break 1 + 25/END pomodoro 2 + 5/END break 2 + 25/END pomodoro 3 + 5/END break 3 + 25/END pomodoro 4 + 5/END break 4"
 
 
    )
