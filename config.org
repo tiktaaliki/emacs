@@ -1,44 +1,18 @@
 
-* load external files
-
-#+begin_src emacs-lisp :tangle yes
-
-   (add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
-   (add-to-list 'load-path "~/Dropbox/emacs/")
-   (load "pi")
-   (load "dired+")
-   (load "org-pdfview")
-   (load "org-protocol-capture-html")
-   (load "ereader")
-   (load "org-book")
-   (load "org-depend")
-   (load "bookmark+")
-   (load "org-contacts")
-   (load "org-toc")
-   (load "org-registry")
-   (load "run-assoc")
-   (load "org-checklist")
-   (load "org-notify")
-
-   #+end_src
-
-#+RESULTS:
-: t
 * keybindings
 
+
 #+begin_src emacs-lisp :tangle yes
-(global-unset-key (kbd "<up>"))
-(global-unset-key (kbd "<down>"))
-(global-unset-key (kbd "<right>"))
-(global-unset-key (kbd "<left>"))
-
-
+      (global-unset-key (kbd "<up>"))
+      (global-unset-key (kbd "<down>"))
+      (global-unset-key (kbd "<right>"))
+      (global-unset-key (kbd "<left>"))
 
       (global-unset-key (kbd "C-z"))     
-      (global-unset-key (kbd "M-c"))
-      (global-unset-key (kbd "C-v "))
+   ;   (global-unset-key (kbd "M-c"))
+    ;  (global-unset-key (kbd "C-v "))
       (define-key org-mode-map (kbd "C-0 C-c C-w") 'org-refile-cache-clear)
-      (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+     ; (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
       (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
       (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
       (global-unset-key (kbd "S-SPC"))
@@ -106,11 +80,36 @@
 : [8756]
 
 
+* load external files
+
+#+begin_src emacs-lisp :tangle yes
+
+   (add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
+   (add-to-list 'load-path "~/Dropbox/emacs/")
+   (load "pi")
+   (load "dired+")
+   (load "org-pdfview")
+   (load "org-protocol-capture-html")
+   (load "ereader")
+   (load "org-book")
+   (load "org-depend")
+   (load "bookmark+")
+   (load "org-contacts")
+   (load "org-toc")
+   (load "org-registry")
+   (load "run-assoc")
+   (load "org-checklist")
+   (load "org-notify")
+
+#+end_src
+
+#+RESULTS:
+: t
 * set language environment hydra 
 #+begin_src emacs-lisp :tangle yes
-(defhydra hydra-korean (:color amaranth)  "korean"
-  ("s" set-language-environment "set language")
-  ("q" nil "quit" :color blue))
+   (defhydra hydra-korean (:color amaranth)  "korean"
+     ("s" set-language-environment "set language")
+     ("q" nil "quit" :color blue))
 
 
 
@@ -259,64 +258,64 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 :END:
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-          ;        (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
+                                           ;        (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
 
-                  (setq org-agenda-custom-commands '(
-                                                          ;habits
-                                                     ("h" "Habits" tags-todo "STYLE=\"habit\"" 
-                                                      ((org-agenda-overriding-header "Habits")))
-                                                          ;timeblocking
-                                                     ("b" "Timeblocking" ((agenda "" 
-                                                                                  ((org-agenda-span 2)
-                                                                                   (org-agenda-clockreport-mode nil)))
-                                                                          (todo "AREA")))
-                                                          ;RETURN ANY TODO ITEMS WTIHOUT TAGS
-                                                     ("k" "all untagged TODOs" tags-todo "-{.*}/-HABIT-BLOCK")  
-                                             
-                                                  
+   (setq org-agenda-custom-commands '(
+                                           ;habits
+                                      ("h" "Habits" tags-todo "STYLE=\"habit\"" 
+                                       ((org-agenda-overriding-header "Habits")))
+                                           ;timeblocking
+                                      ("b" "Timeblocking" ((agenda "" 
+                                                                   ((org-agenda-span 2)
+                                                                    (org-agenda-clockreport-mode nil)))
+                                                           (todo "AREA")))
+                                           ;RETURN ANY TODO ITEMS WTIHOUT TAGS
+                                      ("k" "all untagged TODOs" tags-todo "-{.*}/-HABIT-BLOCK")  
+				   
+				   
 
-                                                  
-   ("o" "todos by mode"(
-   (tags-todo "email-/-HABIT-HOLD-WAIT")
-   (tags-todo "intake-/-HABIT-WAIT-HOLD")
-   (tags-todo "focus-/-HABIT-WAIT-HOLD")
-   (tags-todo "admin-/-HABIT-WAIT-HOLD")
-   (tags-todo "discovery-/-HABIT-WAIT-HOLD")
-   (tags-todo "integrate-/-HABIT-WAIT-HOLD")
-   ))
-
-
-   ("j" "home todos" (
-   (tags-todo "cooking-Style=\"habit\"")
-   (tags-todo "cleaning-Style=\"habit\"")
-   (tags-todo "self-Style=\"habit\"")
-   ))
-
-("n" "ndd" (
-(tags-todo "ndd+admin")
-(tags-todo "ndd+email")
-(tags-todo "ndd+focus")
-(tags-todo "ndd-admin-email-focus")
-))
+				   
+                                      ("o" "todos by mode"(
+                                                           (tags-todo "email-/-HABIT-HOLD-WAIT")
+                                                           (tags-todo "intake-/-HABIT-WAIT-HOLD")
+                                                           (tags-todo "focus-/-HABIT-WAIT-HOLD")
+                                                           (tags-todo "admin-/-HABIT-WAIT-HOLD")
+                                                           (tags-todo "discovery-/-HABIT-WAIT-HOLD")
+                                                           (tags-todo "integrate-/-HABIT-WAIT-HOLD")
+                                                           ))
 
 
-                                                  ("p" "projects and areas" (
-                                                                             (todo "PROJ")
-                                                                             (todo "AREA")))
+                                      ("j" "home todos" (
+                                                         (tags-todo "cooking-Style=\"habit\"")
+                                                         (tags-todo "cleaning-Style=\"habit\"")
+                                                         (tags-todo "self-Style=\"habit\"")
+                                                         ))
+
+                                      ("n" "ndd" (
+                                                  (tags-todo "ndd+admin")
+                                                  (tags-todo "ndd+email")
+                                                  (tags-todo "ndd+focus")
+                                                  (tags-todo "ndd-admin-email-focus")
+                                                  ))
 
 
-
-                                                     ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
-                                                          ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
-                                                     ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" 
-                                                                                           ((org-agenda-span 2)
-                                                                                            (org-agenda-clockreport-mode nil)))
-                                                                                   (todo "NEXT|TODAY|IN-PROG"))
-                                                      ((org-agenda-todo-ignore-scheduled t)))
+                                      ("p" "projects and areas" (
+                                                                 (todo "PROJ")
+                                                                 (todo "AREA")))
 
 
 
-                                                     ))
+                                      ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
+                                           ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
+                                      ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" 
+                                                                                         ((org-agenda-span 2)
+                                                                                          (org-agenda-clockreport-mode nil)))
+                                                                                 (todo "NEXT|TODAY|IN-PROG"))
+                                       ((org-agenda-todo-ignore-scheduled t)))
+
+
+
+                                      ))
 #+END_SRC
 
 #+RESULTS:
@@ -330,26 +329,26 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 | h | all HOLD/WAIT items  | todo                                                                                                                                                                                                                         | HOLD               | WAIT                                                                          |       |           |                                        |
 | g | all UNSCHEDULED NEXT | TODAY                                                                                                                                                                                                                        | IN-PROG            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT | TODAY | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |
 
-     ("e" "all todos/projects/etc." ((todo "IN-PROG")
-                                                                      (todo "NEXT")
-                                                                      (tags-todo "-watch-listen+/TODO")
-                                                                      (todo "PROJ")
-								   (tags-todo "watch|listen")
-                                                                      )
-                                       )
+("e" "all todos/projects/etc." ((todo "IN-PROG")
+(todo "NEXT")
+(tags-todo "-watch-listen+/TODO")
+(todo "PROJ")
+(tags-todo "watch|listen")
+)
+)
 
-   ("e" "all todos/projects/etc." tags-todo "-email-intake-admin-discovery-focus-integrate-cooking-cleaning-self-/-HABIT-WAIT-HOLD-PROJ-AREA")
-
-
+("e" "all todos/projects/etc." tags-todo "-email-intake-admin-discovery-focus-integrate-cooking-cleaning-self-/-HABIT-WAIT-HOLD-PROJ-AREA")
 
 
-      ("i" "todos by area" (
-      (tags-todo "ndd")
-      (tags-todo "mentat-/-HOLD-WAIT")
-      (tags-todo "sysadmin-/-HOLD-WAIT")
-      (tags-todo "lis-/-HOLD-WAIT")
-      (tags-todo "home-/-HABIT-WAIT")
-      )
+
+
+("i" "todos by area" (
+(tags-todo "ndd")
+(tags-todo "mentat-/-HOLD-WAIT")
+(tags-todo "sysadmin-/-HOLD-WAIT")
+(tags-todo "lis-/-HOLD-WAIT")
+(tags-todo "home-/-HABIT-WAIT")
+)
 )
 
 
@@ -469,7 +468,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                     ("system")
                                     (:endgrouptag)
 
-(:startgroup)
+                                    (:startgroup)
                                     ("admin" . ?a)
                                     ("focus" . ?f)
                                     (:endgroup)
@@ -635,25 +634,25 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 | my/org-checkbox-todo |
 *** plain lists & bullets
 #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package org-superstar)
-     (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-(setq org-superstar-headline-bullets-list '("◉" "○" "❤"  "◆"  "⭆" ) )
+   (use-package org-superstar)
+   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+   (setq org-superstar-headline-bullets-list '("◉" "○" "❤"  "◆"  "⭆" ) )
 
 
    (setq org-list-demote-modify-bullet
-            '(("+" . "-") ("-" . "+") ("*" . "+")))
-      ;  (setq org-list-demote-modify-bullet
-       ;       '(("+" . "-") ("-" . "+") ))
-        (setq org-list-allow-alphabetical t)
-        (setq org-list-indent-offset 1)
-        (setq org-list=description-max-indent 5)
-      ;  (setq org-bullets-bullet-list (quote ( "⚫" "⧽" "○" "⯌"     "◆"  "☆"            "⚬" )))
-                                                ;   "•"    "‣"    "⏵""▷"   "♦""◇"    "◉" "⬤"〇⭕ "⨀"  "★" "⬤" "ᐅ"  "〇"     "⟐"     "⚬" )))
-                                                ;○◔◑◕●⌾⭗☉⌾◎◉⨀◎⌾◉◍⊗⊛•○∙⊛⁕✱ ൦❄⊕⊖⊗⊘⊙⊚⊛⊜⊝∘∙◉⏺○◍◎●◐◑◒◓◔◕◦◯◴◵◶◷☉⚪⚫⚬◐
+         '(("+" . "-") ("-" . "+") ("*" . "+")))
+                                           ;  (setq org-list-demote-modify-bullet
+                                           ;       '(("+" . "-") ("-" . "+") ))
+   (setq org-list-allow-alphabetical t)
+   (setq org-list-indent-offset 1)
+   (setq org-list=description-max-indent 5)
+                                           ;  (setq org-bullets-bullet-list (quote ( "⚫" "⧽" "○" "⯌"     "◆"  "☆"            "⚬" )))
+                                           ;   "•"    "‣"    "⏵""▷"   "♦""◇"    "◉" "⬤"〇⭕ "⨀"  "★" "⬤" "ᐅ"  "〇"     "⟐"     "⚬" )))
+                                           ;○◔◑◕●⌾⭗☉⌾◎◉⨀◎⌾◉◍⊗⊛•○∙⊛⁕✱ ൦❄⊕⊖⊗⊘⊙⊚⊛⊜⊝∘∙◉⏺○◍◎●◐◑◒◓◔◕◦◯◴◵◶◷☉⚪⚫⚬◐
 
-                                                ; too tall: "⬥"  "⯈" "⚫" "∙" ⬤ ✶ "✧" "▸" "⯏"  "⭗"   "⛭" "⚪"  "⭐"  "⏵" 
-        (setq org-inlinetask-min-level 7)
-        (setq org-checkbox-hierarchical-statistics nil)
+                                           ; too tall: "⬥"  "⯈" "⚫" "∙" ⬤ ✶ "✧" "▸" "⯏"  "⭗"   "⛭" "⚪"  "⭐"  "⏵" 
+   (setq org-inlinetask-min-level 7)
+   (setq org-checkbox-hierarchical-statistics nil)
 
 #+END_SRC
 
@@ -881,44 +880,45 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 ** org-capture
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-(server-start)
-     (require 'org-protocol)
-     (require 'org-protocol-capture-html)
-     (setq org-protocol-default-template-key "w")
+   (server-start)
+   (require 'org-protocol)
+   (require 'org-protocol-capture-html)
+   (setq org-protocol-default-template-key "w")
 
-     (setq org-capture-templates
-           '(
-             ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> %? \n\n\n\n" :clock-in t :clock-keep t :kill-buffer nil ) 
+   (setq org-capture-templates
+         '(
+           ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> %? \n\n\n\n" :clock-in t :clock-keep t :kill-buffer nil ) 
 
-             ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT}\n%^t\n%a\n%?")
+           ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT}\n%^t\n%a\n%?")
 
-             ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
+           ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
 
-             ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+           ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
 
-             ("F" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
+           ("F" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
 
-             ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
+           ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
 
-             ("l" "look up" entry (id "5br4n6815pi0") "* %? \n%U\n  \n%a\n\n\n" :prepend nil)
+           ("l" "look up" entry (id "5br4n6815pi0") "* %? \n%U\n  \n%a\n\n\n" :prepend nil)
+ ("m" "meditation" table-line (id "meditation") "|%u | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
 
-             ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n" :prepend nil)
+           ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n" :prepend nil)
 
-             ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
+           ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
 
-             ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
-              "* TODO %? %a\n%U\n%:initial\n" )
-
-
-             ))
+           ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
+            "* TODO %? %a\n%U\n%:initial\n" )
 
 
-      (defun my-org-capture-place-template-dont-delete-windows (oldfun args)
-       (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
-         (apply oldfun args)))
+           ))
 
-                                             ;this prevents org-capture from replacing any windows. it just adds. 
-    
+
+   (defun my-org-capture-place-template-dont-delete-windows (oldfun args)
+     (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
+       (apply oldfun args)))
+
+                                           ;this prevents org-capture from replacing any windows. it just adds. 
+
 #+END_SRC
 
 #+RESULTS:
@@ -927,7 +927,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
      (with-eval-after-load "org-capture"
        (advice-add 'org-capture-place-template :around 'my-org-capture-place-template-dont-delete-windows))
 
-          ;   ("m" "meditation" table-line (id "otljx3605ni0") "|%u | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
+          ;  
 
            ;  ("n" "note" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* %^{TOPIC}\n%U\n%? \n%a\n\n\n" :prepend nil)
 
@@ -2083,14 +2083,10 @@ M-x describe-current-coding-system
       (setq org-pomodoro-clock-break nil)
 
      (setq helm-chronos-standard-timers
-           '(	   "25/END pomodoro + 5/END break"
-		   "50/END pomodoro + 5/get back to work"
-                 "25/END pomodoro 1 + 5/END break 1 + 25/END pomodoro 2 + 5/END break 2 + 25/END pomodoro 3 + 5/END break 3 + 25/END pomodoro 4 + 5/END break 4"
-
-
-   )
-
-   )
+           '("25/END pomodoro + 5/END break" 
+             "50/END pomodoro + 5/get back to work" 
+             "=13:00/END fast + =21:00/BEGIN fast"
+             "25/END pomodoro 1 + 5/END break 1 + 25/END pomodoro 2 + 5/END break 2 + 25/END pomodoro 3 + 5/END break 3 + 25/END pomodoro 4 + 5/END break 4"))
 
    (use-package pomidor)
    (setq pomidor-save-session-file "~/Dropbox/emacs/.emacs.d/pomidor-session.json")
