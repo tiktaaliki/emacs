@@ -1,5 +1,31 @@
 
-* keybindings
+* load external files
+
+#+begin_src emacs-lisp :tangle yes
+
+   (add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
+   (add-to-list 'load-path "~/Dropbox/emacs/")
+   (load "pi")
+   (load "dired+")
+   (load "org-pdfview")
+   (load "org-protocol-capture-html")
+;   (load "ereader")
+   (load "org-book")
+   (load "org-depend")
+   (load "bookmark+")
+   (load "org-contacts")
+   (load "org-toc")
+   (load "org-registry")
+   (load "run-assoc")
+   (load "org-checklist")
+   (load "org-notify")
+
+#+end_src
+
+#+RESULTS:
+: t
+* keybind
+ings
 
 
 #+begin_src emacs-lisp :tangle yes
@@ -7,7 +33,7 @@
       (global-unset-key (kbd "<down>"))
       (global-unset-key (kbd "<right>"))
       (global-unset-key (kbd "<left>"))
-
+(global-set-key (kbd "M-o") 'other-window)
       (global-unset-key (kbd "C-z"))     
    ;   (global-unset-key (kbd "M-c"))
     ;  (global-unset-key (kbd "C-v "))
@@ -28,7 +54,7 @@
                                               ;              ("C-x /" . shrink-window-horizontally)
        ("C-x ." . org-archive-subtree-default)
                                               ;       ("C-c n" . org-schedule)
-       ("M-o" . other-window)
+
        ("M-="   . count-words)
        ("M-x"   . helm-M-x)
 
@@ -80,31 +106,6 @@
 : [8756]
 
 
-* load external files
-
-#+begin_src emacs-lisp :tangle yes
-
-   (add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
-   (add-to-list 'load-path "~/Dropbox/emacs/")
-   (load "pi")
-   (load "dired+")
-   (load "org-pdfview")
-   (load "org-protocol-capture-html")
-   (load "ereader")
-   (load "org-book")
-   (load "org-depend")
-   (load "bookmark+")
-   (load "org-contacts")
-   (load "org-toc")
-   (load "org-registry")
-   (load "run-assoc")
-   (load "org-checklist")
-   (load "org-notify")
-
-#+end_src
-
-#+RESULTS:
-: t
 * set language environment hydra 
 #+begin_src emacs-lisp :tangle yes
    (defhydra hydra-korean (:color amaranth)  "korean"
