@@ -21,6 +21,7 @@
 
 
 (org-babel-load-file "~/Dropbox/emacs/config.org")
+(org-babel-load-file "~/Dropbox/emacs/hangul.org")
 (setq custom-file "~/Dropbox/emacs/custom.el")
 (load custom-file)
 (setq mu4e-get-mail-command "mbsync -aV") 
