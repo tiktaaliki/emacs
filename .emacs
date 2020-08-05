@@ -18,9 +18,10 @@
 
 (require 'org)
 
+
+
 (org-babel-load-file "~/Dropbox/emacs/config.org")
 (setq custom-file "~/Dropbox/emacs/custom.el")
-
 (load custom-file)
 (setq mu4e-get-mail-command "mbsync -aV") 
 
