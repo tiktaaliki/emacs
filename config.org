@@ -895,7 +895,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
            ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
 
-           ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+           ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
 
            ("F" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
 
@@ -981,26 +981,27 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (setq bookmark-save-flag 1)
-   (use-package ido
-     :ensure t
-     :defer t
-     )
-   (ido-mode t)
+      (setq bookmark-save-flag 1)
+      (use-package ido
+        :ensure t
+        :defer t
+        )
+      (ido-mode t)
 
-   (use-package projectile
-     :ensure t
-     )
-   (use-package helm-projectile
-     :ensure t
-     )
+      (use-package projectile
+        :ensure t
+        )
+      (use-package helm-projectile
+        :ensure t
+        )
 
-   (projectile-mode +1)
-
+      (projectile-mode +1)
+  
+;If you want to mark a folder manually as a project just create an empty .projectile file in it.
 #+END_SRC
 
 #+RESULTS:
-: t
+| ~/Dropbox/ | ~/Calibre Library/ | ~/Downloads/ |
 ** windows
 
 *** window functions
