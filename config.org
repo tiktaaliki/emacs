@@ -260,64 +260,68 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 :END:
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-                                           ;        (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
+                                              ;        (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
 
-   (setq org-agenda-custom-commands '(
-                                           ;habits
-                                      ("h" "Habits" tags-todo "STYLE=\"habit\"" 
-                                       ((org-agenda-overriding-header "Habits")))
-                                           ;timeblocking
-                                      ("b" "Timeblocking" ((agenda "" 
-                                                                   ((org-agenda-span 2)
-                                                                    (org-agenda-clockreport-mode nil)))
-                                                           (todo "AREA")))
-                                           ;RETURN ANY TODO ITEMS WTIHOUT TAGS
-                                      ("k" "all untagged TODOs" tags-todo "-{.*}/-HABIT-BLOCK")  
+      (setq org-agenda-custom-commands '(
+                                              ;habits
+                                         ("h" "Habits" tags-todo "STYLE=\"habit\"" 
+                                          ((org-agenda-overriding-header "Habits")))
+                                              ;timeblocking
+                                         ("b" "Timeblocking" ((agenda "" 
+                                                                      ((org-agenda-span 2)
+                                                                       (org-agenda-clockreport-mode nil)))
+                                                              (todo "AREA")))
+                                              ;RETURN ANY TODO ITEMS WTIHOUT TAGS
+                                         ("k" "all untagged TODOs" tags-todo "-{.*}/-HABIT-BLOCK")  
 				   
-				   
-
-				   
-                                      ("o" "todos by mode"(
-                                                           (tags-todo "email-/-HABIT-HOLD-WAIT")
-                                                           (tags-todo "intake-/-HABIT-WAIT-HOLD")
-                                                           (tags-todo "focus-/-HABIT-WAIT-HOLD")
-                                                           (tags-todo "admin-/-HABIT-WAIT-HOLD")
-                                                           (tags-todo "discovery-/-HABIT-WAIT-HOLD")
-                                                           (tags-todo "integrate-/-HABIT-WAIT-HOLD")
-                                                           ))
+				   				   
+                                         ("o" "todos by mode"(
+                                                              (tags-todo "email-/-HABIT-HOLD-WAIT")
+                                                              (tags-todo "intake-/-HABIT-WAIT-HOLD")
+                                                              (tags-todo "focus-/-HABIT-WAIT-HOLD")
+                                                              (tags-todo "admin-/-HABIT-WAIT-HOLD")
+                                                              (tags-todo "discovery-/-HABIT-WAIT-HOLD")
+                                                              (tags-todo "integrate-/-HABIT-WAIT-HOLD")
+                                                              ))
 
 
-                                      ("j" "home todos" (
-                                                         (tags-todo "cooking-Style=\"habit\"")
-                                                         (tags-todo "cleaning-Style=\"habit\"")
-                                                         (tags-todo "self-Style=\"habit\"")
-                                                         ))
+                                         ("j" "home todos" (
+                                                            (tags-todo "cooking-Style=\"habit\"")
+                                                            (tags-todo "cleaning-Style=\"habit\"")
+                                                            (tags-todo "self-Style=\"habit\"")
+                                                            ))
 
-                                      ("n" "ndd" (
-                                                  (tags-todo "ndd+admin")
-                                                  (tags-todo "ndd+email")
-                                                  (tags-todo "ndd+focus")
-                                                  (tags-todo "ndd-admin-email-focus")
-                                                  ))
+                                         ("n" "ndd" (
+   (tags-todo "lis-/-HABIT-WAIT-HOLD")
+                                                     (tags-todo "ndd+admin-/-HABIT-WAIT-HOLD")
+                                                     (tags-todo "ndd+email-/-HABIT-WAIT-HOLD")
+                                                     (tags-todo "ndd+focus-/-HABIT-WAIT-HOLD")
+                                                     (tags-todo "ndd-admin-email-focus-/-HABIT-WAIT-HOLD")
+                                                     ))
 
+       ("d" "remainder" (
+                                    
+                                                     (tags-todo "sysadmin-/-HABIT-WAIT-HOLD")
+(tags-todo "mentat-/-HABIT-WAIT-HOLD")
+                                                     ))
 
-                                      ("p" "projects and areas" (
-                                                                 (todo "PROJ")
-                                                                 (todo "AREA")))
-
-
-
-                                      ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
-                                           ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
-                                      ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" 
-                                                                                         ((org-agenda-span 2)
-                                                                                          (org-agenda-clockreport-mode nil)))
-                                                                                 (todo "NEXT|TODAY|IN-PROG"))
-                                       ((org-agenda-todo-ignore-scheduled t)))
+                                         ("p" "projects and areas" (
+                                                                    (todo "PROJ")
+                                                                    (todo "AREA")))
 
 
 
-                                      ))
+                                         ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
+                                              ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
+                                         ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" 
+                                                                                            ((org-agenda-span 2)
+                                                                                             (org-agenda-clockreport-mode nil)))
+                                                                                    (todo "NEXT|TODAY|IN-PROG"))
+                                          ((org-agenda-todo-ignore-scheduled t)))
+
+
+
+                                         ))
 #+END_SRC
 
 #+RESULTS:
@@ -326,7 +330,8 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 | k | all untagged TODOs   | tags-todo                                                                                                                                                                                                                    | -{.*}/-HABIT-BLOCK |                                                                               |       |           |                                        |
 | o | todos by mode        | ((tags-todo email-/-HABIT-HOLD-WAIT) (tags-todo intake-/-HABIT-WAIT-HOLD) (tags-todo focus-/-HABIT-WAIT-HOLD) (tags-todo admin-/-HABIT-WAIT-HOLD) (tags-todo discovery-/-HABIT-WAIT-HOLD) (tags-todo integrate-/-HABIT-WAIT-HOLD)) |                    |                                                                               |       |           |                                        |
 | j | home todos           | ((tags-todo cooking-Style="habit") (tags-todo cleaning-Style="habit") (tags-todo self-Style="habit"))                                                                                                                        |                    |                                                                               |       |           |                                        |
-| n | ndd                  | ((tags-todo ndd+admin) (tags-todo ndd+email) (tags-todo ndd+focus) (tags-todo ndd-admin-email-focus))                                                                                                                        |                    |                                                                               |       |           |                                        |
+| n | ndd                  | ((tags-todo lis-/-HABIT-WAIT-HOLD) (tags-todo ndd+admin-/-HABIT-WAIT-HOLD) (tags-todo ndd+email-/-HABIT-WAIT-HOLD) (tags-todo ndd+focus-/-HABIT-WAIT-HOLD) (tags-todo ndd-admin-email-focus-/-HABIT-WAIT-HOLD))                   |                    |                                                                               |       |           |                                        |
+| d | remainder            | ((tags-todo sysadmin-/-HABIT-WAIT-HOLD) (tags-todo mentat-/-HABIT-WAIT-HOLD))                                                                                                                                                  |                    |                                                                               |       |           |                                        |
 | p | projects and areas   | ((todo PROJ) (todo AREA))                                                                                                                                                                                                    |                    |                                                                               |       |           |                                        |
 | h | all HOLD/WAIT items  | todo                                                                                                                                                                                                                         | HOLD               | WAIT                                                                          |       |           |                                        |
 | g | all UNSCHEDULED NEXT | TODAY                                                                                                                                                                                                                        | IN-PROG            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT | TODAY | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |
