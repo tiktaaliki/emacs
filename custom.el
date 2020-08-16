@@ -33,6 +33,9 @@
  '(org-agenda-files
    (quote
     ("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/habits.org" "~/Dropbox/Zettelkasten/projects.org")))
+ '(org-clock-clocktable-default-properties
+   (quote
+    (:maxlevel 4 :hidefiles t :tags t :tcolumns 1 :narrow 30 :level nil :link t)))
  '(org-emphasis-alist
    (quote
     (("*" bold)
