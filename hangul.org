@@ -1,6 +1,5 @@
 * dvorak
-;; This buffer is for text that is not saved, and for Lisp evaluation.
-;; To create a file, visit it with C-x C-f and enter text in its buffer.
+
 need to re-evaluate hangul.el 
 #+begin_src emacs-lisp
 
@@ -23,7 +22,6 @@ need to re-evaluate hangul.el
 
    #+RESULTS:
    : dvorak
-
 
 #+begin_src emacs-lisp
    (defun hangul2-input-method (key)
@@ -69,11 +67,14 @@ need to re-evaluate hangul.el
       (message "Switched to layout: %s"
        (propertize quail-keyboard-layout-type
                'face 'bold)))
+
+
+      (load "hangul")
 #+end_src
 
 #+RESULTS:
-: toggle-quail-keyboard-layout
-#+begin_src emacs-lisp
+: t
+
 
 (fix-input "english-dvorak" ;; matches alternative layout
 
@@ -81,4 +82,3 @@ need to re-evaluate hangul.el
 
 "dvorak-korean") ;; name of new input method that preserves
 
-#+end_src

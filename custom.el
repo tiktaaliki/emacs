@@ -16,6 +16,7 @@
  '(chronos-expiry-functions
    (quote
     (chronos-sound-notify chronos-message-notify chronos-buffer-notify)))
+ '(default-input-method "korean-hangul")
  '(display-time-mode t)
  '(eyebrowse-mode t)
  '(fill-column 120)
@@ -36,6 +37,7 @@
  '(org-clock-clocktable-default-properties
    (quote
     (:maxlevel 4 :hidefiles t :tags t :tcolumns 1 :narrow 30 :level nil :link t)))
+ '(org-edna-mode t)
  '(org-emphasis-alist
    (quote
     (("*" bold)
@@ -52,7 +54,7 @@
     (ol-bibtex ol-eww org-habit org-id org-protocol org-tempo ol-w3m org-collector org-notify)))
  '(org-pomodoro-keep-killed-pomodoro-time t)
  '(org-pomodoro-ticking-sound-states (quote (:pomodoro)))
- '(org-superstar-item-bullet-alist (quote ((42 . 8211) (43 . 10148) (45 . 8226))))
+ '(org-superstar-item-bullet-alist (quote ((42 . 9900) (43 . 10033) (45 . 9899))))
  '(org-superstar-prettify-item-bullets t)
  '(org-support-shift-select t)
  '(org-tag-faces
@@ -96,7 +98,7 @@
  '(org-wild-notifier-mode t)
  '(package-selected-packages
    (quote
-    (olivetti quail fix-input dvorak-layouts quelpa activity-watch-mode org org-wild-notifier company-org-roam org-roam org-roam-bibtex pomidor org-msg nov org-superstar yasnippet-snippets org-clock-convenience tomatinho org-pomodoro org-plus-contrib crux org-noter pdf-view-restore org-alert anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle eyebrowse org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency spotify speed-type smartparens slack rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-preview-html org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-spotify helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-window centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game)))
+    (undo-tree xml+ use-package olivetti quail fix-input dvorak-layouts quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex pomidor org-msg nov org-superstar yasnippet-snippets org-clock-convenience tomatinho org-pomodoro org-plus-contrib crux org-noter pdf-view-restore org-alert anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle eyebrowse org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency spotify speed-type smartparens slack rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-preview-html org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-spotify helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-window centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game)))
  '(pdf-annot-default-annotation-properties
    (quote
     ((t
