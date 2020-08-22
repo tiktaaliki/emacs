@@ -12,6 +12,7 @@
      (output-dvi "xdvi")
      (output-pdf "Okular")
      (output-html "xdg-open"))))
+ '(ajb-max-window-height 200)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(chronos-expiry-functions
    (quote
@@ -35,7 +36,7 @@
       (file)))))
  '(org-agenda-files
    (quote
-    ("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/habits.org" "~/Dropbox/Zettelkasten/projects.org")))
+    ("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/projects.org")))
  '(org-clock-clocktable-default-properties
    (quote
     (:maxlevel 4 :hidefiles t :tags t :tcolumns 1 :narrow 30 :level nil :link t)))
@@ -58,7 +59,7 @@
  '(org-pomodoro-keep-killed-pomodoro-time t)
  '(org-pomodoro-ticking-sound-states (quote (:pomodoro)))
  '(org-sticky-header-full-path (quote full))
- '(org-sticky-header-heading-star "◎")
+ '(org-sticky-header-heading-star "##")
  '(org-superstar-item-bullet-alist (quote ((42 . 9899) (43 . 10033) (45 . 9900))))
  '(org-superstar-prettify-item-bullets t)
  '(org-support-shift-select t)
@@ -80,13 +81,6 @@
      ("journal" :inherit org-tag :foreground "dark orange")
      ("cleaning" :inherit org-tag :foreground "dark orange")
      ("job" :inherit org-tag :foreground "dark orange"))))
- '(org-tempo-keywords-alist
-   (quote
-    (("L" . "latex")
-     ("H" . "html")
-     ("A" . "ascii")
-     ("i" . "index")
-     ("q" . "quote"))))
  '(org-todo-keyword-faces
    (quote
     (("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
@@ -103,7 +97,7 @@
  '(org-wild-notifier-mode t)
  '(package-selected-packages
    (quote
-    (zoom helm-bufler visible-mark spray scrollkeeper ranger org-noter-pdftools org-pdftools org-ac mu4e-conversation on-screen uptimes unkillable-scratch mw-thesaurus most-used-words korean-holidays helm-unicode helm-flyspell clean-buffers org-mru-clock undo-tree xml+ use-package olivetti quail quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex org-msg nov org-superstar yasnippet-snippets org-clock-convenience org-pomodoro org-plus-contrib crux org-noter pdf-view-restore org-alert anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency speed-type smartparens rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game)))
+    (ac-helm org-clock-today org-clock-split auto-complete-auctex ebib zoom helm-bufler visible-mark spray scrollkeeper ranger org-noter-pdftools org-pdftools org-ac mu4e-conversation on-screen uptimes unkillable-scratch mw-thesaurus most-used-words korean-holidays helm-unicode helm-flyspell clean-buffers org-mru-clock undo-tree xml+ use-package olivetti quail quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex org-msg nov org-superstar yasnippet-snippets org-clock-convenience org-pomodoro org-plus-contrib crux org-noter pdf-view-restore org-alert anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency speed-type smartparens rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game)))
  '(pdf-annot-default-annotation-properties
    (quote
     ((t
@@ -122,7 +116,20 @@
  '(pdf-annot-list-listed-types
    (quote
     (file free-text highlight square squiggly strike-out text underline)))
- '(sentence-end-double-space nil))
+ '(sentence-end-double-space nil)
+ '(temp-buffer-resize-mode t)
+ '(zoom-ignore-predicates
+   (quote
+    ((lambda nil
+       (>
+	(count-lines
+	 (point-min)
+	 (point-max))
+	20)))))
+ '(zoom-ignored-buffer-name-regexps (quote ("^*calc")))
+ '(zoom-ignored-buffer-names (quote ("zoom.el" "init.el")))
+ '(zoom-ignored-major-modes (quote (dired-mode markdown-mode)))
+ '(zoom-size (quote size-callback)))
  
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
