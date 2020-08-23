@@ -54,8 +54,11 @@
 
 
 ** org-clock
+:PROPERTIES:
+:UPDATE_DATE: 2020.0823
+:END:
 #+BEGIN_SRC emacs-lisp :tangle yes
-
+(use-package org-clock-split)
    (setq org-log-into-drawer t)
 
 (setq org-clock-continuously t)
@@ -87,27 +90,7 @@
                  ("e" . org-clock-convenience-fill-gap)
                  ("o" . org-clock-convenience-fill-gap-both)))
 
-   (defun dfeich/helm-org-clock-in (marker)
-     "Clock into the item at MARKER"
-     (with-current-buffer (marker-buffer marker)
-       (goto-char (marker-position marker))
-       (org-clock-in)))
-   (eval-after-load 'helm-org
-     '(nconc helm-org-headings-actions
-             (list
-              (cons "Clock into task" #'dfeich/helm-org-clock-in))))
-
-
-
-   (setq helm-org-headings-actions '(
-                                     ("Go to heading" . helm-org-goto-marker)
-                                     ("Clock into task" . dfeich/helm-org-clock-in)
-                                     ("Open in indirect buffer 'C-c i'" . helm-org--open-heading-in-indirect-buffer)
-                                     ("Refile heading(s) (multiple-marked-to-selected, or current-to-selected) 'C-c w'" . helm-org--refile-heading-to)
-                                     ("Insert link to this heading 'C-c l'" . helm-org-insert-link-to-heading-at-marker)
-                                     )
-         )
-
+  
 
 
 
@@ -147,7 +130,28 @@
 #+RESULTS:
 | :maxlevel | 4 | :scope | subtree |
 
+;removed trying to troubleshoot this helm timer error thing
 
+ (defun dfeich/helm-org-clock-in (marker)
+     "Clock into the item at MARKER"
+     (with-current-buffer (marker-buffer marker)
+       (goto-char (marker-position marker))
+       (org-clock-in)))
+   (eval-after-load 'helm-org
+     '(nconc helm-org-headings-actions
+             (list
+              (cons "Clock into task" #'dfeich/helm-org-clock-in))))
+
+
+
+   (setq helm-org-headings-actions '(
+                                     ("Go to heading" . helm-org-goto-marker)
+                                     ("Clock into task" . dfeich/helm-org-clock-in)
+                                     ("Open in indirect buffer 'C-c i'" . helm-org--open-heading-in-indirect-buffer)
+                                     ("Refile heading(s) (multiple-marked-to-selected, or current-to-selected) 'C-c w'" . helm-org--refile-heading-to)
+                                     ("Insert link to this heading 'C-c l'" . helm-org-insert-link-to-heading-at-marker)
+                                     )
+         )
 
    
 
@@ -292,7 +296,7 @@
 
    (setq org-capture-templates
          '(
-           ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %<%H:%M> %? \n\n\n\n" :clock-in t :clock-keep t :kill-buffer nil ) 
+           ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil ) 
 
            ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT}\n%^t\n%a\n%?")
  ("d" "download" table-line (id "reading") "|%^{Author} | %^{Title} | %^{Format}|"  )
@@ -428,6 +432,7 @@
           ("~/Dropbox/Zettelkasten/inbox.org" 
            "~/Dropbox/Zettelkasten/cal.org"
            "~/Dropbox/Zettelkasten/ndd.org"
+"~/Dropbox/Zettelkasten/readings.org"
            "~/Dropbox/Zettelkasten/journal.org"
            "~/Dropbox/Zettelkasten/lis.org"   
            "~/Dropbox/Zettelkasten/projects.org"
@@ -453,7 +458,7 @@
 #+end_src                     
 
 #+RESULTS:
-: [nil 24378 38187 832188 300 kiwon/org-agenda-redo-in-other-window nil nil 510000]
+: [nil 24386 30267 653464 300 kiwon/org-agenda-redo-in-other-window nil nil 130000]
 
 *** org-agenda custom commands
 :LOGBOOK:
@@ -883,6 +888,28 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 #+RESULTS:
 | my/org-checkbox-todo |
+* accessibility
+#+begin_src emacs-lisp :tangle yes
+   (defhydra hydra-zoom (:color red)  "zoom"
+     ("=" text-scale-increase "in")
+     ("-" text-scale-decrease "out")
+     ("0" (text-scale-adjust 0) "reset")
+     ("o" (other-window) "other window")
+     ("q" nil "quit" :color blue))
+
+   (global-set-key (kbd "C-=") 'hydra-zoom/body)
+
+#+end_src
+
+#+RESULTS:
+: hydra-zoom/body
+
+
+
+
+
+
+
 * navigating
 ** DEFT 
 #+begin_src emacs-lisp :tangle yes
@@ -923,7 +950,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
    (setq helm-help-full-frame nil)
    (setq helm-move-to-line-cycle-in-source nil)
    (setq helm-org-rifle-show-path nil)
-   (setq helm-split-window-inside-p nil)
+   ;(setq helm-split-window-inside-p nil)
 
 #+end_src
 
@@ -1136,28 +1163,6 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 #+RESULTS:
 : ace-jump-helm-line
-
-* accessibility
-#+begin_src emacs-lisp :tangle yes
-   (defhydra hydra-zoom (:color red)  "zoom"
-     ("=" text-scale-increase "in")
-     ("-" text-scale-decrease "out")
-     ("0" (text-scale-adjust 0) "reset")
-     ("o" (other-window) "other window")
-     ("q" nil "quit" :color blue))
-
-   (global-set-key (kbd "C-=") 'hydra-zoom/body)
-
-#+end_src
-
-#+RESULTS:
-: hydra-zoom/body
-
-
-
-
-
-
 
 * debugging
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1569,13 +1574,41 @@ M-x describe-current-coding-system
 : goto/body
 
 * DIRED
+:PROPERTIES:
+:ID:       oi0gh0v0dti0
+:UPDATE_DATE: 2020.0822 opens ok
+:END:
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (add-hook 'dired-load-hook
+            (function (lambda () (load "dired-x"))))
+
+ (add-hook 'dired-mode-hook
+               (lambda ()
+                 ;; Set dired-x buffer-local variables here.  For example:
+                 (dired-omit-mode 1)
+                 ))
+(setq dired-omit-verbose nil)
+;; toggle `dired-omit-mode' with C-x M-o
+(add-hook 'dired-mode-hook #'dired-omit-mode)
+(setq dired-omit-files
+      (concat dired-omit-files "\\|^.DS_STORE$\\|^.projectile$\\|^.org~$"))
+;added 2020.0822. opens ok. 
+(diredp-toggle-find-file-reuse-dir 1)
+#+END_SRC
+
+#+RESULTS:
+: Reusing Dired buffers is now ON
+
+
+: ^\.?#\|^\.$\|^\.\.$\|^.DS_STORE$\|^.projectile$\|^.org~$\|^.DS_STORE$\|^.projectile$\|^.org~$
+
 
 
 (eval-after-load "dired-aux"
 '(add-to-list 'dired-compress-file-suffixes 
 '("\\.zip\\'" ".zip" "unzip")))
 
-(diredp-toggle-find-file-reuse-dir 1)
+
 (defhydra hydra-dired (:hint nil :color pink)
 "
 _+_ mkdir          _v_iew           _m_ark             _(_ details        _i_nsert-subdir    wdired
@@ -1684,9 +1717,11 @@ T - tag prefix
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
+(defvar symbola-font (if (eq system-type 'gnu/linux)
+                         (font-spec :name "Symbola" :size 15)
+                       "Symbola-14"))
 
-
-   (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+   (Set-fontset-font "fontset-default" '(#x1100 . #xffdc)
                      '("NanumBarunpen" . "unicode-bmp" )
 
                      )
@@ -1694,9 +1729,15 @@ T - tag prefix
                      '("NanumBarunpen" . "unicode-bmp"))
                                            ;  (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
                                            ;                   (font-spec :size 30)) 
+ (set-fontset-font "fontset-default" '(#x2000 . #x206F)
+                     '("Symbola" . "unicode-bmp" ))
+(set-fontset-font "fontset-default" '(#x2200 . #x22FF)
+                     '("Symbola" . "unicode-bmp" ))
+
+
+
 
    (setq use-default-font-for-symbols nil)
-
 
    (use-package unicode-fonts
      :ensure t
@@ -2171,12 +2212,16 @@ T - tag prefix
 
 
 * org-roam
+:PROPERTIES:
+:UPDATE_DATE: 2020.0822
+:END:
+
 #+begin_src emacs-lisp :tangle yes
 
    (use-package org-roam)
 
    (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:END:\n%?" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (org-current-time) t)"
- "#+title: ${title}" :unnarrowed t)))
+ "#+title: ${title}" :unnarrowed t :kill-buffer t)))
 
 
    (setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
