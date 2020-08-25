@@ -562,11 +562,8 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                           ;habits scheduled for todeaf
                                       ("b" "Habits"
 
+( (tags-todo "STYLE=\"habit\"+SCHEDULED<=\"<today>\"")
 
-( (tags-todo "mentat+STYLE=\"habit\"+SCHEDULED<=\"<today>\"")
-(tags-todo "home+STYLE=\"habit\"+SCHEDULED<=\"<today>\"")
-(tags-todo "self+STYLE=\"habit\"+SCHEDULED<=\"<today>\"")
-(tags-todo "sysadmin+STYLE=\"habit\"+SCHEDULED<=\"<today>\"")
 )
                                  )
                                                                                                                        
@@ -625,16 +622,16 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 #+END_SRC
 
 #+RESULTS:
-| h | Habits               | tags-todo                                                                                                                                                                                                               | STYLE="habit"      | ((org-agenda-overriding-header Habits))                                       |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| b | Habits               | ((tags-todo mentat+STYLE="habit"+SCHEDULED<="<today>") (tags-todo home+STYLE="habit"+SCHEDULED<="<today>") (tags-todo self+STYLE="habit"+SCHEDULED<="<today>") (tags-todo sysadmin+STYLE="habit"+SCHEDULED<="<today>")) |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| k | all untagged TODOs   | tags-todo                                                                                                                                                                                                               | -{.*}/-HABIT-BLOCK |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| j | home todos           | ((tags-todo cooking-Style="habit") (tags-todo cleaning-Style="habit") (tags-todo self-Style="habit"))                                                                                                                   |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| n | ndd & lis            | ((tags-todo lis-/-HABIT-WAIT-HOLD) (tags-todo ndd-admin-email-focus-/-HABIT-WAIT-HOLD) (tags-todo ndd+admin-/-HABIT-WAIT-HOLD) (tags-todo ndd+email-/-HABIT-WAIT-HOLD) (tags-todo ndd+focus-/-HABIT-WAIT-HOLD))              |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| d | mentat & sysadmin    | ((tags-todo sysadmin-/-HABIT-WAIT-HOLD) (tags-todo mentat-/-HABIT-WAIT-HOLD))                                                                                                                                             |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| p | projects and areas   | ((todo PROJ) (todo AREA))                                                                                                                                                                                               |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| h | all HOLD/WAIT items  | todo                                                                                                                                                                                                                    | HOLD               | WAIT                                                                          |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| g | all UNSCHEDULED NEXT | TODAY                                                                                                                                                                                                                   | IN-PROG            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT | TODAY                         | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| u | all UNSCHEDULED      | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (tags-todo ndd+/TODO                                                                                                                                 | NEXT               | TODAY                                                                         | IN-PROG) (tags-todo lis+/TODO | NEXT      | TODAY                                  | IN-PROG) (tags-todo home+/TODO | NEXT | TODAY | IN-PROG) (tags-todo sysadmin+/TODO | NEXT | TODAY | IN-PROG) (tags-todo mentat+/TODO | NEXT | TODAY | IN-PROG)) | ((org-agenda-max-entries 5)) | ((org-agenda-todo-ignore-scheduled t)) |
+| h | Habits               | tags-todo                                                                                                                                                                                                  | STYLE="habit"      | ((org-agenda-overriding-header Habits))                                       |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| b | Habits               | ((tags-todo STYLE="habit"+SCHEDULED<="<today>"))                                                                                                                                                           |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| k | all untagged TODOs   | tags-todo                                                                                                                                                                                                  | -{.*}/-HABIT-BLOCK |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| j | home todos           | ((tags-todo cooking-Style="habit") (tags-todo cleaning-Style="habit") (tags-todo self-Style="habit"))                                                                                                      |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| n | ndd & lis            | ((tags-todo lis-/-HABIT-WAIT-HOLD) (tags-todo ndd-admin-email-focus-/-HABIT-WAIT-HOLD) (tags-todo ndd+admin-/-HABIT-WAIT-HOLD) (tags-todo ndd+email-/-HABIT-WAIT-HOLD) (tags-todo ndd+focus-/-HABIT-WAIT-HOLD)) |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| d | mentat & sysadmin    | ((tags-todo sysadmin-/-HABIT-WAIT-HOLD) (tags-todo mentat-/-HABIT-WAIT-HOLD))                                                                                                                                |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| p | projects and areas   | ((todo PROJ) (todo AREA))                                                                                                                                                                                  |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| h | all HOLD/WAIT items  | todo                                                                                                                                                                                                       | HOLD               | WAIT                                                                          |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| g | all UNSCHEDULED NEXT | TODAY                                                                                                                                                                                                      | IN-PROG            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT | TODAY                         | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| u | all UNSCHEDULED      | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (tags-todo ndd+/TODO                                                                                                                    | NEXT               | TODAY                                                                         | IN-PROG) (tags-todo lis+/TODO | NEXT      | TODAY                                  | IN-PROG) (tags-todo home+/TODO | NEXT | TODAY | IN-PROG) (tags-todo sysadmin+/TODO | NEXT | TODAY | IN-PROG) (tags-todo mentat+/TODO | NEXT | TODAY | IN-PROG)) | ((org-agenda-max-entries 5)) | ((org-agenda-todo-ignore-scheduled t)) |
 
 
                                       ("o" "todos by mode"(
@@ -856,7 +853,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
    (setq org-todo-keywords
          (quote
           ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "TODAY(o)" "WAIT(w)" "|" "DONE(d)" )
-           (type "AREA(a)" "PROJ(p)"  "HABIT(h)"   "HOLD(l)" "BLOCK(b)"  "|" "DONE(d)")
+           (type "AREA(a)" "PROJ(p)"  "습관(h)"   "HOLD(l)"  "|" "DONE(d)")
            (sequence "|" "x(c)")
 
 
@@ -1328,8 +1325,7 @@ M-x describe-current-coding-system
 #+END_SRC
 
 #+RESULTS:
-: lawlist-read-buffer-file-coding-system
-
+: lawlist-read-buffer-file-coding-syste
 
 * Autosave-backup-git
 
@@ -1763,40 +1759,48 @@ T - tag prefix
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-(defvar symbola-font (if (eq system-type 'gnu/linux)
-                         (font-spec :name "Symbola" :size 15)
-                       "Symbola-14"))
+   (defvar symbola-font (if (eq system-type 'gnu/linux)
+                            (font-spec :name "Symbola" :size 15)
+                          "Symbola-14"))
+   (defvar nanum-font (if (eq system-type 'gnu/linux)
+                            (font-spec :name "NanumBarunpen" :size 9)
+                          "NanumBarunpen"))
+      (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+                        '("NanumBarunpen" . "unicode-bmp" )
 
-   (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                     '("NanumBarunpen" . "unicode-bmp" )
+                        )
+      (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
+                        '("Nanumbarunpen" . "unicode-bmp")
+) 
+                                              ;  (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
+                                              ;                   (font-spec :size 30)) 
+    (set-fontset-font "fontset-default" '(#x2000 . #x206F)
+                        '("Symbola" . "unicode-bmp" ))
+   (set-fontset-font "fontset-default" '(#x2200 . #x22FF)
+                        '("Symbola" . "unicode-bmp" ))
 
-                     )
-   (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
-                     '("NanumBarunpen" . "unicode-bmp"))
-                                           ;  (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
-                                           ;                   (font-spec :size 30)) 
- (set-fontset-font "fontset-default" '(#x2000 . #x206F)
-                     '("Symbola" . "unicode-bmp" ))
-(set-fontset-font "fontset-default" '(#x2200 . #x22FF)
-                     '("Symbola" . "unicode-bmp" ))
-
-
-
-
-   (setq use-default-font-for-symbols nil)
-
-   (use-package unicode-fonts
-     :ensure t
-     :defer t
-     :init (unicode-fonts-setup))
-
-
-   (setq global-visual-fill-column-mode t)
-   (setq global-visual-line-mode t)
+(when (fboundp #'set-fontset-font)
+  (set-fontset-font t 'korean-ksc5601	
+                    ;; Noto Sans CJK: https://www.google.com/get/noto/help/cjk/
+                    (font-spec :family "Nanumbarunpen")))
+(dolist (item '(("Nanumbarunpen" . 0.71)))
+  (add-to-list 'face-font-rescale-alist item))
 
 
-   (eval-after-load "flyspell"
-     '(define-key flyspell-mode-map (kbd "C-.") nil))
+      (setq use-default-font-for-symbols nil)
+
+      (use-package unicode-fonts
+        :ensure t
+        :defer t
+        :init (unicode-fonts-setup))
+
+
+      (setq global-visual-fill-column-mode t)
+      (setq global-visual-line-mode t)
+
+
+      (eval-after-load "flyspell"
+        '(define-key flyspell-mode-map (kbd "C-.") nil))
 
 
 
