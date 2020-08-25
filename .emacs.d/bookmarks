@@ -1,4 +1,4 @@
-;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*-
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
@@ -217,8 +217,8 @@
     (rear-context-string . "35 Mar 23 16:27 ")
     (front-context-region-string)
     (rear-context-region-string)
-    (visits . 34)
-    (time 24382 61157 92476 67000)
+    (visits . 35)
+    (time 24387 51872 110529 553000)
     (created 24246 8924 953441 341000)
     (position . 230)
     (filename . "/home/betsy/Dropbox/2020/")
@@ -244,16 +244,16 @@
       (bmkp-full-record #1#))
     (annotation)
     (tags)
-    (filename . "~/Dropbox/Zettelkasten/notes.org")
-    (buffer-name . "notes.org")
-    (front-context-string . "* Intermittent f")
-    (rear-context-string . ".org][Zettels]]\n")
+    (filename . "~/Dropbox/Zettelkasten/projects.org")
+    (buffer-name . "projects.org")
+    (front-context-string . "** HABIT update ")
+    (rear-context-string . "ow\n* AREA Self \n")
     (front-context-region-string)
     (rear-context-region-string)
     (visits . 0)
-    (time . #2=(24386 50056 252906 114000))
+    (time . #2=(24387 58548 146999 622000))
     (created . #2#)
-    (position . 426))
+    (position . 122740))
 #1=(#("i3 config" 0 9
       (bmkp-full-record #1#))
     (filename . "~/.i3/config")
@@ -272,14 +272,14 @@
     (tags)
     (filename . "~/Dropbox/Zettelkasten/journal.org")
     (buffer-name . "journal.org")
-    (front-context-string . "**** cleaning ki")
-    (rear-context-string . " =>  0:22\n:END:\n")
+    (front-context-string . "**** running \n:L")
+    (rear-context-string . ":\n**** bathroom\n")
     (front-context-region-string)
     (rear-context-region-string)
     (visits . 0)
-    (time . #2=(24386 59412 360645 538000))
+    (time . #2=(24388 24626 572332 731000))
     (created . #2#)
-    (position . 359560))
+    (position . 361257))
 #1=(#(".emacs" 0 6
       (bmkp-full-record #1#))
     (end-position . 521)
