@@ -2182,6 +2182,7 @@ T - tag prefix
 
    (setq helm-chronos-standard-timers
          '(       "=13:00/END fast + =20:00/BEGIN fast"
+                  "=18:00/begin ref shift + -5/ref in 5 min + =22:00/end shift"
                   "25/END pomodoro + 5/END break" 
                   "50/END pomodoro + 5/get back to work" 
 
@@ -2190,7 +2191,7 @@ T - tag prefix
 #+end_src
 
 #+RESULTS:
-: ~/Dropbox/emacs/.emacs.d/tack.wav
+| =13:00/END fast + =20:00/BEGIN fast | =18:00/begin ref shift + -5/ref in 5 min + =22:00/end shift | 25/END pomodoro + 5/END break | 50/END pomodoro + 5/get back to work | 25/END pomodoro 1 + 5/END break 1 + 25/END pomodoro 2 + 5/END break 2 + 25/END pomodoro 3 + 5/END break 3 + 25/END pomodoro 4 + 5/END break 4 |
 
 
 (use-package pomidor)
