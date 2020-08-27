@@ -12,14 +12,14 @@
      (output-pdf "Okular")
      (output-html "xdg-open")))
  '(ajb-max-window-height 200)
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "/home/betsy/Dropbox/emacs/.emacs.d/bookmarks")
  '(chronos-expiry-functions
    '(chronos-sound-notify chronos-message-notify chronos-buffer-notify))
  '(default-input-method "korean-hangul")
  '(display-time-mode t)
  '(eyebrowse-mode t)
  '(fill-column 120)
- '(line-spacing 0.2)
+ '(line-spacing 0.25)
  '(mode-line-format
    '("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote " " mode-line-misc-info mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
      (vc-mode vc-mode)
@@ -30,11 +30,11 @@
  '(openwith-associations
    '(("\\.\\(?:docx?\\|pptx?\\|xls?\\)$" "libreoffice"
       (file))))
- '(org-agenda-files
-   '("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/projects.org"))
  '(org-clock-clocktable-default-properties
    '(:maxlevel 4 :hidefiles t :tags t :tcolumns 1 :narrow 30 :level nil :link t))
  '(org-clock-in-resume nil)
+ '(org-download-delete-image-after-download t)
+ '(org-download-image-dir "/home/betsy/Dropbox/Zettelkasten/images")
  '(org-edna-mode t)
  '(org-emphasis-alist
    '(("*" bold)
@@ -45,7 +45,6 @@
      ("+"
       (:background "#acd0c0" :foreground "black" :family "monofur" :weight bold))))
  '(org-fontify-done-headline t)
- '(org-habit-show-habits-only-for-today nil)
  '(org-modules
    '(ol-bibtex ol-eww org-habit org-id org-protocol org-tempo ol-w3m org-collector org-notify))
  '(org-pomodoro-keep-killed-pomodoro-time t)
@@ -72,7 +71,8 @@
      ("journal" :inherit org-tag :foreground "dark orange")
      ("cleaning" :inherit org-tag :foreground "dark orange")
      ("job" :inherit org-tag :foreground "dark orange")
-     ("mentat" :inherit org-tag :foreground "yellow green")))
+     ("mentat" :inherit org-tag :foreground "yellow green")
+     ("editing" :inherit org-tag :foreground "yellow green")))
  '(org-todo-keyword-faces
    '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
      ("PROJ" :weight regular :underline nil :inherit org-todo :foreground "purple")
@@ -104,6 +104,8 @@
       (color . "red"))))
  '(pdf-annot-list-listed-types
    '(file free-text highlight square squiggly strike-out text underline))
+ '(safe-local-variable-values
+   '((org-download-image-dir . "/home/betsy/.local/share/Anki2/User 1/collection.media")))
  '(sentence-end-double-space nil)
  '(temp-buffer-resize-mode t)
  '(unicode-fonts-block-font-mapping
@@ -276,9 +278,9 @@
      ("Ethiopic Supplement"
       ("Kefa" "Noto Sans Ethiopic" "Nyala" "Abyssinica SIL" "Code2000"))
      ("General Punctuation"
-      ("Monaco" "Apple Symbols" "Segoe UI Symbol" "Cambria Math" "DejaVu Sans Mono" "DejaVu Sans:width=condensed" "Charis SIL" "Doulos SIL" "Antinoou" "Symbola" "Code2000" "Quivira" "Noto Sans" "Everson Mono:weight=bold" "FreeMono" "BabelStone Modern"))
+      ("Symbola" "Monaco" "Apple Symbols" "Segoe UI Symbol" "Cambria Math" "DejaVu Sans Mono" "DejaVu Sans:width=condensed" "Charis SIL" "Doulos SIL" "Antinoou" "Symbola" "Code2000" "Quivira" "Noto Sans" "Everson Mono:weight=bold" "FreeMono" "BabelStone Modern"))
      ("Geometric Shapes"
-      ("DejaVu Sans Mono" "DejaVu Sans:width=condensed" "Segoe UI Symbol" "Arial Unicode MS" "Symbola" "Noto Sans Symbols" "Quivira" "BabelStone Modern" "Everson Mono" "FreeMono" "Code2000"))
+      ("Symbola" "DejaVu Sans Mono" "DejaVu Sans:width=condensed" "Segoe UI Symbol" "Arial Unicode MS" "Noto Sans Symbols" "Quivira" "BabelStone Modern" "Everson Mono" "FreeMono" "Code2000"))
      ("Geometric Shapes Extended"
       ("Symbola" "Quivira"))
      ("Georgian"
@@ -300,15 +302,15 @@
      ("Halfwidth and Fullwidth Forms"
       ("Meiryo" "Arial Unicode MS" "Microsoft JhengHei" "Microsoft JhengHei UI" "Microsoft YaHei" "Microsoft YaHei UI" "BabelStone Han" "Apple Symbols" "Quivira" "Code2000" "HAN NOM A"))
      ("Hangul Compatibility Jamo"
-      ("NanumBarunpen" "PCMyungjo" "Malgun Gothic" "Gulim" "Dotum" "Batang" "Gungsuh" "AppleMyungjo" "UnBatang" "WenQuanYi Zen Hei Mono" "HAN NOM A" "Arial Unicode MS" "Code2000" "HeadLineA"))
+      ("Nanum Gothic Coding" "NanumBarunpen" "PCMyungjo" "Malgun Gothic" "Gulim" "Dotum" "Batang" "Gungsuh" "AppleMyungjo" "UnBatang" "WenQuanYi Zen Hei Mono" "HAN NOM A" "Arial Unicode MS" "Code2000" "HeadLineA"))
      ("Hangul Jamo"
-      ("NanumBarunpen" "UnBatang" "WenQuanYi Zen Hei Mono" "PCMyungjo" "Malgun Gothic" "Gulim" "Dotum" "Batang" "Gungsuh" "Arial Unicode MS" "Code2000"))
+      ("Nanum Gothic Coding" "NanumBarunpen" "UnBatang" "WenQuanYi Zen Hei Mono" "PCMyungjo" "Malgun Gothic" "Gulim" "Dotum" "Batang" "Gungsuh" "Arial Unicode MS" "Code2000"))
      ("Hangul Jamo Extended-A"
-      ("NanumBarunpen" "Malgun Gothic" "HanaMinA" "UnBatang"))
+      ("Nanum Gothic Coding" "NanumBarunpen" "Malgun Gothic" "HanaMinA" "UnBatang"))
      ("Hangul Jamo Extended-B"
-      ("NanumBarunpen" "Malgun Gothic" "HanaMinA" "UnBatang"))
+      ("Nanum Gothic Coding" "NanumBarunpen" "Malgun Gothic" "HanaMinA" "UnBatang"))
      ("Hangul Syllables"
-      ("NanumBarunpen" "AppleGothic" "Malgun Gothic" "Gulim" "Dotum" "Batang" "Gungsuh" "UnBatang" "WenQuanYi Zen Hei Mono" "Arial Unicode MS" "Code2000"))
+      ("Nanum Gothic Coding" "NanumBarunpen" "AppleGothic" "Malgun Gothic" "Gulim" "Dotum" "Batang" "Gungsuh" "UnBatang" "WenQuanYi Zen Hei Mono" "Arial Unicode MS" "Code2000"))
      ("Hanunoo"
       ("Noto Sans Hanunoo" "MPH 2B Damase" "Quivira" "FreeSerif"))
      ("Hebrew"
@@ -388,7 +390,7 @@
      ("Mathematical Alphanumeric Symbols"
       ("Cambria Math" "Noto Sans Symbols" "Asana Math" "Code2001" "Symbola" "Quivira" "Everson Mono:weight=bold"))
      ("Mathematical Operators"
-      ("Monaco" "DejaVu Sans Mono" "Segoe UI Symbol" "Cambria Math" "DejaVu Sans:width=condensed" "Noto Sans Symbols" "Apple Symbols" "Asana Math" "Arial Unicode MS" "Code2000" "Symbola" "Quivira" "Everson Mono:weight=bold" "FreeMono"))
+      ("Symbola" "Monaco" "DejaVu Sans Mono" "Segoe UI Symbol" "Cambria Math" "DejaVu Sans:width=condensed" "Noto Sans Symbols" "Apple Symbols" "Asana Math" "Arial Unicode MS" "Code2000" "Symbola" "Quivira" "Everson Mono:weight=bold" "FreeMono"))
      ("Meetei Mayek"
       ("Noto Sans Meetei Mayek" "Eeyek Unicode" "Meetei Mayek"))
      ("Meetei Mayek Extensions"
@@ -609,6 +611,6 @@
  '(org-special-keyword ((t (:foreground "#83898d" :height 0.9))))
  '(org-tag ((t (:foreground "#83898d" :weight normal :height 0.8))))
  '(org-tag-group ((t (:inherit nil :foreground "dodger blue"))))
- '(org-todo ((t (:foreground "#98be65" :weight normal :family "nova mono"))))
+ '(org-todo ((t (:foreground "#98be65" :weight normal :height 0.75 :family "nova mono"))))
  '(underline ((t (:foreground "#89da59" :underline t))))
  '(variable-pitch ((t (:height 1.0 :family "koho")))))
