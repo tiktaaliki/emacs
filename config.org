@@ -187,7 +187,8 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                                             ))
 
                                          ("n" "ndd & lis" (
-                                                           (tags-todo "lis-/-HABIT-WAIT-HOLD")      (tags-todo "ndd-admin-email-focus-/-HABIT-WAIT-HOLD")
+                                                           (tags-todo "lis-/-HABIT-WAIT-HOLD")  
+ (tags-todo "editing-/-HABIT-WAIT-HOLD")      (tags-todo "ndd-admin-email-focus-/-HABIT-WAIT-HOLD")
                                                            (tags-todo "ndd+admin-/-HABIT-WAIT-HOLD")
                                                            (tags-todo "ndd+email-/-HABIT-WAIT-HOLD")
                                                            (tags-todo "ndd+focus-/-HABIT-WAIT-HOLD")
@@ -232,16 +233,16 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 #+END_SRC
 
 #+RESULTS:
-| h | Habits               | tags-todo                                                                                                                                                                                                  | STYLE="habit"      | ((org-agenda-overriding-header Habits))                                       |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| b | habits               | ((agenda  ((org-agenda-span 1))) (tags-todo STYLE="habit"+SCHEDULED<="<today>"))                                                                                                                           |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| k | all untagged TODOs   | tags-todo                                                                                                                                                                                                  | -{.*}/-HABIT-BLOCK |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| j | home todos           | ((tags-todo cooking-Style="habit") (tags-todo cleaning-Style="habit") (tags-todo self-Style="habit"))                                                                                                      |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| n | ndd & lis            | ((tags-todo lis-/-HABIT-WAIT-HOLD) (tags-todo ndd-admin-email-focus-/-HABIT-WAIT-HOLD) (tags-todo ndd+admin-/-HABIT-WAIT-HOLD) (tags-todo ndd+email-/-HABIT-WAIT-HOLD) (tags-todo ndd+focus-/-HABIT-WAIT-HOLD)) |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| d | mentat & sysadmin    | ((tags-todo sysadmin-/-HABIT-WAIT-HOLD) (tags-todo mentat-/-HABIT-WAIT-HOLD))                                                                                                                                |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| p | projects and areas   | ((todo PROJ) (todo AREA))                                                                                                                                                                                  |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| h | all HOLD/WAIT items  | todo                                                                                                                                                                                                       | HOLD               | WAIT                                                                          |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| g | all UNSCHEDULED NEXT | TODAY                                                                                                                                                                                                      | IN-PROG            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT | TODAY                         | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
-| u | all UNSCHEDULED      | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (tags-todo ndd+/TODO                                                                                                                    | NEXT               | TODAY                                                                         | IN-PROG) (tags-todo lis+/TODO | NEXT      | TODAY                                  | IN-PROG) (tags-todo home+/TODO | NEXT | TODAY | IN-PROG) (tags-todo sysadmin+/TODO | NEXT | TODAY | IN-PROG) (tags-todo mentat+/TODO | NEXT | TODAY | IN-PROG)) | ((org-agenda-max-entries 5)) | ((org-agenda-todo-ignore-scheduled t)) |
+| h | Habits               | tags-todo                                                                                                                                                                                                                                       | STYLE="habit"      | ((org-agenda-overriding-header Habits))                                       |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| b | habits               | ((agenda  ((org-agenda-span 1))) (tags-todo STYLE="habit"+SCHEDULED<="<today>"))                                                                                                                                                                |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| k | all untagged TODOs   | tags-todo                                                                                                                                                                                                                                       | -{.*}/-HABIT-BLOCK |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| j | home todos           | ((tags-todo cooking-Style="habit") (tags-todo cleaning-Style="habit") (tags-todo self-Style="habit"))                                                                                                                                           |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| n | ndd & lis            | ((tags-todo lis-/-HABIT-WAIT-HOLD) (tags-todo editing-/-HABIT-WAIT-HOLD) (tags-todo ndd-admin-email-focus-/-HABIT-WAIT-HOLD) (tags-todo ndd+admin-/-HABIT-WAIT-HOLD) (tags-todo ndd+email-/-HABIT-WAIT-HOLD) (tags-todo ndd+focus-/-HABIT-WAIT-HOLD)) |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| d | mentat & sysadmin    | ((tags-todo sysadmin-/-HABIT-WAIT-HOLD) (tags-todo mentat-/-HABIT-WAIT-HOLD))                                                                                                                                                                     |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| p | projects and areas   | ((todo PROJ) (todo AREA))                                                                                                                                                                                                                       |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| h | all HOLD/WAIT items  | todo                                                                                                                                                                                                                                            | HOLD               | WAIT                                                                          |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| g | all UNSCHEDULED NEXT | TODAY                                                                                                                                                                                                                                           | IN-PROG            | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT | TODAY                         | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| u | all UNSCHEDULED      | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (tags-todo ndd+/TODO                                                                                                                                                         | NEXT               | TODAY                                                                         | IN-PROG) (tags-todo lis+/TODO | NEXT      | TODAY                                  | IN-PROG) (tags-todo home+/TODO | NEXT | TODAY | IN-PROG) (tags-todo sysadmin+/TODO | NEXT | TODAY | IN-PROG) (tags-todo mentat+/TODO | NEXT | TODAY | IN-PROG)) | ((org-agenda-max-entries 5)) | ((org-agenda-todo-ignore-scheduled t)) |
 
 
                                       ("o" "todos by mode"(
@@ -372,7 +373,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 ** org-habit
 #+begin_src emacs-lisp :tangle yes
-   (setq org-habit-graph-column 100)
+   (setq org-habit-graph-column 80)
 (setq org-habit-show-habits nil)
    (setq org-habit-show-all-today nil)
    (setq org-habit-show-habits-only-for-today nil)
@@ -584,8 +585,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                     ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/bookmarks.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
-                                    ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 1)
-                                    ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
+                         ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
                                            ;                                    ("~/Dropbox/Zettelkasten/someday.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 3)
                                     ("~/Dropbox/Zettelkasten/cal.org" :maxlevel . 2)
@@ -800,91 +800,118 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 ** org-tags
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (setq org-complete-tags-always-offer-all-agenda-tags nil)
-   (setq org-tags-match-list-sublevels (quote indented))
-   (setq tags-add-tables nil)
-   (setq org-fast-tag-selection-single-key t)
-   (setq org-use-fast-tag-selection (quote auto))
+            (setq org-complete-tags-always-offer-all-agenda-tags nil)
+            (setq org-tags-match-list-sublevels (quote indented))
+            (setq tags-add-tables nil)
+            (setq org-fast-tag-selection-single-key t)
+            (setq org-use-fast-tag-selection (quote auto))
 
-   (setq org-tag-persistent-alist '( 
-                                    (:startgroup)
-                                    ("ndd" . ?n)
-                                    ("sysadmin" . ?s)
-                                    ("home" . ?h)
-                                    ("lis" . ?l)
-				 ("self")
-                                    ("mentat" . ?m)
-("editing" . ?e)
-                                    (:endgroup)
+            (setq org-tag-persistent-alist '( 
+                                             (:startgroup)
+                                             ("ndd" . ?n)
+                                             ("sysadmin" . ?s)
+                                             ("home" . ?h)
+                                             ("lis" . ?l)
+                                             ("self")
+                                             ("mentat" . ?m)
+                                             ("editing" . ?e)
+                                             (:endgroup)
 
-                                    (:startgrouptag)
-                                    ("sysadmin" . ?s)
-                                    (:grouptags)
-                                    ("emacs")
-                                    ("system")
-                                    (:endgrouptag)
+                                       
 
-                                    (:startgroup)
-                                    ("admin" . ?a)
-                                    ("focus" . ?f)
-                                    (:endgroup)
-                                    (:startgroup)
-                                    ("email")
-                                    ("discovery" . ?d)
-                                    ("intake" . ?i)
-                                    ("integrate")
-                                    (:endgroup)
+                                             (:startgroup)
+                                             ("admin" . ?a)
+                                             ("focus" . ?f)
+                                             (:endgroup)
+                                             (:startgroup)
+                                             ("email")
+                                             ("discovery" . ?d)
+                                             ("intake" . ?i)
+                                             ("integrate")
+                                             (:endgroup)
 
-                                    (:startgrouptag)
-                                    ("lis" . ?l)
-                                    (:grouptags)
-                                    ("bcc")
-                                    ("csi")
-                                    ("job")
-                                    (:endgrouptag)
+                                             (:startgrouptag)
+                                             ("lis" . ?l)
+                                             (:grouptags)
+                               
+                                             ("csi")
+                                             ("job")
+                                             (:endgrouptag)
+                              
+                                             (:startgrouptag)
+                                             ("intake")
+                                             (:grouptags)
+                                             ("listen")
+                                             ("read" . ?r)
+                                             ("watch" . ?w)
+                                             (:endgrouptag)
 
-                                    (:startgrouptag)
-                                    ("mentat" . ?m)
-                                    (:grouptags)
-                                    ("korean")
-
-
-                                    (:endgrouptag)
-
-
-                                    (:startgrouptag)
-                                    ("intake")
-                                    (:grouptags)
-                                    ("listen")
-                                    ("read" . ?r)
-                                    ("watch" . ?w)
-                                    (:endgrouptag)
-
-                                    (:startgrouptag)
-                                    ("home" . ?h)
-                                    (:grouptags)
-                                    ("cooking")
-                                    ("cleaning")
-                                    (:endgrouptag)
+                                             (:startgrouptag)
+                                             ("home" . ?h)
+                                             (:grouptags)
+                                             ("cooking")
+                                             ("cleaning")
+                                             (:endgrouptag)
 
 
 
-                                    ))
+                                             ))
 
-
+         (setq org-tag-faces '(
+           ("ndd" :inherit org-tag :foreground "yellow green")
+           ("sysadmin" :inherit org-tag :foreground "yellow green")
+           ("lis" :inherit org-tag :foreground "yellow green")
+           ("mentat" :inherit org-tag :foreground "yellow green")
+           ("editing" :inherit org-tag :foreground "yellow green")
+           ("self" :inherit org-tag :foreground "yellow green")
+           ("home" :inherit org-tag :foreground "yellow green")
+   ;group2
+          ("journal" :inherit org-tag :foreground "dark orange")
+          ("job" :inherit org-tag :foreground "dark orange")
+     ("csi" :inherit org-tag :foreground "dark orange")
+      ))
 
 
 #+END_SRC
 
 #+RESULTS:
-: ((:startgroup) (ndd . 110) (sysadmin . 115) (home . 104) (lis . 108) (self) (mentat . 109) (editing . 101) (:endgroup) (:startgrouptag) (sysadmin . 115) (:grouptags) (emacs) (system) (:endgrouptag) (:startgroup) (admin . 97) (focus . 102) (:endgroup) (:startgroup) (email) (discovery . 100) (intake . 105) (integrate) (:endgroup) (:startgrouptag) (lis . 108) (:grouptags) (bcc) (csi) (job) (:endgrouptag) (:startgrouptag) (mentat . 109) (:grouptags) (korean) (:endgrouptag) (:startgrouptag) (intake) (:grouptags) (listen) (read . 114) (watch . 119) (:endgrouptag) (:startgrouptag) (home . 104) (:grouptags) (cooking) (cleaning) (:endgrouptag))
+| ndd      | :inherit | org-tag | :foreground | yellow green |
+| sysadmin | :inherit | org-tag | :foreground | yellow green |
+| lis      | :inherit | org-tag | :foreground | yellow green |
+| mentat   | :inherit | org-tag | :foreground | yellow green |
+| editing  | :inherit | org-tag | :foreground | yellow green |
+| self     | :inherit | org-tag | :foreground | yellow green |
+| home     | :inherit | org-tag | :foreground | yellow green |
+| journal  | :inherit | org-tag | :foreground | dark orange  |
+| job      | :inherit | org-tag | :foreground | dark orange  |
+| csi      | :inherit | org-tag | :foreground | dark orange  |
+  ("bcc" :inherit org-tag :foreground "yellow green")
+        ("audiovisual" :inherit org-tag :foreground "dark orange")
+   
+        ("read" :inherit org-tag :foreground "dark orange")
+        ("ingest" :inherit org-tag :foreground "dark orange")
+        ("create" :inherit org-tag :foreground "dark orange")
+   ("cleaning" :inherit org-tag :foreground "dark orange")
+        ("admin" :inherit org-tag :foreground "dark orange")
+        ("research" :inherit org-tag :foreground "dark orange")
 
+        (:startgrouptag)
+                                          ("mentat" . ?m)
+                                          (:grouptags)
+                                          ("korean")
+                                          (:endgrouptag)
+    
 #+TAGS: { MODE : admin(a) home(h) focus(f) lis(l) }
 #+TAGS: { admin : email(e) browser(b) }
 #+TAGS: { focus : read(r) notes(n) }
 #+TAGS: { home : kitchen(k) laundry cleaning }
-
-
+           ("bcc")
+   (:startgrouptag)
+                                          ("sysadmin" . ?s)
+                                          (:grouptags)
+                                          ("emacs")
+                                          ("system")
+                                          (:endgrouptag)
 
 ** org-todo
 #+BEGIN_SRC emacs-lisp :tangle yes
