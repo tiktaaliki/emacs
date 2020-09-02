@@ -460,7 +460,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 (use-package org-clock-split)
    (setq org-log-into-drawer t)
 
-(setq org-clock-continuously t)
+(setq org-clock-continuously nil)
    (setq org-log-note-clock-out nil)
    (defun insert-timestamp (prefix)
      "Insert the current date. With prefix-argument, use ISO format. With
@@ -2094,6 +2094,7 @@ T - tag prefix
      :ensure t
      :bind (("C->" . mc/mark-all-like-this)
 	 ("C-<" . mc/mark-next-like-this)
+("C-c 1" . mc/insert-numbers6)
 ("C-S-'" . mc/edit-lines)
 ("C-M-." . mc/mark-pop)
             ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
@@ -2396,6 +2397,7 @@ T - tag prefix
    (global-set-key (kbd "<f1>") 'org-capture)
    (define-key dired-mode-map (kbd "<f1>") 'org-capture)
    (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
+(global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
    (bind-keys 
                                            ;("C-+"   . text-scale-increase)
                                            ;   a      ("C--"   . text-scale-decrease)
