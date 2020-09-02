@@ -2094,7 +2094,7 @@ T - tag prefix
      :ensure t
      :bind (("C->" . mc/mark-all-like-this)
 	 ("C-<" . mc/mark-next-like-this)
-("C-c 1" . mc/insert-numbers6)
+("C-c 1" . mc/insert-numbers)
 ("C-S-'" . mc/edit-lines)
 ("C-M-." . mc/mark-pop)
             ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
