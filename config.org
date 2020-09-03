@@ -473,7 +473,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
            )
        (insert (format-time-string format))))
 
-(setq org-mru-clock-how-many 40)
+(setq org-mru-clock-how-many 80)
 (setq org-mru-clock-keep-formatting t)
 (defun my-org-clock-select-task ()
   (interactive)

@@ -12,7 +12,7 @@
      (output-pdf "Okular")
      (output-html "xdg-open")))
  '(ajb-max-window-height 200)
- '(bmkp-last-as-first-bookmark-file "/home/betsy/Dropbox/emacs/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(chronos-expiry-functions
    '(chronos-sound-notify chronos-message-notify chronos-buffer-notify))
  '(default-input-method "korean-hangul")
@@ -90,6 +90,7 @@
    '((org-download-image-dir . "/home/betsy/.local/share/Anki2/User 1/collection.media")))
  '(sentence-end-double-space nil)
  '(temp-buffer-resize-mode t)
+ '(tooltip-mode nil)
  '(unicode-fonts-block-font-mapping
    '(("Aegean Numbers"
       ("Noto Sans Symbols" "Aegean" "Symbola" "Quivira" "Code2001" "Everson Mono:weight=bold" "ALPHABETUM Unicode"))
