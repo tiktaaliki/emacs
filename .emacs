@@ -13,10 +13,11 @@
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
+
   (require 'use-package)
   (setq use-package-always-ensure t))
 
-(require 'org)
+  (require 'org)
 
  (add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
      (add-to-list 'load-path "~/Dropbox/emacs/")
@@ -25,9 +26,12 @@
 (org-babel-load-file "~/Dropbox/emacs/hangul-input.org")
 (setq custom-file "~/Dropbox/emacs/custom.el")
 (load custom-file)
-(setq byte-compile-warnings '(cl-functions))	
+;(setq byte-compile-warnings '(cl-functions))	
 (setq mu4e-get-mail-command "mbsync -aV") 
 
+
+
+(put 'digit-argument 'disabled nil)
 
 (set-face-attribute 'default nil :family "Fantasque sans mono" :height 250 :weight 'normal  :foreground "#ebdcb2"); honeydew  d5d6d2 faefd4
 					;   (set-face-attribute 'org-level-1 nil :foreground "#6ab187" :inherit 'default :height 1.1 :weight 'bold) ;lagoon
@@ -51,5 +55,3 @@
 
 (set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
 (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
-
-(put 'digit-argument 'disabled nil)

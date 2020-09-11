@@ -91,67 +91,67 @@
 *** org-agenda settings
 #+begin_src emacs-lisp :tangle yes
 
-   (setq org-agenda-window-setup 'current-window)
+      (setq org-agenda-window-setup 'current-window)
 
-   (setq  org-agenda-sorting-strategy 
-          '((agenda time-up)
-            (todo priority-down category-keep)
-            (tags priority-down category-keep)
-            (search category-keep)))
-   (setq org-agenda-tags-todo-honor-ignore-options t)
-   (setq org-agenda-use-tag-inheritance t)
+      (setq  org-agenda-sorting-strategy 
+             '((agenda time-up)
+               (todo priority-down category-keep)
+               (tags priority-down category-keep)
+               (search category-keep)))
+      (setq org-agenda-tags-todo-honor-ignore-options t)
+      (setq org-agenda-use-tag-inheritance t)
 
    (setq org-agenda-skip-deadline-if-done t)
-   (setq org-agenda-skip-timestamp-if-done t)
-   (setq org-agenda-skip-scheduled-if-done t)
-   (setq org-agenda-current-time-string "✸✸✸✸✸")
+      (setq org-agenda-skip-timestamp-if-done t)
+      (setq org-agenda-skip-scheduled-if-done t)
+      (setq org-agenda-current-time-string "✸✸✸✸✸")
 
-   (setq org-agenda-start-with-clockreport-mode t)
-   (setq org-agenda-span (quote day))
-   (setq org-agenda-jump-prefer-future t)
+      (setq org-agenda-start-with-clockreport-mode t)
+      (setq org-agenda-span (quote day))
+      (setq org-agenda-jump-prefer-future t)
 
-   (setq org-agenda-with-colors t)
-   (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
-   (setq org-agenda-start-on-weekday nil)
+      (setq org-agenda-with-colors t)
+      (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+      (setq org-agenda-start-on-weekday nil)
 
 
-   (setq org-agenda-clockreport-parameter-plist
-         (quote
-          (:link t :maxlevel 2 :narrow 25 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
-   (setq org-agenda-dim-blocked-tasks t)
-   (setq org-agenda-files
-         (quote
-          ("~/Dropbox/Zettelkasten/inbox.org" 
-           "~/Dropbox/Zettelkasten/cal.org"
-           "~/Dropbox/Zettelkasten/ndd.org"
-"~/Dropbox/Zettelkasten/readings.org"
-"~/Dropbox/Zettelkasten/habits.org"
-           "~/Dropbox/Zettelkasten/journal.org"
-           "~/Dropbox/Zettelkasten/lis.org"   
-           "~/Dropbox/Zettelkasten/projects.org"
+      (setq org-agenda-clockreport-parameter-plist
+            (quote
+             (:link t :maxlevel 2 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
+      (setq org-agenda-dim-blocked-tasks 'invisible)
+      (setq org-agenda-files
+            (quote
+             ("~/Dropbox/Zettelkasten/inbox.org" 
+              "~/Dropbox/Zettelkasten/cal.org"
+              "~/Dropbox/Zettelkasten/ndd.org"
+              "~/Dropbox/Zettelkasten/readings.org"
+              "~/Dropbox/Zettelkasten/habits.org"
+              "~/Dropbox/Zettelkasten/journal.org"
+              "~/Dropbox/Zettelkasten/lis.org"   
+              "~/Dropbox/Zettelkasten/projects.org"
+"~/Dropbox/Zettelkasten/contacts.org"
+              )))
+      (setq org-agenda-include-diary nil)
+      (setq org-agenda-inhibit-startup nil)
+      (setq org-agenda-time-grid
+            (quote
+             ((daily weekly today remove-match)
+              (900  1200 1500  1800  2100 )
+              "......" "----------------")))
 
-           )))
-   (setq org-agenda-include-diary t)
-   (setq org-agenda-inhibit-startup nil)
-   (setq org-agenda-time-grid
-         (quote
-          ((daily weekly today remove-match)
-           (900  1200 1500  1800  2100 )
-           "......" "----------------")))
-
-   (defun kiwon/org-agenda-redo-in-other-window ()
-     "Call org-agenda-redo function even in the non-agenda buffer."
-     (interactive)
-     (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
-       (when agenda-window
-         (with-selected-window agenda-window (org-agenda-redo)))))
-   (run-at-time nil 300 'kiwon/org-agenda-redo-in-other-window)
+      (defun kiwon/org-agenda-redo-in-other-window ()
+        "Call org-agenda-redo function even in the non-agenda buffer."
+        (interactive)
+        (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
+          (when agenda-window
+            (with-selected-window agenda-window (org-agenda-redo)))))
+      (run-at-time nil 300 'kiwon/org-agenda-redo-in-other-window)
 
 
 #+end_src                     
 
 #+RESULTS:
-: [nil 24390 38220 236534 300 kiwon/org-agenda-redo-in-other-window nil nil 126000]
+: [nil 24411 53822 697961 300 kiwon/org-agenda-redo-in-other-window nil nil 296000]
 
 *** org-agenda custom commands
 :LOGBOOK:
@@ -164,69 +164,72 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   ;        (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
+                                           ;        (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
 
-      (setq org-agenda-custom-commands '(
-                                              ;habits
-                                         ("h" "Habits" tags-todo "STYLE=\"habit\"" 
-                                          ((org-agenda-overriding-header "Habits")))
-                                              ;habits scheduled for todeaf
-                                   
+   (setq org-agenda-custom-commands '(
+                                           ;habits
+                                      ("h" "Habits" tags-todo "STYLE=\"habit\"" 
+                                       ((org-agenda-overriding-header "Habits")))
+                                           ;habits scheduled for todeaf
 
+                                      ("b" "habits" ((agenda ""  ((org-agenda-span 1) )) (tags-todo "STYLE=\"habit\"+SCHEDULED<=\"<today>\"")))                                   
+                                           ;RETURN ANY TODO ITEMS WTIHOUT TAGS
+                                      ("k" "all untagged TODOs" tags-todo "-{.*}/-HABIT-BLOCK")  
 
+("l" "all todos"
+((agenda ""  ((org-agenda-span 1) ))
+ (alltodo "" 
+((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")))
+ (org-agenda-sorting-strategy '(priority-down))) 
 
-				   
-     ("b" "habits" ((agenda ""  ((org-agenda-span 1) )) (tags-todo "STYLE=\"habit\"+SCHEDULED<=\"<today>\"")))                                   
-                                              ;RETURN ANY TODO ITEMS WTIHOUT TAGS
-                                         ("k" "all untagged TODOs" tags-todo "-{.*}/-HABIT-BLOCK")  
-
-                                         ("j" "home todos" (
-                                                            (tags-todo "cooking-Style=\"habit\"")
-                                                            (tags-todo "cleaning-Style=\"habit\"")
-                                                            (tags-todo "self-Style=\"habit\"")
-                                                            ))
-
-                                         ("n" "ndd & lis" (
-                                                           (tags-todo "lis-/-HABIT-WAIT-HOLD")  
- (tags-todo "editing-/-HABIT-WAIT-HOLD")      (tags-todo "ndd-admin-email-focus-/-HABIT-WAIT-HOLD")
-                                                           (tags-todo "ndd+admin-/-HABIT-WAIT-HOLD")
-                                                           (tags-todo "ndd+email-/-HABIT-WAIT-HOLD")
-                                                           (tags-todo "ndd+focus-/-HABIT-WAIT-HOLD")
-
-                                                           ))
-
-                                         ("d" "mentat & sysadmin" (
-
-                                                                   (tags-todo "sysadmin-/-HABIT-WAIT-HOLD")
-                                                                   (tags-todo "mentat-/-HABIT-WAIT-HOLD")
-                                                                   ))
-
-                                         ("p" "projects and areas" (
-                                                                    (todo "PROJ")
-                                                                    (todo "AREA")))
+)))
 
 
+ 
+                                      ("j" "home todos" (
+                                                         (tags-todo "cooking-Style=\"habit\"")
+                                                         (tags-todo "cleaning-Style=\"habit\"")
+                                                         (tags-todo "self-Style=\"habit\"")
+                                                         ))
 
-                                         ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
-                                              ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
-                                         ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" 
-                                                                                            ((org-agenda-span 2)
-                                                                                             (org-agenda-clockreport-mode nil)))
-                                                                                    (todo "NEXT|TODAY|IN-PROG"))
-                                          ((org-agenda-todo-ignore-scheduled t)))
+                                      ("n" "ndd & lis" (
+                                                        (tags-todo "lis-/-HABIT-WAIT-HOLD")  
+                                                        (tags-todo "editing-/-HABIT-WAIT-HOLD")      (tags-todo "ndd-admin-email-focus-/-HABIT-WAIT-HOLD")
+                                                        (tags-todo "ndd+admin-/-HABIT-WAIT-HOLD")
+                                                        (tags-todo "ndd+email-/-HABIT-WAIT-HOLD")
+                                                        (tags-todo "ndd+focus-/-HABIT-WAIT-HOLD")
 
-                                         ("u" "all UNSCHEDULED" ((agenda "" 
-                                                                         ((org-agenda-span 2)
-                                                                          (org-agenda-clockreport-mode nil)))
-                                                                 (tags-todo "ndd+/TODO|NEXT|TODAY|IN-PROG")
-                                                                 (tags-todo "lis+/TODO|NEXT|TODAY|IN-PROG")
-                                                                 (tags-todo "home+/TODO|NEXT|TODAY|IN-PROG")
-                                                                 (tags-todo "sysadmin+/TODO|NEXT|TODAY|IN-PROG")
-                                                                 (tags-todo "mentat+/TODO|NEXT|TODAY|IN-PROG"))
-                                          ((org-agenda-max-entries 5))
-                                          ((org-agenda-todo-ignore-scheduled t)))
+                                                        ))
 
-                                         ))
+                                      ("d" "mentat & sysadmin" (
+                                                                (tags-todo "sysadmin-/-HABIT-WAIT-HOLD")
+                                                                (tags-todo "mentat-/-HABIT-WAIT-HOLD")
+                                                                ))
+
+                                      ("p" "projects and areas" (
+                                                                 (todo "PROJ")
+                                                                 (todo "AREA")))
+
+                                      ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
+                                           ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
+                                      ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" 
+                                                                                         ((org-agenda-span 2)
+                                                                                          (org-agenda-clockreport-mode nil)))
+                                                                                 (todo "NEXT|TODAY|IN-PROG"))
+                                       ((org-agenda-todo-ignore-scheduled t)))
+
+                                      ("u" "all UNSCHEDULED" ((agenda "" 
+                                                                      ((org-agenda-span 2)
+                                                                       (org-agenda-clockreport-mode nil)))
+                                                              (tags-todo "ndd+/TODO|NEXT|TODAY|IN-PROG")
+                                                              (tags-todo "lis+/TODO|NEXT|TODAY|IN-PROG")
+                                                              (tags-todo "home+/TODO|NEXT|TODAY|IN-PROG")
+                                                              (tags-todo "sysadmin+/TODO|NEXT|TODAY|IN-PROG")
+                                                              (tags-todo "mentat+/TODO|NEXT|TODAY|IN-PROG"))
+                                       ((org-agenda-max-entries 5))
+                                       ((org-agenda-todo-ignore-scheduled t)))
+
+                                      ))
 
 
 
@@ -236,6 +239,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 | h | Habits               | tags-todo                                                                                                                                                                                                                                       | STYLE="habit"      | ((org-agenda-overriding-header Habits))                                       |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
 | b | habits               | ((agenda  ((org-agenda-span 1))) (tags-todo STYLE="habit"+SCHEDULED<="<today>"))                                                                                                                                                                |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
 | k | all untagged TODOs   | tags-todo                                                                                                                                                                                                                                       | -{.*}/-HABIT-BLOCK |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
+| l | all todos            | ((agenda  ((org-agenda-span 1))) (alltodo  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ))) (org-agenda-sorting-strategy '(priority-down)))))                                                               |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
 | j | home todos           | ((tags-todo cooking-Style="habit") (tags-todo cleaning-Style="habit") (tags-todo self-Style="habit"))                                                                                                                                           |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
 | n | ndd & lis            | ((tags-todo lis-/-HABIT-WAIT-HOLD) (tags-todo editing-/-HABIT-WAIT-HOLD) (tags-todo ndd-admin-email-focus-/-HABIT-WAIT-HOLD) (tags-todo ndd+admin-/-HABIT-WAIT-HOLD) (tags-todo ndd+email-/-HABIT-WAIT-HOLD) (tags-todo ndd+focus-/-HABIT-WAIT-HOLD)) |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
 | d | mentat & sysadmin    | ((tags-todo sysadmin-/-HABIT-WAIT-HOLD) (tags-todo mentat-/-HABIT-WAIT-HOLD))                                                                                                                                                                     |                    |                                                                               |                               |           |                                        |                                |      |       |                                    |      |       |                                  |      |       |           |                              |                                        |
@@ -714,7 +718,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
  ("m" "meditation" table-line (id "meditation") "|%u | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
 
            ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n" :prepend nil)
-
+           ("s" "to buy" item (id "shopping") "[ ] %?" :prepend t) 
            ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
 
            ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
@@ -1244,6 +1248,195 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 #+RESULTS:
 : test-emacs
+https://emacs.stackexchange.com/questions/28429/how-do-i-troubleshoot-emacs-problems
+
+(require 'package)
+(setq package-load-list
+      '(	(helm t)
+	(ace-jump-buffer t)
+	(avy t)
+	(dash t)
+	(async t)
+	(popup t)
+	(helm-core t)
+	(ace-jump-mode t)
+	(ace-link t)
+	(ace-window t)
+	(activity-watch t)
+(use-package t)
+(bind-key t)
+(aggressive-indent t)
+(all-the-icons t)
+(memoize t)
+(anki-connect t)
+(anki-editor t)
+(request t)
+(auto-complete-auctex t)
+(yasnippet t)
+(auto-complete t)
+(calfw t)
+(calfw-org t)
+(centered-cursor-mode t)
+(clean-buffers      t)
+(company-auctex     t)
+(company-bibtex     t)
+
+(crux               t)
+(define-word        t)
+(deft t)
+(diminish t)          
+(dired-toggle-sudo  t)
+(doom-themes        t)
+(ebib               t)
+(expand-region      t)
+(flyspell-correct-helm t)
+(gnu-elpa-keyring-update t)
+(dash-functional t)
+(company t)
+(auctex t)
+(parsebib t)
+(flyspell-correct t)
+
+(gnuplot            t)
+(gnuplot-mode       t)
+(helm-bibtexkey     t)
+(chronos t)
+(helm-chronos       t)
+(helm-flyspell      t)
+(helm-org           t)
+
+(helm-swoop         t)
+(helm-unicode       t)
+(highlight          t)
+(hl-anything        t)
+(html2org           t)
+(interleave         t)
+(keychain-environment t)
+(korean-holidays    t)
+(latex-preview-pane t)
+(ledger-mode        t)
+(magit              t)
+(magit-popup        t)
+(markdown-mode      t) 
+(markdown-preview-eww t)
+(mixed-pitch        t)
+(most-used-words    t)
+(mu4e-conversation  t)
+(multiple-cursors   t)
+(mw-thesaurus       t)
+(nov                t)
+(olivetti           t)
+(on-screen          t)
+(openwith           t)
+(org                t)
+(org-ac             t)
+(org-alert          t)
+(org-bookmark-helm t)
+(org-chef           t)
+(org-cliplink       t)
+(org-clock-convenience t)
+(git-commit t)
+(transient t)
+(with-editor t)
+(esxml t)
+(auto-complete-pcmp t)
+(log4e t)
+(yaxception t)
+(s t)
+(alert t)
+(gntp t)
+(org-clock-split    t)
+(org-clock-today    t)
+(org-download       t)
+(org-edna           t)
+(org-mru-clock      t)
+(org-msg            t)
+(org-noter          t)
+
+
+
+(org-plus-contrib   t)
+(org-pomodoro       t)
+(org-recent-headings t)
+
+(org-roam           t)
+(org-sticky-header  t)
+(org-superstar      t)
+(org-treeusage      t)
+(org-web-tools      t)
+(htmlize t)
+(frecency t)
+(a t)
+(helm-bibtex t)
+(bibtex-completion t)
+(f t)
+(biblio t)
+(biblio-core t)
+(ivy t)
+(hydra t)
+(lv t)
+(key-chord t)
+(emacsql t)
+(emacsql-sqlite3 t)
+
+(ov                 t)
+(ox-clip            t)
+(ox-pandoc          t)
+(pandoc             t)
+(pandoc-mode        t)
+(pdf-view-restore   t)
+(powerthesaurus     t)
+(quelpa             t)
+(rainbow-delimiters t)
+(scrollkeeper       t)
+(smartparens        t)
+(solarized-theme    t)
+(speed-type         t)
+(spray              t)
+(ssh-agency         t)
+(undo-tree          t)
+
+(unkillable-scratch t)
+(uptimes            t)
+(visible-mark       t)
+(visual-fill-column t)
+(w3m                t)
+(which-key          t)
+(xml+               t)
+(yankpad            t)
+(zoom               t)
+(ht t)
+(pdf-tools t)
+(tablist t)
+(jeison t)
+(swiper t)
+(counsel            t)
+(helm-org-rifle     t)
+
+
+
+(org-noter-pdftools t)
+(org-pdftools       t)
+(org-pdfview        t)
+(org-ref            t)
+(bufler t)
+(pretty-hydra t)
+(magit-section t)
+(company-org-roam t)
+(projectile t)
+(pkg-info t)
+(epl t)
+(helm-projectile    t)
+(persistent-soft t)
+(pcache t)
+(list-utils t)
+(font-utils t)
+(unicode-fonts      t)
+(ucs-utils t)
+(powerthesaurus t)
+(with-editor t)
+	))
+(package-initialize)
 
 * web
 
@@ -1713,6 +1906,14 @@ T - tag prefix
 
 * NEW snippets
 #+begin_src emacs-lisp :tangle yes
+
+(use-package org-super-links
+  :quelpa (org-super-links :repo "toshism/org-super-links" :fetcher github :commit "0.2")
+  :bind (("C-c s s" . sl-link)
+	   ("C-c s l" . sl-store-link)
+	   ("C-c s C-l" . sl-insert-link)))
+
+(setq org-src-fontify-natively nil)
    (setq display-time-mode t)
    (setq fill-flowed-encode-column 1000)
    (setq org-contacts-files (quote ("~/Dropbox/Zettelkasten/contacts.org")))
@@ -2318,12 +2519,20 @@ T - tag prefix
 :PROPERTIES:
 :UPDATE_DATE: 2020.0822
 :END:
+https://www.reddit.com/r/emacs/comments/ioq1et/incorrect_time_output/
+(format-time-string "%b%d%Y-%I%M" (current-time) t)
+
+Everywhere else in my Emacs has correct time. For instance, the following outputs the correct time: (current-time).
+
+What is going on?
+
+EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time being used and nil to system clock being used.
 
 #+begin_src emacs-lisp :tangle yes
 
    (use-package org-roam)
 
-   (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:END:\n%?" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (org-current-time) t)"
+   (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:END:\n%?" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
  "#+title: ${title}" :unnarrowed t :kill-buffer t)))
 
 
@@ -2484,7 +2693,8 @@ T - tag prefix
   (doom-themes-treemacs-config)
   
   ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+ (doom-themes-org-config)
+)
 
 (find-file "~/Dropbox/emacs/config.org")
 (find-file "~/Dropbox/emacs/.emacs")
@@ -2492,9 +2702,10 @@ T - tag prefix
 #+end_src
 
 #+RESULTS:
-: t
+: #<buffer .emacs>
 
 
 
 #+RESULTS:
 : t
+
