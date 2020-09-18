@@ -12,7 +12,7 @@
      (output-pdf "Okular")
      (output-html "xdg-open")))
  '(ajb-max-window-height 200)
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "/home/betsy/Dropbox/emacs/.emacs.d/bookmarks")
  '(chronos-expiry-functions
    '(chronos-sound-notify chronos-message-notify chronos-buffer-notify))
  '(default-input-method "korean-hangul")
@@ -53,7 +53,7 @@
  '(org-src-fontify-natively t)
  '(org-sticky-header-full-path 'full)
  '(org-sticky-header-heading-star "##")
- '(org-superstar-item-bullet-alist '((42 . 8902) (43 . 8900) (45 . 8226)))
+ '(org-superstar-item-bullet-alist '((42 . 8226) (43 . 8900) (45 . 9205)))
  '(org-superstar-prettify-item-bullets t)
  '(org-support-shift-select t)
  '(org-todo-keyword-faces
@@ -70,7 +70,7 @@
  '(org-wild-notifier-keyword-whitelist nil)
  '(org-wild-notifier-mode t)
  '(package-selected-packages
-   '(frog-jump-buffer org-super-links solarized-theme helm-org org-treeusage dired-x dired-toggle-sudo ac-helm org-clock-today org-clock-split auto-complete-auctex ebib zoom helm-bufler visible-mark spray scrollkeeper org-noter-pdftools org-pdftools org-ac mu4e-conversation on-screen uptimes unkillable-scratch mw-thesaurus most-used-words korean-holidays helm-unicode helm-flyspell clean-buffers org-mru-clock undo-tree xml+ use-package olivetti quail quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex org-msg nov org-superstar yasnippet-snippets org-clock-convenience org-pomodoro org-plus-contrib crux org-noter pdf-view-restore org-alert anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency speed-type smartparens rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game))
+   '(org-analyzer org-drill frog-jump-buffer org-super-links solarized-theme helm-org org-treeusage dired-x dired-toggle-sudo ac-helm org-clock-today org-clock-split auto-complete-auctex ebib zoom helm-bufler visible-mark spray scrollkeeper org-noter-pdftools org-pdftools org-ac mu4e-conversation on-screen uptimes unkillable-scratch mw-thesaurus most-used-words korean-holidays helm-unicode helm-flyspell clean-buffers org-mru-clock undo-tree xml+ use-package olivetti quail quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex org-msg nov org-superstar yasnippet-snippets org-clock-convenience org-pomodoro org-plus-contrib crux org-noter pdf-view-restore org-alert anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency speed-type smartparens rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game))
  '(pdf-annot-default-annotation-properties
    '((t
       (label . "Betsy Yoon"))
@@ -578,6 +578,8 @@
  '(bold-italic ((t (:inherit italic))))
  '(diredp-dir-name ((t (:foreground "RoyalBlue2" :weight bold))))
  '(fringe ((t (:background "#282c34"))))
+ '(frog-menu-border ((t (:background "RoyalBlue4"))))
+ '(frog-menu-posframe-background-face ((t (:background "RoyalBlue4"))))
  '(italic ((t (:foreground "orchid" :slant italic))))
  '(on-screen-narrow-line ((t (:underline (:color "yellow" :style wave) :width extra-expanded))))
  '(org-block ((t (:inherit default :extend t :background "#23272e"))))

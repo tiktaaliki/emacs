@@ -26,7 +26,7 @@
 (org-babel-load-file "~/Dropbox/emacs/hangul-input.org")
 (setq custom-file "~/Dropbox/emacs/custom.el")
 (load custom-file)
-;(setq byte-compile-warnings '(cl-functions))	
+(setq byte-compile-warnings '(cl-functions))	
 (setq mu4e-get-mail-command "mbsync -aV") 
 
 
