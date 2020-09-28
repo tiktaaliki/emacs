@@ -46,6 +46,16 @@
      ("+"
       (:background "#acd0c0" :foreground "black" :family "monofur" :weight bold))))
  '(org-fontify-done-headline t)
+ '(org-log-note-headings
+   '((done . "CLOSING NOTE %t")
+     (state . "State %-12s from %-12S %t")
+     (note . "%t")
+     (reschedule . "Rescheduled from %S on %t")
+     (delschedule . "Not scheduled, was %S on %t")
+     (redeadline . "New deadline from %S on %t")
+     (deldeadline . "Removed deadline, was %S on %t")
+     (refile . "Refiled on %t")
+     (clock-out . "")))
  '(org-modules
    '(ol-bibtex ol-eww org-habit org-id org-protocol org-tempo ol-w3m org-collector org-notify))
  '(org-pomodoro-keep-killed-pomodoro-time t)

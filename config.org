@@ -160,108 +160,96 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 (tags-todo "+STYLE=\"habit\"+SCHEDULED<=\"<today>\"+CATEGORY=\"mentat\"") 
 (tags-todo "+STYLE=\"habit\"+SCHEDULED<=\"<today>\"+CATEGORY=\"HOME\"")
 (tags-todo "+STYLE=\"habit\"+SCHEDULED<=\"<today>\"+CATEGORY=\"SYSADMIN\"")
+        (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
+  ("j" "home todos" (
+                                                         (tags-todo "cooking-Style=\"habit\"")
+                                                         (tags-todo "cleaning-Style=\"habit\"")
+                                                         (tags-todo "self-Style=\"habit\"")
+                                                         ))
 
+                                      ("n" "ndd & lis" (
+                                                        (tags-todo "lis-/-HABIT-WAIT-HOLD")  
+                                                        (tags-todo "editing-/-HABIT-WAIT-HOLD")      (tags-todo "ndd-admin-email-focus-/-HABIT-WAIT-HOLD")
+                                                        (tags-todo "ndd+admin-/-HABIT-WAIT-HOLD")
+                                                        (tags-todo "ndd+email-/-HABIT-WAIT-HOLD")
+                                                        (tags-todo "ndd+focus-/-HABIT-WAIT-HOLD")
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+                                                        ))
 
-                                              ;        (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
+                                      ("d" "mentat & sysadmin" (
+                                                                (tags-todo "sysadmin-/-HABIT-WAIT-HOLD")
+                                                                (tags-todo "mentat-/-HABIT-WAIT-HOLD")
+                                                                ))
 
-      (setq org-agenda-custom-commands '(
-                                          
-                                         ("h" "Habits" tags-todo "STYLE=\"habit\"" 
-                                          ((org-agenda-overriding-header "Habits")))
-                                      
+                                      ("p" "projects and areas" (
+                                                                 (todo "PROJ")
+                                                                 (todo "AREA")))
 
-                                         ("b" "today's habits" ((agenda ""  ((org-agenda-span 1) )) (tags-todo "STYLE=\"habit\"+SCHEDULED<=\"<today>\"")))                                   
-                                          
-                                         ("k" "all untagged TODOs" tags-todo "-{.*}")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
+#+BEGIN_SRC emacs-lisp :tangle yes   
+               (setq org-agenda-custom-commands '(
 
-                                        ("l" "all todos"
-                                          ((agenda ""  ((org-agenda-span 1) ))
-                                           (alltodo "" 
-                                                    ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'todo '("습관" "HOLD" "WAIT" "PROJ")) )
+                                                  ("h" "Habits" tags-todo "STYLE=\"habit\""  ((org-agenda-overriding-header "Habits")))
 
-                                                     (org-agenda-sorting-strategy '(priority-down)))  
+                                                  ("b" "today's habits" ((agenda ""  ((org-agenda-span 1) )) (tags "STYLE=\"habit\"+SCHEDULED<=\"<today>\"")))                                   
 
-                                               )
-   ))
+                                                  ("k" "all untagged TODOs" tags-todo "-{.*}")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
 
+                                                  ("x" "With deadline columns" alltodo "" 
+                                                   ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
+                                                    (org-agenda-view-columns-initially t)
+                                                    (org-agenda-sorting-strategy '(timestamp-up))
+                                                    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) ))
 
+                                                  ("l" "all todos"
+                                                   ((agenda ""  ((org-agenda-span 1) ))
+                                                    (alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ))
+                                                             (org-agenda-sorting-strategy '(priority-down)) )))
 
-                                         ("j" "home todos" (
-                                                            (tags-todo "cooking-Style=\"habit\"")
-                                                            (tags-todo "cleaning-Style=\"habit\"")
-                                                            (tags-todo "self-Style=\"habit\"")
-                                                            ))
+                                                  ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
 
-                                         ("n" "ndd & lis" (
-                                                           (tags-todo "lis-/-HABIT-WAIT-HOLD")  
-                                                           (tags-todo "editing-/-HABIT-WAIT-HOLD")      (tags-todo "ndd-admin-email-focus-/-HABIT-WAIT-HOLD")
-                                                           (tags-todo "ndd+admin-/-HABIT-WAIT-HOLD")
-                                                           (tags-todo "ndd+email-/-HABIT-WAIT-HOLD")
-                                                           (tags-todo "ndd+focus-/-HABIT-WAIT-HOLD")
+                                                  ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" ((org-agenda-span 2)  (org-agenda-clockreport-mode nil)))
+                                                                                             (todo "NEXT|TODAY|IN-PROG"))
+                                                   ((org-agenda-todo-ignore-scheduled t)))
 
-                                                           ))
+                                                  ("u" "all UNSCHEDULED" ((agenda "" ((org-agenda-span 4)
+                                                                                      (org-agenda-clockreport-mode nil)))
+                                                                          (tags-todo "ndd" ((org-agenda-overriding-header "NDD")))
+                                                                          (tags-todo "lis" ((org-agenda-overriding-header "LIS")))
+                                                                          (tags-todo "home" ((org-agenda-overriding-header "home")))
+                                                                          (tags-todo "sysadmin" ((org-agenda-overriding-header "sysadmin")))
+                                                                          (tags-todo "mentat" ((org-agenda-overriding-header "mentat")))
+                                                           
+                                                               
+           )(    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) )
+                (org-agenda-todo-ignore-scheduled t) )
 
-                                         ("d" "mentat & sysadmin" (
-                                                                   (tags-todo "sysadmin-/-HABIT-WAIT-HOLD")
-                                                                   (tags-todo "mentat-/-HABIT-WAIT-HOLD")
-                                                                   ))
-
-                                         ("p" "projects and areas" (
-                                                                    (todo "PROJ")
-                                                                    (todo "AREA")))
-
-                                         ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
-                                              ;RETURN 2-DAY AGENDA WITH ALL UNSCHEDULED ADMIN ITEMS
-                                         ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" 
-                                                                                            ((org-agenda-span 2)
-                                                                                             (org-agenda-clockreport-mode nil)))
-                                                                                    (todo "NEXT|TODAY|IN-PROG"))
-                                          ((org-agenda-todo-ignore-scheduled t)))
-
-                                         ("u" "all UNSCHEDULED" ((agenda "" 
-                                                                         ((org-agenda-span 2)
-                                                                          (org-agenda-clockreport-mode nil)))
-                                                                 (tags-todo "ndd+/TODO|NEXT|TODAY|IN-PROG"
-                                                                            ((org-agenda-overriding-header "NDD"))                                       ((org-agenda-todo-ignore-scheduled t))
-                                                                            )
-
-                                                                 (tags-todo "lis+/TODO|NEXT|TODAY|IN-PROG"
-                                                                            ((org-agenda-overriding-header "LIS"))
-   ((org-agenda-todo-ignore-scheduled t))
-                                                                            )
-                                                                 (tags-todo "home+/TODO|NEXT|TODAY|IN-PROG"
-                                                                            ((org-agenda-overriding-header "home"))
-   ((org-agenda-todo-ignore-scheduled t))
-                                                                            )
-                                                                 (tags-todo "sysadmin+/TODO|NEXT|TODAY|IN-PROG"
-                                                                            ((org-agenda-overriding-header "sysadmin"))
-   ((org-agenda-todo-ignore-scheduled t))
-                                                                            )
-            (tags-todo "mentat+/TODO|NEXT|TODAY|IN-PROG" ((org-agenda-overriding-header "mentat"))
-                       ((org-agenda-todo-ignore-scheduled t))))
-                                          ((org-agenda-max-entries 5))
-                                          ((org-agenda-todo-ignore-scheduled t)))
-
-                                         ))
+                                                   )
+            ))
 
 
 
-                                      #+END_SRC
+                                                                         #+END_SRC
 
+                                                                         #+RESULTS:
+                                                                         | h | Habits                | tags-todo                                                                                                                                                                                                                                                                                                                                                      | STYLE="habit"                                                                                                              | ((org-agenda-overriding-header Habits))                                                                                                                                                                                                        |       |           |                                        |
+                                                                         | b | today's habits        | ((agenda  ((org-agenda-span 1))) (tags STYLE="habit"+SCHEDULED<="<today>"))                                                                                                                                                                                                                                                                                    |                                                                                                                            |                                                                                                                                                                                                                                                |       |           |                                        |
+                                                                         | k | all untagged TODOs    | tags-todo                                                                                                                                                                                                                                                                                                                                                      | -{.*}                                                                                                                      |                                                                                                                                                                                                                                                |       |           |                                        |
+                                                                         | x | With deadline columns | alltodo                                                                                                                                                                                                                                                                                                                                                        |                                                                                                                            | ((org-agenda-overriding-columns-format %40ITEM %SCHEDULED %DEADLINE ) (org-agenda-view-columns-initially t) (org-agenda-sorting-strategy '(timestamp-up)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ)))) |       |           |                                        |
+                                                                         | l | all todos             | ((agenda  ((org-agenda-span 1))) (alltodo  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ)))) (org-agenda-sorting-strategy '(priority-down))))                                                                                                                                                                              |                                                                                                                            |                                                                                                                                                                                                                                                |       |           |                                        |
+                                                                         | h | all HOLD/WAIT items   | todo                                                                                                                                                                                                                                                                                                                                                           | HOLD                                                                                                                       | WAIT                                                                                                                                                                                                                                           |       |           |                                        |
+                                                                         | g | all UNSCHEDULED NEXT  | TODAY                                                                                                                                                                                                                                                                                                                                                          | IN-PROG                                                                                                                    | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT                                                                                                                                                                  | TODAY | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |
+                                                                         | u | all UNSCHEDULED       | ((agenda  ((org-agenda-span 4) (org-agenda-clockreport-mode nil))) (tags-todo ndd ((org-agenda-overriding-header NDD))) (tags-todo lis ((org-agenda-overriding-header LIS))) (tags-todo home ((org-agenda-overriding-header home))) (tags-todo sysadmin ((org-agenda-overriding-header sysadmin))) (tags-todo mentat ((org-agenda-overriding-header mentat)))) | ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ))) (org-agenda-todo-ignore-scheduled t)) |                                                                                                                                                                                                                                                |       |           |                                        |
+
+                                                                      
 #+RESULTS:
-| h | Habits               | tags-todo                                                                                                                                                                                                                                       | STYLE="habit" | ((org-agenda-overriding-header Habits))                                       |                                                                                                           |           |                                        |                                                                                                            |      |       |                                                                                                                 |      |       |                                                                                                                   |      |       |                                                                                          |                              |                                        |
-| b | today's habits       | ((agenda  ((org-agenda-span 1))) (tags-todo STYLE="habit"+SCHEDULED<="<today>"))                                                                                                                                                                |               |                                                                               |                                                                                                           |           |                                        |                                                                                                            |      |       |                                                                                                                 |      |       |                                                                                                                   |      |       |                                                                                          |                              |                                        |
-| k | all untagged TODOs   | tags-todo                                                                                                                                                                                                                                       | -{.*}         |                                                                               |                                                                                                           |           |                                        |                                                                                                            |      |       |                                                                                                                 |      |       |                                                                                                                   |      |       |                                                                                          |                              |                                        |
-| l | all todos            | ((agenda  ((org-agenda-span 1))) (alltodo  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'todo '(습관 HOLD WAIT PROJ))) (org-agenda-sorting-strategy '(priority-down)))))                                          |               |                                                                               |                                                                                                           |           |                                        |                                                                                                            |      |       |                                                                                                                 |      |       |                                                                                                                   |      |       |                                                                                          |                              |                                        |
-| j | home todos           | ((tags-todo cooking-Style="habit") (tags-todo cleaning-Style="habit") (tags-todo self-Style="habit"))                                                                                                                                           |               |                                                                               |                                                                                                           |           |                                        |                                                                                                            |      |       |                                                                                                                 |      |       |                                                                                                                   |      |       |                                                                                          |                              |                                        |
-| n | ndd & lis            | ((tags-todo lis-/-HABIT-WAIT-HOLD) (tags-todo editing-/-HABIT-WAIT-HOLD) (tags-todo ndd-admin-email-focus-/-HABIT-WAIT-HOLD) (tags-todo ndd+admin-/-HABIT-WAIT-HOLD) (tags-todo ndd+email-/-HABIT-WAIT-HOLD) (tags-todo ndd+focus-/-HABIT-WAIT-HOLD)) |               |                                                                               |                                                                                                           |           |                                        |                                                                                                            |      |       |                                                                                                                 |      |       |                                                                                                                   |      |       |                                                                                          |                              |                                        |
-| d | mentat & sysadmin    | ((tags-todo sysadmin-/-HABIT-WAIT-HOLD) (tags-todo mentat-/-HABIT-WAIT-HOLD))                                                                                                                                                                     |               |                                                                               |                                                                                                           |           |                                        |                                                                                                            |      |       |                                                                                                                 |      |       |                                                                                                                   |      |       |                                                                                          |                              |                                        |
-| p | projects and areas   | ((todo PROJ) (todo AREA))                                                                                                                                                                                                                       |               |                                                                               |                                                                                                           |           |                                        |                                                                                                            |      |       |                                                                                                                 |      |       |                                                                                                                   |      |       |                                                                                          |                              |                                        |
-| h | all HOLD/WAIT items  | todo                                                                                                                                                                                                                                            | HOLD          | WAIT                                                                          |                                                                                                           |           |                                        |                                                                                                            |      |       |                                                                                                                 |      |       |                                                                                                                   |      |       |                                                                                          |                              |                                        |
-| g | all UNSCHEDULED NEXT | TODAY                                                                                                                                                                                                                                           | IN-PROG       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT | TODAY                                                                                                     | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |                                                                                                            |      |       |                                                                                                                 |      |       |                                                                                                                   |      |       |                                                                                          |                              |                                        |
-| u | all UNSCHEDULED      | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (tags-todo ndd+/TODO                                                                                                                                                         | NEXT          | TODAY                                                                         | IN-PROG ((org-agenda-overriding-header NDD)) ((org-agenda-todo-ignore-scheduled t))) (tags-todo lis+/TODO | NEXT      | TODAY                                  | IN-PROG ((org-agenda-overriding-header LIS)) ((org-agenda-todo-ignore-scheduled t))) (tags-todo home+/TODO | NEXT | TODAY | IN-PROG ((org-agenda-overriding-header home)) ((org-agenda-todo-ignore-scheduled t))) (tags-todo sysadmin+/TODO | NEXT | TODAY | IN-PROG ((org-agenda-overriding-header sysadmin)) ((org-agenda-todo-ignore-scheduled t))) (tags-todo mentat+/TODO | NEXT | TODAY | IN-PROG ((org-agenda-overriding-header mentat)) ((org-agenda-todo-ignore-scheduled t)))) | ((org-agenda-max-entries 5)) | ((org-agenda-todo-ignore-scheduled t)) |
+| h | Habits                | tags-todo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | STYLE="habit" | ((org-agenda-overriding-header Habits))                                                                                                                                                                                                        |       |           |                                        |
+| b | today's habits        | ((agenda  ((org-agenda-span 1))) (tags-todo STYLE="habit"+SCHEDULED<="<today>"))                                                                                                                                                                                                                                                                                                                                                                                                            |               |                                                                                                                                                                                                                                                |       |           |                                        |
+| k | all untagged TODOs    | tags-todo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | -{.*}         |                                                                                                                                                                                                                                                |       |           |                                        |
+| x | With deadline columns | alltodo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |               | ((org-agenda-overriding-columns-format %40ITEM %SCHEDULED %DEADLINE ) (org-agenda-view-columns-initially t) (org-agenda-sorting-strategy '(timestamp-up)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ)))) |       |           |                                        |
+| l | all todos             | ((agenda  ((org-agenda-span 1))) (alltodo  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ)))) (org-agenda-sorting-strategy '(priority-down))))                                                                                                                                                                                                                                                                                                           |               |                                                                                                                                                                                                                                                |       |           |                                        |
+| h | all HOLD/WAIT items   | todo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | HOLD          | WAIT                                                                                                                                                                                                                                           |       |           |                                        |
+| g | all UNSCHEDULED NEXT  | TODAY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | IN-PROG       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT                                                                                                                                                                  | TODAY | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |
+| u | all UNSCHEDULED       | ((agenda  ((org-agenda-span 4) (org-agenda-clockreport-mode nil))) (tags-todo ndd ((org-agenda-overriding-header NDD))) (tags-todo lis ((org-agenda-overriding-header LIS))) (tags-todo home ((org-agenda-overriding-header home))) (tags-todo sysadmin ((org-agenda-overriding-header sysadmin))) (tags-todo mentat ((org-agenda-overriding-header mentat))) (((org-agenda-todo-ignore-scheduled t))) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ)))) |               |                                                                                                                                                                                                                                                |       |           |                                        |
 
 
 ("o" "todos by mode"(
@@ -480,7 +468,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
    (setq org-log-into-drawer t)
 
    (setq org-clock-continuously nil)
-   (setq org-log-note-clock-out nil)
+   (setq org-log-note-clock-out t)
    (defun insert-timestamp (prefix)
      "Insert the current date. With prefix-argument, use ISO format. With
             two prefix arguments, write out the day and month name."
@@ -943,6 +931,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
            )))
    (setq org-edna-mode t)
+   (org-edna-mode)
    (setq org-log-done (quote time))
    (setq org-enforce-todo-checkbox-dependencies nil)
    (setq org-enforce-todo-dependencies t)
@@ -1706,7 +1695,7 @@ M-x describe-current-coding-system
 
      )
 
-   (setq yankpad-respect-current-org-level nil)
+   (setq yankpad-respect-current-org-level t)
    (setq yas-global-mode t)
    (setq yas-snippet-dirs
          (quote
@@ -2611,7 +2600,7 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
    (global-set-key (kbd "C-<f1>") 'set-input-method)
 
                                            ;   (global-unset-key (kbd "M-c"))
-                                           ;  (global-unset-key (kbd "C-v "))
+                                           (global-unset-key (kbd "C-v "))
  
                                            ; (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
    (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
