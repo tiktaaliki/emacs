@@ -26,6 +26,8 @@
      (vc-mode vc-mode)
      "  " mode-line-modes mode-line-end-spaces))
  '(mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control))))
+ '(on-screen-auto-update t)
+ '(on-screen-delay 2)
  '(on-screen-global-mode t)
  '(on-screen-highlight-method 'narrow-line)
  '(openwith-associations
@@ -591,7 +593,7 @@
  '(frog-menu-border ((t (:background "RoyalBlue4"))))
  '(frog-menu-posframe-background-face ((t (:background "RoyalBlue4"))))
  '(italic ((t (:foreground "orchid" :slant italic))))
- '(on-screen-narrow-line ((t (:underline (:color "yellow" :style wave) :width extra-expanded))))
+ '(on-screen-narrow-line ((t (:underline "dark gray" :width extra-expanded))))
  '(org-block ((t (:inherit default :extend t :background "#23272e"))))
  '(org-date ((t (:underline t :height 1.0 :family "monofur"))))
  '(org-done ((t (:inherit org-headline-done))))
