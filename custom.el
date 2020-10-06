@@ -33,6 +33,8 @@
  '(openwith-associations
    '(("\\.\\(?:docx?\\|pptx?\\|xls?\\)$" "libreoffice"
       (file))))
+ '(org-agenda-files
+   '("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/ndd.org" "~/Dropbox/Zettelkasten/habits.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/lis.org" "~/Dropbox/Zettelkasten/projects.org" "~/Dropbox/Zettelkasten/contacts.org"))
  '(org-clock-clocktable-default-properties
    '(:maxlevel 4 :hidefiles t :tags t :tcolumns 1 :narrow 30 :level nil :link t))
  '(org-clock-in-resume nil)

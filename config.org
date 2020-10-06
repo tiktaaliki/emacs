@@ -724,7 +724,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
            ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
 
            ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
-            "* TODO %? %a\n%U\n%:initial\n" )
+            "* TODO %?%a\n%U\n%:initial\n" )
 
 
            ))
