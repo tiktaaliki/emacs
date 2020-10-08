@@ -658,7 +658,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                            ; (setq bibtex-autokey-titleword-length 0)
 
 
-   (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). ${title}.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${address}: ${publisher}. ${url}\n:END:")
+   (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:STATUS:\n:FORMAT:\n:TYPE:\n:AREA:\n:END:")
 
    (setq bibtex-maintain-sorted-entries t)
 
@@ -2615,7 +2615,7 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
    (bind-keys 
                                            ;("C-+"   . text-scale-increase)
-                                           ;   a      ("C--"   . text-scale-decrease)
+      ("C-c p" . org-set-property)                                     ;   a      ("C--"   . text-scale-decrease)
     ("C-c l" . org-store-link)
 ("M-<f3>" . sl-store-link)
   ("C-c <f3>" . sl-insert-link)

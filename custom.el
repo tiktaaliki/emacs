@@ -12,7 +12,7 @@
      (output-pdf "Okular")
      (output-html "xdg-open")))
  '(ajb-max-window-height 200)
- '(bmkp-last-as-first-bookmark-file "/home/betsy/Dropbox/emacs/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(chronos-expiry-functions
    '(chronos-sound-notify chronos-message-notify chronos-buffer-notify))
  '(default-input-method "korean-hangul")
@@ -33,6 +33,8 @@
  '(openwith-associations
    '(("\\.\\(?:docx?\\|pptx?\\|xls?\\)$" "libreoffice"
       (file))))
+ '(org-agenda-export-html-style
+   "      <link rel=\"stylesheet\" type=\"text/css\" href=\"home/betsy/Dropbox/emacs/org.css\">")
  '(org-agenda-files
    '("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/ndd.org" "~/Dropbox/Zettelkasten/habits.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/lis.org" "~/Dropbox/Zettelkasten/projects.org" "~/Dropbox/Zettelkasten/contacts.org"))
  '(org-clock-clocktable-default-properties
@@ -50,6 +52,10 @@
      ("+"
       (:background "#acd0c0" :foreground "black" :family "monofur" :weight bold))))
  '(org-fontify-done-headline t)
+ '(org-html-head
+   "<link rel=\"stylesheet\" type=\"text/css\" href=\"org.css\" />")
+ '(org-html-head-include-default-style nil)
+ '(org-html-htmlize-output-type 'css)
  '(org-log-note-headings
    '((done . "CLOSING NOTE %t")
      (state . "State %-12s from %-12S %t")
@@ -62,6 +68,7 @@
      (clock-out . "")))
  '(org-modules
    '(ol-bibtex ol-eww org-habit org-id org-protocol org-tempo ol-w3m org-collector org-notify))
+ '(org-org-htmlized-css-url "\"~/Dropbox/emacs/css.org\"")
  '(org-pomodoro-keep-killed-pomodoro-time t)
  '(org-pomodoro-ticking-sound-states '(:pomodoro))
  '(org-src-fontify-natively t)
