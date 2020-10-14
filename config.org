@@ -658,7 +658,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                            ; (setq bibtex-autokey-titleword-length 0)
 
 
-   (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:STATUS:\n:FORMAT:\n:TYPE:\n:AREA:\n:END:")
+   (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:TYPE:\n:AREA:\n:END:")
 
    (setq bibtex-maintain-sorted-entries t)
 
@@ -674,7 +674,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
    (use-package interleave 
      :defer t
      )
-   (setq org-noter-always-create-frame t)
+   (setq org-noter-always-create-frame nil)
    (setq org-noter-auto-save-last-location t)
    (setq org-noter-default-heading-title "$p$: ")
    (setq org-noter-default-notes-file-names (quote ("~/Dropbox/Zettelkasten/readings.org")))
@@ -709,7 +709,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
            ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT}\n%^t\n%a\n%?")
            ("d" "download" table-line (id "reading") "|%^{Author} | %^{Title} | %^{Format}|"  )
-           ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %?" :prepend t) 
+           ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %a %?" :prepend t) 
 
            ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
 
@@ -2102,6 +2102,7 @@ T - tag prefix
 
 
 * mu4e
+[[file:~/.mbsyncrc::IMAPAccount gmail]]
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
