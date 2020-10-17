@@ -21,7 +21,7 @@
  (add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
      (add-to-list 'load-path "~/Dropbox/emacs/")
 
-(org-babel-load-file "~/Dropbox/emacs/config.org")
+(org-babel-load-file "/home/betsy/Dropbox/emacs/config.org")
 (org-babel-load-file "~/Dropbox/emacs/hangul-input.org")
 (setq custom-file "~/Dropbox/emacs/custom.el")
 (load custom-file)
