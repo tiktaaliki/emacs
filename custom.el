@@ -13,7 +13,8 @@
      (output-html "xdg-open")))
  '(ajb-max-window-height 200)
  '(alert-default-style 'notifications)
- '(bmkp-last-as-first-bookmark-file "/home/betsy/Dropbox/emacs/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(browse-url-secondary-browser-function 'eww-browse-url)
  '(chronos-expiry-functions
    '(chronos-sound-notify chronos-message-notify chronos-buffer-notify))
  '(default-input-method "korean-hangul")

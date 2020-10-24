@@ -151,7 +151,7 @@
 #+end_src                     
 
 #+RESULTS:
-: [nil 24443 23182 930186 300 kiwon/org-agenda-redo-in-other-window nil nil 280000]
+: [nil 24459 9623 687203 300 kiwon/org-agenda-redo-in-other-window nil nil 291000]
 
 *** org-agenda custom commands
 :LOGBOOK:
@@ -560,13 +560,128 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 ("Insert link to this heading 'C-c l'" . helm-org-insert-link-to-heading-at-marker)
 )
 )
+** continuous clocking - punch in, punch out
+#+begin_src emacs-lisp  :tangle yes
 
-   
+   (setq bh/keep-clock-running nil)
 
+   (defun bh/clock-in-to-next (kw)
+     "Switch a task from TODO to NEXT when clocking in.
+   Skips capture tasks, projects, and subprojects. Switch projects
+   and subprojects from NEXT back to TODO"
+     (when (not (and (boundp 'org-capture-mode) org-capture-mode))
+       (cond
+        ((and (member (org-get-todo-state) (list "TODO"))
+              (bh/is-task-p))
+         "NEXT")
+        ((and (member (org-get-todo-state) (list "NEXT"))
+              (bh/is-project-p))
+         "TODO"))))
 
+   (defun bh/find-project-task ()
+     "Move point to the parent (project) task if any"
+     (save-restriction
+       (widen)
+       (let ((parent-task (save-excursion (org-back-to-heading 'invisible-ok) (point))))
+         (while (org-up-heading-safe)
+           (when (member (nth 2 (org-heading-components)) org-todo-keywords-1)
+             (setq parent-task (point))))
+         (goto-char parent-task)
+         parent-task)))
 
+   (defun bh/punch-in (arg)
+     "Start continuous clocking and set the default task to the
+   selected task. If no task is selected set the Organization task
+   as the default task."
+     (interactive "p")
+     (setq bh/keep-clock-running t)
+     (if (equal major-mode 'org-agenda-mode)
+         ;;
+         ;; We're in the agenda
+         ;;
+         (let* ((marker (org-get-at-bol 'org-hd-marker))
+                (tags (org-with-point-at marker (org-get-tags-at))))
+           (if (and (eq arg 4) tags)
+               (org-agenda-clock-in '(16))
+             (bh/clock-in-organization-task-as-default)))
+       ;;
+       ;; We are not in the agenda
+       ;;
+       (save-restriction
+         (widen)
+                                           ; Find the tags on the current task
+         (if (and (equal major-mode 'org-mode) (not (org-before-first-heading-p)) (eq arg 4))
+             (org-clock-in '(16))
+           (bh/clock-in-organization-task-as-default)))))
 
+   (defun bh/punch-out ()
+     (interactive)
+     (setq bh/keep-clock-running nil)
+     (when (org-clock-is-active)
+       (org-clock-out))
+     (org-agenda-remove-restriction-lock))
 
+   (defun bh/clock-in-default-task ()
+     (save-excursion
+       (org-with-point-at org-clock-default-task
+         (org-clock-in))))
+
+   (defun bh/clock-in-parent-task ()
+     "Move point to the parent (project) task if any and clock in"
+     (let ((parent-task))
+       (save-excursion
+         (save-restriction
+           (widen)
+           (while (and (not parent-task) (org-up-heading-safe))
+             (when (member (nth 2 (org-heading-components)) org-todo-keywords-1)
+               (setq parent-task (point))))
+           (if parent-task
+               (org-with-point-at parent-task
+                 (org-clock-in))
+             (when bh/keep-clock-running
+               (bh/clock-in-default-task)))))))
+
+   (defvar bh/organization-task-id "default-task-id")
+
+   (defun bh/clock-in-organization-task-as-default ()
+     (interactive)
+     (org-with-point-at (org-id-find bh/organization-task-id 'marker)
+       (org-clock-in '(16))))
+
+   (defun bh/clock-out-maybe ()
+     (when (and bh/keep-clock-running
+                (not org-clock-clocking-in)
+                (marker-buffer org-clock-default-task)
+                (not org-clock-resolving-clocks-due-to-idleness))
+       (bh/clock-in-parent-task)))
+
+   (add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
+
+(require 'org-id)
+(defun bh/clock-in-task-by-id (id)
+  "Clock in a task by id"
+  (org-with-point-at (org-id-find id 'marker)
+    (org-clock-in nil)))
+
+(defun bh/clock-in-last-task (arg)
+  "Clock in the interrupted task if there is one
+Skip the default task and get the next one.
+A prefix arg forces clock in of the default task."
+  (interactive "p")
+  (let ((clock-in-to-task
+         (cond
+          ((eq arg 4) org-clock-default-task)
+          ((and (org-clock-is-active)
+                (equal org-clock-default-task (cadr org-clock-history)))
+           (caddr org-clock-history))
+          ((org-clock-is-active) (cadr org-clock-history))
+          ((equal org-clock-default-task (car org-clock-history)) (cadr org-clock-history))
+          (t (car org-clock-history)))))
+    (widen)
+    (org-with-point-at clock-in-to-task
+      (org-clock-in nil))))
+
+#+end_src
 
 
 
@@ -683,12 +798,12 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
    (setq org-noter-kill-frame-at-session-end nil)
    (setq org-noter-notes-search-path (quote ("~/Dropbox/Zettelkasten/")))
    (setq org-noter-notes-window-location (quote horizontal-split))
-
+(setq org-noter-insert-selected-text-inside-note t)
 
 #+END_SRC
 
 #+RESULTS:
-: horizontal-split
+: t
 
 
 
@@ -1442,11 +1557,11 @@ https://emacs.stackexchange.com/questions/28429/how-do-i-troubleshoot-emacs-prob
 (package-initialize)
 
 * web
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-   (setq browse-url-browser-function 'browse-url-generic
+ (setq browse-url-browser-function 'browse-url-generic
          browse-url-generic-program "brave-browser")
 
+#+BEGIN_SRC emacs-lisp :tangle yes
+  
    (defun my-set-eww-buffer-title ()
      (let* ((title (plist-get eww-data :title))
             (url   (plist-get eww-data :url))
@@ -1468,7 +1583,7 @@ https://emacs.stackexchange.com/questions/28429/how-do-i-troubleshoot-emacs-prob
              (defun shr-fill-lines (start end) nil)  
              (defun shr-fill-line () nil)))
 
-   (setq browse-url-browser-function (quote browse-url-firefox))
+   (setq browse-url-browser-function (quote browse-url-default-browser))
    (setq browse-url-firefox-new-window-is-tab t)
 
 
