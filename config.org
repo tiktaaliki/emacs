@@ -834,7 +834,7 @@ A prefix arg forces clock in of the default task."
            ("l" "look up" entry (id "5br4n6815pi0") "* %? \n%U\n  \n%a\n\n\n" :prepend nil)
            ("m" "meditation" table-line (id "meditation") "|%u | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
 
-           ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n" :prepend nil)
+           ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \nSCHEDULED: %t\n%a\n" :prepend nil)
            ("s" "to buy" item (id "shopping") "[ ] %?" :prepend t) 
            ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
 
@@ -851,7 +851,7 @@ A prefix arg forces clock in of the default task."
 
                                            ;this prevents org-capture from replacing any windows. it just adds. 
 
-#+END_SRC
+         #+END_SRC
 
 #+RESULTS:
 : my-org-capture-place-template-dont-delete-windows

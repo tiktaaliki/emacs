@@ -90,6 +90,7 @@
      ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "magenta")
      ("IN-PROG" :weight regular :underline nil :inherit org-todo :foreground "royalblue1")
      ("TODAY" :weight regular :underline nil :inherit org-todo :background "dodger blue" :foreground "white")))
+ '(org-todo-repeat-to-state t)
  '(org-web-tools-pandoc-sleep-time 1.0)
  '(org-wild-notifier--alert-severity 'high)
  '(org-wild-notifier-alert-time '(10))
