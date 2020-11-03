@@ -13,6 +13,14 @@
      (output-html "xdg-open")))
  '(ajb-max-window-height 200)
  '(alert-default-style 'notifications)
+ '(bibtex-autokey-additional-names "-etal")
+ '(bibtex-autokey-name-case-convert-function 'identity)
+ '(bibtex-autokey-name-separator "-")
+ '(bibtex-autokey-name-year-separator "_")
+ '(bibtex-autokey-names 2)
+ '(bibtex-autokey-names-stretch 1)
+ '(bibtex-autokey-titleword-length 0)
+ '(bibtex-autokey-year-length 4)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(browse-url-secondary-browser-function 'eww-browse-url)
  '(chronos-expiry-functions
@@ -31,9 +39,11 @@
  '(mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control))))
  '(nov-text-width 20)
  '(on-screen-auto-update t)
- '(on-screen-delay 2)
+ '(on-screen-delay 1)
+ '(on-screen-drawing-threshold 1)
  '(on-screen-global-mode t)
- '(on-screen-highlight-method 'narrow-line)
+ '(on-screen-highlight-method 'shadow)
+ '(on-screen-inverse-flag t)
  '(openwith-associations
    '(("\\.\\(?:docx?\\|pptx?\\|xls?\\)$" "libreoffice"
       (file))))
@@ -60,6 +70,7 @@
    "<link rel=\"stylesheet\" type=\"text/css\" href=\"org.css\" />")
  '(org-html-head-include-default-style nil)
  '(org-html-htmlize-output-type 'css)
+ '(org-link-file-path-type 'absolute)
  '(org-log-note-headings
    '((done . "CLOSING NOTE %t")
      (state . "State %-12s from %-12S %t")
@@ -97,7 +108,7 @@
  '(org-wild-notifier-keyword-whitelist nil)
  '(org-wild-notifier-mode t)
  '(package-selected-packages
-   '(org-alert org-wild-notifier workgroups2 org-analyzer org-drill frog-jump-buffer org-super-links solarized-theme helm-org org-treeusage dired-x dired-toggle-sudo ac-helm org-clock-today org-clock-split auto-complete-auctex ebib zoom helm-bufler visible-mark spray scrollkeeper org-noter-pdftools org-pdftools org-ac mu4e-conversation on-screen uptimes unkillable-scratch mw-thesaurus most-used-words korean-holidays helm-unicode helm-flyspell clean-buffers org-mru-clock undo-tree xml+ use-package olivetti quail quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex org-msg nov org-superstar yasnippet-snippets org-clock-convenience org-pomodoro org-plus-contrib crux org-noter pdf-view-restore anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency speed-type smartparens rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game))
+   '(org-alert org-wild-notifier workgroups2 org-analyzer org-drill frog-jump-buffer org-super-links solarized-theme helm-org org-treeusage dired-x dired-toggle-sudo ac-helm org-clock-today org-clock-split auto-complete-auctex zoom helm-bufler visible-mark spray scrollkeeper org-noter-pdftools org-pdftools org-ac mu4e-conversation on-screen uptimes unkillable-scratch mw-thesaurus most-used-words korean-holidays helm-unicode helm-flyspell clean-buffers org-mru-clock undo-tree xml+ use-package olivetti quail quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex org-msg nov org-superstar yasnippet-snippets org-clock-convenience org-pomodoro org-plus-contrib crux org-noter pdf-view-restore anki-editor anki-connect ace-jump-buffer ace-jump-mode helm-org-rifle org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency speed-type smartparens rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-projectile helm-chronos helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game))
  '(pdf-annot-default-annotation-properties
    '((t
       (label . "Betsy Yoon"))
@@ -608,7 +619,7 @@
  '(frog-menu-border ((t (:background "RoyalBlue4"))))
  '(frog-menu-posframe-background-face ((t (:background "RoyalBlue4"))))
  '(italic ((t (:foreground "orchid" :slant italic))))
- '(on-screen-narrow-line ((t (:underline "dark gray" :width extra-expanded))))
+ '(on-screen-narrow-line ((t (:underline "dark gray" :width normal))))
  '(org-block ((t (:inherit default :extend t :background "#23272e"))))
  '(org-date ((t (:underline t :height 1.0 :family "monofur"))))
  '(org-done ((t (:inherit org-headline-done))))

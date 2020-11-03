@@ -705,9 +705,11 @@ A prefix arg forces clock in of the default task."
                                     ("~/Dropbox/Zettelkasten/projects.org" :maxlevel . 4)
                                     ("~/Dropbox/Zettelkasten/habits.org" :maxlevel . 2)
                                     ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 1)
+				                                     ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/bookmarks.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
                                     ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
+
                                            ;                                    ("~/Dropbox/Zettelkasten/someday.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 3)
                                     ("~/Dropbox/Zettelkasten/cal.org" :maxlevel . 2)
@@ -755,8 +757,8 @@ A prefix arg forces clock in of the default task."
    ;; see org-ref for use of these variables
    (setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/readings.org"
          org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
-         org-ref-pdf-directory "~/Dropbox/Library/")
-   (setq org-ref-pdf-directory "~/Dropbox/Library")
+         org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/")
+   (setq org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/")
    (setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
 
          bibtex-completion-notes-path "~/Dropbox/Zettelkasten/readings.org")
@@ -773,7 +775,7 @@ A prefix arg forces clock in of the default task."
                                            ; (setq bibtex-autokey-titleword-length 0)
 
 
-   (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:TYPE:\n:AREA:\n:END:")
+   (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:TYPE:\n:AREA:\n:END:")
 
    (setq bibtex-maintain-sorted-entries t)
 
@@ -811,6 +813,7 @@ A prefix arg forces clock in of the default task."
 	   
 
 ** org-capture
+
 #+BEGIN_SRC emacs-lisp :tangle yes
 
    (server-start)
@@ -1948,11 +1951,11 @@ M-x describe-current-coding-system
    (setq dired-omit-files
          (concat dired-omit-files "\\|^.DS_STORE$\\|^.projectile$\\|^.org~$"))
                                            ;added 2020.0822. opens ok. 
-   (diredp-toggle-find-file-reuse-dir 1)
+   (diredp-toggle-find-file-reuse-dir nil)
 #+END_SRC
 
 #+RESULTS:
-: Reusing Dired buffers is now ON
+: Reusing Dired buffers is now OFF
 
 
 : ^\.?#\|^\.$\|^\.\.$\|^.DS_STORE$\|^.projectile$\|^.org~$\|^.DS_STORE$\|^.projectile$\|^.org~$
