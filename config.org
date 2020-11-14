@@ -874,7 +874,9 @@ A prefix arg forces clock in of the default task."
 
 ** org navigation
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (setq org-id-link-to-org-use-id (quote create-if-interactive))
+;   (setq org-id-link-to-org-use-id (quote create-if-interactive))
+   (setq org-id-link-to-org-use-id (quote create-if-interactive-and-no-custom-id))
+
    (setq org-id-method (quote org))
    (setq org-return-follows-link t)
    (setq org-goto-interface (quote outline-path-completion))
@@ -886,7 +888,7 @@ A prefix arg forces clock in of the default task."
 #+END_SRC
 
 #+RESULTS:
-| (lambda nil (org-sticky-header-mode)) | (lambda nil (org-sticky-header-mode 1)) | (closure (org--rds reftex-docstruct-symbol org-with-time org-defdecode org-def org-read-date-inactive org-ans2 org-ans1 org-columns-current-fmt-compiled org-end-time-was-given org-time-was-given org-blocked-by-checkboxes org-state org-agenda-headline-snapshot-before-repeat buffer-face-mode-face org-struct-menu org-last-state texmathp-why remember-data-file iswitchb-temp-buflist calc-embedded-open-mode calc-embedded-open-formula calc-embedded-close-formula align-mode-rules-list org-export-registered-backends ffap-url-regexp org-inlinetask-min-level t) nil (add-hook (quote change-major-mode-hook) (quote org-show-all) (quote append) (quote local))) | org-tempo-setup | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | (lambda nil (org-superstar-mode 1)) | (lambda nil (auto-revert-mode 1)) | (lambda nil (visual-line-mode 1)) | (lambda nil (org-indent-mode 1)) | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-eldoc-load |
+: t
 
 ** org-misc
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1095,7 +1097,7 @@ A prefix arg forces clock in of the default task."
                                   (case-fn . downcase))) 
    (setq deft-recursive t)
    (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
-   (setq deft-auto-save-interval 1.0)
+   (setq deft-auto-save-interval 5.0)
    (add-hook 'after-init-hook 'deft)
    (add-hook 'deft-mode-hook #'visual-line-mode)
 
@@ -2661,17 +2663,36 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 
 #+begin_src emacs-lisp :tangle yes
 
-   (use-package org-roam)
+        (use-package org-roam)
 
-   (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:END:\n%?" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
- "#+title: ${title}" :unnarrowed t :kill-buffer t)))
+        (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:END:\n%?" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
+      "#+title: ${title}" :unnarrowed t :kill-buffer t)))
 
 
-   (setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
+        (setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
+
+   (defun my/org-roam--title-to-slug (title) ;;<< changed the name
+     "Convert TITLE to a filename-suitable slug."
+     (cl-flet* ((nonspacing-mark-p (char)
+                                   (eq 'Mn (get-char-code-property char 'general-category)))
+                (strip-nonspacing-marks (s)
+                                        (apply #'string (seq-remove #'nonspacing-mark-p
+                                                                    (ucs-normalize-NFD-string s))))
+                (cl-replace (title pair)
+                            (replace-regexp-in-string (car pair) (cdr pair) title)))
+       (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
+                       ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
+                       ("^_" . "")  ;; remove starting underscore
+                       ("_$" . "")))  ;; remove ending underscore
+              (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
+         (downcase slug))))
+
+
+(setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
 #+end_src
 
 #+RESULTS:
-: ~/Dropbox/Zettelkasten/Zettels/
+: my/org-roam--title-to-slug
 
    (setq org-roam-db-location "~/Dropbox/Zettelkasten/Zettels/")
  :ensure t

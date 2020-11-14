@@ -21,7 +21,7 @@
  '(bibtex-autokey-names-stretch 1)
  '(bibtex-autokey-titleword-length 0)
  '(bibtex-autokey-year-length 4)
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "/home/betsy/Dropbox/emacs/.emacs.d/bookmarks")
  '(browse-url-secondary-browser-function 'eww-browse-url)
  '(chronos-expiry-functions
    '(chronos-sound-notify chronos-message-notify chronos-buffer-notify))
