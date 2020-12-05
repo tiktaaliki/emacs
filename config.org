@@ -875,7 +875,7 @@ A prefix arg forces clock in of the default task."
 ** org navigation
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;   (setq org-id-link-to-org-use-id (quote create-if-interactive))
-   (setq org-id-link-to-org-use-id (quote create-if-interactive-and-no-custom-id))
+   (setq org-id-link-to-org-use-id (quote create-if-interactive))
 
    (setq org-id-method (quote org))
    (setq org-return-follows-link t)
@@ -1174,7 +1174,7 @@ A prefix arg forces clock in of the default task."
 #+BEGIN_SRC emacs-lisp :tangle yes
                                            ;   (eyebrowse-mode t)
                                            ;undo and redo changes in window configuration eg go to previous buffer 
-   (winner-mode 1)
+
 
    (defun transpose-windows ()
      (interactive)

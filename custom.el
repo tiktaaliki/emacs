@@ -641,7 +641,7 @@
  '(org-level-1 ((t (:inherit default :foreground "#6ab187" :weight normal :height 1.1))))
  '(org-level-2 ((t (:inherit org-level-1 :foreground "#9a9eab" :weight normal :height 0.9))))
  '(org-level-4 ((t (:inherit org-level-3 :foreground "light coral" :height 1.0))))
- '(org-link ((t (:inherit link :foreground "chocolate" :weight normal :family "monofur"))))
+ '(org-link ((t (:inherit link :foreground "chocolate" :underline nil :weight normal :family "monofur"))))
  '(org-list-dt ((t (:inherit default :foreground "#51afef"))))
  '(org-property-value ((t (:foreground "#83898d" :height 0.9))) t)
  '(org-quote ((t (:background "#23272e" :foreground "sandy brown" :slant normal))))
