@@ -16,6 +16,7 @@
    (load "org-checklist")
    (load "org-notify")
    (load "dired+")
+(load "clipboard2org")
          #+end_src
 
 #+RESULTS:
@@ -1327,7 +1328,7 @@ M-x describe-current-coding-system
    (setq org-timer-display (quote both))
 
 
-;   (global-activity-watch-mode)
+   (global-activity-watch-mode)
 
    (centered-cursor-mode nil)
    (unkillable-scratch 1)
@@ -1342,7 +1343,7 @@ M-x describe-current-coding-system
 #+end_src
 
 #+RESULTS:
-: org-count-subheadings
+| org-download-enable | dired-omit-mode | (lambda nil (dired-omit-mode 1)) | pdf-occur-dired-minor-mode | diredp-nb-marked-in-mode-name | diredp--set-up-font-locking | (lambda nil (let ((now (lookup-key dired-mode-map J))) (if (and now (not (eq now 'undefined))) nil (define-key dired-mode-map J 'bmkp-dired-jump)) (setq now (lookup-key dired-mode-map |
 
 * emacs mechanics
 #+begin_src emacs-lisp :tangle yes
