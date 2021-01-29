@@ -57,11 +57,9 @@
    '(("\\.\\(?:docx?\\|pptx?\\|xls?\\)$" "libreoffice"
       (file))))
  '(org-agenda-export-html-style
-   "      <link rel=\"stylesheet\" type=\"text/css\" href=\"home/betsy/Dropbox/emacs/org.css\">")
- '(org-agenda-files
-   '("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/ndd.org" "~/Dropbox/Zettelkasten/habits.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/lis.org" "~/Dropbox/Zettelkasten/projects.org" "~/Dropbox/Zettelkasten/contacts.org"))
+   "<link rel=\"stylesheet\" href=\"\\home\\betsy\\Dropbox\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
  '(org-clock-clocktable-default-properties
-   '(:maxlevel 4 :hidefiles t :tags t :tcolumns 1 :narrow 30 :level nil :link t))
+   '(:maxlevel 4 :hidefiles t :tags t :tcolumns 1 :narrow 30 :level nil :link t) t)
  '(org-clock-in-resume nil)
  '(org-download-delete-image-after-download t)
  '(org-download-image-dir "/home/betsy/Dropbox/Zettelkasten/images")
@@ -76,9 +74,8 @@
       (:background "#acd0c0" :foreground "black" :family "monofur" :weight bold))))
  '(org-fontify-done-headline t)
  '(org-html-head
-   "<link rel=\"stylesheet\" type=\"text/css\" href=\"org.css\" />")
+   " <link rel=\"stylesheet\" href=\"\\home\\betsy\\Dropbox\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" /><link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lobster Two|Jura|Gentium Basic\">")
  '(org-html-head-include-default-style nil)
- '(org-html-htmlize-output-type 'css)
  '(org-image-actual-width '(600))
  '(org-link-file-path-type 'absolute)
  '(org-log-note-headings
@@ -96,6 +93,7 @@
  '(org-org-htmlized-css-url "\"~/Dropbox/emacs/css.org\"")
  '(org-pomodoro-keep-killed-pomodoro-time t)
  '(org-pomodoro-ticking-sound-states '(:pomodoro))
+ '(org-recent-headings-mode t)
  '(org-src-fontify-natively t)
  '(org-sticky-header-full-path 'full)
  '(org-sticky-header-heading-star "##")
@@ -104,13 +102,11 @@
  '(org-support-shift-select t)
  '(org-todo-keyword-faces
    '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
-     ("PROJ" :weight regular :underline nil :inherit org-todo :foreground "purple")
-     ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#e8a735")
+     ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
      ("슴관" :weight regular :underline nil :inherit org-todo :foreground "#f98866")
-     ("AREA" :weight bold :underline t :inherit org-todo :foreground "dodger blue")
      ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "magenta")
-     ("IN-PROG" :weight regular :underline nil :inherit org-todo :foreground "royalblue1")
-     ("TODAY" :weight regular :underline nil :inherit org-todo :background "dodger blue" :foreground "white")))
+     ("IN-PROG" :weight bold :underline t :inherit org-todo :foreground "#5bcbac")
+     ("AREA" :weight bold :underline t :inherit org-todo :foreground "#73605b")))
  '(org-todo-repeat-to-state t)
  '(org-web-tools-pandoc-sleep-time 1.0)
  '(org-wild-notifier--alert-severity 'high)
@@ -118,7 +114,7 @@
  '(org-wild-notifier-keyword-whitelist nil)
  '(org-wild-notifier-mode t)
  '(package-selected-packages
-   '(copyit-pandoc image+ org-alert org-wild-notifier workgroups2 org-analyzer org-drill frog-jump-buffer org-super-links helm-org dired-x dired-toggle-sudo ac-helm org-clock-today org-clock-split auto-complete-auctex zoom helm-bufler visible-mark spray scrollkeeper org-noter-pdftools org-pdftools org-ac mu4e-conversation on-screen uptimes unkillable-scratch mw-thesaurus most-used-words korean-holidays helm-unicode helm-flyspell clean-buffers org-mru-clock undo-tree xml+ use-package olivetti quail quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex org-msg nov org-superstar yasnippet-snippets org-clock-convenience org-pomodoro org-plus-contrib crux org-noter pdf-view-restore anki-editor anki-connect ace-jump-buffer helm-org-rifle org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency speed-type smartparens rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-projectile helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game))
+   '(worf ox-tufte wc-goal-mode org-wc helm-org-ql calibredb amread-mode copyit-pandoc image+ org-alert org-wild-notifier workgroups2 org-analyzer org-drill frog-jump-buffer org-super-links helm-org dired-x dired-toggle-sudo ac-helm org-clock-today org-clock-split auto-complete-auctex zoom helm-bufler visible-mark spray scrollkeeper org-noter-pdftools org-pdftools org-ac mu4e-conversation on-screen uptimes unkillable-scratch mw-thesaurus most-used-words korean-holidays helm-unicode helm-flyspell clean-buffers org-mru-clock undo-tree xml+ use-package olivetti quail quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex org-msg nov org-superstar yasnippet-snippets org-clock-convenience org-pomodoro org-plus-contrib crux org-noter pdf-view-restore anki-editor anki-connect ace-jump-buffer helm-org-rifle org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency speed-type smartparens rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-projectile helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game))
  '(pdf-annot-default-annotation-properties
    '((t
       (label . "Betsy Yoon"))
@@ -605,6 +601,7 @@
       ("Noto Sans Yi" "Nuosu SIL" "Microsoft Yi Baiti" "STFangsong" "Code2000"))
      ("Yijing Hexagram Symbols"
       ("WenQuanYi Zen Hei Mono" "Noto Sans Symbols" "Segoe UI Symbol" "Apple Symbols" "DejaVu Sans:width=condensed" "BabelStone Han" "Symbola" "Quivira" "BabelStone Modern" "Code2000" "Everson Mono:weight=bold"))))
+ '(visual-fill-column-width nil)
  '(zoom-ignore-predicates
    '((lambda nil
        (>
@@ -622,13 +619,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bold ((t (:foreground "sandy brown" :weight bold))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "#282c34" :foreground "#d6c3aa" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 248 :width normal :foundry "PfEd" :family "Fantasque Sans Mono"))))
+ '(bold ((t (:foreground "#ba5536" :weight bold))))
  '(bold-italic ((t (:inherit italic))))
  '(diredp-dir-name ((t (:foreground "RoyalBlue2" :weight bold))))
  '(fringe ((t (:background "#282c34"))))
  '(frog-menu-border ((t (:background "RoyalBlue4"))))
  '(frog-menu-posframe-background-face ((t (:background "RoyalBlue4"))))
- '(italic ((t (:foreground "orchid" :slant italic))))
+ '(hi-green ((t (:background "#98be65" :foreground "black"))))
+ '(italic ((t (:foreground "#31a9b8" :slant italic))))
  '(on-screen-narrow-line ((t (:underline "dark gray" :width normal))))
  '(org-block ((t (:inherit default :extend t :background "#23272e"))))
  '(org-date ((t (:underline t :height 1.0 :family "monofur"))))
@@ -636,16 +635,17 @@
  '(org-drawer ((t (:foreground "sky blue" :height 0.8))))
  '(org-ellipsis ((t (:foreground "#a4cabc" :strike-through nil :underline nil))))
  '(org-headline-done ((t (:foreground "#5B6268" :strike-through t))))
- '(org-level-1 ((t (:inherit default :foreground "#6ab187" :weight normal :height 1.1))))
  '(org-level-2 ((t (:inherit org-level-1 :foreground "#9a9eab" :weight normal :height 0.9))))
  '(org-level-4 ((t (:inherit org-level-3 :foreground "light coral" :height 1.0))))
- '(org-link ((t (:inherit link :foreground "chocolate" :underline nil :weight normal :family "monofur"))))
+ '(org-link ((t (:inherit link :foreground "#b38867" :underline nil :weight normal :family "monofur"))))
  '(org-list-dt ((t (:inherit default :foreground "#51afef"))))
  '(org-property-value ((t (:foreground "#83898d" :height 0.9))) t)
  '(org-quote ((t (:background "#23272e" :foreground "sandy brown" :slant normal))))
+ '(org-scheduled-previously ((t (:foreground "#fdd475"))))
  '(org-special-keyword ((t (:foreground "#83898d" :height 0.9))))
  '(org-tag ((t (:foreground "#83898d" :weight normal :height 0.8))))
  '(org-tag-group ((t (:inherit nil :foreground "dodger blue"))))
  '(org-todo ((t (:foreground "#98be65" :weight normal :height 0.75 :family "nova mono"))))
+ '(outline-1 ((t (:extend t :foreground "#337bae" :weight normal :family "victor mono"))))
  '(underline ((t (:foreground "#89da59" :underline t))))
  '(variable-pitch ((t (:family "KoHo")))))

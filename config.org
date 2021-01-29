@@ -117,17 +117,18 @@
 
          (setq org-agenda-clockreport-parameter-plist
                (quote
-                (:link t :maxlevel 2 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
+                (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
          (setq org-agenda-dim-blocked-tasks 'invisible)
          (setq org-agenda-files
                (quote
                 ("~/Dropbox/Zettelkasten/inbox.org" 
                  "~/Dropbox/Zettelkasten/cal.org"
+                 "~/Dropbox/Zettelkasten/recipes.org"
                  "~/Dropbox/Zettelkasten/ndd.org"
                  "~/Dropbox/Zettelkasten/readings.org"
-                 "~/Dropbox/Zettelkasten/habits.org"
                  "~/Dropbox/Zettelkasten/journal.org"
-                 "~/Dropbox/Zettelkasten/lis.org"   
+                 "~/Dropbox/Zettelkasten/lis.org"
+	               "~/Dropbox/Zettelkasten/personal.org"
                  "~/Dropbox/Zettelkasten/sysadmin.org"   
    "~/Dropbox/Zettelkasten/contacts.org"
                  )))
@@ -151,7 +152,7 @@
 #+end_src                     
 
 #+RESULTS:
-: [nil 24530 47277 873636 300 kiwon/org-agenda-redo-in-other-window nil nil 934000]
+: [nil 24583 52923 276646 300 kiwon/org-agenda-redo-in-other-window nil nil 118000]
 
 *** org-agenda custom commands
 :LOGBOOK:
@@ -186,58 +187,55 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                                                  (todo "AREA")))
 
 #+BEGIN_SRC emacs-lisp :tangle yes   
-               (setq org-agenda-custom-commands '(
+       (setq org-agenda-custom-commands '(
 
-                                                  ("h" "Habits" tags-todo "STYLE=\"habit\""  ((org-agenda-overriding-header "Habits")))
+                                          ("h" "Habits" tags-todo "STYLE=\"habit\""  ((org-agenda-overriding-header "Habits")))
 
-                                                  ("b" "today's habits" ((agenda ""  ((org-agenda-span 1) )) (tags-todo "STYLE=\"habit\"+SCHEDULED<=\"<today>\""       ((org-agenda-files '("~/Dropbox/Zettelkasten/habits.org"))))))                                   
+                                          ("b" "today's habits" ((agenda ""  ((org-agenda-span 1) )) (tags-todo "STYLE=\"habit\"+SCHEDULED<=\"<today>\""       )))                                   
 
-                                                  ("k" "all untagged TODOs" tags-todo "-{.*}")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
+                                          ("k" "all untagged TODOs" tags-todo "-{.*}")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
 
-                                                  ("x" "With deadline columns" alltodo "" 
-                                                   ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
-                                                    (org-agenda-view-columns-initially t)
-                                                    (org-agenda-sorting-strategy '(timestamp-up))
-                                                    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) ))
+                                          ("x" "With deadline columns" alltodo "" 
+                                           ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
+                                            (org-agenda-view-columns-initially t)
+                                            (org-agenda-sorting-strategy '(timestamp-up))
+                                            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) ))
 
-                                                  ("l" "all todos"
-                                                   ((agenda ""  ((org-agenda-span 1) ))
-                                                    (alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'todo '("습관" "HOLD" "WAIT" "PROJ")) ))
-                                                             (org-agenda-sorting-strategy '(priority-down)) )))
+                                          ("l" "all todos"
+                                           ((agenda ""  ((org-agenda-span 1) ))
+                                            (alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'todo '("AREA" "습관" "HOLD" "WAIT" "PROJ")) ))
+                                                     (org-agenda-sorting-strategy '(priority-down)) )))
 
-                                                  ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
+				          ("r" "stuff to read" tags-todo "read") 
+                                          ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
 
-                                                  ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" ((org-agenda-span 2)  (org-agenda-clockreport-mode nil)))
-                                                                                             (todo "NEXT|TODAY|IN-PROG"))
-                                                   ((org-agenda-todo-ignore-scheduled t)))
+                                          ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" ((org-agenda-span 2)  (org-agenda-clockreport-mode nil)))
+                                                                                     (todo "NEXT|TODAY|IN-PROG"))
+                                           ((org-agenda-todo-ignore-scheduled t)))
 
-                                                  ("u" "all UNSCHEDULED" (
-                                                                          (tags-todo "ndd" ((org-agenda-overriding-header "NDD")))
-                                                                          (tags-todo "lis" ((org-agenda-overriding-header "LIS")))
-                                                                          (tags-todo "home" ((org-agenda-overriding-header "home")))
-                                                                          (tags-todo "sysadmin" ((org-agenda-overriding-header "sysadmin")))
-                                                                          (tags-todo "mentat" ((org-agenda-overriding-header "mentat")))
-                                                           
-                                                               
-           )(    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) )
-                (org-agenda-todo-ignore-scheduled t) )
+                                          ("u" "all UNSCHEDULED" alltodo ""                                                          
 
-                                                   )
-            ))
+
+   (    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+        (org-agenda-todo-ignore-scheduled t) )
+
+                                           )
+    ))
 
 
 
                                                                          #+END_SRC
 
                                                                          #+RESULTS:
-                                                                         | h | Habits                | tags-todo                                                                                                                                                                                                                                                                                    | STYLE="habit"                                                                                                              | ((org-agenda-overriding-header Habits))                                                                                                                                                                                                        |       |           |                                        |
-                                                                         | b | today's habits        | ((agenda  ((org-agenda-span 1))) (tags-todo STYLE="habit"+SCHEDULED<="<today>" ((org-agenda-files '(~/Dropbox/Zettelkasten/habits.org)))))                                                                                                                                                   |                                                                                                                            |                                                                                                                                                                                                                                                |       |           |                                        |
-                                                                         | k | all untagged TODOs    | tags-todo                                                                                                                                                                                                                                                                                    | -{.*}                                                                                                                      |                                                                                                                                                                                                                                                |       |           |                                        |
-                                                                         | x | With deadline columns | alltodo                                                                                                                                                                                                                                                                                      |                                                                                                                            | ((org-agenda-overriding-columns-format %40ITEM %SCHEDULED %DEADLINE ) (org-agenda-view-columns-initially t) (org-agenda-sorting-strategy '(timestamp-up)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ)))) |       |           |                                        |
-                                                                         | l | all todos             | ((agenda  ((org-agenda-span 1))) (alltodo  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'todo '(습관 HOLD WAIT PROJ)))) (org-agenda-sorting-strategy '(priority-down))))                                                                                                 |                                                                                                                            |                                                                                                                                                                                                                                                |       |           |                                        |
-                                                                         | h | all HOLD/WAIT items   | todo                                                                                                                                                                                                                                                                                         | HOLD                                                                                                                       | WAIT                                                                                                                                                                                                                                           |       |           |                                        |
-                                                                         | g | all UNSCHEDULED NEXT  | TODAY                                                                                                                                                                                                                                                                                        | IN-PROG                                                                                                                    | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT                                                                                                                                                                  | TODAY | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |
-                                                                         | u | all UNSCHEDULED       | ((tags-todo ndd ((org-agenda-overriding-header NDD))) (tags-todo lis ((org-agenda-overriding-header LIS))) (tags-todo home ((org-agenda-overriding-header home))) (tags-todo sysadmin ((org-agenda-overriding-header sysadmin))) (tags-todo mentat ((org-agenda-overriding-header mentat)))) | ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ))) (org-agenda-todo-ignore-scheduled t)) |                                                                                                                                                                                                                                                |       |           |                                        |
+                                                                         | h | Habits                | tags-todo                                                                                                                                                                                         | STYLE="habit" | ((org-agenda-overriding-header Habits))                                                                                                                                                                                                        |       |           |                                        |
+                                                                         | b | today's habits        | ((agenda  ((org-agenda-span 1))) (tags-todo STYLE="habit"+SCHEDULED<="<today>"))                                                                                                                  |               |                                                                                                                                                                                                                                                |       |           |                                        |
+                                                                         | k | all untagged TODOs    | tags-todo                                                                                                                                                                                         | -{.*}         |                                                                                                                                                                                                                                                |       |           |                                        |
+                                                                         | x | With deadline columns | alltodo                                                                                                                                                                                           |               | ((org-agenda-overriding-columns-format %40ITEM %SCHEDULED %DEADLINE ) (org-agenda-view-columns-initially t) (org-agenda-sorting-strategy '(timestamp-up)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ)))) |       |           |                                        |
+                                                                         | l | all todos             | ((agenda  ((org-agenda-span 1))) (alltodo  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'todo '(AREA 습관 HOLD WAIT PROJ)))) (org-agenda-sorting-strategy '(priority-down)))) |               |                                                                                                                                                                                                                                                |       |           |                                        |
+                                                                         | r | stuff to read         | tags-todo                                                                                                                                                                                         | read          |                                                                                                                                                                                                                                                |       |           |                                        |
+                                                                         | h | all HOLD/WAIT items   | todo                                                                                                                                                                                              | HOLD          | WAIT                                                                                                                                                                                                                                           |       |           |                                        |
+                                                                         | g | all UNSCHEDULED NEXT  | TODAY                                                                                                                                                                                             | IN-PROG       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT                                                                                                                                                                  | TODAY | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |
+                                                                         | u | all UNSCHEDULED       | alltodo                                                                                                                                                                                           |               | ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD PROJ AREA))) (org-agenda-todo-ignore-scheduled t))                                                                                                                     |       |           |                                        |
 
                                                                       
 #+RESULTS:
@@ -419,16 +417,12 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
    (define-key org-mode-map (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
 
 
-   (setq org-refile-targets (quote (("~/Dropbox/Zettelkasten/notes.org" :maxlevel . 2)
-                                    ("~/Dropbox/Zettelkasten/projects.org" :maxlevel . 4)
-                                    ("~/Dropbox/Zettelkasten/habits.org" :maxlevel . 2)
-                                    ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 1)
-                                 ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
+   (setq org-refile-targets (quote (("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 1)
+                                    ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
+				        ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
-
-                                           ;                                    ("~/Dropbox/Zettelkasten/someday.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 3)
                                     ("~/Dropbox/Zettelkasten/cal.org" :maxlevel . 2)
                                     ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2))))
@@ -544,15 +538,16 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
            ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil ) 
 
            ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT}\n%^t\n%a\n%?")
+	
            ("d" "download" table-line (id "reading") "|%^{Author} | %^{Title} | %^{Format}|"  )
-           ("e" "emacs log" item (file+headline "~/Dropbox/Zettelkasten/personal.org" "Emacs config changes") "%U %a %?" :prepend t) 
+           ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
 
            ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
 
            ("F" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
 
            ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
-           ("l" "look up" entry (id "5br4n6815pi0") "* %? \n%U\n  \n%a\n\n\n" :prepend nil)
+           ("l" "look up" item (id "5br4n6815pi0") "[ ] %? %U %a" :prepend nil)
            ("m" "meditation" table-line (id "meditation") "|%u | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
 
            ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \nSCHEDULED: %t\n%a\n" :prepend nil)
@@ -560,8 +555,12 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
            ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
 
            ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
-            "* TODO %?%a\n%U\n%:initial\n" )
+            "* %a \n\nSCHEDULED: %t %?\n\n%:initial" )
+  ("x" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
+            "* TODO %? \nSCHEDULED: %t\n%a\n\n%:initial" )
 
+ ("y" "org-protocol" item (id "resources")
+            "[ ] %a %U %:initial" )
 
            ))
 
@@ -692,7 +691,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                     (:startgrouptag)
                                     ("home" . ?h)
                                     (:grouptags)
-				 ("habit")
+                                 ("habit")
                                     ("cooking")
                                     ("cleaning")
                                     (:endgrouptag)
@@ -713,6 +712,8 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                          ("journal" :inherit org-tag :foreground "dark orange")
                          ("job" :inherit org-tag :foreground "dark orange")
                          ("csi" :inherit org-tag :foreground "dark orange")
+		          ("read" :inherit org-tag :foreground "dodger blue")
+		      
                          ))
 
 
@@ -729,19 +730,17 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 | journal  | :inherit | org-tag | :foreground | dark orange  |
 | job      | :inherit | org-tag | :foreground | dark orange  |
 | csi      | :inherit | org-tag | :foreground | dark orange  |
+| read     | :inherit | org-tag | :foreground | dodger blue  |
 
 
 ** org-todo
 #+BEGIN_SRC emacs-lisp :tangle yes
    (setq org-todo-keywords
          (quote
-          ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "TODAY(o)" "WAIT(w)" "|" "DONE(d)" )
-           (type "AREA(a)" "PROJ(p)"  "습관(h)"   "HOLD(l)"  "|" "DONE(d)")
-           (sequence "|" "x(c)")
+          ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
+           (type "AREA(a)"  "습관(h)"   "HOLD(l)"  "|" "DONE(d)")     )))
 
 
-
-           )))
    (setq org-edna-mode t)
    (org-edna-mode)
    (setq org-log-done (quote time))
@@ -1066,7 +1065,6 @@ M-x describe-current-coding-system
 
 #+RESULTS:
 : lawlist-read-buffer-file-coding-syste
-
 * Autosave-backup-git
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1328,7 +1326,7 @@ M-x describe-current-coding-system
    (setq org-timer-display (quote both))
 
 
-   (global-activity-watch-mode)
+;   (global-activity-watch-mode)
 
    (centered-cursor-mode nil)
    (unkillable-scratch 1)
@@ -1386,49 +1384,53 @@ M-x describe-current-coding-system
 ) 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (defvar symbola-font (if (eq system-type 'gnu/linux)
-                            (font-spec :name "Symbola" :size 14.5)
-                          "Symbola-14"))
+      (defvar symbola-font (if (eq system-type 'gnu/linux)
+                               (font-spec :name "Symbola" :size 14.5)
+                             "Symbola-14"))
 
 
-    (set-fontset-font "fontset-default" '(#x2000 . #x206F)
-                        '("Symbola" . "unicode-bmp" ))
-   (set-fontset-font "fontset-default" '(#x2200 . #x22FF)
-                        '("Symbola" . "unicode-bmp" ))
+       (set-fontset-font "fontset-default" '(#x2000 . #x206F)
+                           '("Symbola" . "unicode-bmp" ))
 
- (set-fontset-font "fontset-default" '(#x25A0 . #x25FF)
-                        '("Symbola" . "unicode-bmp" ))
+       (set-fontset-font "fontset-default" '(#x2190 . #x21FF)
+                           '("Symbola" . "unicode-bmp" ))
+
+      (set-fontset-font "fontset-default" '(#x2200 . #x22FF)
+                           '("Symbola" . "unicode-bmp" ))
+
+    (set-fontset-font "fontset-default" '(#x25A0 . #x25FF)
+                           '("Symbola" . "unicode-bmp" ))
   
-     (set-fontset-font "fontset-default" '(#x2600 . #x26FF)
-                        '("Symbola" . "unicode-bmp" ))
-    (set-fontset-font "fontset-default" '(#x2700 . #x27BF)
-                        '("Symbola" . "unicode-bmp" ))
+        (set-fontset-font "fontset-default" '(#x2600 . #x26FF)
+                           '("Symbola" . "unicode-bmp" ))
+       (set-fontset-font "fontset-default" '(#x2700 . #x27BF)
+                           '("Symbola" . "unicode-bmp" ))
   
-                                                  ;  (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
-                                              ;                   (font-spec :size 30)) 
+                                                     ;  (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
+                                                 ;                   (font-spec :size 30)) 
 
-;https://www.reddit.com/r/emacs/comments/8tz1r0/how_to_set_font_according_to_languages_that_i/e1bjce6?utm_source=share&utm_medium=web2x&context=3
-(when (fboundp #'set-fontset-font)
-  (set-fontset-font t 'korean-ksc5601	
-                    ;; Noto Sans CJK: https://www.google.com/get/noto/help/cjk/
-                    (font-spec :family "Nanum Gothic Coding")))
-(dolist (item '(("Nanum Gothic Coding" . 1.0)))
-  (add-to-list 'face-font-rescale-alist item))
+   ;https://www.reddit.com/r/emacs/comments/8tz1r0/how_to_set_font_according_to_languages_that_i/e1bjce6?utm_source=share&utm_medium=web2x&context=3
+   (when (fboundp #'set-fontset-font)
+     (set-fontset-font t 'korean-ksc5601	
+                       ;; Noto Sans CJK: https://www.google.com/get/noto/help/cjk/
+                       (font-spec :family "Nanum Gothic Coding")))
+   (dolist (item '(("Nanum Gothic Coding" . 1.0)))
+     (add-to-list 'face-font-rescale-alist item))
 
-      (setq use-default-font-for-symbols nil)
+         (setq use-default-font-for-symbols nil)
 
-      (use-package unicode-fonts
-        :ensure t
-        :defer t
-        :init (unicode-fonts-setup))
-(setq fill-column 70)
+         (use-package unicode-fonts
+           :ensure t
+           :defer t
+           :init (unicode-fonts-setup))
+   (setq fill-column 70)
 
-      (setq global-visual-fill-column-mode t)
-      (setq global-visual-line-mode t)
+         (setq global-visual-fill-column-mode t)
+         (setq global-visual-line-mode t)
 
 
-      (eval-after-load "flyspell"
-        '(define-key flyspell-mode-map (kbd "C-.") nil))
+         (eval-after-load "flyspell"
+           '(define-key flyspell-mode-map (kbd "C-.") nil))
 
 
 
@@ -1456,7 +1458,7 @@ M-x describe-current-coding-system
       :contents-sources
       (list
        (cfw:org-create-source "pale green")  ; orgmode source
-       (cfw:cal-create-source "light goldenrod") ; diary source
+   ;    (cfw:cal-create-source "light goldenrod") ; diary source
        ))) 
    (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
                                            ;   (setq calendar-daylight-savings-starts '(3 11 year))
@@ -1547,11 +1549,23 @@ M-x describe-current-coding-system
                smtpmail-smtp-service 587
                smtpmail-debug-info t)
 
-
+(add-to-list 'mu4e-bookmarks
+  '( :name  "Big messages"
+     :query "size:15M..500M"
+     :key   ?b))
 #+END_SRC
   
 #+RESULTS:
-: t
+| :name | Big messages         | :query | size:20M..500M                       | :key         |  98 |      |     |
+| :name | Big messages         | :query | size:40M..500M                       | :key         |  98 |      |     |
+| :name | Big messages         | :query | size:50M..500M                       | :key         |  98 |      |     |
+| :name | Big messages         | :query | size:10M..500M                       | :key         |  98 |      |     |
+| :name | Big messages         | :query | size:5M..500M                        | :key         |  98 |      |     |
+| :name | inbox                | :query | maildir:/gmail/INBOX                 | :key         | 105 |      |     |
+| :name | Unread messages      | :query | flag:unread AND maildir:/gmail/INBOX | :key         | 117 |      |     |
+| :name | Today's messages     | :query | date:today..now                      | :key         | 116 |      |     |
+| :name | Last 7 days          | :query | date:7d..now                         | :hide-unread |   t | :key | 119 |
+| :name | Messages with images | :query | mime:image/*                         | :key         | 112 |      |     |
   
 ** message view
 
@@ -1670,11 +1684,11 @@ M-x describe-current-coding-system
    (setq mu4e-trash-folder  "/Trash")
    (setq mu4e-refile-folder "/All")
    (setq mu4e-maildir "~/.maildir")
-   (setq mu4e-attachment-dir "~/Dropbox/2020")
+   (setq mu4e-attachment-dir "~/Dropbox/2021")
 #+END_SRC 
 
 #+RESULTS:
-: ~/Dropbox/2020
+: ~/Dropbox/2021
 
   
 
@@ -1939,100 +1953,102 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 
 
 #+begin_src emacs-lisp :tangle yes
-         (global-unset-key (kbd "<up>"))
-         (global-unset-key (kbd "<down>"))
-         (global-unset-key (kbd "<right>"))
-         (global-unset-key (kbd "<left>"))
-         (global-unset-key (kbd "M-o"))
-         (global-set-key (kbd "M-o") 'other-window)
-         (define-key yas-minor-mode-map [(tab)] nil)
-         (define-key yas-minor-mode-map (kbd "TAB") nil)
-         (global-unset-key (kbd "C-z"))
-         (global-set-key (kbd "M-n") 'toggle-input-method)
-         (global-set-key (kbd "C-<f1>") 'set-input-method)
+            (global-unset-key (kbd "<up>"))
+            (global-unset-key (kbd "<down>"))
+            (global-unset-key (kbd "<right>"))
+            (global-unset-key (kbd "<left>"))
+            (global-unset-key (kbd "M-o"))
+            (global-set-key (kbd "M-o") 'other-window)
+            (define-key yas-minor-mode-map [(tab)] nil)
+            (define-key yas-minor-mode-map (kbd "TAB") nil)
+            (global-unset-key (kbd "C-z"))
+            (global-set-key (kbd "M-n") 'toggle-input-method)
+            (global-set-key (kbd "C-<f1>") 'set-input-method)
 
-                                                 ;   (global-unset-key (kbd "M-c"))
-                                                 (global-unset-key (kbd "C-v "))
+                                                    ;   (global-unset-key (kbd "M-c"))
+                                                    (global-unset-key (kbd "C-v "))
 
-                                                 ; (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-         (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-         (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
-         (global-unset-key (kbd "S-SPC"))
-         (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
-         (global-set-key (kbd "C-c <f2>") 'org-clock-out)
+                                                    ; (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+            (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+            (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+            (define-key org-mode-map (kbd "C-y") 'yank)
+            (global-unset-key (kbd "S-SPC"))
+            (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
+            (global-set-key (kbd "C-c <f2>") 'org-clock-out)
 
-         (global-set-key (kbd "<f1>") 'org-capture)
-         (define-key dired-mode-map (kbd "<f1>") 'org-capture)
-        ; (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
-       ;  (define-key dired-mode-map (kbd "<Hangul>-z") 'ace-jump-mode)
-      (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
-         (bind-keys 
-                                                 ;("C-+"   . text-scale-increase)
-            ("C-c p" . org-set-property)                                     ;   a      ("C--"   . text-scale-decrease)
-          ("C-c l" . org-store-link)
-      ("M-<f3>" . sl-store-link)
-        ("C-c <f3>" . sl-insert-link)
+            (global-set-key (kbd "<f1>") 'org-capture)
+            (define-key dired-mode-map (kbd "<f1>") 'org-capture)
+           ; (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
+          ;  (define-key dired-mode-map (kbd "<Hangul>-z") 'ace-jump-mode)
+         (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
+            (bind-keys 
+                                                    ;("C-+"   . text-scale-increase)
+             ("C-c p" . org-set-property)
+   ("C-y" . yank)                                  ;   a      ("C--"   . text-scale-decrease)
+             ("C-c l" . org-store-link)
+         ("M-<f3>" . sl-store-link)
+           ("C-c <f3>" . sl-insert-link)
 
-;          ("M-z" . ace-jump-mode)
-;          ("<Hangul>-z" . ace-jump-mode)
-                                           ;                 ("C-c k" . toggle-korean-input-method)
-          ("C-."   . org-todo)
-                                                 ;              ("C-x /" . shrink-window-horizontally)
-          ("C-x ." . org-archive-subtree-default)
-                                                 ;       ("C-c n" . org-schedule)
+          ("M-z" . helm-swoop-without-pre-input)
+   ;          ("<Hangul>-z" . ace-jump-mode)
+                                              ;                 ("C-c k" . toggle-korean-input-method)
+             ("C-."   . org-todo)
+                                                    ;              ("C-x /" . shrink-window-horizontally)
+             ("C-x ." . org-archive-subtree-default)
+                                                    ;       ("C-c n" . org-schedule)
 
-          ("M-="   . count-words)
-          ("M-x"   . helm-M-x)
-   ("<Hangul> x" . helm-M-x)
-          ("C-c b" . list-bookmarks)
-                                                 ;    ("C-a" . org-beginning-of-line)
-               ("M-<f2>" . org-mru-clock-in)                                  ;          ([menu] . toggle-input-method)
-                ("M-<f4>" . org-time-stamp-inactive)
-                       ("M-<f5>" . org-time-stamp)      
-                                              ;   ("C-e" . org-end-of-line)
-          ("C-k" . org-kill-line)
-                                                 ;              ("C-<kp-6>" . xah-select-block)
-          ("C-x C-b" . bufler-list)                              ;   ("C-x j" . helm-org-in-buffer-headings)
-          ("C-x b" . bufler-switch-buffer)
-          ("C-c i" . insert-timestamp)
-                                                 ;  ("C-c a" . helm-org-agenda-files-headings)
-          ("C-c C-x C-r" . org-clock-report)
-      ("C-c <f1>" . org-roam-capture)
-          ("M-[" . org-metaleft)
-                    ("M-]" . org-metaright)
-                    ("M-{" . org-shiftmetaleft)
-                    ("M-}" . org-shiftmetaright)
-          ([f1] . org-capture)
-          ([f2] . org-clock-in)
-      ;    ([f3] . frog-jump-buffer)           
-        ([f3] . helm-buffers-list)           
-          ([f4] . org-refile)
-          ([f5] . helm-projectile)
-          ([f6] . helm-bibtex-with-local-bibliography)
-          ([f7] . org-agenda)
-          ([f8] . deft)
-          ([f9] . helm-swoop-without-pre-input)
-          ([f10] . org-narrow-to-subtree)
-          ([f11] . org-id-goto)
-          ([f12] . bury-buffer)
+             ("M-="   . count-words)
+             ("M-x"   . helm-M-x)
+      ("<Hangul> x" . helm-M-x)
+             ("C-c b" . list-bookmarks)
+                                                    ;    ("C-a" . org-beginning-of-line)
+                  ("M-<f2>" . org-mru-clock-in)                                  ;          ([menu] . toggle-input-method)
+                   ("M-<f4>" . org-time-stamp-inactive)
+                          ("M-<f5>" . org-time-stamp)      
+                                                 ;   ("C-e" . org-end-of-line)
+             ("C-k" . org-kill-line)
+                                                    ;              ("C-<kp-6>" . xah-select-block)
+             ("C-x C-b" . bufler-list)                              ;   ("C-x j" . helm-org-in-buffer-headings)
+             ("C-x b" . bufler-switch-buffer)
+             ("C-c i" . insert-timestamp)
+                                                    ;  ("C-c a" . helm-org-agenda-files-headings)
+             ("C-c C-x C-r" . org-clock-report)
+         ("C-c <f1>" . org-roam-capture)
+             ("M-[" . org-metaleft)
+                       ("M-]" . org-metaright)
+                       ("M-{" . org-shiftmetaleft)
+                       ("M-}" . org-shiftmetaright)
+             ([f1] . org-capture)
+             ([f2] . org-clock-in)
+         ;    ([f3] . frog-jump-buffer)           
+           ([f3] . helm-buffers-list)           
+             ([f4] . org-refile)
+             ([f5] . helm-projectile)
+             ([f6] . helm-bibtex-with-local-bibliography)
+             ([f7] . org-agenda)
+             ([f8] . deft)
+             ([f9] . helm-swoop-without-pre-input)
+             ([f10] . org-narrow-to-subtree)
+             ([f11] . org-id-goto)
+             ([f12] . bury-buffer)
 
-          )
+             )
 
 
 
-                                                 ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-                                                 ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+                                                    ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+                                                    ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
-         (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-         (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-         (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-         (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-         (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-         (define-key key-translation-map (kbd "C-_") (kbd "–"))
+            (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+            (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+            (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+            (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+            (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+            (define-key key-translation-map (kbd "C-_") (kbd "–"))
 
-         (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-         (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
-         (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+            (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+            (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
+            (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
 
 #+end_src
 
@@ -2045,29 +2061,30 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-(use-package doom-themes
-:ensure t
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-one t)
+      (use-package doom-themes
+      :ensure t
+        :config
+        ;; Global settings (defaults)
+        (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+              doom-themes-enable-italic t) ; if nil, italics is universally disabled
+        (load-theme 'doom-one t)
 
-  ;; Enable flashing mode-line on errors
-;  (doom-themes-visual-bell-config)
-  
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
-  (doom-themes-neotree-config)
-  ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
-  (doom-themes-treemacs-config)
-  
-  ;; Corrects (and improves) org-mode's native fontification.
- (doom-themes-org-config)
-)
+        ;; Enable flashing mode-line on errors
+      ;  (doom-themes-visual-bell-config)
 
-(find-file "~/Dropbox/emacs/config.org")
-(find-file "~/Dropbox/emacs/.emacs")
+        ;; Enable custom neotree theme (all-the-icons must be installed!)
+        (doom-themes-neotree-config)
+        ;; or for treemacs users
+        (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+        (doom-themes-treemacs-config)
+
+        ;; Corrects (and improves) org-mode's native fontification.
+       (doom-themes-org-config)
+      )
+
+      (find-file "~/Dropbox/emacs/config.org")
+   (find-file "~/Dropbox/Zettelkasten/inbox.org")
+      (find-file "~/Dropbox/emacs/.emacs")
 
 #+end_src
 
