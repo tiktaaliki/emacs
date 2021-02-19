@@ -152,7 +152,7 @@
 #+end_src                     
 
 #+RESULTS:
-: [nil 24583 52923 276646 300 kiwon/org-agenda-redo-in-other-window nil nil 118000]
+: [nil 24601 52372 121449 300 kiwon/org-agenda-redo-in-other-window nil nil 537000]
 
 *** org-agenda custom commands
 :LOGBOOK:
@@ -338,7 +338,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 #+BEGIN_SRC emacs-lisp :tangle yes
   
    (setq org-log-into-drawer t)
-
+(use-package org-clock-split)
    (setq org-clock-continuously nil)
    (setq org-log-note-clock-out t)
    (defun insert-timestamp (prefix)
@@ -417,9 +417,9 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
    (define-key org-mode-map (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
 
 
-   (setq org-refile-targets (quote (("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 1)
+   (setq org-refile-targets (quote (("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 2)
                                     ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
-                                    ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 1)
+                                    ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
                                     ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
 				        ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 1)
                                     ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
@@ -555,7 +555,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
            ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
 
            ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
-            "* %a \n\nSCHEDULED: %t %?\n\n%:initial" )
+            "* %a \nSCHEDULED: %t %?\n%:initial" )
   ("x" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
             "* TODO %? \nSCHEDULED: %t\n%a\n\n%:initial" )
 
@@ -626,7 +626,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
    (setq org-attach-method (quote ln))
    (setq org-attach-store-link-p t)
    (setq org-remove-highlights-with-change nil)
-   (setq org-reverse-note-order t)
+   (setq org-reverse-note-order nil)
    (setq org-columns-default-format "%50ITEM %TODO %3PRIORITY %TAGS")
    (setq org-columns-default-format-for-agenda "%50ITEM %TODO %3PRIORITY %TAGS %CLOCKSUM")
    (setq org-ctrl-k-protect-subtree (quote error))
@@ -915,6 +915,8 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 #+RESULTS:
 : ace-jump-helm-line
 
+* resume
+
 * debugging
 #+BEGIN_SRC emacs-lisp :tangle yes
    (setq debug-on-error nil)
@@ -1136,7 +1138,34 @@ M-x describe-current-coding-system
 #+END_SRC
 
 #+RESULTS:
-: t
+: tx
+
+added from https://orgmode.org/worg/org-tutorials/org-latex-export.html
+#+begin_src emacs-lisp :tangle yes
+   (require 'ox-latex)
+   (unless (boundp 'org-latex-classes)
+     (setq org-latex-classes nil))
+   (add-to-list 'org-latex-classes
+                '("article"
+                  "\\documentclass{article}"
+                  ("\\section{%s}" . "\\section*{%s}")))
+
+
+#+end_src
+
+https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exporting-to-latex
+#+begin_src emacs-lisp :tangle yes
+
+   (require 'ox-extra)
+   (ox-extras-activate '(ignore-headlines))
+
+
+
+
+
+#+end_src
+
+#+RESULTS:
 
 * yasnippet & yankpad
 
@@ -1795,13 +1824,14 @@ M-x describe-current-coding-system
 
 * chronos
 #+begin_src emacs-lisp :tangle yes
- 
-   (use-package org-alert)
+
+      (use-package org-alert)
+   (use-package chronos)
+(use-package helm-chronos)
 
 #+end_src
 
 #+RESULTS:
-| =13:00/END fast + =20:00/BEGIN fast | =18:00/begin ref shift + -5/ref in 5 min + =22:00/end shift | 25/END pomodoro + 5/END break | 50/END pomodoro + 5/get back to work | 25/END pomodoro 1 + 5/END break 1 + 25/END pomodoro 2 + 5/END break 2 + 25/END pomodoro 3 + 5/END break 3 + 25/END pomodoro 4 + 5/END break 4 |
 
 
 (use-package pomidor)
@@ -1953,10 +1983,7 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 
 
 #+begin_src emacs-lisp :tangle yes
-            (global-unset-key (kbd "<up>"))
-            (global-unset-key (kbd "<down>"))
-            (global-unset-key (kbd "<right>"))
-            (global-unset-key (kbd "<left>"))
+   
             (global-unset-key (kbd "M-o"))
             (global-set-key (kbd "M-o") 'other-window)
             (define-key yas-minor-mode-map [(tab)] nil)

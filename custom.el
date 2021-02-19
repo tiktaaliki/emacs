@@ -58,8 +58,10 @@
       (file))))
  '(org-agenda-export-html-style
    "<link rel=\"stylesheet\" href=\"\\home\\betsy\\Dropbox\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
+ '(org-agenda-files
+   '("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/recipes.org" "~/Dropbox/Zettelkasten/ndd.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/lis.org" "~/Dropbox/Zettelkasten/personal.org" "~/Dropbox/Zettelkasten/sysadmin.org" "~/Dropbox/Zettelkasten/contacts.org"))
  '(org-clock-clocktable-default-properties
-   '(:maxlevel 4 :hidefiles t :tags t :tcolumns 1 :narrow 30 :level nil :link t) t)
+   '(:maxlevel 4 :hidefiles t :tags t :tcolumns 1 :narrow 30 :level nil :link t))
  '(org-clock-in-resume nil)
  '(org-download-delete-image-after-download t)
  '(org-download-image-dir "/home/betsy/Dropbox/Zettelkasten/images")
@@ -77,6 +79,12 @@
    " <link rel=\"stylesheet\" href=\"\\home\\betsy\\Dropbox\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" /><link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lobster Two|Jura|Gentium Basic\">")
  '(org-html-head-include-default-style nil)
  '(org-image-actual-width '(600))
+ '(org-latex-default-packages-alist
+   '(("rm" "roboto" t nil)
+     ("defaultsans" "lato" t nil)
+     ("" "paracol" t nil)
+     ("" "titletoc" t nil)
+     ("" "titletoc" t nil)))
  '(org-link-file-path-type 'absolute)
  '(org-log-note-headings
    '((done . "CLOSING NOTE %t")
@@ -114,7 +122,7 @@
  '(org-wild-notifier-keyword-whitelist nil)
  '(org-wild-notifier-mode t)
  '(package-selected-packages
-   '(worf ox-tufte wc-goal-mode org-wc helm-org-ql calibredb amread-mode copyit-pandoc image+ org-alert org-wild-notifier workgroups2 org-analyzer org-drill frog-jump-buffer org-super-links helm-org dired-x dired-toggle-sudo ac-helm org-clock-today org-clock-split auto-complete-auctex zoom helm-bufler visible-mark spray scrollkeeper org-noter-pdftools org-pdftools org-ac mu4e-conversation on-screen uptimes unkillable-scratch mw-thesaurus most-used-words korean-holidays helm-unicode helm-flyspell clean-buffers org-mru-clock undo-tree xml+ use-package olivetti quail quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex org-msg nov org-superstar yasnippet-snippets org-clock-convenience org-pomodoro org-plus-contrib crux org-noter pdf-view-restore anki-editor anki-connect ace-jump-buffer helm-org-rifle org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency speed-type smartparens rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-projectile helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game))
+   '(ox-extra helm-chronos chronos worf ox-tufte wc-goal-mode org-wc helm-org-ql calibredb amread-mode copyit-pandoc image+ org-alert org-wild-notifier workgroups2 org-analyzer org-drill frog-jump-buffer org-super-links helm-org dired-x dired-toggle-sudo ac-helm org-clock-today org-clock-split auto-complete-auctex zoom helm-bufler visible-mark spray scrollkeeper org-noter-pdftools org-pdftools org-ac mu4e-conversation on-screen uptimes unkillable-scratch mw-thesaurus most-used-words korean-holidays helm-unicode helm-flyspell clean-buffers org-mru-clock undo-tree xml+ use-package olivetti quail quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex org-msg nov org-superstar yasnippet-snippets org-clock-convenience org-pomodoro org-plus-contrib crux org-noter pdf-view-restore anki-editor anki-connect ace-jump-buffer helm-org-rifle org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency speed-type smartparens rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-projectile helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game))
  '(pdf-annot-default-annotation-properties
    '((t
       (label . "Betsy Yoon"))
