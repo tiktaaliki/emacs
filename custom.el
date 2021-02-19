@@ -58,8 +58,6 @@
       (file))))
  '(org-agenda-export-html-style
    "<link rel=\"stylesheet\" href=\"\\home\\betsy\\Dropbox\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
- '(org-agenda-files
-   '("~/Dropbox/Zettelkasten/inbox.org" "~/Dropbox/Zettelkasten/cal.org" "~/Dropbox/Zettelkasten/recipes.org" "~/Dropbox/Zettelkasten/ndd.org" "~/Dropbox/Zettelkasten/journal.org" "~/Dropbox/Zettelkasten/lis.org" "~/Dropbox/Zettelkasten/personal.org" "~/Dropbox/Zettelkasten/sysadmin.org" "~/Dropbox/Zettelkasten/contacts.org"))
  '(org-clock-clocktable-default-properties
    '(:maxlevel 4 :hidefiles t :tags t :tcolumns 1 :narrow 30 :level nil :link t))
  '(org-clock-in-resume nil)

@@ -152,7 +152,7 @@
 #+end_src                     
 
 #+RESULTS:
-: [nil 24601 52372 121449 300 kiwon/org-agenda-redo-in-other-window nil nil 537000]
+: [nil 24623 9519 4555 300 kiwon/org-agenda-redo-in-other-window nil nil 985000]
 
 *** org-agenda custom commands
 :LOGBOOK:
