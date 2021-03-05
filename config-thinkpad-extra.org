@@ -1,0 +1,220 @@
+
+  
+
+#+RESULTS:
+: t
+* STOP!
+
+
+
+
+
+
+* mu4e
+[[file:~/.mbsyncrc::IMAPAccount gmail]]
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+                                                       ; (use-package mu4e) 
+                                                       ; (use-package mu4e-contrib)
+               (require 'mu4e)
+               (require 'org-mu4e)
+               ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+   (setq org-mu4e-convert-to-html t)
+               (setq mu4e-sent-messages-behavior 'delete)
+               (setq message-kill-buffer-on-exit t)
+               (setq mu4e-change-filenames-when-moving t)
+               (setq mu4e-compose-format-flowed t)
+
+               (setq mu4e-hide-index-messages t)
+               ;; Call EWW to display HTML messages
+                                                       ;(defun jcs-view-in-eww (msg)
+                                                       ; (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
+
+               ;; Arrange to view messages in either the default browser or EWW
+               (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+                                                       ; (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
+
+               ;; From Ben Maughan: Get some Org functionality in compose buffer
+               (add-hook 'message-mode-hook 'turn-on-orgtbl)
+                                                       ; (add-hook 'message-mode-hook 'turn-on-orgstruct++)
+
+               (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
+               (add-hook 'mu4e-view-mode-hook 'visual-fill-column-mode)
+
+               (defun no-auto-fill ()
+                 "Turn off auto-fill-mode."
+                 (auto-fill-mode -1))
+
+
+               (defun vcfm-off ()
+                                                       ;turn off visual fill column mode
+                 (visual-fill-column-mode nil))
+
+               (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
+               (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
+
+               (setq mu4e-compose-dont-reply-to-self t)
+               (setq mu4e-confirm-quit nil)
+               (setq mu4e-display-update-status-in-modeline nil)
+               (setq mu4e-index-lazy-check t)
+
+      (require 'smtpmail)
+         (setq message-send-mail-function 'smtpmail-send-it
+               smtpmail-starttls-credentials
+               '(("smtp.gmail.com" 587 nil nil))
+               smtpmail-default-smtp-server "smtp.gmail.com"
+               smtpmail-smtp-server "smtp.gmail.com"
+               smtpmail-smtp-service 587
+               smtpmail-debug-info t)
+
+(add-to-list 'mu4e-bookmarks
+  '( :name  "Big messages"
+     :query "size:15M..500M"
+     :key   ?b))
+#+END_SRC
+  
+#+RESULTS:
+| :name | Big messages         | :query | size:20M..500M                       | :key         |  98 |      |     |
+| :name | Big messages         | :query | size:40M..500M                       | :key         |  98 |      |     |
+| :name | Big messages         | :query | size:50M..500M                       | :key         |  98 |      |     |
+| :name | Big messages         | :query | size:10M..500M                       | :key         |  98 |      |     |
+| :name | Big messages         | :query | size:5M..500M                        | :key         |  98 |      |     |
+| :name | inbox                | :query | maildir:/gmail/INBOX                 | :key         | 105 |      |     |
+| :name | Unread messages      | :query | flag:unread AND maildir:/gmail/INBOX | :key         | 117 |      |     |
+| :name | Today's messages     | :query | date:today..now                      | :key         | 116 |      |     |
+| :name | Last 7 days          | :query | date:7d..now                         | :hide-unread |   t | :key | 119 |
+| :name | Messages with images | :query | mime:image/*                         | :key         | 112 |      |     |
+  
+** message view
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+                                              ;  (setq mu4e-attachment-dir "/home/betsy/Dropbox/Spring 2019/")
+
+   ;; enable inline images
+   ;; use imagemagick, if available
+   (when (fboundp 'imagemagick-register-types)
+     (imagemagick-register-types))
+
+   (add-hook 'mu4e-compose-mode-hook
+       (defun my-do-compose-stuff ()
+          "My settings for message composition."
+          (visual-line-mode)
+          (org-mu4e-compose-org-mode)
+              (use-hard-newlines -1)
+          (flyspell-mode)))
+
+      (setq shr-color-visible-luminance-min 50) 
+      (setq shr-color-visible-distance-min 5)
+                                              ;(setq mu4e-view-html-plaintext-ratio-heuristic 'most-positive-fixnum)
+      (setq message-yank-prefix ""
+            message-yank-empty-prefix ""
+            message-yank-cited-prefix "")
+
+      (setq w3m-default-desplay-inline-images t)
+      (defun mu4e-action-view-in-w3m ()
+        "View the body of the message in emacs w3m."
+        (interactive)
+        (w3m-browse-url (concat "file://"
+                                (mu4e~write-body-to-html (mu4e-message-at-point t)))))
+
+
+      ;; customize the reply-quote-string
+      (setq message-citation-line-format "\n\nOn %a %d %b %Y at %R, %f wrote:\n")
+      ;; choose to use the formatted string
+      (setq message-citation-line-function 'message-insert-formatted-citation-line)
+
+
+      (setq mu4e-view-scroll-to-next nil)
+
+      (add-hook 'message-mode-hook 'visual-fill-column-mode)
+
+
+
+#+END_SRC
+
+#+RESULTS:
+| visual-fill-column-mode | turn-on-orgtbl | org-contacts-setup-completion-at-point |
+
+** headers view
+
+ 
+
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+   (setq mu4e-headers-include-related nil)
+   (setq mu4e-headers-fields
+         '( (:human-date    .  15)    ;; alternatively, use :human-date
+            (:flags         .   5)
+            (:from          .  20)
+            (:thread-subject       . 70 )
+                                           ;             (:thread-subject       . 120 )
+            )) 
+   (setq org-mu4e-link-query-in-headers-mode nil)
+   (setq mu4e-update-interval 300)
+   (setq mu4e-use-fancy-chars nil)
+   (setq mu4e-index-update-in-background t)
+   (setq mu4e-view-prefer-html t)
+   (setq mu4e-headers-skip-duplicates t)
+   (setq mu4e-headers-auto-update t)
+   (setq mu4e-view-show-addresses t)
+   (setq mu4e-view-show-images t)
+   (setq mu4e-headers-date-format "%x")
+   (setq mu4e-headers-time-format "%H:%M")
+#+END_SRC
+
+#+RESULTS:
+: %H:%M
+
+** settings
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   ;; allow for updating mail using 'U' in the main view:
+   (setq mu4e-get-mail-command "true")
+                                           ;(setq mail-user-agent 'mu4e-user-agent)
+   (use-package org-msg)
+   (setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
+         org-msg-startup "hidestars indent inlineimages"
+                                           ;	org-msg-greeting-fmt "\nHi *%s*,\n\n"
+         org-msg-greeting-name-limit 3
+         org-msg-text-plain-alternative t
+         org-msg-signature "
+
+    In solidarity,
+
+    ,#+begin_signature
+    -- *Betsy (she/they)* \\\\
+    ,#+end_signature")
+   (org-msg-mode)
+
+#+END_SRC 
+
+#+RESULTS:
+: t
+
+** folders
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+ 
+   (setq mu4e-drafts-folder "/Drafts")
+   (setq mu4e-sent-folder   "/Sent")
+   (setq mu4e-trash-folder  "/Trash")
+   (setq mu4e-refile-folder "/All")
+   (setq mu4e-maildir "~/.maildir")
+   (setq mu4e-attachment-dir "~/Dropbox/2021")
+#+END_SRC 
+
+#+RESULTS:
+: ~/Dropbox/2021
+
+  
+
+
+
+
+
+
+
+
