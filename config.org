@@ -1160,7 +1160,7 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
    (ox-extras-activate '(ignore-headlines))
 
 
-
+(setq TeX-auto-save nil)
 
 
 #+end_src
