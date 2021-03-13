@@ -2,23 +2,68 @@
 * load external files
 
 #+begin_src emacs-lisp :tangle yes
-   (load "pi")
-   (load "org-pdfview")
-   (load "org-protocol-capture-html")
-   (load "org-book")
-   (load "org-depend")
-   (load "bookmark+")
-   (load "org-contacts")
-   (load "org-toc")
-   (load "org-registry")
-   (load "run-assoc")
-   (load "unbound")
-   (load "org-checklist")
-   (load "org-notify")
-   (load "dired+")
-(load "clipboard2org")
+                  (load "pi")
+                  (load "org-pdfview")
+                  (load "org-protocol-capture-html")
+                  (load "org-book")
+                  (load "org-depend")
+                  (load "bookmark+")
+                  (load "org-contacts")
+                  (load "org-toc")
+                  (load "org-registry")
+                  (load "run-assoc")
+                  (load "unbound")
+                  (load "org-checklist")
+                  (load "org-notify")
+                  (load "dired+")
+               (load "clipboard2org")
+            (load "pymupdf-mode")
+         (load "org-super-links")
+      (load "backup-each-save")
+   (load "periodic-commit-minor-mode")
+(periodic-commit-minor-mode 1)
          #+end_src
+
+         #+RESULTS:
+         : t
 	 
+* font/coding/wrapping
+ 
+#+begin_src emacs-lisp :tangle yes
+  (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+                        '("NanumBarunpen" . "unicode-bmp" )
+
+                        )
+      (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
+                        '("Nanumbarunpen" . "unicode-bmp")
+
+
+) 
+#+end_src
+
+#+RESULTS:
+   
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+  (setq fill-column 70)
+
+	(setq global-visual-fill-column-mode t)
+	(setq global-visual-line-mode t)
+
+
+	(eval-after-load "flyspell"
+	  '(define-key flyspell-mode-map (kbd "C-.") nil))
+
+
+
+
+#+END_SRC
+
+#+RESULTS:
+
+
+
+
 * plain lists & bullets
 #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package org-superstar)
@@ -755,18 +800,20 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 * accessibility
 #+begin_src emacs-lisp :tangle yes
-     (defhydra hydra-zoom (:color red)  "zoom"
-       ("=" text-scale-increase "in")
-       ("-" text-scale-decrease "out")
-       ("0" (text-scale-adjust 0) "reset")
-       ("o" (other-window) "other window")
-       ("q" nil "quit" :color blue))
+        (defhydra hydra-zoom (:color red)  "zoom"
+          ("=" text-scale-increase "in")
+          ("-" text-scale-decrease "out")
+          ("0" (text-scale-adjust 0) "reset")
+          ("o" (other-window) "other window")
+          ("q" nil "quit" :color blue))
 
-     (global-set-key (kbd "C-=") 'hydra-zoom/body)
-
-(use-package bar-cursor)
-   (bar-cursor-mode 1)
-(beacon-mode 1)
+        (global-set-key (kbd "C-=") 'hydra-zoom/body)
+   (global-hl-line-mode +1)
+   (global-hi-lock-mode 1)
+   (use-package bar-cursor)
+      (bar-cursor-mode 1)
+   (beacon-mode 1)
+(good-scroll-mode 1)
 #+end_src
 
 #+RESULTS:
@@ -794,7 +841,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                   (case-fn . downcase))) 
    (setq deft-recursive t)
    (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
-   (setq deft-auto-save-interval 5.0)
+   (setq deft-auto-save-interval 15.0)
    (add-hook 'after-init-hook 'deft)
    (add-hook 'deft-mode-hook #'visual-line-mode)
 
@@ -1085,40 +1132,51 @@ M-x describe-current-coding-system
    (setq auto-save-visited-file-name t)
    (setq auto-save-visited-mode t)
    (setq dired-auto-revert-buffer (quote dired-directory-changed-p))
-   (setq auto-save-interval 10)
-   (setq auto-save-timeout 5)
+   (setq auto-save-interval 100)
+   (setq auto-save-timeout 10)
    (setq global-auto-revert-mode t)
+
+(setq backup-directory-alist '(("." . "~/Dropbox/emacs/.emacs.d/backups")))
 
 #+END_SRC
 
 #+RESULTS:
-: t
+: ((. . ~/Dropbox/emacs/.emacs.d/backups))
 
 * pdf-tools
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (pdf-tools-install)
+            (pdf-tools-install)
 
-   (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
+            (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
 
-   (use-package pdf-tools :defer t)
-   (use-package org-pdfview :defer t)
-                                           ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
+            (use-package pdf-tools :defer t)
+            (use-package org-pdfview :defer t)
+                                                    ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
 
-   (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
-   (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
+            (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
+            (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
 
-   (setq pdf-view-continuous nil)
-   (add-to-list 'org-file-apps 
-                '("\\.pdf\\'" . (lambda (file link)
-                                  (org-pdfview-open link))))
+            (setq pdf-view-continuous t)
+            (add-to-list 'org-file-apps 
+                         '("\\.pdf\\'" . (lambda (file link)
+                                           (org-pdfview-open link))))
+
+   (quelpa
+    '(quelpa-use-package
+      :fetcher git
+      :url "https://github.com/quelpa/quelpa-use-package.git"))
+   (require 'quelpa-use-package)
+        (use-package pdf-continuous-scroll-mode :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
+
+
 
 
 #+END_SRC
 
 #+RESULTS:
-: hydra-pdftools/body
+: t
 
 
 
@@ -1400,7 +1458,7 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
    (setq confirm-kill-emacs (quote y-or-n-p))
 
 
-   (set-fringe-mode '(25 . 25))
+   (set-fringe-mode '(0 . 25))
    (setq ring-bell-function (quote ignore))
 
 
@@ -1409,96 +1467,7 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 #+RESULTS:
 : ignore
 
-* font/coding/wrapping
- 
-#+begin_src emacs-lisp :tangle yes
-  (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                        '("NanumBarunpen" . "unicode-bmp" )
 
-                        )
-      (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
-                        '("Nanumbarunpen" . "unicode-bmp")
-
-
-) 
-#+end_src
-
-#+RESULTS:
-   
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-         (defvar symbola-font (if (eq system-type 'gnu/linux)
-                  (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                           '("NanumBarunpen" . "unicode-bmp" )
-
-                           )
-         (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
-                           '("Nanumbarunpen" . "unicode-bmp")
-
-
-   )                   (font-spec :name "Symbola" :size 8)
-                                "Symbola"))
-
-
-          (set-fontset-font "fontset-default" '(#x2000 . #x206F)
-                              '("Symbola" . "unicode-bmp" ))
-   ;
-          (set-fontset-font "fontset-default" '(#x2190 . #x21FF)
-                              '("Symbola" . "unicode-bmp" ))
-         (set-fontset-font "fontset-default" '(#x2B00 . #x2BFF)
-                              '("Symbola" . "unicode-bmp" ))
-
-         (set-fontset-font "fontset-default" '(#x2200 . #x22FF)
-                              '("Symbola" . "unicode-bmp" ))
-
-       (set-fontset-font "fontset-default" '(#x25A0 . #x25FF)
-                              '("Symbola" . "unicode-bmp" ))
-
-           (set-fontset-font "fontset-default" '(#x2600 . #x26FF)
-                              '("Symbola" . "unicode-bmp" ))
-          (set-fontset-font "fontset-default" '(#x2700 . #x27BF)
-                              '("Symbola" . "unicode-bmp" ))
-
- (set-fontset-font "fontset-default" '(#x1f800 . #x1f8ff)
-                           '("Symbola" . "unicode-bmp" ))
-
-                                                        ;  (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
-                                                     ;                   (font-spec :size 30)) 
-
-      ;https://www.reddit.com/r/emacs/comments/8tz1r0/how_to_set_font_according_to_languages_that_i/e1bjce6?utm_source=share&utm_medium=web2x&context=3
-      (when (fboundp #'set-fontset-font)
-        (set-fontset-font t 'korean-ksc5601	
-                          ;; Noto Sans CJK: https://www.google.com/get/noto/help/cjk/
-                          (font-spec :family "Nanum Gothic Coding")))
-      (dolist (item '(("Nanum Gothic Coding" . 1.0)))
-        (add-to-list 'face-font-rescale-alist item))
-
-            (setq use-default-font-for-symbols nil)
-
-            (use-package unicode-fonts
-              :ensure t
-              :defer t
-              :init (unicode-fonts-setup))
-      (setq fill-column 70)
-
-            (setq global-visual-fill-column-mode t)
-            (setq global-visual-line-mode t)
-
-
-            (eval-after-load "flyspell"
-              '(define-key flyspell-mode-map (kbd "C-.") nil))
-
-
-
-
-#+END_SRC
-
-#+RESULTS:
-
-
-
-
-* STOP
 
 
 * calendar & calfw
@@ -1545,6 +1514,7 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 
    (setq nov-post-html-render-hook  (lambda () (visual-line-mode 1)))
    (add-hook 'ereader-mode-hook (lambda () (visual-line-mode 1)))
+   (add-hook 'ereader-mode-hook (lambda () (olivetti-mode 1)))
    (add-hook 'nov-post-html-render-hook 'olivetti-mode)
 
 #+end_src
@@ -1754,36 +1724,38 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 
 #+begin_src emacs-lisp :tangle yes
 
-        (use-package org-roam)
+           (use-package org-roam)
 
-        (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CONTEXT: %a\n:END:\n%?" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
-      "#+title: ${title}" :unnarrowed t :kill-buffer t)))
-
-
-        (setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
-
-   (defun my/org-roam--title-to-slug (title) ;;<< changed the name
-     "Convert TITLE to a filename-suitable slug."
-     (cl-flet* ((nonspacing-mark-p (char)
-                                   (eq 'Mn (get-char-code-property char 'general-category)))
-                (strip-nonspacing-marks (s)
-                                        (apply #'string (seq-remove #'nonspacing-mark-p
-                                                                    (ucs-normalize-NFD-string s))))
-                (cl-replace (title pair)
-                            (replace-regexp-in-string (car pair) (cdr pair) title)))
-       (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
-                       ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
-                       ("^_" . "")  ;; remove starting underscore
-                       ("_$" . "")))  ;; remove ending underscore
-              (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
-         (downcase slug))))
+           (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CONTEXT: %a\n:END:\n%?" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
+         "#+title: ${title}" :unnarrowed t :kill-buffer t)))
 
 
-(setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
+           (setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
+
+      (defun my/org-roam--title-to-slug (title) ;;<< changed the name
+        "Convert TITLE to a filename-suitable slug."
+        (cl-flet* ((nonspacing-mark-p (char)
+                                      (eq 'Mn (get-char-code-property char 'general-category)))
+                   (strip-nonspacing-marks (s)
+                                           (apply #'string (seq-remove #'nonspacing-mark-p
+                                                                       (ucs-normalize-NFD-string s))))
+                   (cl-replace (title pair)
+                               (replace-regexp-in-string (car pair) (cdr pair) title)))
+          (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
+                          ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
+                          ("^_" . "")  ;; remove starting underscore
+                          ("_$" . "")))  ;; remove ending underscore
+                 (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
+            (downcase slug))))
+
+
+   (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
+
+
 #+end_src
 
 #+RESULTS:
-: my/org-roam--title-to-slug
+: org-super-links-insert-link
 
    (setq org-roam-db-location "~/Dropbox/Zettelkasten/Zettels/")
  :ensure t
@@ -1826,99 +1798,102 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 
 
 #+begin_src emacs-lisp :tangle yes
-   
-            (global-unset-key (kbd "M-o"))
-            (global-set-key (kbd "M-o") 'other-window)
-            (define-key yas-minor-mode-map [(tab)] nil)
-            (define-key yas-minor-mode-map (kbd "TAB") nil)
-            (global-unset-key (kbd "C-z"))
-            (global-set-key (kbd "M-n") 'toggle-input-method)
-            (global-set-key (kbd "C-<f1>") 'set-input-method)
 
-                                                    ;   (global-unset-key (kbd "M-c"))
-                                                    (global-unset-key (kbd "C-v "))
+                     (global-unset-key (kbd "M-o"))
+                     (global-set-key (kbd "M-o") 'other-window)
+                     (define-key yas-minor-mode-map [(tab)] nil)
+                     (define-key yas-minor-mode-map (kbd "TAB") nil)
+                     (global-unset-key (kbd "C-z"))
+                     (global-set-key (kbd "M-n") 'toggle-input-method)
+                     (global-set-key (kbd "C-<f1>") 'set-input-method)
 
-                                                    ; (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-            (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-            (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
-            (define-key org-mode-map (kbd "C-y") 'yank)
-            (global-unset-key (kbd "S-SPC"))
-            (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
-            (global-set-key (kbd "C-c <f2>") 'org-clock-out)
+                                                             ;   (global-unset-key (kbd "M-c"))
+                                                             (global-unset-key (kbd "C-v "))
 
-            (global-set-key (kbd "<f1>") 'org-capture)
-            (define-key dired-mode-map (kbd "<f1>") 'org-capture)
-           ; (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
-          ;  (define-key dired-mode-map (kbd "<Hangul>-z") 'ace-jump-mode)
-         (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
-            (bind-keys 
-                                                    ;("C-+"   . text-scale-increase)
-             ("C-c p" . org-set-property)
-   ("C-y" . yank)                                  ;   a      ("C--"   . text-scale-decrease)
-             ("C-c l" . org-store-link)
-         ("M-<f3>" . sl-store-link)
-           ("C-c <f3>" . sl-insert-link)
-
-          ("M-z" . helm-swoop-without-pre-input)
-   ;          ("<Hangul>-z" . ace-jump-mode)
-                                              ;                 ("C-c k" . toggle-korean-input-method)
-             ("C-."   . org-todo)
-                                                    ;              ("C-x /" . shrink-window-horizontally)
-             ("C-x ." . org-archive-subtree-default)
-                                                    ;       ("C-c n" . org-schedule)
-
-             ("M-="   . count-words)
-             ("M-x"   . helm-M-x)
-      ("<Hangul> x" . helm-M-x)
-             ("C-c b" . list-bookmarks)
-                                                    ;    ("C-a" . org-beginning-of-line)
-                  ("M-<f2>" . org-mru-clock-in)                                  ;          ([menu] . toggle-input-method)
-                   ("M-<f4>" . org-time-stamp-inactive)
-                          ("M-<f5>" . org-time-stamp)      
-                                                 ;   ("C-e" . org-end-of-line)
-             ("C-k" . org-kill-line)
-                                                    ;              ("C-<kp-6>" . xah-select-block)
-             ("C-x C-b" . bufler-list)                              ;   ("C-x j" . helm-org-in-buffer-headings)
-             ("C-x b" . bufler-switch-buffer)
-             ("C-c i" . insert-timestamp)
-                                                    ;  ("C-c a" . helm-org-agenda-files-headings)
-             ("C-c C-x C-r" . org-clock-report)
-         ("C-c <f1>" . org-roam-capture)
-             ("M-[" . org-metaleft)
-                       ("M-]" . org-metaright)
-                       ("M-{" . org-shiftmetaleft)
-                       ("M-}" . org-shiftmetaright)
-             ([f1] . org-capture)
-             ([f2] . org-clock-in)
-         ;    ([f3] . frog-jump-buffer)           
-           ([f3] . helm-buffers-list)           
-             ([f4] . org-refile)
-             ([f5] . helm-projectile)
-             ([f6] . helm-bibtex-with-local-bibliography)
-             ([f7] . org-agenda)
-             ([f8] . deft)
-             ([f9] . helm-swoop-without-pre-input)
-             ([f10] . org-narrow-to-subtree)
-             ([f11] . org-id-goto)
-             ([f12] . bury-buffer)
-
-             )
+                                                             ; (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+                     (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+                     (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+                     (define-key org-mode-map (kbd "C-y") 'yank)
+                     (global-unset-key (kbd "S-SPC"))
+                     (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
+                     (global-set-key (kbd "C-c <f2>") 'org-clock-out)
+                     (global-unset-key (kbd "C-c C-x C-r"))
+                     (global-set-key (kbd "<f1>") 'org-capture)
+                     (define-key dired-mode-map (kbd "<f1>") 'org-capture)
+                    ; (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
+                   ;  (define-key dired-mode-map (kbd "<Hangul>-z") 'ace-jump-mode)
+                  (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
+                     (bind-keys 
 
 
+                                              ;("C-+"   . text-scale-increase)
+                      ("C-c p" . org-set-property)
+            ("C-y" . yank)                                  ;   a      ("C--"   . text-scale-decrease)
+                      ("C-c l" . org-store-link)
+		        ("C-c C-l" . org-insert-link)
+                  ("M-<f3>" . org-super-links-store-link)
+                    ("C-c <f3>" . org-super-links-insert-link)
 
-                                                    ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-                                                    ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+                   ("M-z" . helm-swoop-without-pre-input)
+            ;          ("<Hangul>-z" . ace-jump-mode)
+                                                       ;                 ("C-c k" . toggle-korean-input-method)
+                      ("C-."   . org-todo)
+                                                             ;              ("C-x /" . shrink-window-horizontally)
+                      ("C-x ." . org-archive-subtree-default)
+                                                             ;       ("C-c n" . org-schedule)
 
-            (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-            (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-            (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-            (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-            (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-            (define-key key-translation-map (kbd "C-_") (kbd "–"))
+                      ("M-="   . count-words)
+                      ("M-x"   . helm-M-x)
+               ("<Hangul> x" . helm-M-x)
+                      ("C-c b" . list-bookmarks)
+                                                             ;    ("C-a" . org-beginning-of-line)
+                           ("M-<f2>" . org-mru-clock-in)                                  ;          ([menu] . toggle-input-method)
+                            ("M-<f4>" . org-time-stamp-inactive)
+                                   ("M-<f5>" . org-time-stamp)      
+                                                          ;   ("C-e" . org-end-of-line)
+                      ("C-k" . org-kill-line)
+                                                             ;              ("C-<kp-6>" . xah-select-block)
+                      ("C-x C-b" . bufler-list)                              ;   ("C-x j" . helm-org-in-buffer-headings)
+                      ("C-x b" . bufler-switch-buffer)
+                      ("C-c i" . insert-timestamp)
+                                                             ;  ("C-c a" . helm-org-agenda-files-headings)
+                      ("C-c C-x C-r" . org-clock-report)
+                  ("C-c <f1>" . org-roam-capture)
+                      ("M-[" . org-metaleft)
+                                ("M-]" . org-metaright)
+                                ("M-{" . org-shiftmetaleft)
+                                ("M-}" . org-shiftmetaright)
+                      ([f1] . org-capture)
+                      ([f2] . org-clock-in)
+                  ;    ([f3] . frog-jump-buffer)           
+                    ([f3] . helm-buffers-list)           
+                      ([f4] . org-refile)
+                      ([f5] . helm-projectile)
+                      ([f6] . helm-bibtex-with-local-bibliography)
+                      ([f7] . org-agenda)
+                      ([f8] . deft)
+                      ([f9] . helm-swoop-without-pre-input)
+                      ([f10] . org-narrow-to-subtree)
+                      ([f11] . org-id-goto)
+                      ([f12] . bury-buffer)
 
-            (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-            (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
-            (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+                      )
+
+
+
+                                                             ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+                                                             ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+                     (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+                     (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+                     (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+                     (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+                     (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+                     (define-key key-translation-map (kbd "C-_") (kbd "–"))
+
+                     (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+                     (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
+                     (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
 
 #+end_src
 

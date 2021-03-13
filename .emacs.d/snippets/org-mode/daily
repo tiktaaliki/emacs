@@ -1,0 +1,50 @@
+# -*- mode: snippet -*-
+# name: daily
+# key: daily
+# --
+
+**** daily routines [0%]
+***** ✶ shower
+***** ✶ stretch/exercise
+***** ✶ eat [/]
+- [ ] breakfast
+- [ ] lunch
+- [ ] dinner
+***** ✶ empty inbox
+***** ✶ pet care [0/2]
+- [ ] litter
+- [ ] feed
+***** ✶ wake up ritual [0/3]
+- [ ] brush teeth
+- [ ] take meds
+- [ ] make tea
+***** ✶ meditate
+***** ✶ journal
+***** ✶ review day [0/5]
+- [ ] agenda
+- [ ] meals
+- [ ] clothes
+- [ ] update scorecard
+- [ ] prepare workspace
+- [ ] set coutdown timer if applicable
+***** ✶ prepare to leave the house [0/7]
+- [ ] chapstick
+- [ ] eyedrops
+- [ ] phone
+- [ ] charger
+- [ ] water
+- [ ] notebook
+- [ ] inked pen
+***** ✶ bedtime ritual [0/2]
+- [ ] wash face
+- [ ] floss
+
+***** ✶ shutdown ritual [0/8]
+- [ ] have space clean and ready for next day
+- [ ] update scorecard
+- [ ] collect any miscellaneous tasks
+- [ ] review agenda for next few days
+- [ ] schedule next day
+- [ ] what will I eat tomorrow?
+- [ ] what will I wear tomorrow?
+

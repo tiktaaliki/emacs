@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: prop-visibility
+# key: prop
+# --
+:PROPERTIES:
+:VISIBILITY: content
+:END:

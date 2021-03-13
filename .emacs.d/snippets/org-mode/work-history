@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: work history
+# key: work
+# --
+:PROPERTIES:
+:INSTITUTION: 
+:TITLE:  
+:LOCATION: 
+:YEARS: 
+:ADDRESS: 
+:SUPERVISOR:
+:SUPERVISOR_TITLE:
+:PHONE: 
+:END:

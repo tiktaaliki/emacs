@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: trigger/blocker
+# key: prop-trigblock
+# --
+:PROPERTIES:
+:BLOCKER:  previous-sibling
+:TRIGGER:  next-sibling todo!(NEXT)
+:END:

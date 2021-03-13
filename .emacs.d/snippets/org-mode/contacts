@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: contacts
+# key: contacts
+# --
+:PROPERTIES:
+:ADDRESS:
+:EMAIL:
+:PHONE:
+:BIRTHDAY:
+:END:

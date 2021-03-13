@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: job properties
+# key: 
+# --
+:PROPERTIES:
+:JOB_TITLE: 
+:INSTITUTION: 
+:POSTING_DATE:
+:WHERE_FOUND:
+:DATE_SUBMITTED: 
+:JOB_TYPE: 
+:JOB_DESCRIPTION:
+:JOB_FILES:
+:END:

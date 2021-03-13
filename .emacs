@@ -54,3 +54,57 @@
 
 (set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
 (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
+
+           (defvar symbola-font (if (eq system-type 'gnu/linux)
+                  (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+                           '("NanumBarunpen" . "unicode-bmp" )
+
+                           )
+         (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
+                           '("Nanumbarunpen" . "unicode-bmp")
+
+
+   )                   (font-spec :name "Symbola" :size 8)
+                                "Symbola"))
+
+
+          (set-fontset-font "fontset-default" '(#x2000 . #x206F)
+                              '("Symbola" . "unicode-bmp" ))
+   ;
+          (set-fontset-font "fontset-default" '(#x2190 . #x21FF)
+                              '("Symbola" . "unicode-bmp" ))
+         (set-fontset-font "fontset-default" '(#x2B00 . #x2BFF)
+                              '("Symbola" . "unicode-bmp" ))
+
+         (set-fontset-font "fontset-default" '(#x2200 . #x22FF)
+                              '("Symbola" . "unicode-bmp" ))
+
+       (set-fontset-font "fontset-default" '(#x25A0 . #x25FF)
+                              '("Symbola" . "unicode-bmp" ))
+
+           (set-fontset-font "fontset-default" '(#x2600 . #x26FF)
+                              '("Symbola" . "unicode-bmp" ))
+          (set-fontset-font "fontset-default" '(#x2700 . #x27BF)
+                              '("Symbola" . "unicode-bmp" ))
+
+ (set-fontset-font "fontset-default" '(#x1f800 . #x1f8ff)
+                           '("Symbola" . "unicode-bmp" ))
+
+                                                        ;  (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
+                                                     ;                   (font-spec :size 30)) 
+
+      ;https://www.reddit.com/r/emacs/comments/8tz1r0/how_to_set_font_according_to_languages_that_i/e1bjce6?utm_source=share&utm_medium=web2x&context=3
+      (when (fboundp #'set-fontset-font)
+        (set-fontset-font t 'korean-ksc5601	
+                          ;; Noto Sans CJK: https://www.google.com/get/noto/help/cjk/
+                          (font-spec :family "Nanum Gothic Coding")))
+      (dolist (item '(("Nanum Gothic Coding" . 1.0)))
+        (add-to-list 'face-font-rescale-alist item))
+
+            (setq use-default-font-for-symbols nil)
+
+            (use-package unicode-fonts
+              :ensure t
+              :defer t
+
+:init (unicode-fonts-setup))

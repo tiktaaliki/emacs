@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: logbook
+# key: logbook
+# --
+:END:
+:LOGBOOK_ARCHIVE:

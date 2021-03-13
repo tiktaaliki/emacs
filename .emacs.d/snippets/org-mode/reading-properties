@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: reading
+# key: reading
+# --
+:PROPERTIES:
+:AREA:
+:TYPE:
+:READ_STATUS:  
+:INGESTED:
+:FORMAT:
+:DATE_READ:
+:END:

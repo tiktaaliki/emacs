@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: edravid
+# key: edravid
+# --
+---
+title: 
+date: "2019-05-25"
+language: en
+rights: CC BY-NC-ND 4.0 | Proceedings of the Environmental Design Research Association 50th Conference
+creator: 
+---
+
+<h1 class="title" style="font-size: 1em; text-align: center">
+</h1>
+
+****
+
+<video width="800" controls>
+  <source src=".mp4" type="video/mp4">
+Oops, it looks like your browser does not support
+this video element.
+</video>

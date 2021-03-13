@@ -1,0 +1,421 @@
+* The black shoals
+- xi: However, also in the witnessing to understand with one another, one realizes that "innocence" does not exist within the lifeways of this hemisphere or the modern world. The endeavor of surviving under conditions of conquest is never clean.
+- xiii: White colonial and settler colonial discourse structure the ways that people think about and simultaneously forget the ways that Black and Native death are intimately connected in the Western Hemisphere.
+- 8: The shoal is an alternative space always in formation (expanding or eroding) and not already overwritten or captured by the conceptual constraints of the sea or the land.
+- 11: At this contemporary juncture, many Black and Indigenous people in this hemisphere experience the current political moment as one marked by mass carnage. Everyday life is marked by grotesque interludes with Black and Indigenous death in the streets or in the plains. Even as Black and Indigenous people and the world bear live witness--on the street, Twitter, Instagram, and Facebook--to the real-time murder of their kin and relations, liberal political commentary, the academy, and the White left continue to use a form of speech that refuses to name the quotidian spectacle of death as conquest.
+- 18: Wynter's 4 contributions
+    - european-negro-indian triad
+    - notion of man as concept under constant revision
+    - adaptation of CLR James pieza consciousness as critique of political-economic reason/criticism
+    - notion of ceremony
+- 19: conquest begins in 1441--before Columbus
+- fungible :: 1: being something (such as money or a commodity) of such a nature that one part or quantity may be replaced by another equal part or quantity in paying a debt or settling an account
+              2: capable of mutual substitution : INTERCHANGEABLE
+              3: readily changeable to adapt to new situations : FLEXIBLE
+
+
+
+- 16: conquistador humanism
+* EDRA PLACE-MAKING
+Practitioner Use of Environmental Autobiography for Library Buildings and Designs
+by Amy Beth
+
+0This text has 0 annotations
+
+    0This text has 0 highlights
+
+Streets with Different Levels of Permeability An Analysis of Preferences Regarding Aesthetics and As Places to Live
+by Antônio Tarcísio Reis
+
+0This text has 0 annotations
+
+    0This text has 0 highlights
+
+Architectural Programming Study at EDRA50/50History of Architectural Programming and Teaching Experience in China
+by Zhang Qu, Weimin Zhuang
+
+0This text has 0 annotations
+
+    0This text has 0 highlights
+
+Designing for Collaboration in the Workplace
+by Lindsey Torpey, Zahid Islam
+
+0This text has 0 annotations
+
+    0This text has 0 highlights
+
+Making our Future Communities Green
+by Susan Booher
+
+0This text has 0 annotations
+
+    0This text has 0 highlights
+
+Theory of Place in Public Space
+by Mark Del Aguila, Ensiyeh Ghavampour, Brenda Vale
+
+0This text has 0 annotations
+
+    0This text has 0 highlights
+
+Shaping the City Image by PlacemakingPlace Attachment and Sustainability of City
+by Yeji Yi
+
+0This text has 0 annotations
+
+    0This text has 0 highlights
+
+Coworking as an emerging urban lifestyleLocation analysis of coworking spaces in Manhattan, NYC
+by Yaoyi Zhou
+
+0This text has 0 annotations
+
+    0This text has 0 highlights
+
+The Power of Collective ImaginationA Driver of Sustainable Lifestyles and Behavior
+by Ashrita Shetty
+
+0This text has 0 annotations
+
+    0This text has 0 highlights
+
+LanewaysInterior Design in the Urban Condition
+by Rebekah Radtke
+* libguide content audit
+** What are OER?
+*** definition of OER
+*** OER rights (The 5 Rs)
+*** courses about OER/OER101
+*** Reasons to use OER (high textbook costs)
+** OER research
+*** OER impact reports
+*** CUNY faculty publications
+*** organizations that research OER 
+*** Choice OER white paper
+*** achieving the dream OER degree initiative
+** OER licensing & copyright
+*** how to cite OER
+*** how to license your OER
+*** copyright OER
+**** creative commons
+**** jisc legal aspects
+
+** Finding OER
+*** OER collections
+*** open images
+*** open courseware
+** Creating OER
+*** how to create OER (tools)
+*** link to licensing & copyright
+** OER in use at CSI
+** OER in NY
+***  NYS year 1 report
+*** Open NYS -- stuff specific to NYS about open
+
+** Sample resource lists
+*** OPEN NYS composition instruction using OER
+*** textbooks for english composition
+*** online composition resources
+
+** REMOVE OER content management solutions
+* land acknowledgment
+
+
+* EDRA - reconciling the master list...
+
+
+Since 1968, the Neighborhood Design Center (NDC) has supported disinvested neighborhoods in Baltimore with pro bono design and planning tools. Our core program, Community Design Works (CDW), pairs volunteer design professionals with community partners and facilitates a co-design process to produce a design deliverable.
+As we worked with partners in the context of CDW projects we observed recurring needs in low and extremely-low income communities, including: skill building around fundraising and marketing, network building, and community organizing.
+We also observed that the CDW co-design process had benefits for community partners beyond the physical design deliverable. In post-project surveys, community partners stressed the benefits of simply coming together around an idea, even if the design was never physically implemented.
+From these two core insights, we hypothesized: Neighborhoods that are not yet implementing individual projects could benefit from a more holistic suite of capacity-building services rooted in NDC’s co-design process.
+What we're finding: Place Matters has allowed NDC to sustain holistic work to support neighborhood growth through the co-design process. Now, using the assessment tool, we've been able to listen directly to our partners feedback on that process—where they are, what they need, and what's next.
+What our partners are saying: Rich cultural history and sense of place drives their long-term commitment to this work - Bringing people together in safe, happy places is a shared, overarching goal. - They have a strong, clear plan for the work required to achieve their vision.
+What they need: Targeted support in the following skill sets: community engagement, development, navigating bureaucracy, administrative work. - Salaries or stipends to support committed, sustainable leadership. - Formal organizational structure to direct work and investment for the long-term.
+Trends we've observed: Success in fundraising - Stronger network ties - Increased confidence across needed skill sets.
+
+* Next actions
+- [2019-08-06 Tue 11:08] pp bigger pellets
+- [2019-08-06 Tue 11:08] canned clam chowder
+
+
+* CSI OER
+** TODO Revise CSI OER brochure 
+:LOGBOOK:
+CLOCK: [2019-08-06 Tue 09:17]--[2019-08-06 Tue 16:29] =>  7:12
+CLOCK: [2019-07-10 Wed 09:56]--[2019-07-10 Wed 09:59] =>  0:03
+:END:
+
+- Note taken on [2019-07-30 Tue 11:58] \\
+  emailed Janice for hi res photo of library. 
+  emailed print services to check on dimensions
+*** DONE Find old brochure --
+:LOGBOOK:
+CLOCK: [2019-07-10 Wed 09:59]--[2019-07-10 Wed 10:55] =>  0:56
+:END:
+the AI file was in my dropbox...
+*** OER thoughts
+- How should the brochure change?
+**** TODO sketch out new brochure ideas
+:LOGBOOK:
+CLOCK: [2019-07-16 Tue 09:12]--[2019-07-16 Tue 09:43] =>  0:31
+:END:
+
+** TODO Reach out to NYPIRG -- waiting for email from xtina
+*** NYPIRG rep Layana Abu Touq and her email is labutouq@nypirg.org
+- emailed Donald Hudec 9/9/19 at 5:17 pm 
+
+*** sample email from xtina
+Hi Sharifa and Rosanne,
+
+I hope your summers have been going well! 
+
+I am reaching out because the library is organizing a campus OER event for the fall, and we would like to invite you to speak on a faculty panel for the event!
+
+The event will take place on November 19th in the Black Box Theater in 1P, and will be a half-day talk entitled "Conversations About Open: OER, OA, and Pedagogy. " The overall goal of this event is to help spread more awareness about OER on our campus, to get faculty more invested in open pedagogy, and to highlight the importance of Open.
+
+Our hope is for you to speak on the faculty panel about your experiences with integrating OER into your classes, triumphs/challenges, how it has had an impact on your pedagogy, any student changes you have noted, etc. The panel will be rather short, around 30 minutes including Q&A, and will hopefully include 3-4 faculty members. The panel itself will be relatively informal, and is intended to be a way for faculty on campus to share their thoughts and experiences with OER in their classrooms.
+
+Is this something you are able/willing to participate in? Please let me know when you can. I am looking forward to hearing back from you!
+** TODO Update libguide
+*** TODO create page w/definition of terms: e.g., OER, free vs. open
+- Open educational resources
+- Open licensing
+- Free vs. open
+- EdTech
+- 
+*** TODO create list of OER courses, can link to on brochure
+*** DONE fix the javascript/navigator header issues
+<style>
+#navigationbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #87cff0;
+weight:bold;
+width:100%;
+}
+
+#navigation-float {
+    float: left;
+weight:bold;
+
+}
+
+#navigation-item {
+    display: block;
+    color: rgb(63,97,112);
+    text-align: center;
+
+    weight:bold;
+    text-decoration: none;
+
+}
+
+li a:hover {
+    background-color:  #d1e8f2;
+}
+</style>
+
+
+*** Libguide accordian code
+<div id="s-lg-index-cols" class="row">
+<div id="col-1" class="col-md-12 center">
+<div class="panel-group margin-right-sm" id="s-lg-general-accordion-1" style="">
+    <div class="panel panel-default" id="s-lib-panel-container-collapse99823" style="">
+      <div class="panel-heading" onclick="" role="heading" aria-level="3">
+      <a id="collapse99823_link" data-toggle="collapse" data-parent="#s-lg-general-accordion-1" href="#collapse99823" role="button" aria-controls="collapse99823" class="collapsed" aria-expanded="false" aria-selected="false" tabindex="0">
+      <div class="badge pull-right">3</div>
+      <div class="bold">Menu 1</div></a></div>
+    <div id="collapse99823" class="panel-collapse collapse" aria-labelledby="collapse99823_link" aria-expanded="false" aria-hidden="true" tabindex="-1" aria-selected="false" style="height: 0px;">
+      <div class="panel-body" style="">
+        <ul class="s-lg-guide-list">
+          <li>
+          <div class="s-lg-gtitle s-lib-color-lt-grey">
+          <!-- Place URL Here -->
+          <a href="http://research.lesley.edu" target="_blank"  data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-title="Description" data-content="Resource 1 Description goes here"  onclick="return springSpace.springTrack.trackLink({link: this,_st_type_id: '2',_st_content_id: '26739097'});">Resource 1</a>
+          </div>
+          </li>
+          <li>
+          <div class="s-lg-gtitle s-lib-color-lt-grey">
+          <!-- Place URL Here -->
+          <a href="http://research.lesley.edu" target="_blank"  data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-title="Description" data-content="Resource 2 Description"  onclick="return springSpace.springTrack.trackLink({link: this,_st_type_id: '2',_st_content_id: '26742110'});">Resource 2</a>
+          </div>
+          </li>
+          <li>
+          <div class="s-lg-gtitle s-lib-color-lt-grey">
+          <!-- Place URL Here -->
+          <a href="http://research.lesley.edu" target="_blank"  data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-title="Description" data-content="Resource 3 Description goes here"  onclick="return springSpace.springTrack.trackLink({link: this,_st_type_id: '2',_st_content_id: '26742154'});">Resource 3</a>
+          </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  <div class="panel panel-default" id="s-lib-panel-container-collapse99821" style="">
+      <div class="panel-heading" onclick="" role="heading" aria-level="3">
+      <a id="collapse99821_link" data-toggle="collapse" data-parent="#s-lg-general-accordion-1" href="#collapse99821" role="button" aria-controls="collapse99821" class="collapsed" aria-expanded="false" aria-selected="false" tabindex="0">
+      <div class="badge pull-right">3</div>
+      <div class="bold">Menu 2</div>
+      </a>
+      </div>
+    <div id="collapse99821" class="panel-collapse collapse" aria-labelledby="collapse99821_link" aria-expanded="false" aria-hidden="true" tabindex="-1" aria-selected="false" style="height: 0px;">
+      <div class="panel-body" style="">
+          <ul class="s-lg-guide-list">
+              <li>
+              <div class="s-lg-gtitle s-lib-color-lt-grey">
+              <!-- Place URL Here -->
+              <a href="http://research.lesley.edu" target="_blank"  data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-title="Description" data-content="Resource 4 Description goes here"  onclick="return springSpace.springTrack.trackLink({link: this,_st_type_id: '2',_st_content_id: '26739097'});">Resource 4</a>
+              </div>
+              </li>
+
+              <li>
+              <div class="s-lg-gtitle s-lib-color-lt-grey">
+              <!-- Place URL Here -->
+              <a href="http://research.lesley.edu" target="_blank"  data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-title="Description" data-content="Resource 5 Description"  onclick="return springSpace.springTrack.trackLink({link: this,_st_type_id: '2',_st_content_id: '26742110'});">Resource 5</a>
+              </div>
+              </li>
+
+              <li>
+              <div class="s-lg-gtitle s-lib-color-lt-grey">
+              <!-- Place URL Here -->
+              <a href="http://research.lesley.edu" target="_blank"  data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-title="Description" data-content="Resource 6 Description goes here"  onclick="return springSpace.springTrack.trackLink({link: this,_st_type_id: '2',_st_content_id: '26742154'});">Resource 6</a>
+              </div>
+              </li>
+            </ul>
+        </div>
+      </div>
+      </div>
+
+  <div class="panel panel-default" id="s-lib-panel-container-collapse99822" style="">
+     <div class="panel-heading" onclick="" role="heading" aria-level="3">
+       <a id="collapse99822_link" data-toggle="collapse" data-parent="#s-lg-general-accordion-1" href="#collapse99822" role="button" aria-controls="collapse99822" class="collapsed" aria-expanded="false" aria-selected="false" tabindex="0">
+       <div class="badge pull-right">3</div>
+       <div class="bold">Menu 3</div></a>
+     </div>
+  <div id="collapse99822" class="panel-collapse collapse" aria-labelledby="collapse99822_link" aria-expanded="false" aria-hidden="true" tabindex="-1" aria-selected="false" style="height: 0px;">
+    <div class="panel-body" style="">
+        <ul class="s-lg-guide-list">
+          <li>
+          <div class="s-lg-gtitle s-lib-color-lt-grey">
+          <!-- Place URL Here -->
+          <a href="http://research.lesley.edu" target="_blank"  data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-title="Description" data-content="Resource 7 Description goes here"  onclick="return springSpace.springTrack.trackLink({link: this,_st_type_id: '2',_st_content_id: '26739097'});">Resource 7</a>
+          </div>
+          </li>
+          <li>
+          <div class="s-lg-gtitle s-lib-color-lt-grey">
+          <!-- Place URL Here -->
+          <a href="http://research.lesley.edu" target="_blank"  data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-title="Description" data-content="Resource 8 Description"  onclick="return springSpace.springTrack.trackLink({link: this,_st_type_id: '2',_st_content_id: '26742110'});">Resource 8</a>
+          </div>
+          </li>
+          <li>
+          <div class="s-lg-gtitle s-lib-color-lt-grey">
+          <!-- Place URL Here -->
+          <a href="http://research.lesley.edu" target="_blank"  data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-title="Description" data-content="Resource 9 Description goes here"  onclick="return springSpace.springTrack.trackLink({link: this,_st_type_id: '2',_st_content_id: '26742154'});">Resource 9</a>
+          </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+
+  <div class="panel panel-default" id="s-lib-panel-container-collapse99840" style="">
+      <div class="panel-heading" onclick="" role="heading" aria-level="3">
+      <a id="collapse99840_link" data-toggle="collapse" data-parent="#s-lg-general-accordion-1" href="#collapse99840" role="button" aria-controls="collapse99840" class="collapsed" aria-expanded="false" aria-selected="false" tabindex="0">
+        <div class="badge pull-right">3</div>
+      <div class="bold">Menu 4</div></a></div>
+  <div id="collapse99840" class="panel-collapse collapse" aria-labelledby="collapse99840_link" aria-expanded="false" aria-hidden="true" tabindex="-1" aria-selected="false" style="height: 0px;">
+    <div class="panel-body" style="">
+        <ul class="s-lg-guide-list">
+          <li>
+          <div class="s-lg-gtitle s-lib-color-lt-grey">
+          <!-- Place URL Here -->
+          <a href="http://research.lesley.edu" target="_blank"  data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-title="Description" data-content="Resource 10 Description goes here"  onclick="return springSpace.springTrack.trackLink({link: this,_st_type_id: '2',_st_content_id: '26739097'});">Resource 10</a>
+          </div>
+          </li>
+          <li>
+          <div class="s-lg-gtitle s-lib-color-lt-grey">
+          <!-- Place URL Here -->
+          <a href="http://research.lesley.edu" target="_blank"  data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-title="Description" data-content="Resource 11 Description"  onclick="return springSpace.springTrack.trackLink({link: this,_st_type_id: '2',_st_content_id: '26742110'});">Resource 11</a>
+          </div>
+          </li>
+          <li>
+          <div class="s-lg-gtitle s-lib-color-lt-grey">
+          <!-- Place URL Here -->
+          <a href="http://research.lesley.edu" target="_blank"  data-toggle="popover" data-trigger="hover" data-placement="right" data-html="true" data-title="Description" data-content="Resource 12 Description goes here"  onclick="return springSpace.springTrack.trackLink({link: this,_st_type_id: '2',_st_content_id: '26742154'});">Resource 12</a>
+          </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+</div>
+</div>
+</div>
+** CSI OER event
+- 8:30am-9:00am Breakfast & Registration
+- 9:15am-9:30am Welcome (I don't recall having a choice for the welcome - do we want it to be the Provost?)
+- 9:30am-10:15am OER/OA 101  (Christina: ask Andy McKinney?)
+- 10:20am-10:45am SPARC (Amy will reach out to SPARC?)
+- 10:45am-11:00am Break
+- 11:00am-11:40am Faculty Panel (Christina will ask Sharifa Hampton, Charles Liu, and the Core dept. Anne will ask Jacob Aplaca)
+- 11:40am-12:10pm Sustaining Open at CUNY (homegrown CUNY platforms) (Christina will ask Krystyna and Laurie from CUNY)
+- 12:10pm-12:15pm Break
+- 12:15pm-12:45pm Student panel (NYPIRG/SGA) ​(Betsy will reach out)
+- 12:45pm-1:00pm Closing 
+
+
+** Admin
+:LOGBOOK:
+CLOCK: [2019-07-30 Tue 09:21]--[2019-07-30 Tue 09:22] =>  0:01
+:END:
+- CSI libguide pw: csi email, rZ
+- FLAS pw: mu3tarjim.
+- [2019-07-30 Tue 13:47] I mean...i can't seem to get anything done. Why. 
+* hours calc
+- Aug. 27; Aug. 28 Aug. 30; = 15 hrs
+- Sept. 10, 17; 13, 20, 27;  Sept. 9, 16, 23;  Sept. 26 = 45 hrs
+- Oct. 15, 22, 29;  4, 11, 18, 25;   Oct. 7, 21, 28;  Oct. 3; = 55 hrs
+- Nov. 1, 4, 5, 7, = 20 hrs
+- Nov 12, 26; 15, 22,  11, 18, 25; Nov.21   Nov. 19 = 45
+- Dec. 3, 10, 17, 13, 20, 2, 9, 16  Dec. 5 = 45
+
+ 
+ 
+; 
+
+
+
+Tuesdays 5pm – 10pm to include: Aug. 27; Sept. 10, 17; Oct. 15, 22, 29; Nov. 5, 12, 26; Dec. 3, 10, 17
+(6pm – 10pm desk)                                               
+35 hrs so far
+
+Wednesday 5pm – 10pm to include:        Aug. 28
+(6pm – 10pm desk)       
+
+40
+
+85 hrs+35+5+10
+
+
+Fridays 5pm – 10pm to include:          Aug. 30; Sept. 13, 20, 27; Oct. 4, 11, 18, 25; Nov. 1, 15, 22; Dec. 13, 20
+(OER)
+
+Mondays 5pm – 10pm to include:  Sept. 9, 16, 23; Oct. 7, 21, 28; Nov. 4, 11, 18, 25; Dec. 2, 9, 16
+(6pm – 10pm desk)                               
+
+Thursdays 5pm – 10pm to include:        Sept. 26; Nov.21
+(6pm – 10pm desk)       
+
+Thursdays 1pm – 6pm to include:         Oct. 3; Nov. 7; Dec. 5
+(2pm – 6pm desk)
+
+Tuesday 9am – 2pm to include:           Nov. 19
+(OER Conference)
+
+#  ov-highlight-data: KCgyNiAyNjUgKGZhY2UgKDpiYWNrZ3JvdW5kICJMaWdodEJsdWUiKSBvdi1oaWdobGlnaHRlciB0IG92LXR5cGUgImJsdWUiKSkgKDI3NCA2NTMgKGZhY2UgKDpiYWNrZ3JvdW5kICJMaWdodEJsdWUiKSBvdi1oaWdobGlnaHRlciB0IG92LXR5cGUgImJsdWUiKSkgKDY2MCAxMjU4IChmYWNlICg6YmFja2dyb3VuZCAiTGlnaHRCbHVlIikgb3YtaGlnaGxpZ2h0ZXIgdCBvdi10eXBlICJibHVlIikpKQ==
+
+# Local Variables:
+# eval: (ov-highlight-load)
+# End:

@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: bathroom cleaning
+# key: bathroom
+# --
+* clean bathroom
+** TODO clear all items from bathroom
+:PROPERTIES:
+:TRIGGER:  next-sibling todo!(NEXT)
+:END:
+:LOGBOOK:
+CLOCK: [2020-11-14 Sat 15:25]
+:END:
+** TODO sweep & vacuum the floor
+:PROPERTIES:
+:TRIGGER:  next-sibling todo!(NEXT)
+:BLOCKER:  previous-sibling
+:END:
+** TODO clean all surfaces with soapy water and rinse thoroughly, and let air dry
+:PROPERTIES:
+:TRIGGER:  next-sibling todo!(NEXT) scheduled!("++10m")
+:BLOCKER:  previous-sibling
+:END:
+** TODO spray all surfaces with bleach mixture and let dry
+:PROPERTIES:
+:TRIGGER:  next-sibling scheduled!("++10m")
+:BLOCKER:  previous-sibling
+:END:
+** TODO add 1 c bleach to toilet bowl, scrub & soak 10 min
+:PROPERTIES:
+:TRIGGER:  next-sibling scheduled!("++10m")
+:BLOCKER:  previous-sibling
+:END:
+** TODO disinfect floors by mopping with same bleach mixture
+:PROPERTIES:
+:TRIGGER:  next-sibling scheduled!("++10m")
+:BLOCKER:  previous-sibling
+:END:

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: html list item
+# key: li    
+# --
+<li class="link"><a href="$1" target="_blank">$2</a><br>$0</li>

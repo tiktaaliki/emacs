@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: properties
+# key: properties
+# --
+
+
+:PROPERTIES:
+:TYPE: 
+:STATUS:   
+:FORMAT:
+:LOCATION:
+:NOTES:
+:AUTHOR:
+:ID:
+:CUSTOM_ID:
+:END:
+

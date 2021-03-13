@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: todo-trigger
+# key: todo
+# --
+:PROPERTIES:
+:TRIGGER:  next-sibling todo!(NEXT)
+:END:

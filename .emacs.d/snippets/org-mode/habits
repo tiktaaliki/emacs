@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: habit properties
+# key: habit
+# --
+SCHEDULED: <2020-04-28 Tue .+1d>
+:PROPERTIES:
+:STYLE:    habit
+:END:
