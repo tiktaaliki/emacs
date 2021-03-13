@@ -1,0 +1,128 @@
+sudo pacman -U /root/Downloads/discord-0.0.10.tar.gz
+sudo pacman -U ~/Downloads/discord-0.0.10.tar.gz
+cd Discord
+makepkg -si
+pacman -S discord
+sudo pacman -S discord
+git initialize
+git init
+git clone git@github.com:tiktaaliki/2020-CLIR-senior-program-officer.git
+pandoc Notes.odt -f odt -t org -s -o bipocnotes.org
+cd ~/Downloads
+ls
+ls
+pandoc protestsecurity.odt -f odt -t org -s -o protestsecurity.org
+ls
+protestsecurity.org
+setxkbmap us
+setxkbmap dvorak
+ls
+sudo 00-keyboard.conf emacs
+sudo emacs 00-keyboard.conf
+reboot
+cd /etc/X11/xorg.conf.d/
+ls
+reboot
+cd ~/Dropbox/2020
+ls
+cd 2020JobSearch
+ls
+cd 2020-NYU-online-instruction-librarian
+pdftk deistatement.pdf cat 1 2-end output removedPages.pdf
+ls
+pdftk deistatement.pdf cat 1-r2 output removedPages2.pdf
+pdftk *.pdf cat output combined.pdf
+pdftk *.pdf cat output combined.pdf
+pdftk deistatement.pdf cat 1-r2 output removedPages2.pdf
+pdftk *.pdf cat output combined.pdf
+cd 2020-NYU-online-instruction-librarian
+cd ~/Dropbox/2020
+cd 2020JobSearch
+ls
+cd 2020-SutterHill-LibraryScientist
+ls
+pdftk *.pdf cat output combined.pdf
+mu init
+mu init -d
+ls
+sudo emacs 01-keyboard.conf 
+reboot
+printenv
+gtypist
+cd ..
+cd etc
+ls
+cd ..
+cd ..
+cd etc
+ls
+emacsclient vconsole.conf
+sudo emacsclient vconsole.conf
+sudo emacsclient vconsole.conf
+man mu
+man maildir
+cd ~
+grep -r org.freedesktop.Notifications /usr/share/dbus-1/services/
+sudo mv /usr/share/dbus-1/services/org.freedesktop.Notifications.service.old /usr/share/dbus-1/services/org.freedesktop.Notifications.service.old.disable
+grep -r org.freedesktop.Notifications /usr/share/dbus-1/services/
+sudo mv /usr/share/dbus-1/services//usr/share/dbus-1/services/org.kde.plasma.Notifications.service /usr/share/dbus-1/services/org.kde.plasma.Notifications.service.disable
+sudo mv /usr/share/dbus-1/services/usr/share/dbus-1/services/org.kde.plasma.Notifications.service /usr/share/dbus-1/services/org.kde.plasma.Notifications.service.disable
+sudo mv /usr/share/dbus-1/services/org.kde.plasma.Notifications.service /usr/share/dbus-1/services/org.kde.plasma.Notifications.service.disable
+grep -r org.freedesktop.Notifications /usr/share/dbus-1/services/
+sudo mv /usr/share/dbus-1/services/com.ph-uhl.deadd.notification.service /usr/share/dbus-1/services/com.ph-uhl.deadd.notification.service.disable
+ls /usr/share/dbus-1/services/ | grep Notif
+exit
+mu index --maildir=~/.mail/tiktaaliki-riseup
+mu index
+mu init
+exit
+pandoc curriculum idea.rtf -f rtf -t org -o curriculum.org
+pandoc curriculum.odt -f odt -t org -o curriculum.org
+curriculum.org
+curriculum.org
+ibus-daemon 
+ibus-daemon 
+gpg2 -c ./.mbsyncpass-tiktaaliki
+gpg2 -c ./.mbsyncpass-gmail
+gpg2 -c ./.mbsyncpass-betsyoon
+mbsync -aV
+mbsync -aV
+mbsync -aV
+mu index
+mbsync -aV
+mbsync riseup
+mbsync tiktaaliki
+mbsync tiktaaliki
+mbsync tiktaaliki
+openlls s_client -connect mail.riseup.net:993 -showcerts | grep Protocol
+openssl s_client -connect mail.riseup.net:993 -showcerts | grep Protocol
+gpg2 -c ./.authinfo
+mbsync -aV
+mbsync -aV
+cd home/betsy/Documents
+cd Documents
+cd NDD website (webfaction)
+ls
+NDD website (webfaction)
+pdftk Forkner_4th_edition.pdf cat 171-193 out exercises.pdf
+pdftk Forkner_4th_edition.pdf cat 171-193 output exercises.pdf
+pdftk Forkner_4th_Edition.pdf cat 171-193 output exercises.pdf
+pdftk Engels_*.pdf cat output combined.pdf
+ssh ndd@web622.webfaction.com 
+cd Downloads
+pandoc -f odt -t org bm.odt
+exit
+journalctl
+setxkbmap qwerty
+setxkbmap us
+setxkbmap ,dvorak
+setxkbmap dvorak
+sudo xkill
+sudo xkill
+sudo xkill
+pandoc -o Return-Documentation for Service Providers - AY 2020-2021.odt Return-Documentation for Service Providers - AY 2020-2021.org
+pandoc -f odt -t org -o Return-Documentation for Service Providers - AY 2020-2021.odt Return-Documentation for Service Providers - AY 2020-2021.org
+pandoc -f odt -t org -o NYU-documentation_2020-2021.odt NYU-documentation_2020-2021.org
+pandoc -f odt -t org -o -s NYU-documentation_2020-2021.odt NYU-documentation_2020-2021.org
+pandoc -f odt -t org -s -o NYU-documentation_2020-2021.odt NYU-documentation_2020-2021.org
+pandoc NYU-documentation_2020-2021.odt -f odt -t org -s -o NYU-documentation_2020-2021.org

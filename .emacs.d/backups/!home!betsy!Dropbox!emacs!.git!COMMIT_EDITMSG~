@@ -1,0 +1,158 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+# Your branch is up to date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   .emacs
+#	new file:   .emacs.d/.helm-chronos-recent-timers
+#	new file:   .emacs.d/lisp/backup-each-save.el
+#	new file:   .emacs.d/lisp/bookmark+-1.el
+#	new file:   .emacs.d/lisp/bookmark+-bmu.el
+#	new file:   .emacs.d/lisp/bookmark+-chg.el
+#	new file:   .emacs.d/lisp/bookmark+-doc.el
+#	new file:   .emacs.d/lisp/bookmark+-key.el
+#	new file:   .emacs.d/lisp/bookmark+-lit.el
+#	new file:   .emacs.d/lisp/bookmark+-mac.el
+#	new file:   .emacs.d/lisp/bookmark+.el
+#	new file:   .emacs.d/lisp/capture.org
+#	new file:   .emacs.d/lisp/clipboard2org.el
+#	new file:   .emacs.d/lisp/dired+.el
+#	new file:   .emacs.d/lisp/ereader.el
+#	new file:   .emacs.d/lisp/hangul.el
+#	new file:   .emacs.d/lisp/hangul.el~
+#	new file:   .emacs.d/lisp/org-book.el
+#	new file:   .emacs.d/lisp/org-checklist.el
+#	new file:   .emacs.d/lisp/org-contacts.el
+#	new file:   .emacs.d/lisp/org-depend.el
+#	new file:   .emacs.d/lisp/org-linkz
+#	new file:   .emacs.d/lisp/org-notify.el
+#	new file:   .emacs.d/lisp/org-pandoc-import.el
+#	new file:   .emacs.d/lisp/org-pdfview.el
+#	new file:   .emacs.d/lisp/org-protocol-capture-html.el
+#	new file:   .emacs.d/lisp/org-registry.el
+#	new file:   .emacs.d/lisp/org-super-links-org-ql.el
+#	new file:   .emacs.d/lisp/org-super-links-org-rifle.el
+#	new file:   .emacs.d/lisp/org-super-links.el
+#	new file:   .emacs.d/lisp/org-toc.el
+#	new file:   .emacs.d/lisp/ov-highlight.el
+#	new file:   .emacs.d/lisp/ov-highlight.el~
+#	new file:   .emacs.d/lisp/periodic-commit-minor-mode.el
+#	new file:   .emacs.d/lisp/pymupdf-mode.el
+#	new file:   .emacs.d/lisp/pymupdf-mode.el~
+#	new file:   .emacs.d/lisp/run-assoc.el
+#	new file:   .emacs.d/lisp/unbound.el
+#	new file:   .emacs.d/lisp/zoom-frm.el
+#	new file:   .emacs.d/snippets/latex-mode/comment.snippet
+#	new file:   .emacs.d/snippets/markdown-mode/edra
+#	new file:   .emacs.d/snippets/markdown-mode/edravid
+#	new file:   .emacs.d/snippets/markdown-mode/edra~
+#	new file:   .emacs.d/snippets/mhtml-mode/li
+#	new file:   .emacs.d/snippets/mhtml-mode/li class link
+#	new file:   .emacs.d/snippets/mhtml-mode/li class link~
+#	new file:   .emacs.d/snippets/mhtml-mode/target-blank
+#	new file:   .emacs.d/snippets/org-mode/a-evening
+#	new file:   .emacs.d/snippets/org-mode/a-morning
+#	new file:   .emacs.d/snippets/org-mode/a-shutdown
+#	new file:   .emacs.d/snippets/org-mode/bathroom
+#	new file:   .emacs.d/snippets/org-mode/block-trigger
+#	new file:   .emacs.d/snippets/org-mode/block-trigger~
+#	new file:   .emacs.d/snippets/org-mode/contacts
+#	new file:   .emacs.d/snippets/org-mode/contacts~
+#	new file:   .emacs.d/snippets/org-mode/cookie
+#	new file:   .emacs.d/snippets/org-mode/daily
+#	new file:   .emacs.d/snippets/org-mode/daily~
+#	new file:   .emacs.d/snippets/org-mode/drawer
+#	new file:   .emacs.d/snippets/org-mode/evening~
+#	new file:   .emacs.d/snippets/org-mode/habits
+#	new file:   .emacs.d/snippets/org-mode/job properties
+#	new file:   .emacs.d/snippets/org-mode/li
+#	new file:   .emacs.d/snippets/org-mode/logbook
+#	new file:   .emacs.d/snippets/org-mode/next-trigger
+#	new file:   .emacs.d/snippets/org-mode/pack
+#	new file:   .emacs.d/snippets/org-mode/prop-visibility-content
+#	new file:   .emacs.d/snippets/org-mode/properties
+#	new file:   .emacs.d/snippets/org-mode/properties~
+#	new file:   .emacs.d/snippets/org-mode/reading-properties
+#	new file:   .emacs.d/snippets/org-mode/shutdown~
+#	new file:   .emacs.d/snippets/org-mode/src
+#	new file:   .emacs.d/snippets/org-mode/todo-trigger
+#	new file:   .emacs.d/snippets/org-mode/work-history
+#	new file:   .emacs.d/snippets/snippet-mode/edra
+#	new file:   .emacs.d/snippets/snippet-mode/logbook
+#	modified:   config-thinkpad.org
+#	modified:   custom-thinkpad.el
+#
+# Untracked files:
+#	#custom-thinkpad.el#
+#	.emacs.d/#bookmarks#
+#	.emacs.d/.#org-recent-headings
+#	.emacs.d/.hl-save
+#	.emacs.d/.mc-lists.el
+#	.emacs.d/.org-id-locations~
+#	.emacs.d/.projectile
+#	.emacs.d/.sync-conflict-20200705-185833-CKMRPHL.org-id-locations
+#	.emacs.d/.trello/
+#	.emacs.d/.uptimes.el
+#	.emacs.d/Temple Bell-SoundBible.com-756181215.wav
+#	.emacs.d/auto-save-list/
+#	.emacs.d/backups/
+#	.emacs.d/bookmarks~
+#	.emacs.d/elpa/
+#	.emacs.d/eshell/
+#	.emacs.d/games/
+#	.emacs.d/history
+#	.emacs.d/ido.last
+#	.emacs.d/ido.last~
+#	.emacs.d/image-dired/
+#	.emacs.d/mu4e/
+#	.emacs.d/network-security.data
+#	.emacs.d/nov-places
+#	.emacs.d/old-fashioned-school-bell-daniel_simon.wav
+#	.emacs.d/org-clock-save (betsy's conflicted copy 2020-03-30).el
+#	.emacs.d/org-clock-save.el
+#	.emacs.d/org-clock-save.el~
+#	.emacs.d/org-gcal/
+#	.emacs.d/org-recent-headings
+#	.emacs.d/org-recent-headings~
+#	.emacs.d/org-roam.db
+#	.emacs.d/overwork.wav
+#	.emacs.d/perspective
+#	.emacs.d/perspective-reading
+#	.emacs.d/perspective-schedule
+#	.emacs.d/pomidor-session.json
+#	.emacs.d/projectile-bookmarks.eld
+#	.emacs.d/projectile-bookmarks.eld~
+#	.emacs.d/projectile.cache
+#	.emacs.d/quelpa/
+#	.emacs.d/recentf
+#	.emacs.d/request/
+#	.emacs.d/sms-alert-1-daniel_simon.wav
+#	.emacs.d/speed-type/
+#	.emacs.d/tack.wav
+#	.emacs.d/tick.wav
+#	.emacs.d/tramp
+#	.emacs.d/transient/
+#	.emacs.d/tutorial/
+#	.emacs.d/url/
+#	.emacs.d/var/
+#	config-pbp-overflow.org
+#	config-pbp.el
+#	config-pbp.org
+#	config-thinkpad-extra.org~
+#	config-thinkpad.el
+#	config-thinkpad.org~
+#	config.el
+#	custom-2.el
+#	custom-pbp.el
+#	custom-thinkpad.el~
+#	hangul-input.el
+#	hiding while testing/
+#	pi.el
+#	pi.org
+#	projectile-bookmarks.eld
+#	removedconfig.org
+#	test2.org
+#

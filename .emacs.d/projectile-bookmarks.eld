@@ -1,0 +1,1 @@
+("~/Dropbox/" "~/Dropbox/emacs/.emacs.d/" "~/Dropbox/Library/" "~/Documents/NDD documentation/Organizing Committee/" "~/Downloads/" "~/Dropbox/emacs/" "~/Dropbox/Zettelkasten/" "~/Dropbox/Flashcards Deluxe/" "~/Dropbox/Apps/" "~/Dropbox/.stfolder/" "~/Dropbox/.git/" "~/Dropbox/.dropbox.cache/")

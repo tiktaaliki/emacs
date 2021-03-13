@@ -1,0 +1,1 @@
+((dvorak-layouts :fetcher github :repo "alezost/dvorak-layouts.el") (org-super-links :repo "toshism/org-super-links" :fetcher github :commit "0.2"))

@@ -1,0 +1,1 @@
+("~/Downloads/" "~/Calibre Library/" "~/Dropbox/")

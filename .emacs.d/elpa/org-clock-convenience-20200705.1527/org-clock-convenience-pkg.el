@@ -1,0 +1,2 @@
+;;; -*- no-byte-compile: t -*-
+(define-package "org-clock-convenience" "20200705.1527" "convenience functions for org time tracking" '((cl-lib "0.5") (org "8") (emacs "24.3")) :commit "efc9773a8dedf834cf4a78fb6f5f8fffe55ef8eb" :keywords '("org") :authors '(("Derek Feichtinger <dfeich.gmail.com>")) :maintainer '("Derek Feichtinger <dfeich.gmail.com>") :url "https://github.com/dfeich/org-clock-convenience")

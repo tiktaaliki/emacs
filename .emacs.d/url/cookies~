@@ -1,0 +1,83 @@
+;; Emacs-W3 HTTP cookies file
+;; Automatically generated file!!! DO NOT EDIT!!!
+
+(setq url-cookie-storage
+ '((".everyaction.com"
+  [url-cookie "visid_incap_1392949" "mEsF/U1eRJeRt6+GQE+9NOMbs14AAAAAQUIPAAAAAACoteqbdUYCG+AQVoAvDmMD" "Thu, 06 May 2021 09:53:12 GMT" "/" ".everyaction.com" nil])
+ ("www.goodreads.com"
+  [url-cookie "ccsid" "270-0000268-6264518" "Tue, 24 Apr 2040 11:05:18 -0000" "/" "www.goodreads.com" nil])
+ (".thebalancecareers.com"
+  [url-cookie "TMog" "n79a3c96760d64b27852a3df34af9517c00" "Thu, 29-Apr-2088 03:38:00 GMT" "/" ".thebalancecareers.com" nil])
+ (".lifewire.com"
+  [url-cookie "TMog" "n9d6538ba1ef4483fb06117889767314c14" "Sat, 24-Apr-2088 17:16:06 GMT" "/" ".lifewire.com" nil])
+ ("unicode-table.com"
+  [url-cookie "lang" "en" "Mon Mar 15 20:38:52 2021 GMT" "/" "unicode-table.com" nil])
+ (".lionsroar.com"
+  [url-cookie "aid" "69d01b6b-799e-430c-b3fb-9b1f1b778a60" "Thu, 25 Mar 2021 14:29:56 -0000" "/" ".lionsroar.com" nil]
+  [url-cookie "_afid" "69d01b6b-799e-430c-b3fb-9b1f1b778a60" "Thu, 25 Mar 2021 14:29:56 -0000" "/" ".lionsroar.com" nil])
+ ("learn.lionsroar.com"
+  [url-cookie "ahoy_visitor" "69d01b6b-799e-430c-b3fb-9b1f1b778a60" "Fri, 25 Mar 2022 14:29:56 -0000" "/" "learn.lionsroar.com" nil])
+ (".allrecipes.com"
+  [url-cookie "ARSiteUser" "1-30d4b963-b6d9-4029-bab5-22c249aba1d2" "Tue, 20-Apr-2021 15:46:01 GMT" "/" ".allrecipes.com" nil]
+  [url-cookie "LVInferredTastePrefs" "f,it,lf,wo" "Fri, 31-Dec-9999 00:00:00 GMT" "/" ".allrecipes.com" nil]
+  [url-cookie "LastViewedRecipes" "46595,23600,7245" "Fri, 31-Dec-9999 00:00:00 GMT" "/" ".allrecipes.com" nil])
+ ("t.co"
+  [url-cookie "muc" "a3a06e84-5f74-4d5c-a4e5-99f8234e8b53" "Fri Feb 19 15:06:41 2021 GMT" "/" "t.co" nil])
+ (".twitter.com"
+  [url-cookie "personalization_id" "v1_+RN9Lz1Wjwj7mOByb1UK+g==" "Fri Feb 19 15:06:43 2021 GMT" "/" ".twitter.com" nil]
+  [url-cookie "guest_id" "v1%3A155067520173207743" "Fri Feb 19 15:06:43 2021 GMT" "/" ".twitter.com" nil])
+ (".stackexchange.com"
+  [url-cookie "prov" "4a549a6c-1eeb-af11-5b9a-4709f9719fd8" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackexchange.com" nil])
+ ("www.thecut.com"
+  [url-cookie "first-nymcid" "c505e53eea42b9ec61088b4384cb73ec.1562332042960" "Wed, 03 Jul 2024 13:07:23 GMT" "/" "www.thecut.com" nil])
+ (".askubuntu.com"
+  [url-cookie "prov" "bd315c2c-6c23-f5f6-8ad5-6de4a907ceeb" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".askubuntu.com" nil])
+ ("genius.com"
+  [url-cookie "_genius_ab_test_cohort" "13" "Fri Apr 30 22:25:34 2088 GMT" "/" "genius.com" nil])
+ ("www.memorangapp.com"
+  [url-cookie "csrftoken" "Z0h1nRH59dURL5xqbAVJtfhqZ6FyEZTuk3aIr2tZuyA5AdfkvVxErr8K4tPUMcdg" "Tue May 04 21:37:23 2021 GMT" "/" "www.memorangapp.com" nil])
+ (".google.com"
+  [url-cookie "CGIC" "Ik10ZXh0L2h0bWwsIHRleHQvcGxhaW4sIHRleHQvc2dtbCwgdGV4dC9jc3MsIGFwcGxpY2F0aW9uL3hodG1sK3htbCwgKi8qO3E9MC4wMQ" "Fri, 11-Jun-2021 03:23:42 GMT" "/complete/search" ".google.com" nil]
+  [url-cookie "CGIC" "Ik10ZXh0L2h0bWwsIHRleHQvcGxhaW4sIHRleHQvc2dtbCwgdGV4dC9jc3MsIGFwcGxpY2F0aW9uL3hodG1sK3htbCwgKi8qO3E9MC4wMQ" "Fri, 11-Jun-2021 03:23:42 GMT" "/search" ".google.com" nil]
+  [url-cookie "NID" "204=EXM4vR2ThWmJFuAoqISoTO-82pSMq2Zb38iV0UT1aXz_4mgnxRZV0NbVKl00JWQePH6E8b-7j7lgutAaiI6ZjlQ3BF_PqbkOX5aviSzNohWCiRsjyx-FksNY_8OK7NZMADhIph4KDQGTMBKr5C35plrYlqT59RCVrt5sRoqu_Ug" "Mon, 14-Jun-2021 03:23:42 GMT" "/" ".google.com" nil])
+ (".stackoverflow.com"
+  [url-cookie "prov" "e2ca4d47-6ebe-3a5d-aa3b-870145e25bf7" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackoverflow.com" nil]))
+)
+(setq url-cookie-secure-storage
+ '((".github.com"
+  [url-cookie "logged_in" "no" "Fri, 11 Feb 2039 16:30:59 -0000" "/" ".github.com" t])
+ ("www.canva.com"
+  [url-cookie "CDI" "7804b941-c2c1-49fa-b6c0-5a2e7b6b2fdb" "Fri Nov 29 17:58:01 2030 GMT" "/" "www.canva.com" t])
+ (".canva.com"
+  [url-cookie "__cfduid" "d36b939f13dd705c1cf882d627e3217951606845496" "Thu, 31-Dec-20 17:58:16 GMT" "/" ".canva.com" t])
+ ("www.archlinux.org"
+  [url-cookie "csrftoken" "E0Xv8uUOs49ay8GsROYEGdkPfc2JVAuwCnCHF7u6yE0oHpvBX1EaU5i6NVKef60K" "Sun Apr 11 18:48:24 2021 GMT" "/" "www.archlinux.org" t])
+ ("github.com"
+  [url-cookie "_octo" "GH1.1.1362444224.1585486735" "Mon, 29 Mar 2021 12:58:55 GMT" "/" "github.com" t])
+ (".proofpoint.com"
+  [url-cookie "ppri" "543E903D-8090-47C0-B562-D594B36DFAF0" "Sat Mar 02 13:39:39 2030 GMT" "/" ".proofpoint.com" t])
+ ("reddit.com"
+  [url-cookie "edgebucket" "8Xy3nak5TBTQfW5RoI" "Tue Mar 01 18:22:44 2022 GMT" "/" "reddit.com" t])
+ (".reddit.com"
+  [url-cookie "csv" "1" "Tue Mar 01 18:22:45 2022 GMT" "/" ".reddit.com" t]
+  [url-cookie "d2_token" "3.80955c3185911da74de9a0884e712a4586245d3ab54629817ee0aeb59decd489.eyJhY2Nlc3NUb2tlbiI6Ii1qdmVtbk1NbEZQOXdpNzhCVG5HOTN6RjRpUlEiLCJleHBpcmVzIjoiMjAyMC0wNS0xM1QxOToxNzoyNi4wMDBaIiwibG9nZ2VkT3V0Ijp0cnVlLCJzY29wZXMiOlsiKiIsImVtYWlsIl19" "Fri, 13 May 2022 18:17:26 GMT" "/" ".reddit.com" t]
+  [url-cookie "loid" "00000000005tl2skxf.2.1583086964673.Z0FBQUFBQmVXXzEwOFh6amVsTXI0VW9LbW5TUlQybFlYSDQ4OExaTEpSeGsyaE8xNW5BVUxaX0JMN3R4WEQyTUhOM0NRUGE0WEZmalpkY3FWNGlKbElNVmZER2tEeVBVa2JGV0VoaDA2OHJZTzFQcnNYYUtSOTFGRkQzc0Z3Vl9na0JsUF9LQTdqWDA" "Tue, 01 Mar 2022 18:22:44 GMT" "/" ".reddit.com" t])
+ (".facebook.com"
+  [url-cookie "sb" "aK1AXmHX0t1TVOKrSW0rf-0P" "Wed Feb 09 01:10:02 2022 GMT" "/" ".facebook.com" t])
+ ("accounts.google.com"
+  [url-cookie "GAPS" "1:KvVZKuVf70j2VpOw_4hTP0yrBg8gZg:EqbF723z5BmUudNo" "Sun, 01-May-2022 14:19:58 GMT" "/" "accounts.google.com" t]
+  [url-cookie "__Host-GAPS" "1:KvVZKuVf70j2VpOw_4hTP0yrBg8gZg:EqbF723z5BmUudNo" "Sun, 01-May-2022 14:19:58 GMT" "/" "accounts.google.com" t])
+ (".list-manage.com"
+  [url-cookie "_abck" "F36EBCC5E1777764B5DE3F4D918534B6~-1~YAAQ7vo7F/snV2ZxAQAARL/tcwMVkCkhUVkVXL8qpmj4g35Js6TJHAbxtgbf1lG5uADaY60Lv4r9u9BT8Zzf6nlEMe/XLl+KZ2s57JA6LQSU08zBXwZfzaVS/ys1OeatO38WyjZfjiSrY9knmKibWsOc4a9kHJQMKkiKELohLmIq1hA3fdob+SYHMcJY9NTh/30A2w/P2Gy0pS+/vr/jNEuLAf7lqouCwzWMh4qy9zck4UZ9gGUQo3bf2BwjDnP0P23kdGhT+n23R08wJwH4uHZihXneoiLuMojvdzdXv8hNEvwts34FDLZUFqtcKwEec4tY9qkir57UEXQwRw==~-1~-1~-1" "Tue Apr 13 14:24:42 2021 GMT" "/" ".list-manage.com" t])
+ (".google.com"
+  [url-cookie "1P_JAR" "2020-12-13-03" "Tue, 12-Jan-2021 03:25:21 GMT" "/" ".google.com" t])
+ (".tandfonline.com"
+  [url-cookie "I2KBRCK" "1" "Thu, 25-Feb-2021 16:20:32 GMT" "/" ".tandfonline.com" t]
+  [url-cookie "MAID" "IvBCK1uhSLESFSXfK9acxg==" "Tue, 22-Dec-2020 16:20:32 GMT" "/" ".tandfonline.com" t]
+  [url-cookie "MACHINE_LAST_SEEN" "2020-02-26T08%3A20%3A32.740-08%3A00" "Tue, 22-Dec-2020 16:20:32 GMT" "/" ".tandfonline.com" t]))
+)
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; End:

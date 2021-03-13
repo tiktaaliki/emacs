@@ -1,0 +1,35 @@
+
+
+file:~/.emacs
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   
+; (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+ ;(add-hook 'org-capture-afterfinalize-hook (lambda () (org-gcal-sync) ))
+
+(setq user-full-name "Betsy Yoon"
+      user-mail-address "betsy.yoon@gmail.com")
+    (setq mu4e-get-mail-command "mbsync -aV")
+(require 'smtpmail)
+(setq message-send-mail-function 'smtpmail-send-it
+     starttls-use-gnutls t
+     smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+     smtpmail-auth-credentials
+       '(("smtp.gmail.com" 587 "betsy.yoon" "gyzoxzmytclnifef"))
+     smtpmail-default-smtp-server "smtp.gmail.com"
+     smtpmail-smtp-server "smtp.gmail.com"
+     smtpmail-smtp-service 587
+     smtpmail-local-domain "gmail.com"
+     smtpmail-smtp-user "betsy.yoon")
+
+(setq message-kill-buffer-on-exit t)
+#+END_SRC
+
+#+RESULTS:
+: betsy.yoon
+(use-package org-gcal
+   :ensure t
+   :config
+   (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
+ 	org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
+ 	org-gcal-file-alist '(("betsy.yoon@gmail.com" .  "~/Sync/Zettelkasten/gcal.org"))))

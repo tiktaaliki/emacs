@@ -1,0 +1,2 @@
+;;; -*- no-byte-compile: t -*-
+(define-package "org-bookmark-heading" "20200103.514" "Emacs bookmark support for org-mode" '((emacs "24.4") (f "0.17.2")) :commit "38a2813f72ff65f3ae91e2ebb23e0bbb42a8d1df" :keywords '("hypermedia" "outlines") :authors '(("Adam Porter" . "adam@alphapapa.net")) :maintainer '("Adam Porter" . "adam@alphapapa.net") :url "http://github.com/alphapapa/org-bookmark-heading")

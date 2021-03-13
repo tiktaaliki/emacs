@@ -1,0 +1,2 @@
+;;; Generated package description from /home/betsy/.emacs.d/elpa/helm-org-ql-20201123.1102/helm-org-ql.el  -*- no-byte-compile: t -*-
+(define-package "helm-org-ql" "20201123.1102" "Helm support for org-ql" '((emacs "26.1") (dash "2.17.0") (s "1.12.0") (helm-org "1.0") (org-ql "0.6pre")) :commit "208e103ecc146db71d878df3bd09c6eb60c2797d" :authors '(("Adam Porter" . "adam@alphapapa.net")) :maintainer '("Adam Porter" . "adam@alphapapa.net") :url "https://github.com/alphapapa/org-ql")

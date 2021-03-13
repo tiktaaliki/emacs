@@ -1,0 +1,2 @@
+;; org-clock-save.el - betsy-manjaro at <2020-04-20 Mon 09:50>
+(setq org-clock-stored-history '(("/home/betsy/Dropbox/emacs/settings.org" . 159) ("/home/betsy/Dropbox/Zettelkasten/lis.org" . 34615) ("/home/betsy/Dropbox/Zettelkasten/lis.org" . 34539) ("/home/betsy/Dropbox/Zettelkasten/lis.org" . 33825) ("/home/betsy/Dropbox/Zettelkasten/lis.org" . 1511) ("/home/betsy/Dropbox/Zettelkasten/ndd.org" . 59630) ("/home/betsy/Dropbox/Zettelkasten/ndd.org" . 61306) ("/home/betsy/Dropbox/Zettelkasten/notes.org" . 45651)    ))

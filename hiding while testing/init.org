@@ -1,0 +1,16 @@
+#+BEGIN_SRC emacs-lisp :tangle yes
+   
+
+     
+
+#+END_SRC
+
+
+* better defaults
+
+** emacs defaults
+
+#+RESULTS:
+: t
+
+** org defaults

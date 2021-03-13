@@ -1,0 +1,151 @@
+
+
+
+
+[[*custom-set-faces][custom-set-faces]]
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+
+#+END_SRC
+
+* themes
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (use-package darkokai-theme
+      :ensure t
+      :config (load-theme 'darkokai t))
+
+
+#+END_SRC
+* custom-set-faces
+'(default ((t ( :height 150  :family "iosevka term ss09"))))                    
+
+    '(org-level-1 ((t (:inherit variable-pitch  :foreground "gray"  :height 1.0))))
+    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 1.0))))
+    '(org-level-3 ((t (:inherit variable-pitch :foreground "gray" :height 1.0))))
+    '(org-level-4 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 1.0))))
+    '(org-level-5 ((t (:inherit variable-pitch :foreground "gray"))))
+    '(org-level-6 ((t (:inherit variable-pitch :foreground "light goldenrod"))))
+
+
+   (custom-set-faces 
+
+    '(default ((t ( :background "#242728" :foreground "bisque1"  :height 225  :family "ubuntu mono"))))   
+    '(org-level-1 ((t (:inherit variable-pitch  :foreground "gray"  :height 0.952))))
+    '(org-level-2 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.90))))
+    '(org-level-3 ((t (:inherit variable-pitch :foreground "gray" :height 0.9))))
+    '(org-level-4 ((t (:inherit variable-pitch :foreground "light goldenrod" :height 0.9))))
+    '(org-level-5 ((t (:inherit variable-pitch :foreground "gray"))))
+    '(org-level-6 ((t (:inherit variable-pitch :foreground "light goldenrod"))))
+
+
+    '(variable-pitch ((t (:family "exo" )))))
+
+    '(fringe ((t (:background "#242728"))))
+					   ; '(highlight ((t (:weight bold))))
+    '(lazy-highlight ((t (:inherit highlight :background "black"))))
+    '(link ((t (:foreground "#06d8ff" :underline t :weight normal))))
+    '(helm-selection ((t (:inherit bold :background "black" :foreground "magenta" :underline t))))
+    '(custom-face-tag ((t (:height 1.2 :weight regular :inherit variable-pitch))))
+    '(custom-variable-tag ((t (:inherit variable-pitch :foreground "gold" :height 1.1))))
+    '(org-agenda-calendar-event ((t (:foreground "light gray"))))
+    '(org-agenda-clocking ((t (:box (:line-width 2 :color "magenta" :style released-button)))))
+    '(org-agenda-current-time ((t (:foreground "OliveDrab3"))))
+    '(org-agenda-date ((t (:background "light steel blue" :foreground "midnight blue" :inverse-video nil :box (:line-width 20 :color "#242728") :overline nil :slant normal :weight normal :height 1.2))))
+
+    '(org-agenda-done ((t(:slant italic :foreground "dark orange"))))
+
+    '(org-mode-line-clock ((t(:background "gold" :height .75 :foreground "black"))) )
+
+    '(mode-line ((t (:background "darkgray" :family "futura" :height .75   :foreground "black" :inverse-video nil :box (:line-width 1 :color "#35393b" :style unspecified)))))
+
+ 
+
+    '(org-agenda-date-today ((t (:inherit org-agenda-date :background "#242728" :foreground "gold" :inverse-video t :overline nil :weight bold))))
+    '(org-agenda-date-weekend ((((class color) (min-colors 257)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "deep pink" :weight unspecified :underline t :overline nil :box (:line-width 20 :color "#242728"))) (((class color) (min-colors 89)) (:inherit org-agenda-date :inverse-video nil :background unspecified :foreground "red" :weight unspecified :underline t :overline nil :box 1))))
+    '(org-archived ((t (:foreground "saddle brown" :weight normal))))
+    '(org-block ((t (:foreground "gainsboro"))))
+    '(org-clock-overlay ((t (:background "dim gray"))))
+    '(org-date ((t (:foreground "steel blue" :underline t))))
+    '(org-default ((t (:inherit default))))
+    '(org-done ((t (:foreground "dark gray" :weight normal))))
+   ; '(org-ellipsis ((t (:foreground "gray"  :height 1.0))))
+
+
+
+					   ;   '(org-habit-alert-future-face ((t (:background "yellow" :foreground "black"))))
+    '(org-habit-overdue-face ((t (:background "#F20055" :foreground "white"))))
+    '(org-habit-ready-face ((t (:background "#63de5d" :foreground "white"))))
+
+    '(org-habit-overdue-future-face ((t (:background "#8b668b" :foreground "white"))))
+    '(org-habit-clear-face ((t
+			     (:foreground "white" :background "DodgerBlue1"))))
+
+    '(org-inlinetask ((t (:foreground "dodger blue"))))
+    '(org-link ((t (:foreground "LightSteelBlue3"  :underline t ))))
+
+    '(org-list-dt ((t (:foreground "black" :overline "thistle" :background "thistle" :underline nil :box (:line-width 1 :color "thistle")))))
+
+    '(org-table ((t :foreground "dim gray" )))
+					   ;'(org-meta-line ((t :foreground "dim gray" :background "gainsboro")))
+
+
+    '(org-priority ((t (:foreground "gold" :weight bold))))
+    '(org-ref-cite-face ((t (:foreground "violet red" :underline t :family "consolas"))))
+    '(org-scheduled ((t (:foreground "DarkOliveGreen3"))))
+    '(org-scheduled-previously ((t (:foreground "seashell1" :weight normal))))
+    '(org-scheduled-today ((t (:foreground "light goldenrod" :weight normal))))
+    '(org-special-keyword ((t (:foreground "#6A6D70" :weight normal))))
+    '(org-tag ((t (:foreground "chartreuse3" :slant normal :weight normal :height 130 :family "consolas"))))
+    '(org-todo ((t ( :foreground "orange red" :box (:line-width 2 :color "#242728") :weight normal :family "fira mono"))))
+    '(org-upcoming-deadline ((((class color) (min-colors 257)) (:foreground "#E6DB74" :weight normal :underline nil)) (((class color) (min-colors 89)) (:foreground "#CDC673" :weight normal :underline nil))))
+    '(org-warning ((t (:foreground "goldenrod1" :underline nil :weight normal))))
+    '(secondary-selection ((t (:background "gray14" :foreground "pale green"))))
+
+
+   '(nxml-prolog-literal-content-face ((t
+					(:foreground "green" ))))
+
+
+
+
+#+RESULTS:
+| nxml-prolog-literal-content-face | ((t (:foreground green))) |
+
+
+** org-emphasis-alist
+
+ #+BEGIN_SRC  emacs-lisp :tangle yes
+ (custom-set-variables
+
+ '(org-emphasis-alist
+    (quote
+     (("!"
+       (quote
+        (:weight bold :family "consolas" :foreground "red3" :background "slategray3"))
+       verbatim)
+      ("*"
+       (quote
+        (:weight bold :foreground "orchid")))
+      ("/"
+       (quote
+        (:slant italic :foreground "darkorchid1")))
+      ("_"
+       (quote
+        (:underline t :foreground "orangered" :weight bold )))
+      ("=" org-verbatim verbatim)
+      ("~" org-code verbatim)
+      ("+"
+       (quote
+        (:strike-through "chartreuse" :weight bold)))
+      ("@"
+       (quote
+        (:weight bold :foreground "chartreuse")
+        verbatim)))))
+ )
+
+ #+END_SRC
+
+ # # #+RESULTS:
+

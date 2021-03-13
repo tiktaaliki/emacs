@@ -1,0 +1,14 @@
+@
+#+PROPERTY:    tangle settings.org
+
+[[file:.emacs][file:~/Dropbox/emacs/.emacs]]
+
+[[file:custom2.el][file:~/Dropbox/emacs/custom2.el]]
+
+[[file:custom2.el][file:~/Dropbox/emacs/parkinglot.org]]
+
+
+* local variables
+;; Local Variables:
+;; eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t)
+;; End:

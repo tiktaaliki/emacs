@@ -21,7 +21,7 @@
          (load "org-super-links")
       (load "backup-each-save")
    (load "periodic-commit-minor-mode")
-(periodic-commit-minor-mode 1)
+
          #+end_src
 
          #+RESULTS:
