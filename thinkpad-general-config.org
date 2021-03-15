@@ -1,0 +1,540 @@
+#+PROPERTY: header-args    :results silent
+
+* Minimum Usability
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (set-fringe-mode '(25 . 25))
+  (fset 'yes-or-no-p 'y-or-n-p)
+                                          ;  (setq confirm-kill-emacs (quote y-or-n-p))
+  (setq confirm-kill-emacs nil)
+  (setq ring-bell-function (quote ignore))
+  (setq visible-bell nil)
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (setq inhibit-startup-screen t)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (setq split-width-threshold 100)
+
+  (set-face-attribute 'default nil :family "Fantasque sans mono" :height 200 :weight 'normal  :foreground "#ebdcb2")
+  (delete-selection-mode) ;allows to delete selected text by typing
+  (global-set-key (kbd "M-o") 'other-window)
+  (setq org-support-shift-select t)
+  (setq debug-on-error t)
+#+END_SRC
+
+* UX
+** navigation
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package helm
+          :bind (("M-x"   . helm-M-x)
+                 ([f3] . helm-buffers-list)       
+                 ("<Hangul> x" . helm-M-x)    
+                 ))
+     (use-package projectile
+          :config
+          (projectile-mode +1))
+
+     (use-package helm-projectile
+          :bind    ([f5] . helm-projectile))
+
+     (use-package bufler)
+     (setq org-special-ctrl-a/e (quote (t . t)))
+   #+END_SRC  
+** functionality
+#+BEGIN_SRC emacs-lisp  :tangle yes
+  (use-package s)
+  (use-package org
+    :ensure org-plus-contrib)
+  (use-package unkillable-scratch
+    :config
+    (unkillable-scratch 1))
+
+
+  (use-package aggressive-indent
+    :custom (global-aggressive-indent-mode t)
+    )
+
+  ;;(straight-use-package '(org-plus-contrib :includes org))
+
+  (use-package smartparens 
+    :defer t 
+    :config
+    (setq sp-show-pair-from-inside nil)
+    (require 'smartparens-config)
+    :diminish smartparens-mode
+    :custom
+    (smartparens-global-mode t))
+  (sp-pair "'" nil :actions :rem)
+
+
+#+END_SRC
+
+
+
+** autosave/backup
+  #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package magit
+      :init (progn
+              (setq magit-repository-directories '("~/Dropbox/" ))))
+    (setq global-auto-revert-mode t)
+    (setq auto-save-interval 5)
+
+  (add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
+
+
+  #+END_SRC
+
+** org-protocol
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+  (server-start)
+  (require 'org-protocol)
+  (require 'org-protocol-capture-html)
+  (setq org-protocol-default-template-key "w")
+
+
+#+END_SRC
+
+#+RESULTS:
+: w
+** org-keybindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
+  (global-set-key (kbd "C-c <f2>") 'org-clock-out)
+  (global-set-key (kbd "<f1>") 'org-capture)
+
+  (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
+
+  (bind-keys
+
+   ("C-c l" . org-store-link)
+   ("C-c C-l" . org-insert-link)
+   ("C-c b" . list-bookmarks)
+   ("C-a" . org-beginning-of-line) 
+   ("C-e" . org-end-of-line) 
+   ("C-k" . org-kill-line)
+   ([f1] . org-capture)
+   ([f2] . org-clock-in)
+   ([f4] . org-refile)
+   ([f7] . org-agenda)
+   ([f10] . org-tree-to-indirect-buffer)
+   ([f11] . org-id-goto)
+
+   )
+
+
+#+END_SRC
+
+#+BEGIN_SRC emacs-ilsp
+
+
+  (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
+  (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+  (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+  (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+  (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+  (define-key key-translation-map (kbd "C-_") (kbd "–"))
+  (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+  (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+#+END_SRC
+
+#+RESULTS:
+: [8756]
+* UI
+#+BEGIN_SRC emacs-lisp  :tangle yes
+  (setq org-ellipsis " ⬎ ")
+  (setq org-hide-leading-stars t) 
+  (use-package org-superstar
+    :config
+    (setq org-superstar-headline-bullets-list '("◉" "❤""☆" "♢" "⭆" ))
+    (setq org-superstar-item-bullet-alist (quote ((42 . 33) (43 . 62) (45 . 45))))
+    (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+  (setq org-startup-indented t)
+  (setq org-hide-emphasis-markers t)
+  (setq org-startup-folded t)
+
+  (use-package doom-themes
+    :config
+    ;; Global settings (defaults)
+    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+          doom-themes-enable-italic t) ; if nil, italics is universally disabled
+    (load-theme 'doom-one t)
+    ;; Corrects (and improves) org-mode's native fontification.
+    (doom-themes-org-config)
+    )
+
+  (set-face-attribute 'variable-pitch nil :family "Koho")
+  (set-face-attribute 'mode-line nil :height 0.9 :family "monofur" :foreground "deep sky blue")
+(set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :height 0.8 :foreground "#ff4447") ;raspberry
+(set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
+(set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
+(set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
+(set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
+
+
+      #+END_SRC
+** font encoding
+#+BEGIN_SRC emacs-lisp  :tangle yes
+  (defvar symbola-font (if (eq system-type 'gnu/linux)
+                           (font-spec :name "Symbola" :size 14)
+                         "Symbola"))
+  (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+                    '("NanumBarunpen" . "unicode-bmp" ))
+  (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
+                    '("Nanumbarunpen" . "unicode-bmp"))
+
+  (set-fontset-font "fontset-default" '(#x2000 . #x206F)
+                    '("Symbola" . "unicode-bmp" ))
+                                          ;
+  (set-fontset-font "fontset-default" '(#x2190 . #x21FF)
+                    '("Symbola" . "unicode-bmp" ))
+  (set-fontset-font "fontset-default" '(#x2B00 . #x2BFF)
+                    '("Symbola" . "unicode-bmp" ))
+
+  (set-fontset-font "fontset-default" '(#x2200 . #x22FF)
+                    '("Symbola" . "unicode-bmp" ))
+
+  (set-fontset-font "fontset-default" '(#x25A0 . #x25FF)
+                    '("Symbola" . "unicode-bmp" ))
+
+  (set-fontset-font "fontset-default" '(#x2600 . #x26FF)
+                    '("Symbola" . "unicode-bmp" ))
+  (set-fontset-font "fontset-default" '(#x2700 . #x27BF)
+                    '("Symbola" . "unicode-bmp" ))
+
+  (set-fontset-font "fontset-default" '(#x1f800 . #x1f8ff)
+                    '("Symbola" . "unicode-bmp" ))
+
+                                          ;https://www.reddit.com/r/emacs/comments/8tz1r0/how_to_set_font_according_to_languages_that_i/e1bjce6?utm_source=share&utm_medium=web2x&context=3
+  (when (fboundp #'set-fontset-font)
+    (set-fontset-font t 'korean-ksc5601	
+                      ;; Noto Sans CJK: https://www.google.com/get/noto/help/cjk/
+                      (font-spec :family "Nanum Gothic Coding")))
+  (dolist (item '(("Nanum Gothic Coding" . 1.0)))
+    (add-to-list 'face-font-rescale-alist item))
+
+  (setq use-default-font-for-symbols nil)
+
+#+END_SRC  
+
+#+RESULTS:
+
+** org-src
+#+BEGIN_SRC emacs-lisp  :tangle yes
+  (setq org-src-fontify-natively t)
+  (setq org-src-tab-acts-natively t)
+#+END_SRC
+
+* org-refile and archiving
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq org-refile-allow-creating-parent-nodes (quote confirm))
+  (setq org-refile-use-outline-path (quote file))
+  (setq org-archive-location
+        "~/Dropbox/Zettelkasten/journal.org::datetree/")
+  (setq org-archive-reversed-order nil)
+  (setq org-refile-use-cache t)
+
+  (defun my-org-refile-cache-clear ()
+    (interactive)
+    (org-refile-cache-clear))
+  (define-key org-mode-map (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
+
+
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3))
+        )
+
+  (setq org-outline-path-complete-in-steps nil) 
+
+                                          ; Refile in a single go
+
+                                          ;  (global-set-key (kbd "<f4>") 'org-refile)
+
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
+
+  (setq org-id-link-to-org-use-id (quote create-if-interactive))
+
+  (setq org-id-method (quote org))
+  (setq org-return-follows-link t)
+  (setq org-goto-interface (quote outline-path-completion))
+                                          ;   (add-hook 'org-mode-hook (lambda () (org-sticky-header-mode 1)))
+
+
+  (setq global-visible-mark-mode t)
+
+
+#+END_SRC
+
+* *scheduling, todos*
+** agenda
+:PROPERTIES:
+:visibility: children
+:END:
+   #+BEGIN_SRC emacs-lisp :tangle yes
+         (setq org-agenda-files
+               '("~/Dropbox/Zettelkasten/inbox.org"
+                 "~/Dropbox/Zettelkasten/journal.org"
+                 "~/Dropbox/Zettelkasten/readings.org"
+                 "~/Dropbox/Zettelkasten/cal.org"
+                 "~/Dropbox/Zettelkasten/contacts.org"
+                 "~/Dropbox/Zettelkasten/lis.org"
+                 "~/Dropbox/Zettelkasten/recipes.org"
+                 "~/Dropbox/Zettelkasten/ndd.org"
+                 "~/Dropbox/Zettelkasten/personal.org"
+                 "~/Dropbox/Zettelkasten/sysadmin.org"
+                 ))
+
+           (setq org-agenda-with-colors t)
+           (setq org-agenda-skip-deadline-if-done t)
+           (setq org-agenda-skip-timestamp-if-done t)
+           (setq org-agenda-skip-scheduled-if-done t)
+           (setq org-agenda-current-time-string "✸✸✸✸✸")
+           (setq org-agenda-start-with-clockreport-mode t)
+           (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+           (setq org-agenda-dim-blocked-tasks t)
+           (setq org-agenda-clockreport-parameter-plist
+                 (quote
+                  (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
+
+     (setq org-todo-keywords
+             (quote
+              ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
+               (type "AREA(a)"  "습관(h)"   "HOLD(l)"  "|" "DONE(d)")     )))
+
+#+END_SRC
+
+#+RESULTS:
+| sequence | TODO(t) | NEXT(n) | IN-PROG(i) | WAIT(w) |   |         | DONE(d) | x(c) |
+| type     | AREA(a) | 습관(h) | HOLD(l)    |         |   | DONE(d) |         |      |
+
+
+
+** org-capture
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq org-capture-templates
+        '(
+          ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil ) 
+
+          ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT}\n%^t\n%a\n%?")
+
+          ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
+
+          ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+
+          ("F" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
+
+          ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
+
+          ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \nSCHEDULED: %t\n%a\n" :prepend nil)
+
+          ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
+           "* %a \nSCHEDULED: %t %?\n%:initial" )
+          ("x" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
+           "* TODO %? \nSCHEDULED: %t\n%a\n\n%:initial" )
+
+          ("y" "org-protocol" item (id "resources")
+           "[ ] %a %U %:initial" )
+
+          ))
+
+
+
+#+END_SRC
+
+#+RESULTS:
+| a         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/journal.org) | ** %?        |     |
+| :clock-in | t                | :clock-keep | t                                                      | :kill-buffer | nil |
+| c         | calendar         | entry       | (file ~/Dropbox/Zettelkasten/cal.org)                  | * %^{EVENT}  |     |
+
+removed templates:
+- ("d" "download" table-line (id "reading") "|%^{Author} | %^{Title} | %^{Format}|"  )
+- ("l" "look up" item (id "5br4n6815pi0") "[ ] %? %U %a" :prepend nil)
+- ("s" "to buy" item (id "shopping") "[ ] %?" :prepend t)
+- ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
+-           ("m" "meditation" table-line (id "meditation") "|%u | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
+
+
+
+
+
+(use-package org-plus-contrib)
+#+RESULTS:
+** org-clock
+
+*** org-mru
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package org-mru-clock
+:bind     ("M-<f2>" . org-mru-clock-in)
+:config
+   (setq org-mru-clock-how-many 80)
+   (setq org-mru-clock-keep-formatting t)
+)
+
+
+
+#+END_SRC
+
+* org
+#+BEGIN_SRC emacs-lisp :tangle yes
+ (setq org-contacts-files (quote ("~/Dropbox/Zettelkasten/contacts.org")))
+
+#+END_SRC
+* *mentat*
+** anki
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+
+ (use-package anki-editor
+   :config
+   (setq anki-editor-create-decks t)
+          (defun anki-editor-cloze-region-auto-incr (&optional arg)
+     "Cloze region without hint and increase card number."
+     (interactive)
+     (anki-editor-cloze-region my-anki-editor-cloze-number "")
+     (setq my-anki-editor-cloze-number (1+ my-anki-editor-cloze-number))
+     (forward-sexp))
+   (defun anki-editor-cloze-region-dont-incr (&optional arg)
+     "Cloze region without hint using the previous card number."
+     (interactive)
+     (anki-editor-cloze-region (1- my-anki-editor-cloze-number) "")
+     (forward-sexp))
+   (defun anki-editor-reset-cloze-number (&optional arg)
+     "Reset cloze number to ARG or 1"
+     (interactive)
+     (setq my-anki-editor-cloze-number (or arg 1)))
+   (defun anki-editor-push-tree ()
+     "Push all notes under a tree."
+     (interactive)
+     (anki-editor-push-notes '(4))
+     (anki-editor-reset-cloze-number))
+   ;; Initialize
+   (anki-editor-reset-cloze-number)
+
+
+   )
+  #+END_SRC
+
+  #+RESULTS:
+  : t
+  :after org
+
+  ; Reset cloze-number after each capture.
+
+  :hook (org-capture-after-finalize . anki-editor-reset-cloze-number)
+  #+RESULTS:
+
+
+** epub
+   #+BEGIN_SRC emacs-lisp :tangle yes
+
+(use-package olivetti)
+(use-package nov
+:config
+  (setq nov-post-html-render-hook  (lambda () (visual-line-mode 1)))
+  (add-hook 'nov-post-html-render-hook 'olivetti-mode)
+)
+   #+END_SRC
+** pdfs
+  #+BEGIN_SRC emacs-lisp :tangle yes
+
+ (use-package pdf-tools
+   :magic ("%PDF" . pdf-view-mode)
+   :config
+   (pdf-tools-install :no-query))
+ (use-package pdf-view-restore)
+
+
+  #+END_SRC
+
+  #+RESULTS:
+
+  (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
+  (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
+
+
+  (use-package org-pdf-tools
+  :straight t)
+
+  (use-package org-noter-pdf-tools
+  :straight t)
+
+** org-roam
+#+begin_src emacs-lisp  :tangle yes 
+
+  (use-package org-roam
+:bind 
+   ("C-c <f1>" . org-roam-capture))
+
+  (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CONTEXT: %a\n:END:\n%?" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
+                                      "#+title: ${title}" :unnarrowed t :kill-buffer t)))
+
+
+  (setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
+
+  (defun my/org-roam--title-to-slug (title) ;;<< changed the name
+    "Convert TITLE to a filename-suitable slug."
+    (cl-flet* ((nonspacing-mark-p (char)
+                                  (eq 'Mn (get-char-code-property char 'general-category)))
+               (strip-nonspacing-marks (s)
+                                       (apply #'string (seq-remove #'nonspacing-mark-p
+                                                                   (ucs-normalize-NFD-string s))))
+               (cl-replace (title pair)
+                           (replace-regexp-in-string (car pair) (cdr pair) title)))
+      (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
+                      ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
+                      ("^_" . "")  ;; remove starting underscore
+                      ("_$" . "")))  ;; remove ending underscore
+             (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
+        (downcase slug))))
+
+
+  (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
+
+
+#+end_src
+
+#+RESULTS:
+: my/org-roam--title-to-slug
+* chronos
+  #+begin_src emacs-lisp :tangle yes
+
+ (use-package org-alert)
+ (use-package chronos
+   :config
+   (setq chronos-expiry-functions '(chronos-sound-notify
+                                    chronos-dunstify
+                                    chronos-buffer-notify
+                                    ))
+   (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+   )
+ (use-package helm-chronos
+   :config
+   (setq helm-chronos-standard-timers
+         '( "=14:00/aal shift + -5/aal shift in 5 + =18:00/end shift + -5/end shift in 5"
+            "=10:00/csi oer + -5/csi shift in 5 + =15:00/end shift + -5/end shift in 5"
+            "=9:00/nyu backup shift + -5/shift in 5 + =12:00/switch to aal + -5/switch in 5"
+            "=18:00/csi reference + -5/shift in 5 + =22:00/end shift + -5/end shift in 5"
+            ))
+
+   )
+
+  #+end_src
+
+  #+RESULTS:
+  : t
+
+
+
+
+* load files
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (find-file "/home/betsy/.emacs")
+  (find-file "~/Dropbox/Zettelkasten/inbox.org")
+  (find-file "~/Dropbox/emacs/config-thinkpad-extra.org")
+  (find-file "~/Dropbox/emacs/thinkpad-general-config.org")
+
+#+END_SRC  
+
+
+

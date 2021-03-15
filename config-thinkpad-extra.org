@@ -1,4 +1,116 @@
-* load external files
+#+begin_src emacs-lisp :tangle yes
+  (define-key dired-mode-map (kbd "<f1>") 'org-capture)
+
+
+  (setq  org-agenda-sorting-strategy 
+         '((agenda time-up)
+           (todo priority-down category-keep)
+           (tags priority-down category-keep)
+           (search category-keep)))
+  (setq org-agenda-tags-todo-honor-ignore-options t)
+  (setq org-agenda-use-tag-inheritance t)
+
+  (setq org-agenda-span (quote day))
+  (setq org-agenda-jump-prefer-future t)
+
+
+  (setq org-agenda-start-on-weekday nil)
+
+
+  (setq org-agenda-include-diary nil)
+  (setq org-agenda-inhibit-startup nil)
+  (setq org-agenda-time-grid
+        (quote
+         ((daily weekly today remove-match)
+          (900  1200 1500  1800  2100 )
+          "......" "----------------")))
+
+
+(setq org-agenda-custom-commands '(
+
+  ("k" "all untagged TODOs" tags-todo "-{.*}") 
+))
+
+
+#+END_SRC
+
+
+  (setq org-agenda-custom-commands '(
+
+                                    ;RETURN ANY TODO ITEMS WTIHOUT TAGS
+                                     ("x" "With deadline columns" alltodo "" 
+                                      ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
+                                       (org-agenda-view-columns-initially t)
+                                       (org-agenda-sorting-strategy '(timestamp-up))
+                                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) ))
+                                     ("l" "all todos"
+                                      ((agenda ""  ((org-agenda-span 1) ))
+                                       (alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'todo '("AREA" "습관" "HOLD" "WAIT" "PROJ")) ))
+                                                (org-agenda-sorting-strategy '(priority-down)) )))
+                                     ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
+                                     ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" 
+                                      ((agenda "" 
+                                               ((org-agenda-span 2)  
+                                                (org-agenda-clockreport-mode nil)))
+                                       (todo "NEXT|TODAY|IN-PROG"))
+                                      ((org-agenda-todo-ignore-scheduled t)))
+                                     ("u" "all UNSCHEDULED" alltodo ""                                                          
+                                      (    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+                                         (org-agenda-todo-ignore-scheduled t) )
+                                      )
+                                     ))
+
+
+
+(setq display-time-mode t)
+
+
+
+
+  (use-package org
+    :custom-face
+    (org-level-1 ((t (:foreground "#337bae" :weight normal :family "victor mono"))))  
+    (org-level-2 ((t (:inherit org-level-1 :foreground "#9a9eab" :height 0.9))))
+    (org-level-3 ((t (:inherit org-level-2 :foreground "#68829e"  :height 0.9))))
+    (org-level-4 ((t (:inherit org-level-3 :foreground "light coral" :height 1.0))))
+    (org-link ((t (:inherit link :foreground "#b38867" :underline nil :weight normal :family "monofur"))))
+    (org-ellipsis ((t (:foreground "#a4cabc" :underline nil))))
+    (org-todo ((t (:foreground "#98be65" :weight normal :height 0.75 :family "nova mono"))))
+    (org-done ((t (:inherit org-headline-done :weight normal :height 0.9 :family "nova mono"))))
+    (org-date ((t (:foreground "#ECBE7B" :underline t :family "monofur"))))
+    (org-drawer ((t (:foreground "sky blue" :height 0.8))))
+    (org-headline-done ((t (:foreground "#5B6268" :strike-through t))))
+    (org-special-keyword ((t (:foreground "#83898d" :height 0.9)))) 
+    (org-property-value ((t (:foreground "#83898d" :height 0.9)))) 
+    )
+
+
+
+
+
+
+  (use-package mic-paren
+    :config
+    (paren-activate)
+    )
+  adding :defer t to smartparens solves Eager macro-expansion failure: (wrong-type-argument listp [(first-item . rest-items) (sp-get-list-items)]) problem 
+ 
+ 
+ 
+
+
+  (sp-local-pair 'org-mode "/" "/" :actions '(wrap))
+  (sp-local-pair 'org-mode "_" "_" :actions '(wrap))
+  (sp-local-pair 'org-mode "*" "*" :actions '(wrap))
+  (sp-local-pair 'org-mode "+" "+" :actions '(wrap))
+  (sp-local-pair 'org-mode "~" "~" :actions '(wrap))
+  (sp-local-pair 'org-mode "=" "=" :actions '(wrap))
+  (sp-local-pair 'org-mode "-" "-" :actions '(wrap))
+
+
+   
+
+
 #+begin_src emacs-lisp :tangle yes
  (setq initial-major-mode 'org-mode)
  (add-hook 'org-mode-hook (lambda () (org-indent-mode 1)))
@@ -31,85 +143,23 @@
          #+RESULTS:
          : t
 	 
-* font/coding/wrapping
+
  
 #+begin_src emacs-lisp :tangle yes
-     (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                           '("NanumBarunpen" . "unicode-bmp" )
-
-                           )
-         (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
-                           '("Nanumbarunpen" . "unicode-bmp")
-
-
-   )
-
+     
 
 (setq byte-compile-warnings '(cl-functions))	
 ;(setq mu4e-get-mail-command "mbsync -aV") 
 
 (put 'digit-argument 'disabled nil)
 
-(set-face-attribute 'default nil :family "Fantasque sans mono" :height 200 :weight 'normal  :foreground "#ebdcb2"); honeydew  d5d6d2 faefd4
-					;   (set-face-attribute 'org-level-1 nil :foreground "#6ab187" :inherit 'default :height 1.1 :weight 'bold) ;lagoon
-					;  (set-face-ㅁdattribute 'org-level-2 nil :inherit 'org-level-1 :foreground "#9a9eab" :height 0.9 :weight 'bold) ;  
-(set-face-attribute 
-					;(set-face-attribute 'org-level-4 nil :inherit 'org-level-3 :foreground "#6ab187" :height 1.0) ;    a3bd38
-(set-face-attribute 'org-level-5 nil :inherit 'org-level-4 :foreground "#9a9eab")
-(set-face-attribute 'org-level-6 nil :inherit 'org-level-5 :foreground "#68829e")
 
-
-
-					;     (set-face-attribute 'org-link nil :weight 'normal :foreground "firebrick" :family "monofur") ;grecian blue  2988bc
-
-(set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :height 0.8 :foreground "#ff4447") ;raspberry
-(set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
-(set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
 					;     (set-face-attribute 'org-special-keyword nil :height 0.8)
 					;    (set-face-attribute 'org-date nil :underline t :foreground "#a1d6e2" :family "monofur" )
 (set-face-attribute 'org-agenda-diary nil :foreground "#a4cabc" )
 					;     (set-face-attribute 'org-ellipsis nil :foreground "#a4cabc" :strike-through nil)
 
-(set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
-(set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
   
-  (defvar symbola-font (if (eq system-type 'gnu/linux)
-                  (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                           '("NanumBarunpen" . "unicode-bmp" )
-
-                           )
-         (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
-                           '("Nanumbarunpen" . "unicode-bmp")
-
-
-   )                   (font-spec :name "Symbola" :size 8)
-                                "Symbola"))
-
-
-          (set-fontset-font "fontset-default" '(#x2000 . #x206F)
-                              '("Symbola" . "unicode-bmp" ))
-   ;
-          (set-fontset-font "fontset-default" '(#x2190 . #x21FF)
-                              '("Symbola" . "unicode-bmp" ))
-         (set-fontset-font "fontset-default" '(#x2B00 . #x2BFF)
-                              '("Symbola" . "unicode-bmp" ))
-
-         (set-fontset-font "fontset-default" '(#x2200 . #x22FF)
-                              '("Symbola" . "unicode-bmp" ))
-
-       (set-fontset-font "fontset-default" '(#x25A0 . #x25FF)
-                              '("Symbola" . "unicode-bmp" ))
-
-           (set-fontset-font "fontset-default" '(#x2600 . #x26FF)
-                              '("Symbola" . "unicode-bmp" ))
-          (set-fontset-font "fontset-default" '(#x2700 . #x27BF)
-                              '("Symbola" . "unicode-bmp" ))
-
- (set-fontset-font "fontset-default" '(#x1f800 . #x1f8ff)
-                           '("Symbola" . "unicode-bmp" ))
-
-                                                        ;  (set-fontset-font "fontset-default" '(#x2091 . #x21ff)     
-                                                     ;                   (font-spec :size 30)) 
 
       ;https://www.reddit.com/r/emacs/comments/8tz1r0/how_to_set_font_according_to_languages_that_i/e1bjce6?utm_source=share&utm_medium=web2x&context=3
       (when (fboundp #'set-fontset-font)
@@ -149,7 +199,6 @@
 
 
 
-* plain lists & bullets
 #+BEGIN_SRC emacs-lisp :tangle yes
 
 
@@ -172,17 +221,12 @@
 
 #+END_SRC
 
-#+RESULTS:
-
-
-* org-startup-defaults
-
 
 #+BEGIN_SRC emacs-lisp :tangle yes
    
   
 
-(setq org-hide-leading-stars t) 
+
 (setq org-startup-with-inline-images t)
 (setq org-startup-align-all-tables t)
 
@@ -202,173 +246,24 @@
 
 #+END_SRC
 
-#+RESULTS:
-: ((agenda . canonical) (bookmark-jump . canonical) (isearch . canonical) (default . minimal))
-
-* org-mode
-** org-agenda
-*** org-agenda settings
-#+begin_src emacs-lisp :tangle yes
-
-         (setq org-agenda-window-setup 'current-window)
-
-         (setq  org-agenda-sorting-strategy 
-                '((agenda time-up)
-                  (todo priority-down category-keep)
-                  (tags priority-down category-keep)
-                  (search category-keep)))
-         (setq org-agenda-tags-todo-honor-ignore-options t)
-         (setq org-agenda-use-tag-inheritance t)
-
-      (setq org-agenda-skip-deadline-if-done t)
-         (setq org-agenda-skip-timestamp-if-done t)
-         (setq org-agenda-skip-scheduled-if-done t)
-         (setq org-agenda-current-time-string "✸✸✸✸✸")
-
-         (setq org-agenda-start-with-clockreport-mode t)
-         (setq org-agenda-span (quote day))
-         (setq org-agenda-jump-prefer-future t)
-
-         (setq org-agenda-with-colors t)
-         (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
-         (setq org-agenda-start-on-weekday nil)
 
 
-         (setq org-agenda-clockreport-parameter-plist
-               (quote
-                (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
-         (setq org-agenda-dim-blocked-tasks t)
-         (setq org-agenda-files
-               (quote
-                ("~/Dropbox/Zettelkasten/inbox.org" 
-                 "~/Dropbox/Zettelkasten/cal.org"
-                 "~/Dropbox/Zettelkasten/recipes.org"
-                 "~/Dropbox/Zettelkasten/ndd.org"
-                 "~/Dropbox/Zettelkasten/readings.org"
-                 "~/Dropbox/Zettelkasten/journal.org"
-                 "~/Dropbox/Zettelkasten/lis.org"
-	               "~/Dropbox/Zettelkasten/personal.org"
-                 "~/Dropbox/Zettelkasten/sysadmin.org"   
-   "~/Dropbox/Zettelkasten/contacts.org"
-                 )))
-         (setq org-agenda-include-diary nil)
-         (setq org-agenda-inhibit-startup nil)
-         (setq org-agenda-time-grid
-               (quote
-                ((daily weekly today remove-match)
-                 (900  1200 1500  1800  2100 )
-                 "......" "----------------")))
-
-         (defun kiwon/org-agenda-redo-in-other-window ()
-           "Call org-agenda-redo function even in the non-agenda buffer."
-           (interactive)
-           (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
-             (when agenda-window
-               (with-selected-window agenda-window (org-agenda-redo)))))
-         (run-at-time nil 300 'kiwon/org-agenda-redo-in-other-window)
-
-
-#+end_src                     
 
 #+RESULTS:
 : [nil 24637 31859 998114 300 kiwon/org-agenda-redo-in-other-window nil nil 516000]
+  (setq org-agenda-window-setup 'current-window)
 
-*** org-agenda custom commands
-:LOGBOOK:
-CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
-:END:
-(tags-todo "+STYLE=\"habit\"+SCHEDULED<=\"<today>\"+CATEGORY=\"mentat\"") 
-(tags-todo "+STYLE=\"habit\"+SCHEDULED<=\"<today>\"+CATEGORY=\"HOME\"")
-(tags-todo "+STYLE=\"habit\"+SCHEDULED<=\"<today>\"+CATEGORY=\"SYSADMIN\"")
-        (setq org-stuck-projects '("/TODO|PROJ" ("NEXT|IN-PROG") ))
-  ("j" "home todos" (
-                                                         (tags-todo "cooking-Style=\"habit\"")
-                                                         (tags-todo "cleaning-Style=\"habit\"")
-                                                         (tags-todo "self-Style=\"habit\"")
-                                                         ))
-
-                                      ("n" "ndd & lis" (
-                                                        (tags-todo "lis-/-HABIT-WAIT-HOLD")  
-                                                        (tags-todo "editing-/-HABIT-WAIT-HOLD")      (tags-todo "ndd-admin-email-focus-/-HABIT-WAIT-HOLD")
-                                                        (tags-todo "ndd+admin-/-HABIT-WAIT-HOLD")
-                                                        (tags-todo "ndd+email-/-HABIT-WAIT-HOLD")
-                                                        (tags-todo "ndd+focus-/-HABIT-WAIT-HOLD")
-
-                                                        ))
-
-                                      ("d" "mentat & sysadmin" (
-                                                                (tags-todo "sysadmin-/-HABIT-WAIT-HOLD")
-                                                                (tags-todo "mentat-/-HABIT-WAIT-HOLD")
-                                                                ))
-
-                                      ("p" "projects and areas" (
-                                                                 (todo "PROJ")
-                                                                 (todo "AREA")))
-
-#+BEGIN_SRC emacs-lisp :tangle yes   
-       (setq org-agenda-custom-commands '(
-
-                                          ("h" "Habits" tags-todo "STYLE=\"habit\""  ((org-agenda-overriding-header "Habits")))
-
-                                          ("b" "today's habits" ((agenda ""  ((org-agenda-span 1) )) (tags-todo "STYLE=\"habit\"+SCHEDULED<=\"<today>\""       )))                                   
-
-                                          ("k" "all untagged TODOs" tags-todo "-{.*}")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
-
-                                          ("x" "With deadline columns" alltodo "" 
-                                           ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
-                                            (org-agenda-view-columns-initially t)
-                                            (org-agenda-sorting-strategy '(timestamp-up))
-                                            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) ))
-
-                                          ("l" "all todos"
-                                           ((agenda ""  ((org-agenda-span 1) ))
-                                            (alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'todo '("AREA" "습관" "HOLD" "WAIT" "PROJ")) ))
-                                                     (org-agenda-sorting-strategy '(priority-down)) )))
-
-				          ("r" "stuff to read" tags-todo "read") 
-                                          ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
-
-                                          ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" ((org-agenda-span 2)  (org-agenda-clockreport-mode nil)))
-                                                                                     (todo "NEXT|TODAY|IN-PROG"))
-                                           ((org-agenda-todo-ignore-scheduled t)))
-
-                                          ("u" "all UNSCHEDULED" alltodo ""                                                          
-
-
-   (    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
-        (org-agenda-todo-ignore-scheduled t) )
-
-                                           )
-    ))
+  (defun kiwon/org-agenda-redo-in-other-window ()
+    "Call org-agenda-redo function even in the non-agenda buffer."
+    (interactive)
+    (let ((agenda-window (get-buffer-window org-agenda-buffer-name t)))
+      (when agenda-window
+        (with-selected-window agenda-window (org-agenda-redo)))))
+  (run-at-time nil 300 'kiwon/org-agenda-redo-in-other-window)
 
 
 
-                                                                         #+END_SRC
 
-                                                                         #+RESULTS:
-                                                                         | h | Habits                | tags-todo                                                                                                                                                                                         | STYLE="habit" | ((org-agenda-overriding-header Habits))                                                                                                                                                                                                        |       |           |                                        |
-                                                                         | b | today's habits        | ((agenda  ((org-agenda-span 1))) (tags-todo STYLE="habit"+SCHEDULED<="<today>"))                                                                                                                  |               |                                                                                                                                                                                                                                                |       |           |                                        |
-                                                                         | k | all untagged TODOs    | tags-todo                                                                                                                                                                                         | -{.*}         |                                                                                                                                                                                                                                                |       |           |                                        |
-                                                                         | x | With deadline columns | alltodo                                                                                                                                                                                           |               | ((org-agenda-overriding-columns-format %40ITEM %SCHEDULED %DEADLINE ) (org-agenda-view-columns-initially t) (org-agenda-sorting-strategy '(timestamp-up)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ)))) |       |           |                                        |
-                                                                         | l | all todos             | ((agenda  ((org-agenda-span 1))) (alltodo  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'todo '(AREA 습관 HOLD WAIT PROJ)))) (org-agenda-sorting-strategy '(priority-down)))) |               |                                                                                                                                                                                                                                                |       |           |                                        |
-                                                                         | r | stuff to read         | tags-todo                                                                                                                                                                                         | read          |                                                                                                                                                                                                                                                |       |           |                                        |
-                                                                         | h | all HOLD/WAIT items   | todo                                                                                                                                                                                              | HOLD          | WAIT                                                                                                                                                                                                                                           |       |           |                                        |
-                                                                         | g | all UNSCHEDULED NEXT  | TODAY                                                                                                                                                                                             | IN-PROG       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT                                                                                                                                                                  | TODAY | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |
-                                                                         | u | all UNSCHEDULED       | alltodo                                                                                                                                                                                           |               | ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD PROJ AREA))) (org-agenda-todo-ignore-scheduled t))                                                                                                                     |       |           |                                        |
-
-                                                                      
-#+RESULTS:
-| h | Habits                | tags-todo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | STYLE="habit" | ((org-agenda-overriding-header Habits))                                                                                                                                                                                                        |       |           |                                        |
-| b | today's habits        | ((agenda  ((org-agenda-span 1))) (tags-todo STYLE="habit"+SCHEDULED<="<today>"))                                                                                                                                                                                                                                                                                                                                                                                                            |               |                                                                                                                                                                                                                                                |       |           |                                        |
-| k | all untagged TODOs    | tags-todo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | -{.*}         |                                                                                                                                                                                                                                                |       |           |                                        |
-| x | With deadline columns | alltodo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |               | ((org-agenda-overriding-columns-format %40ITEM %SCHEDULED %DEADLINE ) (org-agenda-view-columns-initially t) (org-agenda-sorting-strategy '(timestamp-up)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ)))) |       |           |                                        |
-| l | all todos             | ((agenda  ((org-agenda-span 1))) (alltodo  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ)))) (org-agenda-sorting-strategy '(priority-down))))                                                                                                                                                                                                                                                                                                           |               |                                                                                                                                                                                                                                                |       |           |                                        |
-| h | all HOLD/WAIT items   | todo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | HOLD          | WAIT                                                                                                                                                                                                                                           |       |           |                                        |
-| g | all UNSCHEDULED NEXT  | TODAY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | IN-PROG       | ((agenda  ((org-agenda-span 2) (org-agenda-clockreport-mode nil))) (todo NEXT                                                                                                                                                                  | TODAY | IN-PROG)) | ((org-agenda-todo-ignore-scheduled t)) |
-| u | all UNSCHEDULED       | ((agenda  ((org-agenda-span 4) (org-agenda-clockreport-mode nil))) (tags-todo ndd ((org-agenda-overriding-header NDD))) (tags-todo lis ((org-agenda-overriding-header LIS))) (tags-todo home ((org-agenda-overriding-header home))) (tags-todo sysadmin ((org-agenda-overriding-header sysadmin))) (tags-todo mentat ((org-agenda-overriding-header mentat))) (((org-agenda-todo-ignore-scheduled t))) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD WAIT PROJ)))) |               |                                                                                                                                                                                                                                                |       |           |                                        |
-
-
-** org-habit
 #+begin_src emacs-lisp :tangle yes
    (setq org-habit-graph-column 80)
    (setq org-habit-show-habits nil)
@@ -412,10 +307,6 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 #+end_src
 
-#+RESULTS:
-
-** org-list, bullets, checkboxes
-*** checkboxes and todo states
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -447,14 +338,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
    (add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo)
 #+END_SRC
 
-#+RESULTS:
-| my/org-checkbox-todo |
 
-
-** org-clock
-:PROPERTIES:
-:UPDATE_DATE: 2020.0823
-:END:
 #+BEGIN_SRC emacs-lisp :tangle yes
   
    (setq org-log-into-drawer t)
@@ -472,8 +356,6 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
            )
        (insert (format-time-string format))))
 
-   (setq org-mru-clock-how-many 80)
-   (setq org-mru-clock-keep-formatting t)
    (defun my-org-clock-select-task ()
      (interactive)
      (org-clock-select-task))
@@ -517,73 +399,19 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 #+END_SRC
 
-#+RESULTS:
-| :maxlevel | 4 | :scope | subtree |
 
 
-
-** org-refile and archiving
-#+BEGIN_SRC emacs-lisp :tangle yes
-   (setq org-refile-allow-creating-parent-nodes (quote confirm))
-   (setq org-refile-use-outline-path (quote file))
-   (setq org-archive-location
-         "~/Dropbox/Zettelkasten/journal.org::datetree/")
-   (setq org-archive-reversed-order nil)
-   (setq org-refile-use-cache t)
-
-   (defun my-org-refile-cache-clear ()
-     (interactive)
-     (org-refile-cache-clear))
-   (define-key org-mode-map (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
-
-
-   (setq org-refile-targets (quote (("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 2)
-                                    ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
-                                    ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
-                                    ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
-				        ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 1)
-                                    ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
-                                    ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 3)
-                                    ("~/Dropbox/Zettelkasten/cal.org" :maxlevel . 2)
-                                    ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2))))
-
-   (setq org-outline-path-complete-in-steps nil) 
-
-                                           ; Refile in a single go
-
-                                           ;  (global-set-key (kbd "<f4>") 'org-refile)
-
-   (setq org-refile-allow-creating-parent-nodes 'confirm)
-
-
-
-#+END_SRC
-
-#+RESULTS:
-: confirm
-
-
-
-
-
-
-#+RESULTS:
-** org-chef
 #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package org-chef
      :defer t
      )
 #+END_SRC
 
-#+RESULTS:
 
-
-** org-ref
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (use-package org-ref
-     :defer t)
+   (use-package org-ref)
    (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
 
    ;; see org-ref for use of these variables
@@ -636,16 +464,6 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 #+END_SRC
 
-#+RESULTS:
-: t
-
-
-
-
-	   
-
-** org-capture
-
 #+BEGIN_SRC emacs-lisp :tangle yes
 
 
@@ -656,25 +474,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                            ;this prevents org-capture from replacing any windows. it just adds. 
 
          #+END_SRC
-
-#+RESULTS:
-: my-org-capture-place-template-dont-delete-windows
-
-(with-eval-after-load "org-capture"
-(advice-add 'org-capture-place-template :around 'my-org-capture-place-template-dont-delete-windows))
-
-;  
-
-;  ("n" "note" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* %^{TOPIC}\n%U\n%? \n%a\n\n\n" :prepend nil)
-
-; ("p" "pomodoro" table-line (id "6w81f6q04qi0") "| %^{Day & time} | %^{How many pomodoros?} | %^{Task} | %^{Area of focus|ndd|lis|home|sysadmin|} |%^{Mode}|  %^{Notes}|" :table-line-pos "I+1" )
-("r" "reading log" table-line (id "em87rza1mni0") "|%^{Author}|%^{Title}|%^{Finished}|" :table-line-pos "I+1" )
-
-
-
-
-
-** org-tags
+        
 #+BEGIN_SRC emacs-lisp :tangle yes
 
    (setq org-complete-tags-always-offer-all-agenda-tags nil)
@@ -753,27 +553,8 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 #+END_SRC
 
-#+RESULTS:
-| ndd      | :inherit | org-tag | :foreground | yellow green |
-| sysadmin | :inherit | org-tag | :foreground | yellow green |
-| lis      | :inherit | org-tag | :foreground | yellow green |
-| mentat   | :inherit | org-tag | :foreground | yellow green |
-| editing  | :inherit | org-tag | :foreground | yellow green |
-| self     | :inherit | org-tag | :foreground | yellow green |
-| home     | :inherit | org-tag | :foreground | yellow green |
-| journal  | :inherit | org-tag | :foreground | dark orange  |
-| job      | :inherit | org-tag | :foreground | dark orange  |
-| csi      | :inherit | org-tag | :foreground | dark orange  |
-| read     | :inherit | org-tag | :foreground | dodger blue  |
-
-
-** org-todo
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (setq org-todo-keywords
-         (quote
-          ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
-           (type "AREA(a)"  "습관(h)"   "HOLD(l)"  "|" "DONE(d)")     )))
-
+  
 
    (setq org-edna-mode t)
    (org-edna-mode)
@@ -782,28 +563,14 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
    (setq org-enforce-todo-dependencies t)
 #+END_SRC
 
-#+RESULTS:
-: t
 
-** org navigation
 #+BEGIN_SRC emacs-lisp :tangle yes
-;   (setq org-id-link-to-org-use-id (quote create-if-interactive))
-   (setq org-id-link-to-org-use-id (quote create-if-interactive))
-
-   (setq org-id-method (quote org))
-   (setq org-return-follows-link t)
-   (setq org-goto-interface (quote outline-path-completion))
-                                           ;   (add-hook 'org-mode-hook (lambda () (org-sticky-header-mode 1)))
-
-
-   (setq global-visible-mark-mode t)
+  ;   (setq org-id-link-to-org-use-id (quote create-if-interactive))
 
 #+END_SRC
 
-#+RESULTS:
-: t
 
-** org-misc
+
 #+BEGIN_SRC emacs-lisp :tangle yes
    (setq org-modules
 	 (quote
@@ -842,7 +609,6 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 
 
-* accessibility
 #+begin_src emacs-lisp :tangle yes
         (defhydra hydra-zoom (:color red)  "zoom"
           ("=" text-scale-increase "in")
@@ -869,8 +635,6 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 
 
-* navigating
-** DEFT 
 #+begin_src emacs-lisp :tangle yes
    (use-package deft
      :ensure t)
@@ -892,10 +656,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 #+end_src
 
-#+RESULTS:
-| visual-line-mode |
 
-** HELM
 #+begin_src emacs-lisp :tangle yes
   (setq history-delete-duplicates t)
   (setq helm-M-x-always-save-history t)
@@ -923,14 +684,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
   (setq ido-file-extensions-order '(".org" ".txt" ".emacs" ".el" ".ini" ".cfg" ".cnf"))
 
-  (use-package projectile
-    :ensure t
-    )
-  (use-package helm-projectile
-    :ensure t
-    )
 
-  (projectile-mode +1)
   (setq zoom-mode t)
 
   (defun size-callback ()
@@ -952,10 +706,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
                                           ;If you want to mark a folder manually as a project just create an empty .projectile file in it.
 #+END_SRC
 
-#+RESULTS:
-** windows
 
-*** window functions
 #+BEGIN_SRC emacs-lisp :tangle yes
                                           ;   (eyebrowse-mode t)
                                           ;undo and redo changes in window configuration eg go to previous buffer 
@@ -994,11 +745,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 
 #+END_SRC
 
-#+RESULTS:
-: window-split-toggle
 
-
-** in buffers
 #+begin_src emacs-lisp :tangle yes
   (eval-after-load "helm"
     '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
@@ -1008,9 +755,9 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 #+RESULTS:
 : ace-jump-helm-line
 
-* resume
 
-* debugging
+
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq debug-on-error nil)
 
@@ -1047,7 +794,7 @@ CLOCK: [2020-07-06 Mon 10:55]--[2020-07-06 Mon 10:57] =>  0:02
 : test-emacs
 https://emacs.stackexchange.com/questions/28429/how-do-i-troubleshoot-emacs-problems
 
-* web
+
 (setq browse-url-browser-function 'browse-url-generic
 browse-url-generic-program "brave-browser")
 
@@ -1084,8 +831,6 @@ browse-url-generic-program "brave-browser")
 : t
 
 
-
-* buffer file encoding
 C-h C RET
 M-x describe-current-coding-system
 
@@ -1160,7 +905,7 @@ M-x describe-current-coding-system
 
 #+RESULTS:
 : lawlist-read-buffer-file-coding-syste
-* Autosave-backup-git
+
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq auto-save-default t)
@@ -1172,9 +917,6 @@ M-x describe-current-coding-system
 
 #+RESULTS:
 : ((. . ~/Dropbox/emacs/.emacs.d/backups))
-
-* pdf-tools
-
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -1203,10 +945,6 @@ M-x describe-current-coding-system
 
 
 #+END_SRC
-
-#+RESULTS:
-: t
-
 
 
 
@@ -1259,7 +997,6 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 
 #+RESULTS:
 
-* yasnippet & yankpad
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -1320,9 +1057,6 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 
 
 
-* STOP
-
-* HYDRAS
 #+begin_src emacs-lisp :tangle yes
 
   (defhydra hydra-org (:color amaranth :columns 3)
@@ -1399,7 +1133,7 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 #+RESULTS:
 : goto/body
 
-* DIRED
+
 :PROPERTIES:
 :ID:       oi0gh0v0dti0
 :UPDATE_DATE: 2020.0822 opens ok
@@ -1422,17 +1156,8 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
   (diredp-toggle-find-file-reuse-dir nil)
 #+END_SRC
 
-#+RESULTS:
-: Reusing Dired buffers is now OFF
 
 
-: ^\.?#\|^\.$\|^\.\.$\|^.DS_STORE$\|^.projectile$\|^.org~$\|^.DS_STORE$\|^.projectile$\|^.org~$
-
-
-#+RESULTS:
-: hydra-dired/body
-
-* NEW snippets
 #+begin_src emacs-lisp :tangle yes
 
 
@@ -1444,13 +1169,13 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 
   (use-package org-drill)
 
-  (setq org-src-fontify-natively t)
-  (setq display-time-mode t)
   (setq fill-flowed-encode-column 1000)
-  (setq org-contacts-files (quote ("~/Dropbox/Zettelkasten/contacts.org")))
-  (setq org-timer-display (quote both))
+   (setq org-timer-display (quote both))
 
 
+
+
+ 
                                           ;   (global-activity-watch-mode)
 
   (centered-cursor-mode nil)
@@ -1465,10 +1190,8 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
                                           ; (global-mu4e-conversation-mode)
 #+end_src
 
-#+RESULTS:
-| org-download-enable | dired-omit-mode | (lambda nil (dired-omit-mode 1)) | pdf-occur-dired-minor-mode | diredp-nb-marked-in-mode-name | diredp--set-up-font-locking | (lambda nil (let ((now (lookup-key dired-mode-map J))) (if (and now (not (eq now 'undefined))) nil (define-key dired-mode-map J 'bmkp-dired-jump)) (setq now (lookup-key dired-mode-map |
 
-* calendar & calfw
+
 #+BEGIN_SRC emacs-lisp :tangle yes
 
   (use-package calfw)
@@ -1507,13 +1230,10 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 
 
 
-* epub
 #+begin_src emacs-lisp  :tangle yes
 
-  (setq nov-post-html-render-hook  (lambda () (visual-line-mode 1)))
   (add-hook 'ereader-mode-hook (lambda () (visual-line-mode 1)))
   (add-hook 'ereader-mode-hook (lambda () (olivetti-mode 1)))
-  (add-hook 'nov-post-html-render-hook 'olivetti-mode)
 
 #+end_src
 
@@ -1523,7 +1243,6 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 
 
 
-* usability (editing)
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1556,84 +1275,7 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 
 
 
-* anki
-#+begin_src emacs-lisp :tangle yes
-  (setq select-enable-clipboard t
-        x-select-enable-primary nil)
-  (use-package anki-editor
-    :after org
-    :hook (org-capture-after-finalize . anki-editor-reset-cloze-number) ; Reset cloze-number after each capture.
-    :config
-    (setq anki-editor-create-decks t)
-    (defun anki-editor-cloze-region-auto-incr (&optional arg)
-      "Cloze region without hint and increase card number."
-      (interactive)
-      (anki-editor-cloze-region my-anki-editor-cloze-number "")
-      (setq my-anki-editor-cloze-number (1+ my-anki-editor-cloze-number))
-      (forward-sexp))
-    (defun anki-editor-cloze-region-dont-incr (&optional arg)
-      "Cloze region without hint using the previous card number."
-      (interactive)
-      (anki-editor-cloze-region (1- my-anki-editor-cloze-number) "")
-      (forward-sexp))
-    (defun anki-editor-reset-cloze-number (&optional arg)
-      "Reset cloze number to ARG or 1"
-      (interactive)
-      (setq my-anki-editor-cloze-number (or arg 1)))
-    (defun anki-editor-push-tree ()
-      "Push all notes under a tree."
-      (interactive)
-      (anki-editor-push-notes '(4))
-      (anki-editor-reset-cloze-number))
-    ;; Initialize
-    (anki-editor-reset-cloze-number)
-    )
 
-
-
-
-
-
-#+end_src
-
-#+RESULTS:
-| anki-editor-reset-cloze-number | yankpad--remove-id-from-yankpad-capture |
-
-* chronos
-#+begin_src emacs-lisp :tangle yes
-
-  (use-package org-alert)
-  (use-package chronos)
-  (use-package helm-chronos)
-
-  (setq chronos-expiry-functions '(chronos-sound-notify
-                                   chronos-dunstify
-                                   chronos-buffer-notify
-
-                                   ))
-  (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-
-  (setq helm-chronos-standard-timers
-        '( "=14:00/aal shift + -5/aal shift in 5 + =18:00/end shift + -5/end shift in 5"
-           "=10:00/csi oer + -5/csi shift in 5 + =15:00/end shift + -5/end shift in 5"
-           "=9:00/nyu backup shift + -5/shift in 5 + =12:00/switch to aal + -5/switch in 5"
-           "=18:00/csi reference + -5/shift in 5 + =22:00/end shift + -5/end shift in 5"
-           ))
-
-#+end_src
-
-#+RESULTS:
-| =14:00/aal shift + -5/aal shift in 5 + =18:00/end shift + -5/end shift in 5 | =10:00/csi oer + -5/csi shift in 5 + =15:00/end shift + -5/end shift in 5 | =9:00/nyu backup shift + -5/shift in 5 + =12:00/switch to aal + -5/switch in 5 | =18:00/csi reference + -5/shift in 5 + =22:00/end shift + -5/end shift in 5 |
-
-
-(use-package pomidor)
-(setq pomidor-save-session-file "~/Dropbox/emacs/.emacs.d/pomidor-session.json")
-(setq pomidor-sound-break-over "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-(setq pomidor-sound-overwork "~/Dropbox/emacs/.emacs.d/overwork.wav")
-(setq pomidor-sound-tick "~/Dropbox/emacs/.emacs.d/tick.wav")
-(setq pomidor-sound-tack "~/Dropbox/emacs/.emacs.d/tack.wav")
-
-* openwith   
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package openwith
@@ -1670,30 +1312,8 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 
 #+END_SRC
 
-#+RESULTS:
-: crux-ispell-word-then-abbrev
 
-(require 'run-assoc)
-(setq associated-program-alist
-'(("libreoffice" "\\.docx$")
-("libreoffice" "\\.xsls$")
-;		("evince" "\\.pdf$")
-;		("mplayer" "\\.mp3$")
-;		("evince" "\\.ps$")
-((lambda (file)
-(browse-url (concat "file:///" (expand-file-name file)))) "\\.html?$")))
-
-
-
-
-
-
-
-
-* org-roam
-:PROPERTIES:
-:UPDATE_DATE: 2020.0822
-:END:
+:UPDATE_DATE: 2020
 https://www.reddit.com/r/emacs/comments/ioq1et/incorrect_time_output/
 (format-time-string "%b%d%Y-%I%M" (current-time) t)
 
@@ -1703,37 +1323,6 @@ What is going on?
 
 EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time being used and nil to system clock being used.
 
-#+begin_src emacs-lisp :tangle yes
-
-  (use-package org-roam)
-
-  (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CONTEXT: %a\n:END:\n%?" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
-                                      "#+title: ${title}" :unnarrowed t :kill-buffer t)))
-
-
-  (setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
-
-  (defun my/org-roam--title-to-slug (title) ;;<< changed the name
-    "Convert TITLE to a filename-suitable slug."
-    (cl-flet* ((nonspacing-mark-p (char)
-                                  (eq 'Mn (get-char-code-property char 'general-category)))
-               (strip-nonspacing-marks (s)
-                                       (apply #'string (seq-remove #'nonspacing-mark-p
-                                                                   (ucs-normalize-NFD-string s))))
-               (cl-replace (title pair)
-                           (replace-regexp-in-string (car pair) (cdr pair) title)))
-      (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
-                      ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
-                      ("^_" . "")  ;; remove starting underscore
-                      ("_$" . "")))  ;; remove ending underscore
-             (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
-        (downcase slug))))
-
-
-  (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
-
-
-#+end_src
 
 #+RESULTS:
 : org-super-links-insert-link
@@ -1756,7 +1345,6 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 
 
 
-* diminish
 #+BEGIN_SRC emacs-lisp :tangle yes
   (require 'diminish)
   (diminish 'activity-watch-mode "aw")
@@ -1775,7 +1363,6 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 
 
 
-* keybindings
 
 
 #+begin_src emacs-lisp :tangle yes
@@ -1796,22 +1383,16 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
   (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
   (define-key org-mode-map (kbd "C-y") 'yank)
   (global-unset-key (kbd "S-SPC"))
-  (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
-  (global-set-key (kbd "C-c <f2>") 'org-clock-out)
   (global-unset-key (kbd "C-c C-x C-r"))
-  (global-set-key (kbd "<f1>") 'org-capture)
-  (define-key dired-mode-map (kbd "<f1>") 'org-capture)
+
                                           ; (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
                                           ;  (define-key dired-mode-map (kbd "<Hangul>-z") 'ace-jump-mode)
-  (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
   (bind-keys 
 
 
                                           ;("C-+"   . text-scale-increase)
    ("C-c p" . org-set-property)
    ("C-y" . yank)                                  ;   a      ("C--"   . text-scale-decrease)
-   ("C-c l" . org-store-link)
-   ("C-c C-l" . org-insert-link)
    ("M-<f3>" . org-super-links-store-link)
    ("C-c <f3>" . org-super-links-insert-link)
 
@@ -1825,37 +1406,26 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 
    ("M-="   . count-words)
 
-   ("<Hangul> x" . helm-M-x)
-   ("C-c b" . list-bookmarks)
-                                          ;    ("C-a" . org-beginning-of-line)
-   ("M-<f2>" . org-mru-clock-in)                                  ;          ([menu] . toggle-input-method)
+  
    ("M-<f4>" . org-time-stamp-inactive)
    ("M-<f5>" . org-time-stamp)      
                                           ;   ("C-e" . org-end-of-line)
    ("C-k" . org-kill-line)
-                                          ;              ("C-<kp-6>" . xah-select-block)
+
    ("C-x C-b" . bufler-list)                              ;   ("C-x j" . helm-org-in-buffer-headings)
    ("C-x b" . bufler-switch-buffer)
    ("C-c i" . insert-timestamp)
                                           ;  ("C-c a" . helm-org-agenda-files-headings)
    ("C-c C-x C-r" . org-clock-report)
-   ("C-c <f1>" . org-roam-capture)
+
    ("M-[" . org-metaleft)
    ("M-]" . org-metaright)
    ("M-{" . org-shiftmetaleft)
    ("M-}" . org-shiftmetaright)
-   ([f1] . org-capture)
-   ([f2] . org-clock-in)
-                                          ;    ([f3] . frog-jump-buffer)           
 
-   ([f4] . org-refile)
-   ([f5] . helm-projectile)
    ([f6] . helm-bibtex-with-local-bibliography)
-   ([f7] . org-agenda)
    ([f8] . deft)
    ([f9] . helm-swoop-without-pre-input)
-   ([f10] . org-tree-to-indirect-buffer)
-   ([f11] . org-id-goto)
    ([f12] . bury-buffer)
 
    )
@@ -1865,25 +1435,14 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
                                           ;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
                                           ;  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
-  (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-  (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
-  (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-  (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-  (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-  (define-key key-translation-map (kbd "C-_") (kbd "–"))
 
-  (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
   (define-key key-translation-map (kbd "C-c C-<right>")  (kbd "🡆"))
-  (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
 
 #+end_src
 
 #+RESULTS:
 : [8756]
 
-
-
-* theme
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1904,7 +1463,7 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 #+RESULTS:
 : t
 
-* mu4e
+
 [[file:~/.mbsyncrc::IMAPAccount gmail]]
 
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1968,19 +1527,8 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
      :key   ?b))
 #+END_SRC
   
-#+RESULTS:
-| :name | Big messages         | :query | size:20M..500M                       | :key         |  98 |      |     |
-| :name | Big messages         | :query | size:40M..500M                       | :key         |  98 |      |     |
-| :name | Big messages         | :query | size:50M..500M                       | :key         |  98 |      |     |
-| :name | Big messages         | :query | size:10M..500M                       | :key         |  98 |      |     |
-| :name | Big messages         | :query | size:5M..500M                        | :key         |  98 |      |     |
-| :name | inbox                | :query | maildir:/gmail/INBOX                 | :key         | 105 |      |     |
-| :name | Unread messages      | :query | flag:unread AND maildir:/gmail/INBOX | :key         | 117 |      |     |
-| :name | Today's messages     | :query | date:today..now                      | :key         | 116 |      |     |
-| :name | Last 7 days          | :query | date:7d..now                         | :hide-unread |   t | :key | 119 |
-| :name | Messages with images | :query | mime:image/*                         | :key         | 112 |      |     |
   
-** message view
+
 
 #+BEGIN_SRC emacs-lisp :tangle yes
                                               ;  (setq mu4e-attachment-dir "/home/betsy/Dropbox/Spring 2019/")
@@ -2027,10 +1575,7 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 
 #+END_SRC
 
-#+RESULTS:
-| visual-fill-column-mode | turn-on-orgtbl | org-contacts-setup-completion-at-point |
 
-** headers view
 
  
 
@@ -2060,7 +1605,7 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 #+RESULTS:
 : %H:%M
 
-** settings
+
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -2087,7 +1632,7 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 #+RESULTS:
 : t
 
-** folders
+
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
@@ -2109,7 +1654,6 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 
 
 
-* custom.el
 #+begin_src emacs-lisp
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -2760,27 +2304,44 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bold ((t (:foreground "#ba5536" :weight bold))))
+
  '(diredp-dir-name ((t (:foreground "royalblue2" :weight bold))))
  '(frog-menu-border ((t (:background "RoyalBlue4"))))
  '(frog-menu-posframe-background-face ((t (:background "RoyalBlue4"))))
  '(hl-line ((t (:extend t :background "gray25"))))
- '(italic ((t (:foreground "#31a9b8" :slant italic))))
+
 
  '(on-screen-narrow-line ((t (:underline "dark gray" :width normal))))
  '
- 
- '
-
-
 
 (org-tag-group ((t (:inherit nil :foreground "dodger blue"))))
 
  '(region ((t (:extend t :background "#1a3300"))))
- '(underline ((t (:foreground "#89da59" :underline t))))
+
 
 
 
 #+end_src
  '(mode-line ((t (:background "#1c1e24" :foreground "medium spring green" :box nil :family "monofur"))))
 '(variable-pitch ((t (:family "KoHo")))))
+
+#+begin_src emacs-lisp :tangle yes
+  (setq select-enable-clipboard t
+        x-select-enable-primary nil)
+
+
+
+
+
+
+#+end_src
+
+#+RESULTS:
+| anki-editor-reset-cloze-number | yankpad--remove-id-from-yankpad-capture |
+
+(use-package pomidor)
+(setq pomidor-save-session-file "~/Dropbox/emacs/.emacs.d/pomidor-session.json")
+(setq pomidor-sound-break-over "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+(setq pomidor-sound-overwork "~/Dropbox/emacs/.emacs.d/overwork.wav")
+(setq pomidor-sound-tick "~/Dropbox/emacs/.emacs.d/tick.wav")
+(setq pomidor-sound-tack "~/Dropbox/emacs/.emacs.d/tack.wav")
