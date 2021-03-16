@@ -1,6 +1,4 @@
 #+begin_src emacs-lisp :tangle yes
-  (define-key dired-mode-map (kbd "<f1>") 'org-capture)
-
 
   (setq  org-agenda-sorting-strategy 
          '((agenda time-up)
@@ -131,7 +129,7 @@
 (load "unbound")
 (load "org-checklist")
 (load "org-notify")
-(load "dired+")
+
 (load "clipboard2org")
 (load "pymupdf-mode")
 (load "org-super-links")
@@ -411,61 +409,6 @@
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (use-package org-ref)
-   (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
-
-   ;; see org-ref for use of these variables
-   (setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/readings.org"
-         org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
-         org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/")
-   (setq org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/")
-   (setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
-
-         bibtex-completion-notes-path "~/Dropbox/Zettelkasten/readings.org")
-   (setq org-ref-prefer-bracket-links t)
-   ;; open pdf with system pdf viewer (works on mac)
-   (setq bibtex-completion-pdf-open-function
-         (lambda (fpath)
-           (start-process "open" "*open*" "open" fpath)))
-
-
-                                           ;  (setq pdf-view-continuous nil)
-
-                                           ;  (setq bibtex-autokey-year-title-separator "")
-                                           ; (setq bibtex-autokey-titleword-length 0)
-
-
-   (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:TYPE:\n:AREA:\n:END:")
-
-   (setq bibtex-maintain-sorted-entries t)
-
-   (use-package org-noter
-     :ensure t
-     :defer t
-     :config (setq org-noter-property-doc-file "INTERLEAVE_PDF")
-     (setq org-noter-property-note-location "INTERLEAVE_PAGE_NOTE") 
-                                           ;       (setq org-noter-notes-window-location 'other-frame)
-                                           ;      (setq org-noter-default-heading-title "p. $p$") 
-     (setq org-noter-auto-save-last-location t))
-
-   (use-package interleave 
-     :defer t
-     )
-   (setq org-noter-always-create-frame nil)
-   (setq org-noter-auto-save-last-location t)
-   (setq org-noter-default-heading-title "$p$: ")
-   (setq org-noter-default-notes-file-names (quote ("~/Dropbox/Zettelkasten/readings.org")))
-   (setq org-noter-doc-split-fraction (quote (0.75 . 0.75)))
-   (setq org-noter-insert-note-no-questions t)
-   (setq org-noter-kill-frame-at-session-end nil)
-   (setq org-noter-notes-search-path (quote ("~/Dropbox/Zettelkasten/")))
-   (setq org-noter-notes-window-location (quote horizontal-split))
-(setq org-noter-insert-selected-text-inside-note t)
-
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
 
    (defun my-org-capture-place-template-dont-delete-windows (oldfun args)
      (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
@@ -572,9 +515,6 @@
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (setq org-modules
-	 (quote
-	  (ol-bibtex ol-eww org-habit org-id org-protocol ol-w3m ol-bookmark org-checklist org-depend org-registry)))
    (require 'cl) 
    (setq org-babel-load-languages '((emacs-lisp . t)
 				    (css . t)
@@ -635,26 +575,6 @@
 
 
 
-#+begin_src emacs-lisp :tangle yes
-   (use-package deft
-     :ensure t)
-   (setq deft-directory "~/Dropbox/Zettelkasten/")
-   (setq deft-default-extension "org")
-   (setq deft-time-format " %b-%Y %H:%M")
-   (setq deft-use-filename-as-title t)
-   (setq deft-new-file-format "%Y%b%d")
-   (setq deft-text-mode 'org-mode)
-   (setq deft-file-naming-rules '((noslash . "-")
-                                  (nospace . "-")
-                                  (case-fn . downcase))) 
-   (setq deft-recursive t)
-   (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
-   (setq deft-auto-save-interval 15.0)
-   (add-hook 'after-init-hook 'deft)
-   (add-hook 'deft-mode-hook #'visual-line-mode)
-
-
-#+end_src
 
 
 #+begin_src emacs-lisp :tangle yes
@@ -711,17 +631,6 @@
                                           ;   (eyebrowse-mode t)
                                           ;undo and redo changes in window configuration eg go to previous buffer 
 
-
-  (defun transpose-windows ()
-    (interactive)
-    (let ((this-buffer (window-buffer (selected-window)))
-          (other-buffer (prog2
-                            (other-window +1)
-                            (window-buffer (selected-window))
-                          (other-window -1))))
-      (switch-to-buffer other-buffer)
-      (switch-to-buffer-other-window this-buffer)
-      (other-window -1)))
 
 
 
@@ -909,7 +818,7 @@ M-x describe-current-coding-system
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq auto-save-default t)
-  (setq dired-auto-revert-buffer (quote dired-directory-changed-p))
+
   (setq auto-save-timeout 10)
   (setq backup-directory-alist '(("." . "~/Dropbox/emacs/.emacs.d/backups")))
 
@@ -1139,20 +1048,7 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 :UPDATE_DATE: 2020.0822 opens ok
 :END:
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (add-hook 'dired-load-hook
-            (function (lambda () (load "dired-x"))))
-
-  (add-hook 'dired-mode-hook
-            (lambda ()
-              ;; Set dired-x buffer-local variables here.  For example:
-              (dired-omit-mode 1)
-              ))
-  (setq dired-omit-verbose nil)
-  ;; toggle `dired-omit-mode' with C-x M-o
-  (add-hook 'dired-mode-hook #'dired-omit-mode)
-  (setq dired-omit-files
-        (concat dired-omit-files "\\|^.DS_STORE$\\|^.projectile$\\|^.org~$"))
-                                          ;added 2020.0822. opens ok. 
+ ;added 2020.0822. opens ok. 
   (diredp-toggle-find-file-reuse-dir nil)
 #+END_SRC
 
@@ -1424,7 +1320,7 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
    ("M-}" . org-shiftmetaright)
 
    ([f6] . helm-bibtex-with-local-bibliography)
-   ([f8] . deft)
+
    ([f9] . helm-swoop-without-pre-input)
    ([f12] . bury-buffer)
 
@@ -1693,10 +1589,7 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
  '(line-spacing 0.1)
  '(ls-lisp-dirs-first t)
  '(mc/insert-numbers-default 1)
- '(mode-line-format
-   '("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote " " mode-line-misc-info mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
-     (vc-mode vc-mode)
-     "  " mode-line-modes mode-line-end-spaces))
+
  '(mouse-autoselect-window 0.5)
  '(mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control))))
  '(mu4e-bookmarks
@@ -2337,7 +2230,7 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 #+end_src
 
 #+RESULTS:
-| anki-editor-reset-cloze-number | yankpad--remove-id-from-yankpad-capture |
+| anki-editor-reset-cloze-number  | yankpad--remove-id-from-yankpad-capture |
 
 (use-package pomidor)
 (setq pomidor-save-session-file "~/Dropbox/emacs/.emacs.d/pomidor-session.json")

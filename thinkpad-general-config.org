@@ -1,4 +1,4 @@
-#+PROPERTY: header-args    :results silent
+
 
 * Minimum Usability
 
@@ -20,27 +20,84 @@
   (delete-selection-mode) ;allows to delete selected text by typing
   (global-set-key (kbd "M-o") 'other-window)
   (setq org-support-shift-select t)
-  (setq debug-on-error t)
+;  (setq debug-on-error t)
 #+END_SRC
 
 * UX
 ** navigation
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package helm
-          :bind (("M-x"   . helm-M-x)
-                 ([f3] . helm-buffers-list)       
-                 ("<Hangul> x" . helm-M-x)    
-                 ))
-     (use-package projectile
-          :config
-          (projectile-mode +1))
+                    (use-package helm
+                         :bind (("M-x"   . helm-M-x)
+                                ([f3] . helm-buffers-list)       
+                                ("<Hangul> x" . helm-M-x)    
+                                ))
+                    (use-package projectile
+                         :config
+                         (projectile-mode +1))
 
-     (use-package helm-projectile
-          :bind    ([f5] . helm-projectile))
+                    (use-package helm-projectile
+                         :bind    ([f5] . helm-projectile))
 
-     (use-package bufler)
-     (setq org-special-ctrl-a/e (quote (t . t)))
-   #+END_SRC  
+                    (use-package bufler
+                      :custom
+                      (bufler-column-name-width 70)
+                      (bufler-filter-buffer-modes nil))
+                    (setq org-special-ctrl-a/e (quote (t . t)))
+   #+END_SRC
+
+   #+RESULTS:
+   : (t . t)
+
+** dired
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (load "dired+")
+    (define-key dired-mode-map (kbd "<f1>") 'org-capture)
+  (setq dired-auto-revert-buffer (quote dired-directory-changed-p))
+  (add-hook 'dired-load-hook
+            (function (lambda () (load "dired-x"))))
+
+  (add-hook 'dired-mode-hook
+            (lambda ()
+              ;; Set dired-x buffer-local variables here.  For example:
+              (dired-omit-mode 1)
+              ))
+  (setq dired-omit-verbose nil)
+  ;; toggle `dired-omit-mode' with C-x M-o
+  (add-hook 'dired-mode-hook #'dired-omit-mode)
+  (setq dired-omit-files
+        (concat dired-omit-files "\\|^.DS_STORE$\\|^.projectile$\\|^.org~$"))
+                                         
+#+END_SRC
+
+#+RESULTS:
+: \`[.]?#\|\`[.][.]?\'\|^.DS_STORE$\|^.projectile$\|^.org~$
+** deft
+#+begin_src emacs-lisp :tangle yes
+       (use-package deft
+         :ensure t
+         :bind
+            ([f8] . deft))
+       (setq deft-directory "~/Dropbox/Zettelkasten/")
+       (setq deft-default-extension "org")
+       (setq deft-time-format " %b-%Y %H:%M")
+       (setq deft-use-filename-as-title t)
+       (setq deft-new-file-format "%Y%b%d")
+       (setq deft-text-mode 'org-mode)
+       (setq deft-file-naming-rules '((noslash . "-")
+                                      (nospace . "-")
+                                      (case-fn . downcase))) 
+       (setq deft-recursive t)
+       (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
+       (setq deft-auto-save-interval 15.0)
+       (add-hook 'after-init-hook 'deft)
+       (add-hook 'deft-mode-hook #'visual-line-mode)
+
+
+#+end_src
+
+#+RESULTS:
+| visual-line-mode |
+
 ** functionality
 #+BEGIN_SRC emacs-lisp  :tangle yes
   (use-package s)
@@ -68,9 +125,35 @@
   (sp-pair "'" nil :actions :rem)
 
 
+
+ (setq org-modules
+	 (quote
+	  (ol-bibtex ol-eww org-habit org-id org-protocol ol-w3m ol-bookmark org-checklist org-depend org-registry)))
+  
 #+END_SRC
 
+#+RESULTS:
+| ol-bibtex | ol-eww | org-habit | org-id | org-protocol | ol-w3m | ol-bookmark | org-checklist | org-depend | org-registry |
 
+** windows
+#+BEGIN_SRC emacs-lisp
+(setq org-indirect-buffer-display 'current-window)
+  (defun transpose-windows ()
+    (interactive)
+    (let ((this-buffer (window-buffer (selected-window)))
+          (other-buffer (prog2
+                            (other-window +1)
+                            (window-buffer (selected-window))
+                          (other-window -1))))
+      (switch-to-buffer other-buffer)
+      (switch-to-buffer-other-window this-buffer)
+      (other-window -1)))
+
+
+#+END_SRC
+
+#+RESULTS:
+: transpose-windows
 
 ** autosave/backup
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -103,7 +186,6 @@
   (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
   (global-set-key (kbd "C-c <f2>") 'org-clock-out)
   (global-set-key (kbd "<f1>") 'org-capture)
-
   (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
 
   (bind-keys
@@ -225,6 +307,22 @@
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
 #+END_SRC
+
+** accessibility
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package hydra)
+   (defhydra hydra-zoom (:color red)  "zoom"
+          ("=" text-scale-increase "in")
+          ("-" text-scale-decrease "out")
+          ("0" (text-scale-adjust 0) "reset")
+          ("o" (other-window) "other window")
+          ("q" nil "quit" :color blue))
+
+        (global-set-key (kbd "C-=") 'hydra-zoom/body)
+(use-package visual-fill-column)
+#+END_SRC
+
+#+RESULTS:
 
 * org-refile and archiving
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -383,40 +481,38 @@ removed templates:
 * *mentat*
 ** anki
   #+BEGIN_SRC emacs-lisp :tangle yes
-
-
- (use-package anki-editor
-   :config
-   (setq anki-editor-create-decks t)
-          (defun anki-editor-cloze-region-auto-incr (&optional arg)
-     "Cloze region without hint and increase card number."
-     (interactive)
-     (anki-editor-cloze-region my-anki-editor-cloze-number "")
-     (setq my-anki-editor-cloze-number (1+ my-anki-editor-cloze-number))
-     (forward-sexp))
-   (defun anki-editor-cloze-region-dont-incr (&optional arg)
-     "Cloze region without hint using the previous card number."
-     (interactive)
-     (anki-editor-cloze-region (1- my-anki-editor-cloze-number) "")
-     (forward-sexp))
-   (defun anki-editor-reset-cloze-number (&optional arg)
-     "Reset cloze number to ARG or 1"
-     (interactive)
-     (setq my-anki-editor-cloze-number (or arg 1)))
-   (defun anki-editor-push-tree ()
-     "Push all notes under a tree."
-     (interactive)
-     (anki-editor-push-notes '(4))
-     (anki-editor-reset-cloze-number))
-   ;; Initialize
-   (anki-editor-reset-cloze-number)
-
-
-   )
+(use-package anki-editor
+  :after org
+  :hook (org-capture-after-finalize . anki-editor-reset-cloze-number) ; Reset cloze-number after each capture.
+  :config
+  (setq anki-editor-create-decks t)
+  (defun anki-editor-cloze-region-auto-incr (&optional arg)
+    "Cloze region without hint and increase card number."
+    (interactive)
+    (anki-editor-cloze-region my-anki-editor-cloze-number "")
+    (setq my-anki-editor-cloze-number (1+ my-anki-editor-cloze-number))
+    (forward-sexp))
+  (defun anki-editor-cloze-region-dont-incr (&optional arg)
+    "Cloze region without hint using the previous card number."
+    (interactive)
+    (anki-editor-cloze-region (1- my-anki-editor-cloze-number) "")
+    (forward-sexp))
+  (defun anki-editor-reset-cloze-number (&optional arg)
+    "Reset cloze number to ARG or 1"
+    (interactive)
+    (setq my-anki-editor-cloze-number (or arg 1)))
+  (defun anki-editor-push-tree ()
+    "Push all notes under a tree."
+    (interactive)
+    (anki-editor-push-notes '(4))
+    (anki-editor-reset-cloze-number))
+  ;; Initialize
+  (anki-editor-reset-cloze-number)
+  )
   #+END_SRC
 
   #+RESULTS:
-  : t
+  | anki-editor-reset-cloze-number |
   :after org
 
   ; Reset cloze-number after each capture.
@@ -468,7 +564,7 @@ removed templates:
 
   (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CONTEXT: %a\n:END:\n%?" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
                                       "#+title: ${title}" :unnarrowed t :kill-buffer t)))
-
+(setq org-roam-completion-system 'helm)
 
   (setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
 
@@ -496,6 +592,67 @@ removed templates:
 
 #+RESULTS:
 : my/org-roam--title-to-slug
+
+** references/citations
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+   (use-package org-ref)
+   (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
+
+   ;; see org-ref for use of these variables
+   (setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/readings.org"
+         org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
+         org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/")
+   (setq org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/")
+   (setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
+
+         bibtex-completion-notes-path "~/Dropbox/Zettelkasten/readings.org")
+   (setq org-ref-prefer-bracket-links t)
+   ;; open pdf with system pdf viewer (works on mac)
+   (setq bibtex-completion-pdf-open-function
+         (lambda (fpath)
+           (start-process "open" "*open*" "open" fpath)))
+
+
+                                           ;  (setq pdf-view-continuous nil)
+
+                                           ;  (setq bibtex-autokey-year-title-separator "")
+                                           ; (setq bibtex-autokey-titleword-length 0)
+
+
+   (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:TYPE:\n:AREA:\n:END:")
+
+   (setq bibtex-maintain-sorted-entries t)
+
+   (use-package org-noter
+     :ensure t
+     :defer t
+     :config (setq org-noter-property-doc-file "INTERLEAVE_PDF")
+     (setq org-noter-property-note-location "INTERLEAVE_PAGE_NOTE") 
+                                           ;       (setq org-noter-notes-window-location 'other-frame)
+                                           ;      (setq org-noter-default-heading-title "p. $p$") 
+     (setq org-noter-auto-save-last-location t))
+
+   (use-package interleave 
+     :defer t
+     )
+   (setq org-noter-always-create-frame nil)
+   (setq org-noter-auto-save-last-location t)
+   (setq org-noter-default-heading-title "$p$: ")
+   (setq org-noter-default-notes-file-names (quote ("~/Dropbox/Zettelkasten/readings.org")))
+   (setq org-noter-doc-split-fraction (quote (0.75 . 0.75)))
+   (setq org-noter-insert-note-no-questions t)
+   (setq org-noter-kill-frame-at-session-end nil)
+   (setq org-noter-notes-search-path (quote ("~/Dropbox/Zettelkasten/")))
+   (setq org-noter-notes-window-location (quote horizontal-split))
+(setq org-noter-insert-selected-text-inside-note t)
+
+#+END_SRC
+
+#+RESULTS:
+: t
+
 * chronos
   #+begin_src emacs-lisp :tangle yes
 
