@@ -21,7 +21,7 @@
  '(bibtex-autokey-names-stretch 1)
  '(bibtex-autokey-titleword-length 0)
  '(bibtex-autokey-year-length 4)
- '(bmkp-last-as-first-bookmark-file "/home/betsy/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(browse-url-secondary-browser-function 'eww-browse-url)
  '(default-input-method "korean-hangul")
  '(display-time-mode t)
@@ -59,7 +59,7 @@
  '(org-agenda-export-html-style
    "<link rel=\"stylesheet\" href=\"\\home\\betsy\\Dropbox\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
  '(org-clock-clocktable-default-properties
-   '(:maxlevel 4 :hidefiles t :tags t :tcolumns 1 :narrow 30 :level nil :link t))
+   '(:maxlevel 4 :hidefiles t :tags t :tcolumns 1 :narrow 30 :level nil :link t) t)
  '(org-clock-in-resume nil)
  '(org-download-delete-image-after-download t)
  '(org-download-image-dir "/home/betsy/Dropbox/Zettelkasten/images")
@@ -120,7 +120,7 @@
  '(org-wild-notifier-keyword-whitelist nil)
  '(org-wild-notifier-mode t)
  '(package-selected-packages
-   '(csv-mode ox-extra helm-chronos chronos worf ox-tufte wc-goal-mode org-wc helm-org-ql calibredb amread-mode copyit-pandoc image+ org-alert org-wild-notifier workgroups2 org-analyzer org-drill frog-jump-buffer org-super-links helm-org dired-x dired-toggle-sudo ac-helm org-clock-today org-clock-split auto-complete-auctex zoom helm-bufler visible-mark spray scrollkeeper org-noter-pdftools org-pdftools org-ac mu4e-conversation on-screen uptimes unkillable-scratch mw-thesaurus most-used-words korean-holidays helm-unicode helm-flyspell clean-buffers org-mru-clock undo-tree xml+ use-package olivetti quail quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex org-msg nov org-superstar yasnippet-snippets org-clock-convenience org-pomodoro org-plus-contrib crux org-noter pdf-view-restore anki-editor anki-connect ace-jump-buffer helm-org-rifle org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency speed-type smartparens rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-projectile helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game))
+   '(csv-mode ox-extra helm-chronos chronos worf ox-tufte wc-goal-mode org-wc helm-org-ql calibredb amread-mode copyit-pandoc image+ org-alert org-wild-notifier workgroups2 org-analyzer org-drill frog-jump-buffer helm-org dired-x dired-toggle-sudo ac-helm org-clock-today org-clock-split auto-complete-auctex zoom helm-bufler visible-mark spray scrollkeeper org-noter-pdftools org-pdftools org-ac mu4e-conversation on-screen uptimes unkillable-scratch mw-thesaurus most-used-words korean-holidays helm-unicode helm-flyspell clean-buffers org-mru-clock undo-tree xml+ use-package olivetti quail quelpa activity-watch-mode org company-org-roam org-roam org-roam-bibtex org-msg nov org-superstar yasnippet-snippets org-clock-convenience org-pomodoro org-plus-contrib crux org-noter pdf-view-restore anki-editor anki-connect ace-jump-buffer helm-org-rifle org-download which-key ace-jump-helm-line ace-link expand-region yankpad w3m visual-fill-column unicode-fonts ssh-agency speed-type smartparens rainbow-delimiters powerthesaurus pandoc-mode pandoc ox-pandoc ox-clip ov org-web-tools org-sticky-header org-ref org-recent-headings org-pdfview org-edna org-cliplink org-chef org-bookmark-heading openwith multiple-cursors mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane keychain-environment interleave html2org hl-anything highlight helm-swoop helm-projectile helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update flyspell-correct-helm doom-themes diminish deft define-word counsel company-bibtex company-auctex centered-cursor-mode calfw-org calfw-cal calfw bufler all-the-icons aggressive-indent ace-window 2048-game))
  '(pdf-annot-default-annotation-properties
    '((t
       (label . "Betsy Yoon"))
@@ -138,7 +138,8 @@
  '(pdf-annot-list-listed-types
    '(file free-text highlight square squiggly strike-out text underline))
  '(safe-local-variable-values
-   '((org-download-image-dir . "/home/betsy/.local/share/Anki2/User 1/collection.media")))
+   '((org-reverse-note-order)
+     (org-download-image-dir . "/home/betsy/.local/share/Anki2/User 1/collection.media")))
  '(sentence-end-double-space nil)
  '(temp-buffer-resize-mode t)
  '(tooltip-mode nil)

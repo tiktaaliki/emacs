@@ -23,35 +23,51 @@
 ;  (setq debug-on-error t)
 #+END_SRC
 
+#+RESULTS:
+: t
+
 * UX
 ** navigation
    #+BEGIN_SRC emacs-lisp :tangle yes
-                    (use-package helm
-                         :bind (("M-x"   . helm-M-x)
-                                ([f3] . helm-buffers-list)       
-                                ("<Hangul> x" . helm-M-x)    
-                                ))
-                    (use-package projectile
-                         :config
-                         (projectile-mode +1))
 
-                    (use-package helm-projectile
-                         :bind    ([f5] . helm-projectile))
+     (use-package helm
+       :config (helm-mode +1)
+       :bind (("M-x"   . helm-M-x)
+              ([f3] . helm-buffers-list)       
+              ("<Hangul> x" . helm-M-x)
+              ([f9] . helm-occur )
+              ))
+     (use-package projectile
+       :config
+       (projectile-mode +1))
 
-                    (use-package bufler
-                      :custom
-                      (bufler-column-name-width 70)
-                      (bufler-filter-buffer-modes nil))
-                    (setq org-special-ctrl-a/e (quote (t . t)))
+     (use-package helm-projectile
+       :bind    ([f5] . helm-projectile))
+
+     (use-package bufler
+       :custom
+       (bufler-column-name-width 70)
+       (bufler-filter-buffer-modes nil))
+     (setq org-special-ctrl-a/e (quote (t . t)))
+
+     (add-hook 'bufler-list-mode-hook
+               (lambda ()
+                 (visual-line-mode -1)
+                 (toggle-truncate-lines 1)))
+
    #+END_SRC
 
-   #+RESULTS:
-   : (t . t)
+#+RESULTS:
+| (lambda nil (visual-line-mode -1) (toggle-truncate-lines 1)) | hl-line-mode |
+   
+(use-package good-scroll
+:config (good-scroll-mode +1)
+)
 
 ** dired
 #+BEGIN_SRC emacs-lisp :tangle yes
   (load "dired+")
-    (define-key dired-mode-map (kbd "<f1>") 'org-capture)
+  (define-key dired-mode-map (kbd "<f1>") 'org-capture)
   (setq dired-auto-revert-buffer (quote dired-directory-changed-p))
   (add-hook 'dired-load-hook
             (function (lambda () (load "dired-x"))))
@@ -66,31 +82,71 @@
   (add-hook 'dired-mode-hook #'dired-omit-mode)
   (setq dired-omit-files
         (concat dired-omit-files "\\|^.DS_STORE$\\|^.projectile$\\|^.org~$"))
-                                         
+
 #+END_SRC
 
 #+RESULTS:
 : \`[.]?#\|\`[.][.]?\'\|^.DS_STORE$\|^.projectile$\|^.org~$
+
+** files
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+  (use-package openwith
+    :defer t
+    :config (progn
+              (when (require 'openwith nil 'noerror)
+                (setq openwith-associations
+                      (list
+                                          ;                   (list (openwith-make-extension-regexp
+                                          ;                           '("mpg" "mpeg" "mp3" "mp4"
+                                          ;                           "avi" "wmv" "wav" "mov" "flv"
+                                          ;                          "ogm" "ogg" "mkv"))
+                                          ;                      "audacious"
+                                          ;                     '(file))
+                                          ;                    (list (openwith-make-extension-regexp
+                                          ;                          '("xbm" "pbm" "pgm" "ppm" "pnm"
+                                          ;                           "png" "bmp" "tif" "jpeg" "jpg"))
+                                          ;                       "gpicview"
+                                          ;                      '(file))
+                                          ;                       (list (openwith-make-extension-regexp
+                                          ;                             '("pdf"))
+                                          ;                           "zathura"
+                                          ;                          '(file))
+                       (list (openwith-make-extension-regexp
+                              '("doc" "docx" "ppt" "xls" "xlsx" "pptx"))
+                             "LibreOffice"
+                             '(file))
+
+                       ))
+                (openwith-mode 1)))
+    :ensure t)
+
+
+#+END_SRC
+
+#+RESULTS:
+
 ** deft
+
 #+begin_src emacs-lisp :tangle yes
-       (use-package deft
-         :ensure t
-         :bind
-            ([f8] . deft))
-       (setq deft-directory "~/Dropbox/Zettelkasten/")
-       (setq deft-default-extension "org")
-       (setq deft-time-format " %b-%Y %H:%M")
-       (setq deft-use-filename-as-title t)
-       (setq deft-new-file-format "%Y%b%d")
-       (setq deft-text-mode 'org-mode)
-       (setq deft-file-naming-rules '((noslash . "-")
-                                      (nospace . "-")
-                                      (case-fn . downcase))) 
-       (setq deft-recursive t)
-       (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
-       (setq deft-auto-save-interval 15.0)
-       (add-hook 'after-init-hook 'deft)
-       (add-hook 'deft-mode-hook #'visual-line-mode)
+  (use-package deft
+    :ensure t
+    :bind
+    ([f8] . deft))
+  (setq deft-directory "~/Dropbox/Zettelkasten/")
+  (setq deft-default-extension "org")
+  (setq deft-time-format " %b-%Y %H:%M")
+  (setq deft-use-filename-as-title t)
+  (setq deft-new-file-format "%Y%b%d")
+  (setq deft-text-mode 'org-mode)
+  (setq deft-file-naming-rules '((noslash . "-")
+                                 (nospace . "-")
+                                 (case-fn . downcase))) 
+  (setq deft-recursive t)
+  (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
+  (setq deft-auto-save-interval 15.0)
+  (add-hook 'after-init-hook 'deft)
+  (add-hook 'deft-mode-hook #'visual-line-mode)
 
 
 #+end_src
@@ -121,15 +177,17 @@
     (require 'smartparens-config)
     :diminish smartparens-mode
     :custom
-    (smartparens-global-mode t))
+    (smartparens-global-mode t)
+    (global-highlight-parentheses-mode 1)
+    )
   (sp-pair "'" nil :actions :rem)
 
 
 
- (setq org-modules
-	 (quote
-	  (ol-bibtex ol-eww org-habit org-id org-protocol ol-w3m ol-bookmark org-checklist org-depend org-registry)))
-  
+  (setq org-modules
+        (quote
+         (ol-bibtex ol-eww org-habit org-id org-protocol ol-w3m ol-bookmark org-checklist org-depend org-registry)))
+
 #+END_SRC
 
 #+RESULTS:
@@ -137,7 +195,7 @@
 
 ** windows
 #+BEGIN_SRC emacs-lisp
-(setq org-indirect-buffer-display 'current-window)
+  (setq org-indirect-buffer-display 'current-window)
   (defun transpose-windows ()
     (interactive)
     (let ((this-buffer (window-buffer (selected-window)))
@@ -149,24 +207,27 @@
       (switch-to-buffer-other-window this-buffer)
       (other-window -1)))
 
-
+  (use-package good-scroll
+    :config (good-scroll-mode 1)
+    )
 #+END_SRC
 
 #+RESULTS:
-: transpose-windows
+: t
 
 ** autosave/backup
-  #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package magit
-      :init (progn
-              (setq magit-repository-directories '("~/Dropbox/" ))))
-    (setq global-auto-revert-mode t)
-    (setq auto-save-interval 5)
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package magit
+    :init (progn
+            (setq magit-repository-directories '("~/Dropbox/" ))))
+  (setq global-auto-revert-mode t)
+  (setq auto-save-interval 5)
+
 
   (add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
 
 
-  #+END_SRC
+#+END_SRC
 
 ** org-protocol
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -187,28 +248,39 @@
   (global-set-key (kbd "C-c <f2>") 'org-clock-out)
   (global-set-key (kbd "<f1>") 'org-capture)
   (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
-
+  (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+  (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
   (bind-keys
 
    ("C-c l" . org-store-link)
    ("C-c C-l" . org-insert-link)
    ("C-c b" . list-bookmarks)
    ("C-a" . org-beginning-of-line) 
-   ("C-e" . org-end-of-line) 
+   ("C-e" . end-of-line) 
    ("C-k" . org-kill-line)
+   ("C-."   . org-todo)
+   ("C-x /" . shrink-window-horizontally)
+   ("C-x ." . org-archive-subtree-default)
+
    ([f1] . org-capture)
    ([f2] . org-clock-in)
+   ;;f3 is helm
    ([f4] . org-refile)
+   ;;f5 is projectile
+   ([f6] . helm-bibtex-with-local-bibliography)
    ([f7] . org-agenda)
+   ;;f8 is deft
    ([f10] . org-tree-to-indirect-buffer)
    ([f11] . org-id-goto)
-
-   )
+   ([f12] . bury-buffer)     )
 
 
 #+END_SRC
 
-#+BEGIN_SRC emacs-ilsp
+#+RESULTS:
+: bury-buffer
+
+#+BEGIN_SRC emacs-lisp :tangle yes :results none
 
 
   (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
@@ -229,7 +301,7 @@
   (setq org-hide-leading-stars t) 
   (use-package org-superstar
     :config
-    (setq org-superstar-headline-bullets-list '("◉" "❤""☆" "♢" "⭆" ))
+    (setq org-superstar-headline-bullets-list '("◉" "❤""❄" "☆""♢" "⭆" ))
     (setq org-superstar-item-bullet-alist (quote ((42 . 33) (43 . 62) (45 . 45))))
     (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
   (setq org-startup-indented t)
@@ -248,14 +320,18 @@
 
   (set-face-attribute 'variable-pitch nil :family "Koho")
   (set-face-attribute 'mode-line nil :height 0.9 :family "monofur" :foreground "deep sky blue")
-(set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :height 0.8 :foreground "#ff4447") ;raspberry
-(set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
-(set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
-(set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
-(set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
+  (set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :family "Victor Mono" :height 1.0 :foreground "#ff4447") ;raspberry
+  (set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
+  (set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
+  (set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
+  (set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
 
+  (setq org-tags-column 0)
+#+END_SRC
 
-      #+END_SRC
+#+RESULTS:
+: 0
+
 ** font encoding
 #+BEGIN_SRC emacs-lisp  :tangle yes
   (defvar symbola-font (if (eq system-type 'gnu/linux)
@@ -310,28 +386,32 @@
 
 ** accessibility
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package hydra)
-   (defhydra hydra-zoom (:color red)  "zoom"
-          ("=" text-scale-increase "in")
-          ("-" text-scale-decrease "out")
-          ("0" (text-scale-adjust 0) "reset")
-          ("o" (other-window) "other window")
-          ("q" nil "quit" :color blue))
+  (use-package hydra)
+  (defhydra hydra-zoom (:color red)  "zoom"
+    ("=" text-scale-increase "in")
+    ("-" text-scale-decrease "out")
+    ("0" (text-scale-adjust 0) "reset")
+    ("o" (other-window) "other window")
+    ("q" nil "quit" :color blue))
 
-        (global-set-key (kbd "C-=") 'hydra-zoom/body)
-(use-package visual-fill-column)
+  (global-set-key (kbd "C-=") 'hydra-zoom/body)
+  (use-package visual-fill-column)
 #+END_SRC
 
 #+RESULTS:
 
 * org-refile and archiving
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq org-refile-allow-creating-parent-nodes (quote confirm))
-  (setq org-refile-use-outline-path (quote file))
-  (setq org-archive-location
-        "~/Dropbox/Zettelkasten/journal.org::datetree/")
-  (setq org-archive-reversed-order nil)
-  (setq org-refile-use-cache t)
+  (setq org-directory "~/Dropbox/Zettelkasten/")
+  (setq org-default-notes-file "~/Dropbox/Zettelkasten/inbox.org")
+  (setq org-archive-reversed-order nil
+        org-reverse-note-order t
+        org-refile-use-cache t
+        org-refile-allow-creating-parent-nodes 'confirm
+        org-refile-use-outline-path 'file
+        org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/"
+        )
+
 
   (defun my-org-refile-cache-clear ()
     (interactive)
@@ -348,7 +428,6 @@
 
                                           ;  (global-set-key (kbd "<f4>") 'org-refile)
 
-  (setq org-refile-allow-creating-parent-nodes 'confirm)
 
   (setq org-id-link-to-org-use-id (quote create-if-interactive))
 
@@ -363,50 +442,123 @@
 
 #+END_SRC
 
+#+RESULTS:
+: t
+
 * *scheduling, todos*
 ** agenda
 :PROPERTIES:
 :visibility: children
 :END:
-   #+BEGIN_SRC emacs-lisp :tangle yes
-         (setq org-agenda-files
-               '("~/Dropbox/Zettelkasten/inbox.org"
-                 "~/Dropbox/Zettelkasten/journal.org"
-                 "~/Dropbox/Zettelkasten/readings.org"
-                 "~/Dropbox/Zettelkasten/cal.org"
-                 "~/Dropbox/Zettelkasten/contacts.org"
-                 "~/Dropbox/Zettelkasten/lis.org"
-                 "~/Dropbox/Zettelkasten/recipes.org"
-                 "~/Dropbox/Zettelkasten/ndd.org"
-                 "~/Dropbox/Zettelkasten/personal.org"
-                 "~/Dropbox/Zettelkasten/sysadmin.org"
-                 ))
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE ")
+  (setq org-agenda-files
+        '("~/Dropbox/Zettelkasten/inbox.org"
+          "~/Dropbox/Zettelkasten/journal.org"
+          "~/Dropbox/Zettelkasten/readings.org"
+          "~/Dropbox/Zettelkasten/cal.org"
+          "~/Dropbox/Zettelkasten/contacts.org"
+          "~/Dropbox/Zettelkasten/lis.org"
+          "~/Dropbox/Zettelkasten/recipes.org"
+          "~/Dropbox/Zettelkasten/ndd.org"
+          "~/Dropbox/Zettelkasten/personal.org"
+          "~/Dropbox/Zettelkasten/sysadmin.org"
+          ))
 
-           (setq org-agenda-with-colors t)
-           (setq org-agenda-skip-deadline-if-done t)
-           (setq org-agenda-skip-timestamp-if-done t)
-           (setq org-agenda-skip-scheduled-if-done t)
-           (setq org-agenda-current-time-string "✸✸✸✸✸")
-           (setq org-agenda-start-with-clockreport-mode t)
-           (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
-           (setq org-agenda-dim-blocked-tasks t)
-           (setq org-agenda-clockreport-parameter-plist
-                 (quote
-                  (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
+  (setq org-agenda-with-colors t
+        org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
+        org-agenda-current-time-string "✸✸✸✸✸"
+        org-agenda-start-with-clockreport-mode t
+        org-agenda-dim-blocked-tasks t
+        org-agenda-window-setup 'only-window
+        )
+  ;;skips
+  (setq org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-skip-timestamp-if-done t
+        org-agenda-skip-deadline-prewarning-if-scheduled t
+        )
 
-     (setq org-todo-keywords
-             (quote
-              ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
-               (type "AREA(a)"  "습관(h)"   "HOLD(l)"  "|" "DONE(d)")     )))
+  (setq org-agenda-clockreport-parameter-plist
+        (quote
+         (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
+
 
 #+END_SRC
 
 #+RESULTS:
-| sequence | TODO(t) | NEXT(n) | IN-PROG(i) | WAIT(w) |   |         | DONE(d) | x(c) |
-| type     | AREA(a) | 습관(h) | HOLD(l)    |         |   | DONE(d) |         |      |
+| :link | t | :maxlevel | 4 | :narrow | 30 | :tags | t | :tcolumns | 1 | :indent | t | :hidefiles | t | :fileskip0 | t |
+** org-super-agenda
+#+begin_src emacs-lisp :tangle yes :results none
+  (setq org-super-agenda-mode 1)
 
 
+  (setq org-agenda-custom-commands
+        '(
+          ("z" "super" ((agenda "" ((org-agenda-span 'day)
+                                    (org-super-agenda-groups
+                                     '((:name "Today"
+                                              :time-grid t
+                                              :date today
+                                              :todo "TODAY"
+                                              :scheduled today
+                                              :order 1)))))
+                        (alltodo "" ((org-agenda-overriding-header "")
+                                     (org-super-agenda-groups
+                                      '(
+                                        (:name "today" :scheduled today)
+                                        (:name "Deadlines" 
+                                               :and (:deadline t :scheduled nil))
+                                        (:name "not scheduled"
+                                               :and (:deadline nil :scheduled nil))
+                                        (:name "Scheduled" :scheduled future)
 
+                                        ))
+                                     )))
+           )
+
+          )
+        )
+#+end_src
+
+#+RESULTS:
+| z | super | ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Today :time-grid t :date today :todo TODAY :scheduled today :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups 'nil)))) |
+
+(setq org-super-agenda-groups
+'(
+         
+
+))
+
+(:name "Waiting"
+:todo "WAIT" )
+(:name "Next Items"
+:time-grid t
+:todo "NEXT")
+#+RESULTS:
+: 1
+
+** org-todo
+#+begin_src emacs-lisp :tangle yes :results none
+  (setq org-enforce-todo-dependencies t
+        org-clock-out-when-done t
+        )
+
+  (setq org-log-into-drawer t)
+
+  (setq org-todo-keywords
+        (quote
+         ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
+          (type    "HOLD(l)"  "|" "DONE(d)")     )))
+
+  (setq org-todo-keyword-faces
+        '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
+          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
+          ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "magenta")
+          ("IN-PROG" :weight bold :underline t :inherit org-todo :foreground "#5bcbac")))
+
+
+#+end_src
 ** org-capture
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq org-capture-templates
@@ -462,23 +614,105 @@ removed templates:
 *** org-mru
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package org-mru-clock
-:bind     ("M-<f2>" . org-mru-clock-in)
-:config
-   (setq org-mru-clock-how-many 80)
-   (setq org-mru-clock-keep-formatting t)
-)
+  (use-package org-mru-clock
+    :bind     ("M-<f2>" . org-mru-clock-in)
+    :config
+    (setq org-mru-clock-how-many 80)
+    (setq org-mru-clock-keep-formatting t)
+    (setq org-mru-clock-completing-read 'helm--completing-read-default)
+    )
 
-
+  (setq org-clock-mode-line-total 'current)
 
 #+END_SRC
 
+#+RESULTS:
+: current
+
+*** chronos
+  #+begin_src emacs-lisp :tangle yes
+
+        (use-package org-alert)
+        (use-package chronos
+          :config
+          (setq chronos-expiry-functions '(chronos-sound-notify
+                                           chronos-dunstify
+                                           chronos-buffer-notify
+                                           ))
+          (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+          )
+        (use-package helm-chronos
+          :config
+          (setq helm-chronos-standard-timers
+                '(
+                  ;;tuesday shift
+                  "=10:00/OER shift + -1/oer 1 min + -4/oer in 5 + =14:00/aal shift + -5/aal shift in 5 + 4/1 min! + =18:00/end shift + -5/end shift in 5 + 4/1 min!"
+                  ;;wednesday shift
+                   "=10:00/csi oer + -5/csi shift in 5 + =15:00/end shift + -5/end shift in 5"
+                   ;;thursday shift
+                   "=9:00/nyu backup shift + -5/shift in 5 + 4/1 min! + =12:00/switch to aal + -5/switch in 5 + 4/1 min! + =13:00/shift over + 4/1 min! + =18:00/csi reference + -5/shift in 5 + 4/1 min! + =22:00/end shift + -5/end shift in 5 + 4/1 min!"
+                   ;;intermittent fasting
+               "=13:00/end fast + =21:00/begin fast"
+
+                   ))
+
+          )
+
+  #+end_src
+
+  #+RESULTS:
+  : t
+
+
+
+
+** checklists
+#+begin_src emacs-lisp :tangle yes :results none
+   (setq org-list-demote-modify-bullet
+         '(("+" . "*") ("-" . "+") ("*" . "-")))
+
+   (defun my/org-checkbox-todo ()
+     "Switch header TODO state to DONE when all checkboxes are ticked, to TODO otherwise"
+     (let ((todo-state (org-get-todo-state)) beg end)
+       (unless (not todo-state)
+         (save-excursion
+           (org-back-to-heading t)
+           (setq beg (point))
+           (end-of-line)
+           (setq end (point))
+           (goto-char beg)
+           (if (re-search-forward "\\[\\([0-9]*%\\)\\]\\|\\[\\([0-9]*\\)/\\([0-9]*\\)\\]"
+                                  end t)
+               (if (match-end 1)
+                   (if (equal (match-string 1) "100%")
+                       (unless (string-equal todo-state "DONE")
+                         (org-todo 'done))
+                     (unless (string-equal todo-state "✶")
+                       (org-todo 'todo)))
+                 (if (and (> (match-end 2) (match-beginning 2))
+                          (equal (match-string 2) (match-string 3)))
+                     (unless (string-equal todo-state "DONE")
+                       (org-todo 'done))
+                   (unless (string-equal todo-state "✶")
+                     (org-todo 'todo)))))))))
+
+   (add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo)
+#+end_src
 * org
 #+BEGIN_SRC emacs-lisp :tangle yes
  (setq org-contacts-files (quote ("~/Dropbox/Zettelkasten/contacts.org")))
 
 #+END_SRC
 * *mentat*
+#+begin_src emacs-lisp
+(load "annot")
+  (require 'annot)
+
+#+end_src
+
+#+RESULTS:
+: annot
+
 ** anki
   #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package anki-editor
@@ -534,16 +768,30 @@ removed templates:
 ** pdfs
   #+BEGIN_SRC emacs-lisp :tangle yes
 
- (use-package pdf-tools
-   :magic ("%PDF" . pdf-view-mode)
-   :config
-   (pdf-tools-install :no-query))
- (use-package pdf-view-restore)
+          (use-package pdf-tools
+            :magic ("%PDF" . pdf-view-mode)
+            :config
+            (pdf-tools-install :no-query))
+          (use-package pdf-view-restore)
 
+           (setq pdf-view-continuous t)
+        (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
+
+  (load "org-pdfview")
+ 
+                                          ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
+
+ 
+
+
+  (add-to-list 'org-file-apps 
+               '("\\.pdf\\'" . (lambda (file link)
+                                 (org-pdfview-open link))))
 
   #+END_SRC
 
   #+RESULTS:
+  : ((\.pdf\' lambda (file link) (org-pdfview-open link)) (auto-mode . emacs) (directory . emacs) (\.mm\' . default) (\.x?html?\' . default) (\.pdf\' . default))
 
   (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
   (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
@@ -653,37 +901,17 @@ removed templates:
 #+RESULTS:
 : t
 
-* chronos
-  #+begin_src emacs-lisp :tangle yes
-
- (use-package org-alert)
- (use-package chronos
-   :config
-   (setq chronos-expiry-functions '(chronos-sound-notify
-                                    chronos-dunstify
-                                    chronos-buffer-notify
-                                    ))
-   (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-   )
- (use-package helm-chronos
-   :config
-   (setq helm-chronos-standard-timers
-         '( "=14:00/aal shift + -5/aal shift in 5 + =18:00/end shift + -5/end shift in 5"
-            "=10:00/csi oer + -5/csi shift in 5 + =15:00/end shift + -5/end shift in 5"
-            "=9:00/nyu backup shift + -5/shift in 5 + =12:00/switch to aal + -5/switch in 5"
-            "=18:00/csi reference + -5/shift in 5 + =22:00/end shift + -5/end shift in 5"
-            ))
-
-   )
-
-  #+end_src
-
-  #+RESULTS:
-  : t
+** bibtex
 
 
+  (add-to-list 'bibtex-BibTeX-entry-alist
+                  '
 
+                  )
 
+#+begin_src emacs-lisp :tangle yes :results none
+
+#+end_src
 * load files
 #+BEGIN_SRC emacs-lisp :tangle yes
   (find-file "/home/betsy/.emacs")

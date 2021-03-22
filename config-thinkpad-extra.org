@@ -24,39 +24,39 @@
           "......" "----------------")))
 
 
-(setq org-agenda-custom-commands '(
+  (setq org-agenda-custom-commands '(
 
-  ("k" "all untagged TODOs" tags-todo "-{.*}") 
-))
+                                     (setq org-agenda-custom-commands '(
+
+                                          ;RETURN ANY TODO ITEMS WTIHOUT TAGS
+                                                                        ("x" "With deadline columns" alltodo "" 
+                                                                         ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
+                                                                          (org-agenda-view-columns-initially t)
+                                                                          (org-agenda-sorting-strategy '(timestamp-up))
+                                                                          (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) ))
+                                                                        ("l" "all todos"
+                                                                         ((agenda ""  ((org-agenda-span 1) ))
+                                                                          (alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'todo '("AREA" "습관" "HOLD" "WAIT" "PROJ")) ))
+                                                                                   (org-agenda-sorting-strategy '(priority-down)) )))
+                                                                        ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
+                                                                        ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" 
+                                                                         ((agenda "" 
+                                                                                  ((org-agenda-span 2)  
+                                                                                   (org-agenda-clockreport-mode nil)))
+                                                                          (todo "NEXT|TODAY|IN-PROG"))
+                                                                         ((org-agenda-todo-ignore-scheduled t)))
+                                                                        ("u" "all UNSCHEDULED" alltodo ""                                                          
+                                                                         (    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+                                                                              (org-agenda-todo-ignore-scheduled t) )
+                                                                         )
+                                                                        ))
+
+                                     ("k" "all untagged TODOs" tags-todo "-{.*}") 
+                                     ))
 
 
 #+END_SRC
 
-
-  (setq org-agenda-custom-commands '(
-
-                                    ;RETURN ANY TODO ITEMS WTIHOUT TAGS
-                                     ("x" "With deadline columns" alltodo "" 
-                                      ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
-                                       (org-agenda-view-columns-initially t)
-                                       (org-agenda-sorting-strategy '(timestamp-up))
-                                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) ))
-                                     ("l" "all todos"
-                                      ((agenda ""  ((org-agenda-span 1) ))
-                                       (alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'todo '("AREA" "습관" "HOLD" "WAIT" "PROJ")) ))
-                                                (org-agenda-sorting-strategy '(priority-down)) )))
-                                     ("h" "all HOLD/WAIT items" todo "HOLD|WAIT")
-                                     ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" 
-                                      ((agenda "" 
-                                               ((org-agenda-span 2)  
-                                                (org-agenda-clockreport-mode nil)))
-                                       (todo "NEXT|TODAY|IN-PROG"))
-                                      ((org-agenda-todo-ignore-scheduled t)))
-                                     ("u" "all UNSCHEDULED" alltodo ""                                                          
-                                      (    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
-                                         (org-agenda-todo-ignore-scheduled t) )
-                                      )
-                                     ))
 
 
 
@@ -117,7 +117,7 @@
 
 
 (load "pi")
-(load "org-pdfview")
+
 (load "org-protocol-capture-html")
 (load "org-book")
 (load "org-depend")
@@ -201,8 +201,6 @@
 
 
 
-   (setq org-list-demote-modify-bullet
-         '(("+" . "*") ("-" . "+") ("*" . "-")))
                                            ;  (setq org-list-demote-modify-bullet
                                            ;       '(("+" . "-") ("-" . "+") ))
    (setq org-list-allow-alphabetical t)
@@ -308,32 +306,7 @@
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (defun my/org-checkbox-todo ()
-     "Switch header TODO state to DONE when all checkboxes are ticked, to TODO otherwise"
-     (let ((todo-state (org-get-todo-state)) beg end)
-       (unless (not todo-state)
-         (save-excursion
-           (org-back-to-heading t)
-           (setq beg (point))
-           (end-of-line)
-           (setq end (point))
-           (goto-char beg)
-           (if (re-search-forward "\\[\\([0-9]*%\\)\\]\\|\\[\\([0-9]*\\)/\\([0-9]*\\)\\]"
-                                  end t)
-               (if (match-end 1)
-                   (if (equal (match-string 1) "100%")
-                       (unless (string-equal todo-state "DONE")
-                         (org-todo 'done))
-                     (unless (string-equal todo-state "✶")
-                       (org-todo 'todo)))
-                 (if (and (> (match-end 2) (match-beginning 2))
-                          (equal (match-string 2) (match-string 3)))
-                     (unless (string-equal todo-state "DONE")
-                       (org-todo 'done))
-                   (unless (string-equal todo-state "✶")
-                     (org-todo 'todo)))))))))
 
-   (add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo)
 #+END_SRC
 
 
@@ -503,7 +476,7 @@
    (org-edna-mode)
    (setq org-log-done (quote time))
    (setq org-enforce-todo-checkbox-dependencies nil)
-   (setq org-enforce-todo-dependencies t)
+
 #+END_SRC
 
 
@@ -830,18 +803,9 @@ M-x describe-current-coding-system
 #+BEGIN_SRC emacs-lisp :tangle yes
 
 
-  (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
+
 
   (use-package pdf-tools :defer t)
-  (use-package org-pdfview :defer t)
-                                          ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
-
- 
-
-  (setq pdf-view-continuous t)
-  (add-to-list 'org-file-apps 
-               '("\\.pdf\\'" . (lambda (file link)
-                                 (org-pdfview-open link))))
 
   (quelpa
    '(quelpa-use-package
@@ -1174,35 +1138,6 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package openwith
-    :defer t
-    :config (progn
-              (when (require 'openwith nil 'noerror)
-                (setq openwith-associations
-                      (list
-                                          ;                   (list (openwith-make-extension-regexp
-                                          ;                           '("mpg" "mpeg" "mp3" "mp4"
-                                          ;                           "avi" "wmv" "wav" "mov" "flv"
-                                          ;                          "ogm" "ogg" "mkv"))
-                                          ;                      "audacious"
-                                          ;                     '(file))
-                                          ;                    (list (openwith-make-extension-regexp
-                                          ;                          '("xbm" "pbm" "pgm" "ppm" "pnm"
-                                          ;                           "png" "bmp" "tif" "jpeg" "jpg"))
-                                          ;                       "gpicview"
-                                          ;                      '(file))
-                                          ;                       (list (openwith-make-extension-regexp
-                                          ;                             '("pdf"))
-                                          ;                           "zathura"
-                                          ;                          '(file))
-                       (list (openwith-make-extension-regexp
-                              '("doc" "docx" "ppt" "xls" "xlsx" "pptx"))
-                             "LibreOffice"
-                             '(file))
-
-                       ))
-                (openwith-mode 1)))
-    :ensure t)
   (add-to-list  'mm-inhibit-file-name-handlers 'openwith-file-handler)
 
 
@@ -1275,8 +1210,7 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
   (global-unset-key (kbd "C-v "))
 
                                           ; (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-  (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-  (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+  
   (define-key org-mode-map (kbd "C-y") 'yank)
   (global-unset-key (kbd "S-SPC"))
   (global-unset-key (kbd "C-c C-x C-r"))
@@ -1295,9 +1229,6 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
    ("M-z" . helm-swoop-without-pre-input)
                                           ;          ("<Hangul>-z" . ace-jump-mode)
                                           ;                 ("C-c k" . toggle-korean-input-method)
-   ("C-."   . org-todo)
-                                          ;              ("C-x /" . shrink-window-horizontally)
-   ("C-x ." . org-archive-subtree-default)
                                           ;       ("C-c n" . org-schedule)
 
    ("M-="   . count-words)
@@ -1319,10 +1250,10 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
    ("M-{" . org-shiftmetaleft)
    ("M-}" . org-shiftmetaright)
 
-   ([f6] . helm-bibtex-with-local-bibliography)
+
 
    ([f9] . helm-swoop-without-pre-input)
-   ([f12] . bury-buffer)
+
 
    )
 
@@ -1674,13 +1605,7 @@ EDIT: Solved. Passing t causes UTC to be used. Passing nil leads to Emacs time b
 
  '(org-superstar-prettify-item-bullets t)
  '(org-support-shift-select t)
- '(org-todo-keyword-faces
-   '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
-     ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
-     ("슴관" :weight regular :underline nil :inherit org-todo :foreground "#f98866")
-     ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "magenta")
-     ("IN-PROG" :weight bold :underline t :inherit org-todo :foreground "#5bcbac")
-     ("AREA" :weight bold :underline t :inherit org-todo :foreground "#73605b")))
+
  '(org-todo-repeat-to-state t)
  '(org-web-tools-pandoc-sleep-time 1.0)
  '(org-wild-notifier--alert-severity 'high)
