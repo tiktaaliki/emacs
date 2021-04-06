@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auto-save-visited-mode t)
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "/home/betsy/.emacs.d/bookmarks")
  '(fill-column 120)
  '(global-visual-fill-column-mode t)
  '(global-visual-line-mode t)
@@ -16,7 +16,7 @@
  '(org-modules
    '(ol-bibtex ol-docview ol-eww org-habit org-id org-inlinetask org-protocol org-tempo ol-w3m ol-bookmark org-checklist org-depend org-invoice org-registry org-toc))
  '(package-selected-packages
-   '(highlight-quoted highlight-parentheses org-pdfview openwith good-scroll visual-fill-column interleave org-noter org-ref deft burly org-sidebar org-plus-contrib helm-chronos chronos org-alert pdf-view-restore pdf-tools nov olivetti anki-editor org-mru-clock org-roam magit doom-themes org-superstar use-package unkillable-scratch smartparens helm-projectile aggressive-indent))
+   '(helm-unicode ace-mode ace-jump-helm-line ace-jump-mode pdf-continuous-scroll-mode quelpa-use-package quelpa org-auto-tangle highlight-quoted highlight-parentheses org-pdfview openwith good-scroll visual-fill-column interleave org-noter org-ref deft burly org-sidebar org-plus-contrib helm-chronos chronos org-alert pdf-view-restore pdf-tools nov olivetti anki-editor org-mru-clock org-roam magit doom-themes org-superstar use-package unkillable-scratch smartparens helm-projectile aggressive-indent))
  '(safe-local-variable-values
    '((org-download-image-dir . "/home/betsy/.local/share/Anki2/User 1/collection.media")
      (org-reverse-note-order)))
@@ -39,8 +39,10 @@
  '(org-level-2 ((t (:inherit org-level-1 :foreground "#9a9eab" :height 0.9))))
  '(org-level-3 ((t (:inherit org-level-2 :foreground "#68829e" :height 0.9))))
  '(org-level-4 ((t (:inherit org-level-3 :foreground "light coral" :height 1.0))))
+ '(org-level-5 ((t (:inherit org-level-4 :extend nil))))
  '(org-link ((t (:inherit link :foreground "#b38867" :underline nil :weight normal :family "monofur"))))
  '(org-property-value ((t (:foreground "#83898d" :height 0.9))) t)
+ '(org-quote ((t (:extend t :background "medium spring green" :foreground "black" :slant italic :family "KoHo"))))
  '(org-special-keyword ((t (:foreground "#83898d" :height 0.9))))
  '(org-super-agenda-header ((t (:inherit org-agenda-structure :foreground "deep sky blue"))))
  '(org-tag ((t (:foreground "#83898d" :weight normal :height 0.8))))

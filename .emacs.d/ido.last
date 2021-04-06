@@ -20,8 +20,8 @@
 
 ;; ----- ido-work-directory-list -----
 (
- "/home/betsy/Dropbox/Zettelkasten/"
  "/home/betsy/Dropbox/emacs/"
+ "/home/betsy/Dropbox/Zettelkasten/"
  "/home/betsy/Dropbox/Library/"
  "/home/betsy/Dropbox/emacs/.emacs.d/lisp/"
  "/home/betsy/Documents/NDD website (webfaction)/ndd/"
@@ -53,6 +53,7 @@
 
 ;; ----- ido-work-file-list -----
 (
+ "thinkpad-general-config.org"
  "custom.el"
  "resume.org"
  "recipes.org"
@@ -62,14 +63,13 @@
  ".authinfo"
  "org-protocol.desktop"
  "ibus-daemon.desktop"
- "emacsclient.desktop"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/home/betsy/Dropbox/Zettelkasten/" (24623 56801 43830 257000) "readings.org" "inbox.tex~" "recipes.org~" "../" "resume.bcf" ".directory" "recipes.org" "yankpad.org" "ndd.org" "images/" "resume.tex" "css/" "resume.org" "Zettels/" ".stfolder/" ".gitignore" "./" "references.bib" ".git/" "journal.org" "inbox.org" "2021.ledger~" "altacv.cls" ".pdf-view-restore" "resume.out" "anki.org" "personal.org" "resume.run.xml" "resume.tex~" "2021.ledger" "texput.log" "resume.log" "sysadmin.org" "resume.aux" "quotes.org" "cal.org" "lis.org" "contacts.org" "pdfa.xmpi")
+ ("/home/betsy/Dropbox/Zettelkasten/" (24666 5893 403566 122000) "Zettles" "readings.org" "inbox.tex~" "recipes.org~" "../" ".directory" "recipes.org" "yankpad.org" "ndd.org" "images/" "resume.tex" "css/" "resume.org" "Zettels/" ".stfolder/" ".gitignore" "./" "references.bib" ".git/" "journal.org" "inbox.org" "2021.ledger~" "resume.pdf" "altacv.cls" ".pdf-view-restore" "anki.org" "personal.org" "ndd.odt" "2021.ledger" "texput.log" "sysadmin.org" "quotes.org" "cal.org" "lis.org" "contacts.org" "pdfa.xmpi")
 
- ("/home/betsy/Dropbox/emacs/" (24623 9519 7294 151000) "hangul-input.org" "pi.el" "org.css~" "removedconfig.org~" ".emacs" "test2.org" "../" "custom-2.el" "projectile-bookmarks.eld" "config-pbp.org~" "custom.el" "#config-pbp-overflow.org#" "custom-pbp.el" ".#config.org" ".stfolder/" ".gitignore" "config-pbp-overflow.org" "removedconfig.org" "config-pbp.el" "./" "config-pbp.org" "config.el" "config.org" ".git/" "#custom.el#" "hangul-input.el" "hangul-input.org~" "pi.org" ".stignore" "custom-pbp.el~" "config-pbp-overflow.org~" "#config-pbp.org#" "custom.el~" "org-export.css~" ".emacs.d/" "hiding while testing/")
+ ("/home/betsy/Dropbox/emacs/" (24665 63842 582767 733000) "hangul-input.org" "config-thinkpad-extra.org" "pi.el" "thinkpad-general-config.el" ".emacs" "../" "projectile-bookmarks.eld" "custom.el" ".stfolder/" ".gitignore" "./" "config.el" "config.org" "custom-thinkpad.el" ".git/" "hangul-input.el" ".pcmm" "pi.org" "thinkpad-general-config.org" ".stignore" ".emacs.d/" "hiding while testing/")
 
  ("/home/betsy/" (24613 28558 96986 614000) ".ssh/" "#*message*-20201125-165456#" "MEGA/" ".Xauthority" ".vpython-root/" ".i3/" ".local/" "Videos/" "Public/" ".emacs" ".authinfo~" "../" ".mbsyncrc~" ".zshrc" ".dir_colors" "Sync/" ".Xresources" ".dmenurc" ".dropbox-dist/" ".gimp-2.8/" ".makepkg.conf" ".bash_profile" ".putty/" ".zoom/" ".authinfo.gpg" ".xsession-errors" ".mozilla/" ".Xclients" ".moc/" ".festival_history" ".profile" ".mbsync/" ".mbsyncrc" "./" ".xsession-errors.old" ".maildir/" "Desktop/" "Downloads/" ".bashrc~" ".pki/" "Templates/" ".cache/" ".config/" "Pictures/" ".icons/" "Documents/" ".npm/" ".gsutil/" ".moonchild productions/" ".gtkrc-2.0" ".java/" ".thumbnails/" "Music/" ".dropbox/" ".urxvt/" ".m2/" ".bashrc" "Dropbox/" ".xinitrc" ".thunderbird/" ".vpython_cipd_cache/" "#.emacs-bmk-bmenu-state.el#" ".gnupg/" ".emacs-bmk-bmenu-state.el" ".bash_logout" ".bash_history" "gPodder/" ".dmrc" ".emacs.d/")
 

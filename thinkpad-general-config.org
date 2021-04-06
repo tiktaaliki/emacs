@@ -1,64 +1,79 @@
-
+#+auto_tangle: t
 
 * Minimum Usability
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (set-fringe-mode '(25 . 25))
-  (fset 'yes-or-no-p 'y-or-n-p)
-                                          ;  (setq confirm-kill-emacs (quote y-or-n-p))
-  (setq confirm-kill-emacs nil)
-  (setq ring-bell-function (quote ignore))
-  (setq visible-bell nil)
-  (add-to-list 'default-frame-alist '(fullscreen . maximized))
-  (setq inhibit-startup-screen t)
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
-  (setq split-width-threshold 100)
+    (set-fringe-mode '(25 . 25))
+    (fset 'yes-or-no-p 'y-or-n-p)
+                                            ;  (setq confirm-kill-emacs (quote y-or-n-p))
+    (setq confirm-kill-emacs nil
+          visible-bell nil
+          inhibit-startup-screen t
+          org-support-shift-select t
+          ring-bell-function (quote ignore)
+          split-width-threshold 100
+          )
 
-  (set-face-attribute 'default nil :family "Fantasque sans mono" :height 200 :weight 'normal  :foreground "#ebdcb2")
-  (delete-selection-mode) ;allows to delete selected text by typing
-  (global-set-key (kbd "M-o") 'other-window)
-  (setq org-support-shift-select t)
-;  (setq debug-on-error t)
+
+    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+    (tool-bar-mode -1)
+    (menu-bar-mode -1)
+    (scroll-bar-mode -1)
+
+
+    (set-face-attribute 'default nil :family "Fantasque sans mono" :height 200 :weight 'normal  :foreground "#ebdcb2")
+    (delete-selection-mode) ;allows to delete selected text by typing
+    (global-set-key (kbd "M-o") 'other-window)
+
+  ;  (setq debug-on-error t)
 #+END_SRC
 
 #+RESULTS:
-: t
+: other-window
+
+
+
 
 * UX
 ** navigation
    #+BEGIN_SRC emacs-lisp :tangle yes
 
-     (use-package helm
-       :config (helm-mode +1)
-       :bind (("M-x"   . helm-M-x)
-              ([f3] . helm-buffers-list)       
-              ("<Hangul> x" . helm-M-x)
-              ([f9] . helm-occur )
-              ))
-     (use-package projectile
-       :config
-       (projectile-mode +1))
+                         (use-package helm
+                           :config (helm-mode +1)
+                           :bind (("M-x"   . helm-M-x)
+                                  ([f3] . helm-buffers-list)       
+                                  ("<Hangul> x" . helm-M-x)
+                                  ([f9] . helm-occur )
+                                  ))
+                         (use-package projectile
+                           :config
+                           (projectile-mode +1))
 
-     (use-package helm-projectile
-       :bind    ([f5] . helm-projectile))
+                         (use-package helm-projectile
+                           :bind    ([f5] . helm-projectile))
 
-     (use-package bufler
-       :custom
-       (bufler-column-name-width 70)
-       (bufler-filter-buffer-modes nil))
-     (setq org-special-ctrl-a/e (quote (t . t)))
+                         (use-package bufler
+                           :custom
+                           (bufler-column-name-width 70)
+                           (bufler-filter-buffer-modes nil))
 
-     (add-hook 'bufler-list-mode-hook
-               (lambda ()
-                 (visual-line-mode -1)
-                 (toggle-truncate-lines 1)))
+                         (setq org-special-ctrl-a/e (quote (t . t)))
 
-   #+END_SRC
+                         (add-hook 'bufler-list-mode-hook
+                                   (lambda ()
+                                     (visual-line-mode -1)
+                                     (toggle-truncate-lines 1)))
+
+                    (use-package ace-jump-mode)
+               ;(define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
+               (global-set-key (kbd "M-z") 'ace-jump-mode)
+     (global-unset-key (kbd "C-z"))
+          (global-set-key (kbd "C-z") 'ace-jump-helm-line)
+(setq tab-bar-mode nil)
+       #+END_SRC
 
 #+RESULTS:
-| (lambda nil (visual-line-mode -1) (toggle-truncate-lines 1)) | hl-line-mode |
    
 (use-package good-scroll
 :config (good-scroll-mode +1)
@@ -68,7 +83,11 @@
 #+BEGIN_SRC emacs-lisp :tangle yes
   (load "dired+")
   (define-key dired-mode-map (kbd "<f1>") 'org-capture)
-  (setq dired-auto-revert-buffer (quote dired-directory-changed-p))
+  (setq dired-auto-revert-buffer (quote dired-directory-changed-p)
+        dired-omit-verbose nil
+        dired-omit-files
+        (concat dired-omit-files "\\|^.DS_STORE$\\|^.projectile$\\|^.org~$")
+        )
   (add-hook 'dired-load-hook
             (function (lambda () (load "dired-x"))))
 
@@ -77,16 +96,15 @@
               ;; Set dired-x buffer-local variables here.  For example:
               (dired-omit-mode 1)
               ))
-  (setq dired-omit-verbose nil)
+
   ;; toggle `dired-omit-mode' with C-x M-o
   (add-hook 'dired-mode-hook #'dired-omit-mode)
-  (setq dired-omit-files
-        (concat dired-omit-files "\\|^.DS_STORE$\\|^.projectile$\\|^.org~$"))
+
 
 #+END_SRC
 
 #+RESULTS:
-: \`[.]?#\|\`[.][.]?\'\|^.DS_STORE$\|^.projectile$\|^.org~$
+| dired-omit-mode | (lambda nil (dired-omit-mode 1)) | diredp-nb-marked-in-mode-name | diredp--set-up-font-locking | (lambda nil (let ((now (lookup-key dired-mode-map J))) (if (and now (not (eq now 'undefined))) nil (define-key dired-mode-map J 'bmkp-dired-jump)) (setq now (lookup-key dired-mode-map |
 
 ** files
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -133,18 +151,21 @@
     :ensure t
     :bind
     ([f8] . deft))
-  (setq deft-directory "~/Dropbox/Zettelkasten/")
-  (setq deft-default-extension "org")
-  (setq deft-time-format " %b-%Y %H:%M")
-  (setq deft-use-filename-as-title t)
-  (setq deft-new-file-format "%Y%b%d")
-  (setq deft-text-mode 'org-mode)
-  (setq deft-file-naming-rules '((noslash . "-")
+  (setq deft-directory "~/Dropbox/Zettelkasten/"
+        deft-default-extension "org"
+        deft-time-format " %b-%Y %H:%M"
+        deft-use-filename-as-title t
+        deft-new-file-format "%Y%b%d"
+        deft-text-mode 'org-mode
+        deft-recursive t
+        deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex")
+        deft-auto-save-interval 15.0
+        deft-file-naming-rules '((noslash . "-")
                                  (nospace . "-")
                                  (case-fn . downcase))) 
-  (setq deft-recursive t)
-  (setq deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex"))
-  (setq deft-auto-save-interval 15.0)
+
+
+
   (add-hook 'after-init-hook 'deft)
   (add-hook 'deft-mode-hook #'visual-line-mode)
 
@@ -181,7 +202,7 @@
     (global-highlight-parentheses-mode 1)
     )
   (sp-pair "'" nil :actions :rem)
-
+  (sp-pair "=" nil :actions :rem)
 
 
   (setq org-modules
@@ -194,7 +215,7 @@
 | ol-bibtex | ol-eww | org-habit | org-id | org-protocol | ol-w3m | ol-bookmark | org-checklist | org-depend | org-registry |
 
 ** windows
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
   (setq org-indirect-buffer-display 'current-window)
   (defun transpose-windows ()
     (interactive)
@@ -207,27 +228,32 @@
       (switch-to-buffer-other-window this-buffer)
       (other-window -1)))
 
-  (use-package good-scroll
-    :config (good-scroll-mode 1)
-    )
 #+END_SRC
 
 #+RESULTS:
-: t
+: transpose-windows
+
+
+(use-package good-scroll
+:config (good-scroll-mode 1)
+)
 
 ** autosave/backup
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package magit
     :init (progn
             (setq magit-repository-directories '("~/Dropbox/" ))))
-  (setq global-auto-revert-mode t)
-  (setq auto-save-interval 5)
+  (setq global-auto-revert-mode t
+        auto-save-interval 5)
 
 
   (add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
 
 
 #+END_SRC
+
+#+RESULTS:
+| (lambda nil (org-superstar-mode 1)) | (lambda nil (auto-revert-mode 1)) | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-eldoc-load |
 
 ** org-protocol
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -295,19 +321,50 @@
 
 #+RESULTS:
 : [8756]
+** org hydra
+#+begin_src emacs-lisp :tangle yes
+
+  (defhydra hydra-org (:color amaranth :columns 3)
+    "Org Mode Movements"
+    ("n" outline-next-visible-heading "next heading")
+    ("p" outline-previous-visible-heading "prev heading")
+    ("N" org-forward-heading-same-level "next heading at same level")
+    ("P" org-backward-heading-same-level "prev heading at same level")
+    ("u" outline-up-heading "up heading")
+    ("k" kill-region "kill region")
+    ("y" yank "paste")
+    ("l" helm-show-kill-ring "list" :color blue)  
+    ("r" org-refile "refile")
+    ("t" org-todo "todo")
+    ("g" org-set-tags-command "tags")
+    ("s" show-subtree "expand subtree")
+    ("h" hide-subtree "collapse subtree")
+    ("a" org-archive-subtree "archive")
+    ("G" org-goto "goto" :exit t)
+    ("q" nil "quit" :color blue)
+    )
+
+
+
+
+#+end_src
+
+#+RESULTS:
+: hydra-org/body
+
 * UI
 #+BEGIN_SRC emacs-lisp  :tangle yes
-  (setq org-ellipsis " ⬎ ")
-  (setq org-hide-leading-stars t) 
+
   (use-package org-superstar
     :config
-    (setq org-superstar-headline-bullets-list '("◉" "❤""❄" "☆""♢" "⭆" ))
-    (setq org-superstar-item-bullet-alist (quote ((42 . 33) (43 . 62) (45 . 45))))
+    (setq org-superstar-headline-bullets-list '("◉" "❤""❄" "☆""♢" "⭆" )
+    org-superstar-item-bullet-alist (quote ((42 . 33) (43 . 62) (45 . 45))))
     (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
-  (setq org-startup-indented t)
-  (setq org-hide-emphasis-markers t)
-  (setq org-startup-folded t)
-
+  (setq org-startup-indented t
+        org-hide-emphasis-markers t
+        org-startup-folded t
+        org-ellipsis " ⬎ "
+        org-hide-leading-stars t)
   (use-package doom-themes
     :config
     ;; Global settings (defaults)
@@ -380,9 +437,14 @@
 
 ** org-src
 #+BEGIN_SRC emacs-lisp  :tangle yes
-  (setq org-src-fontify-natively t)
-  (setq org-src-tab-acts-natively t)
+  (setq org-src-fontify-natively t
+        org-src-tab-acts-natively t)
+
+(setq org-fontify-quote-and-verse-blocks t)
 #+END_SRC
+
+#+RESULTS:
+: t
 
 ** accessibility
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -400,16 +462,23 @@
 
 #+RESULTS:
 
+
+
 * org-refile and archiving
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq org-directory "~/Dropbox/Zettelkasten/")
-  (setq org-default-notes-file "~/Dropbox/Zettelkasten/inbox.org")
+  (setq org-directory "~/Dropbox/Zettelkasten/"
+        org-default-notes-file "~/Dropbox/Zettelkasten/inbox.org"
+        org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/"
+        org-contacts-files (quote ("~/Dropbox/Zettelkasten/contacts.org"))
+        org-roam-directory "~/Dropbox/Zettelkasten/Zettels/"
+        )
   (setq org-archive-reversed-order nil
         org-reverse-note-order t
         org-refile-use-cache t
         org-refile-allow-creating-parent-nodes 'confirm
         org-refile-use-outline-path 'file
-        org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/"
+        org-refile-targets '((org-agenda-files :maxlevel . 3))
+        org-outline-path-complete-in-steps nil
         )
 
 
@@ -419,21 +488,20 @@
   (define-key org-mode-map (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
 
 
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 3))
-        )
 
-  (setq org-outline-path-complete-in-steps nil) 
 
                                           ; Refile in a single go
 
                                           ;  (global-set-key (kbd "<f4>") 'org-refile)
 
 
-  (setq org-id-link-to-org-use-id (quote create-if-interactive))
+  (setq org-id-link-to-org-use-id (quote create-if-interactive)
+        org-id-method (quote org)
+        org-return-follows-link t
+        org-link-keep-stored-after-insertion nil
+        org-goto-interface (quote outline-path-completion)
+        org-clock-mode-line-total 'current)
 
-  (setq org-id-method (quote org))
-  (setq org-return-follows-link t)
-  (setq org-goto-interface (quote outline-path-completion))
                                           ;   (add-hook 'org-mode-hook (lambda () (org-sticky-header-mode 1)))
 
 
@@ -444,6 +512,8 @@
 
 #+RESULTS:
 : t
+
+
 
 * *scheduling, todos*
 ** agenda
@@ -472,6 +542,8 @@
         org-agenda-dim-blocked-tasks t
         org-agenda-window-setup 'only-window
         )
+
+
   ;;skips
   (setq org-agenda-skip-scheduled-if-done t
         org-agenda-skip-deadline-if-done t
@@ -491,8 +563,6 @@
 ** org-super-agenda
 #+begin_src emacs-lisp :tangle yes :results none
   (setq org-super-agenda-mode 1)
-
-
   (setq org-agenda-custom-commands
         '(
           ("z" "super" ((agenda "" ((org-agenda-span 'day)
@@ -626,8 +696,6 @@ removed templates:
 
 #+END_SRC
 
-#+RESULTS:
-: current
 
 *** chronos
   #+begin_src emacs-lisp :tangle yes
@@ -698,13 +766,27 @@ removed templates:
 
    (add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo)
 #+end_src
+
+
 * org
 #+BEGIN_SRC emacs-lisp :tangle yes
- (setq org-contacts-files (quote ("~/Dropbox/Zettelkasten/contacts.org")))
+          (use-package org-auto-tangle
+            :hook (org-mode . org-auto-tangle-mode)
+
+            )
+
 
 #+END_SRC
+
+#+RESULTS:
+| org-auto-tangle-mode | (lambda nil (org-superstar-mode 1)) | (lambda nil (auto-revert-mode 1)) | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-eldoc-load |
+
+
+(add-hook 'org-mode-hook 'org-auto-tangle-mode) = :hook (org-mode . org-auto-tangle-mode)
+
+
 * *mentat*
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle yes
 (load "annot")
   (require 'annot)
 
@@ -765,33 +847,49 @@ removed templates:
   (add-hook 'nov-post-html-render-hook 'olivetti-mode)
 )
    #+END_SRC
+
+   #+RESULTS:
+   : t
+
 ** pdfs
   #+BEGIN_SRC emacs-lisp :tangle yes
 
-          (use-package pdf-tools
-            :magic ("%PDF" . pdf-view-mode)
-            :config
-            (pdf-tools-install :no-query))
-          (use-package pdf-view-restore)
+            (use-package pdf-tools
+              :magic ("%PDF" . pdf-view-mode)
+              :config
+              (pdf-tools-install :no-query))
+            (use-package pdf-view-restore)
 
-           (setq pdf-view-continuous t)
-        (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
+             (setq pdf-view-continuous t)
+          (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
 
-  (load "org-pdfview")
- 
-                                          ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
+    (load "org-pdfview")
 
- 
+                                            ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
 
 
-  (add-to-list 'org-file-apps 
-               '("\\.pdf\\'" . (lambda (file link)
-                                 (org-pdfview-open link))))
+
+
+    (add-to-list 'org-file-apps 
+                 '("\\.pdf\\'" . (lambda (file link)
+                                   (org-pdfview-open link))))
+
+(use-package quelpa)
+   (quelpa
+    '(quelpa-use-package
+      :fetcher git
+      :url "https://github.com/quelpa/quelpa-use-package.git"))
+   (require 'quelpa-use-package)
+
+      (use-package pdf-continuous-scroll-mode
+        :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
+(add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
+
 
   #+END_SRC
 
   #+RESULTS:
-  : ((\.pdf\' lambda (file link) (org-pdfview-open link)) (auto-mode . emacs) (directory . emacs) (\.mm\' . default) (\.x?html?\' . default) (\.pdf\' . default))
+  | pdf-continuous-scroll-mode | pdf-tools-enable-minor-modes | pdf-view-restore-mode |
 
   (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
   (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
@@ -814,7 +912,7 @@ removed templates:
                                       "#+title: ${title}" :unnarrowed t :kill-buffer t)))
 (setq org-roam-completion-system 'helm)
 
-  (setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
+
 
   (defun my/org-roam--title-to-slug (title) ;;<< changed the name
     "Convert TITLE to a filename-suitable slug."
@@ -845,61 +943,64 @@ removed templates:
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-   (use-package org-ref)
-   (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
+  (use-package org-ref)
+  (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
 
-   ;; see org-ref for use of these variables
-   (setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/readings.org"
-         org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
-         org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/")
-   (setq org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/")
-   (setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
+  ;; see org-ref for use of these variables
+  (setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/readings.org"
+        org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
+        org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/"
+        org-ref-prefer-bracket-links t
+        )
 
-         bibtex-completion-notes-path "~/Dropbox/Zettelkasten/readings.org")
-   (setq org-ref-prefer-bracket-links t)
-   ;; open pdf with system pdf viewer (works on mac)
-   (setq bibtex-completion-pdf-open-function
-         (lambda (fpath)
-           (start-process "open" "*open*" "open" fpath)))
+  (setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
+        bibtex-completion-notes-path "~/Dropbox/Zettelkasten/readings.org")
 
-
-                                           ;  (setq pdf-view-continuous nil)
-
-                                           ;  (setq bibtex-autokey-year-title-separator "")
-                                           ; (setq bibtex-autokey-titleword-length 0)
+  ;; open pdf with system pdf viewer (works on mac)
+  (setq bibtex-completion-pdf-open-function
+        (lambda (fpath)
+          (start-process "open" "*open*" "open" fpath)))
 
 
-   (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:TYPE:\n:AREA:\n:END:")
+                                          ;  (setq pdf-view-continuous nil)
 
-   (setq bibtex-maintain-sorted-entries t)
+                                          ;  (setq bibtex-autokey-year-title-separator "")
+                                          ; (setq bibtex-autokey-titleword-length 0)
 
-   (use-package org-noter
-     :ensure t
-     :defer t
-     :config (setq org-noter-property-doc-file "INTERLEAVE_PDF")
-     (setq org-noter-property-note-location "INTERLEAVE_PAGE_NOTE") 
-                                           ;       (setq org-noter-notes-window-location 'other-frame)
-                                           ;      (setq org-noter-default-heading-title "p. $p$") 
-     (setq org-noter-auto-save-last-location t))
 
-   (use-package interleave 
-     :defer t
-     )
-   (setq org-noter-always-create-frame nil)
-   (setq org-noter-auto-save-last-location t)
-   (setq org-noter-default-heading-title "$p$: ")
-   (setq org-noter-default-notes-file-names (quote ("~/Dropbox/Zettelkasten/readings.org")))
-   (setq org-noter-doc-split-fraction (quote (0.75 . 0.75)))
-   (setq org-noter-insert-note-no-questions t)
-   (setq org-noter-kill-frame-at-session-end nil)
-   (setq org-noter-notes-search-path (quote ("~/Dropbox/Zettelkasten/")))
-   (setq org-noter-notes-window-location (quote horizontal-split))
-(setq org-noter-insert-selected-text-inside-note t)
+  (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:TYPE:\n:AREA:\n:END:")
+
+  (setq bibtex-maintain-sorted-entries t)
+
+  (use-package org-noter
+    :ensure t
+    :defer t
+    :config
+    (setq org-noter-property-doc-file "INTERLEAVE_PDF"
+          org-noter-property-note-location "INTERLEAVE_PAGE_NOTE"
+          org-noter-default-notes-file-names "~/Dropbox/Zettelkasten/readings.org"
+          org-noter-notes-search-path "~/Dropbox/Zettelkasten/"
+          ;;org noter windows
+          org-noter-always-create-frame nil
+          org-noter-notes-window-location (quote horizontal-split)
+          org-noter-doc-split-fraction (quote (0.75 . 0.75))
+          org-noter-kill-frame-at-session-end nil
+
+          org-noter-auto-save-last-location t
+          org-noter-default-heading-title "$p$: "
+          org-noter-insert-note-no-questions t
+          org-noter-insert-selected-text-inside-note t
+          ))
+                                          ;       (setq org-noter-notes-window-location 'other-frame)
+                                          ;      (setq org-noter-default-heading-title "p. $p$") 
+    (use-package interleave 
+      :defer t
+      )
+
 
 #+END_SRC
 
 #+RESULTS:
-: t
 
 ** bibtex
 
@@ -909,9 +1010,14 @@ removed templates:
 
                   )
 
-#+begin_src emacs-lisp :tangle yes :results none
 
-#+end_src
+
+
+
+
+
+
+
 * load files
 #+BEGIN_SRC emacs-lisp :tangle yes
   (find-file "/home/betsy/.emacs")
@@ -920,6 +1026,3 @@ removed templates:
   (find-file "~/Dropbox/emacs/thinkpad-general-config.org")
 
 #+END_SRC  
-
-
-

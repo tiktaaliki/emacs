@@ -1,3 +1,5 @@
+* old
+
 #+begin_src emacs-lisp :tangle yes
 
   (setq  org-agenda-sorting-strategy 
@@ -931,28 +933,6 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 
 
 #+begin_src emacs-lisp :tangle yes
-
-  (defhydra hydra-org (:color amaranth :columns 3)
-    "Org Mode Movements"
-    ("n" outline-next-visible-heading "next heading")
-    ("p" outline-previous-visible-heading "prev heading")
-    ("N" org-forward-heading-same-level "next heading at same level")
-    ("P" org-backward-heading-same-level "prev heading at same level")
-    ("u" outline-up-heading "up heading")
-    ("k" kill-region "kill region")
-    ("y" yank "paste")
-    ("l" helm-show-kill-ring "list" :color blue)  
-    ("r" org-refile "refile")
-    ("t" org-todo "todo")
-    ("g" org-set-tags-command "tags")
-    ("s" show-subtree "expand subtree")
-    ("h" hide-subtree "collapse subtree")
-    ("a" org-archive-subtree "archive")
-    ("G" org-goto "goto" :exit t)
-    ("q" nil "quit" :color blue)
-    )
-
-
 
 
   (defhydra goto (:color blue :hint nil)
