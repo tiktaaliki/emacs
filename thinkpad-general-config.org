@@ -272,12 +272,13 @@
 #+BEGIN_SRC emacs-lisp :tangle yes
   (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
   (global-set-key (kbd "C-c <f2>") 'org-clock-out)
+
   (global-set-key (kbd "<f1>") 'org-capture)
   (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
   (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
   (bind-keys
-
+("C-c r" . org-clock-report)
    ("C-c l" . org-store-link)
    ("C-c C-l" . org-insert-link)
    ("C-c b" . list-bookmarks)
@@ -565,7 +566,7 @@
   (setq org-super-agenda-mode 1)
   (setq org-agenda-custom-commands
         '(
-          ("z" "super" ((agenda "" ((org-agenda-span 'day)
+          ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
                                     (org-super-agenda-groups
                                      '((:name "Today"
                                               :time-grid t
@@ -582,10 +583,23 @@
                                         (:name "not scheduled"
                                                :and (:deadline nil :scheduled nil))
                                         (:name "Scheduled" :scheduled future)
-
+(:name csi :category "csi")
                                         ))
-                                     )))
-           )
+                                     ))
+                        ))
+          ("l" "all todos" (  (alltodo "" ((org-agenda-overriding-header "")
+                                     (org-super-agenda-groups
+                                      '(
+                                        (:name "today" :scheduled today)
+                                        (:name "Deadlines" 
+                                               :and (:deadline t :scheduled nil))
+                                        (:name "not scheduled"
+                                               :and (:deadline nil :scheduled nil))
+                                        (:name "Scheduled" :scheduled future)
+
+                                      (:name csi :category "csi")
+                                      ))
+                            )         )))
 
           )
         )
@@ -651,6 +665,8 @@
            "* %a \nSCHEDULED: %t %?\n%:initial" )
           ("x" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
            "* TODO %? \nSCHEDULED: %t\n%a\n\n%:initial" )
+          ("p" "org-protocol" table-line (id "pens")
+           "|%^{Pen}|%A|%^{Price}|%U|" )
 
           ("y" "org-protocol" item (id "resources")
            "[ ] %a %U %:initial" )
@@ -1002,18 +1018,27 @@ removed templates:
 
 #+RESULTS:
 
-** bibtex
 
 
-  (add-to-list 'bibtex-BibTeX-entry-alist
-                  '
-
-                  )
-
-
+* latex
+#+begin_src emacs-lisp :tangle yes 
+  (require 'ox-extra)
+  (ox-extras-activate '(ignore-headlines))
 
 
+  (use-package company-auctex)
+  (company-auctex-init)
 
+
+  (use-package tex :ensure auctex)
+
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+
+
+#+end_src
+
+#+RESULTS:
 
 
 

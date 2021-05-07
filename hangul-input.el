@@ -1,16 +1,18 @@
-(with-eval-after-load 'quail
-  (push
-   (cons "dvorak"
-         (concat
-          "                              "
-          "`~1!2@3#4$5%6^7&8*9(0)[{]}    "   ; numbers
-          "  '\",<.>pPyYfFgGcCrRlL/?=+\\|  " ; qwerty
-          "  aAoOeEuUiIdDhHtTnNsS-_      "   ; asdf
-          "  ;:qQjJkKxXbBmMwWvVzZ        "   ; zxcv
-          "                              "))
-   quail-keyboard-layout-alist)
+(set-input-method "korean-hangul")
 
-  (quail-set-keyboard-layout "dvorak"))
+  (with-eval-after-load 'quail
+    (push
+     (cons "dvorak"
+           (concat
+            "                              "
+            "`~1!2@3#4$5%6^7&8*9(0)[{]}    "   ; numbers
+            "  '\",<.>pPyYfFgGcCrRlL/?=+\\|  " ; qwerty
+            "  aAoOeEuUiIdDhHtTnNsS-_      "   ; asdf
+            "  ;:qQjJkKxXbBmMwWvVzZ        "   ; zxcv
+            "                              "))
+     quail-keyboard-layout-alist)
+
+    (quail-set-keyboard-layout "dvorak"))
 
 (with-eval-after-load "quail/hangul"
    (defun hangul2-input-method (key)

@@ -830,15 +830,6 @@ M-x describe-current-coding-system
 
 * latex
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package company-auctex)
-  (company-auctex-init)
-
-
-  (use-package tex :ensure auctex)
-
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-
 
 #+END_SRC
 
@@ -1031,36 +1022,6 @@ https://emacs.stackexchange.com/questions/38184/org-mode-ignore-heading-when-exp
 #+end_src
 
 
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-  (use-package calfw)
-  (use-package calfw-org)
-                                          ;   (use-package calfw-gcal)
-  (use-package calfw-cal)
-  (setq package-check-signature nil)
-                                          ;  (setq org-gcal-down-days '30)
-                                          ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
-
-
-  (defun my-open-calendar ()
-    (interactive)
-    (cfw:open-calendar-buffer
-     :contents-sources
-     (list
-      (cfw:org-create-source "pale green")  ; orgmode source
-                                          ;    (cfw:cal-create-source "light goldenrod") ; diary source
-      ))) 
-  (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
-                                          ;   (setq calendar-daylight-savings-starts '(3 11 year))
-                                          ;  (setq calendar-daylight-savings-ends: '(11 4 year))
-  (setq calendar-week-start-day 1)
-
-  (setq diary-file "~/Dropbox/Zettelkasten/diary")
-
-
-
-#+END_SRC
 
 #+RESULTS:
 : ~/Dropbox/Zettelkasten/diary
