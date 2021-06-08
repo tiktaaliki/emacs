@@ -1,0 +1,27 @@
+* load files
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (find-file "~/Dropbox/emacs/config_thinkpad.org")
+ 
+(setq-default fill-column 90)
+#+END_SRC  
+If a variable is buffer-local, then setq sets its local value in the current buffer and setq-default sets the global default value.
+
+If a variable is not buffer-local, then setq and setq-default do the same thing.
+
+#+RESULTS:
+: 90
+
+* font encoding
+#+begin_src emacs-lisp :tangle yes
+ (require 'cnfonts)
+  ;; 让 cnfonts 随着 Emacs 自动生效。
+  ;; (cnfonts-enable)
+  ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
+  ;; (cnfonts-set-spacemacs-fallback-fonts)
+  (setq cnfonts--custom-set-fontnames
+        '(( "Ubuntu Mono" "DejaVu Sans Mono")
+          ("文泉驿等宽微米黑" "Ubuntu Mono" "隶书" "新宋体")
+          ("HanaMinB" "SimSun-ExtB" "MingLiU-ExtB")))
+  
+
+#+end_src

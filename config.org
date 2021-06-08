@@ -22,7 +22,7 @@
     (scroll-bar-mode -1)
 
 
-    (set-face-attribute 'default nil :family "Fantasque sans mono" :height 200 :weight 'normal  :foreground "#ebdcb2")
+    (set-face-attribute 'default nil :family "Fantasque sans mono" :height 165 :weight 'normal  :foreground "#ebdcb2")
     (delete-selection-mode) ;allows to delete selected text by typing
     (global-set-key (kbd "M-o") 'other-window)
 
@@ -176,40 +176,59 @@
 
 ** functionality
 #+BEGIN_SRC emacs-lisp  :tangle yes
-  (use-package s)
-  (use-package org
-    :ensure org-plus-contrib)
-  (use-package unkillable-scratch
-    :config
-    (unkillable-scratch 1))
+    (use-package s)
+    (use-package org
+      :ensure org-plus-contrib)
+    (use-package unkillable-scratch
+      :config
+      (unkillable-scratch 1))
 
 
-  (use-package aggressive-indent
-    :custom (global-aggressive-indent-mode t)
-    )
+    (use-package aggressive-indent
+      :custom (global-aggressive-indent-mode t)
+      )
 
-  ;;(straight-use-package '(org-plus-contrib :includes org))
-
-
-  (setq org-modules
-        (quote
-        (ol-bibtex ol-docview ol-eww org-habit org-id org-inlinetask org-protocol org-tempo ol-w3m org-annotate-file ol-bookmark org-checklist org-collector org-depend org-invoice org-notify org-registry)))
+    ;;(straight-use-package '(org-plus-contrib :includes org))
 
 
-(defun kdm/html2org-clipboard ()
-  "Convert clipboard contents from HTML to Org and then paste (yank)."
-  (interactive)
-  (setq cmd "osascript -e 'the clipboard as \"HTML\"' | perl -ne 'print chr foreach unpack(\"C*\",pack(\"H*\",substr($_,11,-3)))' | pandoc -f html -t json | pandoc -f json -t org")
-  (kill-new (shell-command-to-string cmd))
-  (yank))
+    (setq org-modules
+          (quote
+          (ol-bibtex ol-docview ol-eww org-habit org-id org-inlinetask org-protocol org-tempo ol-w3m org-annotate-file ol-bookmark org-checklist org-collector org-depend org-invoice org-notify org-registry)))
 
+
+  (defun kdm/html2org-clipboard ()
+    "Convert clipboard contents from HTML to Org and then paste (yank)."
+    (interactive)
+    (kill-new (shell-command-to-string "xclip -o -t text/html | pandoc -f html -t json | pandoc -f json -t org --wrap=none"
+))
+    (yank))
+
+
+
+      (use-package smartparens
+        :ensure t
+        :defer t
+        :init
+        (show-smartparens-global-mode 1))
+      (smartparens-global-mode 1)
+      (setq show-paren-style 'expression)
+
+      (sp-local-pair 'org-mode "/" "/" :actions '(wrap))
+      (sp-local-pair 'org-mode "_" "_" :actions '(wrap))
+      (sp-local-pair 'org-mode "*" "*" :actions '(wrap))
+      (sp-local-pair 'org-mode "+" "+" :actions '(wrap))
+      (sp-local-pair 'org-mode "~" "~" :actions '(wrap))
+      (sp-local-pair 'org-mode "=" "=" :actions '(wrap))
+      (sp-local-pair 'org-mode "-" "-" :actions '(wrap))
+      (sp-pair "'" nil :actions :rem)
 
 #+END_SRC
 
 #+RESULTS:
-: kdm/html2org-clipboard
-
-
+| org-mode | (:open - :close - :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open = :close = :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open ~ :close ~ :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open + :close + :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open * :close * :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add))                                                                  | (:open _ :close _ :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open / :close / :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) |                                                             |                                                             |
+| t        | (:open \\( :close \\) :actions (insert wrap autoskip navigate))                                           | (:open \{ :close \} :actions (insert wrap autoskip navigate))                                             | (:open \( :close \) :actions (insert wrap autoskip navigate))                                             | (:open \" :close \" :actions (insert wrap autoskip navigate))                                             | (:open " :close " :actions (insert wrap autoskip navigate escape) :unless (sp-in-string-quotes-p) :post-handlers (sp-escape-wrapped-region sp-escape-quotes-after-insert)) | (:open ( :close ) :actions (insert wrap autoskip navigate))                                               | (:open [ :close ] :actions (insert wrap autoskip navigate))                                               | (:open { :close } :actions (insert wrap autoskip navigate)) | (:open ` :close ` :actions (insert wrap autoskip navigate)) |
+https://emacs.stackexchange.com/questions/12121/org-mode-parsing-rich-html-directly-when-pasting
+https://ivanaf.com/emacs_drag-drop_pdfs_paste_html_custom_templates.html
   (use-package smartparens 
     :defer t 
     :config
@@ -223,6 +242,16 @@
   (sp-pair "'" nil :actions :rem)
   (sp-pair "=" nil :actions :rem)
 
+
+  (sp-local-pair 'org-mode "/" "/" :actions '(wrap))
+  (sp-local-pair 'org-mode "_" "_" :actions '(wrap))
+  (sp-local-pair 'org-mode "*" "*" :actions '(wrap))
+  (sp-local-pair 'org-mode "+" "+" :actions '(wrap))
+  (sp-local-pair 'org-mode "~" "~" :actions '(wrap))
+  (sp-local-pair 'org-mode "=" "=" :actions '(wrap))
+  (sp-local-pair 'org-mode "-" "-" :actions '(wrap))
+
+  
 ** calendar
 
 
@@ -318,42 +347,48 @@
 : w
 ** org-keybindings
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
-  (global-set-key (kbd "C-c <f2>") 'org-clock-out)
+    (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
+    (global-set-key (kbd "C-c <f2>") 'org-clock-out)
+  
+    (global-set-key (kbd "<f1>") 'org-capture)
+    (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
+    (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+    (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+    (bind-keys
+  ("C-c r" . org-clock-report)
+     ("C-c l" . org-store-link)
+     ("C-c C-l" . org-insert-link)
+     ("C-c b" . list-bookmarks)
+     ("C-a" . org-beginning-of-line) 
+     ("C-e" . end-of-line) 
+     ("C-k" . org-kill-line)
+     ("C-."   . org-todo)
+     ("C-x /" . shrink-window-horizontally)
+     ("C-x ." . org-archive-subtree-default)
+  
+     ([f1] . org-capture)
+     ([f2] . org-clock-in)
+     ;;f3 is helm
+     ([f4] . org-refile)
+     ;;f5 is projectile
+     ([f6] . helm-bibtex-with-local-bibliography)
+     ([f7] . org-agenda)
+     ;;f8 is deft
+    ; ([f10] . org-tree-to-indirect-buffer)
+     ([f11] . org-id-goto)
+     ([f12] . bury-buffer)     )
+  
+  
+  (global-set-key (kbd "<f10>") (lambda ()
+                                (interactive)
+                                (let ((current-prefix-arg '(4)))
+                                  (call-interactively #'org-tree-to-indirect-buffer))))
 
-  (global-set-key (kbd "<f1>") 'org-capture)
-  (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
-  (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-  (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
-  (bind-keys
-("C-c r" . org-clock-report)
-   ("C-c l" . org-store-link)
-   ("C-c C-l" . org-insert-link)
-   ("C-c b" . list-bookmarks)
-   ("C-a" . org-beginning-of-line) 
-   ("C-e" . end-of-line) 
-   ("C-k" . org-kill-line)
-   ("C-."   . org-todo)
-   ("C-x /" . shrink-window-horizontally)
-   ("C-x ." . org-archive-subtree-default)
-
-   ([f1] . org-capture)
-   ([f2] . org-clock-in)
-   ;;f3 is helm
-   ([f4] . org-refile)
-   ;;f5 is projectile
-   ([f6] . helm-bibtex-with-local-bibliography)
-   ([f7] . org-agenda)
-   ;;f8 is deft
-   ([f10] . org-tree-to-indirect-buffer)
-   ([f11] . org-id-goto)
-   ([f12] . bury-buffer)     )
-
-
+  
 #+END_SRC
 
 #+RESULTS:
-: bury-buffer
+| lambda | nil | (interactive) | (let ((current-prefix-arg '(4))) (call-interactively #'org-tree-to-indirect-buffer)) |
 
 #+BEGIN_SRC emacs-lisp :tangle yes :results none
 
@@ -459,49 +494,72 @@
 
 #+RESULTS:
 : 0
+** mode line format
+:LOGBOOK:
+CLOCK: [2021-06-08 Tue 13:51]
+:END:
+#+begin_src emacs-lisp :tangle yes
+       (setq-default mode-line-format '("%e"  mode-line-front-space
+                                        mode-line-mule-info
+                                          mode-line-modified
+                                          mode-line-misc-info
+                                          mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
+         (vc-mode vc-mode)
+         "  " mode-line-modes  mode-line-end-spaces)
+       )  
+#+end_src
+
+#+RESULTS:
+| %e | mode-line-front-space | mode-line-mule-info | mode-line-modified | mode-line-misc-info | mode-line-remote | mode-line-frame-identification | mode-line-buffer-identification |   | mode-line-position | (vc-mode vc-mode) |   | mode-line-modes | mode-line-end-spaces |
 
 ** font encoding
 #+BEGIN_SRC emacs-lisp  :tangle yes
-  (defvar symbola-font (if (eq system-type 'gnu/linux)
-                           (font-spec :name "Symbola" :size 14)
-                         "Symbola"))
-  (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                    '("NanumBarunpen" . "unicode-bmp" ))
-  (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
-                    '("Nanumbarunpen" . "unicode-bmp"))
-
-  (set-fontset-font "fontset-default" '(#x2000 . #x206F)
-                    '("Symbola" . "unicode-bmp" ))
-                                          ;
-  (set-fontset-font "fontset-default" '(#x2190 . #x21FF)
-                    '("Symbola" . "unicode-bmp" ))
-  (set-fontset-font "fontset-default" '(#x2B00 . #x2BFF)
-                    '("Symbola" . "unicode-bmp" ))
-
-  (set-fontset-font "fontset-default" '(#x2200 . #x22FF)
-                    '("Symbola" . "unicode-bmp" ))
-
-  (set-fontset-font "fontset-default" '(#x25A0 . #x25FF)
-                    '("Symbola" . "unicode-bmp" ))
-
-  (set-fontset-font "fontset-default" '(#x2600 . #x26FF)
-                    '("Symbola" . "unicode-bmp" ))
-  (set-fontset-font "fontset-default" '(#x2700 . #x27BF)
-                    '("Symbola" . "unicode-bmp" ))
-
-  (set-fontset-font "fontset-default" '(#x1f800 . #x1f8ff)
-                    '("Symbola" . "unicode-bmp" ))
-
-                                          ;https://www.reddit.com/r/emacs/comments/8tz1r0/how_to_set_font_according_to_languages_that_i/e1bjce6?utm_source=share&utm_medium=web2x&context=3
-  (when (fboundp #'set-fontset-font)
-    (set-fontset-font t 'korean-ksc5601	
-                      ;; Noto Sans CJK: https://www.google.com/get/noto/help/cjk/
-                      (font-spec :family "Nanum Gothic Coding")))
-  (dolist (item '(("Nanum Gothic Coding" . 1.0)))
-    (add-to-list 'face-font-rescale-alist item))
-
-  (setq use-default-font-for-symbols nil)
-
+    (defvar symbola-font (if (eq system-type 'gnu/linux)
+                             (font-spec :name "Symbola" :size 14)
+                           "Symbola"))
+    (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+                      '("NanumBarunpen" . "unicode-bmp" ))
+    (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
+                      '("Nanumbarunpen" . "unicode-bmp"))
+  
+    (set-fontset-font "fontset-default" '(#x2000 . #x206F)
+                      '("Symbola" . "unicode-bmp" ))
+                                            ;
+    (set-fontset-font "fontset-default" '(#x2190 . #x21FF)
+                      '("Symbola" . "unicode-bmp" ))
+    (set-fontset-font "fontset-default" '(#x2B00 . #x2BFF)
+                      '("Symbola" . "unicode-bmp" ))
+  
+    (set-fontset-font "fontset-default" '(#x2200 . #x22FF)
+                      '("Symbola" . "unicode-bmp" ))
+  
+    (set-fontset-font "fontset-default" '(#x25A0 . #x25FF)
+                      '("Symbola" . "unicode-bmp" ))
+  
+    (set-fontset-font "fontset-default" '(#x2600 . #x26FF)
+                      '("Symbola" . "unicode-bmp" ))
+    (set-fontset-font "fontset-default" '(#x2700 . #x27BF)
+                      '("Symbola" . "unicode-bmp" ))
+  
+    (set-fontset-font "fontset-default" '(#x1f800 . #x1f8ff)
+                      '("Symbola" . "unicode-bmp" ))
+  
+    (set-fontset-font "fontset-default" '(#x3400 . #x4dbf)
+                      '("NanumBarunpen" . "unicode-bmp" ))
+    (set-fontset-font "fontset-default" '(#x20000 . #x2EBEF)
+                      '("NanumBarunpen" . "unicode-bmp" ))  
+  
+ 
+                                            ;https://www.reddit.com/r/emacs/comments/8tz1r0/how_to_set_font_according_to_languages_that_i/e1bjce6?utm_source=share&utm_medium=web2x&context=3
+    (when (fboundp #'set-fontset-font)
+      (set-fontset-font t 'korean-ksc5601	
+                        ;; Noto Sans CJK: https://www.google.com/get/noto/help/cjk/
+                        (font-spec :family "Nanum Gothic Coding")))
+    (dolist (item '(("Nanum Gothic Coding" . 1.0)))
+      (add-to-list 'face-font-rescale-alist item))
+  
+    (setq use-default-font-for-symbols nil)
+  
 #+END_SRC  
 
 #+RESULTS:
@@ -534,6 +592,40 @@
 #+RESULTS:
 
 
+* editing
+#+begin_src emacs-lisp :tangle yes
+  
+
+   (defhydra hydra-yasnippet (:color red :hint nil)
+     "
+                    ^YASnippets^
+      --------------------------------------------
+        Modes:    Load/Visit:    Actions:
+
+       _g_lobal  _d_irectory    _i_nsert
+       _m_inor   _f_ile         _t_ryout
+       _e_xtra   _l_ist         _n_ew
+                reload _a_ll
+      "
+     ("n" down "done")
+     ("p" down "up")
+     ("N" outline-next-visible-heading "next heading")
+     ("P" outline-previous-visible-heading "prev heading")
+     ("d" yas-load-directory)
+     ("e" yas-activate-extra-mode)
+     ("i" yas-insert-snippet)
+     ("f" yas-visit-snippet-file :color blue)
+     ("n" yas-new-snippet)
+     ("t" yas-tryout-snippet)
+     ("l" yas-describe-tables)
+     ("g" yas-global-mode :color red)
+     ("m" yas-minor-mode :color red)
+     ("a" yas-reload-all))
+  
+#+end_src
+
+#+RESULTS:
+: hydra-yasnippet/body
 
 * org-refile and archiving
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -612,39 +704,53 @@
   (tags . " %i %-12:c")
   (search . " %i %-12:c")))
 
-#+BEGIN_SRC emacs-lisp :tangle yes
-      (setq org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE ")
-
   (setq org-agenda-files '("~/Dropbox/Zettelkasten"
                          "~/Dropbox/Zettelkasten/Zettels"
                            ))
 
+  
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE ")
 
-(setq org-agenda-prefix-format
-'((agenda . " %i %-12:c%?-12t% s")
-  (todo . " %i %-12:c")
-  (tags . " %i %-12:c")
-  (search . " %i %-12:c")))
+  (setq org-agenda-files '("~/Dropbox/Zettelkasten/journal.org"
+                           "~/Dropbox/Zettelkasten/inbox.org"
+                           "~/Dropbox/Zettelkasten/readings.org"
+                           "~/Dropbox/Zettelkasten/contacts.org"
+                           "~/Dropbox/Zettelkasten/ndd.org"
+                           "~/Dropbox/Zettelkasten/personal.org"
+                           "~/Dropbox/Zettelkasten/lis.org"
+                           "~/Dropbox/Zettelkasten/cal.org"
+                           "~/Dropbox/Zettelkasten/recipes.org"
+                           "~/Dropbox/Zettelkasten/sysadmin.org"
+                           "~/Dropbox/Zettelkasten/Zettels/index.org"
+                           ))
 
-      (setq org-agenda-with-colors t
-            org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
-            org-agenda-current-time-string "✸✸✸✸✸"
-            org-agenda-start-with-clockreport-mode t
-            org-agenda-dim-blocked-tasks t
-            org-agenda-window-setup 'only-window
-            )
+
+  (setq org-agenda-prefix-format
+        '((agenda . " %i %-12:c%?-12t% s")
+          (todo . " %i %-12:c")
+          (tags . " %i %-12:c")
+          (search . " %i %-12:c")))
+
+  (setq org-agenda-with-colors t
+        org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
+        org-agenda-current-time-string "✸✸✸✸✸"
+        org-agenda-start-with-clockreport-mode t
+        org-agenda-dim-blocked-tasks t
+        org-agenda-window-setup 'only-window
+        )
 
 
-      ;;skips
-      (setq org-agenda-skip-scheduled-if-done t
-            org-agenda-skip-deadline-if-done t
-            org-agenda-skip-timestamp-if-done t
-            org-agenda-skip-deadline-prewarning-if-scheduled t
-            )
+  ;;skips
+  (setq org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-skip-timestamp-if-done t
+        org-agenda-skip-deadline-prewarning-if-scheduled t
+        )
 
-      (setq org-agenda-clockreport-parameter-plist
-            (quote
-             (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
+  (setq org-agenda-clockreport-parameter-plist
+        (quote
+         (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
 
 
 #+END_SRC
@@ -897,7 +1003,7 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
 ** checklists
 #+begin_src emacs-lisp :tangle yes :results none
    (setq org-list-demote-modify-bullet
-         '(("+" . "*") ("-" . "+") ("*" . "-")))
+         '(("+" . "-") ("-" . "+") ))
 
    (defun my/org-checkbox-todo ()
      "Switch header TODO state to DONE when all checkboxes are ticked, to TODO otherwise"
@@ -1013,43 +1119,44 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
 
 ** pdfs
   #+BEGIN_SRC emacs-lisp :tangle yes
-
-            (use-package pdf-tools
-              :magic ("%PDF" . pdf-view-mode)
-              :config
-              (pdf-tools-install :no-query))
-            (use-package pdf-view-restore)
-
-             (setq pdf-view-continuous t)
-          (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
-
-    (load "org-pdfview")
-
-                                            ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
-
-
-
-
-    (add-to-list 'org-file-apps 
-                 '("\\.pdf\\'" . (lambda (file link)
-                                   (org-pdfview-open link))))
-
-(use-package quelpa)
-   (quelpa
-    '(quelpa-use-package
-      :fetcher git
-      :url "https://github.com/quelpa/quelpa-use-package.git"))
-   (require 'quelpa-use-package)
-
-      (use-package pdf-continuous-scroll-mode
-        :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
-(add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
-
-
+    
+                (use-package pdf-tools
+                  :magic ("%PDF" . pdf-view-mode)
+                  :config
+                  (pdf-tools-install :no-query))
+                (use-package pdf-view-restore)
+    
+                 (setq pdf-view-continuous t)
+              (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
+     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
+    
+        (load "org-pdfview")
+    
+                                                ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
+    
+    
+    
+    
+        (add-to-list 'org-file-apps 
+                     '("\\.pdf\\'" . (lambda (file link)
+                                       (org-pdfview-open link))))
+    
+    (use-package quelpa)
+       (quelpa
+        '(quelpa-use-package
+          :fetcher git
+          :url "https://github.com/quelpa/quelpa-use-package.git"))
+       (require 'quelpa-use-package)
+    
+          (use-package pdf-continuous-scroll-mode
+            :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
+    (add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
+    
+    
   #+END_SRC
 
   #+RESULTS:
-  | pdf-continuous-scroll-mode | pdf-tools-enable-minor-modes | pdf-view-restore-mode |
+  | (lambda nil (visual-fill-column-mode 0)) | pdf-continuous-scroll-mode | pdf-tools-enable-minor-modes | pdf-view-restore-mode |
 
   (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
   (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))

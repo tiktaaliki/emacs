@@ -1,71 +1,3 @@
-sudo pacman -U /root/Downloads/discord-0.0.10.tar.gz
-sudo pacman -U ~/Downloads/discord-0.0.10.tar.gz
-cd Discord
-makepkg -si
-pacman -S discord
-sudo pacman -S discord
-git initialize
-git init
-git clone git@github.com:tiktaaliki/2020-CLIR-senior-program-officer.git
-pandoc Notes.odt -f odt -t org -s -o bipocnotes.org
-cd ~/Downloads
-ls
-ls
-pandoc protestsecurity.odt -f odt -t org -s -o protestsecurity.org
-ls
-protestsecurity.org
-setxkbmap us
-setxkbmap dvorak
-ls
-sudo 00-keyboard.conf emacs
-sudo emacs 00-keyboard.conf
-reboot
-cd /etc/X11/xorg.conf.d/
-ls
-reboot
-cd ~/Dropbox/2020
-ls
-cd 2020JobSearch
-ls
-cd 2020-NYU-online-instruction-librarian
-pdftk deistatement.pdf cat 1 2-end output removedPages.pdf
-ls
-pdftk deistatement.pdf cat 1-r2 output removedPages2.pdf
-pdftk *.pdf cat output combined.pdf
-pdftk *.pdf cat output combined.pdf
-pdftk deistatement.pdf cat 1-r2 output removedPages2.pdf
-pdftk *.pdf cat output combined.pdf
-cd 2020-NYU-online-instruction-librarian
-cd ~/Dropbox/2020
-cd 2020JobSearch
-ls
-cd 2020-SutterHill-LibraryScientist
-ls
-pdftk *.pdf cat output combined.pdf
-mu init
-mu init -d
-ls
-sudo emacs 01-keyboard.conf 
-reboot
-printenv
-gtypist
-cd ..
-cd etc
-ls
-cd ..
-cd ..
-cd etc
-ls
-emacsclient vconsole.conf
-sudo emacsclient vconsole.conf
-sudo emacsclient vconsole.conf
-man mu
-man maildir
-cd ~
-grep -r org.freedesktop.Notifications /usr/share/dbus-1/services/
-sudo mv /usr/share/dbus-1/services/org.freedesktop.Notifications.service.old /usr/share/dbus-1/services/org.freedesktop.Notifications.service.old.disable
-grep -r org.freedesktop.Notifications /usr/share/dbus-1/services/
-sudo mv /usr/share/dbus-1/services//usr/share/dbus-1/services/org.kde.plasma.Notifications.service /usr/share/dbus-1/services/org.kde.plasma.Notifications.service.disable
 sudo mv /usr/share/dbus-1/services/usr/share/dbus-1/services/org.kde.plasma.Notifications.service /usr/share/dbus-1/services/org.kde.plasma.Notifications.service.disable
 sudo mv /usr/share/dbus-1/services/org.kde.plasma.Notifications.service /usr/share/dbus-1/services/org.kde.plasma.Notifications.service.disable
 grep -r org.freedesktop.Notifications /usr/share/dbus-1/services/
@@ -126,3 +58,71 @@ pandoc -f odt -t org -o NYU-documentation_2020-2021.odt NYU-documentation_2020-2
 pandoc -f odt -t org -o -s NYU-documentation_2020-2021.odt NYU-documentation_2020-2021.org
 pandoc -f odt -t org -s -o NYU-documentation_2020-2021.odt NYU-documentation_2020-2021.org
 pandoc NYU-documentation_2020-2021.odt -f odt -t org -s -o NYU-documentation_2020-2021.org
+cd ..
+cd ..
+cd ..
+cd Dropbox/2021
+ls
+pandoc NDD Member Handbook -- LIVE copy.odt -f odt -t org -s -o memberhandbook.org
+pandoc NDD Member Handbook -- LIVE copy.odt -f odt -t org -s -o memberhandbook.org
+lspandoc .odt -f odt -t org -s -o memberhandbook.org
+pandoc NDDmemberhandbook.odt -f odt -t org -s -o memberhandbook.org 
+pdftk  00.pdf 01-1.pdf 01.pdf 02.pdf 03.pdf 04.pdf 05-0.pdf 05.pdf 06.pdf 07.pdf 08.pdf 09-0.pdf 09.pdf 10.pdf 11.pdf 12.pdf 13.pdf 14.pdf index.pdf cat output.pdf
+pdftk  00.pdf 01-1.pdf 01.pdf 02.pdf 03.pdf 04.pdf 05-0.pdf 05.pdf 06.pdf 07.pdf 08.pdf 09-0.pdf 09.pdf 10.pdf 11.pdf 12.pdf 13.pdf 14.pdf index.pdf cat output.pdf
+pdftk  00.pdf 01-1.pdf 01.pdf 02.pdf 03.pdf 04.pdf 05-0.pdf 05.pdf 06.pdf 07.pdf 08.pdf 09-0.pdf 09.pdf 10.pdf 11.pdf 12.pdf 13.pdf 14.pdf index.pdf cat output knowledge-justice.pdf
+cd 2021
+cd ..
+cd 2021
+ls
+exec --no-startup-id setxkbmap -model pc104 -layout "us,kr" -variant "dvorak," -option "ctrl:nocaps"
+setxkbmap -model pc104 -layout "us,kr" -variant "dvorak," -option "ctrl:nocaps"
+xrandr --dpi 96 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2x2 --pos
+xrandr --dpi 96 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2x2
+xrandr --dpi 200 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2x2
+xrandr --dpi 50 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2x2
+xrandr --dpi 296 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2x2
+xrandr  --output HDMI2 --scale 1.25x1.25
+xrandr --dpi 296 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2.5x2.5
+xrandr --dpi 296 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2x2
+xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2.5x2.5
+xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1x1
+xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
+xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.75x1.75
+xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.7x1.7
+xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.6x1.6
+xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
+xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.3x1.3
+xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
+xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
+xrandr --dpi 296 --output DP2 --scale 1.25x1.25 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
+xrandr --dpi 296 --output DP2 --scale .75x.75 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
+xrandr --dpi 296 --output DP2 --scale .75x.75 --output HDMI2 --scale 1.5x1.5
+xrandr --dpi 296 --output DP2 --scale .75x.75 --output HDMI2 --scale 1.5x1.5
+xrandr --dpi 296 --output DP2 --scale 0.75x0.75 --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2 --scale 0.75x0.75 --output HDMI2 --scale 1.5x1.5
+xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2  --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2 --pos 1920x0   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2 --pos 1920x0   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2 --pos 1920x0   --output HDMI2 
+xrandr --output DP2 --pos 1920x0   --output HDMI2 --scale 1x1
+xrandr --output DP2 --pos 1920x0   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2 --pos 2400x0   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2 --pos 2880x0   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2 --pos 1920x0   --output HDMI2 --scale 1x1
+xrandr --output DP2 --pos 2880x0   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2 --scale 0.75x0.75 --pos 2880x0   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2 --scale 0.75x0.75 --pos 2880x0   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2 --scale 0.9x0.9 --pos 2880x0   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2  --pos 2880x0   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2  --pos 2880x0 --scale 1x1   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2  --pos 2880x0 --scale .9x.9   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2  --pos 2880x0 --scale .9x.9   --output HDMI2 --scale 1.6x1.6
+xrandr --output DP2  --pos 2880x0 --scale .9x.9   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2  --pos 3072x0 --scale .9x.9   --output HDMI2 --scale 1.6x1.6
+xrandr --output DP2  --pos 2880x0 --scale .9x.9   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2  --pos 3360x0 --scale .9x.9   --output HDMI2 --scale 1.75x1.75
+xrandr --output DP2  --pos 2400x0 --scale .9x.9   --output HDMI2 --scale 1.25x1.25
+  git config --global user.email "betsy.yoon@gmail.com"
+git config --global user.name "Betsy"
+xinput --disable 14

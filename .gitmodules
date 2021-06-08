@@ -1,0 +1,3 @@
+[submodule ".emacs.d/quelpa/build/pdf-continuous-scroll-mode"]
+	path = .emacs.d/quelpa/build/pdf-continuous-scroll-mode
+	url = https://github.com/dalanicolai/pdf-continuous-scroll-mode.el.git

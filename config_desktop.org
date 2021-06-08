@@ -1,0 +1,10 @@
+* load files
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (find-file "~/Dropbox/emacs/config.org")
+  (find-file "~/Dropbox/emacs/config_desktop.org")
+
+ (set-face-attribute 'default nil :family "Fantasque sans mono" :height 220 :weight 'normal  :foreground "#ebdcb2"); honeydew  d5d6d2 faefd4
+
+ #+END_SRC  
+
+#+RESULTS:

@@ -1,1 +1,1 @@
-("~/Dropbox/Library/" "~/Dropbox/" "~/Dropbox/emacs/.emacs.d/" "~/Documents/NDD documentation/Organizing Committee/" "~/Downloads/" "~/Dropbox/emacs/" "~/Dropbox/Zettelkasten/" "~/Dropbox/Flashcards Deluxe/" "~/Dropbox/Apps/" "~/Dropbox/.stfolder/" "~/Dropbox/.git/" "~/Dropbox/.dropbox.cache/")
+("~/Dropbox/" "~/Dropbox/emacs/.emacs.d/" "~/Dropbox/Library/" "~/Downloads/" "~/Dropbox/emacs/" "~/Dropbox/Zettelkasten/" "~/Dropbox/Flashcards Deluxe/" "~/Dropbox/Apps/" "~/Dropbox/.stfolder/" "~/Dropbox/.git/" "~/Dropbox/.dropbox.cache/")

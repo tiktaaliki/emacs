@@ -1,2 +1,0 @@
-;;; Generated package description from /home/betsy/.emacs.d/elpa/mw-thesaurus-20210106.1857/mw-thesaurus.el  -*- no-byte-compile: t -*-
-(define-package "mw-thesaurus" "20210106.1857" "Merriam-Webster Thesaurus" '((emacs "25") (request "0.3.0") (dash "2.16.0")) :commit "cb0637bd3799820d6738f5d66b8bc2de2333e0e4" :authors '(("Ag Ibragimov")) :maintainer '("Ag Ibragimov") :keywords '("wp" "matching") :url "https://github.com/agzam/mw-thesaurus.el")

@@ -1,0 +1,80 @@
+(eval-when-compile
+  (require 'package)
+  (unless (assoc-default "melpa" package-archives)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
+ ; (unless (assoc-default "melpa-stable" package-archives)
+  ;	  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t))
+  (unless (assoc-default "org" package-archives)
+    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
+  (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+  
+  (package-initialize)
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+  (require 'use-package)
+  (setq use-package-always-ensure t))
+
+
+
+;; (require 'package)
+
+;; ;;
+;; (add-to-list 'package-archives
+;;              '("melpa" . "https://melpa.org/packages/"))
+
+;; ;; for latest org-mode and org-plus-contrib
+;; (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+
+;; ;; https://github.com/purcell/emacs.d/blob/master/lisp/init-elpa.el#L64
+;; ;; (setq package-enable-at-startup nil)
+;; (package-initialize)
+
+;; (when (not package-archive-contents)
+;;   (package-refresh-contents))
+
+;; (unless (package-installed-p 'use-package)
+;;   (package-install 'use-package))
+
+;; ;; install packages automatically if not already present on your
+;; ;; system to be global for all packages
+;; (require 'use-package-ensure)
+;; (setq use-package-always-ensure t)
+
+
+
+
+;; (setq package-enable-at-startup nil)
+
+;; (defvar bootstrap-version)
+;; (let ((bootstrap-file
+;;        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+;;       (bootstrap-version 5))
+;;   (unless (file-exists-p bootstrap-file)
+;;     (with-current-buffer
+;;         (url-retrieve-synchronously
+;;          "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+;;          'silent 'inhibit-cookies)
+;;       (goto-char (point-max))
+;;       (eval-print-last-sexp)))
+;;   (load bootstrap-file nil 'nomessage))
+
+;; (straight-use-package 'use-package)
+;; (setq straight-use-package-by-default t)
+
+;; (require 'package)
+;; (add-to-list 'package-archives
+;;              '("melpa" . "https://melpa.org/packages/"))
+
+(add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
+(add-to-list 'load-path "~/Dropbox/emacs/")
+;(org-babel-tangle-file "~/Dropbox/emacs/thinkpad-general-config.org")
+(org-babel-load-file "~/Dropbox/emacs/config.org")
+(org-babel-load-file "~/Dropbox/emacs/config_thinkpad.org")
+(org-babel-load-file "~/Dropbox/emacs/hangul-input.org")
+(setq custom-file "~/Dropbox/emacs/custom-thinkpad.el")
+(load custom-file)
+
+
+(put 'upcase-region 'disabled nil)
