@@ -337,11 +337,12 @@
 (setq-default mode-line-format '("%e"  mode-line-front-space
                                  mode-line-mule-info
                                    mode-line-modified
-                                   mode-line-misc-info
+                                   mode-line-misc-info 
                                    mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
   (vc-mode vc-mode)
   "  " mode-line-modes  mode-line-end-spaces)
-)
+              )
+  (display-time-mode 1)
 
 (defvar symbola-font (if (eq system-type 'gnu/linux)
                          (font-spec :name "Symbola" :size 14)
@@ -460,7 +461,7 @@
                                         ;  (global-set-key (kbd "<f4>") 'org-refile)
 
 
-(setq org-id-link-to-org-use-id (quote create-if-interactive)
+(setq org-id-link-to-org-use-id t
       org-id-method (quote org)
       org-return-follows-link t
       org-link-keep-stored-after-insertion nil
@@ -515,71 +516,79 @@
        (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
 
 (setq org-super-agenda-mode 1)
-(setq org-agenda-custom-commands
-      '(
-        ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
-                                         (org-super-agenda-groups
-                                          '((:name "Today"
-                                                   :time-grid t
-                                                   :date today
-                                                   :todo "TODAY"
-                                                   :scheduled today
-                                                   :order 1)))))
-                             (alltodo "" ((org-agenda-overriding-header "")
-                                          (org-super-agenda-groups
-                                           '(
-                                             (:name "today" :scheduled today)
-                                             (:name "Deadlines" 
-                                                    :and (:deadline t :scheduled nil))
-                                             (:name "not scheduled"
-                                                    :and (:deadline nil :scheduled nil))
-                                             (:name "Scheduled" :scheduled future)
-                                             (:name "csi" :category "CSI")
-                                             ))
-                                          ))
-                             ))
+  (setq org-agenda-custom-commands
+        '(
+          ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
+                                           (org-super-agenda-groups
+                                            '((:name "Today"
+                                                     :time-grid t
+                                                     :date today
+                                                     :todo "TODAY"
+                                                     :scheduled today
+                                                     :order 1)))))
+                               (alltodo "" ((org-agenda-overriding-header "")
+                                            (org-super-agenda-groups
+                                             '(
+                                               (:name "today" :scheduled today)
+                                               (:name "next" :todo "NEXT")
+                                               (:name "to read" :tag "read"
+)
 
+                                               (:name "Deadlines" 
+                                                      :and (:deadline t :scheduled nil))
 
+                                               (:name "ndd" :category "ndd")
+                                               (:name "lis" :category "lis")
+                                               (:name "csi" :category "CSI")
 
-        ("k" "all untagged TODOs" tags-todo "-{.*}")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
-
-        ("x" "With deadline columns" alltodo "" 
-         ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
-          (org-agenda-view-columns-initially t)
-          (org-agenda-sorting-strategy '(timestamp-up))
-          (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) )
-
-         )
-
-        ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" ((org-agenda-span 2)  (org-agenda-clockreport-mode nil)))
-                                                   (todo "NEXT|TODAY|IN-PROG"))
-         ((org-agenda-todo-ignore-scheduled t)))
-
-        ("u" "all UNSCHEDULED" alltodo ""                                                          
-
-
-         (    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
-              (org-agenda-todo-ignore-scheduled t) )
-
-         )
-        ("l" "all todos" (  (alltodo "" ((org-agenda-overriding-header "")
-                                         (org-super-agenda-groups
-                                          '(
-                                            (:name "csi" :category "CSI" :order 100)
-                                            (:name "important" :priority "A")
-                                            (:name "today" :scheduled today)
-
-                                            (:name "Deadlines" 
-                                                   :and (:deadline t :scheduled nil))
-                                            (:name "not scheduled"
-                                                   :and (:deadline nil :scheduled nil))
-                                            (:name "Scheduled" :scheduled future :order 75)
-
+                                               (:name "not scheduled"
+                                                      :and (:deadline nil :scheduled nil))
+                                                                                                (:name "Scheduled" :scheduled future)
+                                               ))
                                             ))
-                                         )         )))
+                               ))
 
+
+
+          ("k" "all untagged TODOs" tags-todo "-{.*}")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
+
+          ("x" "With deadline columns" alltodo "" 
+           ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
+            (org-agenda-view-columns-initially t)
+            (org-agenda-sorting-strategy '(timestamp-up))
+            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) )
+
+           )
+
+          ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" ((org-agenda-span 2)  (org-agenda-clockreport-mode nil)))
+                                                     (todo "NEXT|TODAY|IN-PROG"))
+           ((org-agenda-todo-ignore-scheduled t)))
+
+          ("u" "all UNSCHEDULED" alltodo ""                                                          
+
+
+           (    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+                (org-agenda-todo-ignore-scheduled t) )
+
+           )
+          ("l" "all todos" (  (alltodo "" ((org-agenda-overriding-header "")
+                                           (org-super-agenda-groups
+                                            '(
+                                              (:name "csi" :category "CSI" :order 100)
+                                              (:name "important" :priority "A")
+                                              (:name "today" :scheduled today)
+
+                                              (:name "Deadlines" 
+                                                     :and (:deadline t :scheduled nil))
+                                              (:name "not scheduled"
+                                                     :and (:deadline nil :scheduled nil))
+                                              (:name "Scheduled" :scheduled future :order 75)
+
+                                              ))
+                                           )         )))
+
+          )
         )
-      )
 
 (setq org-enforce-todo-dependencies t
       org-clock-out-when-done t
@@ -836,7 +845,7 @@
                                         ; (setq bibtex-autokey-titleword-length 0)
 
 
-(setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:TYPE:\n:AREA:\n:END:")
+(setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DISCOVERY:\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:TYPE:\n:AREA:\n:END:")
 
 (setq bibtex-maintain-sorted-entries t)
 

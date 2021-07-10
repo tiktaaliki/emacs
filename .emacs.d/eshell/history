@@ -1,71 +1,3 @@
-sudo mv /usr/share/dbus-1/services/usr/share/dbus-1/services/org.kde.plasma.Notifications.service /usr/share/dbus-1/services/org.kde.plasma.Notifications.service.disable
-sudo mv /usr/share/dbus-1/services/org.kde.plasma.Notifications.service /usr/share/dbus-1/services/org.kde.plasma.Notifications.service.disable
-grep -r org.freedesktop.Notifications /usr/share/dbus-1/services/
-sudo mv /usr/share/dbus-1/services/com.ph-uhl.deadd.notification.service /usr/share/dbus-1/services/com.ph-uhl.deadd.notification.service.disable
-ls /usr/share/dbus-1/services/ | grep Notif
-exit
-mu index --maildir=~/.mail/tiktaaliki-riseup
-mu index
-mu init
-exit
-pandoc curriculum idea.rtf -f rtf -t org -o curriculum.org
-pandoc curriculum.odt -f odt -t org -o curriculum.org
-curriculum.org
-curriculum.org
-ibus-daemon 
-ibus-daemon 
-gpg2 -c ./.mbsyncpass-tiktaaliki
-gpg2 -c ./.mbsyncpass-gmail
-gpg2 -c ./.mbsyncpass-betsyoon
-mbsync -aV
-mbsync -aV
-mbsync -aV
-mu index
-mbsync -aV
-mbsync riseup
-mbsync tiktaaliki
-mbsync tiktaaliki
-mbsync tiktaaliki
-openlls s_client -connect mail.riseup.net:993 -showcerts | grep Protocol
-openssl s_client -connect mail.riseup.net:993 -showcerts | grep Protocol
-gpg2 -c ./.authinfo
-mbsync -aV
-mbsync -aV
-cd home/betsy/Documents
-cd Documents
-cd NDD website (webfaction)
-ls
-NDD website (webfaction)
-pdftk Forkner_4th_edition.pdf cat 171-193 out exercises.pdf
-pdftk Forkner_4th_edition.pdf cat 171-193 output exercises.pdf
-pdftk Forkner_4th_Edition.pdf cat 171-193 output exercises.pdf
-pdftk Engels_*.pdf cat output combined.pdf
-ssh ndd@web622.webfaction.com 
-cd Downloads
-pandoc -f odt -t org bm.odt
-exit
-journalctl
-setxkbmap qwerty
-setxkbmap us
-setxkbmap ,dvorak
-setxkbmap dvorak
-sudo xkill
-sudo xkill
-sudo xkill
-pandoc -o Return-Documentation for Service Providers - AY 2020-2021.odt Return-Documentation for Service Providers - AY 2020-2021.org
-pandoc -f odt -t org -o Return-Documentation for Service Providers - AY 2020-2021.odt Return-Documentation for Service Providers - AY 2020-2021.org
-pandoc -f odt -t org -o NYU-documentation_2020-2021.odt NYU-documentation_2020-2021.org
-pandoc -f odt -t org -o -s NYU-documentation_2020-2021.odt NYU-documentation_2020-2021.org
-pandoc -f odt -t org -s -o NYU-documentation_2020-2021.odt NYU-documentation_2020-2021.org
-pandoc NYU-documentation_2020-2021.odt -f odt -t org -s -o NYU-documentation_2020-2021.org
-cd ..
-cd ..
-cd ..
-cd Dropbox/2021
-ls
-pandoc NDD Member Handbook -- LIVE copy.odt -f odt -t org -s -o memberhandbook.org
-pandoc NDD Member Handbook -- LIVE copy.odt -f odt -t org -s -o memberhandbook.org
-lspandoc .odt -f odt -t org -s -o memberhandbook.org
 pandoc NDDmemberhandbook.odt -f odt -t org -s -o memberhandbook.org 
 pdftk  00.pdf 01-1.pdf 01.pdf 02.pdf 03.pdf 04.pdf 05-0.pdf 05.pdf 06.pdf 07.pdf 08.pdf 09-0.pdf 09.pdf 10.pdf 11.pdf 12.pdf 13.pdf 14.pdf index.pdf cat output.pdf
 pdftk  00.pdf 01-1.pdf 01.pdf 02.pdf 03.pdf 04.pdf 05-0.pdf 05.pdf 06.pdf 07.pdf 08.pdf 09-0.pdf 09.pdf 10.pdf 11.pdf 12.pdf 13.pdf 14.pdf index.pdf cat output.pdf
@@ -123,6 +55,74 @@ xrandr --output DP2  --pos 3072x0 --scale .9x.9   --output HDMI2 --scale 1.6x1.6
 xrandr --output DP2  --pos 2880x0 --scale .9x.9   --output HDMI2 --scale 1.5x1.5
 xrandr --output DP2  --pos 3360x0 --scale .9x.9   --output HDMI2 --scale 1.75x1.75
 xrandr --output DP2  --pos 2400x0 --scale .9x.9   --output HDMI2 --scale 1.25x1.25
-  git config --global user.email "betsy.yoon@gmail.com"
-git config --global user.name "Betsy"
-xinput --disable 14
+pdftk 2021_NYPL_Coverletter_YOON.pdf 2021_RESUME_YOON.pdf output 2021_YOON.pdf
+setxkbmap -model pc104 -layout "us,kr" -variant "dvorak," -option "ctrl:nocaps"
+xrandr --output DP2  --pos 2400x0 --scale .8x.8   --output HDMI2 --scale 1.25x1.25
+xrandr --output DP2  --pos 2400x0 --scale .75x.75   --output HDMI2 --scale 1.25x1.25
+ssh root@10.11.99.1
+ssh root@10.11.99.1
+ssh root@192.168.2.89
+ssh root@192.168.2.89 SjPZMwOv2V
+sudo ssh root@192.168.2.89
+sudo ssh root@192.168.2.89
+ssh root@10.11.99.1
+ssh-keygen
+ssh-copy-id root@10.11.99.1
+ssh-keygen -R 10.11.99.1
+ssh root@10.11.99.1
+ssh-copy-id root@10.11.99.1
+ssh root@10.11.99.1
+ssh root@10.11.99.1
+ssh root@10.11.99.1
+ssh root@10.11.99.1
+ssh root@10.11.99.1
+ssh root@10.11.99.1
+ssh-copy-id root@10.11.99.1
+ssh-copy-id root@10.11.99.1
+ssh 'root@10.11.99.1'
+ssh-copy-id root@10.11.99.1
+ssh 'root@10.11.99.1'
+xrandr --output DP2  --pos 2400x0 --scale .75x.75   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2  --pos 2400x0 --scale .75x.75   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale .75x.75   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale .5x.5   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale .6x.6   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale .5x.5   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale .7x.7   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale .75x.75   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale .75x.75   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale .5x.5   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale .75x.75   --output HDMI2 --scale 1x1
+xrandr
+xrandr --output DP2  --pos 1920x0 --scale .75x.75   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale 1x1 --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale 0.75x0.75 --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale 0.65x0.65 --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale 0.65x0.65 --output HDMI2 --scale 1.15x1.15
+xrandr --output DP2  --pos 1920x0 --scale 0.65x0.65 --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 1920x0 --scale 0.65x0.65 --output HDMI2 --scale 1.2x1.2
+xrandr --output DP2  --pos 1920x0 --scale 0.65x0.65 --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 2208x0 --scale 0.65x0.65 --output HDMI2 --scale 1.15x1.15
+xrandr --output DP2  --pos 1920x0 --scale 0.65x0.65 --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 2400x0 --scale .75x.75   --output HDMI2 --scale 1.25x1.25
+xrandr --output DP2  --pos 1920x0 --scale 1x1   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 2208x0 --scale .6x.6   --output HDMI2 --scale 1.15x1.15
+xrandr --output DP2  --pos 2112x0 --scale .6x.6   --output HDMI2 --scale 1.1x1.1
+xrandr --output DP2  --pos 2112x0 --scale .65x.65   --output HDMI2 --scale 1.1x1.1
+xrandr --output DP2  --pos 2112x0 --scale 1x1   --output HDMI2 --scale 1.1x1.1
+xrandr --output DP2  --pos 2112x0 --scale .65x.65   --output HDMI2 --scale 1.1x1.1
+xrandr --output DP2  --pos 2112x0 --scale .7x.7   --output HDMI2 --scale 1.1x1.1
+xrandr --output DP2  --pos 2112x0 --scale 1x1   --output HDMI2 --scale 1.1x1.1
+xrandr --output DP2  --pos 2112x0 --scale .7x.7   --output HDMI2 --scale 1.1x1.1
+xrandr --output DP2  --pos 2112x0 --scale .75x.75   --output HDMI2 --scale 1.1x1.1
+xrandr --output DP2  --pos 2112x0 --scale 1x1   --output HDMI2 --scale 1.1x1.1
+xrandr --output DP2  --pos 2112x0 --scale .75x.75   --output HDMI2 --scale 1.1x1.1
+xrandr --output DP2  --pos 2112x0 --scale .75x.75   --output HDMI2 --scale 1.1x1.1
+xrandr --output DP2  --pos 1920x0 --scale .5x.5   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 2112x0 --scale .7x.7   --output HDMI2 --scale 1.1x1.1
+xrandr --output DP2  --pos 2112x0 --scale 1x1   --output HDMI2 --scale 1x1
+xrandr --output DP2  --pos 2112x0 --scale .7x.7   --output HDMI2 --scale 1.1x1.1
+ssh root@10.11.99.1
+  ssh-keygen -R 10.11.99.1
+ssh root@10.11.99.1
+ssh root@10.11.99.1

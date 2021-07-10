@@ -13,6 +13,8 @@ If a variable is not buffer-local, then setq and setq-default do the same thing.
 
 * font encoding
 #+begin_src emacs-lisp :tangle yes
+
+#+end_src
  (require 'cnfonts)
   ;; 让 cnfonts 随着 Emacs 自动生效。
   ;; (cnfonts-enable)
@@ -23,5 +25,3 @@ If a variable is not buffer-local, then setq and setq-default do the same thing.
           ("文泉驿等宽微米黑" "Ubuntu Mono" "隶书" "新宋体")
           ("HanaMinB" "SimSun-ExtB" "MingLiU-ExtB")))
   
-
-#+end_src

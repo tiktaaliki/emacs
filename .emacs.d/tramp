@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <21/06/03 10:08:50 /home/betsy/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <21/06/08 14:38:48 /home/betsy/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; Run `M-x tramp-cleanup-all-connections' instead.
 
@@ -57,4 +57,6 @@
   ("touch" "\\touch")
   ("~root" "/root"))
  ((tramp-file-name "afp" "betsyyoon" nil "The-Gunth.local" nil nil nil)
-  ("default-location" "")))
+  ("default-location" ""))
+ ((tramp-file-name "sudo" "root" nil "betsy-manjaro" nil nil nil)
+  nil))
