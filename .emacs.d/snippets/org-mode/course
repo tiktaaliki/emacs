@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: course
+# key: course
+# --
+:PROPERTIES:
+:INSTRUCTOR: $1
+:END:
+

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: libguide book
+# key: libguide
+# --
+
+
+<a href="$1" target="_blank">$2</a>

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: health
+# key: health
+# --
+
+:properties:
+:premium: $1
+:rx: $2
+:total: $3
+:deductible: $4
+:out-of-pocket_limit: $5
+:provider_network: $6
+:referrals_required: $7
+:copay: $8
+:copay_specialist: $9
+:end:

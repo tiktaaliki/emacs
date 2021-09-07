@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: lang
+# key: lang
+# --
+
+<span lang="$1">$2</span>

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: related titles
+# key: related
+# --
+<em>Related titles</em>: <strong>$1</strong>: <a href="$2">$3</a>

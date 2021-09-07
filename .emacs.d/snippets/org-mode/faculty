@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: faculty
+# key: faculty
+# --
+
+:PROPERTIES:
+:FIRST_NAME:
+:LAST_NAME:
+:TITLE:
+:EMAIL:
+:COURSES_F21:
+:RESEARCH_INTERESTS:
+:OUTREACH_STATUS:
+:END:
