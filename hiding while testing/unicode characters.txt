@@ -906,7 +906,7 @@ U+22BD
 Miscellaneous mathematical symbols
 ⊾
 U+22BE
-⊿
+w⊿
 U+22BF
 N-ary operators
 ⋀

@@ -1,128 +1,128 @@
-pandoc NDDmemberhandbook.odt -f odt -t org -s -o memberhandbook.org 
-pdftk  00.pdf 01-1.pdf 01.pdf 02.pdf 03.pdf 04.pdf 05-0.pdf 05.pdf 06.pdf 07.pdf 08.pdf 09-0.pdf 09.pdf 10.pdf 11.pdf 12.pdf 13.pdf 14.pdf index.pdf cat output.pdf
-pdftk  00.pdf 01-1.pdf 01.pdf 02.pdf 03.pdf 04.pdf 05-0.pdf 05.pdf 06.pdf 07.pdf 08.pdf 09-0.pdf 09.pdf 10.pdf 11.pdf 12.pdf 13.pdf 14.pdf index.pdf cat output.pdf
-pdftk  00.pdf 01-1.pdf 01.pdf 02.pdf 03.pdf 04.pdf 05-0.pdf 05.pdf 06.pdf 07.pdf 08.pdf 09-0.pdf 09.pdf 10.pdf 11.pdf 12.pdf 13.pdf 14.pdf index.pdf cat output knowledge-justice.pdf
-cd 2021
-cd ..
-cd 2021
-ls
-exec --no-startup-id setxkbmap -model pc104 -layout "us,kr" -variant "dvorak," -option "ctrl:nocaps"
-setxkbmap -model pc104 -layout "us,kr" -variant "dvorak," -option "ctrl:nocaps"
-xrandr --dpi 96 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2x2 --pos
-xrandr --dpi 96 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2x2
-xrandr --dpi 200 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2x2
-xrandr --dpi 50 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2x2
-xrandr --dpi 296 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2x2
-xrandr  --output HDMI2 --scale 1.25x1.25
-xrandr --dpi 296 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2.5x2.5
-xrandr --dpi 296 --fb 7680x4320 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2x2
-xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 2.5x2.5
-xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1x1
-xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
-xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.75x1.75
-xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.7x1.7
-xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.6x1.6
-xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
-xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.3x1.3
-xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
-xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
-xrandr --dpi 296 --output DP2 --scale 1.25x1.25 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
-xrandr --dpi 296 --output DP2 --scale .75x.75 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
-xrandr --dpi 296 --output DP2 --scale .75x.75 --output HDMI2 --scale 1.5x1.5
-xrandr --dpi 296 --output DP2 --scale .75x.75 --output HDMI2 --scale 1.5x1.5
-xrandr --dpi 296 --output DP2 --scale 0.75x0.75 --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2 --scale 0.75x0.75 --output HDMI2 --scale 1.5x1.5
-xrandr --dpi 296 --output DP2 --mode 3840x2160  --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2  --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2 --pos 1920x0   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2 --pos 1920x0   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2 --pos 1920x0   --output HDMI2 
-xrandr --output DP2 --pos 1920x0   --output HDMI2 --scale 1x1
-xrandr --output DP2 --pos 1920x0   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2 --pos 2400x0   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2 --pos 2880x0   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2 --pos 1920x0   --output HDMI2 --scale 1x1
-xrandr --output DP2 --pos 2880x0   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2 --scale 0.75x0.75 --pos 2880x0   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2 --scale 0.75x0.75 --pos 2880x0   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2 --scale 0.9x0.9 --pos 2880x0   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2  --pos 2880x0   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2  --pos 2880x0 --scale 1x1   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2  --pos 2880x0 --scale .9x.9   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2  --pos 2880x0 --scale .9x.9   --output HDMI2 --scale 1.6x1.6
-xrandr --output DP2  --pos 2880x0 --scale .9x.9   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2  --pos 3072x0 --scale .9x.9   --output HDMI2 --scale 1.6x1.6
-xrandr --output DP2  --pos 2880x0 --scale .9x.9   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2  --pos 3360x0 --scale .9x.9   --output HDMI2 --scale 1.75x1.75
-xrandr --output DP2  --pos 2400x0 --scale .9x.9   --output HDMI2 --scale 1.25x1.25
-pdftk 2021_NYPL_Coverletter_YOON.pdf 2021_RESUME_YOON.pdf output 2021_YOON.pdf
+xrandr --output DP2 --scale 1x1 -o left --pos 0x0 --output HDMI2 --scale 1x1
+xrandr --output DP2 --scale 1x1 -o left --pos 3840x0 --output HDMI2 --scale 1x1
+xrandr --output DP2 --scale 1x1 -o left --left-of HDMI2 --output HDMI2 --scale 1x1
+xrandr --output DP2 --scale 1x1 -o left --left-of HDMI2 --output HDMI2 --scale 1x1 --pos 2160x0
+xrandr --output DP2 --scale 1x1 -o left --left-of HDMI2 --output HDMI2 --scale 1x1 --pos 2160x0
+xrandr --output DP2 --scale 1x1 -o left --pos 2160x0  --output HDMI2 --scale 1x1 --right-of DP2
+sudo xkill
+sudo xkill
+xrandr --output DP2 --scale 1x1 -o left --pos 2160x0  --output HDMI2 --scale 1x1 --pos 4080x0
+xrandr --output DP2 --scale 1x1 -o left --pos 2160x0  --output HDMI2 --scale 1x1 --pos 4100x0
+xrandr --output DP2 --scale 1x1 -o left --pos 2160x0  --output HDMI2 --scale 1x1 --pos 4000x0
+xrandr --output DP2 --scale 1x1 -o left --pos 2160x0  --output HDMI2 --scale 1x1 --right-of DP2 
+xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1x1 --right-of DP2 
+xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1x1 --pos 2160x0
+xrandr -q
+xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1x1 --pos 2160x2314
+xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale .7x.7 --pos 2160x2314
+xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1x1 --pos 2160x2314
+xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 2160x2314
+xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1.2x1.2 --pos 2160x2314
+xrandr --output DP2 --scale .7x.7 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1512x2314
+xrandr --output DP2 --scale .7x.7 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1512x1619
+xrandr --output DP2 --scale .7x.7 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1512x1519
+xrandr --output DP2 --scale .7x.7 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1512x1480
+xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 2160x2314
+xrandr --output DP2 --scale .8x.8 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1728x1619
+xrandr -q
+xrandr -q
+xrandr --output DP2 --mode 3840x2160 --pos 0x0 --scale .8x.8  --rotate left --left-of HDMI2  --output HDMI2 --primary --mode 1920x1080 --pos 1728x1619 --rotate normal --scale 1.1x1.1
+xrandr --output DP2 --scale .7x.7 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1512x1480
+xrandr --output DP2 --scale .6x.6 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1296x1480
+xrandr --output DP2 --scale .6x.6 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1296x1100
+setxkbmap -model pc104 -layout "us,kr"
 setxkbmap -model pc104 -layout "us,kr" -variant "dvorak," -option "ctrl:nocaps"
-xrandr --output DP2  --pos 2400x0 --scale .8x.8   --output HDMI2 --scale 1.25x1.25
-xrandr --output DP2  --pos 2400x0 --scale .75x.75   --output HDMI2 --scale 1.25x1.25
-ssh root@10.11.99.1
-ssh root@10.11.99.1
-ssh root@192.168.2.89
-ssh root@192.168.2.89 SjPZMwOv2V
-sudo ssh root@192.168.2.89
-sudo ssh root@192.168.2.89
-ssh root@10.11.99.1
-ssh-keygen
-ssh-copy-id root@10.11.99.1
-ssh-keygen -R 10.11.99.1
-ssh root@10.11.99.1
-ssh-copy-id root@10.11.99.1
-ssh root@10.11.99.1
-ssh root@10.11.99.1
-ssh root@10.11.99.1
-ssh root@10.11.99.1
-ssh root@10.11.99.1
-ssh root@10.11.99.1
-ssh-copy-id root@10.11.99.1
-ssh-copy-id root@10.11.99.1
-ssh 'root@10.11.99.1'
-ssh-copy-id root@10.11.99.1
-ssh 'root@10.11.99.1'
-xrandr --output DP2  --pos 2400x0 --scale .75x.75   --output HDMI2 --scale 1.5x1.5
-xrandr --output DP2  --pos 2400x0 --scale .75x.75   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale .75x.75   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale .5x.5   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale .6x.6   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale .5x.5   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale .7x.7   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale .75x.75   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale .75x.75   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale .5x.5   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale .75x.75   --output HDMI2 --scale 1x1
-xrandr
-xrandr --output DP2  --pos 1920x0 --scale .75x.75   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale 1x1 --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale 0.75x0.75 --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale 0.65x0.65 --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale 0.65x0.65 --output HDMI2 --scale 1.15x1.15
-xrandr --output DP2  --pos 1920x0 --scale 0.65x0.65 --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 1920x0 --scale 0.65x0.65 --output HDMI2 --scale 1.2x1.2
-xrandr --output DP2  --pos 1920x0 --scale 0.65x0.65 --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 2208x0 --scale 0.65x0.65 --output HDMI2 --scale 1.15x1.15
-xrandr --output DP2  --pos 1920x0 --scale 0.65x0.65 --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 2400x0 --scale .75x.75   --output HDMI2 --scale 1.25x1.25
-xrandr --output DP2  --pos 1920x0 --scale 1x1   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 2208x0 --scale .6x.6   --output HDMI2 --scale 1.15x1.15
-xrandr --output DP2  --pos 2112x0 --scale .6x.6   --output HDMI2 --scale 1.1x1.1
-xrandr --output DP2  --pos 2112x0 --scale .65x.65   --output HDMI2 --scale 1.1x1.1
-xrandr --output DP2  --pos 2112x0 --scale 1x1   --output HDMI2 --scale 1.1x1.1
-xrandr --output DP2  --pos 2112x0 --scale .65x.65   --output HDMI2 --scale 1.1x1.1
-xrandr --output DP2  --pos 2112x0 --scale .7x.7   --output HDMI2 --scale 1.1x1.1
-xrandr --output DP2  --pos 2112x0 --scale 1x1   --output HDMI2 --scale 1.1x1.1
-xrandr --output DP2  --pos 2112x0 --scale .7x.7   --output HDMI2 --scale 1.1x1.1
-xrandr --output DP2  --pos 2112x0 --scale .75x.75   --output HDMI2 --scale 1.1x1.1
-xrandr --output DP2  --pos 2112x0 --scale 1x1   --output HDMI2 --scale 1.1x1.1
-xrandr --output DP2  --pos 2112x0 --scale .75x.75   --output HDMI2 --scale 1.1x1.1
-xrandr --output DP2  --pos 2112x0 --scale .75x.75   --output HDMI2 --scale 1.1x1.1
-xrandr --output DP2  --pos 1920x0 --scale .5x.5   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 2112x0 --scale .7x.7   --output HDMI2 --scale 1.1x1.1
-xrandr --output DP2  --pos 2112x0 --scale 1x1   --output HDMI2 --scale 1x1
-xrandr --output DP2  --pos 2112x0 --scale .7x.7   --output HDMI2 --scale 1.1x1.1
-ssh root@10.11.99.1
-  ssh-keygen -R 10.11.99.1
-ssh root@10.11.99.1
-ssh root@10.11.99.1
+xrandr --output DP2 --scale .6x.6 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1296x700
+xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 --pos 1296x700
+xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 --pos 1296x500
+xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 --pos 0x0
+xrandr --output DP2 --scale 1x1 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1x1 --pos 1296x500
+xrandr --output DP2 --scale 1x1 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1x1 --pos 1296x1200
+xrandr --output DP2 --scale 1x1 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1x1 --pos 0x0
+xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 
+xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 pos 0x0
+xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 --pos 0x0
+xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 --pos -1000x-1000
+pdftk CUNY Application Part 2.pdf CUNY Application Part 2_password.pdf user_pw baruch
+pdftk CUNY Application Part 2.pdf output CUNY Application Part 2_password.pdf user_pw baruch
+pdftk CUNYApplicationPart2.pdf output CUNYApplicationPart2_password.pdf user_pw baruch
+pdftk CUNYApplicationPart2.pdf output CUNYApplicationPart2_password.pdf user_pw baruch
+setxkbmap -model pc104 -layout "us,kr"
+setxkbmap -model pc104 -layout "us, kr"  -option "ctrl:nocaps"
+setxkbmap -model pc104 -layout "us, kr" -variant "dvorak,"  -option "ctrl:nocaps"
+setxkbmap -model pc104 -layout "us, kr"  -option "ctrl:nocaps"
+setxkbmap -model pc104 -layout "us, kr" -variant "dvorak,"  -option "ctrl:nocaps"
+setxkbmap -model pc104 -layout "us, kr"  -option "ctrl:nocaps"
+ps -eo pid,ppid,cmd,%mem,%cpu –sort=-%mem | head
+setxkbmap -model pc104 -layout "us, kr"  -option "ctrl:nocaps"
+xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 --pos 0x0
+ps -eo pid,ppid,cmd,%mem,%cpu –sort=-%mem | head
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+setxkbmap -model pc104 -layout "us, kr" -variant "dvorak,"  -option "ctrl:nocaps"
+setxkbmap -model pc104 -layout "us, kr"  -option "ctrl:nocaps"
+setxkbmap -model pc104 -layout "us, kr"  -option "ctrl:nocaps"
+xrandr -q
+xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 --pos 1296x1116
+sudo xkill
+killall firefox
+xrandr --output DP2 --rotate left --scale .6x.6 --pos 0x0  --output HDMI2 --primary --right-of DP2 --scale 1.1x1.1
+xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 
+xrandr --output DP2 --rotate left --left-of HDMI2 --pos 0x0 --output HDMI2 --primary
+xrandr --output DP2 --rotate left --left-of HDMI2 --pos 0x0 --output HDMI2 --primary
+xrandr --output DP2 --scale 0.75x0.75 --pos 2880x0   --output HDMI2 --scale 1.5x1.5
+xrandr --output DP2 --scale 1x1 --rotate left --pos 0x0 --output HDMI2 --scale 1x1
+xrandr --output DP2 --scale .6x.6 --rotate left --pos 0x0 --output HDMI2 --scale 1x1 --right-of DP2
+xrandr --output DP2 --scale .75x.75 --rotate left --pos 0x0 --output HDMI2 --scale 1x1 --right-of DP2
+xrandr --output DP2 --scale 1x1 --rotate left --pos 0x0 --output HDMI2 --scale 1x1 --right-of DP2
+xrandr --output DP2 --scale .75x.75 --rotate left --pos 0x0 --output HDMI2 --scale 1x1 --right-of DP2
+xrandr --output DP2 --scale .75x.75 --rotate left --pos 0x0 --output HDMI2 --scale 1.1x1.1 --right-of DP2
+xrandr --output DP2 --scale 1x1 --rotate left --pos 0x0 --output HDMI2 --scale 1x1 --right-of DP2
+xrandr --output DP2 --scale .75x.75 --rotate left --pos 0x0 --output HDMI2 --scale 1.1x1.1 --right-of DP2
+xrandr --output DP2 --scale .75x.75 --rotate left --pos 0x0 --output HDMI2 --scale 1.25x1.25 --right-of DP2
+xrandr --output DP2 --scale 1x1 --rotate left --pos 0x0 --output HDMI2 --scale 1x1 --right-of DP2
+xrandr --output DP2 --scale .75x.75 --rotate left --pos 0x0 --output HDMI2 --scale 1.25x1.25 --right-of DP2
+thunar -q && thunar
+thunar -q && thunar
+thunar -q && thunar
+thunar -q && thunar
+gh repo clone Aris-t2/CustomCSSforTb
+git clone https://github.com/Aris-t2/CustomCSSforTb.git
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+killall wps
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+kill -9 17432
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+kill -15 21569
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+killall wpsoffice
+killall wpsoffice
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+ps -eo %cpu
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+gnome system monitor
+gnome-system-monitor
+gnome system monitor
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+setxkbmap -model pc104 -layout "us, kr"  -option "ctrl:nocaps"
+pandoc -f docx -t org Marxe_ PathwaysAssessment_PAF1250_CourseGoalsPathwaysGoals_August_18_2021.docx
+pandoc -f docx -t org 3a_Marxe_PathwaysAssessment_PAF1250_CourseGoalsPathwaysGoals_August_18_2021.docx
+sudo xkill
+sudo xkill
+openconnect
+pdftotext -layout "Framework Companion PPIR - Unknown.pdf" output.txt
+pdftotext "Framework Companion PPIR - Unknown.pdf" output2.txt
+pdftotext -layout -eol unix "Framework Companion PPIR - Unknown.pdf" output2.txt
+pdftotext -layout -eol dos "Framework Companion PPIR - Unknown.pdf" outputdos.txt
+pdftotext -layout -eol mac "Framework Companion PPIR - Unknown.pdf" outputmac.txt
+pdftotext -layout -eol mac "Framework Companion PPIR - Unknown.pdf" outputmac.txt
+pdftotext -layout -eol unix "Framework Companion PPIR - Unknown.pdf" outputunix.txt
+pdftotext -layout "Framework Companion PPIR - Unknown.pdf" outputlayout.txt

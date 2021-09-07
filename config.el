@@ -408,15 +408,15 @@
 
 (defhydra hydra-yasnippet (:color red :hint nil)
   "
-                 ^YASnippets^
-   --------------------------------------------
-     Modes:    Load/Visit:    Actions:
+                          ^YASnippets^
+            --------------------------------------------
+              Modes:    Load/Visit:    Actions:
 
-    _g_lobal  _d_irectory    _i_nsert
-    _m_inor   _f_ile         _t_ryout
-    _e_xtra   _l_ist         _n_ew
-             reload _a_ll
-   "
+             _g_lobal  _d_irectory    _i_nsert
+             _m_inor   _f_ile         _t_ryout
+             _e_xtra   _l_ist         _n_ew
+                      reload _a_ll
+            "
   ("n" down "done")
   ("p" down "up")
   ("N" outline-next-visible-heading "next heading")
@@ -432,6 +432,20 @@
   ("m" yas-minor-mode :color red)
   ("a" yas-reload-all))
 
+(use-package yasnippet)
+
+(define-key yas-minor-mode-map [backtab]    nil)
+
+;; Strangely, just redefining one of the variations below won't work.
+;; All rebinds seem to be needed.
+(define-key yas-minor-mode-map [(tab)]        nil)
+(define-key yas-minor-mode-map (kbd "TAB")    nil)
+(define-key yas-minor-mode-map (kbd "<tab>")  nil)
+
+(use-package ace-jump-helm-line)
+(eval-after-load "helm"
+  '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
+
 (setq org-directory "~/Dropbox/Zettelkasten/"
       org-default-notes-file "~/Dropbox/Zettelkasten/inbox.org"
       org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/"
@@ -443,10 +457,25 @@
       org-refile-use-cache t
       org-refile-allow-creating-parent-nodes 'confirm
       org-refile-use-outline-path 'file
-      org-refile-targets '((org-agenda-files :maxlevel . 3))
       org-outline-path-complete-in-steps nil
       )
 
+(setq org-refile-targets '(
+                           ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
+                           ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 1)
+                           ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
+                           ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
+                           ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
+                           ("~/Dropbox/Zettelkasten/baruch.org" :maxlevel . 3)
+                           ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
+                           ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2)
+                           ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 2)
+                           ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
+                           ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2)
+                           )
+
+
+      )
 
 (defun my-org-refile-cache-clear ()
   (interactive)
@@ -480,12 +509,14 @@
                          "~/Dropbox/Zettelkasten/readings.org"
                          "~/Dropbox/Zettelkasten/contacts.org"
                          "~/Dropbox/Zettelkasten/ndd.org"
+                           "~/Dropbox/Zettelkasten/baruch.org"
                          "~/Dropbox/Zettelkasten/personal.org"
                          "~/Dropbox/Zettelkasten/lis.org"
                          "~/Dropbox/Zettelkasten/cal.org"
                          "~/Dropbox/Zettelkasten/recipes.org"
-                         "~/Dropbox/Zettelkasten/sysadmin.org"
-                         "~/Dropbox/Zettelkasten/Zettels/index.org"
+                         "~/Dropbox/Zettelkasten/sysadmin.org" 
+                        "~/Dropbox/Zettelkasten/Zettels/index.org"
+                         "~/Dropbox/Zettelkasten/editing.org"                           
                          ))
 
 
@@ -515,80 +546,86 @@
       (quote
        (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
 
+(org-super-agenda-mode 1)
 (setq org-super-agenda-mode 1)
-  (setq org-agenda-custom-commands
-        '(
-          ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
-                                           (org-super-agenda-groups
-                                            '((:name "Today"
-                                                     :time-grid t
-                                                     :date today
-                                                     :todo "TODAY"
-                                                     :scheduled today
-                                                     :order 1)))))
-                               (alltodo "" ((org-agenda-overriding-header "")
-                                            (org-super-agenda-groups
-                                             '(
-                                               (:name "today" :scheduled today)
-                                               (:name "next" :todo "NEXT")
-                                               (:name "to read" :tag "read"
-)
+(setq org-agenda-custom-commands
+      '(
+        ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
+                                         (org-super-agenda-groups
+                                          '((:name "Day"
+                                                   :time-grid t
+                                                ;   :date today
+                                               ;    :todo "TODAY"
+                                                 ;  :scheduled today
+                                                   :order 1)))))
+                             (alltodo "" ((org-agenda-overriding-header "")
+                                          (org-super-agenda-groups
+                                           '(
+                                             (:discard (:scheduled future))
+                                             (:name "today" :scheduled today)
+                                        ;                (:name "next" :todo "NEXT")
+                                             (:name "In PROGRESS" :todo "PROG")
+                                             (:name "Next" :todo "NEXT")
+                                             (:name "baruch" :category "baruch" :tag "baruch")  
+                                             (:name "to read" :tag "read")
+                                             (:name "research" :tag "research")
+                                             (:name "Waiting" :todo "WAIT")
+                                             (:name "Deadlines" 
+                                                    :and (:deadline t :scheduled nil))
 
-                                               (:name "Deadlines" 
-                                                      :and (:deadline t :scheduled nil))
+                                             (:name "ndd" :category "ndd")
+                                             (:name "lis" :category "lis")
+                                             (:name "csi" :category "CSI")
+                                             (:discard (:todo "HOLD"))
+                                        ;     (:name "not scheduled"
+                                        ;           :and (:deadline nil :scheduled nil))
+                                             (:name "past due" :scheduled past)
+                                             ))
+                                          ))
+                             ))
 
-                                               (:name "ndd" :category "ndd")
-                                               (:name "lis" :category "lis")
-                                               (:name "csi" :category "CSI")
 
-                                               (:name "not scheduled"
-                                                      :and (:deadline nil :scheduled nil))
-                                                                                                (:name "Scheduled" :scheduled future)
-                                               ))
+
+
+        ("k" "all untagged TODOs" tags-todo "-{.*}")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
+
+        ("x" "With deadline columns" alltodo "" 
+         ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
+          (org-agenda-view-columns-initially t)
+          (org-agenda-sorting-strategy '(timestamp-up))
+          (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) )
+
+         )
+
+        ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
+         ((agenda "" ((org-agenda-span 2)
+                      (org-agenda-clockreport-mode nil)))
+          (todo "NEXT|TODAY|IN-PROG"))
+         ((org-agenda-todo-ignore-scheduled t)))
+
+        ("u" "all UNSCHEDULED" alltodo ""                                                          
+         (    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+              (org-agenda-todo-ignore-scheduled t) )
+
+         )
+        ("l" "all todos" (  (alltodo "" ((org-agenda-overriding-header "")
+                                         (org-super-agenda-groups
+                                          '(
+                                            (:name "csi" :category "CSI" :order 100)
+                                            (:name "important" :priority "A")
+                                            (:name "today" :scheduled today)
+
+                                            (:name "Deadlines" 
+                                                   :and (:deadline t :scheduled nil))
+                                        ;   (:name "not scheduled"
+                                        ;         :and (:deadline nil :scheduled nil))
+                                            (:name "Scheduled" :scheduled future :order 75)
+
                                             ))
-                               ))
+                                         )         )))
 
-
-
-          ("k" "all untagged TODOs" tags-todo "-{.*}")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
-
-          ("x" "With deadline columns" alltodo "" 
-           ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
-            (org-agenda-view-columns-initially t)
-            (org-agenda-sorting-strategy '(timestamp-up))
-            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) )
-
-           )
-
-          ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG" ((agenda "" ((org-agenda-span 2)  (org-agenda-clockreport-mode nil)))
-                                                     (todo "NEXT|TODAY|IN-PROG"))
-           ((org-agenda-todo-ignore-scheduled t)))
-
-          ("u" "all UNSCHEDULED" alltodo ""                                                          
-
-
-           (    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
-                (org-agenda-todo-ignore-scheduled t) )
-
-           )
-          ("l" "all todos" (  (alltodo "" ((org-agenda-overriding-header "")
-                                           (org-super-agenda-groups
-                                            '(
-                                              (:name "csi" :category "CSI" :order 100)
-                                              (:name "important" :priority "A")
-                                              (:name "today" :scheduled today)
-
-                                              (:name "Deadlines" 
-                                                     :and (:deadline t :scheduled nil))
-                                              (:name "not scheduled"
-                                                     :and (:deadline nil :scheduled nil))
-                                              (:name "Scheduled" :scheduled future :order 75)
-
-                                              ))
-                                           )         )))
-
-          )
         )
+      )
 
 (setq org-enforce-todo-dependencies t
       org-clock-out-when-done t
@@ -598,20 +635,31 @@
 
 (setq org-todo-keywords
       (quote
-       ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
+       ((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
         (type    "HOLD(l)"  "|" "DONE(d)")     )))
 
 (setq org-todo-keyword-faces
       '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
         ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
         ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "magenta")
-        ("IN-PROG" :weight bold :underline t :inherit org-todo :foreground "#5bcbac")))
+        ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#ff420e")
+      ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
+
+
+
+(org-edna-mode 1)
+(setq org-log-done 'time)
 
 (setq org-capture-templates
       '(
-        ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil ) 
+        ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
 
-        ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/cal.org") "* %^{EVENT}\n%^t\n%a\n%?")
+        ("b" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/baruch.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
+
+        ("n" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/ndd.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
+
+ ("c" "calendar" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %^{EVENT}\n%^t\n%a\n%?" :time-prompt t)
+
 
         ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
 
@@ -719,6 +767,10 @@
   (setq org-html-head "<link rel=\"stylesheet\" href=\"\\home\\betsy\\Dropbox\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
   (setq org-agenda-export-html-style "/home/betsy/Dropbox/Zettelkasten/css/tufte.css")
 (setq org-export-with-toc nil)
+(setq org-export-initial-scope 'subtree)
+
+
+(use-package org-clock-split)
 
 (load "annot")
   (require 'annot)
@@ -795,7 +847,13 @@
 :bind 
    ("C-c <f1>" . org-roam-capture))
 
-  (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CATEGORY: zettels\n:CONTEXT: %a\n:END:\n%?" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
+  (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CATEGORY: zettels\n:CONTEXT: %a\n:END:\n%?\n\n
+- What is the purpose of this zettel?\n
+- What is the nature of the content I wish to include in this zettel?\n
+- How does it relate to the existing network?\n
+- How do I wish to discover this information in the future?\n
+
+" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
                                       "#+title: ${title}" :unnarrowed t :kill-buffer t)))
 (setq org-roam-completion-system 'helm)
 
