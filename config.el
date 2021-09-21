@@ -503,48 +503,50 @@
 (setq global-visible-mark-mode t)
 
 (setq org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE ")
-
-(setq org-agenda-files '("~/Dropbox/Zettelkasten/journal.org"
-                         "~/Dropbox/Zettelkasten/inbox.org"
-                         "~/Dropbox/Zettelkasten/readings.org"
-                         "~/Dropbox/Zettelkasten/contacts.org"
-                         "~/Dropbox/Zettelkasten/ndd.org"
-                           "~/Dropbox/Zettelkasten/baruch.org"
-                         "~/Dropbox/Zettelkasten/personal.org"
-                         "~/Dropbox/Zettelkasten/lis.org"
-                         "~/Dropbox/Zettelkasten/cal.org"
-                         "~/Dropbox/Zettelkasten/recipes.org"
-                         "~/Dropbox/Zettelkasten/sysadmin.org" 
-                        "~/Dropbox/Zettelkasten/Zettels/index.org"
-                         "~/Dropbox/Zettelkasten/editing.org"                           
-                         ))
-
-
-(setq org-agenda-prefix-format
-      '((agenda . " %i %-12:c%?-12t% s")
-        (todo . " %i %-12:c")
-        (tags . " %i %-12:c")
-        (search . " %i %-12:c")))
-
-(setq org-agenda-with-colors t
-      org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
-      org-agenda-current-time-string "✸✸✸✸✸"
-      org-agenda-start-with-clockreport-mode t
-      org-agenda-dim-blocked-tasks t
-      org-agenda-window-setup 'only-window
-      )
-
-
-;;skips
-(setq org-agenda-skip-scheduled-if-done t
-      org-agenda-skip-deadline-if-done t
-      org-agenda-skip-timestamp-if-done t
-      org-agenda-skip-deadline-prewarning-if-scheduled t
-      )
-
-(setq org-agenda-clockreport-parameter-plist
-      (quote
-       (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
+  
+  (setq org-agenda-files '("~/Dropbox/Zettelkasten/journal.org"
+                           "~/Dropbox/Zettelkasten/inbox.org"
+                           "~/Dropbox/Zettelkasten/readings.org"
+                           "~/Dropbox/Zettelkasten/contacts.org"
+                           "~/Dropbox/Zettelkasten/ndd.org"
+                             "~/Dropbox/Zettelkasten/baruch.org"
+                           "~/Dropbox/Zettelkasten/personal.org"
+                           "~/Dropbox/Zettelkasten/lis.org"
+;                           "~/Dropbox/Zettelkasten/cal.org"
+                           "~/Dropbox/Zettelkasten/recipes.org"
+                           "~/Dropbox/Zettelkasten/sysadmin.org" 
+                          "~/Dropbox/Zettelkasten/Zettels/index.org"
+                           "~/Dropbox/Zettelkasten/editing.org"                           
+                           ))
+  
+  
+  (setq org-agenda-prefix-format
+        '((agenda . " %i %-12:c%?-12t% s")
+          (todo . " %i %-12:c")
+          (tags . " %i %-12:c")
+          (search . " %i %-12:c")))
+  
+  (setq org-agenda-with-colors t
+        org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
+        org-agenda-current-time-string "✸✸✸✸✸"
+        org-agenda-start-with-clockreport-mode t
+        org-agenda-dim-blocked-tasks t
+        org-agenda-window-setup 'only-window
+        )
+  
+  
+  ;;skips
+  (setq org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-skip-timestamp-if-done t
+        org-agenda-skip-deadline-prewarning-if-scheduled t
+        )
+  
+  (setq org-agenda-clockreport-parameter-plist
+        (quote
+         (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :hidefiles nil :fileskip0 t)))
+  
+(setq org-clock-report-include-clocking-task t)
 
 (org-super-agenda-mode 1)
 (setq org-super-agenda-mode 1)
@@ -554,9 +556,9 @@
                                          (org-super-agenda-groups
                                           '((:name "Day"
                                                    :time-grid t
-                                                ;   :date today
-                                               ;    :todo "TODAY"
-                                                 ;  :scheduled today
+                                        ;   :date today
+                                        ;    :todo "TODAY"
+                                        ;  :scheduled today
                                                    :order 1)))))
                              (alltodo "" ((org-agenda-overriding-header "")
                                           (org-super-agenda-groups
@@ -566,7 +568,7 @@
                                         ;                (:name "next" :todo "NEXT")
                                              (:name "In PROGRESS" :todo "PROG")
                                              (:name "Next" :todo "NEXT")
-                                             (:name "baruch" :category "baruch" :tag "baruch")  
+                                             (:name "baruch" :and ( :category "baruch" :not (:todo "WAIT") ))  
                                              (:name "to read" :tag "read")
                                              (:name "research" :tag "research")
                                              (:name "Waiting" :todo "WAIT")
@@ -608,47 +610,54 @@
               (org-agenda-todo-ignore-scheduled t) )
 
          )
-        ("l" "all todos" (  (alltodo "" ((org-agenda-overriding-header "")
-                                         (org-super-agenda-groups
-                                          '(
-                                            (:name "csi" :category "CSI" :order 100)
-                                            (:name "important" :priority "A")
-                                            (:name "today" :scheduled today)
+        ("l" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
+                                       (org-super-agenda-groups
+                                        '(
+                                          (:name "baruch email" :and (:tag "email" :category "baruch"))
+                                          (:name "baruch research/scholarship" :and  (:tag "research" :category "baruch") )
+                                          (:name "baruch admin" :and  (:tag "admin" :category "baruch") )
+                                            (:name "on campus work" :tag "@baruch"  )  
+                                          (:name "baruch" :and ( :category "baruch" :not (:todo "WAIT") ))
 
-                                            (:name "Deadlines" 
-                                                   :and (:deadline t :scheduled nil))
-                                        ;   (:name "not scheduled"
-                                        ;         :and (:deadline nil :scheduled nil))
-                                            (:name "Scheduled" :scheduled future :order 75)
+                                          (:name "to read" :tag "read")
+                                          (:name "research" :tag "research")
+                                          (:name "Waiting" :todo "WAIT")
+                                          (:name "Deadlines" 
+                                                 :and (:deadline t :scheduled nil))
 
-                                            ))
-                                         )         )))
+                                          (:name "ndd" :category "ndd")
+                                          (:name "lis" :category "lis")
+
+                                          ))
+                                       ))
+                          ))
 
         )
       )
 
 (setq org-enforce-todo-dependencies t
-      org-clock-out-when-done t
-      )
+        org-clock-out-when-done t
+        )
 
-(setq org-log-into-drawer t)
+  (setq org-log-into-drawer t)
 
-(setq org-todo-keywords
-      (quote
-       ((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
-        (type    "HOLD(l)"  "|" "DONE(d)")     )))
+  (setq org-todo-keywords
+        (quote
+         ((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
+          (type    "HOLD(l)"  "|" "DONE(d)")     )))
 
-(setq org-todo-keyword-faces
-      '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
-        ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
-        ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "magenta")
-        ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#ff420e")
-      ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
+  (setq org-todo-keyword-faces
+        '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
+;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
+                ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#d0b17c")
+          ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
+          ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
+        ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
 
 
 
-(org-edna-mode 1)
-(setq org-log-done 'time)
+  (org-edna-mode 1)
+  (setq org-log-done 'time)
 
 (setq org-capture-templates
       '(
@@ -658,7 +667,7 @@
 
         ("n" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/ndd.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
 
- ("c" "calendar" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %^{EVENT}\n%^t\n%a\n%?" :time-prompt t)
+ ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
 
 
         ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
@@ -950,7 +959,10 @@
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 
-(find-file "/home/betsy/.emacs")
+(setq-default line-spacing 0.2)
+
+(find-file "~/Dropbox/Zettelkasten/inbox.org")
+   (find-file "/home/betsy/.emacs")
 (find-file "~/Dropbox/emacs/config.org")
   (find-file "~/Dropbox/Zettelkasten/inbox.org")
 

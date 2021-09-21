@@ -1,55 +1,3 @@
-xrandr --output DP2 --scale 1x1 -o left --pos 0x0 --output HDMI2 --scale 1x1
-xrandr --output DP2 --scale 1x1 -o left --pos 3840x0 --output HDMI2 --scale 1x1
-xrandr --output DP2 --scale 1x1 -o left --left-of HDMI2 --output HDMI2 --scale 1x1
-xrandr --output DP2 --scale 1x1 -o left --left-of HDMI2 --output HDMI2 --scale 1x1 --pos 2160x0
-xrandr --output DP2 --scale 1x1 -o left --left-of HDMI2 --output HDMI2 --scale 1x1 --pos 2160x0
-xrandr --output DP2 --scale 1x1 -o left --pos 2160x0  --output HDMI2 --scale 1x1 --right-of DP2
-sudo xkill
-sudo xkill
-xrandr --output DP2 --scale 1x1 -o left --pos 2160x0  --output HDMI2 --scale 1x1 --pos 4080x0
-xrandr --output DP2 --scale 1x1 -o left --pos 2160x0  --output HDMI2 --scale 1x1 --pos 4100x0
-xrandr --output DP2 --scale 1x1 -o left --pos 2160x0  --output HDMI2 --scale 1x1 --pos 4000x0
-xrandr --output DP2 --scale 1x1 -o left --pos 2160x0  --output HDMI2 --scale 1x1 --right-of DP2 
-xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1x1 --right-of DP2 
-xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1x1 --pos 2160x0
-xrandr -q
-xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1x1 --pos 2160x2314
-xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale .7x.7 --pos 2160x2314
-xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1x1 --pos 2160x2314
-xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 2160x2314
-xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1.2x1.2 --pos 2160x2314
-xrandr --output DP2 --scale .7x.7 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1512x2314
-xrandr --output DP2 --scale .7x.7 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1512x1619
-xrandr --output DP2 --scale .7x.7 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1512x1519
-xrandr --output DP2 --scale .7x.7 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1512x1480
-xrandr --output DP2 --scale 1x1 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 2160x2314
-xrandr --output DP2 --scale .8x.8 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1728x1619
-xrandr -q
-xrandr -q
-xrandr --output DP2 --mode 3840x2160 --pos 0x0 --scale .8x.8  --rotate left --left-of HDMI2  --output HDMI2 --primary --mode 1920x1080 --pos 1728x1619 --rotate normal --scale 1.1x1.1
-xrandr --output DP2 --scale .7x.7 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1512x1480
-xrandr --output DP2 --scale .6x.6 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1296x1480
-xrandr --output DP2 --scale .6x.6 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1296x1100
-setxkbmap -model pc104 -layout "us,kr"
-setxkbmap -model pc104 -layout "us,kr" -variant "dvorak," -option "ctrl:nocaps"
-xrandr --output DP2 --scale .6x.6 -o left --pos 0x0  --output HDMI2 --scale 1.1x1.1 --pos 1296x700
-xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 --pos 1296x700
-xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 --pos 1296x500
-xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 --pos 0x0
-xrandr --output DP2 --scale 1x1 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1x1 --pos 1296x500
-xrandr --output DP2 --scale 1x1 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1x1 --pos 1296x1200
-xrandr --output DP2 --scale 1x1 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1x1 --pos 0x0
-xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 
-xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 pos 0x0
-xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 --pos 0x0
-xrandr --output DP2 --scale .6x.6 --rotate left --left-of HDMI2 --pos 0x0  --output HDMI2 --primary --scale 1.1x1.1 --pos -1000x-1000
-pdftk CUNY Application Part 2.pdf CUNY Application Part 2_password.pdf user_pw baruch
-pdftk CUNY Application Part 2.pdf output CUNY Application Part 2_password.pdf user_pw baruch
-pdftk CUNYApplicationPart2.pdf output CUNYApplicationPart2_password.pdf user_pw baruch
-pdftk CUNYApplicationPart2.pdf output CUNYApplicationPart2_password.pdf user_pw baruch
-setxkbmap -model pc104 -layout "us,kr"
-setxkbmap -model pc104 -layout "us, kr"  -option "ctrl:nocaps"
-setxkbmap -model pc104 -layout "us, kr" -variant "dvorak,"  -option "ctrl:nocaps"
 setxkbmap -model pc104 -layout "us, kr"  -option "ctrl:nocaps"
 setxkbmap -model pc104 -layout "us, kr" -variant "dvorak,"  -option "ctrl:nocaps"
 setxkbmap -model pc104 -layout "us, kr"  -option "ctrl:nocaps"
@@ -126,3 +74,55 @@ pdftotext -layout -eol mac "Framework Companion PPIR - Unknown.pdf" outputmac.tx
 pdftotext -layout -eol mac "Framework Companion PPIR - Unknown.pdf" outputmac.txt
 pdftotext -layout -eol unix "Framework Companion PPIR - Unknown.pdf" outputunix.txt
 pdftotext -layout "Framework Companion PPIR - Unknown.pdf" outputlayout.txt
+xrandr --output DP2 --scale 1x1 -o left --pos 0x0 --output HDMI2 --scale 1x1
+xrandr --output DP-2 --scale 1x1 -o left --pos 0x0 --output HDMI-2 --scale 1x1
+xrandr --output DP-2 --scale 1x1 -o left --pos 0x0 --output HDMI-2 --scale 1x1 --right-of DP-2
+xrandr --output DP-2 --scale .75x.75 --pos 0x0 --output HDMI-2 --scale 1.25x1.25 --right-of DP-2
+xrandr --output DP-2 --scale 1x1 --pos 0x0 --output HDMI-2 --scale 1.25x1.25 --right-of DP-2
+xrandr --output DP-2 --scale 1x1 --pos 0x0 --output HDMI-2 --scale 1.25x1.25 --right-of DP-2
+xrandr --output DP-2 --scale 1x1 --pos 0x0 --output HDMI-2 --scale 1.5x1.5 --right-of DP-2
+xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --right-of DP-2 --rotate normal --scale 1.5x1.5 --primary 
+xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --right-of DP-2 --rotate normal --scale 1.75x1.75 --primary 
+xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --right-of DP-2 --rotate normal --scale 2x2 --primary 
+xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --right-of DP-2 --rotate normal --scale 1.25x1.25 --primary 
+xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale .75x.75 --output HDMI-2 --mode 1920x1080 --right-of DP-2 --rotate normal --scale 1.25x1.25 --primary 
+xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale .75x.75 --output HDMI-2 --mode 1920x1080 --right-of DP-2 --rotate normal --scale 1.25x1.25 --primary 
+xrandr --output DP-2 --pos 0x0  --scale .75x.75 --output HDMI-2 --mode 1920x1080 --right-of DP-2 --rotate normal --scale 1.25x1.25 --primary 
+cd ../..
+cd ..
+cd ..
+cd /etc/hosts
+ls
+cd etc
+ls
+lsusb
+scalimage -L
+scanimage -L
+scanimage --device "brother4:bus1;dev1"
+scanimage --list-devices
+sudo sane-find-scanner
+scanimage -L
+systemctl enable ipp-usb.service
+systemctl enable ipp-usb.service
+xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale .75x.75 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1.25x1.25 --primary
+systemctl enable ipp-usb.service
+scanimage -L
+scanimage --device "brother4:bus1;dev1" --format=tiff --output-file test.tiff --progress
+scanimage --device "brother4:bus1;dev1" --format=tiff --output-file test.tiff --progress
+systemctl start brscan-skey.service
+systemctl start ipp-usb.service
+scanimage --device "brother4:bus1;dev1" --format=tiff --output-file test.tiff --progress
+sudo simple-scan
+sudo -i
+ls
+scanimage -A
+scanimage -A
+scanimage -L
+sudo scanimage -L
+cd Downloads
+sudo scanimage -d "brother5:bus2;dev4" --format tiff -v
+sudo scanimage -d "brother5:bus2;dev4" --format=png --output-file test.png --progress
+sudo scanimage -d "brother5:bus2;dev4" --format=png --output-file test.png --progress
+sudo simple-scan
+exit
+sudo simple-scan

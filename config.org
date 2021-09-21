@@ -30,7 +30,7 @@
 #+END_SRC
 
 #+RESULTS:
-: other-window
+: other-window 
 
 
 
@@ -776,7 +776,7 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
                              "~/Dropbox/Zettelkasten/baruch.org"
                            "~/Dropbox/Zettelkasten/personal.org"
                            "~/Dropbox/Zettelkasten/lis.org"
-                           "~/Dropbox/Zettelkasten/cal.org"
+;                           "~/Dropbox/Zettelkasten/cal.org"
                            "~/Dropbox/Zettelkasten/recipes.org"
                            "~/Dropbox/Zettelkasten/sysadmin.org" 
                           "~/Dropbox/Zettelkasten/Zettels/index.org"
@@ -808,13 +808,13 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
   
   (setq org-agenda-clockreport-parameter-plist
         (quote
-         (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
+         (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :hidefiles nil :fileskip0 t)))
   
-  
+(setq org-clock-report-include-clocking-task t)
 #+END_SRC
 
 #+RESULTS:
-| :link | t | :maxlevel | 4 | :narrow | 30 | :tags | t | :tcolumns | 1 | :indent | t | :hidefiles | t | :fileskip0 | t |
+: t
 ** org-super-agenda
 #+begin_src emacs-lisp :tangle yes :results none
   (org-super-agenda-mode 1)
@@ -825,9 +825,9 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
                                            (org-super-agenda-groups
                                             '((:name "Day"
                                                      :time-grid t
-                                                  ;   :date today
-                                                 ;    :todo "TODAY"
-                                                   ;  :scheduled today
+                                          ;   :date today
+                                          ;    :todo "TODAY"
+                                          ;  :scheduled today
                                                      :order 1)))))
                                (alltodo "" ((org-agenda-overriding-header "")
                                             (org-super-agenda-groups
@@ -837,7 +837,7 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
                                           ;                (:name "next" :todo "NEXT")
                                                (:name "In PROGRESS" :todo "PROG")
                                                (:name "Next" :todo "NEXT")
-                                               (:name "baruch" :category "baruch" :tag "baruch")  
+                                               (:name "baruch" :and ( :category "baruch" :not (:todo "WAIT") ))  
                                                (:name "to read" :tag "read")
                                                (:name "research" :tag "research")
                                                (:name "Waiting" :todo "WAIT")
@@ -879,21 +879,27 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
                 (org-agenda-todo-ignore-scheduled t) )
   
            )
-          ("l" "all todos" (  (alltodo "" ((org-agenda-overriding-header "")
-                                           (org-super-agenda-groups
-                                            '(
-                                              (:name "csi" :category "CSI" :order 100)
-                                              (:name "important" :priority "A")
-                                              (:name "today" :scheduled today)
+          ("l" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
+                                         (org-super-agenda-groups
+                                          '(
+                                            (:name "baruch email" :and (:tag "email" :category "baruch"))
+                                            (:name "baruch research/scholarship" :and  (:tag "research" :category "baruch") )
+                                            (:name "baruch admin" :and  (:tag "admin" :category "baruch") )
+                                              (:name "on campus work" :tag "@baruch"  )  
+                                            (:name "baruch" :and ( :category "baruch" :not (:todo "WAIT") ))
   
-                                              (:name "Deadlines" 
-                                                     :and (:deadline t :scheduled nil))
-                                          ;   (:name "not scheduled"
-                                          ;         :and (:deadline nil :scheduled nil))
-                                              (:name "Scheduled" :scheduled future :order 75)
+                                            (:name "to read" :tag "read")
+                                            (:name "research" :tag "research")
+                                            (:name "Waiting" :todo "WAIT")
+                                            (:name "Deadlines" 
+                                                   :and (:deadline t :scheduled nil))
   
-                                              ))
-                                           )         )))
+                                            (:name "ndd" :category "ndd")
+                                            (:name "lis" :category "lis")
+                              
+                                            ))
+                                         ))
+                            ))
   
           )
         )
@@ -920,29 +926,30 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
 
 ** org-todo
 #+begin_src emacs-lisp :tangle yes :results none
-  (setq org-enforce-todo-dependencies t
-        org-clock-out-when-done t
-        )
-  
-  (setq org-log-into-drawer t)
-  
-  (setq org-todo-keywords
-        (quote
-         ((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
-          (type    "HOLD(l)"  "|" "DONE(d)")     )))
-  
-  (setq org-todo-keyword-faces
-        '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
-          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
-          ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "magenta")
-          ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#ff420e")
-        ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
-  
-  
-  
-  (org-edna-mode 1)
-  (setq org-log-done 'time)
-  
+    (setq org-enforce-todo-dependencies t
+          org-clock-out-when-done t
+          )
+    
+    (setq org-log-into-drawer t)
+    
+    (setq org-todo-keywords
+          (quote
+           ((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
+            (type    "HOLD(l)"  "|" "DONE(d)")     )))
+    
+    (setq org-todo-keyword-faces
+          '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
+  ;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
+                  ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#d0b17c")
+            ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
+            ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
+          ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
+    
+    
+    
+    (org-edna-mode 1)
+    (setq org-log-done 'time)
+    
 #+end_src
 ** org-capture
 :PROPERTIES:
@@ -957,7 +964,7 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
   
           ("n" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/ndd.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
   
-   ("c" "calendar" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %^{EVENT}\n%^t\n%a\n%?" :time-prompt t)
+   ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
   
           
           ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
@@ -987,13 +994,13 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
 #+END_SRC
 
 #+RESULTS:
-| a         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/journal.org) | ** %?        |     |
-| :clock-in | t                | :clock-keep | t                                                      | :kill-buffer | nil |
-| b         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/baruch.org)  | ** %?        |     |
-| :clock-in | t                | :clock-keep | t                                                      | :kill-buffer | nil |
-| n         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/ndd.org)     | ** %?        |     |
-| :clock-in | t                | :clock-keep | t                                                      | :kill-buffer | nil |
-| c         | calendar         | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/journal.org) | ** %^{EVENT} |     |
+| a         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/journal.org)  | ** %?        |     |
+| :clock-in | t                | :clock-keep | t                                                       | :kill-buffer | nil |
+| b         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/baruch.org)   | ** %?        |     |
+| :clock-in | t                | :clock-keep | t                                                       | :kill-buffer | nil |
+| n         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/ndd.org)      | ** %?        |     |
+| :clock-in | t                | :clock-keep | t                                                       | :kill-buffer | nil |
+| c         | calendar         | entry       | (file+headline ~/Dropbox/Zettelkasten/inbox.org Events) | ** %^{EVENT} |     |
 
 removed templates:
 - ("d" "download" table-line (id "reading") "|%^{Author} | %^{Title} | %^{Format}|"  )
@@ -1412,12 +1419,23 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
 :LOGBOOK:
 CLOCK: [2021-04-13 Tue 10:17]--[2021-04-13 Tue 10:17] =>  0:00
 :END:
+#+begin_src emacs-lisp :tangle yes
+  (setq-default line-spacing 0.2)
+#+end_src
+
+#+RESULTS:
+: 0.2
+
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (find-file "/home/betsy/.emacs")
-(find-file "~/Dropbox/emacs/config.org")
   (find-file "~/Dropbox/Zettelkasten/inbox.org")
-
- (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
-
+     (find-file "/home/betsy/.emacs")
+  (find-file "~/Dropbox/emacs/config.org")
+    (find-file "~/Dropbox/Zettelkasten/inbox.org")
+  
+   (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
 #+END_SRC  
 
+
+ 
+  
+  
