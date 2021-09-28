@@ -717,7 +717,7 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
                                           ;  (global-set-key (kbd "<f4>") 'org-refile)
   
   
-  (setq org-id-link-to-org-use-id t
+  (setq org-id-link-to-org-use-id (quote create-if-interactive)
         org-id-method (quote org)
         org-return-follows-link t
         org-link-keep-stored-after-insertion nil
@@ -929,27 +929,30 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
     (setq org-enforce-todo-dependencies t
           org-clock-out-when-done t
           )
-    
+  
     (setq org-log-into-drawer t)
-    
+  
     (setq org-todo-keywords
           (quote
            ((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
             (type    "HOLD(l)"  "|" "DONE(d)")     )))
-    
+  
     (setq org-todo-keyword-faces
           '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
   ;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
                   ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#d0b17c")
             ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
             ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
+            ("to-process" :foreground "magenta")
+            ("to-read" :foreground "magenta")
+            ("in-prog" :foreground "magenta")
           ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
-    
-    
-    
+  
+  
+  
     (org-edna-mode 1)
     (setq org-log-done 'time)
-    
+  
 #+end_src
 ** org-capture
 :PROPERTIES:
@@ -1269,13 +1272,28 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
   :straight t)
 
 ** org-roam
-#+begin_src emacs-lisp  :tangle yes 
+:PROPERTIES:
+:ID:       qjfd04u0u7j0
+:END:
 
-  (use-package org-roam
-:bind 
-   ("C-c <f1>" . org-roam-capture))
+:file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
 
-  (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CATEGORY: zettels\n:CONTEXT: %a\n:END:\n%?\n\n
+(file "~/Dropbox/Zettelkasten/Zettels/%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) ${slug}.org")
+
+    (setq org-roam-capture-templates '(("d" "default" plain :target 
+                                        "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CATEGORY: zettels\n:CONTEXT: %a\n:END:\n%?\n\n
+  \n\n\n
+  ----------------------
+  \n
+  - What is the purpose of this zettel?\n
+  - What is the nature of the content I wish to include in this zettel?\n
+  - How does it relate to the existing network?\n
+  - How do I wish to discover this information in the future?\n" 
+                                        "#+title: ${title}" :unnarrowed t :kill-buffer t)))
+
+                                        
+
+  (setq org-roam-capture-templates '(("d" "default" plain "%$" #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CATEGORY: zettels\n:CONTEXT: %a\n:END:\n%?\n\n
 - What is the purpose of this zettel?\n
 - What is the nature of the content I wish to include in this zettel?\n
 - How does it relate to the existing network?\n
@@ -1283,30 +1301,53 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
 
 " :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
                                       "#+title: ${title}" :unnarrowed t :kill-buffer t)))
-(setq org-roam-completion-system 'helm)
 
+                                        (file+head "%<%Y%m%d%>_${slug}.org" "#+title: ${title}\n   \n\n\n
+  ----------------------
+  \n
+  - What is the purpose of this zettel?\n
+%?
+  - What is the nature of the content I wish to include in this zettel?\n
+  - How does it relate to the existing network?\n
+  - How do I wish to discover this information in the future?\n")
 
+                                      
+#+begin_src emacs-lisp  :tangle yes 
+    
+      (use-package org-roam
+    :bind 
+       ("C-c <f1>" . org-roam-capture))
 
-  (defun my/org-roam--title-to-slug (title) ;;<< changed the name
-    "Convert TITLE to a filename-suitable slug."
-    (cl-flet* ((nonspacing-mark-p (char)
-                                  (eq 'Mn (get-char-code-property char 'general-category)))
-               (strip-nonspacing-marks (s)
-                                       (apply #'string (seq-remove #'nonspacing-mark-p
-                                                                   (ucs-normalize-NFD-string s))))
-               (cl-replace (title pair)
-                           (replace-regexp-in-string (car pair) (cdr pair) title)))
-      (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
-                      ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
-                      ("^_" . "")  ;; remove starting underscore
-                      ("_$" . "")))  ;; remove ending underscore
-             (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
-        (downcase slug))))
-
-
-  (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
-
-
+       (setq org-roam-capture-templates '(("d" "default" plain "----------------------\n- What is the purpose of this zettel?\n  %?\n- What is the nature of the content I wish to include in this zettel?\n- How does it relate to the existing network?\n- How do I wish to discover this information in the future?" :target
+   (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}")
+   :unnarrowed t)))
+    
+    (setq org-roam-completion-system 'helm)
+    
+     
+    (setq org-roam-v2-ack t)
+    
+    
+      (defun my/org-roam--title-to-slug (title) ;;<< changed the name
+        "Convert TITLE to a filename-suitable slug."
+        (cl-flet* ((nonspacing-mark-p (char)
+                                      (eq 'Mn (get-char-code-property char 'general-category)))
+                   (strip-nonspacing-marks (s)
+                                           (apply #'string (seq-remove #'nonspacing-mark-p
+                                                                       (ucs-normalize-NFD-string s))))
+                   (cl-replace (title pair)
+                               (replace-regexp-in-string (car pair) (cdr pair) title)))
+          (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
+                          ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
+                          ("^_" . "")  ;; remove starting underscore
+                          ("_$" . "")))  ;; remove ending underscore
+                 (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
+            (downcase slug))))
+    
+    
+      (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
+    
+    
 #+end_src
 
 #+RESULTS:
@@ -1419,12 +1460,9 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
 :LOGBOOK:
 CLOCK: [2021-04-13 Tue 10:17]--[2021-04-13 Tue 10:17] =>  0:00
 :END:
-#+begin_src emacs-lisp :tangle yes
-  (setq-default line-spacing 0.2)
-#+end_src
 
 #+RESULTS:
-: 0.2
+: -0.8
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (find-file "~/Dropbox/Zettelkasten/inbox.org")

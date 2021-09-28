@@ -490,7 +490,7 @@
                                         ;  (global-set-key (kbd "<f4>") 'org-refile)
 
 
-(setq org-id-link-to-org-use-id t
+(setq org-id-link-to-org-use-id (quote create-if-interactive)
       org-id-method (quote org)
       org-return-follows-link t
       org-link-keep-stored-after-insertion nil
@@ -652,6 +652,9 @@
                 ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#d0b17c")
           ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
           ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
+          ("to-process" :foreground "magenta")
+          ("to-read" :foreground "magenta")
+          ("in-prog" :foreground "magenta")
         ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
 
 
@@ -853,39 +856,37 @@
 (add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
 
 (use-package org-roam
-:bind 
-   ("C-c <f1>" . org-roam-capture))
+ :bind 
+    ("C-c <f1>" . org-roam-capture))
 
-  (setq org-roam-capture-templates '(("d" "default" plain #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CATEGORY: zettels\n:CONTEXT: %a\n:END:\n%?\n\n
-- What is the purpose of this zettel?\n
-- What is the nature of the content I wish to include in this zettel?\n
-- How does it relate to the existing network?\n
-- How do I wish to discover this information in the future?\n
+    (setq org-roam-capture-templates '(("d" "default" plain "----------------------\n- What is the purpose of this zettel?\n  %?\n- What is the nature of the content I wish to include in this zettel?\n- How does it relate to the existing network?\n- How do I wish to discover this information in the future?" :target
+(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}")
+:unnarrowed t)))
 
-" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
-                                      "#+title: ${title}" :unnarrowed t :kill-buffer t)))
-(setq org-roam-completion-system 'helm)
+ (setq org-roam-completion-system 'helm)
 
 
-
-  (defun my/org-roam--title-to-slug (title) ;;<< changed the name
-    "Convert TITLE to a filename-suitable slug."
-    (cl-flet* ((nonspacing-mark-p (char)
-                                  (eq 'Mn (get-char-code-property char 'general-category)))
-               (strip-nonspacing-marks (s)
-                                       (apply #'string (seq-remove #'nonspacing-mark-p
-                                                                   (ucs-normalize-NFD-string s))))
-               (cl-replace (title pair)
-                           (replace-regexp-in-string (car pair) (cdr pair) title)))
-      (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
-                      ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
-                      ("^_" . "")  ;; remove starting underscore
-                      ("_$" . "")))  ;; remove ending underscore
-             (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
-        (downcase slug))))
+ (setq org-roam-v2-ack t)
 
 
-  (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
+   (defun my/org-roam--title-to-slug (title) ;;<< changed the name
+     "Convert TITLE to a filename-suitable slug."
+     (cl-flet* ((nonspacing-mark-p (char)
+                                   (eq 'Mn (get-char-code-property char 'general-category)))
+                (strip-nonspacing-marks (s)
+                                        (apply #'string (seq-remove #'nonspacing-mark-p
+                                                                    (ucs-normalize-NFD-string s))))
+                (cl-replace (title pair)
+                            (replace-regexp-in-string (car pair) (cdr pair) title)))
+       (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
+                       ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
+                       ("^_" . "")  ;; remove starting underscore
+                       ("_$" . "")))  ;; remove ending underscore
+              (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
+         (downcase slug))))
+
+
+   (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
 
 (use-package org-ref)
 (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
@@ -958,8 +959,6 @@
 
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
-
-(setq-default line-spacing 0.2)
 
 (find-file "~/Dropbox/Zettelkasten/inbox.org")
    (find-file "/home/betsy/.emacs")

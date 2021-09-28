@@ -8,8 +8,17 @@ If a variable is buffer-local, then setq sets its local value in the current buf
 
 If a variable is not buffer-local, then setq and setq-default do the same thing.
 
+
 #+RESULTS:
 : 90
+
+
+#+begin_src emacs-lisp :tangle yes
+  (setq-default line-spacing -0.75)
+#+end_src
+
+#+RESULTS:
+: -0.75
 
 * font encoding
 #+begin_src emacs-lisp :tangle yes

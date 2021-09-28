@@ -568,7 +568,7 @@ CLOCK: [2021-06-08 Tue 13:51]--[2021-06-08 Tue 14:06] =>  0:15
           ("b" "current activity" entry (file+olp+datetree "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
          
   
-          ("c" "calendar" entry (file "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/cal.org") "* %^{EVENT}\n%^t\n%a\n%?")
+            ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
   
           ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
   

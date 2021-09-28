@@ -4,6 +4,10 @@
 (setq url-cookie-storage
  '(("www.goodreads.com"
   [url-cookie "ccsid" "270-0000268-6264518" "Tue, 24 Apr 2040 11:05:18 -0000" "/" "www.goodreads.com" nil])
+ (".amazon.com"
+  [url-cookie "session-id-time" "2082787201l" "Fri, 23-Sep-2022 22:24:41 GMT" "/" ".amazon.com" nil]
+  [url-cookie "lc-main" "en_US" "Fri, 23-Sep-2022 20:50:42 GMT" "/" ".amazon.com" nil]
+  [url-cookie "i18n-prefs" "USD" "Fri, 23-Sep-2022 20:50:42 GMT" "/" ".amazon.com" nil])
  (".thebalancecareers.com"
   [url-cookie "TMog" "n79a3c96760d64b27852a3df34af9517c00" "Thu, 29-Apr-2088 03:38:00 GMT" "/" ".thebalancecareers.com" nil])
  (".lifewire.com"
@@ -21,16 +25,21 @@
   [url-cookie "prov" "bd315c2c-6c23-f5f6-8ad5-6de4a907ceeb" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".askubuntu.com" nil])
  ("genius.com"
   [url-cookie "_genius_ab_test_cohort" "13" "Fri Apr 30 22:25:34 2088 GMT" "/" "genius.com" nil])
- (".google.com"
-  [url-cookie "CGIC" "Ik10ZXh0L2h0bWwsIHRleHQvcGxhaW4sIHRleHQvc2dtbCwgdGV4dC9jc3MsIGFwcGxpY2F0aW9uL3hodG1sK3htbCwgKi8qO3E9MC4wMQ" "Fri, 11-Jun-2021 03:23:42 GMT" "/complete/search" ".google.com" nil]
-  [url-cookie "CGIC" "Ik10ZXh0L2h0bWwsIHRleHQvcGxhaW4sIHRleHQvc2dtbCwgdGV4dC9jc3MsIGFwcGxpY2F0aW9uL3hodG1sK3htbCwgKi8qO3E9MC4wMQ" "Fri, 11-Jun-2021 03:23:42 GMT" "/search" ".google.com" nil]
-  [url-cookie "NID" "204=EXM4vR2ThWmJFuAoqISoTO-82pSMq2Zb38iV0UT1aXz_4mgnxRZV0NbVKl00JWQePH6E8b-7j7lgutAaiI6ZjlQ3BF_PqbkOX5aviSzNohWCiRsjyx-FksNY_8OK7NZMADhIph4KDQGTMBKr5C35plrYlqT59RCVrt5sRoqu_Ug" "Mon, 14-Jun-2021 03:23:42 GMT" "/" ".google.com" nil])
  (".stackoverflow.com"
   [url-cookie "prov" "e2ca4d47-6ebe-3a5d-aa3b-870145e25bf7" "Fri, 01-Jan-2055 00:00:00 GMT" "/" ".stackoverflow.com" nil]))
 )
 (setq url-cookie-secure-storage
  '((".github.com"
   [url-cookie "logged_in" "no" "Fri, 11 Feb 2039 16:30:59 -0000" "/" ".github.com" t])
+ (".wikipedia.org"
+  [url-cookie "WMF-Last-Access-Global" "23-Sep-2021" "Mon, 25 Oct 2021 12:00:00 GMT" "/" ".wikipedia.org" t])
+ ("en.wikipedia.org"
+  [url-cookie "WMF-Last-Access" "23-Sep-2021" "Mon, 25 Oct 2021 12:00:00 GMT" "/" "en.wikipedia.org" t])
+ (".amazon.com"
+  [url-cookie "session-token" "oBaELuxo/d9BeAmMOulQrU6eRGu6Hi6fPBDg6/cnEAeCz9YcpbfJ19pBLlDRiteL+w0mPxgadK6FcgvcMHFEYN0Ko5YspFplfIjOSM/DliB0X84phCib2xiGQUeehebLtm7+JSp9wBZDKbAlnnmBh7wl29gRjuIWfOS0YU9Qif+ZddkAM3rcEiXS3WU9Oylr" "Fri, 23-Sep-2022 22:24:28 GMT" "/" ".amazon.com" t]
+  [url-cookie "ubid-main" "130-7020569-3828822" "Fri, 23-Sep-2022 22:24:41 GMT" "/" ".amazon.com" t]
+  [url-cookie "session-id-time" "2082787201l" "Fri, 23-Sep-2022 20:50:42 GMT" "/" ".amazon.com" t]
+  [url-cookie "session-id" "134-9696000-3453254" "Fri, 23-Sep-2022 22:24:41 GMT" "/" ".amazon.com" t])
  ("www.canva.com"
   [url-cookie "CDI" "7804b941-c2c1-49fa-b6c0-5a2e7b6b2fdb" "Fri Nov 29 17:58:01 2030 GMT" "/" "www.canva.com" t])
  (".proofpoint.com"
@@ -46,11 +55,8 @@
  ("accounts.google.com"
   [url-cookie "GAPS" "1:KvVZKuVf70j2VpOw_4hTP0yrBg8gZg:EqbF723z5BmUudNo" "Sun, 01-May-2022 14:19:58 GMT" "/" "accounts.google.com" t]
   [url-cookie "__Host-GAPS" "1:KvVZKuVf70j2VpOw_4hTP0yrBg8gZg:EqbF723z5BmUudNo" "Sun, 01-May-2022 14:19:58 GMT" "/" "accounts.google.com" t])
- (".doi.org"
-  [url-cookie "__cfduid" "d32369ef4140e0493e8f8ac815f6f95081620310231" "Sat, 05-Jun-21 14:10:31 GMT" "/" ".doi.org" t])
  (".tandfonline.com"
   [url-cookie "I2KBRCK" "1" "Fri, 06-May-2022 14:10:31 GMT" "/" ".tandfonline.com" t]
-  [url-cookie "__cfduid" "dd972080950bfd0ce96a810cdb30c696e1620310231" "Sat, 05-Jun-21 14:10:31 GMT" "/" ".tandfonline.com" t]
   [url-cookie "MAID" "TiEaHx6VEY29yyK5lyrbow==" "Wed, 02-Mar-2022 14:57:20 GMT" "/" ".tandfonline.com" t]
   [url-cookie "MACHINE_LAST_SEEN" "2021-05-06T07%3A57%3A20.596-07%3A00" "Wed, 02-Mar-2022 14:57:20 GMT" "/" ".tandfonline.com" t]))
 )
