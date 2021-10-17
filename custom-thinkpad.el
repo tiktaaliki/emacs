@@ -12,6 +12,7 @@
    '("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote " " mode-line-misc-info mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
      (vc-mode vc-mode)
      "  " mode-line-modes mode-line-end-spaces))
+ '(org-agenda-scheduled-leaders '("" "S.%2dx: "))
  '(org-modules
    '(ol-bibtex ol-docview ol-eww org-habit org-id org-inlinetask org-protocol org-tempo ol-w3m ol-bookmark org-checklist org-depend org-invoice org-registry org-toc))
  '(org-pomodoro-ticking-sound-states '(:pomodoro))

@@ -1,4 +1,4 @@
-(set-fringe-mode '(25 . 25))
+(set-fringe-mode '(50 . 50))
   (fset 'yes-or-no-p 'y-or-n-p)
                                           ;  (setq confirm-kill-emacs (quote y-or-n-p))
   (setq confirm-kill-emacs nil
@@ -16,43 +16,41 @@
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
 
-
-  (set-face-attribute 'default nil :family "Fantasque sans mono" :height 165 :weight 'normal  :foreground "#ebdcb2")
   (delete-selection-mode) ;allows to delete selected text by typing
   (global-set-key (kbd "M-o") 'other-window)
 
 ;  (setq debug-on-error t)
 
 (use-package helm
-                           :config (helm-mode +1)
-                           :bind (("M-x"   . helm-M-x)
-                                  ([f3] . helm-buffers-list)       
-                                  ("<Hangul> x" . helm-M-x)
-                                  ([f9] . helm-occur )
-                                  ))
-                         (use-package projectile
-                           :config
-                           (projectile-mode +1))
+  :config (helm-mode +1)
+  :bind (("M-x"   . helm-M-x)
+         ([f3] . helm-buffers-list)       
+         ("<Hangul> x" . helm-M-x)
+         ([f9] . helm-occur )
+         ))
+(use-package projectile
+  :config
+  (projectile-mode +1))
 
-                         (use-package helm-projectile
-                           :bind    ([f5] . helm-projectile))
+(use-package helm-projectile
+  :bind    ([f5] . helm-projectile))
 
-                         (use-package bufler
-                           :custom
-                           (bufler-column-name-width 70)
-                           (bufler-filter-buffer-modes nil))
+(use-package bufler
+  :custom
+  (bufler-column-name-width 70)
+  (bufler-filter-buffer-modes nil))
 
-                         (setq org-special-ctrl-a/e (quote (t . t)))
+(setq org-special-ctrl-a/e (quote (t . t)))
 
-                         (add-hook 'bufler-list-mode-hook
-                                   (lambda ()
-                                     (visual-line-mode -1)
-                                     (toggle-truncate-lines 1)))
+(add-hook 'bufler-list-mode-hook
+          (lambda ()
+            (visual-line-mode -1)
+            (toggle-truncate-lines 1)))
 
-                    (use-package ace-jump-mode)
-                             (global-set-key (kbd "M-z") 'ace-jump-mode)
-     (global-unset-key (kbd "C-z"))
-          (global-set-key (kbd "C-z") 'ace-jump-helm-line)
+(use-package ace-jump-mode)
+(global-set-key (kbd "M-z") 'ace-jump-mode)
+(global-unset-key (kbd "C-z"))
+(global-set-key (kbd "C-z") 'ace-jump-helm-line)
 (setq tab-bar-mode nil)
 
 (load "dired+")
@@ -127,50 +125,50 @@
 (add-hook 'deft-mode-hook #'visual-line-mode)
 
 (use-package s)
-    (use-package org
-      :ensure org-plus-contrib)
-    (use-package unkillable-scratch
-      :config
-      (unkillable-scratch 1))
+(use-package org
+  :ensure org-plus-contrib)
+(use-package unkillable-scratch
+  :config
+  (unkillable-scratch 1))
 
 
-    (use-package aggressive-indent
-      :custom (global-aggressive-indent-mode t)
-      )
+(use-package aggressive-indent
+  :custom (global-aggressive-indent-mode t)
+  )
 
-    ;;(straight-use-package '(org-plus-contrib :includes org))
-
-
-    (setq org-modules
-          (quote
-          (ol-bibtex ol-docview ol-eww org-habit org-id org-inlinetask org-protocol org-tempo ol-w3m org-annotate-file ol-bookmark org-checklist org-collector org-depend org-invoice org-notify org-registry)))
+;;(straight-use-package '(org-plus-contrib :includes org))
 
 
-  (defun kdm/html2org-clipboard ()
-    "Convert clipboard contents from HTML to Org and then paste (yank)."
-    (interactive)
-    (kill-new (shell-command-to-string "xclip -o -t text/html | pandoc -f html -t json | pandoc -f json -t org --wrap=none"
-))
-    (yank))
+(setq org-modules
+      (quote
+       (ol-bibtex ol-docview ol-eww org-habit org-id org-inlinetask org-protocol org-tempo ol-w3m org-annotate-file ol-bookmark org-checklist org-collector org-depend org-invoice org-notify org-registry)))
+
+
+(defun kdm/html2org-clipboard ()
+  "Convert clipboard contents from HTML to Org and then paste (yank)."
+  (interactive)
+  (kill-new (shell-command-to-string "xclip -o -t text/html | pandoc -f html -t json | pandoc -f json -t org --wrap=none"
+                                     ))
+  (yank))
 
 
 
-      (use-package smartparens
-        :ensure t
-        :defer t
-        :init
-        (show-smartparens-global-mode 1))
-      (smartparens-global-mode 1)
-      (setq show-paren-style 'expression)
+(use-package smartparens
+  :ensure t
+  :defer t
+  :init
+  (show-smartparens-global-mode 1))
+(smartparens-global-mode 1)
+(setq show-paren-style 'expression)
 
-      (sp-local-pair 'org-mode "/" "/" :actions '(wrap))
-      (sp-local-pair 'org-mode "_" "_" :actions '(wrap))
-      (sp-local-pair 'org-mode "*" "*" :actions '(wrap))
-      (sp-local-pair 'org-mode "+" "+" :actions '(wrap))
-      (sp-local-pair 'org-mode "~" "~" :actions '(wrap))
-      (sp-local-pair 'org-mode "=" "=" :actions '(wrap))
-      (sp-local-pair 'org-mode "-" "-" :actions '(wrap))
-      (sp-pair "'" nil :actions :rem)
+(sp-local-pair 'org-mode "/" "/" :actions '(wrap))
+(sp-local-pair 'org-mode "_" "_" :actions '(wrap))
+(sp-local-pair 'org-mode "*" "*" :actions '(wrap))
+(sp-local-pair 'org-mode "+" "+" :actions '(wrap))
+(sp-local-pair 'org-mode "~" "~" :actions '(wrap))
+(sp-local-pair 'org-mode "=" "=" :actions '(wrap))
+(sp-local-pair 'org-mode "-" "-" :actions '(wrap))
+(sp-pair "'" nil :actions :rem)
 
 (use-package calfw)
 (use-package calfw-org)
@@ -197,28 +195,28 @@
 (setq diary-file "~/Dropbox/Zettelkasten/diary")
 
 (setq org-indirect-buffer-display 'current-window)
-    (defun transpose-windows ()
-      (interactive)
-      (let ((this-buffer (window-buffer (selected-window)))
-            (other-buffer (prog2
-                              (other-window +1)
-                              (window-buffer (selected-window))
-                            (other-window -1))))
-        (switch-to-buffer other-buffer)
-        (switch-to-buffer-other-window this-buffer)
-        (other-window -1)))
+(defun transpose-windows ()
+  (interactive)
+  (let ((this-buffer (window-buffer (selected-window)))
+        (other-buffer (prog2
+                          (other-window +1)
+                          (window-buffer (selected-window))
+                        (other-window -1))))
+    (switch-to-buffer other-buffer)
+    (switch-to-buffer-other-window this-buffer)
+    (other-window -1)))
 
- (setq pop-up-windows nil)
+(setq pop-up-windows nil)
 (setq switch-to-buffer-obey-display-actions t)
 
 (use-package magit
-    :init (progn
-            (setq magit-repository-directories '("~/Dropbox/" ))))
-  (setq global-auto-revert-mode t
-        auto-save-interval 5)
+  :init (progn
+          (setq magit-repository-directories '("~/Dropbox/" ))))
+(setq global-auto-revert-mode t
+      auto-save-interval 5)
 (auto-save-visited-mode 1)
 
-  (add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
+(add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
 
 (setq vc-follow-symlinks t)
 
@@ -228,41 +226,41 @@
 (setq org-protocol-default-template-key "w")
 
 (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
-  (global-set-key (kbd "C-c <f2>") 'org-clock-out)
+(global-set-key (kbd "C-c <f2>") 'org-clock-out)
 
-  (global-set-key (kbd "<f1>") 'org-capture)
-  (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
-  (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-  (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
-  (bind-keys
-("C-c r" . org-clock-report)
-   ("C-c l" . org-store-link)
-   ("C-c C-l" . org-insert-link)
-   ("C-c b" . list-bookmarks)
-   ("C-a" . org-beginning-of-line) 
-   ("C-e" . end-of-line) 
-   ("C-k" . org-kill-line)
-   ("C-."   . org-todo)
-   ("C-x /" . shrink-window-horizontally)
-   ("C-x ." . org-archive-subtree-default)
+(global-set-key (kbd "<f1>") 'org-capture)
+(global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
+(define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+(define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+(bind-keys
+ ("C-c r" . org-clock-report)
+ ("C-c l" . org-store-link)
+ ("C-c C-l" . org-insert-link)
+ ("C-c b" . list-bookmarks)
+ ("C-a" . org-beginning-of-line) 
+ ("C-e" . end-of-line) 
+ ("C-k" . org-kill-line)
+ ("C-."   . org-todo)
+ ("C-x /" . shrink-window-horizontally)
+ ("C-x ." . org-archive-subtree-default)
 
-   ([f1] . org-capture)
-   ([f2] . org-clock-in)
-   ;;f3 is helm
-   ([f4] . org-refile)
-   ;;f5 is projectile
-   ([f6] . helm-bibtex-with-local-bibliography)
-   ([f7] . org-agenda)
-   ;;f8 is deft
-  ; ([f10] . org-tree-to-indirect-buffer)
-   ([f11] . org-id-goto)
-   ([f12] . bury-buffer)     )
+ ([f1] . org-capture)
+ ([f2] . org-clock-in)
+ ;;f3 is helm
+ ([f4] . org-refile)
+ ;;f5 is projectile
+ ([f6] . helm-bibtex-with-local-bibliography)
+ ([f7] . org-agenda)
+ ;;f8 is deft
+                                        ; ([f10] . org-tree-to-indirect-buffer)
+ ([f11] . org-id-goto)
+ ([f12] . bury-buffer)     )
 
 
 (global-set-key (kbd "<f10>") (lambda ()
-                              (interactive)
-                              (let ((current-prefix-arg '(4)))
-                                (call-interactively #'org-tree-to-indirect-buffer))))
+                                (interactive)
+                                (let ((current-prefix-arg '(4)))
+                                  (call-interactively #'org-tree-to-indirect-buffer))))
 
 (define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
 (define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
@@ -301,18 +299,19 @@
 # org-mode markup (and all Org's goodness) to organise the notes.
 # If you want to create a file, visit that file with C-x C-f,
 # then enter the text in that file's own buffer.
- 
+
 ")
 
 (use-package org-superstar
   :config
-  (setq org-superstar-headline-bullets-list '("◉" "❤""❄" "☆""♢" "⭆" )
-  org-superstar-item-bullet-alist (quote ((42 . 33) (43 . 62) (45 . 45))))
+  (setq org-superstar-headline-bullets-list '( "☆" "*" "¶" )
+        org-superstar-item-bullet-alist (quote ((42  . 33) (43 . 62) (45 . 45)))
+        )
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 (setq org-startup-indented t
       org-hide-emphasis-markers t
       org-startup-folded t
-      org-ellipsis " ⬎ "
+      org-ellipsis " »"
       org-hide-leading-stars t)
 (use-package doom-themes
   :config
@@ -324,25 +323,18 @@
   (doom-themes-org-config)
   )
 
-(set-face-attribute 'variable-pitch nil :family "Koho")
-(set-face-attribute 'mode-line nil :height 0.9 :family "monofur" :foreground "deep sky blue")
-(set-face-attribute 'org-checkbox-statistics-todo nil :inherit 'org-todo :weight 'normal :family "Victor Mono" :height 1.0 :foreground "#ff4447") ;raspberry
-(set-face-attribute 'org-checkbox-statistics-done nil :inherit 'org-done :strike-through nil) ;raspberry
-(set-face-attribute 'org-drawer nil :height 0.8 :foreground "sky blue")
-(set-face-attribute 'org-archived nil :foreground "grey32" :strike-through nil)
-(set-face-attribute 'org-agenda-current-time nil :foreground "magenta") 
 
 (setq org-tags-column 0)
 
 (setq-default mode-line-format '("%e"  mode-line-front-space
                                  mode-line-mule-info
-                                   mode-line-modified
-                                   mode-line-misc-info 
-                                   mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
-  (vc-mode vc-mode)
-  "  " mode-line-modes  mode-line-end-spaces)
+                                 mode-line-modified
+                                 mode-line-misc-info 
+                                 mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
+                                 (vc-mode vc-mode)
+                                 "  " mode-line-modes  mode-line-end-spaces)
               )
-  (display-time-mode 1)
+(display-time-mode 1)
 
 (defvar symbola-font (if (eq system-type 'gnu/linux)
                          (font-spec :name "Symbola" :size 14)
@@ -391,7 +383,7 @@
 (setq use-default-font-for-symbols nil)
 
 (setq org-src-fontify-natively t
-        org-src-tab-acts-natively t)
+      org-src-tab-acts-natively t)
 
 (setq org-fontify-quote-and-verse-blocks t)
 
@@ -405,6 +397,7 @@
 
 (global-set-key (kbd "C-=") 'hydra-zoom/body)
 (use-package visual-fill-column)
+(setq visual-fill-column-center-text t)
 
 (defhydra hydra-yasnippet (:color red :hint nil)
   "
@@ -502,165 +495,152 @@
 
 (setq global-visible-mark-mode t)
 
+(add-hook 'org-agenda-mode-hook
+                                 (lambda ()
+                                   (visual-line-mode -1)
+                                   (toggle-truncate-lines 1))) 
+
+
 (setq org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE ")
-  
-  (setq org-agenda-files '("~/Dropbox/Zettelkasten/journal.org"
-                           "~/Dropbox/Zettelkasten/inbox.org"
-                           "~/Dropbox/Zettelkasten/readings.org"
-                           "~/Dropbox/Zettelkasten/contacts.org"
-                           "~/Dropbox/Zettelkasten/ndd.org"
-                             "~/Dropbox/Zettelkasten/baruch.org"
-                           "~/Dropbox/Zettelkasten/personal.org"
-                           "~/Dropbox/Zettelkasten/lis.org"
-;                           "~/Dropbox/Zettelkasten/cal.org"
-                           "~/Dropbox/Zettelkasten/recipes.org"
-                           "~/Dropbox/Zettelkasten/sysadmin.org" 
-                          "~/Dropbox/Zettelkasten/Zettels/index.org"
-                           "~/Dropbox/Zettelkasten/editing.org"                           
-                           ))
-  
-  
-  (setq org-agenda-prefix-format
-        '((agenda . " %i %-12:c%?-12t% s")
-          (todo . " %i %-12:c")
-          (tags . " %i %-12:c")
-          (search . " %i %-12:c")))
-  
-  (setq org-agenda-with-colors t
-        org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
-        org-agenda-current-time-string "✸✸✸✸✸"
-        org-agenda-start-with-clockreport-mode t
-        org-agenda-dim-blocked-tasks t
-        org-agenda-window-setup 'only-window
-        )
-  
-  
-  ;;skips
-  (setq org-agenda-skip-scheduled-if-done t
-        org-agenda-skip-deadline-if-done t
-        org-agenda-skip-timestamp-if-done t
-        org-agenda-skip-deadline-prewarning-if-scheduled t
-        )
-  
-  (setq org-agenda-clockreport-parameter-plist
-        (quote
-         (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :hidefiles nil :fileskip0 t)))
-  
+
+(setq org-agenda-files '("~/Dropbox/Zettelkasten/journal.org"
+                         "~/Dropbox/Zettelkasten/inbox.org"
+                         "~/Dropbox/Zettelkasten/readings.org"
+                         "~/Dropbox/Zettelkasten/contacts.org"
+                         "~/Dropbox/Zettelkasten/ndd.org"
+                         "~/Dropbox/Zettelkasten/baruch.org"
+                         "~/Dropbox/Zettelkasten/personal.org"
+                         "~/Dropbox/Zettelkasten/lis.org"
+                                        ;                           "~/Dropbox/Zettelkasten/cal.org"
+                         "~/Dropbox/Zettelkasten/recipes.org"
+                         "~/Dropbox/Zettelkasten/sysadmin.org" 
+                         "~/Dropbox/Zettelkasten/Zettels/index.org"
+                         "~/Dropbox/Zettelkasten/editing.org"                           
+                         ))
+
+
+(setq org-agenda-prefix-format
+      '((agenda . " %i %-12:c%?-12t% s")
+        (todo . " %i %-12:c")
+        (tags . " %i %-12:c")
+        (search . " %i %-12:c")))
+
+(setq org-agenda-with-colors t
+      org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
+      org-agenda-current-time-string "✸✸✸✸✸"
+      org-agenda-start-with-clockreport-mode t
+      org-agenda-dim-blocked-tasks t
+      org-agenda-window-setup 'only-window
+      )
+
+
+;;skips
+(setq org-agenda-skip-scheduled-if-done t
+      org-agenda-skip-deadline-if-done t
+      org-agenda-skip-timestamp-if-done t
+      org-agenda-skip-deadline-prewarning-if-scheduled t
+      )
+
+(setq org-agenda-clockreport-parameter-plist
+      (quote
+       (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :hidefiles nil :fileskip0 t)))
+
 (setq org-clock-report-include-clocking-task t)
 
 (org-super-agenda-mode 1)
 (setq org-super-agenda-mode 1)
 (setq org-agenda-custom-commands
       '(
-        ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
-                                         (org-super-agenda-groups
-                                          '((:name "Day"
-                                                   :time-grid t
-                                        ;   :date today
-                                        ;    :todo "TODAY"
-                                        ;  :scheduled today
-                                                   :order 1)))))
-                             (alltodo "" ((org-agenda-overriding-header "")
-                                          (org-super-agenda-groups
-                                           '(
-                                             (:discard (:scheduled future))
-                                             (:name "today" :scheduled today)
-                                        ;                (:name "next" :todo "NEXT")
-                                             (:name "In PROGRESS" :todo "PROG")
-                                             (:name "Next" :todo "NEXT")
-                                             (:name "baruch" :and ( :category "baruch" :not (:todo "WAIT") ))  
-                                             (:name "to read" :tag "read")
-                                             (:name "research" :tag "research")
-                                             (:name "Waiting" :todo "WAIT")
-                                             (:name "Deadlines" 
-                                                    :and (:deadline t :scheduled nil))
-
-                                             (:name "ndd" :category "ndd")
-                                             (:name "lis" :category "lis")
-                                             (:name "csi" :category "CSI")
-                                             (:discard (:todo "HOLD"))
-                                        ;     (:name "not scheduled"
-                                        ;           :and (:deadline nil :scheduled nil))
-                                             (:name "past due" :scheduled past)
-                                             ))
-                                          ))
-                             ))
-
-
-
-
-        ("k" "all untagged TODOs" tags-todo "-{.*}")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
-
-        ("x" "With deadline columns" alltodo "" 
-         ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
+        ("l" . "just todo lists") ;description for "h" prefix
+        ("lt" tags-todo "untagged todos" "-{.*}")
+        ("ls" alltodo "all unscheduled" ((org-agenda-skip-function
+                                          '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+                                         (org-agenda-todo-ignore-scheduled t) ))
+        ("lx" "With deadline columns" alltodo "" 
+         ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE %EFFORT " )
           (org-agenda-view-columns-initially t)
           (org-agenda-sorting-strategy '(timestamp-up))
-          (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) )
-
+          (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) )      )
+        ("la" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
+                                        (org-super-agenda-groups
+                                         '(
+                                           (:name "focus" :tag "#1")
+                                           (:name "Baruch TO READ" :and (:tag "_read" :category "baruch"))
+                                           (:name "to read" :tag "_read")
+                                           (:name "Baruch THINKING" :and (:tag "_think" :category "baruch"))
+                                           (:name "NDD THINKING" :and (:tag "_think" :category "ndd"))
+                                           (:name "HOME" :tag "@home")
+                                           )))))
          )
 
-        ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
-         ((agenda "" ((org-agenda-span 2)
-                      (org-agenda-clockreport-mode nil)))
-          (todo "NEXT|TODAY|IN-PROG"))
-         ((org-agenda-todo-ignore-scheduled t)))
+                        ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
+               ((agenda "" ((org-agenda-span 2)
+                            (org-agenda-clockreport-mode nil)))
+                (todo "NEXT|TODAY|IN-PROG"))
+               ((org-agenda-todo-ignore-scheduled t)))
 
-        ("u" "all UNSCHEDULED" alltodo ""                                                          
-         (    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
-              (org-agenda-todo-ignore-scheduled t) )
+    ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
+                                               (org-super-agenda-groups
+                                                '((:name "Day"
+                                                         :time-grid t
+                                              ;   :date today
+                                              ;    :todo "TODAY"
+                                              ;  :scheduled today
+                                                         :order 1)))))
+                                   (alltodo "" ((org-agenda-overriding-header "")
+                                                (org-super-agenda-groups
+                                                 '(
+                                                   (:name "Priority A" :priority "A")
+                                                   (:name "Level 1" :and (:tag "#1" :scheduled nil))
+                                                   (:name "Level 2" :tag "#2")
+                                                   (:name "Level 3" :tag "#3")
+                                                   (:name "Baruch TO READ" :and (:tag "_read" :category "baruch" :scheduled nil))
+                                                   (:name "to read" :and (:tag "_read" :scheduled nil))
+                                                   (:name "Baruch THINKING" :and (:tag "_think" :category "baruch" :scheduled nil))
 
-         )
-        ("l" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
-                                       (org-super-agenda-groups
-                                        '(
-                                          (:name "baruch email" :and (:tag "email" :category "baruch"))
-                                          (:name "baruch research/scholarship" :and  (:tag "research" :category "baruch") )
-                                          (:name "baruch admin" :and  (:tag "admin" :category "baruch") )
-                                            (:name "on campus work" :tag "@baruch"  )  
-                                          (:name "baruch" :and ( :category "baruch" :not (:todo "WAIT") ))
+                                                   (:name "NDD THINKING" :and (:tag "_think" :category "ndd" :scheduled nil))
+                                                   (:name "HOME" :tag "@home" )
+                                                   (:name "wait" :todo "WAIT")
+                                                   ))))
+)
+                                                              ((org-agenda-skip-function
+                                                   '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+                                                  (org-agenda-todo-ignore-scheduled t) )
 
-                                          (:name "to read" :tag "read")
-                                          (:name "research" :tag "research")
-                                          (:name "Waiting" :todo "WAIT")
-                                          (:name "Deadlines" 
-                                                 :and (:deadline t :scheduled nil))
+                                                             )
 
-                                          (:name "ndd" :category "ndd")
-                                          (:name "lis" :category "lis")
 
-                                          ))
-                                       ))
-                          ))
 
-        )
-      )
+          ))
+
+
 
 (setq org-enforce-todo-dependencies t
-        org-clock-out-when-done t
-        )
+      org-clock-out-when-done t
+      )
 
-  (setq org-log-into-drawer t)
+(setq org-log-into-drawer t)
 
-  (setq org-todo-keywords
-        (quote
-         ((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
-          (type    "HOLD(l)"  "|" "DONE(d)")     )))
+(setq org-todo-keywords
+      (quote
+       ((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
+        (type    "HOLD(l)"  "|" "DONE(d)")     )))
 
-  (setq org-todo-keyword-faces
-        '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
-;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
-                ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#d0b17c")
-          ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
-          ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
-          ("to-process" :foreground "magenta")
-          ("to-read" :foreground "magenta")
-          ("in-prog" :foreground "magenta")
+(setq org-todo-keyword-faces
+      '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
+                                        ;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
+        ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#d0b17c")
+        ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
+        ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
+        ("to-process" :foreground "magenta")
+        ("to-read" :foreground "magenta")
+        ("in-prog" :foreground "magenta")
         ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
 
 
 
-  (org-edna-mode 1)
-  (setq org-log-done 'time)
+(org-edna-mode 1)
+(setq org-log-done 'time)
 
 (setq org-capture-templates
       '(
@@ -670,8 +650,7 @@
 
         ("n" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/ndd.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
 
- ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
-
+        ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
 
         ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
 
@@ -718,12 +697,6 @@
   :config
   (setq helm-chronos-standard-timers
         '(
-          ;;tuesday shift
-          "=10:00/OER shift + -1/oer 1 min + -4/oer in 5 + =14:00/aal shift + -5/aal shift in 5 + 4/1 min! + =18:00/end shift + -5/end shift in 5 + 4/1 min!"
-          ;;wednesday shift
-          "=10:00/csi oer + -5/csi shift in 5 + =15:00/end shift + -5/end shift in 5"
-          ;;thursday shift
-          "=9:00/nyu backup shift + -5/shift in 5 + 4/1 min! + =12:00/switch to aal + -5/switch in 5 + 4/1 min! + =13:00/shift over + 4/1 min! + =18:00/csi reference + -5/shift in 5 + 4/1 min! + =22:00/end shift + -5/end shift in 5 + 4/1 min!"
           ;;intermittent fasting
           "=13:00/end fast + =21:00/begin fast"
 
@@ -731,16 +704,18 @@
 
   )
 
+
+
 (use-package org-pomodoro)
 (setq org-pomodoro-ticking-sound-p t)
-(setq org-pomodoro-finished-sound-p nil)
+(setq org-pomodoro-finished-sound-p t) ;i couldn't remember why this is nil [2021-10-16 Sat]:
 (setq org-pomodoro-overtime-sound "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
 (setq org-pomodoro-short-break-sound "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
 (setq org-pomodoro-long-break-sound  "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
 (setq org-pomodoro-keep-killed-pomodoro-time t)
-(setq org-pomodoro-manual-break t)
+(setq org-pomodoro-manual-break nil)
 (setq org-pomodoro-ticking-sound-states '(:pomodoro :overtime))
-(setq org-pomodoro-length 25)
+(setq org-pomodoro-length 50)
 
 (setq org-list-demote-modify-bullet
       '(("+" . "-") ("-" . "+") ))
@@ -859,9 +834,8 @@
  :bind 
     ("C-c <f1>" . org-roam-capture))
 
-    (setq org-roam-capture-templates '(("d" "default" plain "----------------------\n- What is the purpose of this zettel?\n  %?\n- What is the nature of the content I wish to include in this zettel?\n- How does it relate to the existing network?\n- How do I wish to discover this information in the future?" :target
-(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}")
-:unnarrowed t)))
+    (setq org-roam-capture-templates '(("d" "default" plain "#+title: ${title}\n* ${title}\n%?\n* Metadata \n- What is the purpose of this zettel?\n\n- What is the nature of the content I wish to include in this zettel?\n- How does it relate to the existing network?\n- How do I wish to discover this information in the future?" :target
+(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "") :jump-to-captured t :unnarrowed t)))
 
  (setq org-roam-completion-system 'helm)
 
@@ -962,7 +936,6 @@
 
 (find-file "~/Dropbox/Zettelkasten/inbox.org")
    (find-file "/home/betsy/.emacs")
-(find-file "~/Dropbox/emacs/config.org")
-  (find-file "~/Dropbox/Zettelkasten/inbox.org")
+
 
  (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
