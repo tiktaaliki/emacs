@@ -1,3 +1,4 @@
+
 #+auto_tangle: t
 
 * Minimum Usability
@@ -84,17 +85,18 @@
         deft-file-naming-rules '((noslash . "-")
                                  (nospace . "-")
                                  (case-fn . downcase))) 
-
-
-
+  
+  
+  
   (add-hook 'after-init-hook 'deft)
   (add-hook 'deft-mode-hook #'visual-line-mode)
-
-
+    (global-set-key (kbd "M-o") 'other-window)
+  
+  
 #+end_src
 
 #+RESULTS:
-| visual-line-mode |
+: other-window
 
 ** functionality
 #+BEGIN_SRC emacs-lisp  :tangle yes
@@ -568,7 +570,7 @@ CLOCK: [2021-06-08 Tue 13:51]--[2021-06-08 Tue 14:06] =>  0:15
           ("b" "current activity" entry (file+olp+datetree "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
          
   
-            ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
+            ("c" "calendar" entry (file+headline "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
   
           ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
   
@@ -597,11 +599,11 @@ CLOCK: [2021-06-08 Tue 13:51]--[2021-06-08 Tue 14:06] =>  0:15
 #+END_SRC
 
 #+RESULTS:
-| a         | current activity | entry       | (file+olp+datetree c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/journal.org) | ** %?        |     |
-| :clock-in | t                | :clock-keep | t                                                                   | :kill-buffer | nil |
-| b         | current activity | entry       | (file+olp+datetree c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org)  | ** %?        |     |
-| :clock-in | t                | :clock-keep | t                                                                   | :kill-buffer | nil |
-| c         | calendar         | entry       | (file c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/cal.org)                  | * %^{EVENT}  |     |
+| a         | current activity | entry       | (file+olp+datetree c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/journal.org)  | ** %?        |     |
+| :clock-in | t                | :clock-keep | t                                                                               | :kill-buffer | nil |
+| b         | current activity | entry       | (file+olp+datetree c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org)   | ** %?        |     |
+| :clock-in | t                | :clock-keep | t                                                                               | :kill-buffer | nil |
+| c         | calendar         | entry       | (file+headline c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org Events) | ** %^{EVENT} |     |
 
 removed templates:
 - ("d" "download" table-line (id "reading") "|%^{Author} | %^{Title} | %^{Format}|"  )

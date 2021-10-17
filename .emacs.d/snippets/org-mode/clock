@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: clock
+# key: clock
+# --
+$0 
+
+:CLOCK: `(let ((x (org-insert-time-stamp nil t t ))))`--

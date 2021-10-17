@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: research consultation
+# key: research 
+# --
+*** TODO Research consultation: ${1:name}
+:PROPERTIES:
+:NAME:
+:COURSE:
+:FILES: 
+:END:
+- [ ] ask student for materials and offer time
+- [ ] create and send calendar invite
+- [ ] report consultation
+- [ ] send student feedback form
+
+
+**** email content

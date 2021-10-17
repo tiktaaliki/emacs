@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: laundry 
+# key: 
+# --
+
+** TODO laundry load
+*** TODO put load of laundry in wash
+  :PROPERTIES:
+  :TRIGGER: next-sibling scheduled!("++1h")
+  :END:
+*** TODO Put clothes in dryer
+  :PROPERTIES:
+  :TRIGGER: next-sibling scheduled!("++1h")
+  :BLOCKER:  previous-sibling
+  :END:
+*** TODO Fold laundry
+  :PROPERTIES:
+  :TRIGGER: next-sibling scheduled!("++1h")
+  :BLOCKER:  previous-sibling
+  :END:
+*** TODO Put clothes away
+  :PROPERTIES:
+  :TRIGGER: next-sibling scheduled!("++1h")
+  :BLOCKER:  previous-sibling
+  :END:

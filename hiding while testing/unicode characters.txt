@@ -4962,7 +4962,7 @@ U+1F7C5
 U+1F7C6
 🟇
 U+1F7C7
-🟈
+- 🟈
 U+1F7C8
 Five pointed stars
 🟉

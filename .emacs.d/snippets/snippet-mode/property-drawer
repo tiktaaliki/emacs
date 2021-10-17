@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: property drawer
+# key: property
+# --
+:PROPERTIES:
+
+:END:

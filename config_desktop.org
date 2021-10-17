@@ -1,0 +1,17 @@
+#+auto_tangle: t
+
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (find-file "~/Dropbox/emacs/config.org")
+ (find-file "~/Dropbox/emacs/config_desktop.org")
+
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq-default line-spacing .15)
+#+END_SRC
+
+#+RESULTS:
+: 0.15
