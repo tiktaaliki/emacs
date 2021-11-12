@@ -1,55 +1,3 @@
-scalimage -L
-scanimage -L
-scanimage --device "brother4:bus1;dev1"
-scanimage --list-devices
-sudo sane-find-scanner
-scanimage -L
-systemctl enable ipp-usb.service
-systemctl enable ipp-usb.service
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale .75x.75 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1.25x1.25 --primary
-systemctl enable ipp-usb.service
-scanimage -L
-scanimage --device "brother4:bus1;dev1" --format=tiff --output-file test.tiff --progress
-scanimage --device "brother4:bus1;dev1" --format=tiff --output-file test.tiff --progress
-systemctl start brscan-skey.service
-systemctl start ipp-usb.service
-scanimage --device "brother4:bus1;dev1" --format=tiff --output-file test.tiff --progress
-sudo simple-scan
-sudo -i
-ls
-scanimage -A
-scanimage -A
-scanimage -L
-sudo scanimage -L
-cd Downloads
-sudo scanimage -d "brother5:bus2;dev4" --format tiff -v
-sudo scanimage -d "brother5:bus2;dev4" --format=png --output-file test.png --progress
-sudo scanimage -d "brother5:bus2;dev4" --format=png --output-file test.png --progress
-sudo simple-scan
-exit
-sudo simple-scan
-sudo simple-scan
-sudo simple-scan
-df
-sudo umount /dev/sdc1
-sudo mkfs.vfat /dev/sdc1
-df
-sudo fsck /dev/sdc1
-df
-df
-sudo simple-scan
-sudo simple-scan
-history
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale .8x.8 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1.25x1.25 --primary
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1x1 --primary
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1.5x1.5 --primary
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1.75x1.75 --primary
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1.5x1.5 --primary
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale .8x.8 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1.5x1.5 --primary
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0 scale .8x.8 --rotate normal  --output HDMI-2 --primary --mode 1920x1080 --pos 3072x54 --rotate normal --scale 1.5x1.5
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0 --scale .8x.8 --rotate normal  --output HDMI-2 --primary --mode 1920x1080 --pos 3072x54 --rotate normal --scale 1.5x1.5
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1x1 --primary
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0 --scale .8x.8 --rotate normal  --output HDMI-2 --primary --mode 1920x1080 --pos 3072x54 --rotate normal --scale 1.5x1.5
 xrandr --output DP-2 --mode 3840x2160 --pos 0x0 --scale .8x.8 --rotate normal  --output HDMI-2 --primary --mode 1920x1080 --pos 3072x54 --rotate normal --scale 1.75x1.75
 xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1x1 --primary
 xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1.75x1.75 --primaryx1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1x1 --primary
@@ -126,3 +74,55 @@ xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --ou
 xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
 xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
 xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale .9x.9 --pos 1296x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale .9x.9 --pos 1296x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale 1.15x1.15 --pos 1296x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.15x1.15 --pos 1296x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.15x1.15 --pos 1296x0 --rotate left
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.15x1.15 --pos 2305x0 --rotate right
+xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary  --scale 1x1 --pos 2304x0 --rotate right
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary  --scale 1.15x1.15 --pos 2304x1000 --rotate right
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary  --scale 1.15x1.15 --pos 2304x500 --rotate right
+xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary  --scale 1x1 --pos 2304x0 --rotate right
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x1000 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.15x1.15 --pos 2304x0 --rotate right
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x800 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.15x1.15 --pos 2304x0 --rotate right
+ifconfig
+ifconfig -a
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x800 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate right
+xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x800 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate right
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x800 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate right
+xinput --list
+xinput disable 13
+pandoc TongilSolidarity.odt -f odt -t org -s -o tongil.org
+bluetoothctl
+xinput disable 13
+xinput enable 13
+xinput --list
+xinput disable 14
+ssh root@10.11.99.1
+ssh root@10.11.99.1
+ssh root@192.168.2.90
+ssh-keygen -R 10.11.99.1
+ssh root@10.11.99.1
+ssh-keygen
+ssh-copy-id root@10.11.99.1
+ssh root@10.11.99.1
+ssh -V
+ssh root@10.11.99.1
+ssh root@10.11.99.1
+ssh root@192.168.2.90
+ssh -oHostKeyAlgorithms=+ssh-dss root@10.11.99.1
+ssh -oHostKeyAlgorithms=+ssh-dss root@192.168.2.90
+ssh -oHostKeyAlgorithms=+ssh-dss root@10.11.99.1
+ssh-copy-id root@10.11.99.1
+ssh -oHostKeyAlgorithms=+ssh-dss root@10.11.99.1
+ssh root@10.11.99.1
+ssh root@remarkable
+ssh root@remarkable
+ssh root@remarkable

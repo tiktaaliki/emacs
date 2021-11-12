@@ -1,9 +1,15 @@
 * load files
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (find-file "~/Dropbox/emacs/config_thinkpad.org")
- 
-(setq-default fill-column 90)
+    (find-file "~/Dropbox/emacs/config_thinkpad.org")
+  
+  (setq-default fill-column 90)
+  
+   (set-face-attribute 'default nil :family "Fantasque sans mono" :height 180 :weight 'normal  :foreground "#ebdcb2")
+  
 #+END_SRC  
+
+#+RESULTS:
+
 If a variable is buffer-local, then setq sets its local value in the current buffer and setq-default sets the global default value.
 
 If a variable is not buffer-local, then setq and setq-default do the same thing.

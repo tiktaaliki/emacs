@@ -72,6 +72,7 @@
 ;; toggle `dired-omit-mode' with C-x M-o
 (add-hook 'dired-mode-hook #'dired-omit-mode)
 
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
 (use-package openwith
   :defer t
   :config (progn
@@ -304,7 +305,7 @@
 
 (use-package org-superstar
   :config
-  (setq org-superstar-headline-bullets-list '( "☆" "*" "¶" )
+  (setq org-superstar-headline-bullets-list '( "☆" "¶" )
         org-superstar-item-bullet-alist (quote ((42  . 33) (43 . 62) (45 . 45)))
         )
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
@@ -322,9 +323,6 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config)
   )
-
-
-(setq org-tags-column 0)
 
 (setq-default mode-line-format '("%e"  mode-line-front-space
                                  mode-line-mule-info
@@ -465,6 +463,7 @@
                            ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 2)
                            ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
                            ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2)
+                           ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1)
                            )
 
 
@@ -501,7 +500,8 @@
                                    (toggle-truncate-lines 1))) 
 
 
-(setq org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE ")
+(setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
+(setq org-global-properties '(("EFFORT_ALL" . "0:05 0:10 0:15 0:20 0:25 0:30 0:35 0:40 0:45 0:50 0:55 0:60")))
 
 (setq org-agenda-files '("~/Dropbox/Zettelkasten/journal.org"
                          "~/Dropbox/Zettelkasten/inbox.org"
@@ -515,7 +515,10 @@
                          "~/Dropbox/Zettelkasten/recipes.org"
                          "~/Dropbox/Zettelkasten/sysadmin.org" 
                          "~/Dropbox/Zettelkasten/Zettels/index.org"
-                         "~/Dropbox/Zettelkasten/editing.org"                           
+                         "~/Dropbox/Zettelkasten/editing.org"   "~/Dropbox/Zettelkasten/Zettels/zettel-journal.org"
+                         "~/Dropbox/Zettelkasten/Zettels/RESEARCH.org"
+                         "~/Dropbox/Zettelkasten/Zettels/20211021_toward-a-materialist-analysis-of-OER.org"
+
                          ))
 
 
@@ -529,7 +532,7 @@
       org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
       org-agenda-current-time-string "✸✸✸✸✸"
       org-agenda-start-with-clockreport-mode t
-      org-agenda-dim-blocked-tasks t
+      org-agenda-dim-blocked-tasks 'invisible
       org-agenda-window-setup 'only-window
       )
 
@@ -564,54 +567,55 @@
         ("la" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
                                         (org-super-agenda-groups
                                          '(
-                                           (:name "focus" :tag "#1")
-                                           (:name "Baruch TO READ" :and (:tag "_read" :category "baruch"))
-                                           (:name "to read" :tag "_read")
-                                           (:name "Baruch THINKING" :and (:tag "_think" :category "baruch"))
-                                           (:name "NDD THINKING" :and (:tag "_think" :category "ndd"))
-                                           (:name "HOME" :tag "@home")
-                                           )))))
+                                           (:name "NOW" :tag "NOW")
+                                           (:name "DEEP: necessary and timely" :and (:tag "DEEP" :tag "#necessary" :tag "@timely"))
+                                           (:name "SHALLOW: necessary and timely" :and (:tag "SHALLOW" :tag "#necessary" :tag "@timely"))
+                                           (:name "HOME" :and (:tag "HOME"))
+
+                                           (:name "DEEP: necessary but not timely" :and (:tag "DEEP" :tag "#necessary" :tag "@nottimely"))
+                                           (:name "SHALLOW: necessary but not timely" :and (:tag "SHALLOW" :tag "#necessary" :tag "@nottimely"))
+  (:name "SHALLOW: timely" :and (:tag "SHALLOW" :tag "@timely"))
+
+                                           (:name "DEEP: timely but not necessary" :and (:tag "DEEP" :tag "#wouldbenice" :tag "@timely"))
+                                           (:name "SHALLOW: timely but not necessary" :and (:tag "SHALLOW" :tag "#wouldbenice" :tag "@timely"))                                                       
+                                           (:name "necessary but not timely" :and (:tag "#necessary" :tag "@nottimely"))
+                                           (:tag "workflow")
+
+
+                                           ))))))
+
+
+        ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
+         ((agenda "" ((org-agenda-span 2)
+                      (org-agenda-clockreport-mode nil)))
+          (todo "NEXT|TODAY|IN-PROG"))
+         ((org-agenda-todo-ignore-scheduled t)))
+
+        ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
+                                         (org-super-agenda-groups
+                                          '((:name "Day"
+                                                   :time-grid t
+                                        ;   :date today
+                                        ;    :todo "TODAY"
+                                        ;  :scheduled today
+                                                   :order 1)))))
+                             (alltodo "" ((org-agenda-overriding-header "")
+                                          (org-super-agenda-groups
+                                           '(
+                                          (:name "DEEP: necessary and timely" :and (:tag "DEEP" :tag "#necessary" :tag "@timely"))
+                                                 (:name "SHALLOW: necessary and timely" :and (:tag "SHALLOW" :tag "#necessary" :tag "@timely"))
+                                             (:name "wait" :todo "WAIT")
+                                             ))))
+                             )
+         ((org-agenda-skip-function
+           '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+          (org-agenda-todo-ignore-scheduled t) )
+
          )
 
-                        ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
-               ((agenda "" ((org-agenda-span 2)
-                            (org-agenda-clockreport-mode nil)))
-                (todo "NEXT|TODAY|IN-PROG"))
-               ((org-agenda-todo-ignore-scheduled t)))
-
-    ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
-                                               (org-super-agenda-groups
-                                                '((:name "Day"
-                                                         :time-grid t
-                                              ;   :date today
-                                              ;    :todo "TODAY"
-                                              ;  :scheduled today
-                                                         :order 1)))))
-                                   (alltodo "" ((org-agenda-overriding-header "")
-                                                (org-super-agenda-groups
-                                                 '(
-                                                   (:name "Priority A" :priority "A")
-                                                   (:name "Level 1" :and (:tag "#1" :scheduled nil))
-                                                   (:name "Level 2" :tag "#2")
-                                                   (:name "Level 3" :tag "#3")
-                                                   (:name "Baruch TO READ" :and (:tag "_read" :category "baruch" :scheduled nil))
-                                                   (:name "to read" :and (:tag "_read" :scheduled nil))
-                                                   (:name "Baruch THINKING" :and (:tag "_think" :category "baruch" :scheduled nil))
-
-                                                   (:name "NDD THINKING" :and (:tag "_think" :category "ndd" :scheduled nil))
-                                                   (:name "HOME" :tag "@home" )
-                                                   (:name "wait" :todo "WAIT")
-                                                   ))))
-)
-                                                              ((org-agenda-skip-function
-                                                   '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
-                                                  (org-agenda-todo-ignore-scheduled t) )
-
-                                                             )
 
 
-
-          ))
+        ))
 
 
 
@@ -704,18 +708,34 @@
 
   )
 
+(setq org-tag-alist '(  ("NOW" . ?n) ("workflow" . ?w)
+                      (:startgroup . nil)
+                      ("SHALLOW" . ?s) ("DEEP" . ?d) ("HOME" . ?h) 
+                      (:endgroup . nil)
+                      (:startgroup . nil)
+                      ("#necessary" . ?c) ("#wouldbenice" . ?b)
+                      (:endgroup . nil)
+                      (:startgroup . nil)
+                      ("@timely". ?t) ("@nottimely" . ?e)
+                      (:endgroup . nil)                        
+                      ))
+(setq org-complete-tags-always-offer-all-agenda-tags nil)
+(setq org-tags-column 0)
 
-
+(use-package pomm)
 (use-package org-pomodoro)
 (setq org-pomodoro-ticking-sound-p t)
-(setq org-pomodoro-finished-sound-p t) ;i couldn't remember why this is nil [2021-10-16 Sat]:
+(setq org-pomodoro-finished-sound-p t) ;i couldn't remember why this is nil [2021-10-16 Sat]:-- this is nil b/c the short break sound and long break sound signal the end of the pomodoro
 (setq org-pomodoro-overtime-sound "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
 (setq org-pomodoro-short-break-sound "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
 (setq org-pomodoro-long-break-sound  "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
+(setq org-pomodoro-finished-sound  "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
+
 (setq org-pomodoro-keep-killed-pomodoro-time t)
 (setq org-pomodoro-manual-break nil)
 (setq org-pomodoro-ticking-sound-states '(:pomodoro :overtime))
-(setq org-pomodoro-length 50)
+(setq org-pomodoro-length 60
+      org-pomodoro-short-break-length 5)
 
 (setq org-list-demote-modify-bullet
       '(("+" . "-") ("-" . "+") ))
@@ -755,8 +775,7 @@
   (setq org-agenda-export-html-style "/home/betsy/Dropbox/Zettelkasten/css/tufte.css")
 (setq org-export-with-toc nil)
 (setq org-export-initial-scope 'subtree)
-
-
+  (setq org-export-with-section-numbers nil)
 (use-package org-clock-split)
 
 (load "annot")
@@ -835,7 +854,7 @@
     ("C-c <f1>" . org-roam-capture))
 
     (setq org-roam-capture-templates '(("d" "default" plain "#+title: ${title}\n* ${title}\n%?\n* Metadata \n- What is the purpose of this zettel?\n\n- What is the nature of the content I wish to include in this zettel?\n- How does it relate to the existing network?\n- How do I wish to discover this information in the future?" :target
-(file+head "%<%Y%m%d%H%M%S>-${slug}.org" "") :jump-to-captured t :unnarrowed t)))
+(file+head "%<%Y%m%d%H%M%S>_${slug}.org" "") :jump-to-captured t :unnarrowed t)))
 
  (setq org-roam-completion-system 'helm)
 

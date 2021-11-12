@@ -4,7 +4,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "#282c34" :foreground "#ebdcb2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 200 :width normal :foundry "PfEd" :family "Fantasque Sans Mono"))))
  '(bold ((t (:foreground "#f5be41" :weight bold :height 1.0))))
  '(custom-button ((t (:background "#282c34" :foreground "#a5c5f3" :box (:line-width 1 :style none)))))
  '(custom-link ((t (:inherit link :foreground "#f9d2ef"))))
@@ -47,12 +46,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "/home/betsy/.emacs.d/bookmarks")
  '(fill-column 100)
  '(global-visual-line-mode t)
  '(olivetti-body-width 0.8)
  '(org-agenda-columns-add-appointments-to-effort-sum t)
  '(org-agenda-dim-blocked-tasks 'invisible)
+ '(org-agenda-exporter-settings '((org-agenda-remove-tags t) (org-agenda-with-colors nil)))
+ '(org-agenda-prefix-format
+   '((agenda . " %i %-12:c %?-12t% s")
+     (todo . " %i %-12:c")
+     (tags . " %i %-12:c")
+     (search . " %i %-12:c")))
  '(org-agenda-scheduled-leaders '("" "Sch.%2dx: "))
  '(org-agenda-tags-column -80)
  '(org-columns-default-format "%25ITEM %TODO %3PRIORITY %EFFORT %TAGS")
@@ -68,6 +73,8 @@
      ("y" . 525960.0)
      ("p" . 25)))
  '(org-ellipsis " »")
+ '(org-global-properties '(("EFFORT_ALL" . "5 10 15 20 25 30 35 40 45 50 55 60")))
+ '(org-habit-show-habits-only-for-today nil)
  '(org-id-link-to-org-use-id 'create-if-interactive)
  '(org-pomodoro-ticking-sound-states '(:pomodoro))
  '(package-selected-packages
@@ -75,4 +82,5 @@
  '(safe-local-variable-values
    '((org-download-image-dir . "/home/betsy/.local/share/Anki2/User 1/collection.media")
      (org-reverse-note-order)))
- '(visual-fill-column-center-text t))
+ '(visual-fill-column-center-text t)
+ '(yas-global-mode t))

@@ -11,7 +11,8 @@
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq-default line-spacing .15)
+  
+  (set-face-attribute 'default nil :family "Fantasque sans mono" :height 200 :weight 'normal  :foreground "#ebdcb2");
 #+END_SRC
 
 #+RESULTS:
-: 0.15
