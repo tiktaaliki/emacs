@@ -1,5 +1,5 @@
 #+auto_tangle: t
-
+ 
 * Minimum Usability
 
 
@@ -155,7 +155,7 @@
         deft-use-filename-as-title t
         deft-new-file-format "%Y%b%d"
         deft-text-mode 'org-mode
-        deft-recursive t
+        deft-recursive nil
         deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex")
         deft-auto-save-interval 15.0
         deft-file-naming-rules '((noslash . "-")
@@ -808,7 +808,7 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
         org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
         org-agenda-current-time-string "✸✸✸✸✸"
         org-agenda-start-with-clockreport-mode t
-        org-agenda-dim-blocked-tasks 'invisible
+        org-agenda-dim-blocked-tasks t
         org-agenda-window-setup 'only-window
         )
   
@@ -835,6 +835,7 @@ CLOCK: [2021-10-13 Wed 17:03]--[2021-10-13 Wed 17:03] =>  0:00
 :END:
                 
 #+begin_src emacs-lisp :tangle yes :results none
+  (use-package org-super-agenda)
   (org-super-agenda-mode 1)
   (setq org-super-agenda-mode 1)
   (setq org-agenda-custom-commands
@@ -972,7 +973,7 @@ CLOCK: [2021-10-13 Wed 17:03]--[2021-10-13 Wed 17:03] =>  0:00
           ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
   
   
-  
+  (use-package org-edna)
   (org-edna-mode 1)
   (setq org-log-done 'time)
   
@@ -984,19 +985,21 @@ CLOCK: [2021-10-13 Wed 17:03]--[2021-10-13 Wed 17:03] =>  0:00
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq org-capture-templates
         '(
-          ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
+          ("a" "Activities")
+          ("aa" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
   
-          ("b" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/baruch.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
+          ("ab" "baruch activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/baruch.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
   
-          ("n" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/ndd.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
+          ("an" "ndd activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/ndd.org") "** %? %^g \n" :clock-in t :clock-keep t :kill-buffer nil )
+  
   
           ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
   
           ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
+          ("f" "Anki Flashcards")
+          ("fb" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
   
-          ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
-  
-          ("F" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
+          ("fc" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
   
           ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
   
@@ -1019,11 +1022,12 @@ CLOCK: [2021-10-13 Wed 17:03]--[2021-10-13 Wed 17:03] =>  0:00
 #+END_SRC
 
 #+RESULTS:
-| a         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/journal.org)  | ** %?        |     |
+| a         | Activities       |             |                                                         |              |     |
+| aa        | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/journal.org)  | ** %?        |     |
 | :clock-in | t                | :clock-keep | t                                                       | :kill-buffer | nil |
-| b         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/baruch.org)   | ** %?        |     |
+| ab        | baruch activity  | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/baruch.org)   | ** %?        |     |
 | :clock-in | t                | :clock-keep | t                                                       | :kill-buffer | nil |
-| n         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/ndd.org)      | ** %?        |     |
+| an        | ndd activity     | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/ndd.org)      | ** %? %^g    |     |
 | :clock-in | t                | :clock-keep | t                                                       | :kill-buffer | nil |
 | c         | calendar         | entry       | (file+headline ~/Dropbox/Zettelkasten/inbox.org Events) | ** %^{EVENT} |     |
 
@@ -1516,6 +1520,8 @@ CLOCK: [2021-04-13 Tue 10:17]--[2021-04-13 Tue 10:17] =>  0:00
   
    (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
 #+END_SRC  
+
+#+RESULTS:
 
 
  
