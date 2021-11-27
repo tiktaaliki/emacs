@@ -1,10 +1,3 @@
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0 --scale .8x.8 --rotate normal  --output HDMI-2 --primary --mode 1920x1080 --pos 3072x54 --rotate normal --scale 1.75x1.75
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1x1 --primary
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1.75x1.75 --primaryx1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1x1 --primary
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1.75x1.75 --primary --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1x1 --primary
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1.75x1.75 --primary --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1x1 --primary
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0  --scale 1x1 --output HDMI-2 --mode 1920x1080 --rotate normal --scale 1x1 --primary
-xrandr --output DP-2  --pos 0x0  --scale 1x1 --output HDMI-2 --rotate normal --scale 1x1 --primary
 xrandr --output DP-2  --pos 0x0  --scale 1x1 --output HDMI-2 --rotate normal --scale 1x1 --primary
 xrandr --output DP-2  --pos 0x0  --scale 1x1 --output HDMI-2 --rotate normal --scale 1.5x1.5 --primary
 xrandr --output DP-2  --pos 0x0  --scale 1x1 --output HDMI-2 --rotate normal --scale 1.75x1.75 --primary
@@ -126,3 +119,10 @@ ssh root@10.11.99.1
 ssh root@remarkable
 ssh root@remarkable
 ssh root@remarkable
+setxkbmap -model pc104 -layout "us,kr" -variant "dvorak," -option "ctrl:nocaps"
+setxkbmap -model pc104 -layout "us,kr" -option "ctrl:nocaps"
+sudo xkill
+exit
+setxkbmap -model pc104 -layout "us,kr" -option "ctrl:nocaps"
+exit
+setxkbmap -model pc104 -layout "us,kr" -option "ctrl:nocaps"
