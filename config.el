@@ -239,7 +239,7 @@
 
 (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
 (global-set-key (kbd "C-c <f2>") 'org-clock-out)
-
+(global-unset-key (kbd "C-v"))
 (global-set-key (kbd "<f1>") 'org-capture)
 (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
 (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
@@ -274,8 +274,8 @@
                                 (let ((current-prefix-arg '(4)))
                                   (call-interactively #'org-tree-to-indirect-buffer))))
 
-(define-key key-translation-map (kbd "C-c <up>") (kbd "🡑"))
-(define-key key-translation-map (kbd "C-c <down>") (kbd "🡓"))
+(define-key key-translation-map (kbd "C-c <up>") (kbd "↑"))
+(define-key key-translation-map (kbd "C-c <down>") (kbd "↓"))
 (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
 (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
 (define-key key-translation-map (kbd "C-c m") (kbd "—"))
@@ -316,7 +316,7 @@
 
 (use-package org-superstar
   :config
-  (setq org-superstar-headline-bullets-list '( "☆" "¶" )
+  (setq org-superstar-headline-bullets-list '("◉" "☆" "❤" "¶" )
         org-superstar-item-bullet-alist (quote ((42  . 33) (43 . 62) (45 . 45)))
         )
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
@@ -345,6 +345,9 @@
               )
 (display-time-mode 1)
 
+(use-package unicode-fonts)
+(unicode-fonts-setup)
+
 (defvar symbola-font (if (eq system-type 'gnu/linux)
                            (font-spec :name "Symbola" :size 14)
                          "Symbola"))
@@ -352,7 +355,7 @@
                     '("NanumBarunpen" . "unicode-bmp" ))
   (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
                     '("Nanumbarunpen" . "unicode-bmp"))
-  
+
   (set-fontset-font "fontset-default" '(#x2000 . #x206F)
                     '("Symbola" . "unicode-bmp" ))
                                           ;
@@ -360,27 +363,27 @@
                     '("Symbola" . "unicode-bmp" ))
   (set-fontset-font "fontset-default" '(#x2B00 . #x2BFF)
                     '("Symbola" . "unicode-bmp" ))
-  
+
   (set-fontset-font "fontset-default" '(#x2200 . #x22FF)
                     '("Symbola" . "unicode-bmp" ))
-  
+
   (set-fontset-font "fontset-default" '(#x25A0 . #x25FF)
                     '("Symbola" . "unicode-bmp" ))
-  
+
   (set-fontset-font "fontset-default" '(#x2600 . #x26FF)
                     '("Symbola" . "unicode-bmp" ))
   (set-fontset-font "fontset-default" '(#x2700 . #x27BF)
                     '("Symbola" . "unicode-bmp" ))
-  
+
   (set-fontset-font "fontset-default" '(#x1f800 . #x1f8ff)
                     '("Symbola" . "unicode-bmp" ))
-  
+
   (set-fontset-font "fontset-default" '(#x3400 . #x4dbf)
                     '("NanumBarunpen" . "unicode-bmp" ))
   (set-fontset-font "fontset-default" '(#x20000 . #x2EBEF)
                     '("NanumBarunpen" . "unicode-bmp" ))  
-  
-  
+
+
                                           ;https://www.reddit.com/r/emacs/comments/8tz1r0/how_to_set_font_according_to_languages_that_i/e1bjce6?utm_source=share&utm_medium=web2x&context=3
   (when (fboundp #'set-fontset-font)
     (set-fontset-font t 'korean-ksc5601	
@@ -388,9 +391,9 @@
                       (font-spec :family "Nanum Gothic Coding")))
   (dolist (item '(("Nanum Gothic Coding" . 1.0)))
     (add-to-list 'face-font-rescale-alist item))
-  
+
   (setq use-default-font-for-symbols nil)
-  
+
   (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)

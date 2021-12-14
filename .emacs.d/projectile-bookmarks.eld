@@ -1,1 +1,0 @@
-("~/Dropbox/" "~/Dropbox/emacs/.emacs.d/" "~/Dropbox/Library/" "~/Sync/2020/" "~/Downloads/" "~/Dropbox/emacs/" "~/Dropbox/Zettelkasten/" "~/Dropbox/Flashcards Deluxe/" "~/Dropbox/Apps/" "~/Dropbox/.stfolder/" "~/Dropbox/.git/" "~/Dropbox/.dropbox.cache/")
