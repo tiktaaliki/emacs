@@ -1,4 +1,3 @@
-xrandr --output DP-2 --mode 3840x2160 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --rotate normal
 xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --rotate normal --scale 1x1
 xrandr --output DP-2 --mode 3840x2160 --scale .75x.75 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.5x1.5 --pos 2880x0 --rotate normal
 xrandr --output DP-2 --mode 3840x2160 --scale .75x.75 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.75x1.75 --pos 2880x0 --rotate normal
@@ -126,3 +125,4 @@ i3-get-window-criteria
 chmod +x i3-get-window-criteria
 ./i3-get-window-criteria
 reboot
+xrandr --output eDP-1 --scale 1x1  --output HDMI-2 --scale .5x.5 

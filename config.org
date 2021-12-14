@@ -1,3 +1,4 @@
+
 #+auto_tangle: t
  
 * Minimum Usability
@@ -301,7 +302,7 @@ https://ivanaf.com/emacs_drag-drop_pdfs_paste_html_custom_templates.html
 #+end_src
 
 #+RESULTS:
-: #s(deferred #[257 "\303!>\204 \304\305\306D\"\210\211\307H\303!>\204! \304\305\306D\"\210\310H\303!>\2043 \304\305\306D\"\210\311H\312=\203I \313\314\315\"\210\316\317#\202p \211\312=\204b \313\320\321!P\322!\"\210\316\323#\202p \203m \324
+: #s(deferred #[257 "\303!>\204\304\305\306D\"\210\211\307H\303!>\204!\304\305\306D\"\210\310H\303!>\2043\304\305\306D\"\210\311H\312=\203I\313\314\315\"\210\316\317#\202p\211\312=\204b\313\320\321!P\322!\"\210\316\323#\202p\203m\324
 : \"\210\325\312!\207" [cl-struct-request-response-tags org-gcal-token-plist org-gcal-token-file type-of signal wrong-type-argument request-response 3 1 4 nil org-gcal--notify "Got Error" "Could not contact remote service. Please check your network connectivity." error "Network connectivity issue %s: %s" "Status code: " number-to-string pp-to-string "Got error %S: %S" org-gcal--save-sexp deferred:succeed] 8 "
 : 
 : (fn RESPONSE)"] deferred:default-errorback deferred:default-cancel nil nil nil)
@@ -579,6 +580,15 @@ CLOCK: [2021-10-18 Mon 11:25]--[2021-10-18 Mon 11:25] =>  0:00
     (add-to-list 'face-font-rescale-alist item))
   
   (setq use-default-font-for-symbols nil)
+  
+  (prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(set-file-name-coding-system 'utf-8)
+(set-clipboard-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8) 
   
 #+END_SRC  
 

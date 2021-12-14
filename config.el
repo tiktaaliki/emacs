@@ -346,50 +346,59 @@
 (display-time-mode 1)
 
 (defvar symbola-font (if (eq system-type 'gnu/linux)
-                         (font-spec :name "Symbola" :size 14)
-                       "Symbola"))
-(set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                  '("NanumBarunpen" . "unicode-bmp" ))
-(set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
-                  '("Nanumbarunpen" . "unicode-bmp"))
-
-(set-fontset-font "fontset-default" '(#x2000 . #x206F)
-                  '("Symbola" . "unicode-bmp" ))
-                                        ;
-(set-fontset-font "fontset-default" '(#x2190 . #x21FF)
-                  '("Symbola" . "unicode-bmp" ))
-(set-fontset-font "fontset-default" '(#x2B00 . #x2BFF)
-                  '("Symbola" . "unicode-bmp" ))
-
-(set-fontset-font "fontset-default" '(#x2200 . #x22FF)
-                  '("Symbola" . "unicode-bmp" ))
-
-(set-fontset-font "fontset-default" '(#x25A0 . #x25FF)
-                  '("Symbola" . "unicode-bmp" ))
-
-(set-fontset-font "fontset-default" '(#x2600 . #x26FF)
-                  '("Symbola" . "unicode-bmp" ))
-(set-fontset-font "fontset-default" '(#x2700 . #x27BF)
-                  '("Symbola" . "unicode-bmp" ))
-
-(set-fontset-font "fontset-default" '(#x1f800 . #x1f8ff)
-                  '("Symbola" . "unicode-bmp" ))
-
-(set-fontset-font "fontset-default" '(#x3400 . #x4dbf)
-                  '("NanumBarunpen" . "unicode-bmp" ))
-(set-fontset-font "fontset-default" '(#x20000 . #x2EBEF)
-                  '("NanumBarunpen" . "unicode-bmp" ))  
-
-
-                                        ;https://www.reddit.com/r/emacs/comments/8tz1r0/how_to_set_font_according_to_languages_that_i/e1bjce6?utm_source=share&utm_medium=web2x&context=3
-(when (fboundp #'set-fontset-font)
-  (set-fontset-font t 'korean-ksc5601	
-                    ;; Noto Sans CJK: https://www.google.com/get/noto/help/cjk/
-                    (font-spec :family "Nanum Gothic Coding")))
-(dolist (item '(("Nanum Gothic Coding" . 1.0)))
-  (add-to-list 'face-font-rescale-alist item))
-
-(setq use-default-font-for-symbols nil)
+                           (font-spec :name "Symbola" :size 14)
+                         "Symbola"))
+  (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+                    '("NanumBarunpen" . "unicode-bmp" ))
+  (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
+                    '("Nanumbarunpen" . "unicode-bmp"))
+  
+  (set-fontset-font "fontset-default" '(#x2000 . #x206F)
+                    '("Symbola" . "unicode-bmp" ))
+                                          ;
+  (set-fontset-font "fontset-default" '(#x2190 . #x21FF)
+                    '("Symbola" . "unicode-bmp" ))
+  (set-fontset-font "fontset-default" '(#x2B00 . #x2BFF)
+                    '("Symbola" . "unicode-bmp" ))
+  
+  (set-fontset-font "fontset-default" '(#x2200 . #x22FF)
+                    '("Symbola" . "unicode-bmp" ))
+  
+  (set-fontset-font "fontset-default" '(#x25A0 . #x25FF)
+                    '("Symbola" . "unicode-bmp" ))
+  
+  (set-fontset-font "fontset-default" '(#x2600 . #x26FF)
+                    '("Symbola" . "unicode-bmp" ))
+  (set-fontset-font "fontset-default" '(#x2700 . #x27BF)
+                    '("Symbola" . "unicode-bmp" ))
+  
+  (set-fontset-font "fontset-default" '(#x1f800 . #x1f8ff)
+                    '("Symbola" . "unicode-bmp" ))
+  
+  (set-fontset-font "fontset-default" '(#x3400 . #x4dbf)
+                    '("NanumBarunpen" . "unicode-bmp" ))
+  (set-fontset-font "fontset-default" '(#x20000 . #x2EBEF)
+                    '("NanumBarunpen" . "unicode-bmp" ))  
+  
+  
+                                          ;https://www.reddit.com/r/emacs/comments/8tz1r0/how_to_set_font_according_to_languages_that_i/e1bjce6?utm_source=share&utm_medium=web2x&context=3
+  (when (fboundp #'set-fontset-font)
+    (set-fontset-font t 'korean-ksc5601	
+                      ;; Noto Sans CJK: https://www.google.com/get/noto/help/cjk/
+                      (font-spec :family "Nanum Gothic Coding")))
+  (dolist (item '(("Nanum Gothic Coding" . 1.0)))
+    (add-to-list 'face-font-rescale-alist item))
+  
+  (setq use-default-font-for-symbols nil)
+  
+  (prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(set-file-name-coding-system 'utf-8)
+(set-clipboard-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
 
 (setq org-src-fontify-natively t
       org-src-tab-acts-natively t)
