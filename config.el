@@ -113,7 +113,7 @@
       deft-use-filename-as-title t
       deft-new-file-format "%Y%b%d"
       deft-text-mode 'org-mode
-      deft-recursive t
+      deft-recursive nil
       deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex")
       deft-auto-save-interval 15.0
       deft-file-naming-rules '((noslash . "-")
@@ -194,6 +194,17 @@
 (setq calendar-week-start-day 1)
 
 (setq diary-file "~/Dropbox/Zettelkasten/diary")
+
+
+
+(require 'org-gcal)
+(setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
+      org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
+      org-gcal-fetch-file-alist '(
+    ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/timeblocking.org")
+    ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )))
+
+(setq org-gcal-recurring-events-mode 'nested)
 
 (setq org-indirect-buffer-display 'current-window)
 (defun transpose-windows ()
@@ -446,14 +457,14 @@
 (setq org-archive-reversed-order nil
       org-reverse-note-order t
       org-refile-use-cache t
-      org-refile-allow-creating-parent-nodes 'confirm
+      org-refile-allow-creating-parent-nodes t
       org-refile-use-outline-path 'file
       org-outline-path-complete-in-steps nil
       )
 
 (setq org-refile-targets '(
                            ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
-                           ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 1)
+                           ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
                            ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
                            ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
                            ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
@@ -497,7 +508,11 @@
 (add-hook 'org-agenda-mode-hook
                                  (lambda ()
                                    (visual-line-mode -1)
-                                   (toggle-truncate-lines 1))) 
+                                   (toggle-truncate-lines 1)))
+
+  (setq org-agenda-format-date
+        (lambda (date)
+          (concat "\n---------------------------------\n" (org-agenda-format-date-aligned date))))
 
 
 (setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
@@ -511,12 +526,10 @@
                          "~/Dropbox/Zettelkasten/baruch.org"
                          "~/Dropbox/Zettelkasten/personal.org"
                          "~/Dropbox/Zettelkasten/lis.org"
-                                        ;                           "~/Dropbox/Zettelkasten/cal.org"
-                         "~/Dropbox/Zettelkasten/recipes.org"
-                         "~/Dropbox/Zettelkasten/sysadmin.org" 
-                         "~/Dropbox/Zettelkasten/Zettels/index.org"
+                         "~/Dropbox/Zettelkasten/recipes.org" "~/Dropbox/Zettelkasten/sysadmin.org""~/Dropbox/Zettelkasten/Zettels/index.org"
                          "~/Dropbox/Zettelkasten/editing.org"   "~/Dropbox/Zettelkasten/Zettels/zettel-journal.org"
-                         "~/Dropbox/Zettelkasten/Zettels/RESEARCH.org"
+                        "~/Dropbox/Zettelkasten/events.org"
+                        "~/Dropbox/Zettelkasten/Zettels/RESEARCH.org"
                          "~/Dropbox/Zettelkasten/Zettels/20211021_toward-a-materialist-analysis-of-OER.org"
 
                          ))
@@ -532,7 +545,7 @@
       org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
       org-agenda-current-time-string "✸✸✸✸✸"
       org-agenda-start-with-clockreport-mode t
-      org-agenda-dim-blocked-tasks 'invisible
+      org-agenda-dim-blocked-tasks t
       org-agenda-window-setup 'only-window
       )
 
@@ -546,10 +559,11 @@
 
 (setq org-agenda-clockreport-parameter-plist
       (quote
-       (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :hidefiles nil :fileskip0 t)))
+       (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags t :hidefiles nil :fileskip0 t)))
 
 (setq org-clock-report-include-clocking-task t)
 
+(use-package org-super-agenda)
 (org-super-agenda-mode 1)
 (setq org-super-agenda-mode 1)
 (setq org-agenda-custom-commands
@@ -642,7 +656,7 @@
         ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
 
 
-
+(use-package org-edna)
 (org-edna-mode 1)
 (setq org-log-done 'time)
 
@@ -650,17 +664,13 @@
       '(
         ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
 
-        ("b" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/baruch.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
-
-        ("n" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/ndd.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
-
         ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
 
         ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
+        ("f" "Anki Flashcards")
+        ("fb" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
 
-        ("f" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
-
-        ("F" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
+        ("fc" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
 
         ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
 
@@ -677,6 +687,8 @@
          "[ ] %a %U %:initial" )
 
         ))
+
+(setq org-clock-out-remove-zero-time-clocks t)
 
 (use-package org-mru-clock
   :bind     ("M-<f2>" . org-mru-clock-in)
@@ -717,7 +729,10 @@
                       (:endgroup . nil)
                       (:startgroup . nil)
                       ("@timely". ?t) ("@nottimely" . ?e)
-                      (:endgroup . nil)                        
+                      (:endgroup . nil)
+                      (:startgroup . nil)
+                      ("ndd" . ?n) ("self" . ?s) ("baruch" . ?b) ("sysadmin" . ?y)
+                      (:endgroup . nil)
                       ))
 (setq org-complete-tags-always-offer-all-agenda-tags nil)
 (setq org-tags-column 0)

@@ -155,10 +155,17 @@
                               (let ((current-prefix-arg '(4)))
                                 (call-interactively #'org-tree-to-indirect-buffer))))
 
+(setq backup-directory-alist '(("." . "c:/Users/eyoon/Dropbox (Personal)/emacs/baruch-backups"))
+      backup-by-copying 1
+      delete-old-versions -1
+      version-control t
+      vc-make-backup-files t)
+(setq auto-save-file-name-transforms '((".*" "c:/Users/eyoon/Dropbox (Personal)/emacs/baruch-backups/auto-save-list/" t)))
+
 (setq org-startup-indented t
         org-hide-emphasis-markers t
         org-startup-folded t
-        org-ellipsis " [...] "
+        org-ellipsis " ↯ "
         org-hide-leading-stars t)
   (use-package doom-themes
     :config

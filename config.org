@@ -282,10 +282,29 @@ https://ivanaf.com/emacs_drag-drop_pdfs_paste_html_custom_templates.html
   
   
   
-#+END_SRC
+  (require 'org-gcal)
+  (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
+        org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
+        org-gcal-fetch-file-alist '(
+      ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/timeblocking.org")
+      ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )))
+  
+  (setq org-gcal-recurring-events-mode 'nested)
+  
+  
+#+end_src
 
 #+RESULTS:
-: ~/Dropbox/Zettelkasten/diary
+: nested
+#+begin_src emacs-lisp :tangle no
+ (org-gcal-request-token)
+#+end_src
+
+#+RESULTS:
+: #s(deferred #[257 "\303!>\204 \304\305\306D\"\210\211\307H\303!>\204! \304\305\306D\"\210\310H\303!>\2043 \304\305\306D\"\210\311H\312=\203I \313\314\315\"\210\316\317#\202p \211\312=\204b \313\320\321!P\322!\"\210\316\323#\202p \203m \324
+: \"\210\325\312!\207" [cl-struct-request-response-tags org-gcal-token-plist org-gcal-token-file type-of signal wrong-type-argument request-response 3 1 4 nil org-gcal--notify "Got Error" "Could not contact remote service. Please check your network connectivity." error "Network connectivity issue %s: %s" "Status code: " number-to-string pp-to-string "Got error %S: %S" org-gcal--save-sexp deferred:succeed] 8 "
+: 
+: (fn RESPONSE)"] deferred:default-errorback deferred:default-cancel nil nil nil)
 
 ** windows
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -684,14 +703,14 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
   (setq org-archive-reversed-order nil
         org-reverse-note-order t
         org-refile-use-cache t
-        org-refile-allow-creating-parent-nodes 'confirm
+        org-refile-allow-creating-parent-nodes t
         org-refile-use-outline-path 'file
         org-outline-path-complete-in-steps nil
         )
   
   (setq org-refile-targets '(
                              ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
-                             ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 1)
+                             ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
                              ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
                              ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
                              ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
@@ -770,61 +789,63 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
   
 #+BEGIN_SRC emacs-lisp :tangle yes
   
-   (add-hook 'org-agenda-mode-hook
-                                   (lambda ()
-                                     (visual-line-mode -1)
-                                     (toggle-truncate-lines 1))) 
+    (add-hook 'org-agenda-mode-hook
+                                    (lambda ()
+                                      (visual-line-mode -1)
+                                      (toggle-truncate-lines 1)))
+  
+     (setq org-agenda-format-date
+           (lambda (date)
+             (concat "\n---------------------------------\n" (org-agenda-format-date-aligned date))))
   
   
-  (setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
-  (setq org-global-properties '(("EFFORT_ALL" . "0:05 0:10 0:15 0:20 0:25 0:30 0:35 0:40 0:45 0:50 0:55 0:60")))
+   (setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
+   (setq org-global-properties '(("EFFORT_ALL" . "0:05 0:10 0:15 0:20 0:25 0:30 0:35 0:40 0:45 0:50 0:55 0:60")))
   
-  (setq org-agenda-files '("~/Dropbox/Zettelkasten/journal.org"
-                           "~/Dropbox/Zettelkasten/inbox.org"
-                           "~/Dropbox/Zettelkasten/readings.org"
-                           "~/Dropbox/Zettelkasten/contacts.org"
-                           "~/Dropbox/Zettelkasten/ndd.org"
-                           "~/Dropbox/Zettelkasten/baruch.org"
-                           "~/Dropbox/Zettelkasten/personal.org"
-                           "~/Dropbox/Zettelkasten/lis.org"
-                                          ;                           "~/Dropbox/Zettelkasten/cal.org"
-                           "~/Dropbox/Zettelkasten/recipes.org"
-                           "~/Dropbox/Zettelkasten/sysadmin.org" 
-                           "~/Dropbox/Zettelkasten/Zettels/index.org"
-                           "~/Dropbox/Zettelkasten/editing.org"   "~/Dropbox/Zettelkasten/Zettels/zettel-journal.org"
+   (setq org-agenda-files '("~/Dropbox/Zettelkasten/journal.org"
+                            "~/Dropbox/Zettelkasten/inbox.org"
+                            "~/Dropbox/Zettelkasten/readings.org"
+                            "~/Dropbox/Zettelkasten/contacts.org"
+                            "~/Dropbox/Zettelkasten/ndd.org"
+                            "~/Dropbox/Zettelkasten/baruch.org"
+                            "~/Dropbox/Zettelkasten/personal.org"
+                            "~/Dropbox/Zettelkasten/lis.org"
+                            "~/Dropbox/Zettelkasten/recipes.org" "~/Dropbox/Zettelkasten/sysadmin.org""~/Dropbox/Zettelkasten/Zettels/index.org"
+                            "~/Dropbox/Zettelkasten/editing.org"   "~/Dropbox/Zettelkasten/Zettels/zettel-journal.org"
+                           "~/Dropbox/Zettelkasten/events.org"
                            "~/Dropbox/Zettelkasten/Zettels/RESEARCH.org"
-                           "~/Dropbox/Zettelkasten/Zettels/20211021_toward-a-materialist-analysis-of-OER.org"
-                           
-                           ))
+                            "~/Dropbox/Zettelkasten/Zettels/20211021_toward-a-materialist-analysis-of-OER.org"
+  
+                            ))
   
   
-  (setq org-agenda-prefix-format
-        '((agenda . " %i %-12:c%?-12t% s")
-          (todo . " %i %-12:c")
-          (tags . " %i %-12:c")
-          (search . " %i %-12:c")))
+   (setq org-agenda-prefix-format
+         '((agenda . " %i %-12:c%?-12t% s")
+           (todo . " %i %-12:c")
+           (tags . " %i %-12:c")
+           (search . " %i %-12:c")))
   
-  (setq org-agenda-with-colors t
-        org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
-        org-agenda-current-time-string "✸✸✸✸✸"
-        org-agenda-start-with-clockreport-mode t
-        org-agenda-dim-blocked-tasks t
-        org-agenda-window-setup 'only-window
-        )
+   (setq org-agenda-with-colors t
+         org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
+         org-agenda-current-time-string "✸✸✸✸✸"
+         org-agenda-start-with-clockreport-mode t
+         org-agenda-dim-blocked-tasks t
+         org-agenda-window-setup 'only-window
+         )
   
   
-  ;;skips
-  (setq org-agenda-skip-scheduled-if-done t
-        org-agenda-skip-deadline-if-done t
-        org-agenda-skip-timestamp-if-done t
-        org-agenda-skip-deadline-prewarning-if-scheduled t
-        )
+   ;;skips
+   (setq org-agenda-skip-scheduled-if-done t
+         org-agenda-skip-deadline-if-done t
+         org-agenda-skip-timestamp-if-done t
+         org-agenda-skip-deadline-prewarning-if-scheduled t
+         )
   
-  (setq org-agenda-clockreport-parameter-plist
-        (quote
-         (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :hidefiles nil :fileskip0 t)))
+   (setq org-agenda-clockreport-parameter-plist
+         (quote
+          (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags t :hidefiles nil :fileskip0 t)))
   
-  (setq org-clock-report-include-clocking-task t)
+   (setq org-clock-report-include-clocking-task t)
 #+END_SRC
 
 #+RESULTS:
@@ -985,13 +1006,7 @@ CLOCK: [2021-10-13 Wed 17:03]--[2021-10-13 Wed 17:03] =>  0:00
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq org-capture-templates
         '(
-          ("a" "Activities")
-          ("aa" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
-  
-          ("ab" "baruch activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/baruch.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
-  
-          ("an" "ndd activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/ndd.org") "** %? %^g \n" :clock-in t :clock-keep t :kill-buffer nil )
-  
+          ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
   
           ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
   
@@ -1022,12 +1037,7 @@ CLOCK: [2021-10-13 Wed 17:03]--[2021-10-13 Wed 17:03] =>  0:00
 #+END_SRC
 
 #+RESULTS:
-| a         | Activities       |             |                                                         |              |     |
-| aa        | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/journal.org)  | ** %?        |     |
-| :clock-in | t                | :clock-keep | t                                                       | :kill-buffer | nil |
-| ab        | baruch activity  | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/baruch.org)   | ** %?        |     |
-| :clock-in | t                | :clock-keep | t                                                       | :kill-buffer | nil |
-| an        | ndd activity     | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/ndd.org)      | ** %? %^g    |     |
+| a         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/journal.org)  | ** %?        |     |
 | :clock-in | t                | :clock-keep | t                                                       | :kill-buffer | nil |
 | c         | calendar         | entry       | (file+headline ~/Dropbox/Zettelkasten/inbox.org Events) | ** %^{EVENT} |     |
 
@@ -1039,12 +1049,25 @@ removed templates:
 -           ("m" "meditation" table-line (id "meditation") "|%u | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
 
 
-
+    ("a" "Activities")
+          ("aa" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
+  
+          ("ab" "baruch activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/baruch.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
+  
+          ("an" "ndd activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/ndd.org") "** %? %^g \n" :clock-in t :clock-keep t :kill-buffer nil )
+  
 
 
 (use-package org-plus-contrib)
 #+RESULTS:
 ** org-clock
+#+begin_src emacs-lisp :tangle yes
+(setq org-clock-out-remove-zero-time-clocks t)
+  
+#+end_src
+
+#+RESULTS:
+: t
 
 *** org-mru
 
@@ -1092,20 +1115,23 @@ removed templates:
 
 ** org-tag
 #+BEGIN_SRC emacs-lisp :tangle yes
-    (setq org-tag-alist '(  ("NOW" . ?n) ("workflow" . ?w)
-                          (:startgroup . nil)
-                          ("SHALLOW" . ?s) ("DEEP" . ?d) ("HOME" . ?h) 
-                          (:endgroup . nil)
-                          (:startgroup . nil)
-                          ("#necessary" . ?c) ("#wouldbenice" . ?b)
-                          (:endgroup . nil)
-                          (:startgroup . nil)
-                          ("@timely". ?t) ("@nottimely" . ?e)
-                          (:endgroup . nil)                        
-                          ))
-    (setq org-complete-tags-always-offer-all-agenda-tags nil)
-    (setq org-tags-column 0)
-    
+  (setq org-tag-alist '(  ("NOW" . ?n) ("workflow" . ?w)
+                        (:startgroup . nil)
+                        ("SHALLOW" . ?s) ("DEEP" . ?d) ("HOME" . ?h) 
+                        (:endgroup . nil)
+                        (:startgroup . nil)
+                        ("#necessary" . ?c) ("#wouldbenice" . ?b)
+                        (:endgroup . nil)
+                        (:startgroup . nil)
+                        ("@timely". ?t) ("@nottimely" . ?e)
+                        (:endgroup . nil)
+                        (:startgroup . nil)
+                        ("ndd" . ?n) ("self" . ?s) ("baruch" . ?b) ("sysadmin" . ?y)
+                        (:endgroup . nil)
+                        ))
+  (setq org-complete-tags-always-offer-all-agenda-tags nil)
+  (setq org-tags-column 0)
+  
 #+END_SRC
 
 #+RESULTS:

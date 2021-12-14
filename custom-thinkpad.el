@@ -16,7 +16,10 @@
  '(org-modules
    '(ol-bibtex ol-docview ol-eww org-habit org-id org-inlinetask org-protocol org-tempo ol-w3m ol-bookmark org-checklist org-depend org-invoice org-registry org-toc))
  '(org-pomodoro-ticking-sound-states '(:pomodoro))
+ '(org-super-agenda-date-format "%n %e %B %Y")
+ '(org-super-agenda-hide-empty-groups t)
  '(org-super-agenda-mode t)
+ '(org-super-agenda-unmatched-name "")
  '(package-selected-packages
    '(pomm cnfonts org-pomodoro auctex auctex-lua company company-auctex helm-unicode ace-mode ace-jump-helm-line ace-jump-mode pdf-continuous-scroll-mode quelpa-use-package quelpa org-auto-tangle highlight-quoted highlight-parentheses org-pdfview openwith good-scroll visual-fill-column interleave org-noter org-ref deft burly org-sidebar org-plus-contrib helm-chronos chronos org-alert pdf-view-restore pdf-tools nov olivetti anki-editor org-mru-clock org-roam magit doom-themes org-superstar use-package unkillable-scratch helm-projectile aggressive-indent))
  '(safe-local-variable-values
@@ -498,6 +501,7 @@
  '(bold ((t (:foreground "#dfe166" :weight bold))))
  '(italic ((t (:foreground "#f52549" :slant italic))))
  '(link ((t (:foreground "#51afef" :underline t :weight normal :family "monofur"))))
+ '(org-agenda-date ((t (:foreground "tomato" :underline nil :weight bold :height 1.2))))
  '(org-checkbox-statistics-todo ((t (:inherit org-todo :foreground "#ff4447" :weight bold :height 1.0 :family "Victor Mono"))))
  '(org-date ((t (:foreground "#ECBE7B" :underline t :family "monofur"))))
  '(org-done ((t (:inherit org-headline-done :weight normal :height 0.9 :family "nova mono"))))
@@ -513,7 +517,7 @@
  '(org-property-value ((t (:foreground "#83898d" :height 0.9))) t)
  '(org-quote ((t (:extend t :background "medium spring green" :foreground "black" :slant italic :family "KoHo"))))
  '(org-special-keyword ((t (:foreground "#83898d" :height 0.9))))
- '(org-super-agenda-header ((t (:inherit org-agenda-structure :foreground "deep sky blue"))))
+ '(org-super-agenda-header ((t (:inherit org-agenda-structure :foreground "medium spring green"))))
  '(org-tag ((t (:foreground "#83898d" :weight normal :height 0.8))))
  '(org-todo ((t (:foreground "#98be65" :weight normal :height 0.75 :family "nova mono"))))
  '(outline-1 ((t (:extend t :foreground "#51afef" :weight normal))))
