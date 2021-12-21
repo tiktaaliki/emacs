@@ -163,23 +163,32 @@
 (setq auto-save-file-name-transforms '((".*" "c:/Users/eyoon/Dropbox (Personal)/emacs/baruch-backups/auto-save-list/" t)))
 
 (setq org-startup-indented t
-        org-hide-emphasis-markers t
-        org-startup-folded t
-        org-ellipsis " ↯ "
-        org-hide-leading-stars t)
-  (use-package doom-themes
-    :config
-    ;; Global settings (defaults)
-    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-          doom-themes-enable-italic t) ; if nil, italics is universally disabled
-    (load-theme 'doom-one t)
-    ;; Corrects (and improves) org-mode's native fontification.
-    (doom-themes-org-config)
-    )
-(visual-line-mode 1)
- 
-(use-package unicode-fonts)
-  (setq org-tags-column 0)
+          org-hide-emphasis-markers t
+          org-startup-folded t
+          org-ellipsis " ↯ "
+          org-hide-leading-stars t)
+    (use-package doom-themes
+      :config
+      ;; Global settings (defaults)
+      (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+            doom-themes-enable-italic t) ; if nil, italics is universally disabled
+      (load-theme 'doom-one t)
+      ;; Corrects (and improves) org-mode's native fontification.
+      (doom-themes-org-config)
+      )
+  (visual-line-mode 1)
+
+  (use-package unicode-fonts)
+    (setq org-tags-column 0)
+
+  (prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(set-file-name-coding-system 'utf-8)
+(set-clipboard-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
 
 (setq-default mode-line-format '("%e"  mode-line-front-space
                                  mode-line-mule-info

@@ -316,7 +316,7 @@
 
 (use-package org-superstar
   :config
-  (setq org-superstar-headline-bullets-list '("◉" "☆" "❤" "¶" )
+  (setq org-superstar-headline-bullets-list '("◉" "☆" "❤" "¶" "★" )
         org-superstar-item-bullet-alist (quote ((42  . 33) (43 . 62) (45 . 45)))
         )
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
@@ -761,7 +761,7 @@
 (setq org-pomodoro-keep-killed-pomodoro-time t)
 (setq org-pomodoro-manual-break nil)
 (setq org-pomodoro-ticking-sound-states '(:pomodoro :overtime))
-(setq org-pomodoro-length 60
+(setq org-pomodoro-length 25
       org-pomodoro-short-break-length 5)
 
 (setq org-list-demote-modify-bullet

@@ -1,4 +1,1627 @@
 ﻿
+
+    →
+    U+2192
+    Black Right-Pointing Triangle
+    U+25B6
+    ➔
+    U+2794
+    ➜
+    U+279C
+    ➝
+    U+279D
+    ➞
+    U+279E
+    🠖
+    U+1F816
+    🠒
+    U+1F812
+    ☞
+    U+261E
+    ☛
+    U+261B
+    Black Rightwards Arrow
+    U+27A1
+    ➟
+    U+279F
+    ➠
+    U+27A0
+    ➢
+    U+27A2
+    ➣
+    U+27A3
+    ➥
+    U+27A5
+    ➦
+    U+27A6
+    ↛
+    U+219B
+    ↝
+    U+219D
+    ➤
+    U+27A4
+    ↠
+    U+21A0
+    ↣
+    U+21A3
+    ↦
+    U+21A6
+    ↬
+    U+21AC
+    ⇀
+    U+21C0
+    ⇁
+    U+21C1
+    ⇒
+    U+21D2
+    ⇏
+    U+21CF
+    ⇛
+    U+21DB
+    ⇝
+    U+21DD
+    ⇢
+    U+21E2
+    ⇥
+    U+21E5
+    ⇨
+    U+21E8
+    ⇰
+    U+21F0
+    ⇴
+    U+21F4
+    ⇉
+    U+21C9
+    ⇶
+    U+21F6
+    ⇸
+    U+21F8
+    ⇻
+    U+21FB
+    ⇾
+    U+21FE
+    ⟴
+    U+27F4
+    ⟶
+    U+27F6
+    ⟹
+    U+27F9
+    ⟾
+    U+27FE
+    ⟼
+    U+27FC
+    ⟿
+    U+27FF
+    ⤀
+    U+2900
+    ⤁
+    U+2901
+    ⤅
+    U+2905
+    ⤃
+    U+2903
+    ⤇
+    U+2907
+    ⤍
+    U+290D
+    ⤏
+    U+290F
+    ⤐
+    U+2910
+    ⤑
+    U+2911
+    ⤔
+    U+2914
+    ⤕
+    U+2915
+    ⤖
+    U+2916
+    ⤗
+    U+2917
+    ⤘
+    U+2918
+    ⤚
+    U+291A
+    ⤜
+    U+291C
+    ⤞
+    U+291E
+    ⤠
+    U+2920
+    ⤳
+    U+2933
+    ⥇
+    U+2947
+    ⥓
+    U+2953
+    ⥗
+    U+2957
+    ⥟
+    U+295F
+    ⥛
+    U+295B
+    ⥬
+    U+296C
+    ⥭
+    U+296D
+    ⥤
+    U+2964
+    ⥰
+    U+2970
+    ⥅
+    U+2945
+    ⥱
+    U+2971
+    ⥲
+    U+2972
+    ⥴
+    U+2974
+    ⥵
+    U+2975
+    ⥸
+    U+2978
+    ⥹
+    U+2979
+    ➧
+    U+27A7
+    ➨
+    U+27A8
+    ➩
+    U+27A9
+    ➪
+    U+27AA
+    ➫
+    U+27AB
+    ➬
+    U+27AC
+    ➭
+    U+27AD
+    ➮
+    U+27AE
+    ➯
+    U+27AF
+    ➱
+    U+27B1
+    ➲
+    U+27B2
+    ➳
+    U+27B3
+    ➵
+    U+27B5
+    ➸
+    U+27B8
+    ➺
+    U+27BA
+    ➻
+    U+27BB
+    ➼
+    U+27BC
+    ➽
+    U+27BD
+    ➾
+    U+27BE
+    ⍄
+    U+2344
+    ⍈
+    U+2348
+    ⍆
+    U+2346
+    ➙
+    U+2799
+    ➛
+    U+279B
+    >
+    U+003E
+    ˃
+    U+02C3
+    ᐅ
+    U+1405
+    ᐉ
+    U+1409
+    ᐳ
+    U+1433
+    ᗒ
+    U+15D2
+    ⃕
+    U+20D5
+    ⃗
+    U+20D7
+    »
+    U+00BB
+    ›
+    U+203A
+    ❯
+    U+276F
+    ❱
+    U+2771
+    ˲
+    U+02F2
+
+* Left Arrows
+
+    ←
+    U+2190
+    Black Left-Pointing Triangle
+    U+25C0
+    Leftwards Black Arrow
+    U+2B05
+    🠔
+    U+1F814
+    ↚
+    U+219A
+    🠐
+    U+1F810
+    ☚
+    U+261A
+    ↜
+    U+219C
+    ↞
+    U+219E
+    ↢
+    U+21A2
+    ↤
+    U+21A4
+    ↫
+    U+21AB
+    ↼
+    U+21BC
+    ↽
+    U+21BD
+    ⇐
+    U+21D0
+    ⇍
+    U+21CD
+    ⇚
+    U+21DA
+    ⇇
+    U+21C7
+    ⇜
+    U+21DC
+    ⇠
+    U+21E0
+    ⇤
+    U+21E4
+    ⇦
+    U+21E6
+    ⇷
+    U+21F7
+    ⇺
+    U+21FA
+    ⇽
+    U+21FD
+    ⟵
+    U+27F5
+    ⟸
+    U+27F8
+    ⟽
+    U+27FD
+    ⟻
+    U+27FB
+    ⤂
+    U+2902
+    ⤆
+    U+2906
+    ⤌
+    U+290C
+    ⤎
+    U+290E
+    ⤙
+    U+2919
+    ⤛
+    U+291B
+    ⤝
+    U+291D
+    ⤟
+    U+291F
+    ⥆
+    U+2946
+    ⥒
+    U+2952
+    ⥖
+    U+2956
+    ⥚
+    U+295A
+    ⥞
+    U+295E
+    ⥪
+    U+296A
+    ⥫
+    U+296B
+    ⥢
+    U+2962
+    ⥳
+    U+2973
+    ⥶
+    U+2976
+    ⥷
+    U+2977
+    ⥺
+    U+297A
+    ⍃
+    U+2343
+    ⍇
+    U+2347
+    ⍅
+    U+2345
+    <
+    U+003C
+    ˂
+    U+02C2
+    ᐊ
+    U+140A
+    ᐸ
+    U+1438
+    ᑉ
+    U+1449
+    ᗕ
+    U+15D5
+    ⃖
+    U+20D6
+    «
+    U+00AB
+    ‹
+    U+2039
+    ❮
+    U+276E
+    ❰
+    U+2770
+    ˱
+    U+02F1
+
+* Up Arrows
+
+    ↑
+    U+2191
+    ▲
+    U+25B2
+    Upwards Black Arrow
+    U+2B06
+    🠕
+    U+1F815
+    🠑
+    U+1F811
+    White Up Pointing Index
+    U+261D
+    ↟
+    U+219F
+    ↥
+    U+21A5
+    ↾
+    U+21BE
+    ↿
+    U+21BF
+    ⇑
+    U+21D1
+    ⇞
+    U+21DE
+    ⇡
+    U+21E1
+    ⇪
+    U+21EA
+    ⇧
+    U+21E7
+    ⇫
+    U+21EB
+    ⇬
+    U+21EC
+    ⇭
+    U+21ED
+    ⇮
+    U+21EE
+    ⇯
+    U+21EF
+    ⇈
+    U+21C8
+    ⟰
+    U+27F0
+    ⤊
+    U+290A
+    ⤉
+    U+2909
+    ⤒
+    U+2912
+    ⥉
+    U+2949
+    ⥔
+    U+2954
+    ⥘
+    U+2958
+    ⥜
+    U+295C
+    ⥠
+    U+2960
+    ⥣
+    U+2963
+    ⍐
+    U+2350
+    ⍓
+    U+2353
+    ⍍
+    U+234D
+    ⍏
+    U+234F
+    ^
+    U+005E
+    ˄
+    U+02C4
+    ˆ
+    U+02C6
+    ˰
+    U+02F0
+    ̑
+    U+0311
+    ̭
+    U+032D
+    ᐃ
+    U+1403
+    ᐞ
+    U+141E
+    ᐱ
+    U+1431
+    ᗑ
+    U+15D1
+    ᛣ
+    U+16E3
+
+* Down Arrows
+
+    ↓
+    U+2193
+    ▼
+    U+25BC
+    Downwards Black Arrow
+    U+2B07
+    🠗
+    U+1F817
+    🠓
+    U+1F813
+    ☟
+    U+261F
+    ↡
+    U+21A1
+    ↧
+    U+21A7
+    ⇂
+    U+21C2
+    ⇃
+    U+21C3
+    ⇓
+    U+21D3
+    ⇟
+    U+21DF
+    ⇣
+    U+21E3
+    ⇩
+    U+21E9
+    ⇊
+    U+21CA
+    ⟱
+    U+27F1
+    ⤋
+    U+290B
+    ⤈
+    U+2908
+    ⤓
+    U+2913
+    ⥕
+    U+2955
+    ⥙
+    U+2959
+    ⥝
+    U+295D
+    ⥡
+    U+2961
+    ⥥
+    U+2965
+    ⍗
+    U+2357
+    ⍌
+    U+234C
+    ⍔
+    U+2354
+    ⍖
+    U+2356
+    ˅
+    U+02C5
+    ˇ
+    U+02C7
+    ˬ
+    U+02EC
+    ̬
+    U+032C
+    ᐁ
+    U+1401
+    ᐯ
+    U+142F
+    ᗐ
+    U+15D0
+
+* Left Right Arrows
+
+    Left Right Arrow
+    U+2194
+    ↭
+    U+21AD
+    ↮
+    U+21AE
+    ↹
+    U+21B9
+    ⇄
+    U+21C4
+    ⇆
+    U+21C6
+    ⇿
+    U+21FF
+    ⬌
+    U+2B0C
+    ⇔
+    U+21D4
+    ⇌
+    U+21CC
+    ⇹
+    U+21F9
+    ⟷
+    U+27F7
+    ⤄
+    U+2904
+    ⥂
+    U+2942
+    ⥃
+    U+2943
+    ⥄
+    U+2944
+    ⥈
+    U+2948
+    ⥊
+    U+294A
+    ⥋
+    U+294B
+    ⥎
+    U+294E
+    ⥐
+    U+2950
+    ⇋
+    U+21CB
+    ⥦
+    U+2966
+    ⥧
+    U+2967
+    ⥨
+    U+2968
+    ⥩
+    U+2969
+    ⬄
+    U+2B04
+    ⇼
+    U+21FC
+
+* Up Down Arrows
+
+    Up Down Arrow
+    U+2195
+    ↨
+    U+21A8
+    ⇅
+    U+21C5
+    ⇕
+    U+21D5
+    ⇳
+    U+21F3
+    ⬍
+    U+2B0D
+    ⇵
+    U+21F5
+    ⥮
+    U+296E
+    ⥯
+    U+296F
+    ⥌
+    U+294C
+    ⥍
+    U+294D
+    ⥏
+    U+294F
+    ⥑
+    U+2951
+
+* Diagonal Arrows
+
+    North West Arrow
+    U+2196
+    North East Arrow
+    U+2197
+    South East Arrow
+    U+2198
+    South West Arrow
+    U+2199
+    ⇖
+    U+21D6
+    ⇗
+    U+21D7
+    ⇘
+    U+21D8
+    ⇙
+    U+21D9
+    ⇱
+    U+21F1
+    ⇲
+    U+21F2
+    ⤡
+    U+2921
+    ⤢
+    U+2922
+    ⤣
+    U+2923
+    ⤤
+    U+2924
+    ⤥
+    U+2925
+    ⤦
+    U+2926
+    ⤧
+    U+2927
+    ⤨
+    U+2928
+    ⤩
+    U+2929
+    ⤪
+    U+292A
+    ⤭
+    U+292D
+    ⤮
+    U+292E
+    ⤯
+    U+292F
+    ⤰
+    U+2930
+    ⤱
+    U+2931
+    ⤲
+    U+2932
+    ➶
+    U+27B6
+    ➴
+    U+27B4
+    ➷
+    U+27B7
+    ➹
+    U+27B9
+    ➘
+    U+2798
+    ➚
+    U+279A
+    ⬈
+    U+2B08
+    ⬉
+    U+2B09
+    ⬊
+    U+2B0A
+    ⬋
+    U+2B0B
+    ⬀
+    U+2B00
+    ⬁
+    U+2B01
+    ⬂
+    U+2B02
+    ⬃
+    U+2B03
+
+* Heavy Arrows
+
+    🠸
+    U+1F838
+    🠺
+    U+1F83A
+    🠻
+    U+1F83B
+    🠹
+    U+1F839
+    🡄
+    U+1F844
+    🡆
+    U+1F846
+    🡅
+    U+1F845
+    🡇
+    U+1F847
+    🡸
+    U+1F878
+    🡺
+    U+1F87A
+    🡹
+    U+1F879
+    🡻
+    U+1F87B
+    🡼
+    U+1F87C
+    🡽
+    U+1F87D
+    🡾
+    U+1F87E
+    🡿
+    U+1F87F
+    🢀
+    U+1F880
+    🢂
+    U+1F882
+    🢁
+    U+1F881
+    🢃
+    U+1F883
+    🢄
+    U+1F884
+    🢅
+    U+1F885
+    🢆
+    U+1F886
+    🢇
+    U+1F887
+    ➨
+    U+27A8
+    ➜
+    U+279C
+    ➽
+    U+27BD
+    ❰
+    U+2770
+    ❱
+    U+2771
+
+* Heavy Compressed Arrows
+
+    🠼
+    U+1F83C
+    🠾
+    U+1F83E
+    🠽
+    U+1F83D
+    🠿
+    U+1F83F
+    🡀
+    U+1F840
+    🡂
+    U+1F842
+    🡁
+    U+1F841
+    🡃
+    U+1F843
+
+* Curved Arrows
+
+    ⮨
+    U+2BA8
+    ⮩
+    U+2BA9
+    ⮪
+    U+2BAA
+    ⮫
+    U+2BAB
+    ➥
+    U+27A5
+    ➦
+    U+27A6
+    ⮬
+    U+2BAC
+    ⮭
+    U+2BAD
+    ⮮
+    U+2BAE
+    ⮯
+    U+2BAF
+
+* Shadowed Arrows
+
+    🢠
+    U+1F8A0
+    🢡
+    U+1F8A1
+    🢢
+    U+1F8A2
+    🢣
+    U+1F8A3
+    🢤
+    U+1F8A4
+    🢥
+    U+1F8A5
+    🢦
+    U+1F8A6
+    🢧
+    U+1F8A7
+    🢨
+    U+1F8A8
+    🢩
+    U+1F8A9
+    🢪
+    U+1F8AA
+    🢫
+    U+1F8AB
+    ➩
+    U+27A9
+    ➪
+    U+27AA
+    ➫
+    U+27AB
+    ➬
+    U+27AC
+    ➭
+    U+27AD
+    ➮
+    U+27AE
+    ➯
+    U+27AF
+    ➱
+    U+27B1
+
+* Arrow to/from Bar
+
+    ⭰
+    U+2B70
+    ⭲
+    U+2B72
+    ⭱
+    U+2B71
+    ⭳
+    U+2B73
+    ⭶
+    U+2B76
+    ⭷
+    U+2B77
+    ⭸
+    U+2B78
+    ⭹
+    U+2B79
+    ⇤
+    U+21E4
+    ⇥
+    U+21E5
+    ⤒
+    U+2912
+    ⤓
+    U+2913
+    ↨
+    U+21A8
+    ⤝
+    U+291D
+    ⤞
+    U+291E
+    ⤟
+    U+291F
+    ⤠
+    U+2920
+    ↤
+    U+21A4
+    ↦
+    U+21A6
+    ↥
+    U+21A5
+    ↧
+    U+21A7
+    ⬶
+    U+2B36
+    ⤅
+    U+2905
+    ⟻
+    U+27FB
+    ⟼
+    U+27FC
+    ↸
+    U+21B8
+    ⇱
+    U+21F1
+    ⇲
+    U+21F2
+
+* Navigation Arrows
+
+    🡠
+    U+1F860
+    🡢
+    U+1F862
+    🡡
+    U+1F861
+    🡣
+    U+1F863
+    🡤
+    U+1F864
+    🡥
+    U+1F865
+    🡦
+    U+1F866
+    🡧
+    U+1F867
+    🡨
+    U+1F868
+    🡪
+    U+1F86A
+    🡩
+    U+1F869
+    🡫
+    U+1F86B
+    🡬
+    U+1F86C
+    🡭
+    U+1F86D
+    🡮
+    U+1F86E
+    🡯
+    U+1F86F
+    🡰
+    U+1F870
+    🡲
+    U+1F872
+    🡱
+    U+1F871
+    🡳
+    U+1F873
+    🡴
+    U+1F874
+    🡵
+    U+1F875
+    🡶
+    U+1F876
+    🡷
+    U+1F877
+    🡸
+    U+1F878
+    🡺
+    U+1F87A
+    🡹
+    U+1F879
+    🡻
+    U+1F87B
+    🡼
+    U+1F87C
+    🡽
+    U+1F87D
+    🡾
+    U+1F87E
+    🡿
+    U+1F87F
+    🢀
+    U+1F880
+    🢂
+    U+1F882
+    🢁
+    U+1F881
+    🢃
+    U+1F883
+    🢄
+    U+1F884
+    🢅
+    U+1F885
+    🢆
+    U+1F886
+    🢇
+    U+1F887
+
+* Hand Pointing Index
+
+    ☚
+    U+261A
+    ☞
+    U+261E
+    White Up Pointing Index
+    U+261D
+    ☟
+    U+261F
+    ☛
+    U+261B
+
+* 90 Degree Arrows
+
+    ↳
+    U+21B3
+    ↲
+    U+21B2
+    ↰
+    U+21B0
+    ↱
+    U+21B1
+    ↵
+    U+21B5
+    ↴
+    U+21B4
+    ☇
+    U+2607
+
+* Circle Circular Arrows
+
+    ↺
+    U+21BA
+    ↻
+    U+21BB
+    ⟲
+    U+27F2
+    ⟳
+    U+27F3
+    ⭯
+    U+2B6F
+    ⭮
+    U+2B6E
+    ↺
+    U+21BA
+    ↻
+    U+21BB
+    ⥀
+    U+2940
+    ⥁
+    U+2941
+    ↶
+    U+21B6
+    ↷
+    U+21B7
+    ⮌
+    U+2B8C
+    ⮍
+    U+2B8D
+    ⮎
+    U+2B8E
+    ⮏
+    U+2B8F
+    ⤻
+    U+293B
+    ⤸
+    U+2938
+    ⤾
+    U+293E
+    ⤿
+    U+293F
+    ⤺
+    U+293A
+    ⤼
+    U+293C
+    ⤽
+    U+293D
+    ⤹
+    U+2939
+    🗘
+    U+1F5D8
+    ⮔
+    U+2B94
+    Clockwise Rightwards and Leftwards Open Circle Arrows
+    U+1F501
+    Clockwise Rightwards and Leftwards Open Circle Arrows with Circled One Overlay
+    U+1F502
+    Clockwise Downwards and Upwards Open Circle Arrows
+    U+1F503
+    Anticlockwise Downwards and Upwards Open Circle Arrows
+    U+1F504
+    Arrow Pointing Rightwards Then Curving Upwards
+    U+2934
+    Arrow Pointing Rightwards Then Curving Downwards
+    U+2935
+    ⤶
+    U+2936
+    ⤷
+    U+2937
+    Rightwards Arrow with Hook
+    U+21AA
+    Leftwards Arrow with Hook
+    U+21A9
+    ⃕
+    U+20D5
+
+* Circled Arrows
+
+    ⮈
+    U+2B88
+    ⮊
+    U+2B8A
+    ⮉
+    U+2B89
+    ⮋
+    U+2B8B
+    ➲
+    U+27B2
+
+* Ribbon Arrows
+
+    ⮰
+    U+2BB0
+    ⮱
+    U+2BB1
+    ⮲
+    U+2BB2
+    ⮳
+    U+2BB3
+    ⮴
+    U+2BB4
+    ⮵
+    U+2BB5
+    ⮶
+    U+2BB6
+    ⮷
+    U+2BB7
+
+* Paired Twin Two Arrows
+
+    ⮄
+    U+2B84
+    ⮆
+    U+2B86
+    ⮅
+    U+2B85
+    ⮇
+    U+2B87
+    ⇈
+    U+21C8
+    ⇊
+    U+21CA
+    ⇇
+    U+21C7
+    ⇉
+    U+21C9
+    ⇆
+    U+21C6
+    ⇄
+    U+21C4
+    ⇅
+    U+21C5
+    ⇵
+    U+21F5
+    ⮀
+    U+2B80
+    ⮂
+    U+2B82
+    ⮁
+    U+2B81
+    ⮃
+    U+2B83
+
+* Triple Three Arrows
+
+    ⇶
+    U+21F6
+    ⇚
+    U+21DA
+    ⇛
+    U+21DB
+    ⤊
+    U+290A
+    ⟱
+    U+27F1
+
+* Keyboard Arrows
+
+    ←
+    U+2190
+    →
+    U+2192
+    ↑
+    U+2191
+    ↓
+    U+2193
+
+* Tab Key
+
+    ⭾
+    U+2B7E
+    ⭿
+    U+2B7F
+
+* Bow and Arrows
+
+    ➶
+    U+27B6
+    ➴
+    U+27B4
+    ➷
+    U+27B7
+    ➹
+    U+27B9
+
+* Waved Arrows
+
+    ⬿
+    U+2B3F
+    ⤳
+    U+2933
+    ↜
+    U+219C
+    ↝
+    U+219D
+    ⇜
+    U+21DC
+    ⇝
+    U+21DD
+    ⬳
+    U+2B33
+    ⟿
+    U+27FF
+
+* Harpoon Arrows
+
+    ↼
+    U+21BC
+    ⇀
+    U+21C0
+    ↽
+    U+21BD
+    ⇁
+    U+21C1
+    ↿
+    U+21BF
+    ↾
+    U+21BE
+    ⇃
+    U+21C3
+    ⇂
+    U+21C2
+    ⥊
+    U+294A
+    ⥋
+    U+294B
+    ⥌
+    U+294C
+    ⥍
+    U+294D
+    ⥎
+    U+294E
+    ⥐
+    U+2950
+    ⥑
+    U+2951
+    ⥏
+    U+294F
+    ⥒
+    U+2952
+    ⥓
+    U+2953
+    ⥖
+    U+2956
+    ⥗
+    U+2957
+    ⥔
+    U+2954
+    ⥕
+    U+2955
+    ⥘
+    U+2958
+    ⥙
+    U+2959
+    ⥚
+    U+295A
+    ⥛
+    U+295B
+    ⥞
+    U+295E
+    ⥟
+    U+295F
+    ⥜
+    U+295C
+    ⥝
+    U+295D
+    ⥠
+    U+2960
+    ⥡
+    U+2961
+    ⥢
+    U+2962
+    ⥤
+    U+2964
+    ⥣
+    U+2963
+    ⥥
+    U+2965
+    ⇋
+    U+21CB
+    ⇌
+    U+21CC
+    ⥦
+    U+2966
+    ⥨
+    U+2968
+    ⥧
+    U+2967
+    ⥩
+    U+2969
+    ⥪
+    U+296A
+    ⥬
+    U+296C
+    ⥫
+    U+296B
+    ⥭
+    U+296D
+    ⥮
+    U+296E
+    ⥯
+    U+296F
+
+* Stroked Arrows
+
+    ⇷
+    U+21F7
+    ⇸
+    U+21F8
+    ⤉
+    U+2909
+    ⤈
+    U+2908
+    ⇹
+    U+21F9
+    ⇺
+    U+21FA
+    ⇻
+    U+21FB
+    ⇞
+    U+21DE
+    ⇟
+    U+21DF
+    ⇼
+    U+21FC
+    ⭺
+    U+2B7A
+    ⭼
+    U+2B7C
+    ⭻
+    U+2B7B
+    ⭽
+    U+2B7D
+    ⬴
+    U+2B34
+    ⤀
+    U+2900
+    ⬵
+    U+2B35
+    ⤁
+    U+2901
+    ⬹
+    U+2B39
+    ⤔
+    U+2914
+    ⬺
+    U+2B3A
+    ⤕
+    U+2915
+    ⬻
+    U+2B3B
+    ⤖
+    U+2916
+    ⬼
+    U+2B3C
+    ⤗
+    U+2917
+    ⬽
+    U+2B3D
+    ⤘
+    U+2918
+
+* Double Head Arrows
+
+    ↞
+    U+219E
+    ↠
+    U+21A0
+    ↟
+    U+219F
+    ↡
+    U+21A1
+    ⯬
+    U+2BEC
+    ⯭
+    U+2BED
+    ⯮
+    U+2BEE
+    ⯯
+    U+2BEF
+
+* Miscellaneous Arrows
+
+    ↯
+    U+21AF
+    ☈
+    U+2608
+    ⥼
+    U+297C
+    ⥽
+    U+297D
+    ⥾
+    U+297E
+    ⥿
+    U+297F
+
+* Arrows Within Triangle Arrowhead
+
+    🢔
+    U+1F894
+    🢖
+    U+1F896
+    🢕
+    U+1F895
+    🢗
+    U+1F897
+
+* Arrow Heads
+
+    ⮜
+    U+2B9C
+    ⮞
+    U+2B9E
+    ⮝
+    U+2B9D
+    ⮟
+    U+2B9F
+    ➤
+    U+27A4
+    ⮘
+    U+2B98
+    ⮚
+    U+2B9A
+    ⮙
+    U+2B99
+    ⮛
+    U+2B9B
+    ➢
+    U+27A2
+    ➣
+    U+27A3
+    Black Right-Pointing Triangle
+    U+25B6
+    ➤
+    U+27A4
+    ▲
+    U+25B2
+    🢐
+    U+1F890
+    🢒
+    U+1F892
+    🢑
+    U+1F891
+    🢓
+    U+1F893
+    ⌃
+    U+2303
+    ⌄
+    U+2304
+
+* Arrow Shafts
+
+    ■
+    U+25A0
+    □
+    U+25A1
+    🞑
+    U+1F791
+    🞒
+    U+1F792
+    🞓
+    U+1F793
+    ▦
+    U+25A6
+    ▤
+    U+25A4
+    ⧈
+    U+29C8
+    ▨
+    U+25A8
+    ▧
+    U+25A7
+    🢜
+    U+1F89C
+    🢝
+    U+1F89D
+    🢞
+    U+1F89E
+    🢟
+    U+1F89F
+    🢬
+    U+1F8AC
+    🢭
+    U+1F8AD
+
+* Fedex Logo Arrow
+
+    🡆
+
+
+    
+* star symbols
+
+    ★
+    U+2605
+    ☆
+    U+2606
+    ✪
+    U+272A
+    ✵
+    U+2735
+    ✯
+    U+272F
+    Shooting Star
+    U+1F320
+    ٭
+    U+066D
+    ✭
+    U+272D
+    ✰
+    U+2730
+    Glowing Star
+    U+1F31F
+    Star of David
+    U+2721
+    ⚝
+    U+269D
+    ⚹
+    U+26B9
+    ❉
+    U+2749
+    ❋
+    U+274B
+    ✺
+    U+273A
+    ✹
+    U+2739
+    ✸
+    U+2738
+    ✶
+    U+2736
+    ✷
+    U+2737
+    ✵
+    U+2735
+    Eight Pointed Black Star
+    U+2734
+    Eight Spoked Asterisk
+    U+2733
+    ✲
+    U+2732
+    ✱
+    U+2731
+    ✧
+    U+2727
+    ✦
+    U+2726
+    ⍟
+    U+235F
+    ⊛
+    U+229B
+    ⁕
+    U+2055
+    Six Pointed Star with Middle Dot
+    U+1F52F
+    ﹡
+    U+FE61
+    ❃
+    U+2743
+    ❂
+    U+2742
+    ✼
+    U+273C
+    ✻
+    U+273B
+    ⍣
+    U+2363
+    ≛
+    U+225B
+    *
+    U+002A
+    ✫
+    U+272B
+
+
+* card symbols
+
+
+    Black Spade Suit
+    U+2660
+    ♤
+    U+2664
+    Black Heart Suit
+    U+2665
+    ♡
+    U+2661
+    Black Club Suit
+    U+2663
+    ♧
+    U+2667
+    Black Diamond Suit
+    U+2666
+    ♢
+    U+2662
+
+
 * ASCII punctuation and symbols
 -  !
 -  "
@@ -5391,3 +7014,2391 @@ White arrow shafts
 U+1F8AC
 🢭
 U+1F8AD
+* circle
+⦿
+Circled Bullet
+Miscellaneous Mathematical Symbols-B
+U+29BF &#10687;
+⦾
+Circled White Bullet
+Miscellaneous Mathematical Symbols-B
+U+29BE &#10686;
+⊙
+Circled Dot Operator
+Mathematical Operators
+U+2299 &#8857;
+✪
+Circled White Star
+Dingbats
+U+272A &#10026;
+⮿
+Circled Bold X
+Miscellaneous Symbols and Arrows
+U+2BBF &#11199;
+⊘
+Circled Division Slash
+Mathematical Operators
+U+2298 &#8856;
+①
+Circled Digit One
+Enclosed Alphanumerics
+U+2460 &#9312;
+⊚
+Circled Ring Operator
+Mathematical Operators
+U+229A &#8858;
+⊗
+Circled Times
+Mathematical Operators
+U+2297 &#8855;
+⮾
+Circled X
+Miscellaneous Symbols and Arrows
+U+2BBE &#11198;
+⊕
+Circled Plus
+Mathematical Operators
+U+2295 &#8853;
+⊛
+Circled Asterisk Operator
+Mathematical Operators
+U+229B &#8859;
+⊝
+Circled Dash
+Mathematical Operators
+U+229D &#8861;
+⎊
+Circled Triangle Down
+Miscellaneous Technical
+U+238A &#9098;
+⦸
+Circled Reverse Solidus
+Miscellaneous Mathematical Symbols-B
+U+29B8 &#10680;
+🟕
+Circled Triangle
+Geometric Shapes Extended
+U+1F7D5 &#128981;
+②
+Circled Digit Two
+Enclosed Alphanumerics
+U+2461 &#9313;
+⧁
+Circled Greater-Than
+Miscellaneous Mathematical Symbols-B
+U+29C1 &#10689;
+⦶
+Circled Vertical Bar
+Miscellaneous Mathematical Symbols-B
+U+29B6 &#10678;
+⊖
+Circled Minus
+Mathematical Operators
+U+2296 &#8854;
+🟗
+Circled Square
+Geometric Shapes Extended
+U+1F7D7 &#128983;
+⛒
+Circled Crossing Lanes
+Miscellaneous Symbols
+U+26D2 &#9938;
+⓪
+Circled Digit Zero
+Enclosed Alphanumerics
+U+24EA &#9450;
+③
+Circled Digit Three
+Enclosed Alphanumerics
+U+2462 &#9314;
+⊜
+Circled Equals
+Mathematical Operators
+U+229C &#8860;
+🅭
+Circled Cc
+Enclosed Alphanumeric Supplement
+U+1F16D &#127341;
+⧀
+Circled Less-Than
+Miscellaneous Mathematical Symbols-B
+U+29C0 &#10688;
+⑦
+Circled Digit Seven
+Enclosed Alphanumerics
+U+2466 &#9318;
+⦷
+Circled Parallel
+Miscellaneous Mathematical Symbols-B
+U+29B7 &#10679;
+🄎
+Circled Anticlockwise Arrow
+Enclosed Alphanumeric Supplement
+U+1F10E &#127246;
+④
+Circled Digit Four
+Enclosed Alphanumerics
+U+2463 &#9315;
+⑪
+Circled Number Eleven
+Enclosed Alphanumerics
+U+246A &#9322;
+🄮
+Circled Wz
+Enclosed Alphanumeric Supplement
+U+1F12E &#127278;
+⑫
+Circled Number Twelve
+Enclosed Alphanumerics
+U+246B &#9323;
+🄭
+Circled Cd
+Enclosed Alphanumeric Supplement
+U+1F12D &#127277;
+⨸
+Circled Division Sign
+Supplemental Mathematical Operators
+U+2A38 &#10808;
+⑲
+Circled Number Nineteen
+Enclosed Alphanumerics
+U+2472 &#9330;
+⑩
+Circled Number Ten
+Enclosed Alphanumerics
+U+2469 &#9321;
+⑨
+Circled Digit Nine
+Enclosed Alphanumerics
+U+2468 &#9320;
+⑧
+Circled Digit Eight
+Enclosed Alphanumerics
+U+2467 &#9319;
+⑤
+Circled Digit Five
+Enclosed Alphanumerics
+U+2464 &#9316;
+⑥
+Circled Digit Six
+Enclosed Alphanumerics
+U+2465 &#9317;
+⑯
+Circled Number Sixteen
+Enclosed Alphanumerics
+U+246F &#9327;
+⑳
+Circled Number Twenty
+Enclosed Alphanumerics
+U+2473 &#9331;
+⦹
+Circled Perpendicular
+Miscellaneous Mathematical Symbols-B
+U+29B9 &#10681;
+⑰
+Circled Number Seventeen
+Enclosed Alphanumerics
+U+2470 &#9328;
+⑬
+Circled Number Thirteen
+Enclosed Alphanumerics
+U+246C &#9324;
+⑱
+Circled Number Eighteen
+Enclosed Alphanumerics
+U+2471 &#9329;
+⑭
+Circled Number Fourteen
+Enclosed Alphanumerics
+U+246D &#9325;
+⑮
+Circled Number Fifteen
+Enclosed Alphanumerics
+U+246E &#9326;
+🅯
+Circled Human Figure
+Enclosed Alphanumeric Supplement
+U+1F16F&#127343;
+Circled Ideograph Advantage
+Circled Ideograph Advantage
+Enclosed Ideographic Supplement
+U+1F250&#127568;
+Circled Ideograph Accept
+Circled Ideograph Accept
+Enclosed Ideographic Supplement
+U+1F251&#127569;
+Dizzy Symbol
+Dizzy Symbol
+Miscellaneous Symbols and Pictographs
+U+1F4AB&#128171;
+🕀
+Circled Cross Pommee
+Miscellaneous Symbols and Pictographs
+U+1F540&#128320;
+🛈
+Circled Information Source
+Transport and Map Symbols
+U+1F6C8&#128712;
+🤂
+Circled Cross Formee
+Supplemental Symbols and Pictographs
+U+1F902&#129282;
+◍
+Circle with Vertical Fill
+Geometric Shapes
+U+25CD&#9677;
+⦵
+Circle with Horizontal Bar
+Miscellaneous Mathematical Symbols-B
+U+29B5&#10677;
+⦻
+Circle with Superimposed X
+Miscellaneous Mathematical Symbols-B
+U+29BB&#10683;
+🄍
+Circled Zero With Slash
+Enclosed Alphanumeric Supplement
+U+1F10D&#127245;
+⎉
+Circled Horizontal Bar with Notch
+Miscellaneous Technical
+U+2389&#9097;
+Ⓐ
+Circled Latin Capital Letter A
+Enclosed Alphanumerics
+U+24B6&#9398;
+Ⓑ
+Circled Latin Capital Letter B
+Enclosed Alphanumerics
+U+24B7&#9399;
+Ⓒ
+Circled Latin Capital Letter C
+Enclosed Alphanumerics
+U+24B8&#9400;
+Ⓓ
+Circled Latin Capital Letter D
+Enclosed Alphanumerics
+U+24B9&#9401;
+Ⓔ
+Circled Latin Capital Letter E
+Enclosed Alphanumerics
+U+24BA&#9402;
+Ⓕ
+Circled Latin Capital Letter F
+Enclosed Alphanumerics
+U+24BB&#9403;
+Ⓖ
+Circled Latin Capital Letter G
+Enclosed Alphanumerics
+U+24BC&#9404;
+Ⓗ
+Circled Latin Capital Letter H
+Enclosed Alphanumerics
+U+24BD&#9405;
+Ⓘ
+Circled Latin Capital Letter I
+Enclosed Alphanumerics
+U+24BE&#9406;
+Ⓙ
+Circled Latin Capital Letter J
+Enclosed Alphanumerics
+U+24BF&#9407;
+Ⓚ
+Circled Latin Capital Letter K
+Enclosed Alphanumerics
+U+24C0&#9408;
+Ⓛ
+Circled Latin Capital Letter L
+Enclosed Alphanumerics
+U+24C1&#9409;
+Circled Latin Capital Letter M
+Circled Latin Capital Letter M
+Enclosed Alphanumerics
+U+24C2&#9410;
+Ⓝ
+Circled Latin Capital Letter N
+Enclosed Alphanumerics
+U+24C3&#9411;
+Ⓞ
+Circled Latin Capital Letter O
+Enclosed Alphanumerics
+U+24C4&#9412;
+Ⓟ
+Circled Latin Capital Letter P
+Enclosed Alphanumerics
+U+24C5&#9413;
+Ⓠ
+Circled Latin Capital Letter Q
+Enclosed Alphanumerics
+U+24C6&#9414;
+Ⓡ
+Circled Latin Capital Letter R
+Enclosed Alphanumerics
+U+24C7&#9415;
+Ⓢ
+Circled Latin Capital Letter S
+Enclosed Alphanumerics
+U+24C8&#9416;
+Ⓣ
+Circled Latin Capital Letter T
+Enclosed Alphanumerics
+U+24C9&#9417;
+Ⓤ
+Circled Latin Capital Letter U
+Enclosed Alphanumerics
+U+24CA&#9418;
+Ⓥ
+Circled Latin Capital Letter V
+Enclosed Alphanumerics
+U+24CB&#9419;
+Ⓦ
+Circled Latin Capital Letter W
+Enclosed Alphanumerics
+U+24CC&#9420;
+Ⓧ
+Circled Latin Capital Letter X
+Enclosed Alphanumerics
+U+24CD&#9421;
+Ⓨ
+Circled Latin Capital Letter Y
+Enclosed Alphanumerics
+U+24CE&#9422;
+Ⓩ
+Circled Latin Capital Letter Z
+Enclosed Alphanumerics
+U+24CF&#9423;
+ⓐ
+Circled Latin Small Letter A
+Enclosed Alphanumerics
+U+24D0&#9424;
+ⓑ
+Circled Latin Small Letter B
+Enclosed Alphanumerics
+U+24D1&#9425;
+ⓒ
+Circled Latin Small Letter C
+Enclosed Alphanumerics
+U+24D2&#9426;
+ⓓ
+Circled Latin Small Letter D
+Enclosed Alphanumerics
+U+24D3&#9427;
+ⓔ
+Circled Latin Small Letter E
+Enclosed Alphanumerics
+U+24D4&#9428;
+ⓕ
+Circled Latin Small Letter F
+Enclosed Alphanumerics
+U+24D5&#9429;
+ⓖ
+Circled Latin Small Letter G
+Enclosed Alphanumerics
+U+24D6&#9430;
+ⓗ
+Circled Latin Small Letter H
+Enclosed Alphanumerics
+U+24D7&#9431;
+ⓘ
+Circled Latin Small Letter I
+Enclosed Alphanumerics
+U+24D8&#9432;
+ⓙ
+Circled Latin Small Letter J
+Enclosed Alphanumerics
+U+24D9&#9433;
+ⓚ
+Circled Latin Small Letter K
+Enclosed Alphanumerics
+U+24DA&#9434;
+ⓛ
+Circled Latin Small Letter L
+Enclosed Alphanumerics
+U+24DB&#9435;
+ⓜ
+Circled Latin Small Letter M
+Enclosed Alphanumerics
+U+24DC&#9436;
+ⓝ
+Circled Latin Small Letter N
+Enclosed Alphanumerics
+U+24DD&#9437;
+ⓞ
+Circled Latin Small Letter O
+Enclosed Alphanumerics
+U+24DE&#9438;
+ⓟ
+Circled Latin Small Letter P
+Enclosed Alphanumerics
+U+24DF&#9439;
+ⓠ
+Circled Latin Small Letter Q
+Enclosed Alphanumerics
+U+24E0&#9440;
+ⓡ
+Circled Latin Small Letter R
+Enclosed Alphanumerics
+U+24E1&#9441;
+ⓢ
+Circled Latin Small Letter S
+Enclosed Alphanumerics
+U+24E2&#9442;
+ⓣ
+Circled Latin Small Letter T
+Enclosed Alphanumerics
+U+24E3&#9443;
+ⓤ
+Circled Latin Small Letter U
+Enclosed Alphanumerics
+U+24E4&#9444;
+ⓥ
+Circled Latin Small Letter V
+Enclosed Alphanumerics
+U+24E5&#9445;
+ⓦ
+Circled Latin Small Letter W
+Enclosed Alphanumerics
+U+24E6&#9446;
+ⓧ
+Circled Latin Small Letter X
+Enclosed Alphanumerics
+U+24E7&#9447;
+ⓨ
+Circled Latin Small Letter Y
+Enclosed Alphanumerics
+U+24E8&#9448;
+ⓩ
+Circled Latin Small Letter Z
+Enclosed Alphanumerics
+U+24E9&#9449;
+◐
+Circle with Left Half Black
+Geometric Shapes
+U+25D0&#9680;
+◑
+Circle with Right Half Black
+Geometric Shapes
+U+25D1&#9681;
+◒
+Circle with Lower Half Black
+Geometric Shapes
+U+25D2&#9682;
+◓
+Circle with Upper Half Black
+Geometric Shapes
+U+25D3&#9683;
+➲
+Circled Heavy White Rightwards Arrow
+Dingbats
+U+27B2&#10162;
+⦼
+Circled Anticlockwise-Rotated Division Sign
+Miscellaneous Mathematical Symbols-B
+U+29BC&#10684;
+🅮
+Circled C With Overlaid Backslash
+Enclosed Alphanumeric Supplement
+U+1F16E&#127342;
+◔
+Circle with Upper Right Quadrant Black
+Geometric Shapes
+U+25D4&#9684;
+❂
+Circled Open Centre Eight Pointed Star
+Dingbats
+U+2742&#10050;
+⨶
+Circled Multiplication Sign with Circumflex Accent
+Supplemental Mathematical Operators
+U+2A36&#10806;
+🄏
+Circled Dollar Sign With Overlaid Backslash
+Enclosed Alphanumeric Supplement
+U+1F10F&#127247;
+🄫
+Circled Italic Latin Capital Letter C
+Enclosed Alphanumeric Supplement
+U+1F12B&#127275;
+🄬
+Circled Italic Latin Capital Letter R
+Enclosed Alphanumeric Supplement
+U+1F12C&#127276;
+🔾
+Lower Right Shadowed White Circle
+Miscellaneous Symbols and Pictographs
+U+1F53E&#128318;
+🤀
+Circled Cross Formee With Four Dots
+Supplemental Symbols and Pictographs
+U+1F900&#129280;
+🤁
+Circled Cross Formee With Two Dots
+Supplemental Symbols and Pictographs
+U+1F901&#129281;
+⧂
+Circle with Small Circle To the Right
+Miscellaneous Mathematical Symbols-B
+U+29C2&#10690;
+◕
+Circle with All But Upper Left Quadrant Black
+Geometric Shapes
+U+25D5&#9685;
+⧃
+Circle with Two Horizontal Strokes To the Right
+Miscellaneous Mathematical Symbols-B
+U+29C3&#10691;
+⦺
+Circle Divided By Horizontal Bar and Top Half Divided By Vertical Bar
+Miscellaneous Mathematical Symbols-B
+U+29BA&#10682;
+〶
+Circled Postal Mark
+CJK Symbols and Punctuation
+U+3036&#12342;
+㉄
+Circled Ideograph Question
+Enclosed CJK Letters and Months
+U+3244&#12868;
+㉅
+Circled Ideograph Kindergarten
+Enclosed CJK Letters and Months
+U+3245&#12869;
+㉆
+Circled Ideograph School
+Enclosed CJK Letters and Months
+U+3246&#12870;
+㉇
+Circled Ideograph Koto
+Enclosed CJK Letters and Months
+U+3247&#12871;
+㉚
+Circled Number Thirty
+Enclosed CJK Letters and Months
+U+325A&#12890;
+㉠
+Circled Hangul Kiyeok
+Enclosed CJK Letters and Months
+U+3260&#12896;
+㉡
+Circled Hangul Nieun
+Enclosed CJK Letters and Months
+U+3261&#12897;
+㉢
+Circled Hangul Tikeut
+Enclosed CJK Letters and Months
+U+3262&#12898;
+㉣
+Circled Hangul Rieul
+Enclosed CJK Letters and Months
+U+3263&#12899;
+㉤
+Circled Hangul Mieum
+Enclosed CJK Letters and Months
+U+3264&#12900;
+㉥
+Circled Hangul Pieup
+Enclosed CJK Letters and Months
+U+3265&#12901;
+㉦
+Circled Hangul Sios
+Enclosed CJK Letters and Months
+U+3266&#12902;
+㉧
+Circled Hangul Ieung
+Enclosed CJK Letters and Months
+U+3267&#12903;
+㉨
+Circled Hangul Cieuc
+Enclosed CJK Letters and Months
+U+3268&#12904;
+㉩
+Circled Hangul Chieuch
+Enclosed CJK Letters and Months
+U+3269&#12905;
+㉪
+Circled Hangul Khieukh
+Enclosed CJK Letters and Months
+U+326A&#12906;
+㉫
+Circled Hangul Thieuth
+Enclosed CJK Letters and Months
+U+326B&#12907;
+㉬
+Circled Hangul Phieuph
+Enclosed CJK Letters and Months
+U+326C&#12908;
+㉭
+Circled Hangul Hieuh
+Enclosed CJK Letters and Months
+U+326D&#12909;
+㊀
+Circled Ideograph One
+Enclosed CJK Letters and Months
+U+3280&#12928;
+㊁
+Circled Ideograph Two
+Enclosed CJK Letters and Months
+U+3281&#12929;
+㊂
+Circled Ideograph Three
+Enclosed CJK Letters and Months
+U+3282&#12930;
+㊃
+Circled Ideograph Four
+Enclosed CJK Letters and Months
+U+3283&#12931;
+㊄
+Circled Ideograph Five
+Enclosed CJK Letters and Months
+U+3284&#12932;
+㊅
+Circled Ideograph Six
+Enclosed CJK Letters and Months
+U+3285&#12933;
+㊆
+Circled Ideograph Seven
+Enclosed CJK Letters and Months
+U+3286&#12934;
+㊇
+Circled Ideograph Eight
+Enclosed CJK Letters and Months
+U+3287&#12935;
+㊈
+Circled Ideograph Nine
+Enclosed CJK Letters and Months
+U+3288&#12936;
+㊉
+Circled Ideograph Ten
+Enclosed CJK Letters and Months
+U+3289&#12937;
+㊊
+Circled Ideograph Moon
+Enclosed CJK Letters and Months
+U+328A&#12938;
+㊋
+Circled Ideograph Fire
+Enclosed CJK Letters and Months
+U+328B&#12939;
+㊌
+Circled Ideograph Water
+Enclosed CJK Letters and Months
+U+328C&#12940;
+㊍
+Circled Ideograph Wood
+Enclosed CJK Letters and Months
+U+328D&#12941;
+㊎
+Circled Ideograph Metal
+Enclosed CJK Letters and Months
+U+328E&#12942;
+㊏
+Circled Ideograph Earth
+Enclosed CJK Letters and Months
+U+328F&#12943;
+㊐
+Circled Ideograph Sun
+Enclosed CJK Letters and Months
+U+3290&#12944;
+㊑
+Circled Ideograph Stock
+Enclosed CJK Letters and Months
+U+3291&#12945;
+㊒
+Circled Ideograph Have
+Enclosed CJK Letters and Months
+U+3292&#12946;
+㊓
+Circled Ideograph Society
+Enclosed CJK Letters and Months
+U+3293&#12947;
+㊔
+Circled Ideograph Name
+Enclosed CJK Letters and Months
+U+3294&#12948;
+㊕
+Circled Ideograph Special
+Enclosed CJK Letters and Months
+U+3295&#12949;
+㊖
+Circled Ideograph Financial
+Enclosed CJK Letters and Months
+U+3296&#12950;
+Circled Ideograph Congratulation
+Circled Ideograph Congratulation
+Enclosed CJK Letters and Months
+U+3297&#12951;
+㊘
+Circled Ideograph Labor
+Enclosed CJK Letters and Months
+U+3298&#12952;
+Circled Ideograph Secret
+Circled Ideograph Secret
+Enclosed CJK Letters and Months
+U+3299&#12953;
+㊚
+Circled Ideograph Male
+Enclosed CJK Letters and Months
+U+329A&#12954;
+㊛
+Circled Ideograph Female
+Enclosed CJK Letters and Months
+U+329B&#12955;
+㊜
+Circled Ideograph Suitable
+Enclosed CJK Letters and Months
+U+329C&#12956;
+㊝
+Circled Ideograph Excellent
+Enclosed CJK Letters and Months
+U+329D&#12957;
+㊞
+Circled Ideograph Print
+Enclosed CJK Letters and Months
+U+329E&#12958;
+㊟
+Circled Ideograph Attention
+Enclosed CJK Letters and Months
+U+329F&#12959;
+㊠
+Circled Ideograph Item
+Enclosed CJK Letters and Months
+U+32A0&#12960;
+㊡
+Circled Ideograph Rest
+Enclosed CJK Letters and Months
+U+32A1&#12961;
+㊢
+Circled Ideograph Copy
+Enclosed CJK Letters and Months
+U+32A2&#12962;
+㊣
+Circled Ideograph Correct
+Enclosed CJK Letters and Months
+U+32A3&#12963;
+㊤
+Circled Ideograph High
+Enclosed CJK Letters and Months
+U+32A4&#12964;
+㊥
+Circled Ideograph Centre
+Enclosed CJK Letters and Months
+U+32A5&#12965;
+㊦
+Circled Ideograph Low
+Enclosed CJK Letters and Months
+U+32A6&#12966;
+㊧
+Circled Ideograph Left
+Enclosed CJK Letters and Months
+U+32A7&#12967;
+㊨
+Circled Ideograph Right
+Enclosed CJK Letters and Months
+U+32A8&#12968;
+㊩
+Circled Ideograph Medicine
+Enclosed CJK Letters and Months
+U+32A9&#12969;
+㊪
+Circled Ideograph Religion
+Enclosed CJK Letters and Months
+U+32AA&#12970;
+㊫
+Circled Ideograph Study
+Enclosed CJK Letters and Months
+U+32AB&#12971;
+㊬
+Circled Ideograph Supervise
+Enclosed CJK Letters and Months
+U+32AC&#12972;
+㊭
+Circled Ideograph Enterprise
+Enclosed CJK Letters and Months
+U+32AD&#12973;
+㊮
+Circled Ideograph Resource
+Enclosed CJK Letters and Months
+U+32AE&#12974;
+㊯
+Circled Ideograph Alliance
+Enclosed CJK Letters and Months
+U+32AF&#12975;
+㊰
+Circled Ideograph Night
+Enclosed CJK Letters and Months
+U+32B0&#12976;
+㊵
+Circled Number Forty
+Enclosed CJK Letters and Months
+U+32B5&#12981;
+㊿
+Circled Number Fifty
+Enclosed CJK Letters and Months
+U+32BF&#12991;
+㋐
+Circled Katakana A
+Enclosed CJK Letters and Months
+U+32D0&#13008;
+㋑
+Circled Katakana I
+Enclosed CJK Letters and Months
+U+32D1&#13009;
+㋒
+Circled Katakana U
+Enclosed CJK Letters and Months
+U+32D2&#13010;
+㋓
+Circled Katakana E
+Enclosed CJK Letters and Months
+U+32D3&#13011;
+㋔
+Circled Katakana O
+Enclosed CJK Letters and Months
+U+32D4&#13012;
+㋕
+Circled Katakana Ka
+Enclosed CJK Letters and Months
+U+32D5&#13013;
+㋖
+Circled Katakana Ki
+Enclosed CJK Letters and Months
+U+32D6&#13014;
+㋗
+Circled Katakana Ku
+Enclosed CJK Letters and Months
+U+32D7&#13015;
+㋘
+Circled Katakana Ke
+Enclosed CJK Letters and Months
+U+32D8&#13016;
+㋙
+Circled Katakana Ko
+Enclosed CJK Letters and Months
+U+32D9&#13017;
+㋚
+Circled Katakana Sa
+Enclosed CJK Letters and Months
+U+32DA&#13018;
+㋛
+Circled Katakana Si
+Enclosed CJK Letters and Months
+U+32DB&#13019;
+㋜
+Circled Katakana Su
+Enclosed CJK Letters and Months
+U+32DC&#13020;
+㋝
+Circled Katakana Se
+Enclosed CJK Letters and Months
+U+32DD&#13021;
+㋞
+Circled Katakana So
+Enclosed CJK Letters and Months
+U+32DE&#13022;
+㋟
+Circled Katakana Ta
+Enclosed CJK Letters and Months
+U+32DF&#13023;
+㋠
+Circled Katakana Ti
+Enclosed CJK Letters and Months
+U+32E0&#13024;
+㋡
+Circled Katakana Tu
+Enclosed CJK Letters and Months
+U+32E1&#13025;
+㋢
+Circled Katakana Te
+Enclosed CJK Letters and Months
+U+32E2&#13026;
+㋣
+Circled Katakana To
+Enclosed CJK Letters and Months
+U+32E3&#13027;
+㋤
+Circled Katakana Na
+Enclosed CJK Letters and Months
+U+32E4&#13028;
+㋥
+Circled Katakana Ni
+Enclosed CJK Letters and Months
+U+32E5&#13029;
+㋦
+Circled Katakana Nu
+Enclosed CJK Letters and Months
+U+32E6&#13030;
+㋧
+Circled Katakana Ne
+Enclosed CJK Letters and Months
+U+32E7&#13031;
+㋨
+Circled Katakana No
+Enclosed CJK Letters and Months
+U+32E8&#13032;
+㋩
+Circled Katakana Ha
+Enclosed CJK Letters and Months
+U+32E9&#13033;
+㋪
+Circled Katakana Hi
+Enclosed CJK Letters and Months
+U+32EA&#13034;
+㋫
+Circled Katakana Hu
+Enclosed CJK Letters and Months
+U+32EB&#13035;
+㋬
+Circled Katakana He
+Enclosed CJK Letters and Months
+U+32EC&#13036;
+㋭
+Circled Katakana Ho
+Enclosed CJK Letters and Months
+U+32ED&#13037;
+㋮
+Circled Katakana Ma
+Enclosed CJK Letters and Months
+U+32EE&#13038;
+㋯
+Circled Katakana Mi
+Enclosed CJK Letters and Months
+U+32EF&#13039;
+㋰
+Circled Katakana Mu
+Enclosed CJK Letters and Months
+U+32F0&#13040;
+㋱
+Circled Katakana Me
+Enclosed CJK Letters and Months
+U+32F1&#13041;
+㋲
+Circled Katakana Mo
+Enclosed CJK Letters and Months
+U+32F2&#13042;
+㋳
+Circled Katakana Ya
+Enclosed CJK Letters and Months
+U+32F3&#13043;
+㋴
+Circled Katakana Yu
+Enclosed CJK Letters and Months
+U+32F4&#13044;
+㋵
+Circled Katakana Yo
+Enclosed CJK Letters and Months
+U+32F5&#13045;
+㋶
+Circled Katakana Ra
+Enclosed CJK Letters and Months
+U+32F6&#13046;
+㋷
+Circled Katakana Ri
+Enclosed CJK Letters and Months
+U+32F7&#13047;
+㋸
+Circled Katakana Ru
+Enclosed CJK Letters and Months
+U+32F8&#13048;
+㋹
+Circled Katakana Re
+Enclosed CJK Letters and Months
+U+32F9&#13049;
+㋺
+Circled Katakana Ro
+Enclosed CJK Letters and Months
+U+32FA&#13050;
+㋻
+Circled Katakana Wa
+Enclosed CJK Letters and Months
+U+32FB&#13051;
+㋼
+Circled Katakana Wi
+Enclosed CJK Letters and Months
+U+32FC&#13052;
+㋽
+Circled Katakana We
+Enclosed CJK Letters and Months
+U+32FD&#13053;
+㋾
+Circled Katakana Wo
+Enclosed CJK Letters and Months
+U+32FE&#13054;
+㉑
+Circled Number Twenty One
+Enclosed CJK Letters and Months
+U+3251&#12881;
+㉒
+Circled Number Twenty Two
+Enclosed CJK Letters and Months
+U+3252&#12882;
+㉓
+Circled Number Twenty Three
+Enclosed CJK Letters and Months
+U+3253&#12883;
+㉔
+Circled Number Twenty Four
+Enclosed CJK Letters and Months
+U+3254&#12884;
+㉕
+Circled Number Twenty Five
+Enclosed CJK Letters and Months
+U+3255&#12885;
+㉖
+Circled Number Twenty Six
+Enclosed CJK Letters and Months
+U+3256&#12886;
+㉗
+Circled Number Twenty Seven
+Enclosed CJK Letters and Months
+U+3257&#12887;
+㉘
+Circled Number Twenty Eight
+Enclosed CJK Letters and Months
+U+3258&#12888;
+㉙
+Circled Number Twenty Nine
+Enclosed CJK Letters and Months
+U+3259&#12889;
+㉛
+Circled Number Thirty One
+Enclosed CJK Letters and Months
+U+325B&#12891;
+㉜
+Circled Number Thirty Two
+Enclosed CJK Letters and Months
+U+325C&#12892;
+㉝
+Circled Number Thirty Three
+Enclosed CJK Letters and Months
+U+325D&#12893;
+㉞
+Circled Number Thirty Four
+Enclosed CJK Letters and Months
+U+325E&#12894;
+㉟
+Circled Number Thirty Five
+Enclosed CJK Letters and Months
+U+325F&#12895;
+㉮
+Circled Hangul Kiyeok A
+Enclosed CJK Letters and Months
+U+326E&#12910;
+㉯
+Circled Hangul Nieun A
+Enclosed CJK Letters and Months
+U+326F&#12911;
+㉰
+Circled Hangul Tikeut A
+Enclosed CJK Letters and Months
+U+3270&#12912;
+㉱
+Circled Hangul Rieul A
+Enclosed CJK Letters and Months
+U+3271&#12913;
+㉲
+Circled Hangul Mieum A
+Enclosed CJK Letters and Months
+U+3272&#12914;
+㉳
+Circled Hangul Pieup A
+Enclosed CJK Letters and Months
+U+3273&#12915;
+㉴
+Circled Hangul Sios A
+Enclosed CJK Letters and Months
+U+3274&#12916;
+㉵
+Circled Hangul Ieung A
+Enclosed CJK Letters and Months
+U+3275&#12917;
+㉶
+Circled Hangul Cieuc A
+Enclosed CJK Letters and Months
+U+3276&#12918;
+㉷
+Circled Hangul Chieuch A
+Enclosed CJK Letters and Months
+U+3277&#12919;
+㉸
+Circled Hangul Khieukh A
+Enclosed CJK Letters and Months
+U+3278&#12920;
+㉹
+Circled Hangul Thieuth A
+Enclosed CJK Letters and Months
+U+3279&#12921;
+㉺
+Circled Hangul Phieuph A
+Enclosed CJK Letters and Months
+U+327A&#12922;
+㉻
+Circled Hangul Hieuh A
+Enclosed CJK Letters and Months
+U+327B&#12923;
+㉼
+Circled Korean Character Chamko
+Enclosed CJK Letters and Months
+U+327C&#12924;
+㉽
+Circled Korean Character Jueui
+Enclosed CJK Letters and Months
+U+327D&#12925;
+㉾
+Circled Hangul Ieung U
+Enclosed CJK Letters and Months
+U+327E&#12926;
+㊱
+Circled Number Thirty Six
+Enclosed CJK Letters and Months
+U+32B1&#12977;
+㊲
+Circled Number Thirty Seven
+Enclosed CJK Letters and Months
+U+32B2&#12978;
+㊳
+Circled Number Thirty Eight
+Enclosed CJK Letters and Months
+U+32B3&#12979;
+㊴
+Circled Number Thirty Nine
+Enclosed CJK Letters and Months
+U+32B4&#12980;
+㊶
+Circled Number Forty One
+Enclosed CJK Letters and Months
+U+32B6&#12982;
+㊷
+Circled Number Forty Two
+Enclosed CJK Letters and Months
+U+32B7&#12983;
+㊸
+Circled Number Forty Three
+Enclosed CJK Letters and Months
+U+32B8&#12984;
+㊹
+Circled Number Forty Four
+Enclosed CJK Letters and Months
+U+32B9&#12985;
+㊺
+Circled Number Forty Five
+Enclosed CJK Letters and Months
+U+32BA&#12986;
+㊻
+Circled Number Forty Six
+Enclosed CJK Letters and Months
+U+32BB&#12987;
+㊼
+Circled Number Forty Seven
+Enclosed CJK Letters and Months
+U+32BC&#12988;
+㊽
+Circled Number Forty Eight
+Enclosed CJK Letters and Months
+U+32BD&#12989;
+㊾
+Circled Number Forty Nine
+Enclosed CJK Letters and Months
+U+32BE&#12990;
+㉈
+Circled Number Ten On Black Square
+Enclosed CJK Letters and Months
+U+3248&#12872;
+㉉
+Circled Number Twenty On Black Square
+Enclosed CJK Letters and Months
+U+3249&#12873;
+㉊
+Circled Number Thirty On Black Square
+Enclosed CJK Letters and Months
+U+324A&#12874;
+㉋
+Circled Number Forty On Black Square
+Enclosed CJK Letters and Months
+U+324B&#12875;
+㉌
+Circled Number Fifty On Black Square
+Enclosed CJK Letters and Months
+U+324C&#12876;
+㉍
+Circled Number Sixty On Black Square
+Enclosed CJK Letters and Months
+U+324D&#12877;
+㉎
+Circled Number Seventy On Black Square
+Enclosed CJK Letters and Months
+U+324E&#12878;
+㉏
+Circled Number Eighty On Black Square
+Enclosed CJK Letters and Months
+U+324F&#12879;
+Heavy Large Circle
+Heavy Large Circle
+Miscellaneous Symbols and Arrows
+U+2B55&#11093;
+○
+White Circle
+Geometric Shapes
+U+25CB&#9675;
+◌
+Dotted Circle
+Geometric Shapes
+U+25CC&#9676;
+●
+Black Circle
+Geometric Shapes
+U+25CF&#9679;
+◯
+Large Circle
+Geometric Shapes
+U+25EF&#9711;
+⭘
+Heavy Circle
+Miscellaneous Symbols and Arrows
+U+2B58&#11096;
+•
+Bullet
+General Punctuation
+U+2022&#8226;
+⭙
+Heavy Circled Saltire
+Miscellaneous Symbols and Arrows
+U+2B59&#11097;
+🟖
+Negative Circled Triangle
+Geometric Shapes Extended
+U+1F7D6&#128982;
+🟘
+Negative Circled Square
+Geometric Shapes Extended
+U+1F7D8&#128984;
+⃝
+Combining Enclosing Circle
+Combining Diacritical Marks for Symbols
+U+20DD&#8413;
+Black Circle for Record
+Black Circle for Record
+Miscellaneous Technical
+U+23FA&#9210;
+⓫
+Negative Circled Number Eleven
+Enclosed Alphanumerics
+U+24EB&#9451;
+⓬
+Negative Circled Number Twelve
+Enclosed Alphanumerics
+U+24EC&#9452;
+⓭
+Negative Circled Number Thirteen
+Enclosed Alphanumerics
+U+24ED&#9453;
+⓮
+Negative Circled Number Fourteen
+Enclosed Alphanumerics
+U+24EE&#9454;
+⓯
+Negative Circled Number Fifteen
+Enclosed Alphanumerics
+U+24EF&#9455;
+⓰
+Negative Circled Number Sixteen
+Enclosed Alphanumerics
+U+24F0&#9456;
+⓱
+Negative Circled Number Seventeen
+Enclosed Alphanumerics
+U+24F1&#9457;
+⓲
+Negative Circled Number Eighteen
+Enclosed Alphanumerics
+U+24F2&#9458;
+⓳
+Negative Circled Number Nineteen
+Enclosed Alphanumerics
+U+24F3&#9459;
+⓴
+Negative Circled Number Twenty
+Enclosed Alphanumerics
+U+24F4&#9460;
+⓵
+Double Circled Digit One
+Enclosed Alphanumerics
+U+24F5&#9461;
+⓶
+Double Circled Digit Two
+Enclosed Alphanumerics
+U+24F6&#9462;
+⓷
+Double Circled Digit Three
+Enclosed Alphanumerics
+U+24F7&#9463;
+⓸
+Double Circled Digit Four
+Enclosed Alphanumerics
+U+24F8&#9464;
+⓹
+Double Circled Digit Five
+Enclosed Alphanumerics
+U+24F9&#9465;
+⓺
+Double Circled Digit Six
+Enclosed Alphanumerics
+U+24FA&#9466;
+⓻
+Double Circled Digit Seven
+Enclosed Alphanumerics
+U+24FB&#9467;
+⓼
+Double Circled Digit Eight
+Enclosed Alphanumerics
+U+24FC&#9468;
+⓽
+Double Circled Digit Nine
+Enclosed Alphanumerics
+U+24FD&#9469;
+⓾
+Double Circled Number Ten
+Enclosed Alphanumerics
+U+24FE&#9470;
+⓿
+Negative Circled Digit Zero
+Enclosed Alphanumerics
+U+24FF&#9471;
+◙
+Inverse White Circle
+Geometric Shapes
+U+25D9&#9689;
+◠
+Upper Half Circle
+Geometric Shapes
+U+25E0&#9696;
+◡
+Lower Half Circle
+Geometric Shapes
+U+25E1&#9697;
+Medium White Circle
+Medium White Circle
+Miscellaneous Symbols
+U+26AA&#9898;
+Medium Black Circle
+Medium Black Circle
+Miscellaneous Symbols
+U+26AB&#9899;
+❍
+Shadowed White Circle
+Dingbats
+U+274D&#10061;
+⧇
+Squared Small Circle
+Miscellaneous Mathematical Symbols-B
+U+29C7&#10695;
+⬤
+Black Large Circle
+Miscellaneous Symbols and Arrows
+U+2B24&#11044;
+𐩒
+Kharoshthi Punctuation Circle
+Kharoshthi
+U+10A52&#68178;
+𝡶
+Signwriting Hand-Circle
+Sutton SignWriting
+U+1D876&#120950;
+Large Red Circle
+Large Red Circle
+Miscellaneous Symbols and Pictographs
+U+1F534&#128308;
+Large Blue Circle
+Large Blue Circle
+Miscellaneous Symbols and Pictographs
+U+1F535&#128309;
+No Entry Sign
+No Entry Sign
+Transport and Map Symbols
+U+1F6AB&#128683;
+🞆
+Bold White Circle
+Geometric Shapes Extended
+U+1F786&#128902;
+🞇
+Heavy White Circle
+Geometric Shapes Extended
+U+1F787&#128903;
+Large Orange Circle
+Large Orange Circle
+Geometric Shapes Extended
+U+1F7E0&#128992;
+Large Yellow Circle
+Large Yellow Circle
+Geometric Shapes Extended
+U+1F7E1&#128993;
+Large Green Circle
+Large Green Circle
+Geometric Shapes Extended
+U+1F7E2&#128994;
+Large Purple Circle
+Large Purple Circle
+Geometric Shapes Extended
+U+1F7E3&#128995;
+Large Brown Circle
+Large Brown Circle
+Geometric Shapes Extended
+U+1F7E4&#128996;
+🤇
+Left Half Circle
+Supplemental Symbols and Pictographs
+U+1F907&#129287;
+⃠
+Combining Enclosing Circle Backslash
+Combining Diacritical Marks for Symbols
+U+20E0&#8416;
+↺
+Anticlockwise Open Circle Arrow
+Arrows
+U+21BA&#8634;
+↻
+Clockwise Open Circle Arrow
+Arrows
+U+21BB&#8635;
+⎋
+Broken Circle with Northwest Arrow
+Miscellaneous Technical
+U+238B&#9099;
+⚆
+White Circle with Dot Right
+Miscellaneous Symbols
+U+2686&#9862;
+⚇
+White Circle with Two Dots
+Miscellaneous Symbols
+U+2687&#9863;
+⟲
+Anticlockwise Gapped Circle Arrow
+Supplemental Arrows-A
+U+27F2&#10226;
+⟳
+Clockwise Gapped Circle Arrow
+Supplemental Arrows-A
+U+27F3&#10227;
+⥀
+Anticlockwise Closed Circle Arrow
+Supplemental Arrows-B
+U+2940&#10560;
+⥁
+Clockwise Closed Circle Arrow
+Supplemental Arrows-B
+U+2941&#10561;
+⧬
+White Circle with Down Arrow
+Miscellaneous Mathematical Symbols-B
+U+29EC&#10732;
+⧭
+Black Circle with Down Arrow
+Miscellaneous Mathematical Symbols-B
+U+29ED&#10733;
+⭗
+Heavy Circle with Circle Inside
+Miscellaneous Symbols and Arrows
+U+2B57&#11095;
+𝠁
+Signwriting Hand-Circle Index
+Sutton SignWriting
+U+1D801&#120833;
+🗟
+Page with Circled Text
+Miscellaneous Symbols and Pictographs
+U+1F5DF&#128479;
+֯
+Hebrew Mark Masora Circle
+Hebrew
+U+05AF&#1455;
+૾
+Gujarati Sign Circle Nukta Above
+Gujarati
+U+0AFE&#2814;
+⏣
+Benzene Ring with Circle
+Miscellaneous Technical
+U+23E3&#9187;
+◖
+Left Half Black Circle
+Geometric Shapes
+U+25D6&#9686;
+◗
+Right Half Black Circle
+Geometric Shapes
+U+25D7&#9687;
+◴
+White Circle with Upper Left Quadrant
+Geometric Shapes
+U+25F4&#9716;
+◵
+White Circle with Lower Left Quadrant
+Geometric Shapes
+U+25F5&#9717;
+◶
+White Circle with Lower Right Quadrant
+Geometric Shapes
+U+25F6&#9718;
+◷
+White Circle with Upper Right Quadrant
+Geometric Shapes
+U+25F7&#9719;
+⚈
+Black Circle with White Dot Right
+Miscellaneous Symbols
+U+2688&#9864;
+⚉
+Black Circle with Two White Dots
+Miscellaneous Symbols
+U+2689&#9865;
+⚬
+Medium Small White Circle
+Miscellaneous Symbols
+U+26AC&#9900;
+❶
+Dingbat Negative Circled Digit One
+Dingbats
+U+2776&#10102;
+❷
+Dingbat Negative Circled Digit Two
+Dingbats
+U+2777&#10103;
+❸
+Dingbat Negative Circled Digit Three
+Dingbats
+U+2778&#10104;
+❹
+Dingbat Negative Circled Digit Four
+Dingbats
+U+2779&#10105;
+❺
+Dingbat Negative Circled Digit Five
+Dingbats
+U+277A&#10106;
+❻
+Dingbat Negative Circled Digit Six
+Dingbats
+U+277B&#10107;
+❼
+Dingbat Negative Circled Digit Seven
+Dingbats
+U+277C&#10108;
+❽
+Dingbat Negative Circled Digit Eight
+Dingbats
+U+277D&#10109;
+❾
+Dingbat Negative Circled Digit Nine
+Dingbats
+U+277E&#10110;
+❿
+Dingbat Negative Circled Number Ten
+Dingbats
+U+277F&#10111;
+➀
+Dingbat Circled Sans-Serif Digit One
+Dingbats
+U+2780&#10112;
+➁
+Dingbat Circled Sans-Serif Digit Two
+Dingbats
+U+2781&#10113;
+➂
+Dingbat Circled Sans-Serif Digit Three
+Dingbats
+U+2782&#10114;
+➃
+Dingbat Circled Sans-Serif Digit Four
+Dingbats
+U+2783&#10115;
+➄
+Dingbat Circled Sans-Serif Digit Five
+Dingbats
+U+2784&#10116;
+➅
+Dingbat Circled Sans-Serif Digit Six
+Dingbats
+U+2785&#10117;
+➆
+Dingbat Circled Sans-Serif Digit Seven
+Dingbats
+U+2786&#10118;
+➇
+Dingbat Circled Sans-Serif Digit Eight
+Dingbats
+U+2787&#10119;
+➈
+Dingbat Circled Sans-Serif Digit Nine
+Dingbats
+U+2788&#10120;
+➉
+Dingbat Circled Sans-Serif Number Ten
+Dingbats
+U+2789&#10121;
+⦽
+Up Arrow Through Circle
+Miscellaneous Mathematical Symbols-B
+U+29BD&#10685;
+⧲
+Error-Barred White Circle
+Miscellaneous Mathematical Symbols-B
+U+29F2&#10738;
+⧳
+Error-Barred Black Circle
+Miscellaneous Mathematical Symbols-B
+U+29F3&#10739;
+⨀
+N-Ary Circled Dot Operator
+Supplemental Mathematical Operators
+U+2A00&#10752;
+⨁
+N-Ary Circled Plus Operator
+Supplemental Mathematical Operators
+U+2A01&#10753;
+⨂
+N-Ary Circled Times Operator
+Supplemental Mathematical Operators
+U+2A02&#10754;
+⮈
+Leftwards Black Circled White Arrow
+Miscellaneous Symbols and Arrows
+U+2B88&#11144;
+⮉
+Upwards Black Circled White Arrow
+Miscellaneous Symbols and Arrows
+U+2B89&#11145;
+⮊
+Rightwards Black Circled White Arrow
+Miscellaneous Symbols and Arrows
+U+2B8A&#11146;
+⮋
+Downwards Black Circled White Arrow
+Miscellaneous Symbols and Arrows
+U+2B8B&#11147;
+⯊
+Top Half Black Circle
+Miscellaneous Symbols and Arrows
+U+2BCA&#11210;
+⯋
+Bottom Half Black Circle
+Miscellaneous Symbols and Arrows
+U+2BCB&#11211;
+𐩑
+Kharoshthi Punctuation Small Circle
+Kharoshthi
+U+10A51&#68177;
+𐽗
+Sogdian Punctuation Circle with Dot
+Sogdian
+U+10F57&#69463;
+𛲅
+Duployan Affix High Circle
+Duployan
+U+1BC85&#113797;
+𛲕
+Duployan Affix Low Circle
+Duployan
+U+1BC95&#113813;
+𝅅
+Musical Symbol Circle X Notehead
+Musical Symbols
+U+1D145&#119109;
+𝌇
+Tetragram for Full Circle
+Tai Xuan Jing Symbols
+U+1D307&#119559;
+𝠇
+Signwriting Hand-Circle Index Bent
+Sutton SignWriting
+U+1D807&#120839;
+𝠍
+Signwriting Hand-Circle Index Hinge
+Sutton SignWriting
+U+1D80D&#120845;
+𝠏
+Signwriting Hand-Circle Index Middle
+Sutton SignWriting
+U+1D80F&#120847;
+𝢔
+Signwriting Hand-Circle Little Up
+Sutton SignWriting
+U+1D894&#120980;
+𝢡
+Signwriting Hand-Circle Little Index
+Sutton SignWriting
+U+1D8A1&#120993;
+𝢱
+Signwriting Hand-Circle Ring Little
+Sutton SignWriting
+U+1D8B1&#121009;
+𝣇
+Signwriting Hand-Circle Middle Up
+Sutton SignWriting
+U+1D8C7&#121031;
+𝨆
+Signwriting Head Movement Circle
+Sutton SignWriting
+U+1DA06&#121350;
+𝩄
+Signwriting Mouth Open Circle
+Sutton SignWriting
+U+1DA44&#121412;
+🄋
+Dingbat Circled Sans-Serif Digit Zero
+Enclosed Alphanumeric Supplement
+U+1F10B&#127243;
+🅐
+Negative Circled Latin Capital Letter A
+Enclosed Alphanumeric Supplement
+U+1F150&#127312;
+🅑
+Negative Circled Latin Capital Letter B
+Enclosed Alphanumeric Supplement
+U+1F151&#127313;
+🅒
+Negative Circled Latin Capital Letter C
+Enclosed Alphanumeric Supplement
+U+1F152&#127314;
+🅓
+Negative Circled Latin Capital Letter D
+Enclosed Alphanumeric Supplement
+U+1F153&#127315;
+🅔
+Negative Circled Latin Capital Letter E
+Enclosed Alphanumeric Supplement
+U+1F154&#127316;
+🅕
+Negative Circled Latin Capital Letter F
+Enclosed Alphanumeric Supplement
+U+1F155&#127317;
+🅖
+Negative Circled Latin Capital Letter G
+Enclosed Alphanumeric Supplement
+U+1F156&#127318;
+🅗
+Negative Circled Latin Capital Letter H
+Enclosed Alphanumeric Supplement
+U+1F157&#127319;
+🅘
+Negative Circled Latin Capital Letter I
+Enclosed Alphanumeric Supplement
+U+1F158&#127320;
+🅙
+Negative Circled Latin Capital Letter J
+Enclosed Alphanumeric Supplement
+U+1F159&#127321;
+🅚
+Negative Circled Latin Capital Letter K
+Enclosed Alphanumeric Supplement
+U+1F15A&#127322;
+🅛
+Negative Circled Latin Capital Letter L
+Enclosed Alphanumeric Supplement
+U+1F15B&#127323;
+🅜
+Negative Circled Latin Capital Letter M
+Enclosed Alphanumeric Supplement
+U+1F15C&#127324;
+🅝
+Negative Circled Latin Capital Letter N
+Enclosed Alphanumeric Supplement
+U+1F15D&#127325;
+🅞
+Negative Circled Latin Capital Letter O
+Enclosed Alphanumeric Supplement
+U+1F15E&#127326;
+🅟
+Negative Circled Latin Capital Letter P
+Enclosed Alphanumeric Supplement
+U+1F15F&#127327;
+🅠
+Negative Circled Latin Capital Letter Q
+Enclosed Alphanumeric Supplement
+U+1F160&#127328;
+🅡
+Negative Circled Latin Capital Letter R
+Enclosed Alphanumeric Supplement
+U+1F161&#127329;
+🅢
+Negative Circled Latin Capital Letter S
+Enclosed Alphanumeric Supplement
+U+1F162&#127330;
+🅣
+Negative Circled Latin Capital Letter T
+Enclosed Alphanumeric Supplement
+U+1F163&#127331;
+🅤
+Negative Circled Latin Capital Letter U
+Enclosed Alphanumeric Supplement
+U+1F164&#127332;
+🅥
+Negative Circled Latin Capital Letter V
+Enclosed Alphanumeric Supplement
+U+1F165&#127333;
+🅦
+Negative Circled Latin Capital Letter W
+Enclosed Alphanumeric Supplement
+U+1F166&#127334;
+🅧
+Negative Circled Latin Capital Letter X
+Enclosed Alphanumeric Supplement
+U+1F167&#127335;
+🅨
+Negative Circled Latin Capital Letter Y
+Enclosed Alphanumeric Supplement
+U+1F168&#127336;
+🅩
+Negative Circled Latin Capital Letter Z
+Enclosed Alphanumeric Supplement
+U+1F169&#127337;
+🞄
+Black Slightly Small Circle
+Geometric Shapes Extended
+U+1F784&#128900;
+🞅
+Medium Bold White Circle
+Geometric Shapes Extended
+U+1F785&#128901;
+🞈
+Very Heavy White Circle
+Geometric Shapes Extended
+U+1F788&#128904;
+🞉
+Extremely Heavy White Circle
+Geometric Shapes Extended
+U+1F789&#128905;
+🞊
+White Circle Containing Black Small Circle
+Geometric Shapes Extended
+U+1F78A&#128906;
+🤆
+Left Half Circle With Dot
+Supplemental Symbols and Pictographs
+U+1F906&#129286;
+⌽
+Apl Functional Symbol Circle Stile
+Miscellaneous Technical
+U+233D&#9021;
+⌾
+Apl Functional Symbol Circle Jot
+Miscellaneous Technical
+U+233E&#9022;
+⍉
+Apl Functional Symbol Circle Backslash
+Miscellaneous Technical
+U+2349&#9033;
+⍜
+Apl Functional Symbol Circle Underbar
+Miscellaneous Technical
+U+235C&#9052;
+⍟
+Apl Functional Symbol Circle Star
+Miscellaneous Technical
+U+235F&#9055;
+⍥
+Apl Functional Symbol Circle Diaeresis
+Miscellaneous Technical
+U+2365&#9061;
+⟟
+Up Tack with Circle Above
+Miscellaneous Mathematical Symbols-A
+U+27DF&#10207;
+⟴
+Right Arrow with Circled Plus
+Supplemental Arrows-A
+U+27F4&#10228;
+⩹
+Less-Than with Circle Inside
+Supplemental Mathematical Operators
+U+2A79&#10873;
+⩺
+Greater-Than with Circle Inside
+Supplemental Mathematical Operators
+U+2A7A&#10874;
+⫯
+Vertical Line with Circle Above
+Supplemental Mathematical Operators
+U+2AEF&#10991;
+⫰
+Vertical Line with Circle Below
+Supplemental Mathematical Operators
+U+2AF0&#10992;
+⫱
+Down Tack with Circle Below
+Supplemental Mathematical Operators
+U+2AF1&#10993;
+⬲
+Left Arrow with Circled Plus
+Miscellaneous Symbols and Arrows
+U+2B32&#11058;
+𝠛
+Signwriting Hand-Circle Index Middle Crossed
+Sutton SignWriting
+U+1D81B&#120859;
+𝠟
+Signwriting Hand-Circle Index Middle Thumb
+Sutton SignWriting
+U+1D81F&#120863;
+𝢇
+Signwriting Hand-Circle Index Middle Ring
+Sutton SignWriting
+U+1D887&#120967;
+𝢥
+Signwriting Hand-Circle Index Middle Little
+Sutton SignWriting
+U+1D8A5&#120997;
+𝢻
+Signwriting Hand-Circle Index Ring Little
+Sutton SignWriting
+U+1D8BB&#121019;
+𝣎
+Signwriting Hand-Circle Middle Ring Little
+Sutton SignWriting
+U+1D8CE&#121038;
+𞅏
+Nyiakeng Puachue Hmong Circled Ca
+Nyiakeng Puachue Hmong
+U+1E14F&#123215;
+🤃
+Left Half Circle With Four Dots
+Supplemental Symbols and Pictographs
+U+1F903&#129283;
+🤄
+Left Half Circle With Three Dots
+Supplemental Symbols and Pictographs
+U+1F904&#129284;
+🤅
+Left Half Circle With Two Dots
+Supplemental Symbols and Pictographs
+U+1F905&#129285;
+૿
+Gujarati Sign Two-Circle Nukta Above
+Gujarati
+U+0AFF&#2815;
+⇴
+Right Arrow with Small Circle
+Arrows
+U+21F4&#8692;
+⌼
+Apl Functional Symbol Quad Circle
+Miscellaneous Technical
+U+233C&#9020;
+◚
+Upper Half Inverse White Circle
+Geometric Shapes
+U+25DA&#9690;
+◛
+Lower Half Inverse White Circle
+Geometric Shapes
+U+25DB&#9691;
+⛣
+Heavy Circle with Stroke and Two Dots Above
+Miscellaneous Symbols
+U+26E3&#9955;
+➊
+Dingbat Negative Circled Sans-Serif Digit One
+Dingbats
+U+278A&#10122;
+➋
+Dingbat Negative Circled Sans-Serif Digit Two
+Dingbats
+U+278B&#10123;
+➌
+Dingbat Negative Circled Sans-Serif Digit Three
+Dingbats
+U+278C&#10124;
+➍
+Dingbat Negative Circled Sans-Serif Digit Four
+Dingbats
+U+278D&#10125;
+➎
+Dingbat Negative Circled Sans-Serif Digit Five
+Dingbats
+U+278E&#10126;
+➏
+Dingbat Negative Circled Sans-Serif Digit Six
+Dingbats
+U+278F&#10127;
+➐
+Dingbat Negative Circled Sans-Serif Digit Seven
+Dingbats
+U+2790&#10128;
+➑
+Dingbat Negative Circled Sans-Serif Digit Eight
+Dingbats
+U+2791&#10129;
+➒
+Dingbat Negative Circled Sans-Serif Digit Nine
+Dingbats
+U+2792&#10130;
+➓
+Dingbat Negative Circled Sans-Serif Number Ten
+Dingbats
+U+2793&#10131;
+⨷
+Multiplication Sign In Double Circle
+Supplemental Mathematical Operators
+U+2A37&#10807;
+⬰
+Left Arrow with Small Circle
+Miscellaneous Symbols and Arrows
+U+2B30&#11056;
+𐽘
+Sogdian Punctuation Two Circles with Dots
+Sogdian
+U+10F58&#69464;
+𐽙
+Sogdian Punctuation Half Circle with Dot
+Sogdian
+U+10F59&#69465;
+𑗘
+Siddham Letter Three-Circle Alternate I
+Siddham
+U+115D8&#71128;
+𑗙
+Siddham Letter Two-Circle Alternate I
+Siddham
+U+115D9&#71129;
+𑗚
+Siddham Letter Two-Circle Alternate Ii
+Siddham
+U+115DA&#71130;
+𝢪
+Signwriting Hand-Circle Index Middle Cross Little
+Sutton SignWriting
+U+1D8AA&#121002;
+𝣕
+Signwriting Hand-Circle Middle Ring Little Bent
+Sutton SignWriting
+U+1D8D5&#121045;
+🀙
+Mahjong Tile One of Circles
+Mahjong Tiles
+U+1F019&#127001;
+🀚
+Mahjong Tile Two of Circles
+Mahjong Tiles
+U+1F01A&#127002;
+🀛
+Mahjong Tile Three of Circles
+Mahjong Tiles
+U+1F01B&#127003;
+🀜
+Mahjong Tile Four of Circles
+Mahjong Tiles
+U+1F01C&#127004;
+🀝
+Mahjong Tile Five of Circles
+Mahjong Tiles
+U+1F01D&#127005;
+🀞
+Mahjong Tile Six of Circles
+Mahjong Tiles
+U+1F01E&#127006;
+🀟
+Mahjong Tile Seven of Circles
+Mahjong Tiles
+U+1F01F&#127007;
+🀠
+Mahjong Tile Eight of Circles
+Mahjong Tiles
+U+1F020&#127008;
+🀡
+Mahjong Tile Nine of Circles
+Mahjong Tiles
+U+1F021&#127009;
+🄌
+Dingbat Negative Circled Sans-Serif Digit Zero
+Enclosed Alphanumeric Supplement
+U+1F10C&#127244;
+🔿
+Upper Right Shadowed White Circle
+Miscellaneous Symbols and Pictographs
+U+1F53F&#128319;
+𡁸
+Ideograph (Cant.) a circle, ring CJK
+CJK Unified Ideographs Extension B
+U+21078&#135288;
+⦲
+Empty Set with Small Circle Above
+Miscellaneous Mathematical Symbols-B
+U+29B2&#10674;
+⨢
+Plus Sign with Small Circle Above
+Supplemental Mathematical Operators
+U+2A22&#10786;
+⭮
+Clockwise Triangle-Headed Open Circle Arrow
+Miscellaneous Symbols and Arrows
+U+2B6E&#11118;
+⭯
+Anticlockwise Triangle-Headed Open Circle Arrow
+Miscellaneous Symbols and Arrows
+U+2B6F&#11119;
+𝧱
+Signwriting Movement-Wallplane Finger Circles Single
+Sutton SignWriting
+U+1D9F1&#121329;
+𝧲
+Signwriting Movement-Wallplane Finger Circles Double
+Sutton SignWriting
+U+1D9F2&#121330;
+🕁
+Cross Pommee with Half-Circle Below
+Miscellaneous Symbols and Pictographs
+U+1F541&#128321;
+⏀
+Dentistry Symbol Light Vertical with Circle
+Miscellaneous Technical
+U+23C0&#9152;
+⥈
+Left Right Arrow Through Small Circle
+Supplemental Arrows-B
+U+2948&#10568;
+⨭
+Plus Sign In Left Half Circle
+Supplemental Mathematical Operators
+U+2A2D&#10797;
+⨮
+Plus Sign In Right Half Circle
+Supplemental Mathematical Operators
+U+2A2E&#10798;
+⨴
+Multiplication Sign In Left Half Circle
+Supplemental Mathematical Operators
+U+2A34&#10804;
+⨵
+Multiplication Sign In Right Half Circle
+Supplemental Mathematical Operators
+U+2A35&#10805;
+𑗕
+Siddham Section Mark With Circles And Rays
+Siddham
+U+115D5&#71125;
+𝣫
+Signwriting Hand-Fist Index Thumb Circle
+Sutton SignWriting
+U+1D8EB&#121067;
+𝧣
+Signwriting Movement-Wallplane Arm Circle Small Single
+Sutton SignWriting
+U+1D9E3&#121315;
+𝧤
+Signwriting Movement-Wallplane Arm Circle Medium Single
+Sutton SignWriting
+U+1D9E4&#121316;
+𝧥
+Signwriting Movement-Wallplane Arm Circle Small Double
+Sutton SignWriting
+U+1D9E5&#121317;
+𝧦
+Signwriting Movement-Wallplane Arm Circle Medium Double
+Sutton SignWriting
+U+1D9E6&#121318;
+𝧭
+Signwriting Movement-Wallplane Wrist Circle Front Single
+Sutton SignWriting
+U+1D9ED&#121325;
+𝧮
+Signwriting Movement-Wallplane Wrist Circle Front Double
+Sutton SignWriting
+U+1D9EE&#121326;
+⛞
+Falling Diagonal In White Circle In Black Square
+Miscellaneous Symbols
+U+26DE&#9950;
+𑗖
+Siddham Section Mark With Circles And Two Enclosures
+Siddham
+U+115D6&#71126;
+𑗗
+Siddham Section Mark With Circles And Four Enclosures
+Siddham
+U+115D7&#71127;
+𝦌
+Signwriting Movement-Wallplane Curve Half-Circle Small
+Sutton SignWriting
+U+1D98C&#121228;
+𝦍
+Signwriting Movement-Wallplane Curve Half-Circle Medium
+Sutton SignWriting
+U+1D98D&#121229;
+𝦎
+Signwriting Movement-Wallplane Curve Half-Circle Large
+Sutton SignWriting
+U+1D98E&#121230;
+𝦏
+Signwriting Movement-Wallplane Curve Half-Circle Largest
+Sutton SignWriting
+U+1D98F&#121231;
+𝧯
+Signwriting Movement-Floorplane Wrist Circle Hitting Wall Single
+Sutton SignWriting
+U+1D9EF&#121327;
+𝧰
+Signwriting Movement-Floorplane Wrist Circle Hitting Wall Double
+Sutton SignWriting
+U+1D9F0&#121328;
+𝧳
+Signwriting Movement-Floorplane Finger Circles Hitting Wall Single
+Sutton SignWriting
+U+1D9F3&#121331;
+𝧴
+Signwriting Movement-Floorplane Finger Circles Hitting Wall Double
+Sutton SignWriting
+U+1D9F4&#121332;
+Clockwise Rightwards and Leftwards Open Circle Arrows
+Clockwise Rightwards and Leftwards Open Circle Arrows
+Miscellaneous Symbols and Pictographs
+U+1F501&#128257;
+Clockwise Downwards and Upwards Open Circle Arrows
+Clockwise Downwards and Upwards Open Circle Arrows
+Miscellaneous Symbols and Pictographs
+U+1F503&#128259;
+Anticlockwise Downwards and Upwards Open Circle Arrows
+Anticlockwise Downwards and Upwards Open Circle Arrows
+Miscellaneous Symbols and Pictographs
+U+1F504&#128260;
+⥉
+Upwards Two-Headed Arrow from Small Circle
+Supplemental Arrows-B
+U+2949&#10569;
+𝠩
+Signwriting Hand-Fist Index Middle Thumb Circled
+Sutton SignWriting
+U+1D829&#120873;
+𝠸
+Signwriting Hand-Fist Middle Thumb Circled Index Up
+Sutton SignWriting
+U+1D838&#120888;
+𝠹
+Signwriting Hand-Fist Middle Thumb Circled Index Hinged
+Sutton SignWriting
+U+1D839&#120889;
+𝠼
+Signwriting Hand-Fist Index Thumb Circled Middle Up
+Sutton SignWriting
+U+1D83C&#120892;
+𝢑
+Signwriting Hand-Fist Little Down Others Circled
+Sutton SignWriting
+U+1D891&#120977;
+𝧧
+Signwriting Movement-Floorplane Arm Circle Hitting Wall Small Single
+Sutton SignWriting
+U+1D9E7&#121319;
+𝧨
+Signwriting Movement-Floorplane Arm Circle Hitting Wall Medium Single
+Sutton SignWriting
+U+1D9E8&#121320;
+𝧩
+Signwriting Movement-Floorplane Arm Circle Hitting Wall Large Single
+Sutton SignWriting
+U+1D9E9&#121321;
+𝧪
+Signwriting Movement-Floorplane Arm Circle Hitting Wall Small Double
+Sutton SignWriting
+U+1D9EA&#121322;
+𝧫
+Signwriting Movement-Floorplane Arm Circle Hitting Wall Medium Double
+Sutton SignWriting
+U+1D9EB&#121323;
+𝧬
+Signwriting Movement-Floorplane Arm Circle Hitting Wall Large Double
+Sutton SignWriting
+U+1D9EC&#121324;
+𡃈
+Ideograph (Cant.) a lasso; a circle, frame CJK
+CJK Unified Ideographs Extension B
+U+210C8&#135368;
+𝦐
+Signwriting Movement-Wallplane Curve Three-Quarter Circle Small
+Sutton SignWriting
+U+1D990&#121232;
+𝦑
+Signwriting Movement-Wallplane Curve Three-Quarter Circle Medium
+Sutton SignWriting
+U+1D991&#121233;
+⏁
+Dentistry Symbol Light Down and Horizontal with Circle
+Miscellaneous Technical
+U+23C1&#9153;
+⏂
+Dentistry Symbol Light Up and Horizontal with Circle
+Miscellaneous Technical
+U+23C2&#9154;
+Clockwise Rightwards and Leftwards Open Circle Arrows with Circled One Overlay
+Clockwise Rightwards and Leftwards Open Circle Arrows with Circled One Overlay
+Miscellaneous Symbols and Pictographs
+U+1F502&#128258;
+￮
+Halfwidth White Circle
+Halfwidth and Fullwidth Forms
+U+FFEE&#65518;
+圜
+Ideograph circle, surround; encircle CJK
+CJK Unified Ideographs
+U+571C&#22300;
+匝
+Ideograph full circle; encircle CJK
+CJK Unified Ideographs
+U+531D&#21277;
+圆
+Ideograph circle; round, circular; complete CJK
+CJK Unified Ideographs
+U+5706&#22278;
+圎
+Ideograph circle; round, circular; complete CJK
+CJK Unified Ideographs
+U+570E&#22286;
+圓
+Ideograph circle; round, circular; complete CJK
+CJK Unified Ideographs
+U+5713&#22291;
+廻
+Ideograph circle around; return; curving CJK
+CJK Unified Ideographs
+U+5EFB&#24315;
+㘤
+Ideograph circle of the moving water CJK
+CJK Unified Ideographs Extension A
+U+3624&#13860;
+圈
+Ideograph to circle; a circle; corral CJK
+CJK Unified Ideographs
+U+5708&#22280;
+圏
+Ideograph to circle; a circle; corral CJK
+CJK Unified Ideographs
+U+570F&#22287;
+团
+Ideograph sphere, ball, circle; mass, lump CJK
+CJK Unified Ideographs
+U+56E2&#22242;
+団
+Ideograph sphere, ball, circle; mass, lump CJK
+CJK Unified Ideographs
+U+56E3&#22243;
+團
+Ideograph sphere, ball, circle; mass, lump CJK
+CJK Unified Ideographs
+U+5718&#22296;
+㝼
+Ideograph crooked; winding, to circle; to hover around CJK
+CJK Unified Ideographs Extension A
+U+377C&#14204;
+㻱
+Ideograph to circle; to revolve round; to surround; to encase, (same as 璡) used in person's name, jade like stone CJK
+CJK Unified Ideographs Extension A
+U+3EF1&#16113;
+䗕
+Ideograph (same as 蜿) bends; turns; curves; turns and twists, to circle; to hover around, a name for the earthworm CJK
+CJK Unified Ideographs Extension A
+U+45D5&#17877;
+Z䴉
+Ideograph general term for a group of bird (looks like egret), to fly in a circle CJK
+CJK Unified Ideographs Extension A
+U+4D09&#19721;
+㨧
+Ideograph wooden stick or bamboo cane (shaped segment of a circle) used to support the covering of a carriage in ancient times CJK
+CJK Unified Ideographs Extension A
