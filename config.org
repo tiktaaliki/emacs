@@ -369,10 +369,12 @@ https://ivanaf.com/emacs_drag-drop_pdfs_paste_html_custom_templates.html
   (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
   (global-set-key (kbd "C-c <f2>") 'org-clock-out)
   (global-unset-key (kbd "C-v"))
+
   (global-set-key (kbd "<f1>") 'org-capture)
   (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
   (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
   (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+  (define-key org-mode-map (kbd "C-.") 'org-todo)
   (bind-keys
    ("C-c r" . org-clock-report)
    ("C-c l" . org-store-link)
@@ -677,6 +679,8 @@ CLOCK: [2021-09-02 Thu 18:05]--[2021-09-02 Thu 18:05] =>  0:00
   (define-key yas-minor-mode-map [(tab)]        nil)
   (define-key yas-minor-mode-map (kbd "TAB")    nil)
   (define-key yas-minor-mode-map (kbd "<tab>")  nil)
+  
+  (define-key flyspell-mode-map (kbd "C-.") nil)
   
   (use-package ace-jump-helm-line)
   (eval-after-load "helm"
