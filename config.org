@@ -505,7 +505,7 @@ https://ivanaf.com/emacs_drag-drop_pdfs_paste_html_custom_templates.html
     (doom-themes-org-config)
     )
   
-  
+  (setq org-startup-shrink-all-tables t)
 
 #+END_SRC
 
@@ -742,6 +742,7 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
                              ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
                              ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2)
                              ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1)
+                             ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 2)
                              )
   
   
@@ -809,64 +810,65 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
 
   
 #+BEGIN_SRC emacs-lisp :tangle yes
-  
-    (add-hook 'org-agenda-mode-hook
-                                    (lambda ()
-                                      (visual-line-mode -1)
-                                      (toggle-truncate-lines 1)))
-  
-     (setq org-agenda-format-date
-           (lambda (date)
-             (concat "\n---------------------------------\n" (org-agenda-format-date-aligned date))))
-  
-  
-   (setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
-   (setq org-global-properties '(("EFFORT_ALL" . "0:05 0:10 0:15 0:20 0:25 0:30 0:35 0:40 0:45 0:50 0:55 0:60")))
-  
-   (setq org-agenda-files '("~/Dropbox/Zettelkasten/journal.org"
-                            "~/Dropbox/Zettelkasten/inbox.org"
-                            "~/Dropbox/Zettelkasten/readings.org"
-                            "~/Dropbox/Zettelkasten/contacts.org"
-                            "~/Dropbox/Zettelkasten/ndd.org"
-                            "~/Dropbox/Zettelkasten/baruch.org"
-                            "~/Dropbox/Zettelkasten/personal.org"
-                            "~/Dropbox/Zettelkasten/lis.org"
-                            "~/Dropbox/Zettelkasten/recipes.org" "~/Dropbox/Zettelkasten/sysadmin.org""~/Dropbox/Zettelkasten/Zettels/index.org"
-                            "~/Dropbox/Zettelkasten/editing.org"   "~/Dropbox/Zettelkasten/Zettels/zettel-journal.org"
-                           "~/Dropbox/Zettelkasten/events.org"
-                           "~/Dropbox/Zettelkasten/Zettels/RESEARCH.org"
-                            "~/Dropbox/Zettelkasten/Zettels/20211021_toward-a-materialist-analysis-of-OER.org"
-  
-                            ))
-  
-  
-   (setq org-agenda-prefix-format
-         '((agenda . " %i %-12:c%?-12t% s")
-           (todo . " %i %-12:c")
-           (tags . " %i %-12:c")
-           (search . " %i %-12:c")))
-  
-   (setq org-agenda-with-colors t
-         org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
-         org-agenda-current-time-string "✸✸✸✸✸"
-         org-agenda-start-with-clockreport-mode t
-         org-agenda-dim-blocked-tasks t
-         org-agenda-window-setup 'only-window
-         )
-  
-  
-   ;;skips
-   (setq org-agenda-skip-scheduled-if-done t
-         org-agenda-skip-deadline-if-done t
-         org-agenda-skip-timestamp-if-done t
-         org-agenda-skip-deadline-prewarning-if-scheduled t
-         )
-  
-   (setq org-agenda-clockreport-parameter-plist
-         (quote
-          (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags t :hidefiles nil :fileskip0 t)))
-  
-   (setq org-clock-report-include-clocking-task t)
+    
+      (add-hook 'org-agenda-mode-hook
+                                      (lambda ()
+                                        (visual-line-mode -1)
+                                        (toggle-truncate-lines 1)))
+    
+       (setq org-agenda-format-date
+             (lambda (date)
+               (concat "\n---------------------------------\n" (org-agenda-format-date-aligned date))))
+    
+    
+     (setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
+     (setq org-global-properties '(("EFFORT_ALL" . "0:05 0:10 0:15 0:20 0:25 0:30 0:35 0:40 0:45 0:50 0:55 0:60")))
+    
+     (setq org-agenda-files '("~/Dropbox/Zettelkasten/journal.org"
+                              "~/Dropbox/Zettelkasten/inbox.org"
+                              "~/Dropbox/Zettelkasten/readings.org"
+                              "~/Dropbox/Zettelkasten/contacts.org"
+                              "~/Dropbox/Zettelkasten/ndd.org"
+                              "~/Dropbox/Zettelkasten/baruch.org"
+                              "~/Dropbox/Zettelkasten/personal.org"
+                              "~/Dropbox/Zettelkasten/lis.org"
+                              "~/Dropbox/Zettelkasten/recipes.org" "~/Dropbox/Zettelkasten/sysadmin.org"
+                              "~/Dropbox/Zettelkasten/events.org"
+                              "~/Dropbox/Zettelkasten/editing.org"   ;"~/Dropbox/Zettelkasten/Zettels/zettel-journal.org"
+;                              "~/Dropbox/Zettelkasten/Zettels/index.org"
+;                             "~/Dropbox/Zettelkasten/Zettels/RESEARCH.org"
+                              ;"~/Dropbox/Zettelkasten/Zettels/20211021_toward-a-materialist-analysis-of-OER.org"
+    
+                              ))
+    
+    
+     (setq org-agenda-prefix-format
+           '((agenda . " %i %-12:c%?-12t% s")
+             (todo . " %i %-12:c")
+             (tags . " %i %-12:c")
+             (search . " %i %-12:c")))
+    
+     (setq org-agenda-with-colors t
+           org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
+           org-agenda-current-time-string "✸✸✸✸✸"
+           org-agenda-start-with-clockreport-mode t
+           org-agenda-dim-blocked-tasks t
+           org-agenda-window-setup 'only-window
+           )
+    
+    
+     ;;skips
+     (setq org-agenda-skip-scheduled-if-done t
+           org-agenda-skip-deadline-if-done t
+           org-agenda-skip-timestamp-if-done t
+           org-agenda-skip-deadline-prewarning-if-scheduled t
+           )
+    
+     (setq org-agenda-clockreport-parameter-plist
+           (quote
+            (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags t :hidefiles nil :fileskip0 t)))
+    
+     (setq org-clock-report-include-clocking-task t)
 #+END_SRC
 
 #+RESULTS:
