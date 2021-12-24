@@ -1142,7 +1142,26 @@ removed templates:
 
 ** org-tag
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq org-tag-alist '(  ("NOW" . ?n) ("workflow" . ?w)
+  (setq org-tag-alist '(
+                        (:startgroup . nil)
+                        ("ndd" . ?n)
+                        ("self" . ?s)
+                        ("baruch" . ?b)
+                        ("sysadmin" . ?y)
+                        ("home" . ?h)
+                        (:endgroup . nil)
+                        ))
+  
+    (setq org-complete-tags-always-offer-all-agenda-tags nil)
+    (setq org-tags-column 0)
+  
+#+END_SRC
+
+#+RESULTS:
+: 0
+
+#+begin_src emacs-lisp :tangle no
+    (setq org-tag-alist '(  ("NOW" . ?n) ("workflow" . ?w)
                         (:startgroup . nil)
                         ("SHALLOW" . ?s) ("DEEP" . ?d) ("HOME" . ?h) 
                         (:endgroup . nil)
@@ -1152,15 +1171,10 @@ removed templates:
                         (:startgroup . nil)
                         ("@timely". ?t) ("@nottimely" . ?e)
                         (:endgroup . nil)
-                        (:startgroup . nil)
-                        ("ndd" . ?n) ("self" . ?s) ("baruch" . ?b) ("sysadmin" . ?y)
-                        (:endgroup . nil)
+                       
                         ))
-  (setq org-complete-tags-always-offer-all-agenda-tags nil)
-  (setq org-tags-column 0)
   
-#+END_SRC
-
+#+end_src
 #+RESULTS:
 : 0
 
