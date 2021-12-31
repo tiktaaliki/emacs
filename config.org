@@ -642,49 +642,53 @@ CLOCK: [2021-10-18 Mon 11:25]--[2021-10-18 Mon 11:25] =>  0:00
 CLOCK: [2021-09-02 Thu 18:05]--[2021-09-02 Thu 18:05] =>  0:00
 :END:
 #+begin_src emacs-lisp :tangle yes
+    (use-package yasnippet)
+     (yas-minor-mode 1)
+  
+    (defhydra hydra-yasnippet (:color red :hint nil)
+      "
+                              ^YASnippets^
+                --------------------------------------------
+                  Modes:    Load/Visit:    Actions:
+  
+                 _g_lobal  _d_irectory    _i_nsert
+                 _m_inor   _f_ile         _t_ryout
+                 _e_xtra   _l_ist         _n_ew
+                          reload _a_ll
+                "
+      ("n" down "done")
+      ("p" down "up")
+      ("N" outline-next-visible-heading "next heading")
+      ("P" outline-previous-visible-heading "prev heading")
+      ("d" yas-load-directory)
+      ("e" yas-activate-extra-mode)
+      ("i" yas-insert-snippet)
+      ("f" yas-visit-snippet-file :color blue)
+      ("n" yas-new-snippet)
+      ("t" yas-tryout-snippet)
+      ("l" yas-describe-tables)
+      ("g" yas-global-mode :color red)
+      ("m" yas-minor-mode :color red)
+      ("a" yas-reload-all))
   
   
-  (defhydra hydra-yasnippet (:color red :hint nil)
-    "
-                            ^YASnippets^
-              --------------------------------------------
-                Modes:    Load/Visit:    Actions:
+  (eval-after-load "yas-minor-mode" '(progn
+ 
   
-               _g_lobal  _d_irectory    _i_nsert
-               _m_inor   _f_ile         _t_ryout
-               _e_xtra   _l_ist         _n_ew
-                        reload _a_ll
-              "
-    ("n" down "done")
-    ("p" down "up")
-    ("N" outline-next-visible-heading "next heading")
-    ("P" outline-previous-visible-heading "prev heading")
-    ("d" yas-load-directory)
-    ("e" yas-activate-extra-mode)
-    ("i" yas-insert-snippet)
-    ("f" yas-visit-snippet-file :color blue)
-    ("n" yas-new-snippet)
-    ("t" yas-tryout-snippet)
-    ("l" yas-describe-tables)
-    ("g" yas-global-mode :color red)
-    ("m" yas-minor-mode :color red)
-    ("a" yas-reload-all))
+    (define-key yas-minor-mode-map [backtab]    nil)
   
-  (use-package yasnippet)
+    ;; Strangely, just redefining one of the variations below won't work.
+    ;; All rebinds seem to be needed.
+    (define-key yas-minor-mode-map [(tab)]        nil)
+    (define-key yas-minor-mode-map (kbd "TAB")    nil)
+    (define-key yas-minor-mode-map (kbd "<tab>")  nil))
+                   )
+    (use-package flyspell)
+    (define-key flyspell-mode-map (kbd "C-.") nil)
   
-  (define-key yas-minor-mode-map [backtab]    nil)
-  
-  ;; Strangely, just redefining one of the variations below won't work.
-  ;; All rebinds seem to be needed.
-  (define-key yas-minor-mode-map [(tab)]        nil)
-  (define-key yas-minor-mode-map (kbd "TAB")    nil)
-  (define-key yas-minor-mode-map (kbd "<tab>")  nil)
-  
-  (define-key flyspell-mode-map (kbd "C-.") nil)
-  
-  (use-package ace-jump-helm-line)
-  (eval-after-load "helm"
-    '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
+    (use-package ace-jump-helm-line)
+    (eval-after-load "helm"
+      '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
   
   
   
@@ -1340,38 +1344,49 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
 ** pdfs
   #+BEGIN_SRC emacs-lisp :tangle yes
     
-                (use-package pdf-tools
-                  :magic ("%PDF" . pdf-view-mode)
-                  :config
-                  (pdf-tools-install :no-query))
-                (use-package pdf-view-restore)
+                    (use-package pdf-tools
+                      :magic ("%PDF" . pdf-view-mode)
+                      :config
+                      (pdf-tools-install :no-query))
+                    (use-package pdf-view-restore)
     
-                 (setq pdf-view-continuous t)
-              (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
-     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
+                     (setq pdf-view-continuous t)
+                  (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
+         (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
     
-        (load "org-pdfview")
+            (load "org-pdfview")
     
-                                                ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
-    
-    
+                                                    ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
     
     
-        (add-to-list 'org-file-apps 
-                     '("\\.pdf\\'" . (lambda (file link)
-                                       (org-pdfview-open link))))
     
-    (use-package quelpa)
-       (quelpa
-        '(quelpa-use-package
-          :fetcher git
-          :url "https://github.com/quelpa/quelpa-use-package.git"))
-       (require 'quelpa-use-package)
     
-          (use-package pdf-continuous-scroll-mode
-            :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
-    (add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
+            (add-to-list 'org-file-apps 
+                         '("\\.pdf\\'" . (lambda (file link)
+                                           (org-pdfview-open link))))
     
+        (use-package quelpa)
+           (quelpa
+            '(quelpa-use-package
+              :fetcher git
+              :url "https://github.com/quelpa/quelpa-use-package.git"))
+           (require 'quelpa-use-package)
+    
+              (use-package pdf-continuous-scroll-mode
+                :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
+        (add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
+    
+    
+    ;;to get PDFS to open on a specific page. added 12/27/21 from this link: https://emacs.stackexchange.com/questions/30344/how-to-link-and-open-a-pdf-file-to-a-specific-page-skim-adobe. haven't tested it out yet. 
+        (org-add-link-type "pdf" 'org-pdf-open nil)
+    
+    (defun org-pdf-open (link)
+      "Where page number is 105, the link should look like:
+       [[pdf:/path/to/file.pdf#page=105][My description.]]"
+      (let* ((path+page (split-string link "#page="))
+             (pdf-file (car path+page))
+             (page (car (cdr path+page))))
+        (start-process "view-pdf" nil "evince" "--page-index" page pdf-file)))
     
   #+END_SRC
 
