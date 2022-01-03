@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: time log entry
+# key: timelog
+# --
+
+
+CLOCK: [`(format-time-string "%Y-%m-%d %a ")`$1]--[`(format-time-string "%Y-%m-%d %a ")`$2]

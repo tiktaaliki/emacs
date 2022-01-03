@@ -240,10 +240,12 @@
 (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
 (global-set-key (kbd "C-c <f2>") 'org-clock-out)
 (global-unset-key (kbd "C-v"))
+
 (global-set-key (kbd "<f1>") 'org-capture)
 (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
 (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
 (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+(define-key org-mode-map (kbd "C-.") 'org-todo)
 (bind-keys
  ("C-c r" . org-clock-report)
  ("C-c l" . org-store-link)
@@ -422,45 +424,53 @@
 (use-package visual-fill-column)
 (setq visual-fill-column-center-text t)
 
-(defhydra hydra-yasnippet (:color red :hint nil)
-  "
-                          ^YASnippets^
-            --------------------------------------------
-              Modes:    Load/Visit:    Actions:
-
-             _g_lobal  _d_irectory    _i_nsert
-             _m_inor   _f_ile         _t_ryout
-             _e_xtra   _l_ist         _n_ew
-                      reload _a_ll
-            "
-  ("n" down "done")
-  ("p" down "up")
-  ("N" outline-next-visible-heading "next heading")
-  ("P" outline-previous-visible-heading "prev heading")
-  ("d" yas-load-directory)
-  ("e" yas-activate-extra-mode)
-  ("i" yas-insert-snippet)
-  ("f" yas-visit-snippet-file :color blue)
-  ("n" yas-new-snippet)
-  ("t" yas-tryout-snippet)
-  ("l" yas-describe-tables)
-  ("g" yas-global-mode :color red)
-  ("m" yas-minor-mode :color red)
-  ("a" yas-reload-all))
-
 (use-package yasnippet)
+   (yas-minor-mode 1)
 
-(define-key yas-minor-mode-map [backtab]    nil)
+  (defhydra hydra-yasnippet (:color red :hint nil)
+    "
+                            ^YASnippets^
+              --------------------------------------------
+                Modes:    Load/Visit:    Actions:
 
-;; Strangely, just redefining one of the variations below won't work.
-;; All rebinds seem to be needed.
-(define-key yas-minor-mode-map [(tab)]        nil)
-(define-key yas-minor-mode-map (kbd "TAB")    nil)
-(define-key yas-minor-mode-map (kbd "<tab>")  nil)
+               _g_lobal  _d_irectory    _i_nsert
+               _m_inor   _f_ile         _t_ryout
+               _e_xtra   _l_ist         _n_ew
+                        reload _a_ll
+              "
+    ("n" down "done")
+    ("p" down "up")
+    ("N" outline-next-visible-heading "next heading")
+    ("P" outline-previous-visible-heading "prev heading")
+    ("d" yas-load-directory)
+    ("e" yas-activate-extra-mode)
+    ("i" yas-insert-snippet)
+    ("f" yas-visit-snippet-file :color blue)
+    ("n" yas-new-snippet)
+    ("t" yas-tryout-snippet)
+    ("l" yas-describe-tables)
+    ("g" yas-global-mode :color red)
+    ("m" yas-minor-mode :color red)
+    ("a" yas-reload-all))
 
-(use-package ace-jump-helm-line)
-(eval-after-load "helm"
-  '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
+
+(eval-after-load "yas-minor-mode" '(progn
+
+
+  (define-key yas-minor-mode-map [backtab]    nil)
+
+  ;; Strangely, just redefining one of the variations below won't work.
+  ;; All rebinds seem to be needed.
+  (define-key yas-minor-mode-map [(tab)]        nil)
+  (define-key yas-minor-mode-map (kbd "TAB")    nil)
+  (define-key yas-minor-mode-map (kbd "<tab>")  nil))
+                 )
+  (use-package flyspell)
+  (define-key flyspell-mode-map (kbd "C-.") nil)
+
+  (use-package ace-jump-helm-line)
+  (eval-after-load "helm"
+    '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
 
 (setq org-directory "~/Dropbox/Zettelkasten/"
       org-default-notes-file "~/Dropbox/Zettelkasten/inbox.org"
@@ -524,15 +534,15 @@
                                       (lambda ()
                                         (visual-line-mode -1)
                                         (toggle-truncate-lines 1)))
-    
+
        (setq org-agenda-format-date
              (lambda (date)
                (concat "\n---------------------------------\n" (org-agenda-format-date-aligned date))))
-    
-    
+
+
      (setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
      (setq org-global-properties '(("EFFORT_ALL" . "0:05 0:10 0:15 0:20 0:25 0:30 0:35 0:40 0:45 0:50 0:55 0:60")))
-    
+
      (setq org-agenda-files '("~/Dropbox/Zettelkasten/journal.org"
                               "~/Dropbox/Zettelkasten/inbox.org"
                               "~/Dropbox/Zettelkasten/readings.org"
@@ -543,20 +553,21 @@
                               "~/Dropbox/Zettelkasten/lis.org"
                               "~/Dropbox/Zettelkasten/recipes.org" "~/Dropbox/Zettelkasten/sysadmin.org"
                               "~/Dropbox/Zettelkasten/events.org"
-                              "~/Dropbox/Zettelkasten/editing.org"   ;"~/Dropbox/Zettelkasten/Zettels/zettel-journal.org"
+                              "~/Dropbox/Zettelkasten/editing.org"
+                              "~/Dropbox/Zettelkasten/zettels.org"  ;"~/Dropbox/Zettelkasten/Zettels/zettel-journal.org"
 ;                              "~/Dropbox/Zettelkasten/Zettels/index.org"
 ;                             "~/Dropbox/Zettelkasten/Zettels/RESEARCH.org"
                               ;"~/Dropbox/Zettelkasten/Zettels/20211021_toward-a-materialist-analysis-of-OER.org"
-    
+
                               ))
-    
-    
+
+
      (setq org-agenda-prefix-format
            '((agenda . " %i %-12:c%?-12t% s")
              (todo . " %i %-12:c")
              (tags . " %i %-12:c")
              (search . " %i %-12:c")))
-    
+
      (setq org-agenda-with-colors t
            org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
            org-agenda-current-time-string "✸✸✸✸✸"
@@ -564,19 +575,19 @@
            org-agenda-dim-blocked-tasks t
            org-agenda-window-setup 'only-window
            )
-    
-    
+
+
      ;;skips
      (setq org-agenda-skip-scheduled-if-done t
            org-agenda-skip-deadline-if-done t
            org-agenda-skip-timestamp-if-done t
            org-agenda-skip-deadline-prewarning-if-scheduled t
            )
-    
+
      (setq org-agenda-clockreport-parameter-plist
            (quote
             (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags t :hidefiles nil :fileskip0 t)))
-    
+
      (setq org-clock-report-include-clocking-task t)
 
 (use-package org-super-agenda)
@@ -736,22 +747,18 @@
 
   )
 
-(setq org-tag-alist '(  ("NOW" . ?n) ("workflow" . ?w)
+(setq org-tag-alist '(
                       (:startgroup . nil)
-                      ("SHALLOW" . ?s) ("DEEP" . ?d) ("HOME" . ?h) 
-                      (:endgroup . nil)
-                      (:startgroup . nil)
-                      ("#necessary" . ?c) ("#wouldbenice" . ?b)
-                      (:endgroup . nil)
-                      (:startgroup . nil)
-                      ("@timely". ?t) ("@nottimely" . ?e)
-                      (:endgroup . nil)
-                      (:startgroup . nil)
-                      ("ndd" . ?n) ("self" . ?s) ("baruch" . ?b) ("sysadmin" . ?y)
+                      ("ndd" . ?n)
+                      ("self" . ?s)
+                      ("baruch" . ?b)
+                      ("sysadmin" . ?y)
+                      ("home" . ?h)
                       (:endgroup . nil)
                       ))
-(setq org-complete-tags-always-offer-all-agenda-tags nil)
-(setq org-tags-column 0)
+
+  (setq org-complete-tags-always-offer-all-agenda-tags nil)
+  (setq org-tags-column 0)
 
 (use-package pomm)
 (use-package org-pomodoro)
@@ -849,36 +856,48 @@
 )
 
 (use-package pdf-tools
-              :magic ("%PDF" . pdf-view-mode)
-              :config
-              (pdf-tools-install :no-query))
-            (use-package pdf-view-restore)
+                  :magic ("%PDF" . pdf-view-mode)
+                  :config
+                  (pdf-tools-install :no-query))
+                (use-package pdf-view-restore)
 
-             (setq pdf-view-continuous t)
-          (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
- (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
+                 (setq pdf-view-continuous t)
+              (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
+     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
 
-    (load "org-pdfview")
+        (load "org-pdfview")
 
-                                            ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
-
-
+                                                ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
 
 
-    (add-to-list 'org-file-apps 
-                 '("\\.pdf\\'" . (lambda (file link)
-                                   (org-pdfview-open link))))
 
-(use-package quelpa)
-   (quelpa
-    '(quelpa-use-package
-      :fetcher git
-      :url "https://github.com/quelpa/quelpa-use-package.git"))
-   (require 'quelpa-use-package)
 
-      (use-package pdf-continuous-scroll-mode
-        :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
-(add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
+        (add-to-list 'org-file-apps 
+                     '("\\.pdf\\'" . (lambda (file link)
+                                       (org-pdfview-open link))))
+
+    (use-package quelpa)
+       (quelpa
+        '(quelpa-use-package
+          :fetcher git
+          :url "https://github.com/quelpa/quelpa-use-package.git"))
+       (require 'quelpa-use-package)
+
+          (use-package pdf-continuous-scroll-mode
+            :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
+    (add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
+
+
+;;to get PDFS to open on a specific page. added 12/27/21 from this link: https://emacs.stackexchange.com/questions/30344/how-to-link-and-open-a-pdf-file-to-a-specific-page-skim-adobe. haven't tested it out yet. 
+    (org-add-link-type "pdf" 'org-pdf-open nil)
+
+(defun org-pdf-open (link)
+  "Where page number is 105, the link should look like:
+   [[pdf:/path/to/file.pdf#page=105][My description.]]"
+  (let* ((path+page (split-string link "#page="))
+         (pdf-file (car path+page))
+         (page (car (cdr path+page))))
+    (start-process "view-pdf" nil "evince" "--page-index" page pdf-file)))
 
 (use-package org-roam
  :bind 
