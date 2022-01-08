@@ -1,3 +1,38 @@
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+setxkbmap -model pc104 -layout "us,kr" -variant "dvorak," -option "ctrl:nocaps"
+setxkbmap -model pc104 -layout "us,kr" -option "ctrl:nocaps"
+xinput --list
+xinput disable 13
+exit
+xinput --list
+xinput disable 13
+exit
+xrandr --output DP-2 --mode 3840x2160 --scale .5x.5 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.5x1.5 --pos 2880x0 --rotate normal
+xrandr --output DP-2 --scale 1x1 --pos 0x0 --output HDMI-2 --scale 1.25x1.25 --right-of DP-2
+xrandr --output DP-2 --scale 1x1 --pos 0x0 --output HDMI-2 --scale 1x1 --right-of DP-2
+xrandr --output DP-2 --scale .5x.5 --pos 0x0 --output HDMI-2 --scale 1x1 --right-of DP-2
+xrandr --output DP-2 --scale .5x.5 --pos 0x0 --output HDMI-2 --scale 1x1 --right-of DP-2 --pos 1920x0
+xrandr --output DP-2 --scale 1x1 --pos 0x0 --output HDMI-2 --scale 1x1 --right-of DP-2
+xrandr --output DP-2 --scale .5x.5 --pos 0x0 --output HDMI-2 --scale 1x1 --right-of DP-2 --pos 1920x0
+xrandr --output DP-2 --mode 3840x2160 --scale .5x.5 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale .5x.5 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
+sudo simple-scan
+exit
+xrandr --output DP-2 --mode 3840x2160 --scale .5x.5 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale .9x9 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale .5x.5 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale .9x.9 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale .5x.5 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale .8x.8 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
+xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate normal
 xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
 xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
 xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate normal
@@ -84,45 +119,10 @@ xinput --list
 xinput --disable 13
 xrandr --output eDP-1 --scale 1x1  --output HDMI-2 --scale .5x.5 
 exit
-xinput --list
-xinput --disable 13
-xrandr --output eDP-1 --scale 1x1  --output HDMI-2 --scale .5x.5 
-bluetoothctl
-piactl
-piactl enable
-piactl connect
-piactl background enable
-piactl connect
-piactl connect
-cd Downloads
-cd ..
-cd ..
-cd Downloads
-chmod +x pia-linux-3.2-06857.run
-./pia-linux-3.2-06857.run
-pia-linux-3.2-06857
-./pia-linux-3.2-06857.run
-pia
-PIA
-./pia-linux-3.2-06857.run
-exit
-cd .. Downloads
-cd ..
-cd ..
-cd Downloads
-./pia-linux-3.2-06857.run
-./i3-get-window-criteria
-cd ../../Downloads
-./pia-linux-3.2-06857.run
-cd ..
+cd
+ls
 cd .i3
+ls
+ln -s /home/betsy/.i3/config /home/betsy/Sync/i3config
+config
 ./i3-get-window-criteria
-privateinternetaccess
-run privateinternetaccess
-pia-client
-run pia-client
-piavpn
-./pia-linux-3.2-06857.run
-cd .. / Downloads
-cd ../Downloads
-./pia-linux-3.2-06857.run
