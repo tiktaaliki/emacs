@@ -1,14 +1,31 @@
 (eval-when-compile
   (require 'package)
-  (unless (assoc-default "melpa" package-archives)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
- ; (unless (assoc-default "melpa-stable" package-archives)
-  ;	  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t))
-  (unless (assoc-default "org" package-archives)
-    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
+
+
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                           ("gnu" . "https://elpa.gnu.org/packages/")
+                           ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                           ;; ("org"   . "https://orgmode.org/elpa/")
+                           ("elpa"  . "https://elpa.gnu.org/packages/")))
+
+  (package-initialize)
+  ;; https://github.com/jwiegley/use-package/issues/319#issuecomment-845214233
+  (assq-delete-all 'org package--builtins)
+  (assq-delete-all 'org package--builtin-versions)
+
+  
+
+  
+					;  (unless (assoc-default "melpa" package-archives)
+					;   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
+  
+					; (unless (assoc-default "melpa-stable" package-archives)
+					;	  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t))
+					;(unless (assoc-default "org" package-archives)
+					; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
   (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
   
-  (package-initialize)
+					;  (package-initialize)
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))

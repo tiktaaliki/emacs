@@ -127,7 +127,8 @@
 
 (use-package s)
 (use-package org
-  :ensure org-plus-contrib)
+  :ensure t
+  :pin gnu)
 (use-package unkillable-scratch
   :config
   (unkillable-scratch 1))
@@ -197,7 +198,7 @@
 
 
 
-(require 'org-gcal)
+(use-package org-gcal)
 (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
       org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
       org-gcal-fetch-file-alist '(
@@ -425,58 +426,55 @@
 (setq visual-fill-column-center-text t)
 
 (use-package yasnippet)
-   (yas-minor-mode 1)
 
-  (defhydra hydra-yasnippet (:color red :hint nil)
-    "
-                            ^YASnippets^
-              --------------------------------------------
-                Modes:    Load/Visit:    Actions:
-
-               _g_lobal  _d_irectory    _i_nsert
-               _m_inor   _f_ile         _t_ryout
-               _e_xtra   _l_ist         _n_ew
-                        reload _a_ll
-              "
-    ("n" down "done")
-    ("p" down "up")
-    ("N" outline-next-visible-heading "next heading")
-    ("P" outline-previous-visible-heading "prev heading")
-    ("d" yas-load-directory)
-    ("e" yas-activate-extra-mode)
-    ("i" yas-insert-snippet)
-    ("f" yas-visit-snippet-file :color blue)
-    ("n" yas-new-snippet)
-    ("t" yas-tryout-snippet)
-    ("l" yas-describe-tables)
-    ("g" yas-global-mode :color red)
-    ("m" yas-minor-mode :color red)
-    ("a" yas-reload-all))
-
-
-(eval-after-load "yas-minor-mode" '(progn
-
-
-  (define-key yas-minor-mode-map [backtab]    nil)
+   (define-key yas-minor-mode-map [backtab]    nil)
 
   ;; Strangely, just redefining one of the variations below won't work.
   ;; All rebinds seem to be needed.
   (define-key yas-minor-mode-map [(tab)]        nil)
   (define-key yas-minor-mode-map (kbd "TAB")    nil)
-  (define-key yas-minor-mode-map (kbd "<tab>")  nil))
-                 )
-  (use-package flyspell)
-  (define-key flyspell-mode-map (kbd "C-.") nil)
+  (define-key yas-minor-mode-map (kbd "<tab>")  nil)
 
-  (use-package ace-jump-helm-line)
-  (eval-after-load "helm"
-    '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
+(defhydra hydra-yasnippet (:color red :hint nil)
+  "
+                          ^YASnippets^
+            --------------------------------------------
+              Modes:    Load/Visit:    Actions:
+
+             _g_lobal  _d_irectory    _i_nsert
+             _m_inor   _f_ile         _t_ryout
+             _e_xtra   _l_ist         _n_ew
+                      reload _a_ll
+            "
+  ("n" down "done")
+  ("p" down "up")
+  ("N" outline-next-visible-heading "next heading")
+  ("P" outline-previous-visible-heading "prev heading")
+  ("d" yas-load-directory)
+  ("e" yas-activate-extra-mode)
+  ("i" yas-insert-snippet)
+  ("f" yas-visit-snippet-file :color blue)
+  ("n" yas-new-snippet)
+  ("t" yas-tryout-snippet)
+  ("l" yas-describe-tables)
+  ("g" yas-global-mode :color red)
+  ("m" yas-minor-mode :color red)
+  ("a" yas-reload-all))
+
+
+
+(use-package flyspell)
+(define-key flyspell-mode-map (kbd "C-.") nil)
+
+(use-package ace-jump-helm-line)
+(eval-after-load "helm"
+  '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
 
 (setq org-directory "~/Dropbox/Zettelkasten/"
       org-default-notes-file "~/Dropbox/Zettelkasten/inbox.org"
       org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/"
       org-contacts-files (quote ("~/Dropbox/Zettelkasten/contacts.org"))
-      org-roam-directory "~/Dropbox/Zettelkasten/Zettels/"
+      org-roam-directory "~/Dropbox/Zettelkasten"
       )
 (setq org-archive-reversed-order nil
       org-reverse-note-order t
@@ -530,65 +528,74 @@
 
 (setq global-visible-mark-mode t)
 
+(use-package org-auto-tangle
+                :hook (org-mode . org-auto-tangle-mode)
+
+                )
+  (setq org-html-head "<link rel=\"stylesheet\" href=\"\\home\\betsy\\Dropbox\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
+  (setq org-agenda-export-html-style "/home/betsy/Dropbox/Zettelkasten/css/tufte.css")
+(setq org-export-with-toc nil)
+(setq org-export-initial-scope 'subtree)
+  (setq org-export-with-section-numbers nil)
+(use-package org-clock-split)
+
 (add-hook 'org-agenda-mode-hook
                                       (lambda ()
                                         (visual-line-mode -1)
                                         (toggle-truncate-lines 1)))
 
-       (setq org-agenda-format-date
-             (lambda (date)
-               (concat "\n---------------------------------\n" (org-agenda-format-date-aligned date))))
 
-
-     (setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
+  (setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
      (setq org-global-properties '(("EFFORT_ALL" . "0:05 0:10 0:15 0:20 0:25 0:30 0:35 0:40 0:45 0:50 0:55 0:60")))
 
-     (setq org-agenda-files '("~/Dropbox/Zettelkasten/journal.org"
-                              "~/Dropbox/Zettelkasten/inbox.org"
-                              "~/Dropbox/Zettelkasten/readings.org"
-                              "~/Dropbox/Zettelkasten/contacts.org"
-                              "~/Dropbox/Zettelkasten/ndd.org"
-                              "~/Dropbox/Zettelkasten/baruch.org"
-                              "~/Dropbox/Zettelkasten/personal.org"
-                              "~/Dropbox/Zettelkasten/lis.org"
-                              "~/Dropbox/Zettelkasten/recipes.org" "~/Dropbox/Zettelkasten/sysadmin.org"
-                              "~/Dropbox/Zettelkasten/events.org"
-                              "~/Dropbox/Zettelkasten/editing.org"
-                              "~/Dropbox/Zettelkasten/zettels.org"  ;"~/Dropbox/Zettelkasten/Zettels/zettel-journal.org"
-;                              "~/Dropbox/Zettelkasten/Zettels/index.org"
-;                             "~/Dropbox/Zettelkasten/Zettels/RESEARCH.org"
-                              ;"~/Dropbox/Zettelkasten/Zettels/20211021_toward-a-materialist-analysis-of-OER.org"
 
-                              ))
-
-
-     (setq org-agenda-prefix-format
-           '((agenda . " %i %-12:c%?-12t% s")
-             (todo . " %i %-12:c")
-             (tags . " %i %-12:c")
-             (search . " %i %-12:c")))
-
-     (setq org-agenda-with-colors t
-           org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
-           org-agenda-current-time-string "✸✸✸✸✸"
-           org-agenda-start-with-clockreport-mode t
-           org-agenda-dim-blocked-tasks t
-           org-agenda-window-setup 'only-window
-           )
+(setq org-agenda-files '(
+                         "~/Dropbox/Zettelkasten/inbox.org"
+                         "~/Dropbox/Zettelkasten/contacts.org"
+                         "~/Dropbox/Zettelkasten/readings.org"
+                         "~/Dropbox/Zettelkasten/journal.org"
+                         "~/Dropbox/Zettelkasten/ndd.org"
+                         "~/Dropbox/Zettelkasten/baruch.org"
+                         "~/Dropbox/Zettelkasten/personal.org"
+                         "~/Dropbox/Zettelkasten/lis.org"
+                         "~/Dropbox/Zettelkasten/recipes.org"
+                         "~/Dropbox/Zettelkasten/sysadmin.org"
+                         "~/Dropbox/Zettelkasten/events.org"
+                         "~/Dropbox/Zettelkasten/editing.org"
+                         "~/Dropbox/Zettelkasten/zettels.org"
+                         ))
 
 
-     ;;skips
-     (setq org-agenda-skip-scheduled-if-done t
-           org-agenda-skip-deadline-if-done t
-           org-agenda-skip-timestamp-if-done t
-           org-agenda-skip-deadline-prewarning-if-scheduled t
-           )
 
-     (setq org-agenda-clockreport-parameter-plist
-           (quote
-            (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags t :hidefiles nil :fileskip0 t)))
+(setq org-agenda-skip-scheduled-if-done t
+      org-agenda-skip-deadline-if-done t
+      org-agenda-skip-timestamp-if-done t
+      org-agenda-skip-deadline-prewarning-if-scheduled t
+      )
 
-     (setq org-clock-report-include-clocking-task t)
+(setq org-agenda-clockreport-parameter-plist
+      (quote
+       (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags t :hidefiles nil :fileskip0 t)))
+
+(setq org-clock-report-include-clocking-task t)
+(setq org-agenda-prefix-format
+      '((agenda . " %i %-12:c%?-12t% s")
+        (todo . " %i %-12:c")
+        (tags . " %i %-12:c")
+        (search . " %i %-12:c")))
+
+(setq org-agenda-with-colors t
+      org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
+      org-agenda-current-time-string "✸✸✸✸✸"
+      org-agenda-start-with-clockreport-mode t
+      org-agenda-dim-blocked-tasks t
+      org-agenda-window-setup 'only-window
+      )
+
+
+(setq org-agenda-format-date
+      (lambda (date)
+        (concat "\n---------------------------------\n" (org-agenda-format-date-aligned date))))
 
 (use-package org-super-agenda)
 (org-super-agenda-mode 1)
@@ -711,7 +718,7 @@
          "|%^{Pen}|%A|%^{Price}|%U|" )
 
         ("y" "org-protocol" item (id "resources")
-         "[ ] %a %U %:initial" )
+         "[ ] %a %:initial" )
 
         ))
 
@@ -754,6 +761,7 @@
                       ("baruch" . ?b)
                       ("sysadmin" . ?y)
                       ("home" . ?h)
+                      ("lis" . ?l)
                       (:endgroup . nil)
                       ))
 
@@ -804,17 +812,6 @@
                   (org-todo 'todo)))))))))
 
 (add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo)
-
-(use-package org-auto-tangle
-                :hook (org-mode . org-auto-tangle-mode)
-
-                )
-  (setq org-html-head "<link rel=\"stylesheet\" href=\"\\home\\betsy\\Dropbox\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
-  (setq org-agenda-export-html-style "/home/betsy/Dropbox/Zettelkasten/css/tufte.css")
-(setq org-export-with-toc nil)
-(setq org-export-initial-scope 'subtree)
-  (setq org-export-with-section-numbers nil)
-(use-package org-clock-split)
 
 (load "annot")
   (require 'annot)
@@ -956,9 +953,10 @@
                                         ; (setq bibtex-autokey-titleword-length 0)
 
 
-(setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DISCOVERY:\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:TYPE:\n:AREA:\n:END:")
+(setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DISCOVERY:\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:INTERLEAVE_PDF: ../Library/BIBTEX/$(=key=).pdf\n:TYPE:\n:AREA:\n:END:")
 
 (setq bibtex-maintain-sorted-entries t)
+
 
 (use-package org-noter
   :ensure t
@@ -984,6 +982,18 @@
   (use-package interleave 
     :defer t
     )
+
+;; Spell checking (requires the ispell software)
+  (add-hook 'bibtex-mode-hook 'flyspell-mode)
+  
+  ;; Change fields and format
+  (setq bibtex-user-optional-fields '(("keywords" "Keywords to describe the entry" "")
+                                      ("file" "Link to document file." ":"))
+        bibtex-align-at-equal-sign t)
+  
+    ;; BibLaTeX settings
+  ;; bibtex-mode
+;  (setq bibtex-dialect 'biblatex)
 
 (setq bibtex-autokey-additional-names "etal"
       bibtex-autokey-name-separator "-"

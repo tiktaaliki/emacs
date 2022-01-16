@@ -1,10 +1,4 @@
 sudo simple-scan
-sudo simple-scan
-sudo simple-scan
-sudo simple-scan
-sudo simple-scan
-sudo simple-scan
-sudo simple-scan
 setxkbmap -model pc104 -layout "us,kr" -variant "dvorak," -option "ctrl:nocaps"
 setxkbmap -model pc104 -layout "us,kr" -option "ctrl:nocaps"
 xinput --list
@@ -126,3 +120,9 @@ ls
 ln -s /home/betsy/.i3/config /home/betsy/Sync/i3config
 config
 ./i3-get-window-criteria
+insync
+insync start
+xinput --list
+xinput --disable 13
+xinput --list
+xinput --disable 13
