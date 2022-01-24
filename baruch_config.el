@@ -324,7 +324,7 @@
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/cal.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/recipes.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/sysadmin.org" 
-                        "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/Zettels/index.org"
+                        "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/zettels.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/editing.org"                           
                          ))
 

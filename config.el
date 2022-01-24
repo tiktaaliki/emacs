@@ -778,7 +778,7 @@
 (setq org-pomodoro-finished-sound  "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
 
 (setq org-pomodoro-keep-killed-pomodoro-time t)
-(setq org-pomodoro-manual-break nil)
+(setq org-pomodoro-manual-break t)
 (setq org-pomodoro-ticking-sound-states '(:pomodoro :overtime))
 (setq org-pomodoro-length 25
       org-pomodoro-short-break-length 5)

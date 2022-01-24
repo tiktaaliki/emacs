@@ -415,7 +415,7 @@ CLOCK: [2021-06-08 Tue 13:51]--[2021-06-08 Tue 14:06] =>  0:15
                              "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/cal.org"
                              "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/recipes.org"
                              "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/sysadmin.org" 
-                            "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/Zettels/index.org"
+                            "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/zettels.org"
                              "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/editing.org"                           
                              ))
     
