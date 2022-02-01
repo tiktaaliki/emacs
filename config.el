@@ -317,28 +317,31 @@
 
 ")
 
-(use-package org-superstar
-  :config
-  (setq org-superstar-headline-bullets-list '("◉" "☆" "❤" "¶" "★" )
-        org-superstar-item-bullet-alist (quote ((42  . 33) (43 . 62) (45 . 45)))
-        )
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
-(setq org-startup-indented t
-      org-hide-emphasis-markers t
-      org-startup-folded t
-      org-ellipsis " »"
-      org-hide-leading-stars t)
-(use-package doom-themes
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-one t)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config)
-  )
+(use-package emojify
+  :hook (after-init . global-emojify-mode))
 
-(setq org-startup-shrink-all-tables t)
+  (use-package org-superstar
+    :config
+    (setq org-superstar-headline-bullets-list '("◉" "☆" "❤" "¶" "★" )
+          org-superstar-item-bullet-alist (quote ((42  . 33) (43 . 62) (45 . 45)))
+          )
+    (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+  (setq org-startup-indented t
+        org-hide-emphasis-markers t
+        org-startup-folded t
+        org-ellipsis " »"
+        org-hide-leading-stars t)
+  (use-package doom-themes
+    :config
+    ;; Global settings (defaults)
+    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+          doom-themes-enable-italic t) ; if nil, italics is universally disabled
+    (load-theme 'doom-one t)
+    ;; Corrects (and improves) org-mode's native fontification.
+    (doom-themes-org-config)
+    )
+
+  (setq org-startup-shrink-all-tables t)
 
 (setq-default mode-line-format '("%e"  mode-line-front-space
                                  mode-line-mule-info
