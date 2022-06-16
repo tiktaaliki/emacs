@@ -4,26 +4,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bold ((t (:foreground "#f5be41" :weight bold :height 1.0))))
- '(custom-button ((t (:background "#282c34" :foreground "#a5c5f3" :box (:line-width 1 :style none)))))
  '(custom-link ((t (:inherit link :foreground "#f9d2ef"))))
- '(custom-visibility ((t (:foreground "chocolate" :underline nil))))
- '(diredp-dir-name ((t (:foreground "dark orange" :weight normal))))
- '(font-lock-keyword-face ((t (:foreground "#92aac7"))))
- '(italic ((t (:foreground "#cb6318" :slant italic))))
- '(link ((t (:foreground "#51afef" :underline t :weight normal :family "monofur"))))
- '(mode-line ((t (:background "#1d2026" :foreground "sienna3" :box nil :height 0.9 :family "monofur"))))
+ '(org-agenda-calendar-event ((t (:foreground "orange" :underline nil))))
  '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "magenta"))))
- '(org-agenda-done ((t (:inherit org-done :height 1.2 :family "fantasque sans mono"))))
- '(org-archived ((t (:foreground "grey32" :strike-through nil))))
- '(org-checkbox-statistics-done ((t (:inherit org-done :strike-through nil :height 1.1))))
- '(org-checkbox-statistics-todo ((t (:inherit org-todo :foreground "#ff4447" :weight normal :height 1.0))))
  '(org-column ((t (:background "gray0" :foreground "pale green" :strike-through nil :underline nil :slant normal :weight normal))))
- '(org-date ((t (:foreground "#d2f1c0" :underline t :slant normal :height 1.05 :family "monofur"))))
- '(org-done ((t (:inherit org-headline-done :weight normal :height 0.8 :family "nova mono"))))
- '(org-drawer ((t (:foreground "#78a5a3" :height 0.8))))
- '(org-ellipsis ((t (:foreground "dim gray" :underline nil))))
- '(org-headline-done ((t (:foreground "#5B6268" :strike-through nil))))
  '(org-level-1 ((t (:inherit outline-1 :extend nil :weight normal :height 1.0))))
  '(org-level-2 ((t (:inherit outline-1 :extend nil :foreground "#809fff" :weight normal :width normal))))
  '(org-level-3 ((t (:inherit org-level-2 :extend nil :foreground "#a862ea" :weight normal :height 1.0 :family "fantasque sans mono"))))
@@ -31,15 +15,8 @@
  '(org-level-5 ((t (:inherit org-level-4 :extend nil :foreground "#a1be95"))))
  '(org-level-6 ((t (:inherit org-level-5 :extend nil :foreground "dark goldenrod"))))
  '(org-level-7 ((t (:inherit org-level-6 :extend nil :foreground "sky blue"))))
- '(org-link ((t (:inherit link :foreground "#b38867" :underline nil :weight normal :height 1.0 :family "monofur"))))
- '(org-property-value ((t (:foreground "#83898d" :height 0.9))) t)
- '(org-quote ((t (:inherit org-block :extend t :background "OliveDrab1" :foreground "black" :slant italic :family "KoHo"))))
- '(org-special-keyword ((t (:foreground "#83898d" :height 0.9))))
  '(org-super-agenda-header ((t (:inherit org-agenda-structure :foreground "#e2dfa2"))))
  '(org-superstar-item ((t (:inherit default :foreground "orange red"))))
- '(org-tag ((t (:foreground "#83898d" :weight normal :height 0.8))))
- '(org-todo ((t (:foreground "#98be65" :weight normal))))
- '(outline-1 ((t (:extend t :foreground "#77b234" :weight normal :height 1.0 :family "Fantasque sans mono"))))
  '(underline ((t (:foreground "#89da59" :underline t))))
  '(variable-pitch ((t (:family "Koho")))))
 (custom-set-variables
@@ -47,9 +24,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(bibtex-completion-format-citation-functions
+   '((org-mode . bibtex-completion-format-citation-org-cite)
+     (latex-mode . bibtex-completion-format-citation-cite)
+     (markdown-mode . bibtex-completion-format-citation-pandoc-citeproc)
+     (python-mode . bibtex-completion-format-citation-sphinxcontrib-bibtex)
+     (rst-mode . bibtex-completion-format-citation-sphinxcontrib-bibtex)
+     (default . bibtex-completion-format-citation-default)))
  '(bmkp-last-as-first-bookmark-file "/home/betsy/.emacs.d/bookmarks")
+ '(default-input-method "korean-hangul")
  '(fill-column 100)
  '(global-visual-line-mode t)
+ '(mu4e-attachment-dir "/home/betsy/Dropbox/2022")
  '(olivetti-body-width 0.8)
  '(org-agenda-columns-add-appointments-to-effort-sum t)
  '(org-agenda-dim-blocked-tasks 'invisible)
@@ -61,6 +47,7 @@
      (search . " %i %-12:c")))
  '(org-agenda-scheduled-leaders '("" "Sch.%2dx: "))
  '(org-agenda-tags-column -80)
+ '(org-cite-global-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
  '(org-columns-default-format "%25ITEM %TODO %3PRIORITY %EFFORT %TAGS")
  '(org-columns-default-format-for-agenda "%25ITEM %TODO %SCHEDULED %EFFORT")
  '(org-duration-format '(("p" . t) (special . h:mm)))
@@ -73,14 +60,32 @@
      ("y" . 525960.0)
      ("p" . 25)))
  '(org-ellipsis " »")
+ '(org-gcal-auto-archive nil)
  '(org-global-properties '(("EFFORT_ALL" . "5 10 15 20 25 30 35 40 45 50 55 60")))
  '(org-habit-show-habits-only-for-today t)
  '(org-id-link-to-org-use-id 'create-if-interactive)
+ '(org-image-actual-width '(400))
  '(org-pomodoro-ticking-sound-states '(:pomodoro))
  '(package-selected-packages
-   '(org pdf-tools helm async helm-bibtex org-gcal transient pomm yas yasnippet-snippets org-time-budgets org-timeline org-pomodoro zoom yankpad xml+ workgroups2 worf which-key wc-mode wc-goal-mode w3m visual-fill-column visible-mark uptimes unkillable-scratch unicode-fonts undo-tree ssh-agency spray speed-type smartparens scrollkeeper rainbow-delimiters quelpa-use-package powerthesaurus pdf-view-restore pdf-continuous-scroll-mode pandoc-mode ox-tufte ox-pandoc ox-clip org-wild-notifier org-web-tools org-wc org-superstar org-sticky-header org-ref org-recent-headings org-plus-contrib org-pdfview org-noter-pdftools org-msg org-mru-clock org-edna org-drill org-download org-clock-today org-clock-split org-clock-convenience org-cliplink org-chef org-bookmark-heading org-auto-tangle org-analyzer org-alert org-ac openwith on-screen olivetti nov mw-thesaurus multiple-cursors mu4e-conversation most-used-words mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane korean-holidays keychain-environment interleave image+ html2org hl-anything highlight helm-unicode helm-swoop helm-projectile helm-org-rifle helm-org-ql helm-flyspell helm-chronos helm-bufler helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update frog-jump-buffer flyspell-correct-helm expand-region doom-themes dired-toggle-sudo diminish deft define-word csv-mode crux counsel copyit-pandoc company-org-roam company-bibtex company-auctex clean-buffers centered-cursor-mode calibredb calfw-org calfw-cal calfw auto-complete-auctex anki-editor anki-connect amread-mode all-the-icons aggressive-indent activity-watch-mode ace-window ace-jump-mode ace-jump-helm-line ace-jump-buffer ac-helm 2048-game))
+   '(org-projectile org-projectile-helm citeproc-org ov org-ref-prettify mu4e org pdf-tools helm async helm-bibtex org-gcal transient pomm yas yasnippet-snippets org-time-budgets org-timeline org-pomodoro zoom yankpad xml+ workgroups2 worf which-key wc-mode wc-goal-mode w3m visual-fill-column visible-mark uptimes unkillable-scratch unicode-fonts undo-tree ssh-agency spray speed-type smartparens scrollkeeper rainbow-delimiters quelpa-use-package powerthesaurus pdf-view-restore pdf-continuous-scroll-mode pandoc-mode ox-tufte ox-pandoc ox-clip org-wild-notifier org-web-tools org-wc org-superstar org-sticky-header org-ref org-recent-headings org-plus-contrib org-pdfview org-noter-pdftools org-msg org-mru-clock org-edna org-drill org-download org-clock-today org-clock-split org-clock-convenience org-cliplink org-chef org-bookmark-heading org-auto-tangle org-analyzer org-alert org-ac openwith on-screen olivetti nov mw-thesaurus multiple-cursors mu4e-conversation most-used-words mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane korean-holidays keychain-environment interleave image+ html2org hl-anything highlight helm-unicode helm-swoop helm-projectile helm-org-rifle helm-org-ql helm-flyspell helm-chronos helm-bufler helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update frog-jump-buffer flyspell-correct-helm expand-region doom-themes dired-toggle-sudo diminish deft define-word csv-mode crux counsel copyit-pandoc company-org-roam company-bibtex company-auctex clean-buffers centered-cursor-mode calibredb calfw-org calfw-cal calfw auto-complete-auctex anki-editor anki-connect amread-mode all-the-icons aggressive-indent activity-watch-mode ace-window ace-jump-mode ace-jump-helm-line ace-jump-buffer ac-helm 2048-game))
+ '(pdf-annot-default-annotation-properties
+   '((t
+      (label . "Betsy"))
+     (text
+      (color . "#ff0000")
+      (icon . "Note"))
+     (highlight
+      (color . "spring green"))
+     (underline
+      (color . "blue"))
+     (squiggly
+      (color . "orange"))
+     (strike-out
+      (color . "red"))))
  '(safe-local-variable-values
    '((org-download-image-dir . "/home/betsy/.local/share/Anki2/User 1/collection.media")
      (org-reverse-note-order)))
+ '(user-mail-address "betsy.yoon@baruch.cuny.edu")
  '(visual-fill-column-center-text t)
+ '(warning-suppress-types '((use-package)))
  '(yas-global-mode t))

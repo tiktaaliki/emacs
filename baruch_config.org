@@ -408,11 +408,12 @@ CLOCK: [2021-06-08 Tue 13:51]--[2021-06-08 Tue 14:06] =>  0:15
                              "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org"
                              "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/readings.org"
                              "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/contacts.org"
+                             "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/events.org"
                              "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/ndd.org"
-    			   "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org"
+                           "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org"
                              "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/personal.org"
                              "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/lis.org"
-                             "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/cal.org"
+
                              "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/recipes.org"
                              "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/sysadmin.org" 
                             "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/zettels.org"
@@ -1027,7 +1028,7 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
 #+BEGIN_SRC emacs-lisp :tangle yes
   (find-file "c:/Users/eyoon/AppData/Roaming/.emacs")
 (find-file "c:/Users/eyoon/Dropbox (Personal)/emacs/baruch_config.org")
-  (find-file "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org")
+;  (find-file "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org")
 
  (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
 
