@@ -317,11 +317,12 @@
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/readings.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/contacts.org"
+                         "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/events.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/ndd.org"
-    		       "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org"
+                       "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/personal.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/lis.org"
-                         "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/cal.org"
+
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/recipes.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/sysadmin.org" 
                         "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/zettels.org"
@@ -729,6 +730,6 @@
 
 (find-file "c:/Users/eyoon/AppData/Roaming/.emacs")
 (find-file "c:/Users/eyoon/Dropbox (Personal)/emacs/baruch_config.org")
-  (find-file "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org")
+;  (find-file "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org")
 
  (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)

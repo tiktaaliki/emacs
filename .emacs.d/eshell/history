@@ -1,108 +1,3 @@
-xinput disable 13
-exit
-xrandr --output DP-2 --mode 3840x2160 --scale .5x.5 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.5x1.5 --pos 2880x0 --rotate normal
-xrandr --output DP-2 --scale 1x1 --pos 0x0 --output HDMI-2 --scale 1.25x1.25 --right-of DP-2
-xrandr --output DP-2 --scale 1x1 --pos 0x0 --output HDMI-2 --scale 1x1 --right-of DP-2
-xrandr --output DP-2 --scale .5x.5 --pos 0x0 --output HDMI-2 --scale 1x1 --right-of DP-2
-xrandr --output DP-2 --scale .5x.5 --pos 0x0 --output HDMI-2 --scale 1x1 --right-of DP-2 --pos 1920x0
-xrandr --output DP-2 --scale 1x1 --pos 0x0 --output HDMI-2 --scale 1x1 --right-of DP-2
-xrandr --output DP-2 --scale .5x.5 --pos 0x0 --output HDMI-2 --scale 1x1 --right-of DP-2 --pos 1920x0
-xrandr --output DP-2 --mode 3840x2160 --scale .5x.5 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale .5x.5 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
-sudo simple-scan
-exit
-xrandr --output DP-2 --mode 3840x2160 --scale .5x.5 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale .9x9 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale .5x.5 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale .9x.9 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale .5x.5 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale .8x.8 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale .9x.9 --pos 1296x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale .9x.9 --pos 1296x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 1920x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate left --output HDMI-2 --primary --mode 1920x1080 --scale 1.15x1.15 --pos 1296x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.15x1.15 --pos 1296x0 --rotate normal
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.15x1.15 --pos 1296x0 --rotate left
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.15x1.15 --pos 2305x0 --rotate right
-xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary  --scale 1x1 --pos 2304x0 --rotate right
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary  --scale 1.15x1.15 --pos 2304x1000 --rotate right
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x0 --rotate normal --output HDMI-2 --primary  --scale 1.15x1.15 --pos 2304x500 --rotate right
-xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x0 --rotate normal --output HDMI-2 --primary  --scale 1x1 --pos 2304x0 --rotate right
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x1000 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.15x1.15 --pos 2304x0 --rotate right
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x800 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1.15x1.15 --pos 2304x0 --rotate right
-ifconfig
-ifconfig -a
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x800 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate right
-xrandr --output DP-2 --mode 3840x2160 --scale 1x1 --pos 0x800 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate right
-xrandr --output DP-2 --mode 3840x2160 --scale .6x.6 --pos 0x800 --rotate normal --output HDMI-2 --primary --mode 1920x1080 --scale 1x1 --pos 2304x0 --rotate right
-xinput --list
-xinput disable 13
-pandoc TongilSolidarity.odt -f odt -t org -s -o tongil.org
-bluetoothctl
-xinput disable 13
-xinput enable 13
-xinput --list
-xinput disable 14
-ssh root@10.11.99.1
-ssh root@10.11.99.1
-ssh root@192.168.2.90
-ssh-keygen -R 10.11.99.1
-ssh root@10.11.99.1
-ssh-keygen
-ssh-copy-id root@10.11.99.1
-ssh root@10.11.99.1
-ssh -V
-ssh root@10.11.99.1
-ssh root@10.11.99.1
-ssh root@192.168.2.90
-ssh -oHostKeyAlgorithms=+ssh-dss root@10.11.99.1
-ssh -oHostKeyAlgorithms=+ssh-dss root@192.168.2.90
-ssh -oHostKeyAlgorithms=+ssh-dss root@10.11.99.1
-ssh-copy-id root@10.11.99.1
-ssh -oHostKeyAlgorithms=+ssh-dss root@10.11.99.1
-ssh root@10.11.99.1
-ssh root@remarkable
-ssh root@remarkable
-ssh root@remarkable
-setxkbmap -model pc104 -layout "us,kr" -variant "dvorak," -option "ctrl:nocaps"
-setxkbmap -model pc104 -layout "us,kr" -option "ctrl:nocaps"
-sudo xkill
-exit
-setxkbmap -model pc104 -layout "us,kr" -option "ctrl:nocaps"
-exit
-setxkbmap -model pc104 -layout "us,kr" -option "ctrl:nocaps"
-xinput --list
-xinput --disable 13
-exit
-for f in *.HEIC; do heif-convert -q 100 $f $f.jpg; done
-heif-convert IMG_0862.HEIC IMG_0862.png
-heif-convert IMG_0862.HEIf IMG_0862.png
-sudo simple-scan
-xinput --list
-xinput --enable 2
-exit
-sudo simple-scan
-simple-scan
-reboot
-xinput --list
-xinput --disable 13
-chmod +x i3-get-window-criteria
-i3-get-window-criteria
-./i3-get-window-criteria
-chmod +x i3-get-window-criteria
-./i3-get-window-criteria
-reboot
-xrandr --output eDP-1 --scale 1x1  --output HDMI-2 --scale .5x.5 
-xrandr --output eDP-1 --scale 1x1  --output HDMI-2 --scale .5x.5 
-xinput --list
 xinput --disable 13
 xrandr --output eDP-1 --scale 1x1  --output HDMI-2 --scale .5x.5 
 exit
@@ -126,3 +21,108 @@ sudo xkill
 exit
 sudo xkill
 setxkbmap -model pc104 -layout "us,kr" -option "ctrl:nocaps"
+sudo xkill
+mu init
+mu init -my-address=betsy.yoon@baruch.cuny.edu
+xinput --list
+xinput --disable 13
+exit
+cd ..
+ls
+cd 2022
+ls
+cd NDD
+ls
+pandoc Campaign Brainstorming Meeting Agenda (2_12).odt -f odt -t org -s -o Campaign Brainstorming Meeting Agenda.org
+pandoc CampaignBrainstorming.odt -f odt -t org -s -o CampaignBrainstorming.org
+xinput --list
+xinput --disable 13
+xinput --list
+xinput --disable 13
+xinput --disable 13
+xrandr
+xrandr --scale 1.5x1.5
+xrandr --output eDP-1 --scale 1.5x1.5
+xrandr --output eDP-1 --scale 1.25x1.25
+xrandr --output eDP1 --scale .5x.5
+xrandr --output eDP-1 --scale .5x.5
+xrandr --output eDP-1 --scale 1.5x1.5
+xrandr --output eDP-1 --scale 1.25x1.25
+xinput --list
+xinput --disable 14
+pdftotext Alem_learningreflection.pdf - | tr -d '.' | wc -w
+pdftotext Arad_Learningreflection1.pdf - | tr -d '.' | wc -w
+pdftotext Carmen_reflection.pdf - | tr -d '.' | wc -w
+pdftotext Cassandra_LearningReflections.pdf - | tr -d '.' | wc -w
+pdftotext Jem_Learning-reflection.pdf - | tr -d '.' | wc -w
+pdftotext KM_Learning reflection.pdf - | tr -d '.' | wc -w
+pdftotext Sami_learningreflection.pdf - | tr -d '.' | wc -w
+pdftotext Sheril_learning-reflection.pdf - | tr -d '.' | wc -w
+pdftotext Vinika_learningreflection1.pdf - | tr -d '.' | wc -w
+pdftotext Kevin_Learningreflection1.pdf - | tr -d '.' | wc -w
+pdftotext kirilllearningreflection1.pdf - | tr -d '.' | wc -w
+update-desktop-database ~/.local/share/applications/
+update-desktop-database ~/.local/share/applications/
+update-desktop-database ~/.local/share/applications/
+kbuildsycoca5
+xdg-mime default org-protocol.desktop x-scheme-handler/org-protocol
+update-desktop-database ~/.local/share/applications/
+xdg-mime query default application/org-protocol
+xdg-mime query default application/pdf
+xrandr --output DP-3 --left-of DP-1 --scale .6x.6
+xrandr --output DP-3 --left-of DP-1 --scale .75x.75
+xrandr --output DP-3 --left-of DP-1 --scale 1x1
+xrandr --output DP-3 --left-of DP-1 --scale .75x.75 --output DP-1 --scale 1.25x1.25
+xrandr --output DP-3 --left-of DP-1 --scale .75x.75 --output DP-1 --scale 1x1
+xrandr --output DP-3 --left-of DP-1 --scale 1x1 --output DP-1 --scale 1x1
+xrandr --output DP-3 --left-of DP-1 --scale .5x.5 --output DP-1 --scale 1x1
+cd .. / .. 
+cd .. 
+cd ..
+cd Downloads
+ls
+debtap brscan5-1.2.10-0.amd64.deb
+ls
+sudo pacman -U brscan5-1.2.10-1-x86_64.pkg.tar.zst
+sudo simple-scan
+sudo simple-scan
+./i3-get-window-criteria
+cd .. 
+cd ..
+ls
+cd .config
+ls
+cd i3
+ls
+chmod +x i3-get-window-criteria.sh
+i3-get-window-criteria
+./i3-get-window-criteria
+xrandr --output DP-1 --scale 1x1 --output DP-3 --scale 1x1 --left-of DP-1 --primary
+xrandr --output DP-1 --scale 1x1 --output DP-3 --scale .5x.5 --left-of DP-1 --primary
+xrandr --output DP-1 --scale 1x1 --pos 1920x0 --output DP-3 --scale .5x.5 --left-of DP-1 --primary --pos 0x0
+xrandr --output DP-1 --scale 1x1 --pos 1920x0 --output DP-3 --scale .5x.5 --left-of DP-1 --primary --pos 0x0
+xrandr --output DP-1 --scale 1x1 --pos 1920x0 --output DP-3 --scale 1x1 --left-of DP-1 --primary --pos 0x0
+update-desktop-database ~/.local/share/applications/
+cd Scholarship
+ls
+pandoc -f org -t odt open.org
+pandoc -f org -t odt open.org -o open.odt
+ls
+ls
+./i3-get-window-criteria
+  git config --global user.email "betsy.yoon@gmail.com"
+git config --global user.name "Betsy"
+git remote add origin https://github.com/tiktaaliki/emacs.git
+gh auth login
+gh auth login
+ls -al ~/.ssh
+ssh-keygen -t ed25519 -C "your_email@example.com"
+ssh-keygen -t ed25519 -C "betsy.yoon@gmail.com"
+eval "$(ssh-agent -s)"
+sudo -s -H
+ssh-add ~/.ssh/id_ed25519
+sudo eval "$(ssh-agent -s)"
+sudo -s -H
+cd /home/betsy/.ssh
+ls
+id_ed25519

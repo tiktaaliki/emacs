@@ -1,4 +1,4 @@
-(set-fringe-mode '(50 . 50))
+(set-fringe-mode '(10 . 10))
   (fset 'yes-or-no-p 'y-or-n-p)
                                           ;  (setq confirm-kill-emacs (quote y-or-n-p))
   (setq confirm-kill-emacs nil
@@ -53,25 +53,6 @@
 (global-set-key (kbd "C-z") 'ace-jump-helm-line)
 (setq tab-bar-mode nil)
 
-(load "dired+")
-(define-key dired-mode-map (kbd "<f1>") 'org-capture)
-(setq dired-auto-revert-buffer (quote dired-directory-changed-p)
-      dired-omit-verbose nil
-      dired-omit-files
-      (concat dired-omit-files "\\|^.DS_STORE$\\|^.projectile$\\|^.org~$")
-      )
-(add-hook 'dired-load-hook
-          (function (lambda () (load "dired-x"))))
-
-(add-hook 'dired-mode-hook
-          (lambda ()
-            ;; Set dired-x buffer-local variables here.  For example:
-            (dired-omit-mode 1)
-            ))
-
-;; toggle `dired-omit-mode' with C-x M-o
-(add-hook 'dired-mode-hook #'dired-omit-mode)
-
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
 (use-package openwith
   :defer t
@@ -99,6 +80,7 @@
                            "LibreOffice"
                            '(file))
 
+
                      ))
               (openwith-mode 1)))
   :ensure t)
@@ -113,7 +95,7 @@
       deft-use-filename-as-title t
       deft-new-file-format "%Y%b%d"
       deft-text-mode 'org-mode
-      deft-recursive nil
+      deft-recursive t
       deft-extensions '("org" "txt" "emacs" "bib" "ledger" "el" "tex")
       deft-auto-save-interval 15.0
       deft-file-naming-rules '((noslash . "-")
@@ -122,9 +104,10 @@
 
 
 
-(add-hook 'after-init-hook 'deft)
+;(add-hook 'after-init-hook 'deft)
 (add-hook 'deft-mode-hook #'visual-line-mode)
 
+(use-package undo-tree)
 (use-package s)
 (use-package org
   :ensure t
@@ -202,10 +185,10 @@
 (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
       org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
       org-gcal-fetch-file-alist '(
-    ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/timeblocking.org")
+
     ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )))
 
-(setq org-gcal-recurring-events-mode 'nested)
+(setq org-gcal-recurring-events-mode 'top-level)
 
 (setq org-indirect-buffer-display 'current-window)
 (defun transpose-windows ()
@@ -255,6 +238,9 @@
  ("C-a" . org-beginning-of-line) 
  ("C-e" . end-of-line) 
  ("C-k" . org-kill-line)
+ ("M->" . end-of-buffer)
+ ("C->" . end-of-buffer) ; necessary b/c for some reason emacs in kde plasma doesn't seem to recognize M-< and only see is it as M-.
+ ("C-<" . beginning-of-buffer)    ; necessary b/c for some reason emacs in kde plasma doesn't seem to recognize M-< and only see is it as M-.
  ("C-."   . org-todo)
  ("C-x /" . shrink-window-horizontally)
  ("C-x ." . org-archive-subtree-default)
@@ -317,31 +303,37 @@
 
 ")
 
-(use-package emojify
-  :hook (after-init . global-emojify-mode))
+; (use-package emojify
+  ;  :hook (after-init . global-emojify-mode))
 
-  (use-package org-superstar
-    :config
-    (setq org-superstar-headline-bullets-list '("◉" "☆" "❤" "¶" "★" )
-          org-superstar-item-bullet-alist (quote ((42  . 33) (43 . 62) (45 . 45)))
-          )
-    (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
-  (setq org-startup-indented t
-        org-hide-emphasis-markers t
-        org-startup-folded t
-        org-ellipsis " »"
-        org-hide-leading-stars t)
-  (use-package doom-themes
-    :config
-    ;; Global settings (defaults)
-    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-          doom-themes-enable-italic t) ; if nil, italics is universally disabled
-    (load-theme 'doom-one t)
-    ;; Corrects (and improves) org-mode's native fontification.
-    (doom-themes-org-config)
-    )
+    (use-package org-superstar
+      :config
+      (setq org-superstar-headline-bullets-list '("◉" "☆" "♡" "¶" "★" )
+            org-superstar-item-bullet-alist (quote ((42  . 33) (43 . 62) (45 . 45)))
+            )
+      (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+    (setq org-startup-indented t
+          org-hide-emphasis-markers t
+          org-startup-folded t
+          org-ellipsis " »"
+          org-hide-leading-stars t)
+    (use-package doom-themes
+      :config
+      ;; Global settings (defaults)
+      (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+            doom-themes-enable-italic t) ; if nil, italics is universally disabled
+      (load-theme 'doom-one t)
+      ;; Corrects (and improves) org-mode's native fontification.
+      (doom-themes-org-config)
+      )
 
-  (setq org-startup-shrink-all-tables t)
+    (setq org-startup-shrink-all-tables t)
+
+  ;strikethrough org-emphasis-alist
+  (require 'cl)   ; for delete*
+(setq org-emphasis-alist
+      (cons '("+" '(:strike-through t :foreground "gray"))
+            (delete* "+" org-emphasis-alist :key 'car :test 'equal)))
 
 (setq-default mode-line-format '("%e"  mode-line-front-space
                                  mode-line-mule-info
@@ -473,63 +465,7 @@
 (eval-after-load "helm"
   '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
 
-(setq org-directory "~/Dropbox/Zettelkasten/"
-      org-default-notes-file "~/Dropbox/Zettelkasten/inbox.org"
-      org-archive-location "~/Dropbox/Zettelkasten/journal.org::datetree/"
-      org-contacts-files (quote ("~/Dropbox/Zettelkasten/contacts.org"))
-      org-roam-directory "~/Dropbox/Zettelkasten"
-      )
-(setq org-archive-reversed-order nil
-      org-reverse-note-order t
-      org-refile-use-cache t
-      org-refile-allow-creating-parent-nodes t
-      org-refile-use-outline-path 'file
-      org-outline-path-complete-in-steps nil
-      )
-
-(setq org-refile-targets '(
-                           ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
-                           ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
-                           ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
-                           ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
-                           ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
-                           ("~/Dropbox/Zettelkasten/baruch.org" :maxlevel . 3)
-                           ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
-                           ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2)
-                           ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 2)
-                           ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
-                           ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2)
-                           ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1)
-                           ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 2)
-                           )
-
-
-      )
-
-(defun my-org-refile-cache-clear ()
-  (interactive)
-  (org-refile-cache-clear))
-(define-key org-mode-map (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
-
-
-
-
-                                        ; Refile in a single go
-
-                                        ;  (global-set-key (kbd "<f4>") 'org-refile)
-
-
-(setq org-id-link-to-org-use-id (quote create-if-interactive)
-      org-id-method (quote org)
-      org-return-follows-link t
-      org-link-keep-stored-after-insertion nil
-      org-goto-interface (quote outline-path-completion)
-      org-clock-mode-line-total 'current)
-
-                                        ;   (add-hook 'org-mode-hook (lambda () (org-sticky-header-mode 1)))
-
-
-(setq global-visible-mark-mode t)
+(use-package org-wc)
 
 (use-package org-auto-tangle
                 :hook (org-mode . org-auto-tangle-mode)
@@ -542,63 +478,113 @@
   (setq org-export-with-section-numbers nil)
 (use-package org-clock-split)
 
+(setq org-directory "~/Dropbox/Zettelkasten/" org-default-notes-file
+               "~/Dropbox/Zettelkasten/inbox.org" org-archive-location
+               "~/Dropbox/Zettelkasten/journal.org::datetree/" org-contacts-files (quote
+               ("~/Dropbox/Zettelkasten/contacts.org")) )
+(setq
+               org-archive-reversed-order nil org-reverse-note-order t org-refile-use-cache t
+               org-refile-allow-creating-parent-nodes t org-refile-use-outline-path 'file
+               org-outline-path-complete-in-steps nil )
+
+         (setq org-refile-targets '(
+                                    ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
+                                    ("~/Dropbox/Zettelkasten/events.org" :maxlevel . 1)
+                                    ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
+                                    ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
+                                    ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
+                                    ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
+
+                                    ("~/Dropbox/Zettelkasten/baruch.org" :maxlevel . 5)
+                                    ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
+                                    ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2)
+                                    ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 2) ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1) ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2) ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1) ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 2) )
+
+
+               )
+
+         (defun my-org-refile-cache-clear () (interactive) (org-refile-cache-clear)) (define-key org-mode-map
+           (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
+
+
+
+
+                                                 ; Refile in a single go
+
+                                                 ;  (global-set-key (kbd "<f4>") 'org-refile)
+
+
+         (setq org-id-link-to-org-use-id (quote create-if-interactive) org-id-method (quote org)
+               org-return-follows-link t org-link-keep-stored-after-insertion nil org-goto-interface (quote
+               outline-path-completion) org-clock-mode-line-total 'current)
+
+                                                 ;   (add-hook 'org-mode-hook (lambda ()
+                                                 ;   (org-sticky-header-mode 1)))
+
+
+         (setq global-visible-mark-mode t)
+
 (add-hook 'org-agenda-mode-hook
-                                      (lambda ()
-                                        (visual-line-mode -1)
-                                        (toggle-truncate-lines 1)))
+                                        (lambda ()
+                                          (visual-line-mode -1)
+                                          (toggle-truncate-lines 1)))
 
 
-  (setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
-     (setq org-global-properties '(("EFFORT_ALL" . "0:05 0:10 0:15 0:20 0:25 0:30 0:35 0:40 0:45 0:50 0:55 0:60")))
+    (setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
+       (setq org-global-properties '(("EFFORT_ALL" . "0:05 0:10 0:15 0:20 0:25 0:30 0:35 0:40 0:45 0:50 0:55 0:60")))
 
 
-(setq org-agenda-files '(
-                         "~/Dropbox/Zettelkasten/inbox.org"
-                         "~/Dropbox/Zettelkasten/contacts.org"
-                         "~/Dropbox/Zettelkasten/readings.org"
-                         "~/Dropbox/Zettelkasten/journal.org"
-                         "~/Dropbox/Zettelkasten/ndd.org"
-                         "~/Dropbox/Zettelkasten/baruch.org"
-                         "~/Dropbox/Zettelkasten/personal.org"
-                         "~/Dropbox/Zettelkasten/lis.org"
-                         "~/Dropbox/Zettelkasten/recipes.org"
-                         "~/Dropbox/Zettelkasten/sysadmin.org"
-                         "~/Dropbox/Zettelkasten/events.org"
-                         "~/Dropbox/Zettelkasten/editing.org"
-                         "~/Dropbox/Zettelkasten/zettels.org"
-                         ))
+  (setq org-agenda-files '(
+                           "~/Dropbox/Zettelkasten/inbox.org"
+                           "~/Dropbox/Zettelkasten/contacts.org"
+                           "~/Dropbox/Zettelkasten/readings.org"
+                           "~/Dropbox/Zettelkasten/journal.org"
+                           "~/Dropbox/Zettelkasten/ndd.org"
+;                           "~/Dropbox/Zettelkasten/Scholarship/open.org"
+                           "~/Dropbox/Zettelkasten/baruch.org"
+                           "~/Dropbox/Zettelkasten/personal.org"
+                           "~/Dropbox/Zettelkasten/lis.org"
+                           "~/Dropbox/Zettelkasten/recipes.org"
+                           "~/Dropbox/Zettelkasten/sysadmin.org"
+                           "~/Dropbox/Zettelkasten/events.org"
+                           "~/Dropbox/Zettelkasten/editing.org"
+                           "~/Dropbox/Zettelkasten/zettels.org"
+                           ))
 
 
 
-(setq org-agenda-skip-scheduled-if-done t
-      org-agenda-skip-deadline-if-done t
-      org-agenda-skip-timestamp-if-done t
-      org-agenda-skip-deadline-prewarning-if-scheduled t
-      )
+  (setq org-agenda-skip-scheduled-if-done nil
+        org-agenda-skip-deadline-if-done t
+        org-agenda-skip-timestamp-if-done t
+        org-agenda-skip-deadline-prewarning-if-scheduled t
+        )
 
-(setq org-agenda-clockreport-parameter-plist
-      (quote
-       (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags t :hidefiles nil :fileskip0 t)))
+  (setq org-agenda-clockreport-parameter-plist
+        (quote
+         (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags t :hidefiles nil :fileskip0 t)))
 
-(setq org-clock-report-include-clocking-task t)
-(setq org-agenda-prefix-format
-      '((agenda . " %i %-12:c%?-12t% s")
-        (todo . " %i %-12:c")
-        (tags . " %i %-12:c")
-        (search . " %i %-12:c")))
+  (setq org-clock-report-include-clocking-task t)
+  (setq org-agenda-prefix-format
+        '((agenda . " %i %-12:c%?-12t% s")
+          (todo . " %i %-12:c")
+          (tags . " %i %-12:c")
+          (search . " %i %-12:c")))
 
-(setq org-agenda-with-colors t
-      org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
-      org-agenda-current-time-string "✸✸✸✸✸"
-      org-agenda-start-with-clockreport-mode t
-      org-agenda-dim-blocked-tasks t
-      org-agenda-window-setup 'only-window
-      )
+  (setq org-agenda-with-colors t
+        org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
+        org-agenda-current-time-string "✸✸✸✸✸"
+        org-agenda-start-with-clockreport-mode t
+        org-agenda-dim-blocked-tasks t
+        org-agenda-window-setup 'only-window
+        )
 
 
-(setq org-agenda-format-date
-      (lambda (date)
-        (concat "\n---------------------------------\n" (org-agenda-format-date-aligned date))))
+  (setq org-agenda-format-date
+        (lambda (date)
+          (concat "\n---------------------------------\n" (org-agenda-format-date-aligned date))))
+
+
+(setq org-agenda-sticky t)
 
 (use-package org-super-agenda)
 (org-super-agenda-mode 1)
@@ -618,19 +604,10 @@
         ("la" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
                                         (org-super-agenda-groups
                                          '(
-                                           (:name "NOW" :tag "NOW")
-                                           (:name "DEEP: necessary and timely" :and (:tag "DEEP" :tag "#necessary" :tag "@timely"))
-                                           (:name "SHALLOW: necessary and timely" :and (:tag "SHALLOW" :tag "#necessary" :tag "@timely"))
-                                           (:name "HOME" :and (:tag "HOME"))
-
-                                           (:name "DEEP: necessary but not timely" :and (:tag "DEEP" :tag "#necessary" :tag "@nottimely"))
-                                           (:name "SHALLOW: necessary but not timely" :and (:tag "SHALLOW" :tag "#necessary" :tag "@nottimely"))
-  (:name "SHALLOW: timely" :and (:tag "SHALLOW" :tag "@timely"))
-
-                                           (:name "DEEP: timely but not necessary" :and (:tag "DEEP" :tag "#wouldbenice" :tag "@timely"))
-                                           (:name "SHALLOW: timely but not necessary" :and (:tag "SHALLOW" :tag "#wouldbenice" :tag "@timely"))                                                       
-                                           (:name "necessary but not timely" :and (:tag "#necessary" :tag "@nottimely"))
-                                           (:tag "workflow")
+                                           (:name "NDD" :and (:tag "ndd" :category "ndd"))
+                                             (:name "Scholarship" :and (:tag "schol"))
+                                             (:name "Baruch" :and (:tag "baruch"))
+                                            (:name "Me" :and (:tag "me"))
 
 
                                            ))))))
@@ -653,9 +630,10 @@
                              (alltodo "" ((org-agenda-overriding-header "")
                                           (org-super-agenda-groups
                                            '(
-                                          (:name "DEEP: necessary and timely" :and (:tag "DEEP" :tag "#necessary" :tag "@timely"))
-                                                 (:name "SHALLOW: necessary and timely" :and (:tag "SHALLOW" :tag "#necessary" :tag "@timely"))
-                                             (:name "wait" :todo "WAIT")
+                                             (:name "NDD" :and (:tag "ndd" :category "ndd"))
+                                             (:name "Scholarship" :and (:tag "schol"))
+                                             (:name "Baruch" :and (:tag "baruch"))
+                                            (:name "Me" :and (:tag "me"))
                                              ))))
                              )
          ((org-agenda-skip-function
@@ -684,7 +662,7 @@
 (setq org-todo-keyword-faces
       '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
                                         ;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
-        ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#d0b17c")
+        ("TODO" :weight regular :underline nil :inherit org-todo :foreground "yellow green")
         ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
         ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
         ("to-process" :foreground "magenta")
@@ -698,32 +676,32 @@
 (setq org-log-done 'time)
 
 (setq org-capture-templates
-      '(
-        ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
+        '(
+          ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
 
-        ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
+          ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
 
-        ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
-        ("f" "Anki Flashcards")
-        ("fb" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+          ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
+          ("f" "Anki Flashcards")
+          ("fb" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
 
-        ("fc" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
+          ("fc" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
 
-        ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
+          ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
+;removed "scheduled" from todo entries
+          ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n" :prepend nil)
 
-        ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \nSCHEDULED: %t\n%a\n" :prepend nil)
+          ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
+           "* %a \nSCHEDULED: %t %?\n%:initial" )
+          ("x" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
+           "* TODO %? \nSCHEDULED: %t\n%a\n\n%:initial" )
+          ("p" "org-protocol" table-line (id "pens")
+           "|%^{Pen}|%A|%^{Price}|%U|" )
 
-        ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
-         "* %a \nSCHEDULED: %t %?\n%:initial" )
-        ("x" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
-         "* TODO %? \nSCHEDULED: %t\n%a\n\n%:initial" )
-        ("p" "org-protocol" table-line (id "pens")
-         "|%^{Pen}|%A|%^{Price}|%U|" )
+          ("y" "org-protocol" item (id "resources")
+           "[ ] %a %:initial" )
 
-        ("y" "org-protocol" item (id "resources")
-         "[ ] %a %:initial" )
-
-        ))
+          ))
 
 (setq org-clock-out-remove-zero-time-clocks t)
 
@@ -760,7 +738,8 @@
 (setq org-tag-alist '(
                       (:startgroup . nil)
                       ("ndd" . ?n)
-                      ("self" . ?s)
+                      ("schol" . ?s)
+                      ("me" . ?m)
                       ("baruch" . ?b)
                       ("sysadmin" . ?y)
                       ("home" . ?h)
@@ -900,17 +879,17 @@
     (start-process "view-pdf" nil "evince" "--page-index" page pdf-file)))
 
 (use-package org-roam
- :bind 
-    ("C-c <f1>" . org-roam-capture))
-
-    (setq org-roam-capture-templates '(("d" "default" plain "#+title: ${title}\n* ${title}\n%?\n* Metadata \n- What is the purpose of this zettel?\n\n- What is the nature of the content I wish to include in this zettel?\n- How does it relate to the existing network?\n- How do I wish to discover this information in the future?" :target
-(file+head "%<%Y%m%d%H%M%S>_${slug}.org" "") :jump-to-captured t :unnarrowed t)))
-
- (setq org-roam-completion-system 'helm)
-
-
- (setq org-roam-v2-ack t)
-
+  :ensure t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (setq org-roam-directory (file-truename "~/Dropbox/Zettelkasten/Zettels"))
+  (org-roam-db-autosync-mode)
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert))
+  :config
+  (org-roam-setup))
 
    (defun my/org-roam--title-to-slug (title) ;;<< changed the name
      "Convert TITLE to a filename-suitable slug."
@@ -932,59 +911,59 @@
    (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
 
 (use-package org-ref)
-(setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
+  (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
+  
+  ;; see org-ref for use of these variables
+  (setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/readings.org"
+        org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
+        org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/"
+        org-ref-prefer-bracket-links t
+        )
+  
+  (setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
+        bibtex-completion-notes-path "~/Dropbox/Zettelkasten/readings.org")
+  
+  ;; open pdf with system pdf viewer (works on mac)
+  (setq bibtex-completion-pdf-open-function
+        (lambda (fpath)
+          (start-process "open" "*open*" "open" fpath)))
+  
+  
+                                          ;  (setq pdf-view-continuous nil)
+  
+                                          ;  (setq bibtex-autokey-year-title-separator "")
+                                          ; (setq bibtex-autokey-titleword-length 0)
+  
+  
+  (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DISCOVERY:\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:INTERLEAVE_PDF: ../Library/BIBTEX/$(=key=).pdf\n:TYPE:\n:AREA:\n:END:")
+  
+  (setq bibtex-maintain-sorted-entries t)
 
-;; see org-ref for use of these variables
-(setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/readings.org"
-      org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
-      org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/"
-      org-ref-prefer-bracket-links t
-      )
-
-(setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
-      bibtex-completion-notes-path "~/Dropbox/Zettelkasten/readings.org")
-
-;; open pdf with system pdf viewer (works on mac)
-(setq bibtex-completion-pdf-open-function
-      (lambda (fpath)
-        (start-process "open" "*open*" "open" fpath)))
-
-
-                                        ;  (setq pdf-view-continuous nil)
-
-                                        ;  (setq bibtex-autokey-year-title-separator "")
-                                        ; (setq bibtex-autokey-titleword-length 0)
-
-
-(setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DISCOVERY:\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:INTERLEAVE_PDF: ../Library/BIBTEX/$(=key=).pdf\n:TYPE:\n:AREA:\n:END:")
-
-(setq bibtex-maintain-sorted-entries t)
-
-
-(use-package org-noter
-  :ensure t
-  :defer t
-  :config
-  (setq org-noter-property-doc-file "INTERLEAVE_PDF"
-        org-noter-property-note-location "INTERLEAVE_PAGE_NOTE"
-        org-noter-default-notes-file-names "~/Dropbox/Zettelkasten/readings.org"
-        org-noter-notes-search-path "~/Dropbox/Zettelkasten/"
-        ;;org noter windows
-        org-noter-always-create-frame nil
-        org-noter-notes-window-location (quote horizontal-split)
-        org-noter-doc-split-fraction (quote (0.75 . 0.75))
-        org-noter-kill-frame-at-session-end nil
-
-        org-noter-auto-save-last-location t
-        org-noter-default-heading-title "$p$: "
-        org-noter-insert-note-no-questions t
-        org-noter-insert-selected-text-inside-note t
-        ))
-                                        ;       (setq org-noter-notes-window-location 'other-frame)
-                                        ;      (setq org-noter-default-heading-title "p. $p$") 
-  (use-package interleave 
+  
+  (use-package org-noter
+    :ensure t
     :defer t
-    )
+    :config
+    (setq org-noter-property-doc-file "INTERLEAVE_PDF"
+          org-noter-property-note-location "INTERLEAVE_PAGE_NOTE"
+          org-noter-default-notes-file-names "~/Dropbox/Zettelkasten/readings.org"
+          org-noter-notes-search-path "~/Dropbox/Zettelkasten/"
+          ;;org noter windows
+          org-noter-always-create-frame nil
+          org-noter-notes-window-location (quote horizontal-split)
+          org-noter-doc-split-fraction (quote (0.75 . 0.75))
+          org-noter-kill-frame-at-session-end nil
+  
+          org-noter-auto-save-last-location t
+          org-noter-default-heading-title "$p$: "
+          org-noter-insert-note-no-questions nil
+          org-noter-insert-selected-text-inside-note t
+          ))
+                                          ;       (setq org-noter-notes-window-location 'other-frame)
+                                          ;      (setq org-noter-default-heading-title "p. $p$") 
+;    (use-package interleave 
+ ;     :defer t
+  ;    )
 
 ;; Spell checking (requires the ispell software)
   (add-hook 'bibtex-mode-hook 'flyspell-mode)
@@ -1008,16 +987,69 @@
   bibtex-autokey-name-case-convert-function 'capitalize
       )
 
+(use-package citeproc)
+    (use-package org-ref-cite
+      :load-path "/home/betsy/Dropbox/emacs/.emacs.d/lisp/org-ref-cite-main/"
+      :config
+      ;; I like green links
+      (set-face-attribute 'org-cite nil :foreground "DarkSeaGreen4")
+      (set-face-attribute 'org-cite-key nil :foreground "forest green")
+      (setq
+       org-cite-global-bibliography bibtex-completion-bibliography
+       ;; https://github.com/citation-style-language/styles
+       ;; or https://www.zotero.org/styles
+       org-cite-csl-styles-dir "/home/betsy/Dropbox/emacs/.emacs.d/lisp/org-ref-cite-main/csl-styles/"
+       org-cite-insert-processor 'org-ref-cite
+       org-cite-follow-processor 'org-ref-cite
+       org-cite-activate-processor 'org-ref-cite
+       org-cite-export-processors '((html csl "elsevier-with-titles.csl")
+                                    (latex org-ref-cite)
+                                    (t basic))))
+
+
+   ;from https://blog.tecosaur.com/tmio/2021-07-31-citations.html
+(require 'oc-natbib)
+(require 'oc-csl)
+;  (setq org-cite-export-processors 'csl)
+  (setq org-cite-csl-styles-dir "~/Zotero/styles")
+
 (require 'ox-extra)
-(ox-extras-activate '(ignore-headlines))
+  (ox-extras-activate '(ignore-headlines))
 
 
 
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+(with-eval-after-load 'ox-latex
+(add-to-list 'org-latex-classes
+             '("org-plain-latex"
+               "\\documentclass{article}
+           [NO-DEFAULT-PACKAGES]
+           [PACKAGES]
+           [EXTRA]"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+ (add-to-list 'org-latex-classes
+               '("apa6"
+                 "\\documentclass{apa6}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-(find-file "~/Dropbox/Zettelkasten/inbox.org")
-   (find-file "/home/betsy/.emacs")
 
 
- (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
+(load "bookmark+")
+(load "clipboard2org")
+ (load "hangul")
+ (load "org-book")
+ (load "org-super-links")
+ (load "ov-highlight")
+ (load "annot")
+ (load "backup-each-save")
+
+   (load "dired+")

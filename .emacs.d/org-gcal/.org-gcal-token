@@ -1,3 +1,3 @@
 (:token
- (:access_token "ya29.A0ARrdaM8W6A3xWOpLSJmfBcdCpH8a6-rWiuSyBNXGb3IHZLPqQ7LHBfk0VfwEQO3AvyMXpKFmvIcE4-TZBQkdabrYjG6yOWlRkHWxcaUFFEkYaGJXno3iNIlQMPS0IpkiU0FZ45rcHCsGSt12XEZKz_1VOxJ7pPI" :expires_in 3599 :refresh_token "1//0dXQ-QetOPIY6CgYIARAAGA0SNwF-L9Iri1awQbMuqbSHe7mw1PWSl6UgtDp0tpZSB0ffRIeAVQdL21AsRytOOQOkX2GZlNhJamI" :scope "https://www.googleapis.com/auth/calendar" :token_type "Bearer")
+ (:access_token "ya29.A0ARrdaM--93SPd_k9G9qIqfdFhkkH18mtCS9gwvmxUZn-UWgVHo14qWmRn0M1q5OEW0AuZT-DDlCXwclsVJykEb3DnZyxg3Wr5dbvFfnYJ7n0iij91ZUb84HiE5gFqj1a8KQaGts5X3iw5prcxxozCcljhpltCBUYUNnWUtBVEFTQVRBU0ZRRl91NjFWcDlCMUw3Q3JjRXo2OWRuX0RRZ3c1UQ0166" :expires_in 3599 :refresh_token "1//0dXQ-QetOPIY6CgYIARAAGA0SNwF-L9Iri1awQbMuqbSHe7mw1PWSl6UgtDp0tpZSB0ffRIeAVQdL21AsRytOOQOkX2GZlNhJamI" :scope "https://www.googleapis.com/auth/calendar" :token_type "Bearer")
  :elem nil)

@@ -21,7 +21,7 @@
  '(org-super-agenda-mode t)
  '(org-super-agenda-unmatched-name "")
  '(package-selected-packages
-   '(emojify org-roam-bibtex org-roam-timestamps org-roam-ui helm-bibtex helm-bibtexkey org-noter-pdftools unicode-fonts pomm cnfonts org-pomodoro auctex auctex-lua company company-auctex helm-unicode ace-mode ace-jump-helm-line ace-jump-mode pdf-continuous-scroll-mode quelpa-use-package quelpa org-auto-tangle highlight-quoted highlight-parentheses org-pdfview openwith good-scroll visual-fill-column interleave org-noter org-ref deft burly org-sidebar org-plus-contrib helm-chronos chronos org-alert pdf-view-restore pdf-tools nov olivetti anki-editor org-mru-clock org-roam magit doom-themes org-superstar use-package unkillable-scratch helm-projectile aggressive-indent))
+   '(org-transclusion emojify org-roam-bibtex org-roam-timestamps org-roam-ui helm-bibtex helm-bibtexkey org-noter-pdftools unicode-fonts pomm cnfonts org-pomodoro auctex auctex-lua company company-auctex helm-unicode ace-mode ace-jump-helm-line ace-jump-mode pdf-continuous-scroll-mode quelpa-use-package quelpa org-auto-tangle highlight-quoted highlight-parentheses org-pdfview openwith good-scroll visual-fill-column interleave org-noter org-ref deft burly org-sidebar org-plus-contrib helm-chronos chronos org-alert pdf-view-restore pdf-tools nov olivetti anki-editor org-mru-clock org-roam magit doom-themes org-superstar use-package unkillable-scratch helm-projectile aggressive-indent))
  '(safe-local-variable-values
    '((org-download-image-dir . "/home/betsy/.local/share/Anki2/User 1/collection.media")
      (org-reverse-note-order)))
@@ -499,6 +499,7 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :extend nil :stipple nil :background "#282c34" :foreground "#ebdcb2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 200 :width normal :foundry "PfEd" :family "Fantasque Sans Mono"))))
  '(bold ((t (:foreground "#dfe166" :weight bold))))
+ '(doom-themes-org-hash-tag ((t (:height 1.0))))
  '(italic ((t (:foreground "#f52549" :slant italic))))
  '(link ((t (:foreground "#51afef" :underline t :weight normal :family "monofur"))))
  '(org-agenda-date ((t (:foreground "tomato" :underline nil :weight bold :height 1.2))))
@@ -512,10 +513,10 @@
  '(org-level-2 ((t (:inherit org-level-1 :extend nil :foreground "#9a9eab"))))
  '(org-level-3 ((t (:inherit org-level-2 :extend nil :foreground "#68829e"))))
  '(org-level-4 ((t (:inherit org-level-3 :foreground "light coral" :height 1.0))))
- '(org-level-5 ((t (:inherit org-level-4 :extend nil))))
+ '(org-level-5 ((t (:extend nil :foreground "deep sky blue"))))
  '(org-link ((t (:inherit link :foreground "#b38867" :underline nil :weight normal :height 1 :family "monofur"))))
  '(org-property-value ((t (:foreground "#83898d" :height 0.9))) t)
- '(org-quote ((t (:extend t :background "medium spring green" :foreground "black" :slant italic :family "KoHo"))))
+ '(org-quote ((t (:inherit org-block :extend t :background "gray26" :foreground "spring green" :slant italic :family "KoHo"))))
  '(org-special-keyword ((t (:foreground "#83898d" :height 0.9))))
  '(org-super-agenda-header ((t (:inherit org-agenda-structure :foreground "medium spring green"))))
  '(org-tag ((t (:foreground "spring green" :weight normal :height 0.8))))
