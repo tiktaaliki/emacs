@@ -3,4 +3,5 @@
 # key: logbook
 # --
 :LOGBOOK:
+$0
 :END:

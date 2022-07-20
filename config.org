@@ -1040,6 +1040,38 @@ old version of alltodo....changed to reflect categories
   
 #+END_SRC
 
+** org-todo
+#+begin_src emacs-lisp :tangle yes :results none
+  (setq org-enforce-todo-dependencies t
+        org-clock-out-when-done t
+        )
+
+  (setq org-log-into-drawer t)
+
+  (setq org-todo-keywords
+        (quote
+         ((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
+          (type    "HOLD(l)" "PROJ(j)"  "|" "DONE(d)")     )))
+
+  (setq org-todo-keyword-faces
+        '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
+                                          ;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
+          ("TODO" :weight regular :underline nil :inherit org-todo )
+          ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
+          ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
+          ("to-process" :foreground "magenta")
+          ("to-read" :foreground "magenta")
+          ("in-prog" :foreground "magenta")
+          ("PROJ" :foreground "magenta")
+          ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
+
+
+  (use-package org-edna)
+  (org-edna-mode 1)
+  (setq org-log-done 'time)
+
+#+end_src
+
 
 ** org-capture
 :PROPERTIES:
