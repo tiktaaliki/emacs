@@ -12,7 +12,7 @@
 : #<buffer config_desktop.org>
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq-default line-spacing .15)
+  (setq-default line-spacing 0)
   
   (set-face-attribute 'default nil :family "Fantasque sans mono" :height 180 :weight 'normal  :foreground "#ebdcb2");
 #+END_SRC

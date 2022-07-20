@@ -54,36 +54,38 @@
 (setq tab-bar-mode nil)
 
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
-(use-package openwith
-  :defer t
-  :config (progn
-            (when (require 'openwith nil 'noerror)
-              (setq openwith-associations
-                    (list
-                                        ;                   (list (openwith-make-extension-regexp
-                                        ;                           '("mpg" "mpeg" "mp3" "mp4"
-                                        ;                           "avi" "wmv" "wav" "mov" "flv"
-                                        ;                          "ogm" "ogg" "mkv"))
-                                        ;                      "audacious"
-                                        ;                     '(file))
-                                        ;                    (list (openwith-make-extension-regexp
-                                        ;                          '("xbm" "pbm" "pgm" "ppm" "pnm"
-                                        ;                           "png" "bmp" "tif" "jpeg" "jpg"))
-                                        ;                       "gpicview"
-                                        ;                      '(file))
-                                        ;                       (list (openwith-make-extension-regexp
-                                        ;                             '("pdf"))
-                                        ;                           "zathura"
-                                        ;                          '(file))
-                     (list (openwith-make-extension-regexp
-                            '("doc" "docx" "ppt" "xls" "xlsx" "pptx"))
-                           "LibreOffice"
-                           '(file))
+  (use-package openwith
+    :defer t
+    :config (progn
+              (when (require 'openwith nil 'noerror)
+                (setq openwith-associations
+                      (list
+                                          ;                   (list (openwith-make-extension-regexp
+                                          ;                           '("mpg" "mpeg" "mp3" "mp4"
+                                          ;                           "avi" "wmv" "wav" "mov" "flv"
+                                          ;                          "ogm" "ogg" "mkv"))
+                                          ;                      "audacious"
+                                          ;                     '(file))
+                                          ;                    (list (openwith-make-extension-regexp
+                                          ;                          '("xbm" "pbm" "pgm" "ppm" "pnm"
+                                          ;                           "png" "bmp" "tif" "jpeg" "jpg"))
+                                          ;                       "gpicview"
+                                          ;                      '(file))
+                                          ;                       (list (openwith-make-extension-regexp
+                                          ;                             '("pdf"))
+                                          ;                           "zathura"
+                                          ;                          '(file))
+                       (list (openwith-make-extension-regexp
+                              '("doc" "docx" "ppt" "xls" "xlsx" "pptx"))
+                             "LibreOffice"
+                             '(file))
 
 
-                     ))
-              (openwith-mode 1)))
-  :ensure t)
+                       ))
+                (openwith-mode 1)))
+    :ensure t)
+  
+(setq openwith-associations '(("\\.docx\\'" "com.wps.Office" (file))))
 
 (use-package deft
   :ensure t
@@ -156,39 +158,40 @@
 (sp-pair "'" nil :actions :rem)
 
 (use-package calfw)
-(use-package calfw-org)
-                                        ;   (use-package calfw-gcal)
-(use-package calfw-cal) 
-(setq package-check-signature nil)
-                                        ;  (setq org-gcal-down-days '30)
-                                        ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
+  (use-package calfw-org)
+                                          ;   (use-package calfw-gcal)
+  (use-package calfw-cal) 
+  (setq package-check-signature nil)
+                                          ;  (setq org-gcal-down-days '30)
+                                          ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
 
 
-(defun my-open-calendar ()
-  (interactive)
-  (cfw:open-calendar-buffer
-   :contents-sources
-   (list
-    (cfw:org-create-source "pale green")  ; orgmode source
-                                        ;    (cfw:cal-create-source "light goldenrod") ; diary source
-    ))) 
-(add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
-                                        ;   (setq calendar-daylight-savings-starts '(3 11 year))
-                                        ;  (setq calendar-daylight-savings-ends: '(11 4 year))
-(setq calendar-week-start-day 1)
+  (defun my-open-calendar ()
+    (interactive)
+    (cfw:open-calendar-buffer
+     :contents-sources
+     (list
+      (cfw:org-create-source "pale green")  ; orgmode source
+                                          ;    (cfw:cal-create-source "light goldenrod") ; diary source
+      ))) 
+  (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
+                                          ;   (setq calendar-daylight-savings-starts '(3 11 year))
+                                          ;  (setq calendar-daylight-savings-ends: '(11 4 year))
+  (setq calendar-week-start-day 1)
 
-(setq diary-file "~/Dropbox/Zettelkasten/diary")
+  (setq diary-file "~/Dropbox/Zettelkasten/diary")
 
 
 
-(use-package org-gcal)
-(setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
-      org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
-      org-gcal-fetch-file-alist '(
+  (use-package org-gcal)
+  (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
+        org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
+        org-gcal-fetch-file-alist '(
+      ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
+;      ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/time.org")
+      ))
 
-    ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )))
-
-(setq org-gcal-recurring-events-mode 'top-level)
+  (setq org-gcal-recurring-events-mode 'top-level)
 
 (setq org-indirect-buffer-display 'current-window)
 (defun transpose-windows ()
@@ -244,6 +247,7 @@
  ("C-."   . org-todo)
  ("C-x /" . shrink-window-horizontally)
  ("C-x ." . org-archive-subtree-default)
+ ("C-c 5" . yas-insert-snippet)
 
  ([f1] . org-capture)
  ([f2] . org-clock-in)
@@ -303,30 +307,22 @@
 
 ")
 
+(use-package org-superstar
+  :config
+  (setq org-superstar-headline-bullets-list '("◉" "›" "※" "⌘"  "♡"  "♧" "⟳" "★ ")
+        org-superstar-item-bullet-alist (quote ((42  . 33) (43 . 62) (45 . 45)))
+        )
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+
 ; (use-package emojify
   ;  :hook (after-init . global-emojify-mode))
 
-    (use-package org-superstar
-      :config
-      (setq org-superstar-headline-bullets-list '("◉" "☆" "♡" "¶" "★" )
-            org-superstar-item-bullet-alist (quote ((42  . 33) (43 . 62) (45 . 45)))
-            )
-      (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
     (setq org-startup-indented t
           org-hide-emphasis-markers t
           org-startup-folded t
           org-ellipsis " »"
           org-hide-leading-stars t)
-    (use-package doom-themes
-      :config
-      ;; Global settings (defaults)
-      (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-            doom-themes-enable-italic t) ; if nil, italics is universally disabled
-      (load-theme 'doom-one t)
-      ;; Corrects (and improves) org-mode's native fontification.
-      (doom-themes-org-config)
-      )
-
+   
     (setq org-startup-shrink-all-tables t)
 
   ;strikethrough org-emphasis-alist
@@ -540,7 +536,8 @@
                            "~/Dropbox/Zettelkasten/readings.org"
                            "~/Dropbox/Zettelkasten/journal.org"
                            "~/Dropbox/Zettelkasten/ndd.org"
-;                           "~/Dropbox/Zettelkasten/Scholarship/open.org"
+                         "~/Dropbox/Zettelkasten/Scholarship/open.org"
+                     ;      "~/Dropbox/Zettelkasten/time.org"                             
                            "~/Dropbox/Zettelkasten/baruch.org"
                            "~/Dropbox/Zettelkasten/personal.org"
                            "~/Dropbox/Zettelkasten/lis.org"
@@ -561,7 +558,7 @@
 
   (setq org-agenda-clockreport-parameter-plist
         (quote
-         (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags t :hidefiles nil :fileskip0 t)))
+         (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags nil :hidefiles nil :fileskip0 t)))
 
   (setq org-clock-report-include-clocking-task t)
   (setq org-agenda-prefix-format
@@ -587,93 +584,78 @@
 (setq org-agenda-sticky t)
 
 (use-package org-super-agenda)
-(org-super-agenda-mode 1)
-(setq org-super-agenda-mode 1)
-(setq org-agenda-custom-commands
-      '(
-        ("l" . "just todo lists") ;description for "h" prefix
-        ("lt" tags-todo "untagged todos" "-{.*}")
-        ("ls" alltodo "all unscheduled" ((org-agenda-skip-function
-                                          '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
-                                         (org-agenda-todo-ignore-scheduled t) ))
-        ("lx" "With deadline columns" alltodo "" 
-         ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE %EFFORT " )
-          (org-agenda-view-columns-initially t)
-          (org-agenda-sorting-strategy '(timestamp-up))
-          (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) )      )
-        ("la" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
-                                        (org-super-agenda-groups
-                                         '(
-                                           (:name "NDD" :and (:tag "ndd" :category "ndd"))
-                                             (:name "Scholarship" :and (:tag "schol"))
-                                             (:name "Baruch" :and (:tag "baruch"))
-                                            (:name "Me" :and (:tag "me"))
+  (org-super-agenda-mode 1)
+  (setq org-super-agenda-mode 1)
+  (setq org-agenda-custom-commands
+        '(
+          ("l" . "just todo lists") ;description for "h" prefix
+          ("lt" tags-todo "untagged todos" "-{.*}")
+          ("ls" alltodo "all unscheduled" (
+                                           (org-agenda-todo-ignore-scheduled t)
+                                           (org-super-agenda-groups
+                                            '(
+                                              (:name "NDD" :and (:tag "ndd" :category "ndd"))
+                                              (:name "Scholarship research" :and (:tag "schol" :tag "research"))
+                                              (:name "Scholarship reading" :and (:tag "schol" :tag "read"))
+                                              (:name "Scholarship writing" :and (:tag "schol" :tag "write"))
+                                              (:name "Scholarship admin" :and (:tag "schol" :tag "admin")) 
+                                              (:name "Baruch" :and (:tag "baruch"))
+                                              (:name "Me" :and (:tag "me"))
 
 
-                                           ))))))
+                                              ))
 
-
-        ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
-         ((agenda "" ((org-agenda-span 2)
-                      (org-agenda-clockreport-mode nil)))
-          (todo "NEXT|TODAY|IN-PROG"))
-         ((org-agenda-todo-ignore-scheduled t)))
-
-        ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
-                                         (org-super-agenda-groups
-                                          '((:name "Day"
-                                                   :time-grid t
-                                        ;   :date today
-                                        ;    :todo "TODAY"
-                                        ;  :scheduled today
-                                                   :order 1)))))
-                             (alltodo "" ((org-agenda-overriding-header "")
+                                           (org-agenda-skip-function
+                                            '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+                                           ))
+          ("lx" "With deadline columns" alltodo "" 
+           ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE %EFFORT " )
+            (org-agenda-view-columns-initially t)
+            (org-agenda-sorting-strategy '(timestamp-up))
+            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) )      )
+          ("la" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
                                           (org-super-agenda-groups
                                            '(
                                              (:name "NDD" :and (:tag "ndd" :category "ndd"))
-                                             (:name "Scholarship" :and (:tag "schol"))
+                                             (:name "Scholarship research" :and (:tag "schol" :tag "research"))
+                                             (:name "Scholarship reading" :and (:tag "schol" :tag "read"))
+                                             (:name "Scholarship writing" :and (:tag "schol" :tag "write"))
+                                             (:name "Scholarship admin" :and (:tag "schol" :tag "admin")) 
                                              (:name "Baruch" :and (:tag "baruch"))
-                                            (:name "Me" :and (:tag "me"))
-                                             ))))
-                             )
-         ((org-agenda-skip-function
-           '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
-          (org-agenda-todo-ignore-scheduled t) )
-
-         )
+                                             (:name "Me" :and (:tag "me"))
 
 
-
-        ))
-
+                                             ))))))
 
 
-(setq org-enforce-todo-dependencies t
-      org-clock-out-when-done t
-      )
+          ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
+           ((agenda "" ((org-agenda-span 2)
+                        (org-agenda-clockreport-mode nil)))
+            (todo "NEXT|TODAY|IN-PROG"))
+           ((org-agenda-todo-ignore-scheduled t)))
 
-(setq org-log-into-drawer t)
+          ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
+                                           (org-super-agenda-groups
+                                            '((:name "Day" :time-grid t :order 1)))))
+                               (alltodo "" ((org-agenda-overriding-header "")
+                                            (org-super-agenda-groups '(
 
-(setq org-todo-keywords
-      (quote
-       ((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
-        (type    "HOLD(l)"  "|" "DONE(d)")     )))
+                                             (:name "Scholarship writing" :and (:tag "schol" :tag "write"))
+                                             (:name "To read" :and (:tag "read"))
+                                             (:name "NDD" :and (:tag "ndd"))
+                                             (:name "Scholarship research" :and (:tag "schol" :tag "research"))
+                                             (:name "Scholarship reading" :and (:tag "schol" :tag "read"))
+                                             (:name "Scholarship admin" :and (:tag "schol" :tag "admin")) 
+                                             (:name "Baruch" :and (:tag "baruch"))
+                                             (:name "Me" :and (:tag "me"))
+                                             )))))
+           ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+            (org-agenda-todo-ignore-scheduled t) ))
+)
 
-(setq org-todo-keyword-faces
-      '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
-                                        ;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
-        ("TODO" :weight regular :underline nil :inherit org-todo :foreground "yellow green")
-        ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
-        ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
-        ("to-process" :foreground "magenta")
-        ("to-read" :foreground "magenta")
-        ("in-prog" :foreground "magenta")
-        ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
+        )
 
 
-(use-package org-edna)
-(org-edna-mode 1)
-(setq org-log-done 'time)
 
 (setq org-capture-templates
         '(
@@ -689,7 +671,8 @@
 
           ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
 ;removed "scheduled" from todo entries
-          ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \n%a\n" :prepend nil)
+     ;added it back in [2022-07-09 Sat]
+          ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \nSCHEDULED: %t \n%a\n" :prepend nil)
 
           ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
            "* %a \nSCHEDULED: %t %?\n%:initial" )
@@ -745,10 +728,18 @@
                       ("home" . ?h)
                       ("lis" . ?l)
                       (:endgroup . nil)
+
+                      (:startgroup . nil)
+                      ("admin" . ?a)
+                      ("research" . ?r)
+                      ("write" . ?w)
+                      ("read" . ?d)
+                      (:endgroup . nil)
+
                       ))
 
-  (setq org-complete-tags-always-offer-all-agenda-tags nil)
-  (setq org-tags-column 0)
+(setq org-complete-tags-always-offer-all-agenda-tags nil)
+(setq org-tags-column 0)
 
 (use-package pomm)
 (use-package org-pomodoro)
@@ -840,7 +831,7 @@
                   (pdf-tools-install :no-query))
                 (use-package pdf-view-restore)
 
-                 (setq pdf-view-continuous t)
+                 (setq pdf-view-continuous nil)
               (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
      (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
 
@@ -1053,3 +1044,14 @@
  (load "backup-each-save")
 
    (load "dired+")
+
+(use-package modus-themes)
+  (modus-themes-load-themes)
+ (load-theme 'modus-vivendi t)
+
+
+;to fontify done checkbox items
+(font-lock-add-keywords
+ 'org-mode
+ `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
+ 'append)
