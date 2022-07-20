@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: reading todos
+# key: reading
+# --
+**** TODO add to bibtex
+:PROPERTIES:
+:TRIGGER:  next-sibling todo!(TODO)
+:END:
+**** create entry in readings.org
+:PROPERTIES:
+:TRIGGER:  next-sibling todo!(TODO)
+:END:
+**** add TOC in readings.org and as TODOs

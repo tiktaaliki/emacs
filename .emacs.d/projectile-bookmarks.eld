@@ -1,0 +1,1 @@
+("~/Dropbox/" "~/Dropbox/Library/" "~/Dropbox/emacs/.emacs.d/" "~/Downloads/" "~/Dropbox/emacs/" "~/Dropbox/Zettelkasten/")

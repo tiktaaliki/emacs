@@ -34,10 +34,10 @@
   (require 'use-package)
   (setq use-package-always-ensure t))
 
-  (require 'org)
+(require 'org)
 
- (add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
-     (add-to-list 'load-path "~/Dropbox/emacs/")
+(add-to-list 'load-path "~/Dropbox/emacs/.emacs.d/lisp/")
+(add-to-list 'load-path "~/Dropbox/emacs/")
 
 (org-babel-load-file "/home/betsy/Dropbox/emacs/config.org")
 (org-babel-load-file "/home/betsy/Dropbox/emacs/config_desktop.org")

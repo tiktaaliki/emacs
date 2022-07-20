@@ -1,0 +1,571 @@
+#+title: org-ref-cite
+#+options: toc:nil
+
+#+latex: \maketitle
+
+This repo is archived and not actively maintained. If anyone wants to take over maintenance please contact me. 
+
+This directory contains org-ref-cite. It is a setup derived from oc-natbib.el that is more similar to what I am used to with org-ref. The features include:
+
+1. Use bibtex-completion candidates and ivy to insert references
+2. cite styles that are as consistent with oc-csl as feasible
+3. flyspell should ignore cites
+4. Navigation functions for moving around in cites
+5. Editing functions for manipulating cites (shifting the order, sorting, deleting, copying, etc)
+6. Keymap on cites to make those things (4, 5) easy
+7. A hydra follow menu to do lots of useful things on a cite
+8. a natbib_options keyword
+9. A bibliographystyle keyword
+10. Customizable print_bibliography keyword
+
+
+This document on its own is not as useful as the video that shows how I used it. You can see a video of this in action here:
+
+Version 3: https://www.youtube.com/watch?v=puZMxooyDms
+
+
+These videos are from the version of this library that was oc-bibtex. They might be historically interesting.
+
+1. Version 1: https://www.youtube.com/watch?v=4ta4J20kpmM
+2. Version 2: https://www.youtube.com/watch?v=3TBYg1MZ6iY
+
+* setup
+
+Here is my setup for bibtex-completion and org-cite. These currently have hard-coded paths that you will have to adjust for where you have these. One day you will probably install this with MELPA, and that won't be necessary.
+
+
+
+#+BEGIN_SRC emacs-lisp :results silent
+(use-package org
+  :load-path "/Users/jkitchin/Dropbox/emacs/tests/org-mode-git/lisp")
+
+(use-package ivy-bibtex
+  :config (ivy-mode +1)
+  :init
+  (setq bibtex-completion-bibliography '("/Users/jkitchin/Dropbox/emacs/scimax/org-ref-cite/org-ref-cite.bib")
+	bibtex-completion-notes-path "/Users/jkitchin/Dropbox/emacs/scimax/org-ref-cite/notes"
+	bibtex-completion-notes-template-multiple-files "#+TITLE: Notes on: ${author-or-editor} (${year}): ${title}\n\nSee [cite/t:@${=key=}]\n"
+	bibtex-completion-library-path '("/Users/jkitchin/Dropbox/emacs/bibliography/bibtex-pdfs/")
+	bibtex-completion-additional-search-fields '(keywords)
+	bibtex-completion-display-formats
+	'((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
+	  (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
+	  (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+	  (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+	  (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
+	;; This is specific for a Mac I think
+	bibtex-completion-pdf-open-function (lambda (fpath)
+					      (call-process "open" nil 0 nil fpath))))
+
+(use-package citeproc)
+
+(use-package oc
+  :load-path "/Users/jkitchin/Dropbox/emacs/tests/org-mode-git/lisp"
+  :config
+  (require 'oc-csl))
+
+(add-to-list 'load-path "/Users/jkitchin/Dropbox/emacs/scimax/org-ref-cite/")
+
+(use-package org-ref-cite
+  :load-path "/Users/jkitchin/Dropbox/emacs/scimax/org-ref-cite/"
+  :config
+  ;; I like green links
+  (set-face-attribute 'org-cite nil :foreground "DarkSeaGreen4")
+  (set-face-attribute 'org-cite-key nil :foreground "forest green")
+  (setq
+   org-cite-global-bibliography bibtex-completion-bibliography
+   ;; https://github.com/citation-style-language/styles
+   ;; or https://www.zotero.org/styles
+   org-cite-csl-styles-dir "/Users/jkitchin/Dropbox/emacs/scimax/org-ref-cite/csl-styles"
+   org-cite-insert-processor 'org-ref-cite
+   org-cite-follow-processor 'org-ref-cite
+   org-cite-activate-processor 'org-ref-cite
+   org-cite-export-processors '((html csl "elsevier-with-titles.csl")
+			        (latex org-ref-cite)
+			        (t basic)))
+
+  (define-key org-mode-map (kbd "C-c \\") 'org-cite-insert))
+
+(setq  flyspell-duplicate-distance 0
+       flyspell-mark-duplications-flag nil
+       warning-minimum-level :error)
+#+END_SRC
+
+
+* Examples of usage
+
+
+** Basic insertion
+
+You should never type citations by hand; it is tedious and error-prone. I use C-c \ to insert a citation: [cite/t:@kitchin-2018-machin-learn-catal]
+
+With a single prefix arg, you will be prompted to choose a reference and a style: [cite/num:@rose-2019-pybliom].
+
+** Multiple insertions
+
+With ivy-bibtex open, you have these default options for making multiple insertions:
+
+| C-M-m | insert current entry and stay open on current entry |
+| C-M-n | insert current entry and go to next                 |
+| C-M-p | insert current entry and go to previous entry       |
+| C-M-o | act on current entry with alternate action          |
+
+[cite/t:@kitchin-2018-machin-learn-catal;@kitchin-2015-examp-effec;@kitchin-2015-examp-effec]
+
+[cite/t:@rose-2019-pybliom;@kitchin-2015-examp-effec]
+
+Or, you can type C-o to get to the hydra menu of actions for ivy. Then, you can press m to mark entries, and finally press RET to insert them.
+
+Scimax offers the following "enhancements" that are inspired from keybindings in running src blocks (these should work in all ivy commands).
+
+| C-RET | insert current entry and continue                                     |
+| S-RET | insert current entry and next (or with prefix arg the previous) entry |
+| M-RET | alternate action on current entry and continue                        |
+| s-RET | quit with no action (and no beep like C-g)                            |
+| M-TAB | mark current entry                                                    |
+| C-s   | show marked entries                                                   |
+
+[cite/t:@rose-2019-pybliom;@kitchin-2015-examp-effec]
+
+
+[cite/t:@rose-2019-pybliom;@kitchin-2015-examp-effec]
+
+** Inserting on an existing citation
+
+If your point is on a citation the following rules apply:
+
+1. If you are at the beginning of a reference, insert before it.   [cite/t:@kitchin-2018-machin-learn-catal;@kitchin-2015-examp-effec;@rose-2019-pybliom]
+2. If you are the end of a reference, insert after it. [cite/t:@rose-2019-pybliom;@kitchin-2018-machin-learn-catal]
+3. If you are in a reference, replace it. [cite/t:@rose-2019-pybliom]
+4. If you are in the style part, insert at the beginning.
+
+You can select the style for a new cite if you use a prefix arg with the insert cite command.
+
+You can delete a cite with a double prefix arg on the insert cite command. If point is on a reference, it will delete the reference, and if it is in the style part it will delete the whole citation. See also [[*Editing the citation at point]].
+
+** Tooltips and fontification of citations
+
+There are two kinds of tooltips on citations. If you hover over the style portion, you will see how the citation is rendered in export. If you hover over a citation-reference key, you will see the bibliographic information for that key.
+
+[cite/t:@rose-2019-pybliom;@kitchin-2018-machin-learn-catal;]
+
+Bad cite keys will be red [cite/t:@rose-2019-pybliom;@kitchin-2018-machin-learn-catal;]. See Section [[*Editing the citation at point]] for an easy way to fix bad keys.
+
+** Prefix and suffix text on citations
+
+In LaTeX with natbib and bibtex, the options for using prefix and suffix text on citations are more limited than they are with biblatex. This package only supports global prefixes and suffixes. The global prefix is either the global prefix in a citation, or the prefix on the first citation. If both a global and local prefix are defined, they will be combined. The global suffix is defined as the suffix on the last citation. All other prefixes and suffixes are ignored in the exporter.
+
+The general syntax is: [cite/t:global prefix ;local prefix @rose-2019-pybliom global suffix]
+
+Here are some examples.
+
+- global prefix ::  [cite/p:global prefix;@kitchin-2018-machin-learn-catal;]
+- local prefix ::   [cite/p:local prefix @rose-2019-pybliom;]
+- global + local prefix :: [cite/p:global ;local prefix @rose-2019-pybliom;]
+- global suffix :: [cite/p:@rose-2019-pybliom the suffix text;]
+- Prefix and suffix :: [cite/p:local prefix @rose-2019-pybliom the suffix text;]
+
+For multiple citations, there is not a way to use prefixes and suffixes on every reference. Only the prefix on the first reference, and the suffix on the last reference is used in export. I have setup fontification to indicate prefixes and suffixes that will be ignored when the org-ref-cite exporter is used. How this looks in your export depends a lot on the bibliography style you choose.
+
+[cite/p:this prefix is good @kitchin-2018-machin-learn-catal this suffix is ignored; this prefix is ignored @rose-2019-pybliom this suffix is good;]
+
+** Following a citation
+
+You follow a citation by clicking on it, pressing RET,  C-c C-o, or C-c C-c on it. All of these open a hydra that has many other actions you can choose for the citation or reference at point, unless you are on the style part of the cite, then you will be prompted for a reference to act on.
+
+[cite/t:@kitchin-2018-machin-learn-catal;]
+
+The hydra menu has actions to perform on the key at point, edit actions, navigation actions, WWW search actions, and some miscellaneous actions.
+
+
+** Editing the citation at point
+
+There are many ways you might want to edit a citation. In addition to the ways you can edit by insertion described in [[*Inserting on an existing citation]], and that are shown in the hydra from [[*Following a citation]], the following options are available as keyboard commands:
+
+- S-<left> and S-<right> to shift a reference to the left or right. Note that the behavior of references with prefix/suffixes is not well defined, and shifting may result in unintended changes to the prefix/suffix.
+- S-<up> to sort the keys by year
+- C-d to delete the thing at point (reference or citation)
+- C-k to kill the thing at point (to the clipboard)
+- M-p will prompt you for prefix text and suffix text for the reference at point.
+- M-s to update the style
+- M-r will prompt you to replace the key at point with a similar key (e.g. if it is red because one character is wrong).
+
+[cite/t:before @rose-2019-pybliom after ;@kitchin-2015-examp-effec;]
+
+[cite/num:See @rose-2019-pybliom Ch. 5;]
+
+Check out the tooltips with prefix/suffix text: [cite/t:This is before @rose-2019-pybliom and after;]
+
+** Navigation
+
+You can use C-<left> and C-<right> to navigate around in the citation and between citations. Use C-a to go to the beginning and C-e to go to the end of the citations. If you type C-q you will be able to jump to a visible citation using avy.
+
+** Convenience
+
+- M-w copy the thing at point (citation or reference)
+- M-m mark the thing at point (citation or reference)
+
+[cite/t:@rose-2019-pybliom;]
+
+** export
+
+The bibliography will be printed where you put the print_bibliography keyword. You can also use a bibliographystyle keyword to specify the style. You can use the natbib_options keyword to override the default settings you may have defined in your init files.
+
+A citet should get moved past punctuation if you also use natmove a textual citation like this one will move past punctuation on export [cite/t:@rose-2019-pybliom], but a parenthetical one like this will not [cite/p:@rose-2019-pybliom]. I usually use superscripted citations, and if you want them in line, you should use the citenum style like this: Ref. [cite/num:@rose-2019-pybliom].
+
+After that, you just do a regular export, e.g. C-c C-e lo to make and open a pdf. Of course you need your LaTeX setup working. Mine is customized for scimax, but as long as yours calls pdflatex and bibtex in the right order, and the right number of times it should work for you too, and it also handles building the bibliography when nobibliography is used.
+
+#+BEGIN_SRC emacs-lisp
+org-latex-pdf-process
+#+END_SRC
+
+#+RESULTS:
+: ox-manuscript-latex-pdf-process
+
+That setup is necessary to get the convenient and automatic handling of nobibliography described next. This is handled in `ox-manuscript-nobibliography'.  Note, however, that you cannot change the title or numbering of the section if you use nobibliography at this time.
+
+If you do not want a bibliography printed, but still want a pdf, you use =#+print_bibliography: :nobibliography t= instead, and make sure you use bibentry in your file. I use this, for example, when writing proposals that require the bibliography to be in a different pdf file than the project description. You can also specify a :title for the Bibliography section, and use =:numbered t= to indicate if it should be numbered (the default is not numbered). These options are specific to org-ref-cite.
+
+# You need these to get a bibliography in a PDF
+#+bibliographystyle: unsrtnat
+
+# This is where the bibliography will be printed in your document
+#+print_bibliography: :numbered t
+
+** Compatibility with org-ref
+
+org-ref-cite provides a compatibility function  =org-ref-to-org-cite= that will convert org-ref links to org-cite format.
+
+** Utilities
+
+org-ref-cite provides some utility functions:
+
+- org-ref-cite-extract-bibliography :: will extract the bibliography in the current buffer into a variety of formats and outputs. You can choose a formatted string or bibtex format, and choose buffer, copy or file for the output.
+- org-ref-cite :: This will analyze the current buffer and provide a summary buffer of the setup and any issues detected (e.g. bad cites, etc). It is useful for debugging.
+
+
+* testing the styles
+
+#+BEGIN_SRC emacs-lisp :results org raw
+(cl-loop for (style . command) in
+	 (cl-loop for (style . command) in (org-ref-cite-get-combinatorial-style-commands)
+			  collect
+			  (cons
+			   (concat (car style)
+				   (when (cdr style) (format "/%s" (cdr style))))
+			   command))
+	 concat
+	 (format "- =[cite/%s:@rose-2019-pybliom]= (%s) [cite/%s:@rose-2019-pybliom]\n"
+		 style (substring command 1) style))
+#+END_SRC
+
+#+RESULTS:
+- =[cite/text:@rose-2019-pybliom]= (citet) [cite/text:@rose-2019-pybliom]
+- =[cite/t:@rose-2019-pybliom]= (citet) [cite/t:@rose-2019-pybliom]
+- =[cite/text/bare:@rose-2019-pybliom]= (citealt) [cite/text/bare:@rose-2019-pybliom]
+- =[cite/text/b:@rose-2019-pybliom]= (citealt) [cite/text/b:@rose-2019-pybliom]
+- =[cite/t/bare:@rose-2019-pybliom]= (citealt) [cite/t/bare:@rose-2019-pybliom]
+- =[cite/t/b:@rose-2019-pybliom]= (citealt) [cite/t/b:@rose-2019-pybliom]
+- =[cite/text/caps:@rose-2019-pybliom]= (Citet) [cite/text/caps:@rose-2019-pybliom]
+- =[cite/text/c:@rose-2019-pybliom]= (Citet) [cite/text/c:@rose-2019-pybliom]
+- =[cite/t/caps:@rose-2019-pybliom]= (Citet) [cite/t/caps:@rose-2019-pybliom]
+- =[cite/t/c:@rose-2019-pybliom]= (Citet) [cite/t/c:@rose-2019-pybliom]
+- =[cite/text/full:@rose-2019-pybliom]= (citet*) [cite/text/full:@rose-2019-pybliom]
+- =[cite/text/f:@rose-2019-pybliom]= (citet*) [cite/text/f:@rose-2019-pybliom]
+- =[cite/t/full:@rose-2019-pybliom]= (citet*) [cite/t/full:@rose-2019-pybliom]
+- =[cite/t/f:@rose-2019-pybliom]= (citet*) [cite/t/f:@rose-2019-pybliom]
+- =[cite/text/caps-full:@rose-2019-pybliom]= (Citet*) [cite/text/caps-full:@rose-2019-pybliom]
+- =[cite/text/cf:@rose-2019-pybliom]= (Citet*) [cite/text/cf:@rose-2019-pybliom]
+- =[cite/t/caps-full:@rose-2019-pybliom]= (Citet*) [cite/t/caps-full:@rose-2019-pybliom]
+- =[cite/t/cf:@rose-2019-pybliom]= (Citet*) [cite/t/cf:@rose-2019-pybliom]
+- =[cite/text/bare-caps:@rose-2019-pybliom]= (Citealt*) [cite/text/bare-caps:@rose-2019-pybliom]
+- =[cite/text/bc:@rose-2019-pybliom]= (Citealt*) [cite/text/bc:@rose-2019-pybliom]
+- =[cite/t/bare-caps:@rose-2019-pybliom]= (Citealt*) [cite/t/bare-caps:@rose-2019-pybliom]
+- =[cite/t/bc:@rose-2019-pybliom]= (Citealt*) [cite/t/bc:@rose-2019-pybliom]
+- =[cite/text/bare-full:@rose-2019-pybliom]= (citealt*) [cite/text/bare-full:@rose-2019-pybliom]
+- =[cite/text/bf:@rose-2019-pybliom]= (citealt*) [cite/text/bf:@rose-2019-pybliom]
+- =[cite/t/bare-full:@rose-2019-pybliom]= (citealt*) [cite/t/bare-full:@rose-2019-pybliom]
+- =[cite/t/bf:@rose-2019-pybliom]= (citealt*) [cite/t/bf:@rose-2019-pybliom]
+- =[cite/text/bare-full:@rose-2019-pybliom]= (Citealt*) [cite/text/bare-full:@rose-2019-pybliom]
+- =[cite/text/bcf:@rose-2019-pybliom]= (Citealt*) [cite/text/bcf:@rose-2019-pybliom]
+- =[cite/t/bare-full:@rose-2019-pybliom]= (Citealt*) [cite/t/bare-full:@rose-2019-pybliom]
+- =[cite/t/bcf:@rose-2019-pybliom]= (Citealt*) [cite/t/bcf:@rose-2019-pybliom]
+- =[cite/author:@rose-2019-pybliom]= (citeauthor) [cite/author:@rose-2019-pybliom]
+- =[cite/a:@rose-2019-pybliom]= (citeauthor) [cite/a:@rose-2019-pybliom]
+- =[cite/author/caps:@rose-2019-pybliom]= (Citeauthor) [cite/author/caps:@rose-2019-pybliom]
+- =[cite/author/c:@rose-2019-pybliom]= (Citeauthor) [cite/author/c:@rose-2019-pybliom]
+- =[cite/a/caps:@rose-2019-pybliom]= (Citeauthor) [cite/a/caps:@rose-2019-pybliom]
+- =[cite/a/c:@rose-2019-pybliom]= (Citeauthor) [cite/a/c:@rose-2019-pybliom]
+- =[cite/author/full:@rose-2019-pybliom]= (citeauthor*) [cite/author/full:@rose-2019-pybliom]
+- =[cite/author/f:@rose-2019-pybliom]= (citeauthor*) [cite/author/f:@rose-2019-pybliom]
+- =[cite/a/full:@rose-2019-pybliom]= (citeauthor*) [cite/a/full:@rose-2019-pybliom]
+- =[cite/a/f:@rose-2019-pybliom]= (citeauthor*) [cite/a/f:@rose-2019-pybliom]
+- =[cite/author/caps-full:@rose-2019-pybliom]= (Citeauthor*) [cite/author/caps-full:@rose-2019-pybliom]
+- =[cite/author/cf:@rose-2019-pybliom]= (Citeauthor*) [cite/author/cf:@rose-2019-pybliom]
+- =[cite/a/caps-full:@rose-2019-pybliom]= (Citeauthor*) [cite/a/caps-full:@rose-2019-pybliom]
+- =[cite/a/cf:@rose-2019-pybliom]= (Citeauthor*) [cite/a/cf:@rose-2019-pybliom]
+- =[cite/noauthor:@rose-2019-pybliom]= (citeyearpar) [cite/noauthor:@rose-2019-pybliom]
+- =[cite/na:@rose-2019-pybliom]= (citeyearpar) [cite/na:@rose-2019-pybliom]
+- =[cite/noauthor/bare:@rose-2019-pybliom]= (citeyear) [cite/noauthor/bare:@rose-2019-pybliom]
+- =[cite/noauthor/b:@rose-2019-pybliom]= (citeyear) [cite/noauthor/b:@rose-2019-pybliom]
+- =[cite/na/bare:@rose-2019-pybliom]= (citeyear) [cite/na/bare:@rose-2019-pybliom]
+- =[cite/na/b:@rose-2019-pybliom]= (citeyear) [cite/na/b:@rose-2019-pybliom]
+- =[cite/nocite:@rose-2019-pybliom]= (nocite) [cite/nocite:@rose-2019-pybliom]
+- =[cite/p:@rose-2019-pybliom]= (citep) [cite/p:@rose-2019-pybliom]
+- =[cite/p/bare:@rose-2019-pybliom]= (citealp) [cite/p/bare:@rose-2019-pybliom]
+- =[cite/p/b:@rose-2019-pybliom]= (citealp) [cite/p/b:@rose-2019-pybliom]
+- =[cite/p/caps:@rose-2019-pybliom]= (Citep) [cite/p/caps:@rose-2019-pybliom]
+- =[cite/p/c:@rose-2019-pybliom]= (Citep) [cite/p/c:@rose-2019-pybliom]
+- =[cite/p/full:@rose-2019-pybliom]= (citep*) [cite/p/full:@rose-2019-pybliom]
+- =[cite/p/f:@rose-2019-pybliom]= (citep*) [cite/p/f:@rose-2019-pybliom]
+- =[cite/p/bare-caps:@rose-2019-pybliom]= (Citealp) [cite/p/bare-caps:@rose-2019-pybliom]
+- =[cite/p/bc:@rose-2019-pybliom]= (Citealp) [cite/p/bc:@rose-2019-pybliom]
+- =[cite/p/bare-full:@rose-2019-pybliom]= (citealp*) [cite/p/bare-full:@rose-2019-pybliom]
+- =[cite/p/bf:@rose-2019-pybliom]= (citealp*) [cite/p/bf:@rose-2019-pybliom]
+- =[cite/p/bare-caps-full:@rose-2019-pybliom]= (Citealp*) [cite/p/bare-caps-full:@rose-2019-pybliom]
+- =[cite/p/bcf:@rose-2019-pybliom]= (Citealp*) [cite/p/bcf:@rose-2019-pybliom]
+- =[cite/num:@rose-2019-pybliom]= (citenum) [cite/num:@rose-2019-pybliom]
+
+
+
+* Customizing org-ref-cite
+
+** Customizing or adding new styles
+
+The cite styles are set in =org-ref-cite-styles=.
+
+#+BEGIN_SRC emacs-lisp :results code
+org-ref-cite-styles
+#+END_SRC
+
+#+RESULTS:
+#+begin_src emacs-lisp
+(((("text" "t"))
+  . "\\citet")
+ ((("text" "t")
+   ("bare" "b"))
+  . "\\citealt")
+ ((("text" "t")
+   ("caps" "c"))
+  . "\\Citet")
+ ((("text" "t")
+   ("full" "f"))
+  . "\\citet*")
+ ((("text" "t")
+   ("bare-caps" "bc"))
+  . "\\Citealt*")
+ ((("text" "t")
+   ("bare-full" "bf"))
+  . "\\citealt*")
+ ((("text" "t")
+   ("bare-full" "bcf"))
+  . "\\Citealt*")
+ ((("author" "a"))
+  . "\\citeauthor")
+ ((("author" "a")
+   ("caps" "c"))
+  . "\\Citeauthor")
+ ((("author" "a")
+   ("full" "f"))
+  . "\\citeauthor*")
+ ((("author" "a")
+   ("caps-full" "cf"))
+  . "\\Citeauthor*")
+ ((("noauthor" "na"))
+  . "\\citeyearpar")
+ ((("noauthor" "na")
+   ("bare" "b"))
+  . "\\citeyear")
+ ((("nocite"))
+  . "\\nocite")
+ ((("p"))
+  . "\\citep")
+ ((("p")
+   ("bare" "b"))
+  . "\\citealp")
+ ((("p")
+   ("caps" "c"))
+  . "\\Citep")
+ ((("p")
+   ("full" "f"))
+  . "\\citep*")
+ ((("p")
+   ("bare-caps" "bc"))
+  . "\\Citealp")
+ ((("p")
+   ("bare-full" "bf"))
+  . "\\citealp*")
+ ((("p")
+   ("bare-caps-full" "bf"))
+  . "\\Citealp*")
+ ((("num")
+   nil)
+  . "\\citenum"))
+#+end_src
+
+In theory you can make this defcustom anyway you want. It should probably be setq before you load org-ref-cite though. The export processor defines the available styles from this variable.
+
+** Modifying the activation of citations
+
+The activation of citations in org-ref-cite is done by a list of function defined in =org-ref-cite-activation-functions=. You can modify this list as you see fit in your init files.
+
+#+BEGIN_SRC emacs-lisp
+org-ref-cite-activation-functions
+#+END_SRC
+
+#+RESULTS:
+| org-cite-basic-activate | org-ref-cite-activate-keymap | org-ref-cite-activate-style-fontification | org-ref-cite-activate-prefix-suffix |
+
+** I don't use ivy and want a different insert processor
+
+No problem, just make a different insert processor. You could make one like this that uses the oc-basic key completer, but the org-ref-cite style selector. I find the basic key completer too slow on large bibliography files.
+
+#+BEGIN_SRC emacs-lisp :results silent
+(require 'oc-basic)
+(org-cite-register-processor 'my-inserter
+  :insert (org-cite-make-insert-processor #'org-cite-basic--complete-key
+					  #'org-ref-cite-select-style))
+
+(setq org-cite-insert-processor 'my-inserter)
+#+END_SRC
+
+Suppose you just want a completing-read compatible inserter using bibtex-completion for candidates. =org-ref-cite= provides a function that can be used instead of org-cite-basic--complete-key.
+
+#+BEGIN_SRC emacs-lisp :results silent
+(org-cite-register-processor 'my-inserter
+ :insert (org-cite-make-insert-processor #'org-ref-cite--complete-key
+					 #'org-ref-cite-select-style))
+
+(setq org-cite-insert-processor 'my-inserter)
+#+END_SRC
+
+If you use Emacs 28, you might prefer this instead, which supports annotation.
+
+#+BEGIN_SRC emacs-lisp :results silent
+(org-cite-register-processor 'my-inserter
+ :insert (org-cite-make-insert-processor #'org-ref-cite--complete-key-28
+					 #'org-ref-cite-select-style))
+
+(setq org-cite-insert-processor 'my-inserter)
+#+END_SRC
+
+
+Now you are all set, you get bibtex-completion candidates and no ivy dependency required, and the default insertion behavior of the org-cite library.
+
+The following notes are true for me:
+
+1. If you use helm you press return to select candidates, and then you have to press C-S-return to end the selection and insert the candidates.
+
+2. If you use ivy-mode you still type return to select candidates, but you have to press C-M-return to end the selection and insert the candidates.
+
+3. If you use vanilla emacs on this, it is very tedious. You have to press Tab to see any candidates, use arrows to get to the one you want, press return to select it, repeat for additional candidates, and then press return at the end to insert them. If you have a lot of candidates, you really need something like helm/ivy/selectrum/etc. to help with the selection.
+
+
+* Using parts of org-ref-cite
+
+The way org-ref-cite is configured out of the box reflects the needs and opinions of the author. It does everything I want in this setup, and it is the setup I can best support because I use it.
+
+If you want to configure your own setup, you can. org-ref-cite provides a lot of modularity with completing-read compatibility.
+You could setup an insert processor that uses  [[https://github.com/bdarcus/bibtex-actions][bibtex-actions]] with pieces of org-ref-cite. For example you could use and customize the insert processor from org-ref-cite like this:
+
+#+BEGIN_SRC emacs-lisp
+(org-cite-register-processor 'bibtex-actions-alt
+  :insert (org-cite-make-insert-processor #'oc-bibtex-actions-insert
+					  #'org-ref-cite-select-style))
+
+(setq org-cite-insert-processor 'bibtex-actions-alt)
+#+END_SRC
+
+and customize the activate function like this.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-ref-cite-activation-functions '(your list of functions)
+      org-cite-activate-processor 'org-ref-cite-activate)
+#+END_SRC
+
+
+* Dependencies
+
+** org-ref-cite-core.el
+
+- relies on bibtex-completion and avy. avy is only needed for one navigation function.
+
+**  org-ref-cite-activate.el
+
+Technically, this depends on bibtex-completion because of the =org-ref-cite-sort-year-ascending= function. I don't think anything will break if you don't use that. I don't see a way around this, I want to be able to use a key press (Shift-up) and also have an action in the follow processor for this. You can always remove that key binding in the map if it bugs you.
+
+** org-ref-cite-insert.el
+
+- I use bibtex-completion to get the candidates.
+- Ivy is required for this, as it allows single, multiple, and sequential actions on the selected candidates. While [[https://github.com/oantolin/embark][Embark]] offers the same for completing-read, completing-read does not include actions out-of-the-box.
+
+** org-ref-cite-follow.el
+
+- Many follow functions depend on bibtex-completion functions
+- One depends on biblio
+
+
+I don't think anything will break if you don't use those.
+
+** org-ref-cite-export.el
+
+No dependencies I can think of.
+
+** I don't want all these pieces...
+
+You do not have to use them all. Just don't require org-ref-cite, and import what you want and use them how you want instead.
+
+* Relationship to org-ref
+
+This library only handles citations, and provides no support for cross-references. org-ref still supports its links style citations, but I consider them deprecated and do not recommend them for future use. I am going to leave them in there though to continue supporting all the documents that use it. I am going to continue maintaining org-ref because it is probably still going to be the way I do cross-referencing, since that is not supported by org-cite. org-ref also still provides a lot of useful things like glossaries, etc.
+
+This library should be independent and orthogonal to org-ref. The only leakage I am aware of is if have org-ref loaded, it thinks cite: in the org-cite syntax is a broken link. The default in org-ref-cite should prevent that from being an issue.
+
+* What is left?
+
+1. So far this only handles citations.
+2. I am debating how to handle cross-references and labels. They are still covered in org-ref for now, and there is no new syntax for them. I do not think I will duplicate that here, there won't be a way to support two different definitions of links, which I think will be confusing. Maybe this will coexist with org-ref, and I will just leave the old cite links there for people who want to keep using older org-mode for some reason. It is kind of a pickle.
+
+Most but not all of the natbib cite commands are supported. I don't plan to make this support all the biblatex styles. See oc-biblatex for that.
+- I am not sure if citenum is supported in other exporters
+- citetext doesn't currently seem possible because it doesn't use a key, but it also not a style I would use often since it is a light wrapper around text, and not for the bibliography.
+- =\\nocite{*}= also does not currently seem possible for the same reason, but this is also an infrequently used style for me.
+
+
+* For MELPA
+
+This is probably the recipe. I probably do not need to distribute the bibliography, notes and style files via MELPA.
+
+#+BEGIN_SRC emacs-lisp
+(org-ref-cite :fetcher github :repo "jkitchin/org-ref-cite" :files (:defaults "readme.org"))
+#+END_SRC
+
+Before going on MELPA:
+- [ ] org 9.5 should be installable from a package-manager
+- [ ] I need to build this to check for byte-compiler issues
+
+* Sandbox notes                                                    :noexport:
+
+#+BEGIN_SRC emacs-lisp
+(org-cite-supported-styles '(org-ref-cite))
+#+END_SRC
+
+#+RESULTS:
+| (nil)         |          |          |                |                |                |                      |
+| (num)         |          |          |                |                |                |                      |
+| (p)           | (bare b) | (caps c) | (full f)       | (bare-caps bc) | (bare-full bf) | (bare-caps-full bcf) |
+| (nocite)      |          |          |                |                |                |                      |
+| (noauthor na) | (bare b) |          |                |                |                |                      |
+| (author a)    | (caps c) | (full f) | (caps-full cf) |                |                |                      |
+| (text t)      | (bare b) | (caps c) | (full f)       | (caps-full cf) | (bare-caps bc) | (bare-full bf bcf)   |
+
+#+BEGIN_SRC emacs-lisp
+(defun test-select-style ()
+  "Select a style with completion."
+  (interactive)
+  (let ((candidates (cl-loop for (style . command) in (org-ref-cite-get-combinatorial-style-commands)
+			     collect
+			     (concat (car style)
+				     (when (cdr style) (format "/%s" (cdr style)))))))
+    (completing-read "Style: " candidates)))
+#+END_SRC
