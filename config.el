@@ -22,36 +22,39 @@
 ;  (setq debug-on-error t)
 
 (use-package helm
-  :config (helm-mode +1)
-  :bind (("M-x"   . helm-M-x)
-         ([f3] . helm-buffers-list)       
-         ("<Hangul> x" . helm-M-x)
-         ([f9] . helm-occur )
-         ))
-(use-package projectile
-  :config
-  (projectile-mode +1))
+     :config (helm-mode +1)
+     :bind (("M-x"   . helm-M-x)
+            ([f3] . helm-buffers-list)       
+            ("<Hangul> x" . helm-M-x)
+            ([f9] . helm-occur )
+            ))
+   (use-package projectile
+     :config
+     (projectile-mode +1))
 
-(use-package helm-projectile
-  :bind    ([f5] . helm-projectile))
+   (use-package helm-projectile
+     :bind    ([f5] . helm-projectile))
 
-(use-package bufler
-  :custom
-  (bufler-column-name-width 70)
-  (bufler-filter-buffer-modes nil))
+   (use-package bufler
+     :custom
+     (bufler-column-name-width 70)
+     (bufler-filter-buffer-modes nil))
 
-(setq org-special-ctrl-a/e (quote (t . t)))
+   (setq org-special-ctrl-a/e (quote (t . t)))
 
-(add-hook 'bufler-list-mode-hook
-          (lambda ()
-            (visual-line-mode -1)
-            (toggle-truncate-lines 1)))
+   (add-hook 'bufler-list-mode-hook
+             (lambda ()
+               (visual-line-mode -1)
+               (toggle-truncate-lines 1)))
 
-(use-package ace-jump-mode)
-(global-set-key (kbd "M-z") 'ace-jump-mode)
-(global-unset-key (kbd "C-z"))
-(global-set-key (kbd "C-z") 'ace-jump-helm-line)
-(setq tab-bar-mode nil)
+   (use-package ace-jump-mode)
+;   (global-set-key (kbd "M-z") 'ace-jump-mode)
+   (global-unset-key (kbd "C-z"))
+   (global-set-key (kbd "C-z") 'ace-jump-helm-line)
+   (setq tab-bar-mode nil)
+
+(use-package avy)
+(global-set-key (kbd "M-z") 'avy-goto-char)
 
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
   (use-package openwith
@@ -571,7 +574,7 @@
         org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
         org-agenda-current-time-string "✸✸✸✸✸"
         org-agenda-start-with-clockreport-mode t
-        org-agenda-dim-blocked-tasks t
+        org-agenda-dim-blocked-tasks 'invisible
         org-agenda-window-setup 'only-window
         )
 
@@ -588,12 +591,24 @@
   (setq org-super-agenda-mode 1)
   (setq org-agenda-custom-commands
         '(
-          ("l" . "just todo lists") ;description for "h" prefix
+          ("l" . "just todo lists") ;description for "l" prefix
           ("lt" tags-todo "untagged todos" "-{.*}")
           ("ls" alltodo "all unscheduled" (
                                            (org-agenda-todo-ignore-scheduled t)
                                            (org-super-agenda-groups
                                             '(
+
+  (:discard (:todo "HABIT"))
+                                             (:name "TO READ" :and (:tag "read"))
+                                             (:name "Meetings" :and (:tag "meetings"))
+                                             (:name "TO WRITE" :and (:tag "write"))
+                                             (:name "TO PROCESS" :and (:tag "process"))
+                                             (:name "look up" :and (:tag "lookup"))
+                                             (:name "focus" :and (:tag "focus"))
+                                             (:name "quick" :and (:tag "quick"))
+
+                                             (:name "away from computer" :and (:tag "analog"))
+
                                               (:name "NDD" :and (:tag "ndd" :category "ndd"))
                                               (:name "Scholarship research" :and (:tag "schol" :tag "research"))
                                               (:name "Scholarship reading" :and (:tag "schol" :tag "read"))
@@ -612,17 +627,21 @@
            ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE %EFFORT " )
             (org-agenda-view-columns-initially t)
             (org-agenda-sorting-strategy '(timestamp-up))
-            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" "PROJ")) ) )      )
+            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" )) ) )      )
           ("la" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
                                           (org-super-agenda-groups
                                            '(
-                                             (:name "NDD" :and (:tag "ndd" :category "ndd"))
-                                             (:name "Scholarship research" :and (:tag "schol" :tag "research"))
-                                             (:name "Scholarship reading" :and (:tag "schol" :tag "read"))
-                                             (:name "Scholarship writing" :and (:tag "schol" :tag "write"))
-                                             (:name "Scholarship admin" :and (:tag "schol" :tag "admin")) 
-                                             (:name "Baruch" :and (:tag "baruch"))
-                                             (:name "Me" :and (:tag "me"))
+                                             (:discard (:todo "HABIT"))
+                                             (:name "TO READ" :and (:tag "read"))
+                                             (:name "Meetings" :and (:tag "meetings"))
+                                             (:name "TO WRITE" :and (:tag "write"))
+                                             (:name "TO PROCESS" :and (:tag "process"))
+                                             (:name "look up" :and (:tag "lookup"))
+                                             (:name "focus" :and (:tag "focus"))
+                                             (:name "quick" :and (:tag "quick"))
+
+                                             (:name "away from computer" :and (:tag "analog"))
+
 
 
                                              ))))))
@@ -640,16 +659,20 @@
                                (alltodo "" ((org-agenda-overriding-header "")
                                             (org-super-agenda-groups '(
 
-                                             (:name "Scholarship writing" :and (:tag "schol" :tag "write"))
-                                             (:name "To read" :and (:tag "read"))
-                                             (:name "NDD" :and (:tag "ndd"))
-                                             (:name "Scholarship research" :and (:tag "schol" :tag "research"))
-                                             (:name "Scholarship reading" :and (:tag "schol" :tag "read"))
-                                             (:name "Scholarship admin" :and (:tag "schol" :tag "admin")) 
-                                             (:name "Baruch" :and (:tag "baruch"))
-                                             (:name "Me" :and (:tag "me"))
+                                                                          (:discard (:todo "HABIT"))
+                                             (:name "TO READ" :and (:tag "read"))
+                                             (:name "Meetings" :and (:tag "meetings"))
+                                             (:name "TO WRITE" :and (:tag "write"))
+                                             (:name "TO PROCESS" :and (:tag "process"))
+                                             (:name "look up" :and (:tag "lookup"))
+                                             (:name "focus" :and (:tag "focus"))
+                                             (:name "quick" :and (:tag "quick"))
+
+                                             (:name "away from computer" :and (:tag "analog"))
+
+
                                              )))))
-           ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+           ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
             (org-agenda-todo-ignore-scheduled t) ))
 )
 
@@ -665,18 +688,16 @@
 
 (setq org-todo-keywords
       (quote
-       ((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
-        (type    "HOLD(l)" "PROJ(j)"  "|" "DONE(d)")     )))
+       ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "|" "DONE(d)"  "x(c)" )
+        (type    "HABIT(h)" "PROJ(p)"  "WAIT(w)" "|" "DONE(d)")     )))
 
 (setq org-todo-keyword-faces
       '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
                                         ;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
         ("TODO" :weight regular :underline nil :inherit org-todo )
         ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
-        ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
-        ("to-process" :foreground "magenta")
-        ("to-read" :foreground "magenta")
-        ("in-prog" :foreground "magenta")
+        ("IN-PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
+         ("HABIT" :weight bold :underline nil :inherit org-todo :foreground "forestgreen")
         ("PROJ" :foreground "magenta")
         ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
 
@@ -759,11 +780,23 @@
 
                       (:startgroup . nil)
                       ("admin" . ?a)
+                      ("lookup" . ?p)
                       ("research" . ?r)
+                      ("process" . ?c)
                       ("write" . ?w)
                       ("read" . ?d)
                       (:endgroup . nil)
 
+                      (:startgroup . nil)
+                      ("meetings" . ?t)
+                      (:endgroup . nil)
+
+
+                      (:startgroup . nil)
+                      ("focus" . ?f)
+                      ("quick" . ?q)
+                      ("analog" . ?g)
+                      (:endgroup . nil)
                       ))
 
 (setq org-complete-tags-always-offer-all-agenda-tags nil)

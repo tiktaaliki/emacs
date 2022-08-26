@@ -4,7 +4,18 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auto-save-visited-mode t)
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(bibtex-completion-format-citation-functions
+   '((org-mode . bibtex-completion-format-citation-org-cite)
+     (latex-mode . bibtex-completion-format-citation-cite)
+     (markdown-mode . bibtex-completion-format-citation-pandoc-citeproc)
+     (python-mode . bibtex-completion-format-citation-sphinxcontrib-bibtex)
+     (rst-mode . bibtex-completion-format-citation-sphinxcontrib-bibtex)
+     (default . bibtex-completion-format-citation-default)))
+ '(bmkp-last-as-first-bookmark-file "/home/betsy/.emacs.d/bookmarks")
+ '(custom-safe-themes
+   '("5a611788d47c1deec31494eb2bb864fde402b32b139fe461312589a9f28835db" default))
+ '(default-input-method "korean-hangul")
+ '(fill-column 100)
  '(global-visual-fill-column-mode t)
  '(global-visual-line-mode t)
  '(good-scroll-point-jump 10)
@@ -12,7 +23,40 @@
    '("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote " " mode-line-misc-info mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
      (vc-mode vc-mode)
      "  " mode-line-modes mode-line-end-spaces))
+ '(mu4e-attachment-dir "/home/betsy/Dropbox/2022")
+ '(olivetti-body-width 0.8)
+ '(org-agenda-columns-add-appointments-to-effort-sum t)
+ '(org-agenda-dim-blocked-tasks t)
+ '(org-agenda-exporter-settings '((org-agenda-remove-tags t) (org-agenda-with-colors nil)))
+ '(org-agenda-prefix-format
+   '((agenda . " %i %-12:c %?-12t% s")
+     (todo . " %i %-12:c")
+     (tags . " %i %-12:c")
+     (search . " %i %-12:c")))
  '(org-agenda-scheduled-leaders '("" "S.%2dx: "))
+ '(org-agenda-tags-column -80)
+ '(org-catch-invisible-edits 'smart)
+ '(org-cite-global-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
+ '(org-columns-default-format "%25ITEM %TODO %3PRIORITY %EFFORT %TAGS")
+ '(org-columns-default-format-for-agenda "%25ITEM %TODO %SCHEDULED %EFFORT")
+ '(org-duration-format '(("p" . t) (special . h:mm)))
+ '(org-duration-units
+   '(("min" . 1)
+     ("h" . 60)
+     ("d" . 1440)
+     ("w" . 10080)
+     ("m" . 43200)
+     ("y" . 525960.0)
+     ("p" . 25)))
+ '(org-ellipsis " »")
+ '(org-fast-tag-selection-single-key t)
+ '(org-gcal-auto-archive nil)
+ '(org-gcal-remove-api-cancelled-events t)
+ '(org-global-properties '(("EFFORT_ALL" . "5 10 15 20 25 30 35 40 45 50 55 60")))
+ '(org-habit-graph-column 50)
+ '(org-habit-show-habits-only-for-today t)
+ '(org-id-link-to-org-use-id 'create-if-interactive)
+ '(org-image-actual-width '(400))
  '(org-modules
    '(ol-bibtex ol-docview ol-eww org-habit org-id org-inlinetask org-protocol org-tempo ol-w3m ol-bookmark org-checklist org-depend org-invoice org-registry org-toc))
  '(org-pomodoro-ticking-sound-states '(:pomodoro))
@@ -22,6 +66,22 @@
  '(org-super-agenda-unmatched-name "")
  '(package-selected-packages
    '(org-transclusion emojify org-roam-bibtex org-roam-timestamps org-roam-ui helm-bibtex helm-bibtexkey org-noter-pdftools unicode-fonts pomm cnfonts org-pomodoro auctex auctex-lua company company-auctex helm-unicode ace-mode ace-jump-helm-line ace-jump-mode pdf-continuous-scroll-mode quelpa-use-package quelpa org-auto-tangle highlight-quoted highlight-parentheses org-pdfview openwith good-scroll visual-fill-column interleave org-noter org-ref deft burly org-sidebar org-plus-contrib helm-chronos chronos org-alert pdf-view-restore pdf-tools nov olivetti anki-editor org-mru-clock org-roam magit doom-themes org-superstar use-package unkillable-scratch helm-projectile aggressive-indent))
+ '(pdf-annot-default-annotation-properties
+   '((t
+      (label . "Betsy"))
+     (text
+      (color . "#ff0000")
+      (icon . "Note"))
+     (highlight
+      (color . "light green"))
+     (underline
+      (color . "blue"))
+     (squiggly
+      (color . "orange"))
+     (strike-out
+      (color . "red"))))
+ '(pdf-annot-list-listed-types
+   '(file free-text highlight squiggly strike-out text underline))
  '(safe-local-variable-values
    '((org-download-image-dir . "/home/betsy/.local/share/Anki2/User 1/collection.media")
      (org-reverse-note-order)))
@@ -491,7 +551,11 @@
      ("Yi Syllables"
       ("Noto Sans Yi" "Nuosu SIL" "Microsoft Yi Baiti" "STFangsong" "Code2000"))
      ("Yijing Hexagram Symbols"
-      ("WenQuanYi Zen Hei Mono" "Noto Sans Symbols" "Segoe UI Symbol" "Apple Symbols" "DejaVu Sans:width=condensed" "BabelStone Han" "Symbola" "Quivira" "BabelStone Modern" "Code2000" "Everson Mono:weight=bold")))))
+      ("WenQuanYi Zen Hei Mono" "Noto Sans Symbols" "Segoe UI Symbol" "Apple Symbols" "DejaVu Sans:width=condensed" "BabelStone Han" "Symbola" "Quivira" "BabelStone Modern" "Code2000" "Everson Mono:weight=bold"))))
+ '(user-mail-address "betsy.yoon@baruch.cuny.edu")
+ '(visual-fill-column-center-text t)
+ '(warning-suppress-types '((use-package)))
+ '(yas-global-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -499,11 +563,21 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :extend nil :stipple nil :background "#282c34" :foreground "#ebdcb2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 200 :width normal :foundry "PfEd" :family "Fantasque Sans Mono"))))
  '(bold ((t (:foreground "#dfe166" :weight bold))))
+ '(custom-link ((t (:inherit link :foreground "#f9d2ef"))))
  '(doom-themes-org-hash-tag ((t (:height 1.0))))
  '(italic ((t (:foreground "#f52549" :slant italic))))
  '(link ((t (:foreground "#51afef" :underline t :weight normal :family "monofur"))))
+ '(mode-line ((t (:inherit modus-themes-ui-variable-pitch :background "#323232" :foreground "#f4f4f4" :box (:line-width (1 . 1) :color "#a8a8a8") :height 0.8))))
+ '(org-agenda-calendar-event ((t (:inherit shadow :foreground "dark turquoise" :underline nil))))
+ '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "magenta"))))
  '(org-agenda-date ((t (:foreground "tomato" :underline nil :weight bold :height 1.2))))
+ '(org-agenda-date-today ((t (:background "black" :foreground "#00d3d0"))))
+ '(org-agenda-done ((t (:inherit modus-themes-grue-nuanced :foreground "dim gray"))))
+ '(org-block ((t (:inherit modus-themes-fixed-pitch :extend t :background "gray9" :foreground "#ffffff"))))
+ '(org-block-begin-line ((t (:inherit modus-themes-fixed-pitch :extend t :foreground "medium slate blue"))))
+ '(org-checkbox ((t (:foreground "pale green"))))
  '(org-checkbox-statistics-todo ((t (:inherit org-todo :foreground "#ff4447" :weight bold :height 1.0 :family "Victor Mono"))))
+ '(org-column ((t (:background "gray0" :foreground "pale green" :strike-through nil :underline nil :slant normal :weight normal))))
  '(org-date ((t (:foreground "#ECBE7B" :underline t :family "monofur"))))
  '(org-done ((t (:inherit org-headline-done :weight normal :height 0.9 :family "nova mono"))))
  '(org-drawer ((t (:foreground "sky blue" :height 0.8))))
@@ -514,12 +588,18 @@
  '(org-level-3 ((t (:inherit org-level-2 :extend nil :foreground "#68829e"))))
  '(org-level-4 ((t (:inherit org-level-3 :foreground "light coral" :height 1.0))))
  '(org-level-5 ((t (:extend nil :foreground "deep sky blue"))))
+ '(org-level-6 ((t (:inherit org-level-5 :extend nil :foreground "dark goldenrod"))))
+ '(org-level-7 ((t (:inherit org-level-6 :extend nil :foreground "#fbcd4b"))))
+ '(org-level-8 ((t (:inherit org-level-7 :extend nil :foreground "#e05858"))))
  '(org-link ((t (:inherit link :foreground "#b38867" :underline nil :weight normal :height 1 :family "monofur"))))
+ '(org-list-dt ((t nil)))
  '(org-property-value ((t (:foreground "#83898d" :height 0.9))) t)
  '(org-quote ((t (:inherit org-block :extend t :background "gray26" :foreground "spring green" :slant italic :family "KoHo"))))
  '(org-special-keyword ((t (:foreground "#83898d" :height 0.9))))
  '(org-super-agenda-header ((t (:inherit org-agenda-structure :foreground "medium spring green"))))
+ '(org-superstar-item ((t (:inherit default :foreground "turquoise"))))
  '(org-tag ((t (:foreground "spring green" :weight normal :height 0.8))))
- '(org-todo ((t (:foreground "#98be65" :weight normal :height 0.75 :family "nova mono"))))
+ '(org-todo ((t (:foreground "#98be65" :weight normal :height 1.0 :family "nova mono"))))
  '(outline-1 ((t (:extend t :foreground "#51afef" :weight normal))))
- '(underline ((t (:foreground "#89da59" :underline t)))))
+ '(underline ((t (:foreground "#89da59" :underline t))))
+ '(variable-pitch ((t (:family "Koho")))))

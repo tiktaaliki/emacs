@@ -155,6 +155,42 @@
                               (let ((current-prefix-arg '(4)))
                                 (call-interactively #'org-tree-to-indirect-buffer))))
 
+(use-package calfw)
+  (use-package calfw-org)
+                                          ;   (use-package calfw-gcal)
+  (use-package calfw-cal) 
+  (setq package-check-signature nil)
+                                          ;  (setq org-gcal-down-days '30)
+                                          ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
+
+
+  (defun my-open-calendar ()
+    (interactive)
+    (cfw:open-calendar-buffer
+     :contents-sources
+     (list
+      (cfw:org-create-source "pale green")  ; orgmode source
+                                          ;    (cfw:cal-create-source "light goldenrod") ; diary source
+      ))) 
+  (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
+                                          ;   (setq calendar-daylight-savings-starts '(3 11 year))
+                                          ;  (setq calendar-daylight-savings-ends: '(11 4 year))
+  (setq calendar-week-start-day 1)
+
+  (setq diary-file "~/Dropbox/Zettelkasten/diary")
+
+
+
+  (use-package org-gcal)
+  (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
+        org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
+        org-gcal-fetch-file-alist '(
+      ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
+;      ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/time.org")
+      ))
+
+  (setq org-gcal-recurring-events-mode 'top-level)
+
 (setq backup-directory-alist '(("." . "c:/Users/eyoon/Dropbox (Personal)/emacs/baruch-backups"))
       backup-by-copying 1
       delete-old-versions -1
@@ -282,6 +318,15 @@
 
 (setq global-visible-mark-mode t)
 
+(use-package org-auto-tangle
+                :hook (org-mode . org-auto-tangle-mode)
+
+                )
+  (setq org-html-head "<link rel=\"stylesheet\" href=\"\\c:\\Users\\eyoon\\Dropbox (Personal)\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
+  (setq org-agenda-export-html-style "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/css/tufte.css")
+(setq org-export-with-toc nil)
+(setq org-export-initial-scope 'subtree)
+
 (setq org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE ")
 
 
@@ -357,84 +402,96 @@
        (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
 
 (use-package org-super-agenda)
-(org-super-agenda-mode 1)
-(setq org-super-agenda-mode 1)
-(setq org-agenda-custom-commands
-      '(
-	("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
-					 (org-super-agenda-groups
-					  '((:name "Day"
-						   :time-grid t
-						   :date today
-						   :todo "TODAY"
-						   :scheduled today
-						   :order 1)))))
-			     (alltodo "" ((org-agenda-overriding-header "")
-					  (org-super-agenda-groups
-					   '(
-					     (:name "today" :scheduled today)
-					;                (:name "next" :todo "NEXT")
-(:name "In PROGRESS" :todo "PROG")
-					     (:name "Next" :todo "NEXT")
-					     (:name "to read" :tag "read")
-					     (:name "research" :tag "research")
-					     (:name "Waiting" :todo "WAIT")
-					     (:name "Deadlines" 
-						    :and (:deadline t :scheduled nil))
+  (org-super-agenda-mode 1)
+  (setq org-super-agenda-mode 1)
+  (setq org-agenda-custom-commands
+        '(
+          ("l" . "just todo lists") ;description for "l" prefix
+          ("lt" tags-todo "untagged todos" "-{.*}")
+          ("ls" alltodo "all unscheduled" (
+                                           (org-agenda-todo-ignore-scheduled t)
+                                           (org-super-agenda-groups
+                                            '(
 
-					     (:name "ndd" :category "ndd")
-					     (:name "lis" :category "lis")
-					     (:name "csi" :category "CSI")
-					     (:discard (:todo "HOLD"))
-					;     (:name "not scheduled"
-					;           :and (:deadline nil :scheduled nil))
-					     (:name "Scheduled" :scheduled future)
-					     ))
-					  ))
-			     ))
+                                             (:discard (:todo "HABIT"))
+                                             (:name "TO READ" :and (:tag "read"))
+                                             (:name "Meetings" :and (:tag "meetings"))
+                                             (:name "TO WRITE" :and (:tag "write"))
+                                             (:name "TO PROCESS" :and (:tag "process"))
+                                             (:name "look up" :and (:tag "lookup"))
+                                             (:name "focus" :and (:tag "focus"))
+                                             (:name "quick" :and (:tag "quick"))
+
+                                             (:name "away from computer" :and (:tag "analog"))
+
+                                              (:name "NDD" :and (:tag "ndd" :category "ndd"))
+                                              (:name "Scholarship research" :and (:tag "schol" :tag "research"))
+                                              (:name "Scholarship reading" :and (:tag "schol" :tag "read"))
+                                              (:name "Scholarship writing" :and (:tag "schol" :tag "write"))
+                                              (:name "Scholarship admin" :and (:tag "schol" :tag "admin")) 
+                                              (:name "Baruch" :and (:tag "baruch"))
+                                              (:name "Me" :and (:tag "me"))
 
 
+                                              ))
+
+                                           (org-agenda-skip-function
+                                            '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+                                           ))
+          ("lx" "With deadline columns" alltodo "" 
+           ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE %EFFORT " )
+            (org-agenda-view-columns-initially t)
+            (org-agenda-sorting-strategy '(timestamp-up))
+            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" )) ) )      )
+          ("la" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
+                                          (org-super-agenda-groups
+                                           '(
+                                             (:discard (:todo "HABIT"))
+                                             (:name "TO READ" :and (:tag "read"))
+                                             (:name "Meetings" :and (:tag "meetings"))
+                                             (:name "TO WRITE" :and (:tag "write"))
+                                             (:name "TO PROCESS" :and (:tag "process"))
+                                             (:name "look up" :and (:tag "lookup"))
+                                             (:name "focus" :and (:tag "focus"))
+                                             (:name "quick" :and (:tag "quick"))
+
+                                             (:name "away from computer" :and (:tag "analog"))
 
 
-	("k" "all untagged TODOs" tags-todo "-{.*}")  ;RETURN ANY TODO ITEMS WTIHOUT TAGS
 
-	("x" "With deadline columns" alltodo "" 
-	 ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE " )
-	  (org-agenda-view-columns-initially t)
-	  (org-agenda-sorting-strategy '(timestamp-up))
-	  (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("HOLD" "WAIT" "PROJ")) ) )
+                                             ))))))
 
-	 )
 
-	("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
-	 ((agenda "" ((org-agenda-span 2)
-		      (org-agenda-clockreport-mode nil)))
-	  (todo "NEXT|TODAY|IN-PROG"))
-	 ((org-agenda-todo-ignore-scheduled t)))
+          ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
+           ((agenda "" ((org-agenda-span 2)
+                        (org-agenda-clockreport-mode nil)))
+            (todo "NEXT|TODAY|IN-PROG"))
+           ((org-agenda-todo-ignore-scheduled t)))
 
-	("u" "all UNSCHEDULED" alltodo ""                                                          
-	 (    (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '( "HOLD"  "PROJ" "AREA")) )
-	      (org-agenda-todo-ignore-scheduled t) )
+          ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
+                                           (org-super-agenda-groups
+                                            '((:name "Day" :time-grid t :order 1)))))
+                               (alltodo "" ((org-agenda-overriding-header "")
+                                            (org-super-agenda-groups '(
 
-	 )
-	("l" "all todos" (  (alltodo "" ((org-agenda-overriding-header "")
-					 (org-super-agenda-groups
-					  '(
-					    (:name "csi" :category "CSI" :order 100)
-					    (:name "important" :priority "A")
-					    (:name "today" :scheduled today)
+                                                                          (:discard (:todo "HABIT"))
+                                             (:name "TO READ" :and (:tag "read"))
+                                             (:name "Meetings" :and (:tag "meetings"))
+                                             (:name "TO WRITE" :and (:tag "write"))
+                                             (:name "TO PROCESS" :and (:tag "process"))
+                                             (:name "look up" :and (:tag "lookup"))
+                                             (:name "focus" :and (:tag "focus"))
+                                             (:name "quick" :and (:tag "quick"))
 
-					    (:name "Deadlines" 
-						   :and (:deadline t :scheduled nil))
-					;   (:name "not scheduled"
-					;         :and (:deadline nil :scheduled nil))
-					    (:name "Scheduled" :scheduled future :order 75)
+                                             (:name "away from computer" :and (:tag "analog"))
 
-					    ))
-					 )         )))
 
-	)
-      )
+                                             )))))
+           ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
+            (org-agenda-todo-ignore-scheduled t) ))
+)
+
+        )
 
 (setq org-enforce-todo-dependencies t
       org-clock-out-when-done t
@@ -444,20 +501,58 @@
 
 (setq org-todo-keywords
       (quote
-       ((sequence "TODO(t)" "NEXT(n)" "PROG(p)" "WAIT(w)" "|" "DONE(d)"  "x(c)" )
-        (type    "HOLD(l)"  "|" "DONE(d)")     )))
+       ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "|" "DONE(d)"  "x(c)" )
+        (type    "HABIT(h)" "PROJ(p)"  "WAIT(w)" "|" "DONE(d)")     )))
 
 (setq org-todo-keyword-faces
       '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
-        ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
-        ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "magenta")
-        ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#ff420e")
-      ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
+                                        ;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
+        ("TODO" :weight regular :underline nil :inherit org-todo )
+        ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
+        ("IN-PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
+         ("HABIT" :weight bold :underline nil :inherit org-todo :foreground "forestgreen")
+        ("PROJ" :foreground "magenta")
+        ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
 
 
 (use-package org-edna)
 (org-edna-mode 1)
 (setq org-log-done 'time)
+
+(setq org-tag-alist '(
+                      (:startgroup . nil)
+                      ("ndd" . ?n)
+                      ("schol" . ?s)
+                      ("me" . ?m)
+                      ("baruch" . ?b)
+                      ("sysadmin" . ?y)
+                      ("home" . ?h)
+                      ("lis" . ?l)
+                      (:endgroup . nil)
+
+                      (:startgroup . nil)
+                      ("admin" . ?a)
+                      ("lookup" . ?p)
+                      ("research" . ?r)
+                      ("process" . ?c)
+                      ("write" . ?w)
+                      ("read" . ?d)
+                      (:endgroup . nil)
+
+                      (:startgroup . nil)
+                      ("meetings" . ?t)
+                      (:endgroup . nil)
+
+
+                      (:startgroup . nil)
+                      ("focus" . ?f)
+                      ("quick" . ?q)
+                      ("analog" . ?g)
+                      (:endgroup . nil)
+                      ))
+
+(setq org-complete-tags-always-offer-all-agenda-tags nil)
+(setq org-tags-column 0)
 
 (setq org-capture-templates
       '(
@@ -566,15 +661,6 @@
                   (org-todo 'todo)))))))))
 
 (add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo)
-
-(use-package org-auto-tangle
-                :hook (org-mode . org-auto-tangle-mode)
-
-                )
-  (setq org-html-head "<link rel=\"stylesheet\" href=\"\\c:\\Users\\eyoon\\Dropbox (Personal)\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
-  (setq org-agenda-export-html-style "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/css/tufte.css")
-(setq org-export-with-toc nil)
-(setq org-export-initial-scope 'subtree)
 
 (load "annot")
   (require 'annot)

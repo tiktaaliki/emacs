@@ -15,6 +15,7 @@
  '(global-visual-line-mode t)
  '(org-agenda-files
    '("c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/journal.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/readings.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/contacts.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/ndd.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/personal.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/lis.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/recipes.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/sysadmin.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/editing.org"))
+ '(org-agenda-tags-column -80)
  '(org-clock-out-remove-zero-time-clocks t)
  '(org-ellipsis " ↯ ")
  '(org-fontify-quote-and-verse-blocks t)
@@ -26,7 +27,7 @@
      ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#00BFFF")
      ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
  '(package-selected-packages
-   '(centered-window zenburn-theme sudoku 2048-game yasnippet unicode-fonts doom-themes org-superstar interleave smartparens aggressive-indent unkillable-scratch org-plus-contrib deft ace-jump-mode bufler helm-projectile projectile helm use-package))
+   '(org-gcal centered-window zenburn-theme sudoku 2048-game yasnippet unicode-fonts doom-themes org-superstar interleave smartparens aggressive-indent unkillable-scratch org-plus-contrib deft ace-jump-mode bufler helm-projectile projectile helm use-package))
  '(safe-local-variable-values '((org-reverse-note-order))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
