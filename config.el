@@ -538,6 +538,7 @@
                            "~/Dropbox/Zettelkasten/contacts.org"
                            "~/Dropbox/Zettelkasten/readings.org"
                            "~/Dropbox/Zettelkasten/journal.org"
+                           "~/Dropbox/Zettelkasten/habits.org"
                            "~/Dropbox/Zettelkasten/ndd.org"
                          "~/Dropbox/Zettelkasten/Scholarship/open.org"
                      ;      "~/Dropbox/Zettelkasten/time.org"                             
@@ -586,97 +587,93 @@
 
 (setq org-agenda-sticky t)
 
+;this makes it so that habits show up in the time grid
+  (setq org-agenda-sorting-strategy
+'((agenda time-up priority-down category-keep)
+  (todo   priority-down category-keep)
+  (tags   priority-down category-keep)
+  (search category-keep)))
+
 (use-package org-super-agenda)
-  (org-super-agenda-mode 1)
-  (setq org-super-agenda-mode 1)
-  (setq org-agenda-custom-commands
-        '(
-          ("l" . "just todo lists") ;description for "l" prefix
-          ("lt" tags-todo "untagged todos" "-{.*}")
-          ("ls" alltodo "all unscheduled" (
-                                           (org-agenda-todo-ignore-scheduled t)
-                                           (org-super-agenda-groups
-                                            '(
+    (org-super-agenda-mode 1)
+    (setq org-super-agenda-mode 1)
+    (setq org-agenda-custom-commands
+          '(
+            ("l" . "just todo lists") ;description for "l" prefix
+            ("lt" tags-todo "untagged todos" "-{.*}")
+            ("ls" alltodo "all unscheduled" (
+                                             (org-agenda-todo-ignore-scheduled t)
+                                             (org-super-agenda-groups
+                                              '(
+                                                 (:discard (:todo "HABIT" :todo "PROJ" ))
+                                               (:name "TO READ" :and (:tag "read"))
+                                               (:name "Meetings" :and (:tag "meetings"))
+                                               (:name "TO WRITE" :and (:tag "write"))
+                                               (:name "TO PROCESS" :and (:tag "process"))
+                                               (:name "look up" :and (:tag "lookup"))
+                                               (:name "focus" :and (:tag "focus"))
+                                               (:name "quick" :and (:tag "quick"))
+                                               (:name "analog" :and (:tag "analog"))
+                                               (:name "waiting" :and (:todo "WAIT"))
+                                                  )))
 
-  (:discard (:todo "HABIT"))
-                                             (:name "TO READ" :and (:tag "read"))
-                                             (:name "Meetings" :and (:tag "meetings"))
-                                             (:name "TO WRITE" :and (:tag "write"))
-                                             (:name "TO PROCESS" :and (:tag "process"))
-                                             (:name "look up" :and (:tag "lookup"))
-                                             (:name "focus" :and (:tag "focus"))
-                                             (:name "quick" :and (:tag "quick"))
+                                             (org-agenda-skip-function
+;                                              '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+                                             ))
+            ("lx" "With deadline columns" alltodo "" 
+             ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE %EFFORT " )
+              (org-agenda-view-columns-initially t)
+              (org-agenda-sorting-strategy '(timestamp-up))
+              (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "HABIT" "WAIT" )) ) )      )
+            ("la" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
+                                            (org-super-agenda-groups
+                                             '(
+                                               (:discard (:todo "HABIT"))
+                                               (:name "TO READ" :and (:tag "read"))
+                                               (:name "Meetings" :and (:tag "meetings"))
+                                               (:name "TO WRITE" :and (:tag "write"))
+                                               (:name "TO PROCESS" :and (:tag "process"))
+                                               (:name "look up" :and (:tag "lookup"))
+                                               (:name "focus" :and (:tag "focus"))
+                                               (:name "quick" :and (:tag "quick"))
 
-                                             (:name "away from computer" :and (:tag "analog"))
-
-                                              (:name "NDD" :and (:tag "ndd" :category "ndd"))
-                                              (:name "Scholarship research" :and (:tag "schol" :tag "research"))
-                                              (:name "Scholarship reading" :and (:tag "schol" :tag "read"))
-                                              (:name "Scholarship writing" :and (:tag "schol" :tag "write"))
-                                              (:name "Scholarship admin" :and (:tag "schol" :tag "admin")) 
-                                              (:name "Baruch" :and (:tag "baruch"))
-                                              (:name "Me" :and (:tag "me"))
-
-
-                                              ))
-
-                                           (org-agenda-skip-function
-                                            '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
-                                           ))
-          ("lx" "With deadline columns" alltodo "" 
-           ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE %EFFORT " )
-            (org-agenda-view-columns-initially t)
-            (org-agenda-sorting-strategy '(timestamp-up))
-            (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "WAIT" )) ) )      )
-          ("la" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
-                                          (org-super-agenda-groups
-                                           '(
-                                             (:discard (:todo "HABIT"))
-                                             (:name "TO READ" :and (:tag "read"))
-                                             (:name "Meetings" :and (:tag "meetings"))
-                                             (:name "TO WRITE" :and (:tag "write"))
-                                             (:name "TO PROCESS" :and (:tag "process"))
-                                             (:name "look up" :and (:tag "lookup"))
-                                             (:name "focus" :and (:tag "focus"))
-                                             (:name "quick" :and (:tag "quick"))
-
-                                             (:name "away from computer" :and (:tag "analog"))
+                                               (:name "away from computer" :and (:tag "analog"))
 
 
 
-                                             ))))))
+                                               ))))))
 
 
-          ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
-           ((agenda "" ((org-agenda-span 2)
-                        (org-agenda-clockreport-mode nil)))
-            (todo "NEXT|TODAY|IN-PROG"))
-           ((org-agenda-todo-ignore-scheduled t)))
+            ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
+             ((agenda "" ((org-agenda-span 2)
+                          (org-agenda-clockreport-mode nil)))
+              (todo "NEXT|TODAY|IN-PROG"))
+             ((org-agenda-todo-ignore-scheduled t)))
 
-          ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
-                                           (org-super-agenda-groups
-                                            '((:name "Day" :time-grid t :order 1)))))
-                               (alltodo "" ((org-agenda-overriding-header "")
-                                            (org-super-agenda-groups '(
+            ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
+                                             (org-super-agenda-groups
+                                              '((:name "Day" :time-grid t :order 1)))))
+                                 (alltodo "" ((org-agenda-overriding-header "")
+                                              (org-super-agenda-groups '(
 
-                                                                          (:discard (:todo "HABIT"))
-                                             (:name "TO READ" :and (:tag "read"))
-                                             (:name "Meetings" :and (:tag "meetings"))
-                                             (:name "TO WRITE" :and (:tag "write"))
-                                             (:name "TO PROCESS" :and (:tag "process"))
-                                             (:name "look up" :and (:tag "lookup"))
-                                             (:name "focus" :and (:tag "focus"))
-                                             (:name "quick" :and (:tag "quick"))
+                                                                            (:discard (:todo "HABIT"))
+                                               (:name "TO READ" :and (:tag "read"))
+                                               (:name "Meetings" :and (:tag "meetings"))
+                                               (:name "TO WRITE" :and (:tag "write"))
+                                               (:name "TO PROCESS" :and (:tag "process"))
+                                               (:name "look up" :and (:tag "lookup"))
+                                               (:name "focus" :and (:tag "focus"))
+                                               (:name "quick" :and (:tag "quick"))
 
-                                             (:name "away from computer" :and (:tag "analog"))
+                                               (:name "away from computer" :and (:tag "analog"))
 
 
-                                             )))))
-           ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
-            (org-agenda-todo-ignore-scheduled t) ))
-)
+                                               )))))
+             ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
+              (org-agenda-todo-ignore-scheduled t) ))
+  )
 
-        )
+          )
 
 
 
@@ -931,36 +928,37 @@
     (start-process "view-pdf" nil "evince" "--page-index" page pdf-file)))
 
 (use-package org-roam
-  :ensure t
-  :init
-  (setq org-roam-v2-ack t)
-  :custom
-  (setq org-roam-directory (file-truename "~/Dropbox/Zettelkasten/Zettels"))
-  (org-roam-db-autosync-mode)
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert))
-  :config
-  (org-roam-setup))
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (setq org-roam-directory (file-truename "~/Dropbox/Zettelkasten/Zettels"))
+    (org-roam-db-autosync-mode)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert))
+    :config
+    (org-roam-setup))
 
-   (defun my/org-roam--title-to-slug (title) ;;<< changed the name
-     "Convert TITLE to a filename-suitable slug."
-     (cl-flet* ((nonspacing-mark-p (char)
-                                   (eq 'Mn (get-char-code-property char 'general-category)))
-                (strip-nonspacing-marks (s)
-                                        (apply #'string (seq-remove #'nonspacing-mark-p
-                                                                    (ucs-normalize-NFD-string s))))
-                (cl-replace (title pair)
-                            (replace-regexp-in-string (car pair) (cdr pair) title)))
-       (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
-                       ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
-                       ("^_" . "")  ;; remove starting underscore
-                       ("_$" . "")))  ;; remove ending underscore
-              (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
-         (downcase slug))))
+     (defun my/org-roam--title-to-slug (title) ;;<< changed the name
+       "Convert TITLE to a filename-suitable slug."
+       (cl-flet* ((nonspacing-mark-p (char)
+                                     (eq 'Mn (get-char-code-property char 'general-category)))
+                  (strip-nonspacing-marks (s)
+                                          (apply #'string (seq-remove #'nonspacing-mark-p
+                                                                      (ucs-normalize-NFD-string s))))
+                  (cl-replace (title pair)
+                              (replace-regexp-in-string (car pair) (cdr pair) title)))
+         (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
+                         ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
+                         ("^_" . "")  ;; remove starting underscore
+                         ("_$" . "")))  ;; remove ending underscore
+                (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
+           (downcase slug))))
 
 
-   (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
+     (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
+(setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
 
 (use-package org-ref)
   (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))

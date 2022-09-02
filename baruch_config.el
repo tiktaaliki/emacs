@@ -43,8 +43,8 @@
                                      (visual-line-mode -1)
                                      (toggle-truncate-lines 1)))
 
-                    (use-package ace-jump-mode)
-                             (global-set-key (kbd "M-z") 'ace-jump-mode)
+ ;                   (use-package ace-jump-mode)
+;                             (global-set-key (kbd "M-z") 'ace-jump-mode)
      (global-unset-key (kbd "C-z"))
           (global-set-key (kbd "C-z") 'ace-jump-helm-line)
 (setq tab-bar-mode nil)
@@ -346,9 +346,9 @@
 
 
 ;;skips
-(setq org-agenda-skip-scheduled-if-done t
-      org-agenda-skip-deadline-if-done t
-      org-agenda-skip-timestamp-if-done t
+(setq org-agenda-skip-scheduled-if-done nil
+      org-agenda-skip-deadline-if-done nil
+      org-agenda-skip-timestamp-if-done nil
       org-agenda-skip-deadline-prewarning-if-scheduled t
       )
 
@@ -367,7 +367,7 @@
                        "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/personal.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/lis.org"
-
+                         "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/habits.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/recipes.org"
                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/sysadmin.org" 
                         "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/zettels.org"
@@ -474,7 +474,7 @@
                                (alltodo "" ((org-agenda-overriding-header "")
                                             (org-super-agenda-groups '(
 
-                                                                          (:discard (:todo "HABIT"))
+                                                                       (:discard (:todo "HABIT"))
                                              (:name "TO READ" :and (:tag "read"))
                                              (:name "Meetings" :and (:tag "meetings"))
                                              (:name "TO WRITE" :and (:tag "write"))
@@ -488,10 +488,17 @@
 
                                              )))))
            ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
-            (org-agenda-todo-ignore-scheduled t) ))
+            (org-agenda-todo-ignore-scheduled t) )
+           nil ("c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/agenda.html"))
 )
 
         )
+
+(setq org-agenda-exporter-settings
+    '((ps-number-of-columns 2)
+      (ps-landscape-mode t)
+      (org-agenda-add-entry-text-maxlines 5)
+      (htmlize-output-type 'css)))
 
 (setq org-enforce-todo-dependencies t
       org-clock-out-when-done t
@@ -814,8 +821,14 @@
   bibtex-autokey-name-case-convert-function 'capitalize
       )
 
+(use-package avy)
+     (define-key dired-mode-map (kbd "M-z") 'avy-goto-char)
+(font-lock-add-keywords 'org-mode '(
+				    
+				    ("\"[^\"]*\"" . 'org-warning)
+			            
+				    ))
+
 (find-file "c:/Users/eyoon/AppData/Roaming/.emacs")
 (find-file "c:/Users/eyoon/Dropbox (Personal)/emacs/baruch_config.org")
 ;  (find-file "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org")
-
- (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
