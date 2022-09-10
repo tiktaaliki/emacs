@@ -36,7 +36,8 @@
  '(org-super-agenda-header ((t (:inherit org-agenda-structure :foreground "#e2dfa2"))))
  '(org-superstar-item ((t (:inherit default :foreground "turquoise"))))
  '(org-todo ((t (:foreground "#ffc61a" :underline t :weight normal))))
- '(underline ((t (:foreground "#89da59" :underline t))))
+ '(org-warning ((t (:foreground "green" :weight normal))))
+ '(underline ((t (:foreground "dodger blue" :underline t))))
  '(variable-pitch ((t (:family "Koho")))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -50,7 +51,7 @@
      (python-mode . bibtex-completion-format-citation-sphinxcontrib-bibtex)
      (rst-mode . bibtex-completion-format-citation-sphinxcontrib-bibtex)
      (default . bibtex-completion-format-citation-default)))
- '(bmkp-last-as-first-bookmark-file "/home/betsy/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(custom-safe-themes
    '("5a611788d47c1deec31494eb2bb864fde402b32b139fe461312589a9f28835db" default))
  '(default-input-method "korean-hangul")
@@ -90,6 +91,16 @@
  '(org-habit-show-habits-only-for-today nil)
  '(org-id-link-to-org-use-id 'create-if-interactive)
  '(org-image-actual-width '(400))
+ '(org-log-note-headings
+   '((done . "State %-12s from %-12S %t")
+     (state . "State %-12s from %-12S %t")
+     (note . "Note taken on %t")
+     (reschedule . "Rescheduled from %S on %t")
+     (delschedule . "Not scheduled, was %S on %t")
+     (redeadline . "New deadline from %S on %t")
+     (deldeadline . "Removed deadline, was %S on %t")
+     (refile . "Refiled on %t")
+     (clock-out . "")))
  '(org-pomodoro-ticking-sound-states '(:pomodoro))
  '(org-roam-directory "/home/betsy/Dropbox/Zettelkasten/Zettels")
  '(package-selected-packages

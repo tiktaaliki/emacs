@@ -512,7 +512,13 @@ CLOCK: [2021-06-08 Tue 13:51]--[2021-06-08 Tue 14:06] =>  0:15
           (quote
            (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
     
-    
+      ;this makes it so that habits show up in the time grid
+    (setq org-agenda-sorting-strategy
+  '((agenda time-up priority-down category-keep)
+    (todo   priority-down category-keep)
+    (tags   priority-down category-keep)
+    (search category-keep)))
+
 #+END_SRC
 
   

@@ -639,7 +639,7 @@
 
                                                (:name "away from computer" :and (:tag "analog"))
 
-
+                                               (:name "waiting" :and (:todo "WAIT"))
 
                                                ))))))
 
@@ -711,7 +711,7 @@
 
           ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
           ("f" "Anki Flashcards")
-          ("fb" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+          ("fb" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic \n:ANKI_DECK: Default::Korean\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
 
           ("fc" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
 
@@ -884,48 +884,48 @@
 )
 
 (use-package pdf-tools
-                  :magic ("%PDF" . pdf-view-mode)
-                  :config
-                  (pdf-tools-install :no-query))
-                (use-package pdf-view-restore)
-
-                 (setq pdf-view-continuous nil)
-              (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
-     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
-
-        (load "org-pdfview")
-
-                                                ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
-
-
-
-
-        (add-to-list 'org-file-apps 
-                     '("\\.pdf\\'" . (lambda (file link)
-                                       (org-pdfview-open link))))
-
-    (use-package quelpa)
-       (quelpa
-        '(quelpa-use-package
-          :fetcher git
-          :url "https://github.com/quelpa/quelpa-use-package.git"))
-       (require 'quelpa-use-package)
-
-          (use-package pdf-continuous-scroll-mode
-            :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
-    (add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
-
-
-;;to get PDFS to open on a specific page. added 12/27/21 from this link: https://emacs.stackexchange.com/questions/30344/how-to-link-and-open-a-pdf-file-to-a-specific-page-skim-adobe. haven't tested it out yet. 
-    (org-add-link-type "pdf" 'org-pdf-open nil)
-
-(defun org-pdf-open (link)
-  "Where page number is 105, the link should look like:
-   [[pdf:/path/to/file.pdf#page=105][My description.]]"
-  (let* ((path+page (split-string link "#page="))
-         (pdf-file (car path+page))
-         (page (car (cdr path+page))))
-    (start-process "view-pdf" nil "evince" "--page-index" page pdf-file)))
+                      :magic ("%PDF" . pdf-view-mode)
+                      :config
+                      (pdf-tools-install :no-query))
+                    (use-package pdf-view-restore)
+    
+                     (setq pdf-view-continuous nil)
+                  (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
+         (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
+    
+            (load "org-pdfview")
+    
+                                                    ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
+    
+    
+    
+    
+            (add-to-list 'org-file-apps 
+                         '("\\.pdf\\'" . (lambda (file link)
+                                           (org-pdfview-open link))))
+    
+        (use-package quelpa)
+           (quelpa
+            '(quelpa-use-package
+              :fetcher git
+              :url "https://github.com/quelpa/quelpa-use-package.git"))
+           (require 'quelpa-use-package)
+    
+;              (use-package pdf-continuous-scroll-mode
+ ;               :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
+  ;      (add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
+    
+    
+    ;;to get PDFS to open on a specific page. added 12/27/21 from this link: https://emacs.stackexchange.com/questions/30344/how-to-link-and-open-a-pdf-file-to-a-specific-page-skim-adobe. haven't tested it out yet. 
+        (org-add-link-type "pdf" 'org-pdf-open nil)
+    
+    (defun org-pdf-open (link)
+      "Where page number is 105, the link should look like:
+       [[pdf:/path/to/file.pdf#page=105][My description.]]"
+      (let* ((path+page (split-string link "#page="))
+             (pdf-file (car path+page))
+             (page (car (cdr path+page))))
+        (start-process "view-pdf" nil "evince" "--page-index" page pdf-file)))
 
 (use-package org-roam
     :ensure t

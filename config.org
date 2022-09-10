@@ -941,7 +941,7 @@ CLOCK: [2021-10-13 Wed 17:03]--[2021-10-13 Wed 17:03] =>  0:00
                                                  (:name "analog" :and (:tag "analog"))
                                                  (:name "waiting" :and (:todo "WAIT"))
                                                     )))
-  
+
                                                (org-agenda-skip-function
   ;                                              '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
                                                ))
@@ -961,26 +961,26 @@ CLOCK: [2021-10-13 Wed 17:03]--[2021-10-13 Wed 17:03] =>  0:00
                                                  (:name "look up" :and (:tag "lookup"))
                                                  (:name "focus" :and (:tag "focus"))
                                                  (:name "quick" :and (:tag "quick"))
-  
+
                                                  (:name "away from computer" :and (:tag "analog"))
-  
-  
-  
+
+                                                 (:name "waiting" :and (:todo "WAIT"))
+
                                                  ))))))
-  
-  
+
+
               ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
                ((agenda "" ((org-agenda-span 2)
                             (org-agenda-clockreport-mode nil)))
                 (todo "NEXT|TODAY|IN-PROG"))
                ((org-agenda-todo-ignore-scheduled t)))
-  
+
               ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
                                                (org-super-agenda-groups
                                                 '((:name "Day" :time-grid t :order 1)))))
                                    (alltodo "" ((org-agenda-overriding-header "")
                                                 (org-super-agenda-groups '(
-  
+
                                                                               (:discard (:todo "HABIT"))
                                                  (:name "TO READ" :and (:tag "read"))
                                                  (:name "Meetings" :and (:tag "meetings"))
@@ -989,15 +989,15 @@ CLOCK: [2021-10-13 Wed 17:03]--[2021-10-13 Wed 17:03] =>  0:00
                                                  (:name "look up" :and (:tag "lookup"))
                                                  (:name "focus" :and (:tag "focus"))
                                                  (:name "quick" :and (:tag "quick"))
-  
+
                                                  (:name "away from computer" :and (:tag "analog"))
-  
-  
+
+
                                                  )))))
                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
                 (org-agenda-todo-ignore-scheduled t) ))
     )
-  
+
             )
             #+end_src
 
@@ -1115,7 +1115,7 @@ old version of alltodo....changed to reflect categories
 
             ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
             ("f" "Anki Flashcards")
-            ("fb" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+            ("fb" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic \n:ANKI_DECK: Default::Korean\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
 
             ("fc" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
 
@@ -1451,9 +1451,9 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
               :url "https://github.com/quelpa/quelpa-use-package.git"))
            (require 'quelpa-use-package)
     
-              (use-package pdf-continuous-scroll-mode
-                :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
-        (add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
+;              (use-package pdf-continuous-scroll-mode
+ ;               :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
+  ;      (add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
     
     
     ;;to get PDFS to open on a specific page. added 12/27/21 from this link: https://emacs.stackexchange.com/questions/30344/how-to-link-and-open-a-pdf-file-to-a-specific-page-skim-adobe. haven't tested it out yet. 
@@ -1834,7 +1834,6 @@ CLOCK: [2021-04-13 Tue 10:17]--[2021-04-13 Tue 10:17] =>  0:00
 #+end_src
 
 #+RESULTS:
-: #<buffer config.org>
 
 #+BEGIN_SRC emacs-lisp :tangle yes
  (load "bookmark+")

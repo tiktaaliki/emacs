@@ -1,4 +1,3 @@
-ls
 cd 2022
 ls
 cd NDD
@@ -126,3 +125,4 @@ update-desktop-database ~/.local/share/applications/
 sudo profile
 sudo emacsclient profile
 sudo emacsclient profile
+setxkbmap -option ctrl:nocaps
