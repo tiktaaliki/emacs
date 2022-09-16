@@ -244,41 +244,42 @@ https://ivanaf.com/emacs_drag-drop_pdfs_paste_html_custom_templates.html
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 
-  (use-package calfw)
-  (use-package calfw-org)
-                                          ;   (use-package calfw-gcal)
-  (use-package calfw-cal) 
-  (setq package-check-signature nil)
-                                          ;  (setq org-gcal-down-days '30)
-                                          ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
+    (use-package calfw)
+    (use-package calfw-org)
+                                            ;   (use-package calfw-gcal)
+    (use-package calfw-cal) 
+    (setq package-check-signature nil)
+                                            ;  (setq org-gcal-down-days '30)
+                                            ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
 
 
-  (defun my-open-calendar ()
-    (interactive)
-    (cfw:open-calendar-buffer
-     :contents-sources
-     (list
-      (cfw:org-create-source "pale green")  ; orgmode source
-                                          ;    (cfw:cal-create-source "light goldenrod") ; diary source
-      ))) 
-  (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
-                                          ;   (setq calendar-daylight-savings-starts '(3 11 year))
-                                          ;  (setq calendar-daylight-savings-ends: '(11 4 year))
-  (setq calendar-week-start-day 1)
+    (defun my-open-calendar ()
+      (interactive)
+      (cfw:open-calendar-buffer
+       :contents-sources
+       (list
+        (cfw:org-create-source "pale green")  ; orgmode source
+                                            ;    (cfw:cal-create-source "light goldenrod") ; diary source
+        ))) 
+    (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
+                                            ;   (setq calendar-daylight-savings-starts '(3 11 year))
+                                            ;  (setq calendar-daylight-savings-ends: '(11 4 year))
+    (setq calendar-week-start-day 1)
 
-  (setq diary-file "~/Dropbox/Zettelkasten/diary")
+    (setq diary-file "~/Dropbox/Zettelkasten/diary")
 
 
 
-  (use-package org-gcal)
-  (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
-        org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
-        org-gcal-fetch-file-alist '(
-      ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
-;      ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/time.org")
-      ))
+    (use-package org-gcal)
+    (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
+          org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
+          org-gcal-fetch-file-alist '(
+                                      ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
+                              ("yoonbetsy@protonmail.com" . "~/Dropbox/Zettelkasten/events.org")        
+  ;      ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/time.org")
+        ))
 
-  (setq org-gcal-recurring-events-mode 'top-level)
+    (setq org-gcal-recurring-events-mode 'top-level)
 
 
 #+end_src
@@ -766,51 +767,52 @@ CLOCK: [2021-09-02 Thu 18:05]--[2021-09-02 Thu 18:05] =>  0:00
 CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
 :END:
 #+BEGIN_SRC emacs-lisp :tangle yes
-           (setq org-directory "~/Dropbox/Zettelkasten/" org-default-notes-file
-                 "~/Dropbox/Zettelkasten/inbox.org" org-archive-location
-                 "~/Dropbox/Zettelkasten/journal.org::datetree/" org-contacts-files (quote
-                 ("~/Dropbox/Zettelkasten/contacts.org")) )
-  (setq
-                 org-archive-reversed-order nil org-reverse-note-order t org-refile-use-cache t
-                 org-refile-allow-creating-parent-nodes t org-refile-use-outline-path 'file
-                 org-outline-path-complete-in-steps nil )
+  (setq org-directory "~/Dropbox/Zettelkasten/" org-default-notes-file
+        "~/Dropbox/Zettelkasten/inbox.org" org-archive-location
+        "~/Dropbox/Zettelkasten/journal.org::datetree/" org-contacts-files (quote
+        ("~/Dropbox/Zettelkasten/contacts.org")) ) (setq org-archive-reversed-order nil
+        org-reverse-note-order t org-refile-use-cache t org-refile-allow-creating-parent-nodes t
+        org-refile-use-outline-path 'file org-outline-path-complete-in-steps nil )
 
-           (setq org-refile-targets '(
-                                      ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
-                                      ("~/Dropbox/Zettelkasten/events.org" :maxlevel . 1)
-                                      ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
-                                      ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
-                                      ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
-                                      ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
-
-                                      ("~/Dropbox/Zettelkasten/baruch.org" :maxlevel . 5)
-                                      ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
-                                      ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2)
-                                      ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 2) ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1) ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2) ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1) ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 2) )
-
-
-                 )
-
-           (defun my-org-refile-cache-clear () (interactive) (org-refile-cache-clear)) (define-key org-mode-map
-             (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
+  (setq org-refile-targets '( ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
+                             ("~/Dropbox/Zettelkasten/events.org" :maxlevel . 1)
+                             ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
+                             ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
+                             ("~/Dropbox/Zettelkasten/habits.org" :maxlevel . 1)
+                             ("~/Dropbox/Zettelkasten/baruch.org" :maxlevel . 5)
+                             ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
+                             ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1)
+                             ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 2) )
 
 
+        )
+
+  (defun my-org-refile-cache-clear () (interactive) (org-refile-cache-clear)) (define-key org-mode-map
+    (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
 
 
-                                                   ; Refile in a single go
-
-                                                   ;  (global-set-key (kbd "<f4>") 'org-refile)
 
 
-           (setq org-id-link-to-org-use-id (quote create-if-interactive) org-id-method (quote org)
-                 org-return-follows-link t org-link-keep-stored-after-insertion nil org-goto-interface (quote
-                 outline-path-completion) org-clock-mode-line-total 'current)
+                                          ; Refile in a single go
 
-                                                   ;   (add-hook 'org-mode-hook (lambda ()
-                                                   ;   (org-sticky-header-mode 1)))
+                                          ;  (global-set-key (kbd "<f4>") 'org-refile)
 
 
-           (setq global-visible-mark-mode t)
+  (setq org-id-link-to-org-use-id (quote create-if-interactive) org-id-method (quote org)
+        org-return-follows-link t org-link-keep-stored-after-insertion nil org-goto-interface (quote
+        outline-path-completion) org-clock-mode-line-total 'current)
+
+                                          ;   (add-hook 'org-mode-hook (lambda ()
+                                          ;   (org-sticky-header-mode 1)))
+
+
+  (setq global-visible-mark-mode t)
 
 
 #+END_SRC

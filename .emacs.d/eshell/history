@@ -1,17 +1,3 @@
-cd 2022
-ls
-cd NDD
-ls
-pandoc Campaign Brainstorming Meeting Agenda (2_12).odt -f odt -t org -s -o Campaign Brainstorming Meeting Agenda.org
-pandoc CampaignBrainstorming.odt -f odt -t org -s -o CampaignBrainstorming.org
-xinput --list
-xinput --disable 13
-xinput --list
-xinput --disable 13
-xinput --disable 13
-xrandr
-xrandr --scale 1.5x1.5
-xrandr --output eDP-1 --scale 1.5x1.5
 xrandr --output eDP-1 --scale 1.25x1.25
 xrandr --output eDP1 --scale .5x.5
 xrandr --output eDP-1 --scale .5x.5
@@ -126,3 +112,17 @@ sudo profile
 sudo emacsclient profile
 sudo emacsclient profile
 setxkbmap -option ctrl:nocaps
+cd /etc/
+ls
+sudo fstab
+sudo emacsclient fstab
+cd /home/betsy/Downloads
+cd "732_Literature-Review master copy"
+ls
+pandoc 732-archives-litreview.tex --bibliography=references.bib -o mydoc.docx
+pandoc 732-archives-litreview.tex --bibliography=references.bib --csl=chicago-author-date-de.csl -o mydoc.docx
+pandoc 732-archives-litreview.tex --bibliography=references.bib --csl=apa.csl -o mydoc.docx
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
