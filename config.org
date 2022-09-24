@@ -1,4 +1,4 @@
-3
+
 #+auto_tangle: t
 
 
@@ -932,7 +932,7 @@ CLOCK: [2021-10-13 Wed 17:03]--[2021-10-13 Wed 17:03] =>  0:00
                                                (org-agenda-todo-ignore-scheduled t)
                                                (org-super-agenda-groups
                                                 '(
-                                                   (:discard (:todo "HABIT" :todo "PROJ" ))
+                                                 (:discard (:todo "HABIT" :todo "PROJ" ))
                                                  (:name "TO READ" :and (:tag "read"))
                                                  (:name "Meetings" :and (:tag "meetings"))
                                                  (:name "TO WRITE" :and (:tag "write"))

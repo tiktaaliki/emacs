@@ -22,7 +22,7 @@
  '(org-clock-out-remove-zero-time-clocks t)
  '(org-ellipsis " ↯ ")
  '(org-fontify-quote-and-verse-blocks t)
- '(org-habit-graph-column 80)
+ '(org-habit-graph-column 40)
  '(org-id-link-to-org-use-id 'create-if-interactive)
  '(org-log-note-headings
    '((done . "State %-12s from %-12S %t")

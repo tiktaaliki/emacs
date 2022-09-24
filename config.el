@@ -190,7 +190,8 @@
   (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
         org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
         org-gcal-fetch-file-alist '(
-      ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
+                                    ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
+                            ("yoonbetsy@protonmail.com" . "~/Dropbox/Zettelkasten/events.org")        
 ;      ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/time.org")
       ))
 
@@ -478,50 +479,51 @@
 (use-package org-clock-split)
 
 (setq org-directory "~/Dropbox/Zettelkasten/" org-default-notes-file
-               "~/Dropbox/Zettelkasten/inbox.org" org-archive-location
-               "~/Dropbox/Zettelkasten/journal.org::datetree/" org-contacts-files (quote
-               ("~/Dropbox/Zettelkasten/contacts.org")) )
-(setq
-               org-archive-reversed-order nil org-reverse-note-order t org-refile-use-cache t
-               org-refile-allow-creating-parent-nodes t org-refile-use-outline-path 'file
-               org-outline-path-complete-in-steps nil )
+      "~/Dropbox/Zettelkasten/inbox.org" org-archive-location
+      "~/Dropbox/Zettelkasten/journal.org::datetree/" org-contacts-files (quote
+      ("~/Dropbox/Zettelkasten/contacts.org")) ) (setq org-archive-reversed-order nil
+      org-reverse-note-order t org-refile-use-cache t org-refile-allow-creating-parent-nodes t
+      org-refile-use-outline-path 'file org-outline-path-complete-in-steps nil )
 
-         (setq org-refile-targets '(
-                                    ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
-                                    ("~/Dropbox/Zettelkasten/events.org" :maxlevel . 1)
-                                    ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
-                                    ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
-                                    ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
-                                    ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
-
-                                    ("~/Dropbox/Zettelkasten/baruch.org" :maxlevel . 5)
-                                    ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
-                                    ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2)
-                                    ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 2) ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1) ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2) ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1) ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 2) )
-
-
-               )
-
-         (defun my-org-refile-cache-clear () (interactive) (org-refile-cache-clear)) (define-key org-mode-map
-           (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
+(setq org-refile-targets '( ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
+                           ("~/Dropbox/Zettelkasten/events.org" :maxlevel . 1)
+                           ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
+                           ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
+                           ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
+                           ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
+                           ("~/Dropbox/Zettelkasten/habits.org" :maxlevel . 1)
+                           ("~/Dropbox/Zettelkasten/baruch.org" :maxlevel . 5)
+                           ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
+                           ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2)
+                           ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 2)
+                           ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
+                           ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2)
+                           ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1)
+                           ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 2) )
 
 
+      )
+
+(defun my-org-refile-cache-clear () (interactive) (org-refile-cache-clear)) (define-key org-mode-map
+  (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
 
 
-                                                 ; Refile in a single go
-
-                                                 ;  (global-set-key (kbd "<f4>") 'org-refile)
 
 
-         (setq org-id-link-to-org-use-id (quote create-if-interactive) org-id-method (quote org)
-               org-return-follows-link t org-link-keep-stored-after-insertion nil org-goto-interface (quote
-               outline-path-completion) org-clock-mode-line-total 'current)
+                                        ; Refile in a single go
 
-                                                 ;   (add-hook 'org-mode-hook (lambda ()
-                                                 ;   (org-sticky-header-mode 1)))
+                                        ;  (global-set-key (kbd "<f4>") 'org-refile)
 
 
-         (setq global-visible-mark-mode t)
+(setq org-id-link-to-org-use-id (quote create-if-interactive) org-id-method (quote org)
+      org-return-follows-link t org-link-keep-stored-after-insertion nil org-goto-interface (quote
+      outline-path-completion) org-clock-mode-line-total 'current)
+
+                                        ;   (add-hook 'org-mode-hook (lambda ()
+                                        ;   (org-sticky-header-mode 1)))
+
+
+(setq global-visible-mark-mode t)
 
 (add-hook 'org-agenda-mode-hook
                                         (lambda ()
@@ -605,7 +607,7 @@
                                              (org-agenda-todo-ignore-scheduled t)
                                              (org-super-agenda-groups
                                               '(
-                                                 (:discard (:todo "HABIT" :todo "PROJ" ))
+                                               (:discard (:todo "HABIT" :todo "PROJ" ))
                                                (:name "TO READ" :and (:tag "read"))
                                                (:name "Meetings" :and (:tag "meetings"))
                                                (:name "TO WRITE" :and (:tag "write"))
