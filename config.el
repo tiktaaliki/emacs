@@ -542,7 +542,7 @@
                            "~/Dropbox/Zettelkasten/journal.org"
                            "~/Dropbox/Zettelkasten/habits.org"
                            "~/Dropbox/Zettelkasten/ndd.org"
-                         "~/Dropbox/Zettelkasten/Scholarship/open.org"
+                       ;  "~/Dropbox/Zettelkasten/Scholarship/open.org"
                      ;      "~/Dropbox/Zettelkasten/time.org"                             
                            "~/Dropbox/Zettelkasten/baruch.org"
                            "~/Dropbox/Zettelkasten/personal.org"
@@ -597,87 +597,101 @@
   (search category-keep)))
 
 (use-package org-super-agenda)
-    (org-super-agenda-mode 1)
-    (setq org-super-agenda-mode 1)
-    (setq org-agenda-custom-commands
-          '(
-            ("l" . "just todo lists") ;description for "l" prefix
-            ("lt" tags-todo "untagged todos" "-{.*}")
-            ("ls" alltodo "all unscheduled" (
-                                             (org-agenda-todo-ignore-scheduled t)
-                                             (org-super-agenda-groups
-                                              '(
-                                               (:discard (:todo "HABIT" :todo "PROJ" ))
-                                               (:name "TO READ" :and (:tag "read"))
-                                               (:name "Meetings" :and (:tag "meetings"))
-                                               (:name "TO WRITE" :and (:tag "write"))
-                                               (:name "TO PROCESS" :and (:tag "process"))
-                                               (:name "look up" :and (:tag "lookup"))
-                                               (:name "focus" :and (:tag "focus"))
-                                               (:name "quick" :and (:tag "quick"))
-                                               (:name "analog" :and (:tag "analog"))
-                                               (:name "waiting" :and (:todo "WAIT"))
-                                                  )))
+(org-super-agenda-mode 1)
+(setq org-super-agenda-mode 1)
+(setq org-agenda-custom-commands
+      '(
+        ("l" . "just todo lists") ;description for "l" prefix
+        ("lt" tags-todo "untagged todos" "-{.*}")
+        ("ls" alltodo "all unscheduled" (
+                                         (org-agenda-todo-ignore-scheduled t)
+                                         (org-super-agenda-groups
+                                          '(
+                                            (:discard (:todo "HABIT" :todo "PROJ" ))
 
-                                             (org-agenda-skip-function
-;                                              '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
-                                             ))
-            ("lx" "With deadline columns" alltodo "" 
-             ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE %EFFORT " )
-              (org-agenda-view-columns-initially t)
-              (org-agenda-sorting-strategy '(timestamp-up))
-              (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "HABIT" "WAIT" )) ) )      )
-            ("la" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
-                                            (org-super-agenda-groups
-                                             '(
-                                               (:discard (:todo "HABIT"))
-                                               (:name "TO READ" :and (:tag "read"))
-                                               (:name "Meetings" :and (:tag "meetings"))
-                                               (:name "TO WRITE" :and (:tag "write"))
-                                               (:name "TO PROCESS" :and (:tag "process"))
-                                               (:name "look up" :and (:tag "lookup"))
-                                               (:name "focus" :and (:tag "focus"))
-                                               (:name "quick" :and (:tag "quick"))
+                                            (:name "TO READ" :and (:tag "read"))
+                                            (:name "Meetings" :and (:tag "meetings"))
+                                            (:name "TO WRITE" :and (:tag "write"))
+                                            (:name "TO PROCESS" :and (:tag "process"))
+                                            (:name "look up" :and (:tag "lookup"))
+                                            (:name "focus" :and (:tag "focus"))
+                                            (:name "quick" :and (:tag "quick"))
+                                            (:name "analog" :and (:tag "analog"))
+                                            (:name "waiting" :and (:todo "WAIT"))
+                                            )))
 
-                                               (:name "away from computer" :and (:tag "analog"))
+         (org-agenda-skip-function
+                                        ;                                              '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "PROJ" "AREA")) )
+          ))
+        ("lx" "With deadline columns" alltodo "" 
+         ((org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE %EFFORT " )
+          (org-agenda-view-columns-initially t)
+          (org-agenda-sorting-strategy '(timestamp-up))
+          (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD" "HABIT" "WAIT" )) ) )      )
+        ("la" "all todos" ((alltodo "" ((org-agenda-overriding-header "")
+                                        (org-super-agenda-groups
+                                         '(
+                                           (:discard (:todo "HABIT"))
+                                           (:name "TO READ" :and (:tag "read"))
+                                           (:name "Meetings" :and (:tag "meetings"))
+                                           (:name "TO WRITE" :and (:tag "write"))
+                                           (:name "TO PROCESS" :and (:tag "process"))
+                                           (:name "look up" :and (:tag "lookup"))
+                                           (:name "focus" :and (:tag "focus"))
+                                           (:name "quick" :and (:tag "quick"))
 
-                                               (:name "waiting" :and (:todo "WAIT"))
+                                           (:name "away from computer" :and (:tag "analog"))
 
-                                               ))))))
+                                           (:name "waiting" :and (:todo "WAIT"))
 
-
-            ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
-             ((agenda "" ((org-agenda-span 2)
-                          (org-agenda-clockreport-mode nil)))
-              (todo "NEXT|TODAY|IN-PROG"))
-             ((org-agenda-todo-ignore-scheduled t)))
-
-            ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
-                                             (org-super-agenda-groups
-                                              '((:name "Day" :time-grid t :order 1)))))
-                                 (alltodo "" ((org-agenda-overriding-header "")
-                                              (org-super-agenda-groups '(
-
-                                                                            (:discard (:todo "HABIT"))
-                                               (:name "TO READ" :and (:tag "read"))
-                                               (:name "Meetings" :and (:tag "meetings"))
-                                               (:name "TO WRITE" :and (:tag "write"))
-                                               (:name "TO PROCESS" :and (:tag "process"))
-                                               (:name "look up" :and (:tag "lookup"))
-                                               (:name "focus" :and (:tag "focus"))
-                                               (:name "quick" :and (:tag "quick"))
-
-                                               (:name "away from computer" :and (:tag "analog"))
+                                           ))))))
 
 
-                                               )))))
-             ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
-              (org-agenda-todo-ignore-scheduled t) ))
-  )
+        ("g" "all UNSCHEDULED NEXT|TODAY|IN-PROG"
+         ((agenda "" ((org-agenda-span 2)
+                      (org-agenda-clockreport-mode nil)))
+          (todo "NEXT|TODAY|IN-PROG"))
+         ((org-agenda-todo-ignore-scheduled t)))
 
-          )
+        ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
+                                         (org-super-agenda-groups
+                                          '((:name "Day" :time-grid t :order 1)))))
+                             (alltodo "" ((org-agenda-overriding-header "")
+                                          (org-super-agenda-groups '(
+
+                                                                     (:discard (:todo "HABIT"))
+                                                                     (:name "Projects" :and (:todo "PROJ"))
+                                                                     (:name "TO READ" :and (:tag "read"))
+                                                                     (:name "Meetings" :and (:tag "meetings"))
+                                                                     (:name "TO WRITE" :and (:tag "write"))
+                                                                     (:name "TO PROCESS" :and (:tag "process"))
+                                                                     (:name "look up" :and (:tag "lookup"))
+                                                                     (:name "focus" :and (:tag "focus"))
+                                                                     (:name "quick" :and (:tag "quick"))
+
+                                                                     (:name "away from computer" :and (:tag "analog"))
 
 
+                                                                     )))))
+         ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
+          (org-agenda-todo-ignore-scheduled t) ))
+        )
+
+      )
+
+
+
+;list of projects
+(add-to-list 'org-agenda-custom-commands '(
+                                           "p" todo "PROJ" ))
+
+(add-to-list 'org-agenda-custom-commands '(
+                                           "f" "two-week view" agenda "" ((org-agenda-span 14))
+                                           ))
+
+(add-to-list 'org-agenda-custom-commands '(
+                                           "o" "three-week view" agenda "" ((org-agenda-span 21))
+                                           ))
 
 (setq org-enforce-todo-dependencies t
       org-clock-out-when-done t
