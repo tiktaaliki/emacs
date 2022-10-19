@@ -499,6 +499,7 @@
                            ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
                            ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2)
                            ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1)
+                           ("~/Dropbox/Baruch/Scholarship/OER-origins/open.org" :maxlevel . 5)
                            ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 2) )
 
 
@@ -589,13 +590,6 @@
 
 (setq org-agenda-sticky t)
 
-;this makes it so that habits show up in the time grid
-  (setq org-agenda-sorting-strategy
-'((agenda time-up priority-down category-keep)
-  (todo   priority-down category-keep)
-  (tags   priority-down category-keep)
-  (search category-keep)))
-
 (use-package org-super-agenda)
 (org-super-agenda-mode 1)
 (setq org-super-agenda-mode 1)
@@ -670,7 +664,7 @@
                                                                      (:name "quick" :and (:tag "quick"))
 
                                                                      (:name "away from computer" :and (:tag "analog"))
-
+                                                                     (:name "waiting" :and (:todo "WAIT"))
 
                                                                      )))))
          ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )

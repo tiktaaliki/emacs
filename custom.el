@@ -73,6 +73,7 @@
  '(org-cite-global-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
  '(org-columns-default-format "%25ITEM %TODO %3PRIORITY %EFFORT %TAGS")
  '(org-columns-default-format-for-agenda "%25ITEM %TODO %SCHEDULED %EFFORT")
+ '(org-deadline-warning-days 3)
  '(org-duration-format '(("p" . t) (special . h:mm)))
  '(org-duration-units
    '(("min" . 1)

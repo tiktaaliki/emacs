@@ -512,14 +512,23 @@ CLOCK: [2021-06-08 Tue 13:51]--[2021-06-08 Tue 14:06] =>  0:15
           (quote
            (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
     
-    
+      ;this makes it so that habits show up in the time grid
+    (setq org-agenda-sorting-strategy
+  '((agenda time-up priority-down category-keep)
+    (todo   priority-down category-keep)
+    (tags   priority-down category-keep)
+    (search category-keep)))
+
 #+END_SRC
 
   
 
 
 #+RESULTS:
-| :link | t | :maxlevel | 4 | :narrow | 30 | :tags | t | :tcolumns | 1 | :indent | t | :hidefiles | t | :fileskip0 | t |
+| agenda | time-up       | priority-down | category-keep |
+| todo   | priority-down | category-keep |               |
+| tags   | priority-down | category-keep |               |
+| search | category-keep |               |               |
 ** org-super-agenda
 #+begin_src emacs-lisp :tangle yes :results none
     (use-package org-super-agenda)
@@ -1165,18 +1174,14 @@ added [2022-08-29 Mon]
   
   (use-package avy)
      (define-key dired-mode-map (kbd "M-z") 'avy-goto-char)
-    (global-set-key (kbd "M-z") 'avy-goto-char)
-  
-  
-  (add-hook 'org-mode-hook
-          (lambda ()
-            (font-lock-add-keywords nil '(("\"\\(\\\\[\\\\\"]\\|[^\\\\\"]\\)*\"" 1 'font-lock-warning-face)))))
+(font-lock-add-keywords 'org-mode '(
+				    
+				    ("\"[^\"]*\"" . 'org-warning)
+			            
+				    ))
 #+end_src
 
 #+RESULTS:
-| (lambda nil (font-lock-add-keywords nil '(("\(\\[\\"]\ | [^\\"]\)*" 1 'font-lock-warning-face)))) | (lambda nil (font-lock-add-keywords nil '(("\(\\[\\"]\ | [^\\"]\)*" 1 'font-lock-function-name-face)))) | org-tempo-setup | org-ref-org-menu | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | org-auto-tangle-mode | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | org-eldoc-load | org-ref-setup-label-finders |
-
-
 
 * load files
 
