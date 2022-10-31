@@ -717,7 +717,7 @@
         '(
           ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
 
-          ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
+          ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/inbox.org" ) "** %^{EVENT}\n%^t\n%a\n%?")
 
           ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
           ("f" "Anki Flashcards")

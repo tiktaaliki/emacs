@@ -1146,7 +1146,7 @@ old version of alltodo....changed to reflect categories
           '(
             ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
 
-            ("c" "calendar" entry (file+headline "~/Dropbox/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
+            ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/inbox.org" ) "** %^{EVENT}\n%^t\n%a\n%?")
 
             ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
             ("f" "Anki Flashcards")
@@ -1176,9 +1176,9 @@ old version of alltodo....changed to reflect categories
 #+END_SRC
 
 #+RESULTS:
-| a         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/journal.org)  | ** %?        |     |
-| :clock-in | t                | :clock-keep | t                                                       | :kill-buffer | nil |
-| c         | calendar         | entry       | (file+headline ~/Dropbox/Zettelkasten/inbox.org Events) | ** %^{EVENT} |     |
+| a         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/journal.org) | ** %?        |     |
+| :clock-in | t                | :clock-keep | t                                                      | :kill-buffer | nil |
+| c         | calendar         | entry       | (file ~/Dropbox/Zettelkasten/inbox.org)                | ** %^{EVENT} |     |
 
 removed templates:
 - ("d" "download" table-line (id "reading") "|%^{Author} | %^{Title} | %^{Format}|"  )
