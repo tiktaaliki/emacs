@@ -53,7 +53,7 @@
   :ensure t
   :bind
   ([f8] . deft))
-(setq deft-directory "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/"
+(setq deft-directory "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/"
       deft-default-extension "org"
       deft-time-format " %b-%Y %H:%M"
       deft-use-filename-as-title t
@@ -191,12 +191,12 @@
 
   (setq org-gcal-recurring-events-mode 'top-level)
 
-(setq backup-directory-alist '(("." . "c:/Users/eyoon/Dropbox (Personal)/emacs/baruch-backups"))
+(setq backup-directory-alist '(("." . "c:/Users/byoon/Dropbox (Personal)/emacs/baruch-backups"))
       backup-by-copying 1
       delete-old-versions -1
       version-control t
       vc-make-backup-files t)
-(setq auto-save-file-name-transforms '((".*" "c:/Users/eyoon/Dropbox (Personal)/emacs/baruch-backups/auto-save-list/" t)))
+(setq auto-save-file-name-transforms '((".*" "c:/Users/byoon/Dropbox (Personal)/emacs/baruch-backups/auto-save-list/" t)))
 
 (setq org-startup-indented t
           org-hide-emphasis-markers t
@@ -277,11 +277,11 @@
   (define-key yas-minor-mode-map (kbd "<tab>")  nil)
 ))
 
-(setq org-directory "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/"
-      org-default-notes-file "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org"
-      org-archive-location "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/journal.org::datetree/"
-      org-contacts-files (quote ("c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/contacts.org"))
-      org-roam-directory "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/Zettels/"
+(setq org-directory "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/"
+      org-default-notes-file "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/inbox.org"
+      org-archive-location "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/journal.org::datetree/"
+      org-contacts-files (quote ("c:/Users/byoon/Dropbox (Personal)/Zettelkasten/contacts.org"))
+      org-roam-directory "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/Zettels/"
       )
 (setq org-archive-reversed-order nil
       org-reverse-note-order t
@@ -322,8 +322,8 @@
                 :hook (org-mode . org-auto-tangle-mode)
 
                 )
-  (setq org-html-head "<link rel=\"stylesheet\" href=\"\\c:\\Users\\eyoon\\Dropbox (Personal)\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
-  (setq org-agenda-export-html-style "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/css/tufte.css")
+  (setq org-html-head "<link rel=\"stylesheet\" href=\"\\c:\\Users\\byoon\\Dropbox (Personal)\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
+  (setq org-agenda-export-html-style "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/css/tufte.css")
 (setq org-export-with-toc nil)
 (setq org-export-initial-scope 'subtree)
 
@@ -358,20 +358,20 @@
 
 (setq org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE ")
 
-  (setq org-agenda-files '("c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/journal.org"
-                           "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org"
-                           "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/readings.org"
-                           "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/contacts.org"
-                           "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/events.org"
-                           "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/ndd.org"
-                         "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org"
-                           "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/personal.org"
-                           "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/lis.org"
-                           "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/habits.org"
-                           "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/recipes.org"
-                           "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/sysadmin.org" 
-                          "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/zettels.org"
-                           "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/editing.org"                           
+  (setq org-agenda-files '("c:/Users/byoon/Dropbox (Personal)/Zettelkasten/journal.org"
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/inbox.org"
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/readings.org"
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/contacts.org"
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/events.org"
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/ndd.org"
+                         "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/baruch.org"
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/personal.org"
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/lis.org"
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/habits.org"
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/recipes.org"
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/sysadmin.org" 
+                          "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/zettels.org"
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/editing.org"                           
                            ))
 
 
@@ -496,7 +496,7 @@
                                              )))))
            ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
             (org-agenda-todo-ignore-scheduled t) )
-           nil ("c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/agenda.html"))
+           nil ("c:/Users/byoon/Dropbox (Personal)/Zettelkasten/agenda.html"))
 )
 
         )
@@ -570,26 +570,26 @@
 
 (setq org-capture-templates
       '(
-        ("a" "current activity" entry (file+olp+datetree "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
+        ("a" "current activity" entry (file+olp+datetree "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
 
-        ("b" "current activity" entry (file+olp+datetree "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
+        ("b" "current activity" entry (file+olp+datetree "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/baruch.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
 
 
-          ("c" "calendar" entry (file+headline "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
+          ("c" "calendar" entry (file+headline "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/inbox.org" "Events") "** %^{EVENT}\n%^t\n%a\n%?")
 
         ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
 
-        ("f" "Anki basic" entry (file+headline "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+        ("f" "Anki basic" entry (file+headline "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic (and reversed card)\n:ANKI_DECK: Default\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
 
-        ("F" "Anki cloze" entry (file+headline "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
+        ("F" "Anki cloze" entry (file+headline "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
 
-        ("j" "journal" entry (file+olp+datetree "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
+        ("j" "journal" entry (file+olp+datetree "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
 
-        ("t" "todo" entry (file "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org") "* TODO %? \nSCHEDULED: %t\n%a\n" :prepend nil)
+        ("t" "todo" entry (file "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/inbox.org") "* TODO %? \nSCHEDULED: %t\n%a\n" :prepend nil)
 
-        ("w" "org-protocol" entry (file "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org")
+        ("w" "org-protocol" entry (file "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/inbox.org")
          "* %a \nSCHEDULED: %t %?\n%:initial" )
-        ("x" "org-protocol" entry (file "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org")
+        ("x" "org-protocol" entry (file "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/inbox.org")
          "* TODO %? \nSCHEDULED: %t\n%a\n\n%:initial" )
         ("p" "org-protocol" table-line (id "pens")
          "|%^{Pen}|%A|%^{Price}|%U|" )
@@ -616,7 +616,7 @@
                                    chronos-dunstify
                                    chronos-buffer-notify
                                    ))
-  (setq chronos-notification-wav "c:/Users/eyoon/Dropbox (Personal)/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+  (setq chronos-notification-wav "c:/Users/byoon/Dropbox (Personal)/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
   )
 (use-package helm-chronos
   :config
@@ -638,9 +638,9 @@
 (use-package org-pomodoro)
 (setq org-pomodoro-ticking-sound-p t)
 (setq org-pomodoro-finished-sound-p nil)
-(setq org-pomodoro-overtime-sound "c:/Users/eyoon/Dropbox (Personal)/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-(setq org-pomodoro-short-break-sound "c:/Users/eyoon/Dropbox (Personal)/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-(setq org-pomodoro-long-break-sound  "c:/Users/eyoon/Dropbox (Personal)/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+(setq org-pomodoro-overtime-sound "c:/Users/byoon/Dropbox (Personal)/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+(setq org-pomodoro-short-break-sound "c:/Users/byoon/Dropbox (Personal)/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+(setq org-pomodoro-long-break-sound  "c:/Users/byoon/Dropbox (Personal)/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
 (setq org-pomodoro-keep-killed-pomodoro-time t)
 (setq org-pomodoro-manual-break t)
 (setq org-pomodoro-ticking-sound-states '(:pomodoro :overtime))
@@ -768,17 +768,17 @@
   (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
 
 (use-package org-ref)
-(setq reftex-default-bibliography '("c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/references.bib"))
+(setq reftex-default-bibliography '("c:/Users/byoon/Dropbox (Personal)/Zettelkasten/references.bib"))
 
 ;; see org-ref for use of these variables
-(setq org-ref-bibliography-notes "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/readings.org"
-      org-ref-default-bibliography '("c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/references.bib")
-      org-ref-pdf-directory "c:/Users/eyoon/Dropbox (Personal)/Library/BIBTEX/"
+(setq org-ref-bibliography-notes "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/readings.org"
+      org-ref-default-bibliography '("c:/Users/byoon/Dropbox (Personal)/Zettelkasten/references.bib")
+      org-ref-pdf-directory "c:/Users/byoon/Dropbox (Personal)/Library/BIBTEX/"
       org-ref-prefer-bracket-links t
       )
 
-(setq bibtex-completion-bibliography "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/references.bib"
-      bibtex-completion-notes-path "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/readings.org")
+(setq bibtex-completion-bibliography "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/references.bib"
+      bibtex-completion-notes-path "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/readings.org")
 
 ;; open pdf with system pdf viewer (works on mac)
 (setq bibtex-completion-pdf-open-function
@@ -802,8 +802,8 @@
   :config
   (setq org-noter-property-doc-file "INTERLEAVE_PDF"
         org-noter-property-note-location "INTERLEAVE_PAGE_NOTE"
-        org-noter-default-notes-file-names "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/readings.org"
-        org-noter-notes-search-path "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/"
+        org-noter-default-notes-file-names "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/readings.org"
+        org-noter-notes-search-path "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/"
         ;;org noter windows
         org-noter-always-create-frame nil
         org-noter-notes-window-location (quote horizontal-split)
@@ -836,6 +836,6 @@
 			            
 				    ))
 
-(find-file "c:/Users/eyoon/AppData/Roaming/.emacs")
-(find-file "c:/Users/eyoon/Dropbox (Personal)/emacs/baruch_config.org")
-;  (find-file "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org")
+(find-file "c:/Users/byoon/AppData/Roaming/.emacs")
+(find-file "c:/Users/byoon/Dropbox (Personal)/emacs/baruch_config.org")
+;  (find-file "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/inbox.org")

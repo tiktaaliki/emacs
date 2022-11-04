@@ -8,14 +8,12 @@
  '(auto-save-visited-file-name t)
  '(auto-save-visited-mode t)
  '(backup-directory-alist
-   '(("." . "c:/Users/eyoon/Dropbox (Personal)/emacs/.emacs.d/emacs-backup")))
+   '(("." . "c:/Users/byoon/Dropbox (Personal)/emacs/.emacs.d/emacs-backup")))
  '(create-lockfiles nil)
  '(delete-selection-mode t)
  '(global-auto-revert-mode t)
  '(global-visual-line-mode t)
  '(org-agenda-dim-blocked-tasks 'invisible)
- '(org-agenda-files
-   '("c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/journal.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/inbox.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/readings.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/contacts.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/ndd.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/baruch.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/personal.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/lis.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/recipes.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/sysadmin.org" "c:/Users/eyoon/Dropbox (Personal)/Zettelkasten/editing.org"))
  '(org-agenda-skip-scheduled-if-deadline-is-shown 'not-today)
  '(org-agenda-sticky t)
  '(org-agenda-tags-column -80)
