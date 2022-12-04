@@ -127,5 +127,6 @@
      (org-reverse-note-order)))
  '(user-mail-address "betsy.yoon@baruch.cuny.edu")
  '(visual-fill-column-center-text t)
+ '(visual-fill-column-width 50)
  '(warning-suppress-types '((use-package)))
  '(yas-global-mode t))

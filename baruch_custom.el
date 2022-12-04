@@ -63,6 +63,7 @@
  '(org-link ((t (:inherit link :foreground "green yellow" :weight normal))))
  '(org-property-value ((t (:foreground "#83898d" :height 0.8))) t)
  '(org-special-keyword ((t (:foreground "#83898d" :underline nil :height 0.7))))
+ '(org-table ((t (:foreground "deep sky blue"))))
  '(org-todo ((t (:foreground "#98be65" :weight normal))))
  '(outline-1 ((t (:extend t :foreground "#51afef" :weight normal))))
  '(underline ((t (:foreground "firebrick1" :underline t)))))
