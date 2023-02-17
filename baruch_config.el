@@ -367,7 +367,7 @@
                          "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/baruch.org"
                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/personal.org"
                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/lis.org"
-                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/habits.org"
+            ;               "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/habits.org"
                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/recipes.org"
                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/sysadmin.org" 
                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/zettels.org"

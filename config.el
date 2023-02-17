@@ -161,41 +161,41 @@
 (sp-pair "'" nil :actions :rem)
 
 (use-package calfw)
-  (use-package calfw-org)
-                                          ;   (use-package calfw-gcal)
-  (use-package calfw-cal) 
-  (setq package-check-signature nil)
-                                          ;  (setq org-gcal-down-days '30)
-                                          ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
+    (use-package calfw-org)
+                                            ;   (use-package calfw-gcal)
+    (use-package calfw-cal) 
+    (setq package-check-signature nil)
+                                            ;  (setq org-gcal-down-days '30)
+                                            ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
 
 
-  (defun my-open-calendar ()
-    (interactive)
-    (cfw:open-calendar-buffer
-     :contents-sources
-     (list
-      (cfw:org-create-source "pale green")  ; orgmode source
-                                          ;    (cfw:cal-create-source "light goldenrod") ; diary source
-      ))) 
-  (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
-                                          ;   (setq calendar-daylight-savings-starts '(3 11 year))
-                                          ;  (setq calendar-daylight-savings-ends: '(11 4 year))
-  (setq calendar-week-start-day 1)
+    (defun my-open-calendar ()
+      (interactive)
+      (cfw:open-calendar-buffer
+       :contents-sources
+       (list
+        (cfw:org-create-source "pale green")  ; orgmode source
+                                            ;    (cfw:cal-create-source "light goldenrod") ; diary source
+        ))) 
+    (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
+                                            ;   (setq calendar-daylight-savings-starts '(3 11 year))
+                                            ;  (setq calendar-daylight-savings-ends: '(11 4 year))
+    (setq calendar-week-start-day 1)
 
-  (setq diary-file "~/Dropbox/Zettelkasten/diary")
+    (setq diary-file "~/Dropbox/Zettelkasten/diary")
 
 
 
-  (use-package org-gcal)
-  (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
-        org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
-        org-gcal-fetch-file-alist '(
-                                    ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
-                            ("yoonbetsy@protonmail.com" . "~/Dropbox/Zettelkasten/events.org")        
-;      ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/time.org")
-      ))
-
-  (setq org-gcal-recurring-events-mode 'top-level)
+    (use-package org-gcal)
+    (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
+          org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
+          org-gcal-fetch-file-alist '(
+                                      ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
+                              ("yoonbetsy@protonmail.com" . "~/Dropbox/Zettelkasten/events.org")        
+  ;      ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/time.org")
+        ))
+(org-gcal-reload-client-id-secret)
+    (setq org-gcal-recurring-events-mode 'top-level)
 
 (setq org-indirect-buffer-display 'current-window)
 (defun transpose-windows ()
@@ -229,47 +229,47 @@
 (setq org-protocol-default-template-key "w")
 
 (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
-(global-set-key (kbd "C-c <f2>") 'org-clock-out)
-(global-unset-key (kbd "C-v"))
+    (global-set-key (kbd "C-c <f2>") 'org-clock-out)
+;    (global-unset-key (kbd "C-v"))
 
-(global-set-key (kbd "<f1>") 'org-capture)
-(global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
-(define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-(define-key org-mode-map (kbd "C-e") 'org-end-of-line)
-(define-key org-mode-map (kbd "C-.") 'org-todo)
-(bind-keys
- ("C-c r" . org-clock-report)
- ("C-c l" . org-store-link)
- ("C-c C-l" . org-insert-link)
- ("C-c b" . list-bookmarks)
- ("C-a" . org-beginning-of-line) 
- ("C-e" . end-of-line) 
- ("C-k" . org-kill-line)
- ("M->" . end-of-buffer)
- ("C->" . end-of-buffer) ; necessary b/c for some reason emacs in kde plasma doesn't seem to recognize M-< and only see is it as M-.
- ("C-<" . beginning-of-buffer)    ; necessary b/c for some reason emacs in kde plasma doesn't seem to recognize M-< and only see is it as M-.
- ("C-."   . org-todo)
- ("C-x /" . shrink-window-horizontally)
- ("C-x ." . org-archive-subtree-default)
- ("C-c 5" . yas-insert-snippet)
+    (global-set-key (kbd "<f1>") 'org-capture)
+    (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
+    (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+    (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+    (define-key org-mode-map (kbd "C-.") 'org-todo)
+    (bind-keys
+     ("C-c r" . org-clock-report)
+     ("C-c l" . org-store-link)
+     ("C-c C-l" . org-insert-link)
+     ("C-c b" . list-bookmarks)
+     ("C-a" . org-beginning-of-line) 
+     ("C-e" . end-of-line) 
+     ("C-k" . org-kill-line)
+     ("M->" . end-of-buffer)
+     ("C->" . end-of-buffer) ; necessary b/c for some reason emacs in kde plasma doesn't seem to recognize M-< and only see is it as M-.
+     ("C-<" . beginning-of-buffer)    ; necessary b/c for some reason emacs in kde plasma doesn't seem to recognize M-< and only see is it as M-.
+     ("C-."   . org-todo)
+     ("C-x /" . shrink-window-horizontally)
+     ("C-x ." . org-archive-subtree-default)
+     ("C-c 5" . yas-insert-snippet)
+  
+     ([f1] . org-capture)
+     ([f2] . org-clock-in)
+     ;;f3 is helm
+     ([f4] . org-refile)
+     ;;f5 is projectile
+     ([f6] . helm-bibtex-with-local-bibliography)
+     ([f7] . org-agenda)
+     ;;f8 is deft
+                                            ; ([f10] . org-tree-to-indirect-buffer)
+     ([f11] . org-id-goto)
+     ([f12] . bury-buffer)     )
 
- ([f1] . org-capture)
- ([f2] . org-clock-in)
- ;;f3 is helm
- ([f4] . org-refile)
- ;;f5 is projectile
- ([f6] . helm-bibtex-with-local-bibliography)
- ([f7] . org-agenda)
- ;;f8 is deft
-                                        ; ([f10] . org-tree-to-indirect-buffer)
- ([f11] . org-id-goto)
- ([f12] . bury-buffer)     )
 
-
-(global-set-key (kbd "<f10>") (lambda ()
-                                (interactive)
-                                (let ((current-prefix-arg '(4)))
-                                  (call-interactively #'org-tree-to-indirect-buffer))))
+    (global-set-key (kbd "<f10>") (lambda ()
+                                    (interactive)
+                                    (let ((current-prefix-arg '(4)))
+                                      (call-interactively #'org-tree-to-indirect-buffer))))
 
 (define-key key-translation-map (kbd "C-c <up>") (kbd "↑"))
 (define-key key-translation-map (kbd "C-c <down>") (kbd "↓"))
@@ -464,6 +464,8 @@
 (use-package ace-jump-helm-line)
 (eval-after-load "helm"
   '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
+
+(use-package helm-org-rifle)
 
 (use-package org-wc)
 
@@ -723,16 +725,17 @@
                                                                                  (org-super-agenda-groups '(
 
                                                                                                             (:discard (:todo "HABIT"))
-                                                                                                            (:name "leadership" :and (:tag "lc"))
-                                                                                                            (:name "tongsol" :and (:tag "tongsol"))
-                                                                                                            (:name "keep" :and (:tag "keep"))
-                                                                                                            (:name "archives" :and (:tag "archives"))
+                                                                                                         ;   (:name "leadership" :and (:tag "lc"))
+                                                                                                          ;  (:name "tongsol" :and (:tag "tongsol"))
+                                                                                                           ; (:name "keep" :and (:tag "keep"))
+                                                                                                          ;  (:name "archives" :and (:tag "archives"))
                                                                                                             (:name "ndd" :and (:tag "ndd"))
-                                                                                                            (:name "scholarship" :and (:tag "schol"))
+                                                                                                   ;         (:name "scholarship" :and (:tag "schol"))
                                                                                                             (:name "baruch" :and (:tag "baruch"))
                                                                                                             (:name "finances" :and (:tag "finances"))
                                                                                                             (:name "health" :and (:tag "health"))
                                                                                                             (:name "home" :and (:tag "home"))
+                                                                                                            (:name "admin" :and (:tag "sysadmin")) 
 
 
                                                                                                             )))))
@@ -774,7 +777,7 @@
                                         ;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
         ("TODO" :weight regular :underline nil :inherit org-todo )
         ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
-        ("IN-PROG" :weight bold :underline nil :inherit org-todo :foreground "#fa4032")
+        ("IN-PROG" :weight bold :underline nil :inherit org-todo :foreground "#c9e467")
          ("HABIT" :weight bold :underline nil :inherit org-todo :foreground "forestgreen")
         ("PROJ" :foreground "magenta")
         ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
@@ -786,7 +789,7 @@
 
 (setq org-capture-templates
         '(
-          ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
+          ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil)
 
           ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/inbox.org" ) "** %^{EVENT}\n%^t\n%a\n%?")
 
@@ -796,7 +799,7 @@
 
           ("fc" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
 
-          ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t) 
+          ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t ) 
 ;removed "scheduled" from todo entries
      ;added it back in [2022-07-09 Sat]
           ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \nSCHEDULED: %t \n%a\n" :prepend nil)
@@ -826,24 +829,30 @@
 (setq org-clock-mode-line-total 'current)
 
 (use-package org-alert)
-(use-package chronos
-  :config
-  (setq chronos-expiry-functions '(chronos-sound-notify
-                                   chronos-dunstify
-                                   chronos-buffer-notify
-                                   ))
-  (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-  )
-(use-package helm-chronos
-  :config
-  (setq helm-chronos-standard-timers
-        '(
-          ;;intermittent fasting
-          "=13:00/end fast + =21:00/begin fast"
+  (use-package chronos
+    :config
+    (setq chronos-expiry-functions '(chronos-shell-notify
+                                     chronos-dunstify
+                                     chronos-buffer-notify
+                                     ))
+    (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+    )
+  (use-package helm-chronos
+    :config
+    (setq helm-chronos-standard-timers
+          '(
+            ;;intermittent fasting
+            "=13:00/end fast + =21:00/begin fast"
 
-          ))
+            ))
 
-  )
+    )
+
+      (setq chronos-shell-notify-program "mpv"
+          chronos-shell-notify-parameters '("~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+
+
+)
 
 (setq org-tag-alist '(
                       (:startgroup . nil)
@@ -927,6 +936,8 @@
                   (org-todo 'todo)))))))))
 
 (add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo)
+
+(use-package emms)
 
 (load "annot")
   (require 'annot)
@@ -1189,7 +1200,7 @@
    (load "dired+")
 
 (use-package modus-themes)
-  (modus-themes-load-themes)
+;  (modus-themes-load-themes)
  (load-theme 'modus-vivendi t)
 
 

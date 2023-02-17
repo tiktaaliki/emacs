@@ -1,89 +1,5 @@
 sudo simple-scan
 sudo simple-scan
-./i3-get-window-criteria
-cd .. 
-cd ..
-ls
-cd .config
-ls
-cd i3
-ls
-chmod +x i3-get-window-criteria.sh
-i3-get-window-criteria
-./i3-get-window-criteria
-xrandr --output DP-1 --scale 1x1 --output DP-3 --scale 1x1 --left-of DP-1 --primary
-xrandr --output DP-1 --scale 1x1 --output DP-3 --scale .5x.5 --left-of DP-1 --primary
-xrandr --output DP-1 --scale 1x1 --pos 1920x0 --output DP-3 --scale .5x.5 --left-of DP-1 --primary --pos 0x0
-xrandr --output DP-1 --scale 1x1 --pos 1920x0 --output DP-3 --scale .5x.5 --left-of DP-1 --primary --pos 0x0
-xrandr --output DP-1 --scale 1x1 --pos 1920x0 --output DP-3 --scale 1x1 --left-of DP-1 --primary --pos 0x0
-update-desktop-database ~/.local/share/applications/
-cd Scholarship
-ls
-pandoc -f org -t odt open.org
-pandoc -f org -t odt open.org -o open.odt
-ls
-ls
-./i3-get-window-criteria
-git config --global user.email "betsy.yoon@gmail.com"
-git config --global user.name "Betsy"
-git remote add origin https://github.com/tiktaaliki/emacs.git
-gh auth login
-gh auth login
-ls -al ~/.ssh
-ssh-keygen -t ed25519 -C "your_email@example.com"
-ssh-keygen -t ed25519 -C "betsy.yoon@gmail.com"
-eval "$(ssh-agent -s)"
-sudo -s -H
-ssh-add ~/.ssh/id_ed25519
-sudo eval "$(ssh-agent -s)"
-sudo -s -H
-cd /home/betsy/.ssh
-ls
-id_ed25519
-xdg-settings set default-web-browser firefox.desktop
-echo $BROWSER
-xdg-settings get default-web-browser
-xdg-settings get default-web-browser
-xdg-settings get default-web-browser
-cd /run/media/betsy
-cd storage
-ls
-cd .. 
-cd ..
-cd /home/
-cd ..
-cd ..
-cd home
-betsy
-ls
-cd Megasync
-cd MEGAsync
-ls
-ls
-ls
-cd MEGAsync
-ls
-cd //
-cd ..
-cd MEGA
-update-desktop-database ~/.local/share/applications/
-sudo profile
-sudo emacsclient profile
-sudo emacsclient profile
-setxkbmap -option ctrl:nocaps
-cd /etc/
-ls
-sudo fstab
-sudo emacsclient fstab
-cd /home/betsy/Downloads
-cd "732_Literature-Review master copy"
-ls
-pandoc 732-archives-litreview.tex --bibliography=references.bib -o mydoc.docx
-pandoc 732-archives-litreview.tex --bibliography=references.bib --csl=chicago-author-date-de.csl -o mydoc.docx
-pandoc 732-archives-litreview.tex --bibliography=references.bib --csl=apa.csl -o mydoc.docx
-sudo simple-scan
-sudo simple-scan
-sudo simple-scan
 sudo simple-scan
 sudo simple-scan
 cd /Downloads
@@ -126,3 +42,87 @@ sudo simple-scan
 pandoc -f org -t odt article.org
 pandoc -f org -t odt article.org -o article.odt
 setxkbmap -option ctrl:nocaps
+pandoc -f org -t odt article.org -o article.odt
+pandoc -f tex -t odt open.tex
+pandoc -f latex -t odt open.tex
+pandoc -f latex -t odt open.tex -o open.odt
+pandoc open.tex --bibliography=open.bib -o open.odt
+pandoc open.tex --bibliography=open.bib --filter pandoc-citeproc -o open.odt
+pandoc open.tex --bibliography=open.bib --citeproc -o open.odt
+pandoc open.tex --bibliography=open.bib --citeproc -o open.odt
+pandoc open.tex --bibliography=open.bib --citeproc --csl=apa6.csl -o open.odt
+setxkbmap -option ctrl:nocaps
+pandoc open.tex --bibliography=open.bib --citeproc --csl=apa6.csl -o open.odt
+pandoc open.tex --bibliography=open.bib --citeproc --csl=apa6.csl -o open.odt
+pandoc open.tex --bibliography=open.bib --citeproc --csl=apa6.csl -o open.odt
+pandoc open.tex --bibliography=open.bib --citeproc --csl=apa6.csl -o open.odt
+pandoc open.tex --bibliography=open.bib --citeproc --csl=apa6.csl -o open.odt
+pandoc open.tex --bibliography=open.bib --citeproc --csl=apa6.csl -o open.odt
+pandoc open.tex --bibliography=open.bib --citeproc --csl=apa6.csl -o open.odt
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+cd ..
+ls
+cd Taxes
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+ls -l /run/media/betsy/storage/Sync/Records/Benefits
+ls -l /run/media/betsy/storage/Sync/Records/
+chown betsy /run/media/betsy/storage/Sync/Records
+ls -l /run/media/betsy/storage/Sync/Records/
+sudo chown betsy /run/media/betsy/storage/Sync/Records
+ls -l /run/media/betsy/storage/Sync/Records/
+sudo chown betsy /run/media/betsy/storage/Sync/Records/Benefits
+ls -l /run/media/betsy/storage/Sync/Records/
+sudo chown betsy /run/media/betsy/storage/Sync/Records/"EZ Pass"
+ls -l /run/media/betsy/storage/Sync/Records/
+sudo chown betsy /run/media/betsy/storage/Sync/Records/Employment
+sudo chown betsy /run/media/betsy/storage/Sync/Records/"Health Billing"
+sudo chown betsy /run/media/betsy/storage/Sync/Records/"Health Records"
+sudo chown betsy /run/media/betsy/storage/Sync/Records/Jury-duty_2022-06-14.pdf
+sudo chown betsy /run/media/betsy/storage/Sync/Records/Manuals
+sudo chown betsy /run/media/betsy/storage/Sync/Records/Paystubs
+sudo chown betsy /run/media/betsy/storage/Sync/Records/Taxes
+sudo chown betsy /run/media/betsy/storage/Sync/Records/brca-letter.pdf
+sudo chown betsy /run/media/betsy/storage/Sync/Records/"staten island therapists.pdf"
+sudo chown betsy /run/media/betsy/storage/Sync/Records/"staten island therapists.png"
+ls -l /run/media/betsy/storage/Sync/Records/
+aply -l
+aplay -l
+pavucontroll
+pavucontrol
+aplay tick.wav
+ldd $(which emacs) | grep sound    libasound.so.2 => /lib64/libasound.so.2 (0x00007fce0efec000)
+aplay old-fashioned-school-bell-daniel_simon.wav
+aplay -D plughw:1,0 /usr/share/sounds/alsa/Front_Center.wav
+aplay -l
+aplay -D plughw:0,3 /usr/share/sounds/alsa/Front_Center.wav
+aplay -D plughw:0,7 /usr/share/sounds/alsa/Front_Center.wav
+aplay -D plughw:0,8 /usr/share/sounds/alsa/Front_Center.wav
+aplay -D plughw:0,9 /usr/share/sounds/alsa/Front_Center.wav
+aplay -D plughw:0,0 /usr/share/sounds/alsa/Front_Center.wav
+play /usr/share/sounds/alsa/Front_Center.wav
+lspci -vnn
+lspci | grep audio
+systemctl --user status pipewire.service
+aplay -L | grep :CARD
+lsmod | grep '^snd' | column -t
+ls -l /dev/snd
+play /usr/share/sounds/alsa/Front_Center.wav
+play /usr/share/sounds/alsa/Front_Center.wav
+play /usr/share/sounds/alsa/Front_Center.wav
+play old-fashioned-school-bell-daniel_simon.wav
+play sms-alert-1-daniel_simon.wav
