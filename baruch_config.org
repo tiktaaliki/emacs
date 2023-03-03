@@ -152,7 +152,7 @@ test
 #+BEGIN_SRC emacs-lisp :tangle yes
     (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
     (global-set-key (kbd "C-c <f2>") 'org-clock-out)
-
+(global-set-key (kbd "C-c c") 'kill-ring-save)
     (global-set-key (kbd "<f1>") 'org-capture)
     (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
     (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
@@ -168,7 +168,7 @@ test
      ("C-."   . org-todo)
      ("C-x /" . shrink-window-horizontally)
      ("C-x ." . org-archive-subtree-default)
-  
+
      ([f1] . org-capture)
      ([f2] . org-clock-in)
      ;;f3 is helm
@@ -176,18 +176,19 @@ test
      ;;f5 is projectile
      ([f6] . helm-bibtex-with-local-bibliography)
      ([f7] . org-agenda)
+     
      ;;f8 is deft
     ; ([f10] . org-tree-to-indirect-buffer)
      ([f11] . org-id-goto)
      ([f12] . bury-buffer)     )
-  
-  
+
+
   (global-set-key (kbd "<f10>") (lambda ()
                                 (interactive)
                                 (let ((current-prefix-arg '(4)))
                                   (call-interactively #'org-tree-to-indirect-buffer))))
 
-  
+
 #+END_SRC
 
 #+RESULTS:
@@ -351,7 +352,6 @@ CLOCK: [2021-06-08 Tue 13:51]--[2021-06-08 Tue 14:06] =>  0:15
 ))
     
   
-    
     
 #+end_src
 
@@ -847,10 +847,16 @@ removed templates:
 
     )
 
+   (setq chronos-shell-notify-program "mpv"
+            chronos-shell-notify-parameters '("c:/Users/byoon/Dropbox (Personal)/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+
+
+  )
+
 #+end_src
 
 #+RESULTS:
-: t
+| c:/Users/byoon/Dropbox (Personal)/emacs/.emacs.d/sms-alert-1-daniel_simon.wav |
 
 
 

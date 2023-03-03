@@ -1,10 +1,3 @@
-sudo simple-scan
-sudo simple-scan
-sudo simple-scan
-sudo simple-scan
-cd /Downloads
-cd ..
-cd ..
 cd Downloads
 git clone https://github.com/DanielBorgesOliveira/onedrive_tray.git
 cd onedrive_tray
@@ -126,3 +119,10 @@ play /usr/share/sounds/alsa/Front_Center.wav
 play /usr/share/sounds/alsa/Front_Center.wav
 play old-fashioned-school-bell-daniel_simon.wav
 play sms-alert-1-daniel_simon.wav
+git
+git diff --name-only
+git commit
+git add
+git gc --auto
+git reset --hard
+git fsck

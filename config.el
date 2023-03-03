@@ -481,53 +481,53 @@
 (use-package org-clock-split)
 
 (setq org-directory "~/Dropbox/Zettelkasten/" org-default-notes-file
-      "~/Dropbox/Zettelkasten/inbox.org" org-archive-location
-      "~/Dropbox/Zettelkasten/journal.org::datetree/" org-contacts-files (quote
-      ("~/Dropbox/Zettelkasten/contacts.org")) ) (setq org-archive-reversed-order nil
-      org-reverse-note-order t org-refile-use-cache t org-refile-allow-creating-parent-nodes t
-      org-refile-use-outline-path 'file org-outline-path-complete-in-steps nil )
+        "~/Dropbox/Zettelkasten/inbox.org" org-archive-location
+        "~/Dropbox/Zettelkasten/journal.org::datetree/" org-contacts-files (quote
+        ("~/Dropbox/Zettelkasten/contacts.org")) ) (setq org-archive-reversed-order nil
+        org-reverse-note-order t org-refile-use-cache t org-refile-allow-creating-parent-nodes t
+        org-refile-use-outline-path 'file org-outline-path-complete-in-steps nil )
 
-(setq org-refile-targets '( ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
-                           ("~/Dropbox/Zettelkasten/events.org" :maxlevel . 1)
-                           ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
-                           ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
-                           ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
-                           ("~/Dropbox/Zettelkasten/projects.org" :maxlevel . 1)
-                           ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
-                           ("~/Dropbox/Zettelkasten/habits.org" :maxlevel . 1)
-                           ("~/Dropbox/Zettelkasten/baruch.org" :maxlevel . 5)
-                           ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
-                           ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2)
-                           ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 2)
-                           ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
-                           ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2)
-                           ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1)
-                           ("~/Dropbox/Baruch/Scholarship/OER-origins/open.org" :maxlevel . 5)
-                           ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 2) )
-
-
-      )
-
-(defun my-org-refile-cache-clear () (interactive) (org-refile-cache-clear)) (define-key org-mode-map
-  (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
+  (setq org-refile-targets '( ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
+                             ("~/Dropbox/Zettelkasten/events.org" :maxlevel . 1)
+                             ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
+ ;                            ("~/Dropbox/Zettelkasten/projects.org" :maxlevel . 1)
+                             ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
+;                             ("~/Dropbox/Zettelkasten/habits.org" :maxlevel . 1)
+                             ("~/Dropbox/Zettelkasten/baruch.org" :maxlevel . 5)
+                             ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
+                             ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2)
+                             ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1)
+                             ("~/Dropbox/Baruch/Scholarship/OER-origins/open.org" :maxlevel . 5)
+                             ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 2) )
 
 
+        )
+
+  (defun my-org-refile-cache-clear () (interactive) (org-refile-cache-clear)) (define-key org-mode-map
+    (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
 
 
-                                        ; Refile in a single go
-
-                                        ;  (global-set-key (kbd "<f4>") 'org-refile)
 
 
-(setq org-id-link-to-org-use-id (quote create-if-interactive) org-id-method (quote org)
-      org-return-follows-link t org-link-keep-stored-after-insertion nil org-goto-interface (quote
-      outline-path-completion) org-clock-mode-line-total 'current)
+                                          ; Refile in a single go
 
-                                        ;   (add-hook 'org-mode-hook (lambda ()
-                                        ;   (org-sticky-header-mode 1)))
+                                          ;  (global-set-key (kbd "<f4>") 'org-refile)
 
 
-(setq global-visible-mark-mode t)
+  (setq org-id-link-to-org-use-id (quote create-if-interactive) org-id-method (quote org)
+        org-return-follows-link t org-link-keep-stored-after-insertion nil org-goto-interface (quote
+        outline-path-completion) org-clock-mode-line-total 'current)
+
+                                          ;   (add-hook 'org-mode-hook (lambda ()
+                                          ;   (org-sticky-header-mode 1)))
+
+
+  (setq global-visible-mark-mode t)
 
 (add-hook 'org-agenda-mode-hook
                                         (lambda ()
@@ -670,9 +670,9 @@
                                            ))))))
 
 
-     ("z" . "agenda + tasks") ;description for "z" prefix
+     ("x" . "agenda + tasks") ;description for "x" prefix
 
-     ("zt" "agenda by task type" ((agenda "" ((org-agenda-span 'day)
+     ("xt" "agenda by task type" ((agenda "" ((org-agenda-span 'day)
                                          (org-super-agenda-groups
                                           '((:name "Day" :time-grid t :order 1)))))
                              (alltodo "" ((org-agenda-overriding-header "")
@@ -709,7 +709,8 @@
 ;list of projects
 (add-to-list 'org-agenda-custom-commands '(
                                            "p" todo "PROJ" ))
-
+(add-to-list 'org-agenda-custom-commands '(
+                                           "w" todo "WAIT" ))
 (add-to-list 'org-agenda-custom-commands '(
                                            "f" "two-week view" agenda "" ((org-agenda-span 14))
                                            ))
@@ -718,7 +719,7 @@
                                            "o" "three-week view" agenda "" ((org-agenda-span 21))
                                            ))
 
-(add-to-list 'org-agenda-custom-commands      '("zb" "agenda + buckets" ((agenda "" ((org-agenda-span 'day)
+(add-to-list 'org-agenda-custom-commands      '("z" "agenda + buckets" ((agenda "" ((org-agenda-span 'day)
                                                                                 (org-super-agenda-groups
                                                                                  '((:name "Day" :time-grid t :order 1)))))
                                                                     (alltodo "" ((org-agenda-overriding-header "")
@@ -743,7 +744,7 @@
                                                  (org-agenda-todo-ignore-scheduled t) )))
 
 
- (add-to-list 'org-agenda-custom-commands      '("zn" "agenda + ndd" ((agenda "" ((org-agenda-span 'day)
+ (add-to-list 'org-agenda-custom-commands      '("xn" "agenda + ndd" ((agenda "" ((org-agenda-span 'day)
                                                                                 (org-super-agenda-groups
                                                                                  '((:name "Day" :time-grid t :order 1)))))
                                                                     (alltodo "" ((org-agenda-overriding-header "")

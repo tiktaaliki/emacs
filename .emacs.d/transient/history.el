@@ -7,4 +7,5 @@
  (magit-remote\.<remote>\.*url "https://github.com/tiktaaliki/emacs.git" "git@github.com:tiktaaliki/emacs")
  (magit-revert
   ("--edit"))
+ (magit-tag nil)
  (pomm-transient nil))

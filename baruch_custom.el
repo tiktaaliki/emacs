@@ -39,7 +39,7 @@
      ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#00BFFF")
      ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
  '(package-selected-packages
-   '(visual-fill-column avy org-gcal centered-window zenburn-theme sudoku 2048-game yasnippet unicode-fonts doom-themes org-superstar interleave smartparens aggressive-indent unkillable-scratch org-plus-contrib deft ace-jump-mode bufler helm-projectile projectile helm use-package))
+   '(powershell sound-wav mpv visual-fill-column avy org-gcal centered-window zenburn-theme sudoku 2048-game yasnippet unicode-fonts doom-themes org-superstar interleave smartparens aggressive-indent unkillable-scratch org-plus-contrib deft ace-jump-mode bufler helm-projectile projectile helm use-package))
  '(safe-local-variable-values '((org-reverse-note-order))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -47,7 +47,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :extend nil :stipple nil :background "#282c34" :foreground "cornsilk" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 143 :width normal :foundry "outline" :family "Consolas"))))
- '(bold ((t (:foreground "dodger blue" :weight bold))))
+ '(bold ((t (:foreground "orange" :weight bold))))
  '(italic ((t (:foreground "peach puff" :slant italic))))
  '(org-agenda-calendar-event ((t (:inherit default :foreground "cornflower blue"))))
  '(org-block ((t (:extend t :background "#23272e" :foreground "turquoise" :slant italic))))

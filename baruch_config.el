@@ -119,41 +119,42 @@
       (sp-pair "'" nil :actions :rem)
 
 (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
-  (global-set-key (kbd "C-c <f2>") 'org-clock-out)
+    (global-set-key (kbd "C-c <f2>") 'org-clock-out)
+(global-set-key (kbd "C-c c") 'kill-ring-save)
+    (global-set-key (kbd "<f1>") 'org-capture)
+    (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
+    (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+    (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+    (bind-keys
+  ("C-c r" . org-clock-report)
+     ("C-c l" . org-store-link)
+     ("C-c C-l" . org-insert-link)
+     ("C-c b" . list-bookmarks)
+     ("C-a" . org-beginning-of-line) 
+     ("C-e" . end-of-line) 
+     ("C-k" . org-kill-line)
+     ("C-."   . org-todo)
+     ("C-x /" . shrink-window-horizontally)
+     ("C-x ." . org-archive-subtree-default)
 
-  (global-set-key (kbd "<f1>") 'org-capture)
-  (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
-  (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-  (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
-  (bind-keys
-("C-c r" . org-clock-report)
-   ("C-c l" . org-store-link)
-   ("C-c C-l" . org-insert-link)
-   ("C-c b" . list-bookmarks)
-   ("C-a" . org-beginning-of-line) 
-   ("C-e" . end-of-line) 
-   ("C-k" . org-kill-line)
-   ("C-."   . org-todo)
-   ("C-x /" . shrink-window-horizontally)
-   ("C-x ." . org-archive-subtree-default)
-
-   ([f1] . org-capture)
-   ([f2] . org-clock-in)
-   ;;f3 is helm
-   ([f4] . org-refile)
-   ;;f5 is projectile
-   ([f6] . helm-bibtex-with-local-bibliography)
-   ([f7] . org-agenda)
-   ;;f8 is deft
-  ; ([f10] . org-tree-to-indirect-buffer)
-   ([f11] . org-id-goto)
-   ([f12] . bury-buffer)     )
+     ([f1] . org-capture)
+     ([f2] . org-clock-in)
+     ;;f3 is helm
+     ([f4] . org-refile)
+     ;;f5 is projectile
+     ([f6] . helm-bibtex-with-local-bibliography)
+     ([f7] . org-agenda)
+     
+     ;;f8 is deft
+    ; ([f10] . org-tree-to-indirect-buffer)
+     ([f11] . org-id-goto)
+     ([f12] . bury-buffer)     )
 
 
-(global-set-key (kbd "<f10>") (lambda ()
-                              (interactive)
-                              (let ((current-prefix-arg '(4)))
-                                (call-interactively #'org-tree-to-indirect-buffer))))
+  (global-set-key (kbd "<f10>") (lambda ()
+                                (interactive)
+                                (let ((current-prefix-arg '(4)))
+                                  (call-interactively #'org-tree-to-indirect-buffer))))
 
 (use-package calfw)
   (use-package calfw-org)
@@ -634,6 +635,12 @@
           ))
 
   )
+
+ (setq chronos-shell-notify-program "mpv"
+          chronos-shell-notify-parameters '("c:/Users/byoon/Dropbox (Personal)/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+
+
+)
 
 (use-package org-pomodoro)
 (setq org-pomodoro-ticking-sound-p t)
