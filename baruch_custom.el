@@ -62,6 +62,7 @@
  '(org-level-4 ((t (:inherit outline-4 :extend nil :weight normal))))
  '(org-link ((t (:inherit link :foreground "green yellow" :weight normal))))
  '(org-property-value ((t (:foreground "#83898d" :height 0.8))) t)
+ '(org-scheduled-today ((t (:foreground "peach puff"))))
  '(org-special-keyword ((t (:foreground "#83898d" :underline nil :height 0.7))))
  '(org-table ((t (:foreground "deep sky blue"))))
  '(org-todo ((t (:foreground "#98be65" :weight normal))))

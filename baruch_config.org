@@ -33,38 +33,41 @@ test
 ** navigation
    #+BEGIN_SRC emacs-lisp :tangle yes
 
-                         (use-package helm
-                           :config (helm-mode +1)
-                           :bind (("M-x"   . helm-M-x)
-                                  ([f3] . helm-buffers-list)       
-                                  ("<Hangul> x" . helm-M-x)
-                                  ([f9] . helm-occur )
-                                  ))
-                         (use-package projectile
-                           :config
-                           (projectile-mode +1))
+                              (use-package helm
+                                :config (helm-mode +1)
+                                :bind (("M-x"   . helm-M-x)
+                                       ([f3] . helm-buffers-list)       
+                                       ("<Hangul> x" . helm-M-x)
+                                       ([f9] . helm-occur )
+                                       ))
+                              (use-package projectile
+                                :config
+                                (projectile-mode +1))
 
-                         (use-package helm-projectile
-                           :bind    ([f5] . helm-projectile))
+                              (use-package helm-projectile
+                                :bind    ([f5] . helm-projectile))
 
-                         (use-package bufler
-                           :custom
-                           (bufler-column-name-width 70)
-                           (bufler-filter-buffer-modes nil))
+                              (use-package bufler
+                                :custom
+                                (bufler-column-name-width 70)
+                                (bufler-filter-buffer-modes nil))
 
-                         (setq org-special-ctrl-a/e (quote (t . t)))
+                              (setq org-special-ctrl-a/e (quote (t . t)))
 
-                         (add-hook 'bufler-list-mode-hook
-                                   (lambda ()
-                                     (visual-line-mode -1)
-                                     (toggle-truncate-lines 1)))
+                              (add-hook 'bufler-list-mode-hook
+                                        (lambda ()
+                                          (visual-line-mode -1)
+                                          (toggle-truncate-lines 1)))
 
- ;                   (use-package ace-jump-mode)
-;                             (global-set-key (kbd "M-z") 'ace-jump-mode)
-     (global-unset-key (kbd "C-z"))
-          (global-set-key (kbd "C-z") 'ace-jump-helm-line)
-(setq tab-bar-mode nil)
+      ;                   (use-package ace-jump-mode)
+     ;                             (global-set-key (kbd "M-z") 'ace-jump-mode)
+          (global-unset-key (kbd "C-z"))
+               (global-set-key (kbd "C-z") 'ace-jump-helm-line)
+     (global-unset-key (kbd "C-v"))
+     (setq tab-bar-mode nil)
        #+END_SRC
+
+       #+RESULTS:
 
 ** deft
 

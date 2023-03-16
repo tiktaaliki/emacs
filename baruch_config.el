@@ -47,6 +47,7 @@
 ;                             (global-set-key (kbd "M-z") 'ace-jump-mode)
      (global-unset-key (kbd "C-z"))
           (global-set-key (kbd "C-z") 'ace-jump-helm-line)
+(global-unset-key (kbd "C-v"))
 (setq tab-bar-mode nil)
 
 (use-package deft
