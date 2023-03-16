@@ -657,3 +657,11 @@
  '(outline-1 ((t (:extend t :foreground "#337bae" :weight normal :family "victor mono"))))
  '(underline ((t (:foreground "#89da59" :underline t))))
  '(variable-pitch ((t (:family "KoHo")))))
+
+
+
+					;from latest change
+					;'(custom-link ((t (:inherit link :foreground "#f9d2ef"))))
+'(org-scheduled ((t (:foreground "dark orange"))))
+'(org-super-agenda-header ((t (:inherit org-agenda-structure :foreground "#e2dfa2"))))
+'(variable-pitch ((t (:family "Koho")))))
