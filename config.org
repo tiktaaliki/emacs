@@ -868,6 +868,7 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
                          ;  "~/Dropbox/Zettelkasten/Scholarship/open.org"
                        ;      "~/Dropbox/Zettelkasten/time.org"                             
                              "~/Dropbox/Zettelkasten/baruch.org"
+                             "~/Dropbox/Zettelkasten/instruction.org"
                              "~/Dropbox/Zettelkasten/personal.org"
                              "~/Dropbox/Zettelkasten/lis.org"
                              "~/Dropbox/Zettelkasten/recipes.org"
@@ -1146,6 +1147,11 @@ old version of alltodo....changed to reflect categories
                                                                                                             ;  (:name "archives" :and (:tag "archives"))
                                                                                                               (:name "ndd" :and (:tag "ndd"))
                                                                                                      ;         (:name "scholarship" :and (:tag "schol"))
+                                                                                                              (:name "baruch scholarship" :and (:tag "baruch" :tag "scholarship"))
+                                                                                                              (:name "baruch librarianship" :and (:tag "baruch" :tag "librarianship"))
+                                                                                                              (:name "baruch tenure" :and (:tag "baruch" :tag "tenure"))
+                                                                                                              
+                                                                                                              (:name "baruch service" :and (:tag "baruch" :tag "service"))
                                                                                                               (:name "baruch" :and (:tag "baruch"))
                                                                                                               (:name "finances" :and (:tag "finances"))
                                                                                                               (:name "health" :and (:tag "health"))
@@ -1179,7 +1185,8 @@ old version of alltodo....changed to reflect categories
 #+end_src
 
 #+RESULTS:
-: ((w todo WAIT) (xn agenda + ndd ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name leadership :and (:tag lc)) (:name tongsol :and (:tag tongsol)) (:name keep :and (:tag keep)) (:name archives :and (:tag archives)) (:name ndd :and (:tag ndd))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (z agenda + buckets ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name ndd :and (:tag ndd)) (:name baruch :and (:tag baruch)) (:name finances :and (:tag finances)) (:name health :and (:tag health)) (:name home :and (:tag home)) (:name admin :and (:tag sysadmin))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (o three-week view agenda  ((org-agenda-span 21))) (f two-week view agenda  ((org-agenda-span 14))) (p todo PROJ) (l . just todo lists) (lt tags-todo untagged todos -{.*}) (ls alltodo all unscheduled by type ((org-agenda-todo-ignore-scheduled t) (org-super-agenda-groups '((:discard (:todo HABIT :todo PROJ)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name analog :and (:tag analog)) (:name waiting :and (:todo WAIT))))) (org-agenda-skip-function)) (lb alltodo all unscheduled by bucket ((org-agenda-todo-ignore-scheduled t) (org-super-agenda-groups '((:discard (:todo HABIT :todo PROJ)) (:name NDD :and (:tag ndd)) (:name Baruch :and (:tag baruch)) (:name scholarship :and (:tag schol)) (:name sysadmin :and (:tag sysadmin)) (:name finances :and (:tag finances)) (:name me :and (:tag me)) (:name home :and (:tag home))))) (org-agenda-skip-function)) (lx With deadline columns alltodo  ((org-agenda-overriding-columns-format %40ITEM %SCHEDULED %DEADLINE %EFFORT ) (org-agenda-view-columns-initially t) (org-agenda-sorting-strategy '(timestamp-up)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD HABIT WAIT))))) (la all todos ((alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name away from computer :and (:tag analog)) (:name waiting :and (:todo WAIT)))))))) (x . agenda + tasks) (xt agenda by task type ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name Projects :and (:todo PROJ)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name away from computer :and (:tag analog)) (:name waiting :and (:todo WAIT))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))))
+: ((z agenda + buckets ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name ndd :and (:tag ndd)) (:name baruch scholarship :and (:tag baruch :tag scholarship)) (:name baruch librarianship :and (:tag baruch :tag librarianship)) (:name baruch tenure :and (:tag baruch :tag tenure)) (:name baruch service :and (:tag baruch :tag service)) (:name baruch :and (:tag baruch)) (:name finances :and (:tag finances)) (:name health :and (:tag health)) (:name home :and (:tag home)) (:name admin :and (:tag sysadmin))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (z agenda + buckets ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name ndd :and (:tag ndd)) (:name baruch scholarship :and (:tag baruch :tag scholarship)) (:name baruch librarianship :and (:tag baruch :tag librarianship)) (:name baruch service :and (:tag baruch :tag service)) (:name baruch :and (:tag baruch)) (:name finances :and (:tag finances)) (:name health :and (:tag health)) (:name home :and (:tag home)) (:name admin :and (:tag sysadmin))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (xn agenda + ndd ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name leadership :and (:tag lc)) (:name tongsol :and (:tag tongsol)) (:name keep :and (:tag keep)) (:name archives :and (:tag archives)) (:name ndd :and (:tag ndd))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (z agenda + buckets ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name ndd :and (:tag ndd)) (:name baruch :and (:tag baruch)) (:name finances :and (:tag finances)) (:name health :and (:tag health)) (:name home :and (:tag home)) (:name admin :and (:tag sysadmin))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (o three-week view agenda  ((org-agenda-span 21))) (f two-week view agenda  ((org-agenda-span 14))) (w todo WAIT) (p todo PROJ) (l . just todo lists) (lt tags-todo untagged todos -{.*}) (ls alltodo all unscheduled by type ((org-agenda-todo-ignore-scheduled t) (org-super-agenda-groups '((:discard (:todo HABIT :todo PROJ)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name analog :and (:tag analog)) (:name waiting :and (:todo WAIT))))) (org-agenda-skip-function)) (lb alltodo all unscheduled by bucket ((org-agenda-todo-ignore-scheduled t) (org-super-agenda-groups '((:discard (:todo HABIT :todo PROJ)) (:name NDD :and (:tag ndd)) (:name Baruch :and (:tag baruch)) (:name scholarship :and (:tag schol)) (:name sysadmin :and (:tag sysadmin)) (:name finances :and (:tag finances)) (:name me :and (:tag me)) (:name home :and (:tag home))))) (org-agenda-skip-function)) (lx With deadline columns alltodo  ((org-agenda-overriding-columns-format %40ITEM %SCHEDULED %DEADLINE %EFFORT ) (org-agenda-view-columns-initially t) (org-agenda-sorting-strategy '(timestamp-up)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD HABIT WAIT))))) (la all todos ((alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name away from computer :and (:tag analog)) (:name waiting :and (:todo WAIT)))))))) (x . agenda + tasks) (xt agenda by task type ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name Projects :and (:todo PROJ)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name away from computer :and (:tag analog)) (:name waiting :and (:todo WAIT))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))))
+
 
 ** org-todo
 #+begin_src emacs-lisp :tangle yes :results none
@@ -1339,17 +1346,41 @@ removed templates:
 
 ** org-tag
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (setq org-tag-alist '(
-                         (:startgroup . nil)
-                         ("ndd" . ?n)
-                         ("health" . ?m)
-                         ("baruch" . ?b)
-                         ("finances" . ?i)
-                         ("sysadmin" . ?y)
-                         ("home" . ?h)
-                         ("lis" . ?l)
-                         (:endgroup . nil)
+  (setq org-tag-alist '(
+                        (:startgroup . nil)
+                        ("ndd" . ?n)
+                        ("health" . ?m)
+                        ("baruch" . ?b)
+                        ("finances" . ?i)
+                        ("sysadmin" . ?y)
+                        ("home" . ?h)
+                        (:endgroup . nil)
 
+                        (:startgroup . nil)
+                        ("lc" . ?e)
+                        ("tongsol" . ?g)
+                        ("keep" . ?k)
+                        ("archives" . ?v) 
+                        (:endgroup . nil)
+
+                        (:startgroup . nil)
+                        ("librarianship" . ?l)
+                        ("service" . ?v)
+                        ("scholarship" . ?s)
+                        ("tenure" . ?t)
+                        (:endgroup . nil)
+
+                        ))
+
+  (setq org-complete-tags-always-offer-all-agenda-tags nil)
+  (setq org-tags-column 0)
+
+#+END_SRC
+
+#+RESULTS:
+: 0
+           ("schol" . ?s)
+                        ("lis" . ?l)
                          (:startgroup . nil)
                          ("admin" . ?a)
                          ("lookup" . ?p)
@@ -1364,23 +1395,6 @@ removed templates:
                          ("quick" . ?q)
                          ("analog" . ?g)
                          (:endgroup . nil)
-
-                         (:startgroup . nil)
-                         ("lc" . ?e)
-                         ("tongsol" . ?t)
-                         ("keep" . ?k)
-                         ("archives" . ?v) 
-                         ("schol" . ?s)
-                         (:endgroup . nil)
-                         ))
-
-   (setq org-complete-tags-always-offer-all-agenda-tags nil)
-   (setq org-tags-column 0)
-
-#+END_SRC
-
-#+RESULTS:
-: 0
 
 #+begin_src emacs-lisp :tangle no
     (setq org-tag-alist '(  ("NOW" . ?n) ("workflow" . ?w)

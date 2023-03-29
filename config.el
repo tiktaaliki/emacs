@@ -549,6 +549,7 @@
                        ;  "~/Dropbox/Zettelkasten/Scholarship/open.org"
                      ;      "~/Dropbox/Zettelkasten/time.org"                             
                            "~/Dropbox/Zettelkasten/baruch.org"
+                           "~/Dropbox/Zettelkasten/instruction.org"
                            "~/Dropbox/Zettelkasten/personal.org"
                            "~/Dropbox/Zettelkasten/lis.org"
                            "~/Dropbox/Zettelkasten/recipes.org"
@@ -732,6 +733,11 @@
                                                                                                           ;  (:name "archives" :and (:tag "archives"))
                                                                                                             (:name "ndd" :and (:tag "ndd"))
                                                                                                    ;         (:name "scholarship" :and (:tag "schol"))
+                                                                                                            (:name "baruch scholarship" :and (:tag "baruch" :tag "scholarship"))
+                                                                                                            (:name "baruch librarianship" :and (:tag "baruch" :tag "librarianship"))
+                                                                                                            (:name "baruch tenure" :and (:tag "baruch" :tag "tenure"))
+
+                                                                                                            (:name "baruch service" :and (:tag "baruch" :tag "service"))
                                                                                                             (:name "baruch" :and (:tag "baruch"))
                                                                                                             (:name "finances" :and (:tag "finances"))
                                                                                                             (:name "health" :and (:tag "health"))
@@ -863,31 +869,22 @@
                       ("finances" . ?i)
                       ("sysadmin" . ?y)
                       ("home" . ?h)
-                      ("lis" . ?l)
-                      (:endgroup . nil)
-
-                      (:startgroup . nil)
-                      ("admin" . ?a)
-                      ("lookup" . ?p)
-                      ("research" . ?r)
-                      ("process" . ?c)
-                      ("write" . ?w)
-                      ("read" . ?d)
-                      (:endgroup . nil)
-
-                      (:startgroup . nil)
-                      ("focus" . ?f)
-                      ("quick" . ?q)
-                      ("analog" . ?g)
                       (:endgroup . nil)
 
                       (:startgroup . nil)
                       ("lc" . ?e)
-                      ("tongsol" . ?t)
+                      ("tongsol" . ?g)
                       ("keep" . ?k)
                       ("archives" . ?v) 
-                      ("schol" . ?s)
                       (:endgroup . nil)
+
+                      (:startgroup . nil)
+                      ("librarianship" . ?l)
+                      ("service" . ?v)
+                      ("scholarship" . ?s)
+                      ("tenure" . ?t)
+                      (:endgroup . nil)
+
                       ))
 
 (setq org-complete-tags-always-offer-all-agenda-tags nil)
