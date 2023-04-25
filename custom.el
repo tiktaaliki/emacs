@@ -90,7 +90,7 @@
      ("p" . 25)))
  '(org-ellipsis " »")
  '(org-fast-tag-selection-single-key t)
- '(org-fold-catch-invisible-edits 'show)
+ '(org-fold-catch-invisible-edits 'show-and-error)
  '(org-gcal-auto-archive nil)
  '(org-gcal-remove-api-cancelled-events t)
  '(org-global-properties '(("EFFORT_ALL" . "5 10 15 20 25 30 35 40 45 50 55 60")))

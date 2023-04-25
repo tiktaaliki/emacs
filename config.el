@@ -197,6 +197,8 @@
 (org-gcal-reload-client-id-secret)
     (setq org-gcal-recurring-events-mode 'top-level)
 
+(setq plstore-cache-passphrase-for-symmetric-encryption t)
+
 (setq org-indirect-buffer-display 'current-window)
 (defun transpose-windows ()
   (interactive)

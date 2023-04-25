@@ -837,7 +837,7 @@
       )
 
 (use-package avy)
-     (define-key dired-mode-map (kbd "M-z") 'avy-goto-char)
+     (define-key dired-mode-map (kbd "C-c z") 'avy-goto-char)
 (font-lock-add-keywords 'org-mode '(
 				    
 				    ("\"[^\"]*\"" . 'org-warning)

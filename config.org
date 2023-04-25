@@ -281,11 +281,11 @@ https://ivanaf.com/emacs_drag-drop_pdfs_paste_html_custom_templates.html
 (org-gcal-reload-client-id-secret)
     (setq org-gcal-recurring-events-mode 'top-level)
 
-
+(setq plstore-cache-passphrase-for-symmetric-encryption t)
 #+end_src
 
 #+RESULTS:
-: top-level
+: t
 #+begin_src emacs-lisp :tangle no
  (org-gcal-request-token)
 #+end_src
