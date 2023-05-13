@@ -1080,7 +1080,7 @@
                                           ; (setq bibtex-autokey-titleword-length 0)
   
   
-  (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/.\n:PROPERTIES:\n:Custom_ID: ${=key=}\n:ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DISCOVERY:\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:INTERLEAVE_PDF: ../Library/BIBTEX/$(=key=).pdf\n:TYPE:\n:AREA:\n:END:")
+  (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/. ${journal}. \n:PROPERTIES:\n:Custom_ID: ${=key=}\n:ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DISCOVERY:\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:INTERLEAVE_PDF: ../Library/BIBTEX/$(=key=).pdf\n:TYPE:\n:AREA:\n:END:")
   
   (setq bibtex-maintain-sorted-entries t)
 

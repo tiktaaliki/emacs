@@ -1,8 +1,3 @@
-sudo chown betsy /run/media/betsy/storage/Sync/Records/"Health Records"
-sudo chown betsy /run/media/betsy/storage/Sync/Records/Jury-duty_2022-06-14.pdf
-sudo chown betsy /run/media/betsy/storage/Sync/Records/Manuals
-sudo chown betsy /run/media/betsy/storage/Sync/Records/Paystubs
-sudo chown betsy /run/media/betsy/storage/Sync/Records/Taxes
 sudo chown betsy /run/media/betsy/storage/Sync/Records/brca-letter.pdf
 sudo chown betsy /run/media/betsy/storage/Sync/Records/"staten island therapists.pdf"
 sudo chown betsy /run/media/betsy/storage/Sync/Records/"staten island therapists.png"
@@ -126,3 +121,8 @@ sudo simple-scan
 cd ..
 ls
 sudo simple-scan
+sudo xkill
+sudo xkill
+sudo xkill
+sudo xkill
+sudo killall firefox

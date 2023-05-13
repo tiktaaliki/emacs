@@ -290,7 +290,7 @@
       org-refile-use-cache t
       org-refile-allow-creating-parent-nodes 'confirm
       org-refile-use-outline-path 'file
-      org-refile-targets '((org-agenda-files :maxlevel . 3))
+      org-refile-targets '((org-agenda-files :maxlevel . 4)) 
       org-outline-path-complete-in-steps nil
       )
 
@@ -421,27 +421,23 @@
                                            (org-agenda-todo-ignore-scheduled t)
                                            (org-super-agenda-groups
                                             '(
+                     (:discard (:todo "HABIT"))
+                                                                                                         ;   (:name "leadership" :and (:tag "lc"))
+                                                                                                          ;  (:name "tongsol" :and (:tag "tongsol"))
+                                                                                                           ; (:name "keep" :and (:tag "keep"))
+                                                                                                          ;  (:name "archives" :and (:tag "archives"))
+                                                                                                            (:name "ndd" :and (:tag "ndd"))
+                                                                                                   ;         (:name "scholarship" :and (:tag "schol"))
+                                                                                                            (:name "baruch scholarship" :and (:tag "baruch" :tag "scholarship"))
+                                                                                                            (:name "baruch librarianship" :and (:tag "baruch" :tag "librarianship"))
+                                                                                                            (:name "baruch tenure" :and (:tag "baruch" :tag "tenure"))
 
-                                             (:discard (:todo "HABIT"))
-                                             (:name "TO READ" :and (:tag "read"))
-                                             (:name "Meetings" :and (:tag "meetings"))
-                                             (:name "TO WRITE" :and (:tag "write"))
-                                             (:name "TO PROCESS" :and (:tag "process"))
-                                             (:name "look up" :and (:tag "lookup"))
-                                             (:name "focus" :and (:tag "focus"))
-                                             (:name "quick" :and (:tag "quick"))
-
-                                             (:name "away from computer" :and (:tag "analog"))
-
-                                              (:name "NDD" :and (:tag "ndd" :category "ndd"))
-                                              (:name "Scholarship research" :and (:tag "schol" :tag "research"))
-                                              (:name "Scholarship reading" :and (:tag "schol" :tag "read"))
-                                              (:name "Scholarship writing" :and (:tag "schol" :tag "write"))
-                                              (:name "Scholarship admin" :and (:tag "schol" :tag "admin")) 
-                                              (:name "Baruch" :and (:tag "baruch"))
-                                              (:name "Me" :and (:tag "me"))
-
-
+                                                                                                            (:name "baruch service" :and (:tag "baruch" :tag "service"))
+                                                                                                            (:name "baruch" :and (:tag "baruch"))
+                                                                                                            (:name "finances" :and (:tag "finances"))
+                                                                                                            (:name "health" :and (:tag "health"))
+                                                                                                            (:name "home" :and (:tag "home"))
+                                                                                                            (:name "admin" :and (:tag "sysadmin")) 
                                               ))
 
                                            (org-agenda-skip-function
@@ -482,18 +478,23 @@
                                             '((:name "Day" :time-grid t :order 1)))))
                                (alltodo "" ((org-agenda-overriding-header "")
                                             (org-super-agenda-groups '(
+                     (:discard (:todo "HABIT"))
+                                                                                                         ;   (:name "leadership" :and (:tag "lc"))
+                                                                                                          ;  (:name "tongsol" :and (:tag "tongsol"))
+                                                                                                            ; (:name "keep" :and (:tag "keep"))
+                                                                                                          ;  (:name "archives" :and (:tag "archives"))
+                                                                                                            (:name "ndd" :and (:tag "ndd"))
+                                                                                                   ;         (:name "scholarship" :and (:tag "schol"))
+                                                                                                            (:name "baruch scholarship" :and (:tag "baruch" :tag "scholarship"))
+                                                                                                            (:name "baruch librarianship" :and (:tag "baruch" :tag "librarianship"))
+                                                                                                            (:name "baruch tenure" :and (:tag "baruch" :tag "tenure"))
 
-                                                                       (:discard (:todo "HABIT"))
-                                             (:name "TO READ" :and (:tag "read"))
-                                             (:name "Meetings" :and (:tag "meetings"))
-                                             (:name "TO WRITE" :and (:tag "write"))
-                                             (:name "TO PROCESS" :and (:tag "process"))
-                                             (:name "look up" :and (:tag "lookup"))
-                                             (:name "focus" :and (:tag "focus"))
-                                             (:name "quick" :and (:tag "quick"))
-
-                                             (:name "away from computer" :and (:tag "analog"))
-
+                                                                                                            (:name "baruch service" :and (:tag "baruch" :tag "service"))
+                                                                                                            (:name "baruch" :and (:tag "baruch"))
+                                                                                                            (:name "finances" :and (:tag "finances"))
+                                                                                                            (:name "health" :and (:tag "health"))
+                                                                                                            (:name "home" :and (:tag "home"))
+                                                                                                            (:name "admin" :and (:tag "sysadmin")) 
 
                                              )))))
            ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
@@ -536,39 +537,33 @@
 (setq org-log-done 'time)
 
 (setq org-tag-alist '(
-                      (:startgroup . nil)
-                      ("ndd" . ?n)
-                      ("schol" . ?s)
-                      ("me" . ?m)
-                      ("baruch" . ?b)
-                      ("sysadmin" . ?y)
-                      ("home" . ?h)
-                      ("lis" . ?l)
-                      (:endgroup . nil)
+                              (:startgroup . nil)
+                        ("ndd" . ?n)
+                        ("health" . ?m)
+                        ("baruch" . ?b)
+                        ("finances" . ?i)
+                        ("sysadmin" . ?y)
+                        ("home" . ?h)
+                        (:endgroup . nil)
 
-                      (:startgroup . nil)
-                      ("admin" . ?a)
-                      ("lookup" . ?p)
-                      ("research" . ?r)
-                      ("process" . ?c)
-                      ("write" . ?w)
-                      ("read" . ?d)
-                      (:endgroup . nil)
+                        (:startgroup . nil)
+                        ("lc" . ?e)
+                        ("tongsol" . ?g)
+                        ("keep" . ?k)
+                        ("archives" . ?v) 
+                        (:endgroup . nil)
 
-                      (:startgroup . nil)
-                      ("meetings" . ?t)
-                      (:endgroup . nil)
+                        (:startgroup . nil)
+                        ("librarianship" . ?l)
+                        ("service" . ?v)
+                        ("scholarship" . ?s)
+                        ("tenure" . ?t)
+                        (:endgroup . nil)
 
+))
 
-                      (:startgroup . nil)
-                      ("focus" . ?f)
-                      ("quick" . ?q)
-                      ("analog" . ?g)
-                      (:endgroup . nil)
-                      ))
-
-(setq org-complete-tags-always-offer-all-agenda-tags nil)
-(setq org-tags-column 0)
+  (setq org-complete-tags-always-offer-all-agenda-tags nil)
+  (setq org-tags-column 0)
 
 (setq org-capture-templates
       '(
@@ -847,3 +842,6 @@
 (find-file "c:/Users/byoon/AppData/Roaming/.emacs")
 (find-file "c:/Users/byoon/Dropbox (Personal)/emacs/baruch_config.org")
 ;  (find-file "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/inbox.org")
+
+
+  (set-face-attribute 'default nil :family "Consolas" :height 170 :weight 'normal  :foreground "#ebdcb2");

@@ -39,32 +39,16 @@
      ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#00BFFF")
      ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
  '(package-selected-packages
-   '(powershell sound-wav mpv visual-fill-column avy org-gcal centered-window zenburn-theme sudoku 2048-game yasnippet unicode-fonts doom-themes org-superstar interleave smartparens aggressive-indent unkillable-scratch org-plus-contrib deft ace-jump-mode bufler helm-projectile projectile helm use-package))
+   '(org-edna helm-bibtex helm-bibtexkey powershell sound-wav mpv visual-fill-column avy org-gcal centered-window zenburn-theme sudoku 2048-game yasnippet unicode-fonts org-superstar interleave aggressive-indent unkillable-scratch org-plus-contrib deft ace-jump-mode bufler helm-projectile))
  '(safe-local-variable-values '((org-reverse-note-order))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "#282c34" :foreground "cornsilk" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 143 :width normal :foundry "outline" :family "Consolas"))))
- '(bold ((t (:foreground "orange" :weight bold))))
- '(italic ((t (:foreground "peach puff" :slant italic))))
  '(org-agenda-calendar-event ((t (:inherit default :foreground "cornflower blue"))))
- '(org-block ((t (:extend t :background "#23272e" :foreground "turquoise" :slant italic))))
- '(org-date ((t (:foreground "#ECBE7B" :underline t :height 1.0))))
- '(org-done ((t (:inherit org-headline-done :strike-through "indian red" :weight bold))))
- '(org-drawer ((t (:foreground "#83898d" :height 0.7))))
- '(org-ellipsis ((t (:foreground "moccasin" :underline nil))))
- '(org-headline-done ((t (:foreground "slate gray" :strike-through "orchid"))))
  '(org-level-1 ((t (:inherit outline-1 :extend nil :weight normal))))
  '(org-level-2 ((t (:inherit outline-2 :extend nil :weight normal))))
  '(org-level-3 ((t (:inherit outline-3 :extend nil :weight normal))))
  '(org-level-4 ((t (:inherit outline-4 :extend nil :weight normal))))
- '(org-link ((t (:inherit link :foreground "green yellow" :weight normal))))
- '(org-property-value ((t (:foreground "#83898d" :height 0.8))) t)
- '(org-scheduled-today ((t (:foreground "peach puff"))))
- '(org-special-keyword ((t (:foreground "#83898d" :underline nil :height 0.7))))
- '(org-table ((t (:foreground "deep sky blue"))))
- '(org-todo ((t (:foreground "#98be65" :weight normal))))
- '(outline-1 ((t (:extend t :foreground "#51afef" :weight normal))))
  '(underline ((t (:foreground "firebrick1" :underline t)))))

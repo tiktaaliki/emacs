@@ -1,8 +1,9 @@
 # -*- mode: snippet -*-
-# name: consult
+# name: consult properties
 # key: consult
 # --
 :PROPERTIES:
 :PROFESSOR: 
-:COURSE: 
+:COURSE_NUMBER:
+:COURSE_TITLE:
 :END:
