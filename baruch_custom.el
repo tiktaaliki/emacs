@@ -39,14 +39,17 @@
      ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#00BFFF")
      ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
  '(package-selected-packages
-   '(org-edna helm-bibtex helm-bibtexkey powershell sound-wav mpv visual-fill-column avy org-gcal centered-window zenburn-theme sudoku 2048-game yasnippet unicode-fonts org-superstar interleave aggressive-indent unkillable-scratch org-plus-contrib deft ace-jump-mode bufler helm-projectile))
- '(safe-local-variable-values '((org-reverse-note-order))))
+   '(org-ref org-edna helm-bibtex helm-bibtexkey powershell sound-wav mpv visual-fill-column avy org-gcal centered-window zenburn-theme sudoku 2048-game yasnippet unicode-fonts org-superstar interleave aggressive-indent unkillable-scratch org-plus-contrib deft ace-jump-mode bufler helm-projectile))
+ '(safe-local-variable-values '((org-reverse-note-order)))
+ '(visual-fill-column-center-text t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(bold ((t (:foreground "gold" :weight bold))))
  '(org-agenda-calendar-event ((t (:inherit default :foreground "cornflower blue"))))
+ '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "deep pink"))))
  '(org-level-1 ((t (:inherit outline-1 :extend nil :weight normal))))
  '(org-level-2 ((t (:inherit outline-2 :extend nil :weight normal))))
  '(org-level-3 ((t (:inherit outline-3 :extend nil :weight normal))))

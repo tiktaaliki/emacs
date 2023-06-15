@@ -330,7 +330,10 @@
 (setq org-export-initial-scope 'subtree)
 
 (setq org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE ")
-
+  (add-hook 'org-agenda-mode-hook
+                                        (lambda ()
+                                          (visual-line-mode -1)
+                                          (toggle-truncate-lines 1)))  
 
 (setq org-agenda-prefix-format
       '((agenda . " %i %-12:c%?-12t% s")
@@ -473,6 +476,8 @@
             (todo "NEXT|TODAY|IN-PROG"))
            ((org-agenda-todo-ignore-scheduled t)))
 
+
+
           ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
                                            (org-super-agenda-groups
                                             '((:name "Day" :time-grid t :order 1)))))
@@ -503,6 +508,12 @@
 )
 
         )
+
+(add-to-list 'org-agenda-custom-commands '(
+                                           "o" "three-month view" agenda "" ((org-agenda-span 90))
+                                           ))
+  (add-to-list 'org-agenda-custom-commands '(
+                                           "p" todo "PROJ" ))
 
 (setq org-agenda-exporter-settings
     '((ps-number-of-columns 2)

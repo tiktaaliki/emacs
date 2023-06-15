@@ -722,6 +722,10 @@
                                            "o" "three-week view" agenda "" ((org-agenda-span 21))
                                            ))
 
+  (add-to-list 'org-agenda-custom-commands '(
+                                           "u" "3 month" agenda "" ((org-agenda-span 90))
+                                           ))
+
 (add-to-list 'org-agenda-custom-commands      '("z" "agenda + buckets" ((agenda "" ((org-agenda-span 'day)
                                                                                 (org-super-agenda-groups
                                                                                  '((:name "Day" :time-grid t :order 1)))))
