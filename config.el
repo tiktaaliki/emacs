@@ -161,43 +161,46 @@
 (sp-pair "'" nil :actions :rem)
 
 (use-package calfw)
-    (use-package calfw-org)
-                                            ;   (use-package calfw-gcal)
-    (use-package calfw-cal) 
-    (setq package-check-signature nil)
-                                            ;  (setq org-gcal-down-days '30)
-                                            ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
+      (use-package calfw-org)
+                                              ;   (use-package calfw-gcal)
+      (use-package calfw-cal) 
+      (setq package-check-signature nil)
+                                              ;  (setq org-gcal-down-days '30)
+                                              ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
 
 
-    (defun my-open-calendar ()
-      (interactive)
-      (cfw:open-calendar-buffer
-       :contents-sources
-       (list
-        (cfw:org-create-source "pale green")  ; orgmode source
-                                            ;    (cfw:cal-create-source "light goldenrod") ; diary source
-        ))) 
-    (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
-                                            ;   (setq calendar-daylight-savings-starts '(3 11 year))
-                                            ;  (setq calendar-daylight-savings-ends: '(11 4 year))
-    (setq calendar-week-start-day 1)
+      (defun my-open-calendar ()
+        (interactive)
+        (cfw:open-calendar-buffer
+         :contents-sources
+         (list
+          (cfw:org-create-source "pale green")  ; orgmode source
+                                              ;    (cfw:cal-create-source "light goldenrod") ; diary source
+          ))) 
+      (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
+                                              ;   (setq calendar-daylight-savings-starts '(3 11 year))
+                                              ;  (setq calendar-daylight-savings-ends: '(11 4 year))
+      (setq calendar-week-start-day 1)
 
-    (setq diary-file "~/Dropbox/Zettelkasten/diary")
+      (setq diary-file "~/Dropbox/Zettelkasten/diary")
 
 
 
-    (use-package org-gcal)
-    (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
-          org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
-          org-gcal-fetch-file-alist '(
-                                      ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
-                              ("yoonbetsy@protonmail.com" . "~/Dropbox/Zettelkasten/events.org")        
-  ;      ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/time.org")
-        ))
-(org-gcal-reload-client-id-secret)
-    (setq org-gcal-recurring-events-mode 'top-level)
+      (use-package org-gcal)
+      (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
+            org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
+            org-gcal-fetch-file-alist '(
+                                        ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
+                                ("yoonbetsy@protonmail.com" . "~/Dropbox/Zettelkasten/events.org")        
+    ;      ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/time.org")
+          ))
+  (org-gcal-reload-client-id-secret)
+      (setq org-gcal-recurring-events-mode 'top-level)
 
-(setq plstore-cache-passphrase-for-symmetric-encryption t)
+  (setq plstore-cache-passphrase-for-symmetric-encryption t)
+
+  (require 'plstore)
+(add-to-list 'plstore-encrypt-to '("193E17CAFF83FE75D678A462A922544B1884A3CC"))
 
 (setq org-indirect-buffer-display 'current-window)
 (defun transpose-windows ()
@@ -808,7 +811,7 @@
 
           ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
           ("f" "Anki Flashcards")
-          ("fb" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic \n:ANKI_DECK: Default::Korean\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+          ("fb" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic \n:ANKI_DECK: 위저드\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
 
           ("fc" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
 
