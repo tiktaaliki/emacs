@@ -287,11 +287,12 @@ CLOCK: [2023-06-20 Tue 11:57]--[2023-06-20 Tue 11:58] =>  0:01
   (setq plstore-cache-passphrase-for-symmetric-encryption t)
 
   (require 'plstore)
-(add-to-list 'plstore-encrypt-to '("193E17CAFF83FE75D678A462A922544B1884A3CC"))
+(add-to-list 'plstore-encrypt-to '("A922544B1884A3CC"))
   
 #+end_src
 
 #+RESULTS:
+| A922544B1884A3CC                         |
 | 193E17CAFF83FE75D678A462A922544B1884A3CC |
 #+begin_src emacs-lisp :tangle no
  (org-gcal-request-token)
@@ -1915,9 +1916,45 @@ there's a few other things here
   (company-auctex-init)
 
 * mu4e
+#+begin_src emacs-lisp :tangle yes 
+  (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 
-      (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-(require 'mu4e)
+  (use-package mu4e
+  :ensure nil
+  :config
+
+  ;; This is set to 't' to avoid mail syncing issues when using mbsync
+  (setq mu4e-change-filenames-when-moving t)
+
+  ;; Refresh mail using isync every 10 minutes
+  (setq mu4e-update-interval (* 10 60))
+  (setq mu4e-get-mail-command "mbsync -a")
+  (setq mu4e-maildir "/home/betsy/.thunderbird/mgzibeze.default-release/ImapMail/")
+
+  (setq mu4e-contexts
+        (list
+         ;; Work account
+         (make-mu4e-context
+          :name "Work"
+          :match-func
+            (lambda (msg)
+              (when msg
+                (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "systemcrafters.test@gmail.com")
+                  (user-full-name    . "System Crafters Gmail")
+                  (mu4e-drafts-folder  . "/Gmail/[Gmail]/Drafts")
+                  (mu4e-sent-folder  . "/Gmail/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder  . "/Gmail/[Gmail]/All Mail")
+                  (mu4e-trash-folder  . "/Gmail/[Gmail]/Trash")))))
+
+  (setq mu4e-maildir-shortcuts
+        '(("/Gmail/Inbox"             . ?i)
+          ("/Gmail/[Gmail]/Sent Mail" . ?s)
+          ("/Gmail/[Gmail]/Trash"     . ?t)
+          ("/Gmail/[Gmail]/Drafts"    . ?d)
+          ("/Gmail/[Gmail]/All Mail"  . ?a))))
+#+end_src
+    
     (setq mu4e-attachment-dir "/home/betsy/Dropbox/2022")
     (setq mu4e-refile-folder "/baruch/Temp/")
     (setq mu4e-sent-folder "/baruch/Sent Items/" )
