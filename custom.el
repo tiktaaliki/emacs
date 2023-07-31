@@ -32,6 +32,7 @@
  '(org-list-dt ((t nil)))
  '(org-property-value ((t (:foreground "#83898d" :height 0.8))) t)
  '(org-quote ((t (:extend t :background "gray13" :foreground "#c6eaff"))))
+ '(org-scheduled ((t (:foreground "khaki"))))
  '(org-scheduled-previously ((t (:inherit org-scheduled :foreground "deep sky blue"))))
  '(org-scheduled-today ((t (:inherit (modus-themes-bold org-scheduled) :foreground "light coral"))))
  '(org-special-keyword ((t (:foreground "#83898d" :underline nil :height 0.8))))
@@ -53,7 +54,7 @@
      (python-mode . bibtex-completion-format-citation-sphinxcontrib-bibtex)
      (rst-mode . bibtex-completion-format-citation-sphinxcontrib-bibtex)
      (default . bibtex-completion-format-citation-default)))
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "/home/betsy/.emacs.d/bookmarks")
  '(custom-safe-themes
    '("5a611788d47c1deec31494eb2bb864fde402b32b139fe461312589a9f28835db" default))
  '(default-input-method "korean-hangul")

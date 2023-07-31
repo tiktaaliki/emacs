@@ -363,55 +363,55 @@
 
 (setq org-agenda-overriding-columns-format "%40ITEM %SCHEDULED %DEADLINE ")
 
-  (setq org-agenda-files '("c:/Users/byoon/Dropbox (Personal)/Zettelkasten/journal.org"
-                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/inbox.org"
-                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/readings.org"
-                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/contacts.org"
-                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/events.org"
-                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/ndd.org"
-                         "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/baruch.org"
-                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/personal.org"
-                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/lis.org"
-            ;               "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/habits.org"
-                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/recipes.org"
-                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/sysadmin.org" 
-                          "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/zettels.org"
-                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/editing.org"                           
-                           ))
+   (setq org-agenda-files '("c:/Users/byoon/Dropbox (Personal)/Zettelkasten/journal.org"
+                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/inbox.org"
+                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/readings.org"
+                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/contacts.org"
+                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/events.org"
+                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/ndd.org"
+                          "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/baruch.org"
+                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/personal.org"
+                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/lis.org"
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/habits.org"
+                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/recipes.org"
+                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/sysadmin.org" 
+                           "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/zettels.org"
+                            "c:/Users/byoon/Dropbox (Personal)/Zettelkasten/editing.org"                           
+                            ))
 
 
-  (setq org-agenda-prefix-format
-        '((agenda . " %i %-12:c%?-12t% s")
-          (todo . " %i %-12:c")
-          (tags . " %i %-12:c")
-          (search . " %i %-12:c")))
+   (setq org-agenda-prefix-format
+         '((agenda . " %i %-12:c%?-12t% s")
+           (todo . " %i %-12:c")
+           (tags . " %i %-12:c")
+           (search . " %i %-12:c")))
 
-  (setq org-agenda-with-colors t
-        org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
-        org-agenda-current-time-string "*****"
-        org-agenda-start-with-clockreport-mode t
-        org-agenda-dim-blocked-tasks t
-        org-agenda-window-setup 'only-window
-        )
+   (setq org-agenda-with-colors t
+         org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
+         org-agenda-current-time-string "*****"
+         org-agenda-start-with-clockreport-mode t
+         org-agenda-dim-blocked-tasks t
+         org-agenda-window-setup 'only-window
+         )
 
 
-  ;;skips
-  (setq org-agenda-skip-scheduled-if-done t
-        org-agenda-skip-deadline-if-done t
-        org-agenda-skip-timestamp-if-done t
-        org-agenda-skip-deadline-prewarning-if-scheduled t
-        )
+   ;;skips
+   (setq org-agenda-skip-scheduled-if-done t
+         org-agenda-skip-deadline-if-done t
+         org-agenda-skip-timestamp-if-done t
+         org-agenda-skip-deadline-prewarning-if-scheduled t
+         )
 
-  (setq org-agenda-clockreport-parameter-plist
-        (quote
-         (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
+   (setq org-agenda-clockreport-parameter-plist
+         (quote
+          (:link t :maxlevel 4 :narrow 30 :tags t :tcolumns 1 :indent t :hidefiles t :fileskip0 t)))
 
-    ;this makes it so that habits show up in the time grid
-  (setq org-agenda-sorting-strategy
-'((agenda time-up priority-down category-keep)
-  (todo   priority-down category-keep)
-  (tags   priority-down category-keep)
-  (search category-keep)))
+     ;this makes it so that habits show up in the time grid
+;   (setq org-agenda-sorting-strategy
+ ;'((agenda time-up priority-down category-keep)
+  ; (todo   priority-down category-keep)
+  ; (tags   priority-down category-keep)
+  ; (search category-keep)))
 
 (use-package org-super-agenda)
   (org-super-agenda-mode 1)
@@ -480,7 +480,10 @@
 
           ("z" "super agenda" ((agenda "" ((org-agenda-span 'day)
                                            (org-super-agenda-groups
-                                            '((:name "Day" :time-grid t :order 1)))))
+                                            '((:name "Day" :time-grid t :order 1)
+                                                   (:name "ndd" :and (:tag "ndd") :order 3)
+                                                   (:name "baruch" :and (:tag "baruch") :order 2)
+                                              ))))
                                (alltodo "" ((org-agenda-overriding-header "")
                                             (org-super-agenda-groups '(
                      (:discard (:todo "HABIT"))

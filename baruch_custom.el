@@ -47,6 +47,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(bold ((t (:foreground "gold" :weight bold))))
+ '(italic ((t (:foreground "violet" :slant italic))))
  '(org-agenda-calendar-event ((t (:inherit default :foreground "cornflower blue"))))
  '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "deep pink"))))
  '(org-date ((t (:foreground "#ECBE7B" :underline t))))
@@ -55,5 +56,6 @@
  '(org-level-3 ((t (:inherit outline-3 :extend nil :weight normal))))
  '(org-level-4 ((t (:inherit outline-4 :extend nil :weight normal))))
  '(org-link ((t (:inherit link :foreground "gray" :weight normal))))
+ '(org-quote ((t (:inherit org-block :foreground "alice blue" :slant italic))))
  '(org-scheduled-today ((t (:foreground "misty rose"))))
  '(underline ((t (:foreground "firebrick1" :underline t)))))

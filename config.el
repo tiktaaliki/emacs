@@ -200,7 +200,7 @@
   (setq plstore-cache-passphrase-for-symmetric-encryption t)
 
   (require 'plstore)
-(add-to-list 'plstore-encrypt-to '("193E17CAFF83FE75D678A462A922544B1884A3CC"))
+(add-to-list 'plstore-encrypt-to '("A922544B1884A3CC"))
 
 (setq org-indirect-buffer-display 'current-window)
 (defun transpose-windows ()
@@ -549,7 +549,7 @@
                            "~/Dropbox/Zettelkasten/contacts.org"
                            "~/Dropbox/Zettelkasten/readings.org"
                            "~/Dropbox/Zettelkasten/journal.org"
-        ;                   "~/Dropbox/Zettelkasten/habits.org"
+                          "~/Dropbox/Zettelkasten/habits.org"
                            "~/Dropbox/Zettelkasten/ndd.org"
                        ;  "~/Dropbox/Zettelkasten/Scholarship/open.org"
                      ;      "~/Dropbox/Zettelkasten/time.org"                             
@@ -600,12 +600,12 @@
 (setq org-agenda-sticky t)
 
     ;this makes it so that habits show up in the time grid
-    (setq org-agenda-sorting-strategy
-  '((agenda time-up priority-down category-keep)
-    (todo   priority-down category-keep)
-    (tags   priority-down category-keep)
-    (search category-keep))
-  )
+;    (setq org-agenda-sorting-strategy
+ ; '((agenda time-up priority-down category-keep)
+  ;  (todo   priority-down category-keep)
+  ;  (tags   priority-down category-keep)
+   ; (search category-keep))
+;  )
 
 (use-package org-super-agenda)
 (org-super-agenda-mode 1)
@@ -731,7 +731,12 @@
 
 (add-to-list 'org-agenda-custom-commands      '("z" "agenda + buckets" ((agenda "" ((org-agenda-span 'day)
                                                                                 (org-super-agenda-groups
-                                                                                 '((:name "Day" :time-grid t :order 1)))))
+                                                                                 '((:discard (:todo "WAIT"))
+                                                                                   (:name "Day" :time-grid t :order 1)
+                                                                                   (:name "ndd" :and (:tag "ndd") :order 3)
+
+                                                                                     (:name "baruch" :and (:tag "baruch") :order 2)
+                                                                                   ))))
                                                                     (alltodo "" ((org-agenda-overriding-header "")
                                                                                  (org-super-agenda-groups '(
 
@@ -819,7 +824,7 @@
 ;removed "scheduled" from todo entries
      ;added it back in [2022-07-09 Sat]
           ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \nSCHEDULED: %t \n%a\n" :prepend nil)
-
+          ("r" "resistance" item (file+headline "~/Dropbox/Zettelkasten/inbox.org" "resistance") "%U\n *What resistance am I facing?*\n%?  *What should I be working on? / What is my plan?*\n"  )
           ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
            "* %a \nSCHEDULED: %t %?\n%:initial" )
           ("x" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
@@ -831,6 +836,118 @@
            "[ ] %a %:initial" )
 
           ))
+
+(setq org-clock-out-remove-zero-time-clocks t)
+
+(use-package org-mru-clock
+  :bind     ("M-<f2>" . org-mru-clock-in)
+  :config
+  (setq org-mru-clock-how-many 80)
+  (setq org-mru-clock-keep-formatting t)
+  (setq org-mru-clock-completing-read 'helm--completing-read-default)
+  )
+
+(setq org-clock-mode-line-total 'current)
+
+(use-package org-alert)
+  (use-package chronos
+    :config
+    (setq chronos-expiry-functions '(chronos-shell-notify
+                                     chronos-dunstify
+                                     chronos-buffer-notify
+                                     ))
+    (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+    )
+  (use-package helm-chronos
+    :config
+    (setq helm-chronos-standard-timers
+          '(
+            ;;intermittent fasting
+            "=13:00/end fast + =21:00/begin fast"
+
+            ))
+
+    )
+
+      (setq chronos-shell-notify-program "mpv"
+          chronos-shell-notify-parameters '("~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
+
+
+)
+
+(setq org-tag-alist '(
+                      (:startgroup . nil)
+                      ("ndd" . ?n)
+                      ("health" . ?m)
+                      ("baruch" . ?b)
+                      ("finances" . ?i)
+                      ("sysadmin" . ?y)
+                      ("home" . ?h)
+                      (:endgroup . nil)
+
+                      (:startgroup . nil)
+                      ("lc" . ?e)
+                      ("tongsol" . ?g)
+                      ("keep" . ?k)
+                      ("archives" . ?v) 
+                      (:endgroup . nil)
+
+                      (:startgroup . nil)
+                      ("librarianship" . ?l)
+                      ("service" . ?v)
+                      ("scholarship" . ?s)
+                      ("tenure" . ?t)
+                      (:endgroup . nil)
+
+                      ))
+
+(setq org-complete-tags-always-offer-all-agenda-tags nil)
+(setq org-tags-column 0)
+
+(use-package pomm)
+(use-package org-pomodoro)
+(setq org-pomodoro-ticking-sound-p t)
+(setq org-pomodoro-finished-sound-p t) ;i couldn't remember why this is nil [2021-10-16 Sat]:-- this is nil b/c the short break sound and long break sound signal the end of the pomodoro
+(setq org-pomodoro-overtime-sound "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
+(setq org-pomodoro-short-break-sound "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
+(setq org-pomodoro-long-break-sound  "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
+(setq org-pomodoro-finished-sound  "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
+
+(setq org-pomodoro-keep-killed-pomodoro-time t)
+(setq org-pomodoro-manual-break t)
+(setq org-pomodoro-ticking-sound-states '(:pomodoro :overtime))
+(setq org-pomodoro-length 25
+      org-pomodoro-short-break-length 5)
+
+(setq org-list-demote-modify-bullet
+      '(("+" . "-") ("-" . "+") ))
+
+(defun my/org-checkbox-todo ()
+  "Switch header TODO state to DONE when all checkboxes are ticked, to TODO otherwise"
+  (let ((todo-state (org-get-todo-state)) beg end)
+    (unless (not todo-state)
+      (save-excursion
+        (org-back-to-heading t)
+        (setq beg (point))
+        (end-of-line)
+        (setq end (point))
+        (goto-char beg)
+        (if (re-search-forward "\\[\\([0-9]*%\\)\\]\\|\\[\\([0-9]*\\)/\\([0-9]*\\)\\]"
+                               end t)
+            (if (match-end 1)
+                (if (equal (match-string 1) "100%")
+                    (unless (string-equal todo-state "DONE")
+                      (org-todo 'done))
+                  (unless (string-equal todo-state "✶")
+                    (org-todo 'todo)))
+              (if (and (> (match-end 2) (match-beginning 2))
+                       (equal (match-string 2) (match-string 3)))
+                  (unless (string-equal todo-state "DONE")
+                    (org-todo 'done))
+                (unless (string-equal todo-state "✶")
+                  (org-todo 'todo)))))))))
+
+(add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo)
 
 (setq org-clock-out-remove-zero-time-clocks t)
 
@@ -1192,6 +1309,353 @@
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+
+(use-package mu4e
+:ensure nil
+:config
+
+;; This is set to 't' to avoid mail syncing issues when using mbsync
+(setq mu4e-change-filenames-when-moving t)
+
+;; Refresh mail using isync every 10 minutes
+(setq mu4e-update-interval (* 10 60))
+(setq mu4e-get-mail-command "mbsync -a")
+(setq mu4e-maildir "/home/betsy/.thunderbird/mgzibeze.default-release/ImapMail/")
+
+(setq mu4e-contexts
+      (list
+       ;; Work account
+       (make-mu4e-context
+        :name "Work"
+        :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
+        :vars '((user-mail-address . "systemcrafters.test@gmail.com")
+                (user-full-name    . "System Crafters Gmail")
+                (mu4e-drafts-folder  . "/Gmail/[Gmail]/Drafts")
+                (mu4e-sent-folder  . "/Gmail/[Gmail]/Sent Mail")
+                (mu4e-refile-folder  . "/Gmail/[Gmail]/All Mail")
+                (mu4e-trash-folder  . "/Gmail/[Gmail]/Trash")))))
+
+(setq mu4e-maildir-shortcuts
+      '(("/Gmail/Inbox"             . ?i)
+        ("/Gmail/[Gmail]/Sent Mail" . ?s)
+        ("/Gmail/[Gmail]/Trash"     . ?t)
+        ("/Gmail/[Gmail]/Drafts"    . ?d)
+        ("/Gmail/[Gmail]/All Mail"  . ?a))))
+
+
+
+(load "bookmark+")
+(load "clipboard2org")
+ (load "hangul")
+ (load "org-book")
+ (load "org-super-links")
+ (load "ov-highlight")
+ (load "annot")
+ (load "backup-each-save")
+
+   (load "dired+")
+
+(use-package modus-themes)
+;  (modus-themes-load-themes)
+ (load-theme 'modus-vivendi t)
+
+
+;to fontify done checkbox items
+(font-lock-add-keywords
+ 'org-mode
+ `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
+ 'append)
+
+(use-package emms)
+
+(load "annot")
+  (require 'annot)
+
+(use-package anki-editor
+  :after org
+  :hook (org-capture-after-finalize . anki-editor-reset-cloze-number) ; Reset cloze-number after each capture.
+  :config
+  (setq anki-editor-create-decks t)
+  (defun anki-editor-cloze-region-auto-incr (&optional arg)
+    "Cloze region without hint and increase card number."
+    (interactive)
+    (anki-editor-cloze-region my-anki-editor-cloze-number "")
+    (setq my-anki-editor-cloze-number (1+ my-anki-editor-cloze-number))
+    (forward-sexp))
+  (defun anki-editor-cloze-region-dont-incr (&optional arg)
+    "Cloze region without hint using the previous card number."
+    (interactive)
+    (anki-editor-cloze-region (1- my-anki-editor-cloze-number) "")
+    (forward-sexp))
+  (defun anki-editor-reset-cloze-number (&optional arg)
+    "Reset cloze number to ARG or 1"
+    (interactive)
+    (setq my-anki-editor-cloze-number (or arg 1)))
+  (defun anki-editor-push-tree ()
+    "Push all notes under a tree."
+    (interactive)
+    (anki-editor-push-notes '(4))
+    (anki-editor-reset-cloze-number))
+  ;; Initialize
+  (anki-editor-reset-cloze-number)
+  )
+
+(use-package olivetti)
+(use-package nov
+:config
+  (setq nov-post-html-render-hook  (lambda () (visual-line-mode 1)))
+  (add-hook 'nov-post-html-render-hook 'olivetti-mode)
+)
+
+(use-package pdf-tools
+                      :magic ("%PDF" . pdf-view-mode)
+                      :config
+                      (pdf-tools-install :no-query))
+                    (use-package pdf-view-restore)
+    
+                     (setq pdf-view-continuous nil)
+                  (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
+         (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
+    
+            (load "org-pdfview")
+    
+                                                    ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
+    
+    
+    
+    
+            (add-to-list 'org-file-apps 
+                         '("\\.pdf\\'" . (lambda (file link)
+                                           (org-pdfview-open link))))
+    
+        (use-package quelpa)
+           (quelpa
+            '(quelpa-use-package
+              :fetcher git
+              :url "https://github.com/quelpa/quelpa-use-package.git"))
+           (require 'quelpa-use-package)
+    
+;              (use-package pdf-continuous-scroll-mode
+ ;               :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
+  ;      (add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
+    
+    
+    ;;to get PDFS to open on a specific page. added 12/27/21 from this link: https://emacs.stackexchange.com/questions/30344/how-to-link-and-open-a-pdf-file-to-a-specific-page-skim-adobe. haven't tested it out yet. 
+        (org-add-link-type "pdf" 'org-pdf-open nil)
+    
+    (defun org-pdf-open (link)
+      "Where page number is 105, the link should look like:
+       [[pdf:/path/to/file.pdf#page=105][My description.]]"
+      (let* ((path+page (split-string link "#page="))
+             (pdf-file (car path+page))
+             (page (car (cdr path+page))))
+        (start-process "view-pdf" nil "evince" "--page-index" page pdf-file)))
+
+(use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (setq org-roam-directory (file-truename "~/Dropbox/Zettelkasten/Zettels"))
+    (org-roam-db-autosync-mode)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert))
+    :config
+    (org-roam-setup))
+
+     (defun my/org-roam--title-to-slug (title) ;;<< changed the name
+       "Convert TITLE to a filename-suitable slug."
+       (cl-flet* ((nonspacing-mark-p (char)
+                                     (eq 'Mn (get-char-code-property char 'general-category)))
+                  (strip-nonspacing-marks (s)
+                                          (apply #'string (seq-remove #'nonspacing-mark-p
+                                                                      (ucs-normalize-NFD-string s))))
+                  (cl-replace (title pair)
+                              (replace-regexp-in-string (car pair) (cdr pair) title)))
+         (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
+                         ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
+                         ("^_" . "")  ;; remove starting underscore
+                         ("_$" . "")))  ;; remove ending underscore
+                (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
+           (downcase slug))))
+
+
+     (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
+(setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
+
+(use-package org-ref)
+  (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
+  
+  ;; see org-ref for use of these variables
+  (setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/readings.org"
+        org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
+        org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/"
+        org-ref-prefer-bracket-links t
+        )
+  
+  (setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
+        bibtex-completion-notes-path "~/Dropbox/Zettelkasten/readings.org")
+  
+  ;; open pdf with system pdf viewer (works on mac)
+  (setq bibtex-completion-pdf-open-function
+        (lambda (fpath)
+          (start-process "open" "*open*" "open" fpath)))
+  
+  
+                                          ;  (setq pdf-view-continuous nil)
+  
+                                          ;  (setq bibtex-autokey-year-title-separator "")
+                                          ; (setq bibtex-autokey-titleword-length 0)
+  
+  
+  (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/. ${journal}. \n:PROPERTIES:\n:Custom_ID: ${=key=}\n:ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DISCOVERY:\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:INTERLEAVE_PDF: ../Library/BIBTEX/$(=key=).pdf\n:TYPE:\n:AREA:\n:END:")
+  
+  (setq bibtex-maintain-sorted-entries t)
+
+  
+  (use-package org-noter
+    :ensure t
+    :defer t
+    :config
+    (setq org-noter-property-doc-file "INTERLEAVE_PDF"
+          org-noter-property-note-location "INTERLEAVE_PAGE_NOTE"
+          org-noter-default-notes-file-names "~/Dropbox/Zettelkasten/readings.org"
+          org-noter-notes-search-path "~/Dropbox/Zettelkasten/"
+          ;;org noter windows
+          org-noter-always-create-frame nil
+          org-noter-notes-window-location (quote horizontal-split)
+          org-noter-doc-split-fraction (quote (0.75 . 0.75))
+          org-noter-kill-frame-at-session-end nil
+  
+          org-noter-auto-save-last-location t
+          org-noter-default-heading-title "$p$: "
+          org-noter-insert-note-no-questions nil
+          org-noter-insert-selected-text-inside-note t
+          ))
+                                          ;       (setq org-noter-notes-window-location 'other-frame)
+                                          ;      (setq org-noter-default-heading-title "p. $p$") 
+;    (use-package interleave 
+ ;     :defer t
+  ;    )
+
+;; Spell checking (requires the ispell software)
+  (add-hook 'bibtex-mode-hook 'flyspell-mode)
+  
+  ;; Change fields and format
+  (setq bibtex-user-optional-fields '(("keywords" "Keywords to describe the entry" "")
+                                      ("file" "Link to document file." ":"))
+        bibtex-align-at-equal-sign t)
+  
+    ;; BibLaTeX settings
+  ;; bibtex-mode
+;  (setq bibtex-dialect 'biblatex)
+
+(setq bibtex-autokey-additional-names "etal"
+      bibtex-autokey-name-separator "-"
+      bibtex-autokey-name-year-separator "_"
+      bibtex-autokey-names 2
+      bibtex-autokey-titleword-length 0
+            bibtex-autokey-titleword-separator ""
+    bibtex-autokey-year-length 4
+  bibtex-autokey-name-case-convert-function 'capitalize
+      )
+
+(use-package citeproc)
+    (use-package org-ref-cite
+      :load-path "/home/betsy/Dropbox/emacs/.emacs.d/lisp/org-ref-cite-main/"
+      :config
+      ;; I like green links
+      (set-face-attribute 'org-cite nil :foreground "DarkSeaGreen4")
+      (set-face-attribute 'org-cite-key nil :foreground "forest green")
+      (setq
+       org-cite-global-bibliography bibtex-completion-bibliography
+       ;; https://github.com/citation-style-language/styles
+       ;; or https://www.zotero.org/styles
+       org-cite-csl-styles-dir "/home/betsy/Dropbox/emacs/.emacs.d/lisp/org-ref-cite-main/csl-styles/"
+       org-cite-insert-processor 'org-ref-cite
+       org-cite-follow-processor 'org-ref-cite
+       org-cite-activate-processor 'org-ref-cite
+       org-cite-export-processors '((html csl "elsevier-with-titles.csl")
+                                    (latex org-ref-cite)
+                                    (t basic))))
+
+
+   ;from https://blog.tecosaur.com/tmio/2021-07-31-citations.html
+(require 'oc-natbib)
+(require 'oc-csl)
+;  (setq org-cite-export-processors 'csl)
+  (setq org-cite-csl-styles-dir "~/Zotero/styles")
+
+(require 'ox-extra)
+  (ox-extras-activate '(ignore-headlines))
+
+
+
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+(with-eval-after-load 'ox-latex
+(add-to-list 'org-latex-classes
+             '("org-plain-latex"
+               "\\documentclass{article}
+           [NO-DEFAULT-PACKAGES]
+           [PACKAGES]
+           [EXTRA]"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+ (add-to-list 'org-latex-classes
+               '("apa6"
+                 "\\documentclass{apa6}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+
+(use-package mu4e
+:ensure nil
+:config
+
+;; This is set to 't' to avoid mail syncing issues when using mbsync
+(setq mu4e-change-filenames-when-moving t)
+
+;; Refresh mail using isync every 10 minutes
+(setq mu4e-update-interval (* 10 60))
+(setq mu4e-get-mail-command "mbsync -a")
+(setq mu4e-maildir "/home/betsy/.thunderbird/mgzibeze.default-release/ImapMail/")
+
+(setq mu4e-contexts
+      (list
+       ;; Work account
+       (make-mu4e-context
+        :name "Work"
+        :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
+        :vars '((user-mail-address . "systemcrafters.test@gmail.com")
+                (user-full-name    . "System Crafters Gmail")
+                (mu4e-drafts-folder  . "/Gmail/[Gmail]/Drafts")
+                (mu4e-sent-folder  . "/Gmail/[Gmail]/Sent Mail")
+                (mu4e-refile-folder  . "/Gmail/[Gmail]/All Mail")
+                (mu4e-trash-folder  . "/Gmail/[Gmail]/Trash")))))
+
+(setq mu4e-maildir-shortcuts
+      '(("/Gmail/Inbox"             . ?i)
+        ("/Gmail/[Gmail]/Sent Mail" . ?s)
+        ("/Gmail/[Gmail]/Trash"     . ?t)
+        ("/Gmail/[Gmail]/Drafts"    . ?d)
+        ("/Gmail/[Gmail]/All Mail"  . ?a))))
 
 
 
