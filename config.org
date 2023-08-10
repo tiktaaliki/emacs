@@ -786,54 +786,55 @@ CLOCK: [2021-09-02 Thu 18:05]--[2021-09-02 Thu 18:05] =>  0:00
 CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
 :END:
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq org-directory "~/Dropbox/Zettelkasten/" org-default-notes-file
-        "~/Dropbox/Zettelkasten/inbox.org" org-archive-location
-        "~/Dropbox/Zettelkasten/journal.org::datetree/" org-contacts-files (quote
-        ("~/Dropbox/Zettelkasten/contacts.org")) ) (setq org-archive-reversed-order nil
-        org-reverse-note-order t org-refile-use-cache t org-refile-allow-creating-parent-nodes t
-        org-refile-use-outline-path 'file org-outline-path-complete-in-steps nil )
+    (setq org-directory "~/Dropbox/Zettelkasten/" org-default-notes-file
+          "~/Dropbox/Zettelkasten/inbox.org" org-archive-location
+          "~/Dropbox/Zettelkasten/journal.org::datetree/" org-contacts-files (quote
+          ("~/Dropbox/Zettelkasten/contacts.org")) ) (setq org-archive-reversed-order nil
+          org-reverse-note-order t org-refile-use-cache t org-refile-allow-creating-parent-nodes t
+          org-refile-use-outline-path 'file org-outline-path-complete-in-steps nil )
 
-  (setq org-refile-targets '( ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
-                             ("~/Dropbox/Zettelkasten/events.org" :maxlevel . 1)
-                             ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
-                             ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
-                             ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
- ;                            ("~/Dropbox/Zettelkasten/projects.org" :maxlevel . 1)
-                             ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
-;                             ("~/Dropbox/Zettelkasten/habits.org" :maxlevel . 1)
-                             ("~/Dropbox/Zettelkasten/baruch.org" :maxlevel . 5)
-                             ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
-                             ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2)
-                             ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 2)
-                             ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
-                             ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2)
-                             ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1)
-                             ("~/Dropbox/Baruch/Scholarship/OER-origins/open.org" :maxlevel . 5)
-                             ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 2) )
-
-
-        )
-
-  (defun my-org-refile-cache-clear () (interactive) (org-refile-cache-clear)) (define-key org-mode-map
-    (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
+    (setq org-refile-targets '( ("~/Dropbox/Zettelkasten/journal.org" :maxlevel . 5)
+                               ("~/Dropbox/Zettelkasten/events.org" :maxlevel . 1)
+                               ("~/Dropbox/Zettelkasten/inbox.org" :maxlevel . 2)
+                               ("~/Dropbox/Zettelkasten/readings.org" :maxlevel . 2)
+                               ("~/Dropbox/Zettelkasten/contacts.org" :maxlevel . 1)
+   ;                            ("~/Dropbox/Zettelkasten/projects.org" :maxlevel . 1)
+                               ("~/Dropbox/Zettelkasten/ndd.org" :maxlevel . 3)
+                               ("~/Dropbox/Zettelkasten/korean.org" :maxlevel . 1)  
+                               ("~/Dropbox/Zettelkasten/habits.org" :maxlevel . 1)
+                               ("~/Dropbox/Zettelkasten/baruch.org" :maxlevel . 5)
+                               ("~/Dropbox/Zettelkasten/personal.org" :maxlevel . 2)
+                               ("~/Dropbox/Zettelkasten/lis.org" :maxlevel . 2)
+                               ("~/Dropbox/Zettelkasten/recipes.org" :maxlevel . 2)
+                               ("~/Dropbox/Zettelkasten/sysadmin.org" :maxlevel . 1)
+                               ("~/Dropbox/Zettelkasten/editing.org" :maxlevel . 2)
+                               ("~/Dropbox/Zettelkasten/hold.org" :maxlevel . 1)
+                               ("~/Dropbox/Baruch/Scholarship/OER-origins/open.org" :maxlevel . 5)
+                               ("~/Dropbox/Zettelkasten/zettels.org" :maxlevel . 2) )
 
 
+          )
+
+    (defun my-org-refile-cache-clear () (interactive) (org-refile-cache-clear)) (define-key org-mode-map
+      (kbd "C-0 C-c C-w") 'my-org-refile-cache-clear)
 
 
-                                          ; Refile in a single go
-
-                                          ;  (global-set-key (kbd "<f4>") 'org-refile)
 
 
-  (setq org-id-link-to-org-use-id (quote create-if-interactive) org-id-method (quote org)
-        org-return-follows-link t org-link-keep-stored-after-insertion nil org-goto-interface (quote
-        outline-path-completion) org-clock-mode-line-total 'current)
+                                            ; Refile in a single go
 
-                                          ;   (add-hook 'org-mode-hook (lambda ()
-                                          ;   (org-sticky-header-mode 1)))
+                                            ;  (global-set-key (kbd "<f4>") 'org-refile)
 
 
-  (setq global-visible-mark-mode t)
+    (setq org-id-link-to-org-use-id (quote create-if-interactive) org-id-method (quote org)
+          org-return-follows-link t org-link-keep-stored-after-insertion nil org-goto-interface (quote
+          outline-path-completion) org-clock-mode-line-total 'current)
+
+                                            ;   (add-hook 'org-mode-hook (lambda ()
+                                            ;   (org-sticky-header-mode 1)))
+
+
+    (setq global-visible-mark-mode t)
 
 
 #+END_SRC
@@ -860,78 +861,79 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
 
  
 #+begin_src emacs-lisp :tangle yes
-    (add-hook 'org-agenda-mode-hook
-                                          (lambda ()
-                                            (visual-line-mode -1)
-                                            (toggle-truncate-lines 1)))
+            (add-hook 'org-agenda-mode-hook
+                                                  (lambda ()
+                                                    (visual-line-mode -1)
+                                                    (toggle-truncate-lines 1)))
 
 
-      (setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
-         (setq org-global-properties '(("EFFORT_ALL" . "0:05 0:10 0:15 0:20 0:25 0:30 0:35 0:40 0:45 0:50 0:55 0:60")))
+              (setq org-agenda-overriding-columns-format "%40ITEM %4EFFORT %4CLOCKSUM %16SCHEDULED %16DEADLINE ")
+                 (setq org-global-properties '(("EFFORT_ALL" . "0:05 0:10 0:15 0:20 0:25 0:30 0:35 0:40 0:45 0:50 0:55 0:60")))
 
 
-    (setq org-agenda-files '(
-                             "~/Dropbox/Zettelkasten/inbox.org"
-                             "~/Dropbox/Zettelkasten/contacts.org"
-                             "~/Dropbox/Zettelkasten/readings.org"
-                             "~/Dropbox/Zettelkasten/journal.org"
-                            "~/Dropbox/Zettelkasten/habits.org"
-                             "~/Dropbox/Zettelkasten/ndd.org"
-                         ;  "~/Dropbox/Zettelkasten/Scholarship/open.org"
-                       ;      "~/Dropbox/Zettelkasten/time.org"                             
-                             "~/Dropbox/Zettelkasten/baruch.org"
-                             "~/Dropbox/Zettelkasten/instruction.org"
-                             "~/Dropbox/Zettelkasten/personal.org"
-                             "~/Dropbox/Zettelkasten/lis.org"
-                             "~/Dropbox/Zettelkasten/recipes.org"
-                             "~/Dropbox/Zettelkasten/sysadmin.org"
-                             "~/Dropbox/Zettelkasten/events.org"
-                             "~/Dropbox/Zettelkasten/editing.org"
-                             "~/Dropbox/Zettelkasten/zettels.org"
-                             ))
+            (setq org-agenda-files '(
+                                     "~/Dropbox/Zettelkasten/inbox.org"
+                                     "~/Dropbox/Zettelkasten/contacts.org"
+                                     "~/Dropbox/Zettelkasten/readings.org"
+                                     "~/Dropbox/Zettelkasten/journal.org"
+                                    "~/Dropbox/Zettelkasten/habits.org"
+                                     "~/Dropbox/Zettelkasten/ndd.org"
+                                 ;  "~/Dropbox/Zettelkasten/Scholarship/open.org"
+                               ;      "~/Dropbox/Zettelkasten/time.org"
+                                     "~/Dropbox/Zettelkasten/korean.org"     
+                                     "~/Dropbox/Zettelkasten/baruch.org"
+                                     "~/Dropbox/Zettelkasten/instruction.org"
+                                     "~/Dropbox/Zettelkasten/personal.org"
+                                     "~/Dropbox/Zettelkasten/lis.org"
+                                     "~/Dropbox/Zettelkasten/recipes.org"
+                                     "~/Dropbox/Zettelkasten/sysadmin.org"
+                                     "~/Dropbox/Zettelkasten/events.org"
+                                     "~/Dropbox/Zettelkasten/editing.org"
+                                     "~/Dropbox/Zettelkasten/zettels.org"
+                                     ))
 
 
 
-    (setq org-agenda-skip-scheduled-if-done nil
-          org-agenda-skip-deadline-if-done t
-          org-agenda-skip-timestamp-if-done t
-          org-agenda-skip-deadline-prewarning-if-scheduled t
-          )
+            (setq org-agenda-skip-scheduled-if-done nil
+                  org-agenda-skip-deadline-if-done t
+                  org-agenda-skip-timestamp-if-done t
+                  org-agenda-skip-deadline-prewarning-if-scheduled t
+                  )
 
-    (setq org-agenda-clockreport-parameter-plist
-          (quote
-           (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags nil :hidefiles nil :fileskip0 t)))
+            (setq org-agenda-clockreport-parameter-plist
+                  (quote
+                   (:link t :maxlevel 4 :narrow 30 :tcolumns 1 :indent t :tags nil :hidefiles nil :fileskip0 t)))
 
-    (setq org-clock-report-include-clocking-task t)
-    (setq org-agenda-prefix-format
-          '((agenda . " %i %-12:c%?-12t% s")
-            (todo . " %i %-12:c")
-            (tags . " %i %-12:c")
-            (search . " %i %-12:c")))
+            (setq org-clock-report-include-clocking-task t)
+            (setq org-agenda-prefix-format
+                  '((agenda . " %i %-12:c%?-12t% s")
+                    (todo . " %i %-12:c")
+                    (tags . " %i %-12:c")
+                    (search . " %i %-12:c")))
 
-    (setq org-agenda-with-colors t
-          org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
-          org-agenda-current-time-string "✸✸✸✸✸"
-          org-agenda-start-with-clockreport-mode t
-          org-agenda-dim-blocked-tasks 'invisible
-          org-agenda-window-setup 'only-window
-          )
-
-
-    (setq org-agenda-format-date
-          (lambda (date)
-            (concat "\n---------------------------------\n" (org-agenda-format-date-aligned date))))
+            (setq org-agenda-with-colors t
+                  org-agenda-start-on-weekday nil  ;; this allows agenda to start on current day
+                  org-agenda-current-time-string "✸✸✸✸✸"
+                  org-agenda-start-with-clockreport-mode t
+                  org-agenda-dim-blocked-tasks 'invisible
+                  org-agenda-window-setup 'only-window
+                  )
 
 
-  (setq org-agenda-sticky t)
+            (setq org-agenda-format-date
+                  (lambda (date)
+                    (concat "\n---------------------------------\n" (org-agenda-format-date-aligned date))))
 
-      ;this makes it so that habits show up in the time grid
-  ;    (setq org-agenda-sorting-strategy
-   ; '((agenda time-up priority-down category-keep)
-    ;  (todo   priority-down category-keep)
-    ;  (tags   priority-down category-keep)
-     ; (search category-keep))
-  ;  )
+
+          (setq org-agenda-sticky t)
+
+              ;this makes it so that habits show up in the time grid
+          ;    (setq org-agenda-sorting-strategy
+           ; '((agenda time-up priority-down category-keep)
+            ;  (todo   priority-down category-keep)
+            ;  (tags   priority-down category-keep)
+             ; (search category-keep))
+          ;  )
 
 #+end_src
 
@@ -1130,80 +1132,80 @@ old version of alltodo....changed to reflect categories
 ** org-agenda-custom-commands additions
 #+begin_src emacs-lisp :tangle yes
 
-                                            ;list of projects
-    (add-to-list 'org-agenda-custom-commands '(
-                                               "p" todo "PROJ" ))
-    (add-to-list 'org-agenda-custom-commands '(
-                                               "w" todo "WAIT" ))
-    (add-to-list 'org-agenda-custom-commands '(
-                                               "f" "two-week view" agenda "" ((org-agenda-span 14))
-                                               ))
+                                          ;list of projects
+  (add-to-list 'org-agenda-custom-commands '(
+                                             "p" todo "PROJ" ))
+  (add-to-list 'org-agenda-custom-commands '(
+                                             "w" todo "WAIT" ))
+  (add-to-list 'org-agenda-custom-commands '(
+                                             "f" "two-week view" agenda "" ((org-agenda-span 14))
+                                             ))
+
+  (add-to-list 'org-agenda-custom-commands '(
+                                             "o" "three-week view" agenda "" ((org-agenda-span 21))
+                                             ))
 
     (add-to-list 'org-agenda-custom-commands '(
-                                               "o" "three-week view" agenda "" ((org-agenda-span 21))
-                                               ))
+                                             "u" "3 month" agenda "" ((org-agenda-span 90))
+                                             ))
 
-      (add-to-list 'org-agenda-custom-commands '(
-                                               "u" "3 month" agenda "" ((org-agenda-span 90))
-                                               ))
+  (add-to-list 'org-agenda-custom-commands      '("z" "agenda + buckets" ((agenda "" ((org-agenda-span 'day)
+                                                                                  (org-super-agenda-groups
+                                                                                   '((:discard (:todo "WAIT"))
+                                                                                     (:name "Day" :time-grid t :order 1)
+                                                                                     (:name "PRIORITY" :priority "A" :order 2)
+                                                                                     (:name "ndd" :and (:tag "ndd") :order 10)
+                                                                                       (:name "baruch" :and (:tag "baruch") :order 5)
+                                                                                     ))))
+                                                                      (alltodo "" ((org-agenda-overriding-header "")
+                                                                                   (org-super-agenda-groups '(
 
-    (add-to-list 'org-agenda-custom-commands      '("z" "agenda + buckets" ((agenda "" ((org-agenda-span 'day)
-                                                                                    (org-super-agenda-groups
-                                                                                     '((:discard (:todo "WAIT"))
-                                                                                       (:name "Day" :time-grid t :order 1)
-                                                                                       (:name "ndd" :and (:tag "ndd") :order 3)
+                                                                                                              (:discard (:todo "HABIT"))
+                                                                                                           ;   (:name "leadership" :and (:tag "lc"))
+                                                                                                            ;  (:name "tongsol" :and (:tag "tongsol"))
+                                                                                                             ; (:name "keep" :and (:tag "keep"))
+                                                                                                            ;  (:name "archives" :and (:tag "archives"))
+                                                                                                              (:name "ndd" :and (:tag "ndd"))
+                                                                                                     ;         (:name "scholarship" :and (:tag "schol"))
+                                                                                                              (:name "baruch scholarship" :and (:tag "baruch" :tag "scholarship"))
+                                                                                                              (:name "baruch librarianship" :and (:tag "baruch" :tag "librarianship"))
+                                                                                                              (:name "baruch tenure" :and (:tag "baruch" :tag "tenure"))
 
-                                                                                         (:name "baruch" :and (:tag "baruch") :order 2)
-                                                                                       ))))
-                                                                        (alltodo "" ((org-agenda-overriding-header "")
-                                                                                     (org-super-agenda-groups '(
-
-                                                                                                                (:discard (:todo "HABIT"))
-                                                                                                             ;   (:name "leadership" :and (:tag "lc"))
-                                                                                                              ;  (:name "tongsol" :and (:tag "tongsol"))
-                                                                                                               ; (:name "keep" :and (:tag "keep"))
-                                                                                                              ;  (:name "archives" :and (:tag "archives"))
-                                                                                                                (:name "ndd" :and (:tag "ndd"))
-                                                                                                       ;         (:name "scholarship" :and (:tag "schol"))
-                                                                                                                (:name "baruch scholarship" :and (:tag "baruch" :tag "scholarship"))
-                                                                                                                (:name "baruch librarianship" :and (:tag "baruch" :tag "librarianship"))
-                                                                                                                (:name "baruch tenure" :and (:tag "baruch" :tag "tenure"))
-
-                                                                                                                (:name "baruch service" :and (:tag "baruch" :tag "service"))
-                                                                                                                (:name "baruch" :and (:tag "baruch"))
-                                                                                                                (:name "finances" :and (:tag "finances"))
-                                                                                                                (:name "health" :and (:tag "health"))
-                                                                                                                (:name "home" :and (:tag "home"))
-                                                                                                                (:name "admin" :and (:tag "sysadmin")) 
+                                                                                                              (:name "baruch service" :and (:tag "baruch" :tag "service"))
+                                                                                                              (:name "baruch" :and (:tag "baruch"))
+                                                                                                              (:name "finances" :and (:tag "finances"))
+                                                                                                              (:name "health" :and (:tag "health"))
+                                                                                                              (:name "home" :and (:tag "home"))
+                                                                                                              (:name "admin" :and (:tag "sysadmin")) 
 
 
-                                                                                                                )))))
-                                                    ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
-                                                     (org-agenda-todo-ignore-scheduled t) )))
+                                                                                                              )))))
+                                                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
+                                                   (org-agenda-todo-ignore-scheduled t) )))
 
 
-     (add-to-list 'org-agenda-custom-commands      '("xn" "agenda + ndd" ((agenda "" ((org-agenda-span 'day)
-                                                                                    (org-super-agenda-groups
-                                                                                     '((:name "Day" :time-grid t :order 1)))))
-                                                                        (alltodo "" ((org-agenda-overriding-header "")
-                                                                                     (org-super-agenda-groups '(
+   (add-to-list 'org-agenda-custom-commands      '("xn" "agenda + ndd" ((agenda "" ((org-agenda-span 'day)
+                                                                                  (org-super-agenda-groups
+                                                                                   '((:name "Day" :time-grid t :order 1)))))
+                                                                      (alltodo "" ((org-agenda-overriding-header "")
+                                                                                   (org-super-agenda-groups '(
 
-                                                                                                                (:discard (:todo "HABIT"))
-                                                                                                                (:name "leadership" :and (:tag "lc"))
-                                                                                                                (:name "tongsol" :and (:tag "tongsol"))
-                                                                                                                (:name "keep" :and (:tag "keep"))
-                                                                                                                (:name "archives" :and (:tag "archives"))
-                                                                                                                (:name "ndd" :and (:tag "ndd"))
+                                                                                                              (:discard (:todo "HABIT"))
+                                                                                                              (:name "leadership" :and (:tag "lc"))
+                                                                                                              (:name "tongsol" :and (:tag "tongsol"))
+                                                                                                              (:name "keep" :and (:tag "keep"))
+                                                                                                              (:name "archives" :and (:tag "archives"))
+                                                                                                              (:name "ndd" :and (:tag "ndd"))
 
 
-                                                                                                                )))))
-                                                    ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
-                                                     (org-agenda-todo-ignore-scheduled t) )))
+                                                                                                              )))))
+                                                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("습관" "HOLD"  "AREA")) )
+                                                   (org-agenda-todo-ignore-scheduled t) )))
 
 #+end_src
 
 #+RESULTS:
-: ((z agenda + buckets ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:discard (:todo WAIT)) (:name Day :time-grid t :order 1) (:name ndd :and (:tag ndd) :order 3) (:name baruch :and (:tag baruch) :order 2))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name ndd :and (:tag ndd)) (:name baruch scholarship :and (:tag baruch :tag scholarship)) (:name baruch librarianship :and (:tag baruch :tag librarianship)) (:name baruch tenure :and (:tag baruch :tag tenure)) (:name baruch service :and (:tag baruch :tag service)) (:name baruch :and (:tag baruch)) (:name finances :and (:tag finances)) (:name health :and (:tag health)) (:name home :and (:tag home)) (:name admin :and (:tag sysadmin))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (xn agenda + ndd ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name leadership :and (:tag lc)) (:name tongsol :and (:tag tongsol)) (:name keep :and (:tag keep)) (:name archives :and (:tag archives)) (:name ndd :and (:tag ndd))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (z agenda + buckets ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:discard (:todo WAIT)) (:name Day :time-grid t :order 1) (:name ndd :and (:tag ndd) :order 3) (:name baruch :and (:tag baruch) :order 2))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT WAIT)) (:name ndd :and (:tag ndd)) (:name baruch scholarship :and (:tag baruch :tag scholarship)) (:name baruch librarianship :and (:tag baruch :tag librarianship)) (:name baruch tenure :and (:tag baruch :tag tenure)) (:name baruch service :and (:tag baruch :tag service)) (:name baruch :and (:tag baruch)) (:name finances :and (:tag finances)) (:name health :and (:tag health)) (:name home :and (:tag home)) (:name admin :and (:tag sysadmin))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (u 3 month agenda  ((org-agenda-span 90))) (o three-week view agenda  ((org-agenda-span 21))) (f two-week view agenda  ((org-agenda-span 14))) (w todo WAIT) (p todo PROJ) (l . just todo lists) (lt tags-todo untagged todos -{.*}) (ls alltodo all unscheduled by type ((org-agenda-todo-ignore-scheduled t) (org-super-agenda-groups '((:discard (:todo HABIT :todo PROJ)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name analog :and (:tag analog)) (:name waiting :and (:todo WAIT))))) (org-agenda-skip-function)) (lb alltodo all unscheduled by bucket ((org-agenda-todo-ignore-scheduled t) (org-super-agenda-groups '((:discard (:todo HABIT :todo PROJ)) (:name NDD :and (:tag ndd)) (:name Baruch :and (:tag baruch)) (:name scholarship :and (:tag schol)) (:name sysadmin :and (:tag sysadmin)) (:name finances :and (:tag finances)) (:name me :and (:tag me)) (:name home :and (:tag home))))) (org-agenda-skip-function)) (lx With deadline columns alltodo  ((org-agenda-overriding-columns-format %40ITEM %SCHEDULED %DEADLINE %EFFORT ) (org-agenda-view-columns-initially t) (org-agenda-sorting-strategy '(timestamp-up)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD HABIT WAIT))))) (la all todos ((alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name away from computer :and (:tag analog)) (:name waiting :and (:todo WAIT)))))))) (x . agenda + tasks) (xt agenda by task type ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name Projects :and (:todo PROJ)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name away from computer :and (:tag analog)) (:name waiting :and (:todo WAIT))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))))
+: ((z agenda + buckets ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:discard (:todo WAIT)) (:name Day :time-grid t :order 1) (:name PRIORITY :priority A :order 2) (:name ndd :and (:tag ndd) :order 10) (:name baruch :and (:tag baruch) :order 5))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name ndd :and (:tag ndd)) (:name baruch scholarship :and (:tag baruch :tag scholarship)) (:name baruch librarianship :and (:tag baruch :tag librarianship)) (:name baruch tenure :and (:tag baruch :tag tenure)) (:name baruch service :and (:tag baruch :tag service)) (:name baruch :and (:tag baruch)) (:name finances :and (:tag finances)) (:name health :and (:tag health)) (:name home :and (:tag home)) (:name admin :and (:tag sysadmin))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (z agenda + buckets ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:discard (:todo WAIT)) (:name Day :time-grid t :order 1) (:name PRIORITY :priority A) (:name ndd :and (:tag ndd) :order 3) (:name baruch :and (:tag baruch) :order 2))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name ndd :and (:tag ndd)) (:name baruch scholarship :and (:tag baruch :tag scholarship)) (:name baruch librarianship :and (:tag baruch :tag librarianship)) (:name baruch tenure :and (:tag baruch :tag tenure)) (:name baruch service :and (:tag baruch :tag service)) (:name baruch :and (:tag baruch)) (:name finances :and (:tag finances)) (:name health :and (:tag health)) (:name home :and (:tag home)) (:name admin :and (:tag sysadmin))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (xn agenda + ndd ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name leadership :and (:tag lc)) (:name tongsol :and (:tag tongsol)) (:name keep :and (:tag keep)) (:name archives :and (:tag archives)) (:name ndd :and (:tag ndd))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (z agenda + buckets ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:discard (:todo WAIT)) (:name Day :time-grid t :order 1) (:name ndd :and (:tag ndd) :order 3) (:name baruch :and (:tag baruch) :order 2))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name ndd :and (:tag ndd)) (:name baruch scholarship :and (:tag baruch :tag scholarship)) (:name baruch librarianship :and (:tag baruch :tag librarianship)) (:name baruch tenure :and (:tag baruch :tag tenure)) (:name baruch service :and (:tag baruch :tag service)) (:name baruch :and (:tag baruch)) (:name finances :and (:tag finances)) (:name health :and (:tag health)) (:name home :and (:tag home)) (:name admin :and (:tag sysadmin))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (u 3 month agenda  ((org-agenda-span 90))) (o three-week view agenda  ((org-agenda-span 21))) (f two-week view agenda  ((org-agenda-span 14))) (w todo WAIT) (p todo PROJ) (l . just todo lists) (lt tags-todo untagged todos -{.*}) (ls alltodo all unscheduled by type ((org-agenda-todo-ignore-scheduled t) (org-super-agenda-groups '((:discard (:todo HABIT :todo PROJ)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name analog :and (:tag analog)) (:name waiting :and (:todo WAIT))))) (org-agenda-skip-function)) (lb alltodo all unscheduled by bucket ((org-agenda-todo-ignore-scheduled t) (org-super-agenda-groups '((:discard (:todo HABIT :todo PROJ)) (:name NDD :and (:tag ndd)) (:name Baruch :and (:tag baruch)) (:name scholarship :and (:tag schol)) (:name sysadmin :and (:tag sysadmin)) (:name finances :and (:tag finances)) (:name me :and (:tag me)) (:name home :and (:tag home))))) (org-agenda-skip-function)) (lx With deadline columns alltodo  ((org-agenda-overriding-columns-format %40ITEM %SCHEDULED %DEADLINE %EFFORT ) (org-agenda-view-columns-initially t) (org-agenda-sorting-strategy '(timestamp-up)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD HABIT WAIT))))) (la all todos ((alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name away from computer :and (:tag analog)) (:name waiting :and (:todo WAIT)))))))) (x . agenda + tasks) (xt agenda by task type ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name Projects :and (:todo PROJ)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name away from computer :and (:tag analog)) (:name waiting :and (:todo WAIT))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))))
 
 
 ** org-todo
@@ -1259,7 +1261,7 @@ old version of alltodo....changed to reflect categories
     ;removed "scheduled" from todo entries
          ;added it back in [2022-07-09 Sat]
               ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \nSCHEDULED: %t \n%a\n" :prepend nil)
-              ("r" "resistance" item (file+headline "~/Dropbox/Zettelkasten/inbox.org" "resistance") "%U\n *What resistance am I facing?*\n%?  *What should I be working on? / What is my plan?*\n"  )
+              ("r" "resistance" item (file+headline "~/Dropbox/Zettelkasten/inbox.org" "resistance") "%U\n*What resistance am I facing?*\n%?\n*What should I be working on? / What is my plan?*\n"  )
               ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
                "* %a \nSCHEDULED: %t %?\n%:initial" )
               ("x" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
@@ -1314,7 +1316,7 @@ removed templates:
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package org-mru-clock
-    :bind     ("M-<f2>" . org-mru-clock-in)
+    :bind     ("M-<f3>" . org-mru-clock-in)
     :config
     (setq org-mru-clock-how-many 80)
     (setq org-mru-clock-keep-formatting t)
@@ -1332,7 +1334,11 @@ removed templates:
 *** chronos
 #+begin_src emacs-lisp :tangle yes
 
-    (use-package org-alert)
+  (use-package org-alert)
+
+  (setq org-alert-interval 300 ;check agenda every 5 minutes
+      org-alert-notify-cutoff 10 ;notify 10 min before event
+      org-alert-notify-after-event-cutoff 10) ;stop notifying 10 min after
     (use-package chronos
       :config
       (setq chronos-expiry-functions '(chronos-shell-notify
@@ -1504,176 +1510,8 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
    (add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo)
 #+end_src
 
-** org-clock
-#+begin_src emacs-lisp :tangle yes
-(setq org-clock-out-remove-zero-time-clocks t)
-  
-#+end_src
-
-#+RESULTS:
-: t
-
-*** org-mru
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package org-mru-clock
-    :bind     ("M-<f2>" . org-mru-clock-in)
-    :config
-    (setq org-mru-clock-how-many 80)
-    (setq org-mru-clock-keep-formatting t)
-    (setq org-mru-clock-completing-read 'helm--completing-read-default)
-    )
-  
-  (setq org-clock-mode-line-total 'current)
-  
-#+END_SRC
-
-#+RESULTS:
-: current
 
 
-*** chronos
-#+begin_src emacs-lisp :tangle yes
-
-    (use-package org-alert)
-    (use-package chronos
-      :config
-      (setq chronos-expiry-functions '(chronos-shell-notify
-                                       chronos-dunstify
-                                       chronos-buffer-notify
-                                       ))
-      (setq chronos-notification-wav "~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-      )
-    (use-package helm-chronos
-      :config
-      (setq helm-chronos-standard-timers
-            '(
-              ;;intermittent fasting
-              "=13:00/end fast + =21:00/begin fast"
-
-              ))
-
-      )
-
-        (setq chronos-shell-notify-program "mpv"
-            chronos-shell-notify-parameters '("~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav")
-
-
-  )
-#+end_src
-
-#+RESULTS:
-| ~/Dropbox/emacs/.emacs.d/sms-alert-1-daniel_simon.wav |
-
-** org-tag
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (setq org-tag-alist '(
-                        (:startgroup . nil)
-                        ("ndd" . ?n)
-                        ("health" . ?m)
-                        ("baruch" . ?b)
-                        ("finances" . ?i)
-                        ("sysadmin" . ?y)
-                        ("home" . ?h)
-                        (:endgroup . nil)
-
-                        (:startgroup . nil)
-                        ("lc" . ?e)
-                        ("tongsol" . ?g)
-                        ("keep" . ?k)
-                        ("archives" . ?v) 
-                        (:endgroup . nil)
-
-                        (:startgroup . nil)
-                        ("librarianship" . ?l)
-                        ("service" . ?v)
-                        ("scholarship" . ?s)
-                        ("tenure" . ?t)
-                        (:endgroup . nil)
-
-                        ))
-
-  (setq org-complete-tags-always-offer-all-agenda-tags nil)
-  (setq org-tags-column 0)
-
-#+END_SRC
-
-#+RESULTS:
-: 0
-           ("schol" . ?s)
-                        ("lis" . ?l)
-                         (:startgroup . nil)
-                         ("admin" . ?a)
-                         ("lookup" . ?p)
-                         ("research" . ?r)
-                         ("process" . ?c)
-                         ("write" . ?w)
-                         ("read" . ?d)
-                         (:endgroup . nil)
-
-                         (:startgroup . nil)
-                         ("focus" . ?f)
-                         ("quick" . ?q)
-                         ("analog" . ?g)
-                         (:endgroup . nil)
-
-#+begin_src emacs-lisp :tangle no
-    (setq org-tag-alist '(  ("NOW" . ?n) ("workflow" . ?w)
-                        (:startgroup . nil)
-                        ("SHALLOW" . ?s) ("DEEP" . ?d) ("HOME" . ?h) 
-                        (:endgroup . nil)
-                        (:startgroup . nil)
-                        ("#necessary" . ?c) ("#wouldbenice" . ?b)
-                        (:endgroup . nil)
-                        (:startgroup . nil)
-                        ("@timely". ?t) ("@nottimely" . ?e)
-                        (:endgroup . nil)
-                       
-                        ))
-  
-#+end_src
-#+RESULTS:
-: 0
-
-** org-pomodoro
-:PROPERTIES:
-:ID:       pomodoro
-:END:
-:LOGBOOK:
-CLOCK: [2021-10-18 Mon 10:47]--[2021-10-18 Mon 10:47] =>  0:00
-CLOCK: [2021-05-04 Tue 11:33]--[2021-05-04 Tue 12:02] =>  0:29
-CLOCK: [2021-05-04 Tue 10:21]--[2021-05-04 Tue 10:22] =>  0:01
-CLOCK: [2021-05-04 Tue 10:18]--[2021-05-04 Tue 10:19] =>  0:01
-CLOCK: [2021-04-30 Fri 12:07]--[2021-04-30 Fri 12:09] =>  0:02
-CLOCK: [2021-04-30 Fri 12:06]--[2021-04-30 Fri 12:07] =>  0:01
-CLOCK: [2021-04-30 Fri 12:03]--[2021-04-30 Fri 12:04] =>  0:01
-CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
-:END:
-#+begin_src emacs-lisp :tangle yes
-  
-  
-  (use-package pomm)
-  (use-package org-pomodoro)
-  (setq org-pomodoro-ticking-sound-p t)
-  (setq org-pomodoro-finished-sound-p t) ;i couldn't remember why this is nil [2021-10-16 Sat]:-- this is nil b/c the short break sound and long break sound signal the end of the pomodoro
-  (setq org-pomodoro-overtime-sound "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
-  (setq org-pomodoro-short-break-sound "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
-  (setq org-pomodoro-long-break-sound  "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
-  (setq org-pomodoro-finished-sound  "/home/betsy/.emacs.d/sms-alert-1-daniel_simon.wav")
-  
-  (setq org-pomodoro-keep-killed-pomodoro-time t)
-  (setq org-pomodoro-manual-break t)
-  (setq org-pomodoro-ticking-sound-states '(:pomodoro :overtime))
-  (setq org-pomodoro-length 25
-        org-pomodoro-short-break-length 5)
-  
-#+end_src
-
-#+RESULTS:
-: 5
- (setq org-pomodoro-length 25
-          org-pomodoro-short-break-length 5)
-************
 ** checklists
 #+begin_src emacs-lisp :tangle yes :results none
    (setq org-list-demote-modify-bullet
@@ -1707,595 +1545,6 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
    (add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo)
 #+end_src
 
-* sound
-#+begin_src emacs-lisp :tangle yes
-(use-package emms)
-#+end_src
-
-#+RESULTS:
-
-* *mentat*
-#+begin_src emacs-lisp :tangle yes
-(load "annot")
-  (require 'annot)
-
-#+end_src
-
-#+RESULTS:
-: annot
-
-** anki
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package anki-editor
-  :after org
-  :hook (org-capture-after-finalize . anki-editor-reset-cloze-number) ; Reset cloze-number after each capture.
-  :config
-  (setq anki-editor-create-decks t)
-  (defun anki-editor-cloze-region-auto-incr (&optional arg)
-    "Cloze region without hint and increase card number."
-    (interactive)
-    (anki-editor-cloze-region my-anki-editor-cloze-number "")
-    (setq my-anki-editor-cloze-number (1+ my-anki-editor-cloze-number))
-    (forward-sexp))
-  (defun anki-editor-cloze-region-dont-incr (&optional arg)
-    "Cloze region without hint using the previous card number."
-    (interactive)
-    (anki-editor-cloze-region (1- my-anki-editor-cloze-number) "")
-    (forward-sexp))
-  (defun anki-editor-reset-cloze-number (&optional arg)
-    "Reset cloze number to ARG or 1"
-    (interactive)
-    (setq my-anki-editor-cloze-number (or arg 1)))
-  (defun anki-editor-push-tree ()
-    "Push all notes under a tree."
-    (interactive)
-    (anki-editor-push-notes '(4))
-    (anki-editor-reset-cloze-number))
-  ;; Initialize
-  (anki-editor-reset-cloze-number)
-  )
-  #+END_SRC
-
-  #+RESULTS:
-  | anki-editor-reset-cloze-number | org-gcal--capture-post |
-  :after org
-
-  ; Reset cloze-number after each capture.
-
-  :hook (org-capture-after-finalize . anki-editor-reset-cloze-number)
-  #+RESULTS:
-
-
-** epub
-   #+BEGIN_SRC emacs-lisp :tangle yes
-
-(use-package olivetti)
-(use-package nov
-:config
-  (setq nov-post-html-render-hook  (lambda () (visual-line-mode 1)))
-  (add-hook 'nov-post-html-render-hook 'olivetti-mode)
-)
-   #+END_SRC
-
-   #+RESULTS:
-   : t
-
-** pdfs
-  #+BEGIN_SRC emacs-lisp :tangle yes
-    
-                    (use-package pdf-tools
-                      :magic ("%PDF" . pdf-view-mode)
-                      :config
-                      (pdf-tools-install :no-query))
-                    (use-package pdf-view-restore)
-    
-                     (setq pdf-view-continuous nil)
-                  (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode)
-         (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
-    
-            (load "org-pdfview")
-    
-                                                    ;     (add-hook 'pdf-view-mode-hook (lambda () (visual-fill-column-mode 0)))
-    
-    
-    
-    
-            (add-to-list 'org-file-apps 
-                         '("\\.pdf\\'" . (lambda (file link)
-                                           (org-pdfview-open link))))
-    
-        (use-package quelpa)
-           (quelpa
-            '(quelpa-use-package
-              :fetcher git
-              :url "https://github.com/quelpa/quelpa-use-package.git"))
-           (require 'quelpa-use-package)
-    
-;              (use-package pdf-continuous-scroll-mode
- ;               :quelpa (pdf-continuous-scroll-mode :fetcher github :repo "dalanicolai/pdf-continuous-scroll-mode.el"))
-  ;      (add-hook 'pdf-view-mode-hook 'pdf-continuous-scroll-mode)
-    
-    
-    ;;to get PDFS to open on a specific page. added 12/27/21 from this link: https://emacs.stackexchange.com/questions/30344/how-to-link-and-open-a-pdf-file-to-a-specific-page-skim-adobe. haven't tested it out yet. 
-        (org-add-link-type "pdf" 'org-pdf-open nil)
-    
-    (defun org-pdf-open (link)
-      "Where page number is 105, the link should look like:
-       [[pdf:/path/to/file.pdf#page=105][My description.]]"
-      (let* ((path+page (split-string link "#page="))
-             (pdf-file (car path+page))
-             (page (car (cdr path+page))))
-        (start-process "view-pdf" nil "evince" "--page-index" page pdf-file)))
-    
-  #+END_SRC
-
-  #+RESULTS:
-  : org-pdf-open
-
-  (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
-  (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" .  org-pdfview-open))
-
-
-  (use-package org-pdf-tools
-  :straight t)
-
-  (use-package org-noter-pdf-tools
-  :straight t)
-
-** org-roam
-:PROPERTIES:
-:ID:       qjfd04u0u7j0
-:END:
-
-:file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
-
-(file "~/Dropbox/Zettelkasten/Zettels/%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) ${slug}.org")
-
-    (setq org-roam-capture-templates '(("d" "default" plain :target 
-                                        "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CATEGORY: zettels\n:CONTEXT: %a\n:END:\n%?\n\n
-  \n\n\n
-  ----------------------
-  \n
-  - What is the purpose of this zettel?\n
-  - What is the nature of the content I wish to include in this zettel?\n
-  - How does it relate to the existing network?\n
-  - How do I wish to discover this information in the future?\n" 
-                                        "#+title: ${title}" :unnarrowed t :kill-buffer t)))
-
-                                        
-
-  (setq org-roam-capture-templates '(("d" "default" plain "%$" #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CATEGORY: zettels\n:CONTEXT: %a\n:END:\n%?\n\n
-- What is the purpose of this zettel?\n
-- What is the nature of the content I wish to include in this zettel?\n
-- How does it relate to the existing network?\n
-- How do I wish to discover this information in the future?\n
-
-" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
-                                      "#+title: ${title}" :unnarrowed t :kill-buffer t)))
-
-                                        (file+head "%<%Y%m%d%>_${slug}.org" "#+title: ${title}\n   \n\n\n
-  ----------------------
-  \n
-  - What is the purpose of this zettel?\n
-%?
-  - What is the nature of the content I wish to include in this zettel?\n
-  - How does it relate to the existing network?\n
-  - How do I wish to discover this information in the future?\n")
-
-                                      
-#+begin_src emacs-lisp  :tangle yes 
-
-  (use-package org-roam
-    :ensure t
-    :init
-    (setq org-roam-v2-ack t)
-    :custom
-    (setq org-roam-directory (file-truename "~/Dropbox/Zettelkasten/Zettels"))
-    (org-roam-db-autosync-mode)
-    :bind (("C-c n l" . org-roam-buffer-toggle)
-           ("C-c n f" . org-roam-node-find)
-           ("C-c n i" . org-roam-node-insert))
-    :config
-    (org-roam-setup))
-
-     (defun my/org-roam--title-to-slug (title) ;;<< changed the name
-       "Convert TITLE to a filename-suitable slug."
-       (cl-flet* ((nonspacing-mark-p (char)
-                                     (eq 'Mn (get-char-code-property char 'general-category)))
-                  (strip-nonspacing-marks (s)
-                                          (apply #'string (seq-remove #'nonspacing-mark-p
-                                                                      (ucs-normalize-NFD-string s))))
-                  (cl-replace (title pair)
-                              (replace-regexp-in-string (car pair) (cdr pair) title)))
-         (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
-                         ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
-                         ("^_" . "")  ;; remove starting underscore
-                         ("_$" . "")))  ;; remove ending underscore
-                (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
-           (downcase slug))))
-
-
-     (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
-(setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
-#+end_src
-
-#+RESULTS:
-: ~/Dropbox/Zettelkasten/Zettels/
-
-("C-c <f1>" . org-roam-capture)
-#+begin_src emacs-lisp :tangle no
-  
-      (setq org-roam-capture-templates '(("d" "default" plain "#+title: ${title}\n* ${title}\n%?\n* Metadata \n- What is the purpose of this zettel?\n\n- What is the nature of the content I wish to include in this zettel?\n- How does it relate to the existing network?\n- How do I wish to discover this information in the future?" :target
-  (file+head "%<%Y%m%d%H%M%S>_${slug}.org" "") :jump-to-captured t :unnarrowed t)))
-
-   (setq org-roam-completion-system 'helm)
-
-
-
-
-
-
-
-#+end_src
-#+RESULTS:
-: my/org-roam--title-to-slug
-
-** references/citations
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-  
-  (use-package org-ref)
-  (setq reftex-default-bibliography '("~/Dropbox/Zettelkasten/references.bib"))
-  
-  ;; see org-ref for use of these variables
-  (setq org-ref-bibliography-notes "~/Dropbox/Zettelkasten/readings.org"
-        org-ref-default-bibliography '("~/Dropbox/Zettelkasten/references.bib")
-        org-ref-pdf-directory "~/Dropbox/Library/BIBTEX/"
-        org-ref-prefer-bracket-links t
-        )
-  
-  (setq bibtex-completion-bibliography "~/Dropbox/Zettelkasten/references.bib"
-        bibtex-completion-notes-path "~/Dropbox/Zettelkasten/readings.org")
-  
-  ;; open pdf with system pdf viewer (works on mac)
-  (setq bibtex-completion-pdf-open-function
-        (lambda (fpath)
-          (start-process "open" "*open*" "open" fpath)))
-  
-  
-                                          ;  (setq pdf-view-continuous nil)
-  
-                                          ;  (setq bibtex-autokey-year-title-separator "")
-                                          ; (setq bibtex-autokey-titleword-length 0)
-  
-  
-  (setq bibtex-completion-notes-template-one-file "\n* ${author} (${year}). /${title}/. ${journal}. \n:PROPERTIES:\n:Custom_ID: ${=key=}\n:ID: ${=key=}\n:CITATION: ${author} (${year}). /${title}/. /${journal}/, /${volume}/(${number}), ${pages}. ${publisher}. ${url}\n:DISCOVERY:\n:DATE_ADDED: %t\n:READ_STATUS:\n:INGESTED:\n:FORMAT:\n:INTERLEAVE_PDF: ../Library/BIBTEX/$(=key=).pdf\n:TYPE:\n:AREA:\n:END:")
-  
-  (setq bibtex-maintain-sorted-entries t)
-
-  
-  (use-package org-noter
-    :ensure t
-    :defer t
-    :config
-    (setq org-noter-property-doc-file "INTERLEAVE_PDF"
-          org-noter-property-note-location "INTERLEAVE_PAGE_NOTE"
-          org-noter-default-notes-file-names "~/Dropbox/Zettelkasten/readings.org"
-          org-noter-notes-search-path "~/Dropbox/Zettelkasten/"
-          ;;org noter windows
-          org-noter-always-create-frame nil
-          org-noter-notes-window-location (quote horizontal-split)
-          org-noter-doc-split-fraction (quote (0.75 . 0.75))
-          org-noter-kill-frame-at-session-end nil
-  
-          org-noter-auto-save-last-location t
-          org-noter-default-heading-title "$p$: "
-          org-noter-insert-note-no-questions nil
-          org-noter-insert-selected-text-inside-note t
-          ))
-                                          ;       (setq org-noter-notes-window-location 'other-frame)
-                                          ;      (setq org-noter-default-heading-title "p. $p$") 
-;    (use-package interleave 
- ;     :defer t
-  ;    )
-  
-  
-#+END_SRC
-
-#+RESULTS:
-
-
-https://lucidmanager.org/productivity/emacs-bibtex-mode/
-there's a few other things here 
-#+begin_src emacs-lisp :tangle yes
-  
-   
-    ;; Spell checking (requires the ispell software)
-  (add-hook 'bibtex-mode-hook 'flyspell-mode)
-  
-  ;; Change fields and format
-  (setq bibtex-user-optional-fields '(("keywords" "Keywords to describe the entry" "")
-                                      ("file" "Link to document file." ":"))
-        bibtex-align-at-equal-sign t)
-  
-    ;; BibLaTeX settings
-  ;; bibtex-mode
-;  (setq bibtex-dialect 'biblatex)
-  
-  
-  
-#+end_src
-
-
-
-
-#+RESULTS:
-
-** bibtex
-#+begin_src emacs-lisp :tangle yes
-  (setq bibtex-autokey-additional-names "etal"
-        bibtex-autokey-name-separator "-"
-        bibtex-autokey-name-year-separator "_"
-        bibtex-autokey-names 2
-        bibtex-autokey-titleword-length 0
-              bibtex-autokey-titleword-separator ""
-      bibtex-autokey-year-length 4
-    bibtex-autokey-name-case-convert-function 'capitalize
-        )
-
-#+end_src
-
-#+RESULTS:
-: capitalize
-
-** org-cite
-#+begin_src emacs-lisp :tangle yes
-
-        (use-package citeproc)
-      (use-package org-ref-cite
-        :load-path "/home/betsy/Dropbox/emacs/.emacs.d/lisp/org-ref-cite-main/"
-        :config
-        ;; I like green links
-        (set-face-attribute 'org-cite nil :foreground "DarkSeaGreen4")
-        (set-face-attribute 'org-cite-key nil :foreground "forest green")
-        (setq
-         org-cite-global-bibliography bibtex-completion-bibliography
-         ;; https://github.com/citation-style-language/styles
-         ;; or https://www.zotero.org/styles
-         org-cite-csl-styles-dir "/home/betsy/Dropbox/emacs/.emacs.d/lisp/org-ref-cite-main/csl-styles/"
-         org-cite-insert-processor 'org-ref-cite
-         org-cite-follow-processor 'org-ref-cite
-         org-cite-activate-processor 'org-ref-cite
-         org-cite-export-processors '((html csl "elsevier-with-titles.csl")
-                                      (latex org-ref-cite)
-                                      (t basic))))
-
-
-     ;from https://blog.tecosaur.com/tmio/2021-07-31-citations.html
-  (require 'oc-natbib)
-  (require 'oc-csl)
-  ;  (setq org-cite-export-processors 'csl)
-    (setq org-cite-csl-styles-dir "~/Zotero/styles")
-
-
-#+end_src
-
-#+RESULTS:
-: ~/Zotero/styles
-
-* latex
-#+begin_src emacs-lisp :tangle yes 
-  (require 'ox-extra)
-  (ox-extras-activate '(ignore-headlines))
-
-
-
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-(with-eval-after-load 'ox-latex
-(add-to-list 'org-latex-classes
-             '("org-plain-latex"
-               "\\documentclass{article}
-           [NO-DEFAULT-PACKAGES]
-           [PACKAGES]
-           [EXTRA]"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
- (add-to-list 'org-latex-classes
-               '("apa6"
-                 "\\documentclass{apa6}"
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-#+end_src
-
-#+RESULTS:
-| org-plain-latex | \documentclass{article} |
-
-
-  (use-package tex :ensure auctex)
-
-
-  (use-package company-auctex)
-  (company-auctex-init)
-
-* mu4e
-#+begin_src emacs-lisp :tangle yes 
-  (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-
-  (use-package mu4e
-  :ensure nil
-  :config
-
-  ;; This is set to 't' to avoid mail syncing issues when using mbsync
-  (setq mu4e-change-filenames-when-moving t)
-
-  ;; Refresh mail using isync every 10 minutes
-  (setq mu4e-update-interval (* 10 60))
-  (setq mu4e-get-mail-command "mbsync -a")
-  (setq mu4e-maildir "/home/betsy/.thunderbird/mgzibeze.default-release/ImapMail/")
-
-  (setq mu4e-contexts
-        (list
-         ;; Work account
-         (make-mu4e-context
-          :name "Work"
-          :match-func
-            (lambda (msg)
-              (when msg
-                (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
-          :vars '((user-mail-address . "systemcrafters.test@gmail.com")
-                  (user-full-name    . "System Crafters Gmail")
-                  (mu4e-drafts-folder  . "/Gmail/[Gmail]/Drafts")
-                  (mu4e-sent-folder  . "/Gmail/[Gmail]/Sent Mail")
-                  (mu4e-refile-folder  . "/Gmail/[Gmail]/All Mail")
-                  (mu4e-trash-folder  . "/Gmail/[Gmail]/Trash")))))
-
-  (setq mu4e-maildir-shortcuts
-        '(("/Gmail/Inbox"             . ?i)
-          ("/Gmail/[Gmail]/Sent Mail" . ?s)
-          ("/Gmail/[Gmail]/Trash"     . ?t)
-          ("/Gmail/[Gmail]/Drafts"    . ?d)
-          ("/Gmail/[Gmail]/All Mail"  . ?a))))
-#+end_src
-    
-    (setq mu4e-attachment-dir "/home/betsy/Dropbox/2022")
-    (setq mu4e-refile-folder "/baruch/Temp/")
-    (setq mu4e-sent-folder "/baruch/Sent Items/" )
-      (setq mu4e-trash-folder "/baruch/Deleted Items/" )
-    (setq mu4e-drafts-folder "/baruch/Drafts/")
-    (setq mu4e-get-mail-command "mbsync -aV")
-    (setq mu4e-bookmarks
-     (quote
-      ((:name "Inbox" :query "maildir:/baruch/Inbox" :key 117)
-       (:name "Today's messages" :query "date:today..now" :key 116)
-       (:name "Last 7 days" :query "date:7d..now" :show-unread t :key 119)
-       (:name "Messages with images" :query "mime:image/*" :key 112))))
-
-    (setq mu4e-compose-dont-reply-to-self t)
-  (setq mu4e-view-show-images t)
-  (setq org-mu4e-convert-to-html t)
-   (setq mu4e-compose-format-flowed t)
-      (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
-               (add-hook 'mu4e-view-mode-hook 'visual-fill-column-mode)
-
-               (defun no-auto-fill ()
-                 "Turn off auto-fill-mode."
-                 (auto-fill-mode -1))
-
-
-               (defun vcfm-off ()
-                                                       ;turn off visual fill column mode
-                 (visual-fill-column-mode nil))
-
-               (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
-               (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
-
-               (setq mu4e-compose-dont-reply-to-self t)
-               (setq mu4e-confirm-quit nil)
-               (setq mu4e-display-update-status-in-modeline nil)
-               (setq mu4e-index-lazy-check t)
-
-    (require 'smtpmail)
-         (setq message-send-mail-function 'smtpmail-send-it
-               smtpmail-starttls-credentials
-               '(("smtp.baruch.cuny.edu" 587 nil nil))
-               smtpmail-default-smtp-server "smtp.baruch.cuny.edu"
-               smtpmail-smtp-server "smtp.baruch.cuny.edu"
-               smtpmail-smtp-service 587
-               smtpmail-debug-info t)
-
-  
-
-* load files
-:LOGBOOK:
-CLOCK: [2021-04-13 Tue 10:17]--[2021-04-13 Tue 10:17] =>  0:00
-:END:
-
-#+RESULTS:
-: -0.8
-   (find-file "~/Dropbox/Zettelkasten/inbox.org")   
-   (find-file "/home/betsy/.emacs")
-#+begin_src emacs-lisp :tangle yes
-
-
-
-#+end_src
-
-#+RESULTS:
-
-#+BEGIN_SRC emacs-lisp :tangle yes
- (load "bookmark+")
- (load "clipboard2org")
-  (load "hangul")
-  (load "org-book")
-  (load "org-super-links")
-  (load "ov-highlight")
-  (load "annot")
-  (load "backup-each-save")
-    
-    (load "dired+")
-
-#+END_SRC  
-
-#+RESULTS:
-: t
-
- 
-
-  ;had to add xml+ and ov via package manager
-
-
- 
- 
-    (define-key dired-mode-map (kbd "<f1>") 'org-capture)
-    (setq dired-auto-revert-buffer (quote dired-directory-changed-p)
-          dired-omit-verbose nil
-          dired-omit-files
-          (concat dired-omit-files "\\|^.DS_STORE$\\|^.projectile$\\|^.org~$")
-          )
-    (add-hook 'dired-load-hook
-              (function (lambda () (load "dired-x"))))
-
-    (add-hook 'dired-mode-hook
-              (lambda ()
-                ;; Set dired-x buffer-local variables here.  For example:
-                (dired-omit-mode 1)
-                ))
-
-    ;; toggle `dired-omit-mode' with C-x M-o
-    (add-hook 'dired-mode-hook #'dired-omit-mode)
-
-     (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
-
-* theme
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package modus-themes)
-;  (modus-themes-load-themes)
- (load-theme 'modus-vivendi t)
-
-
-;to fontify done checkbox items
-(font-lock-add-keywords
- 'org-mode
- `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
- 'append)
-
-
-#+end_src
-
-#+RESULTS:
-
-#+RESULTS:
-: t
-2
 * sound
 #+begin_src emacs-lisp :tangle yes
 (use-package emms)
