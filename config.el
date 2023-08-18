@@ -161,46 +161,71 @@
 (sp-pair "'" nil :actions :rem)
 
 (use-package calfw)
-      (use-package calfw-org)
-                                              ;   (use-package calfw-gcal)
-      (use-package calfw-cal) 
-      (setq package-check-signature nil)
-                                              ;  (setq org-gcal-down-days '30)
-                                              ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
+       (use-package calfw-org)
+                                               ;   (use-package calfw-gcal)
+       (use-package calfw-cal) 
+       (setq package-check-signature nil)
+                                               ;  (setq org-gcal-down-days '30)
+                                               ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
 
 
-      (defun my-open-calendar ()
-        (interactive)
-        (cfw:open-calendar-buffer
-         :contents-sources
-         (list
-          (cfw:org-create-source "pale green")  ; orgmode source
-                                              ;    (cfw:cal-create-source "light goldenrod") ; diary source
-          ))) 
-      (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
-                                              ;   (setq calendar-daylight-savings-starts '(3 11 year))
-                                              ;  (setq calendar-daylight-savings-ends: '(11 4 year))
-      (setq calendar-week-start-day 1)
+       (defun my-open-calendar ()
+         (interactive)
+         (cfw:open-calendar-buffer
+          :contents-sources
+          (list
+           (cfw:org-create-source "pale green")  ; orgmode source
+                                               ;    (cfw:cal-create-source "light goldenrod") ; diary source
+           ))) 
+       (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
+                                               ;   (setq calendar-daylight-savings-starts '(3 11 year))
+                                               ;  (setq calendar-daylight-savings-ends: '(11 4 year))
+       (setq calendar-week-start-day 1)
 
-      (setq diary-file "~/Dropbox/Zettelkasten/diary")
+       (setq diary-file "~/Dropbox/Zettelkasten/diary")
 
 
 
-      (use-package org-gcal)
-      (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
-            org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
-            org-gcal-fetch-file-alist '(
-                                        ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
-                                ("yoonbetsy@protonmail.com" . "~/Dropbox/Zettelkasten/events.org")        
-    ;      ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/time.org")
-          ))
-  (org-gcal-reload-client-id-secret)
-      (setq org-gcal-recurring-events-mode 'top-level)
+       (use-package org-gcal)
+       (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
+             org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
+             org-gcal-fetch-file-alist '(
+                                         ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
+                                 ("yoonbetsy@protonmail.com" . "~/Dropbox/Zettelkasten/events.org")        
+     ;      ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/time.org")
+           ))
+   (org-gcal-reload-client-id-secret)
+       (setq org-gcal-recurring-events-mode 'top-level)
 
-  (setq plstore-cache-passphrase-for-symmetric-encryption t)
+   (setq plstore-cache-passphrase-for-symmetric-encryption t)
 
-  (require 'plstore)
-(add-to-list 'plstore-encrypt-to '("A922544B1884A3CC"))
+   (require 'plstore)
+; (add-to-list 'plstore-encrypt-to '("A922544B1884A3CC"))
+
+    (require 'epa-file)
+   ;; And then this setting probably is also the winner.
+   (setq epg-pinentry-mode 'loopback)
+   (epa-file-enable)
+
+   ;; I don't know if this is necessary. I removed it again.
+   ;; Essentially it is the path to the downgrade package I used.
+ ;  (setq epg-gpg-program "~/Downloads/gnupg-2.4.0/bin/gpg")
+
+   ;; No clue if I need this. But I kept it.
+   (setq plstore-cache-passphrase-for-symmetric-encryption t)
+   ;; Same thing here. This is more or less
+   ;; lazy copy pasting without reading the descriptions
+   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
+   (use-package org-gcal
+      ;; This is just to make sure I use the correct version.
+      ;; Most likely not needed.
+     :elpaca '(org-gcal :host github :repo "kidd/org-gcal.el")
+     :init
+     (setq org-gcal-client-id "CLIENT_ID_HERE"
+           org-gcal-client-secret "CLIENT_SECRET_HERE")
+           ...
+    )
 
 (setq org-indirect-buffer-display 'current-window)
 (defun transpose-windows ()

@@ -1,16 +1,3 @@
-play sms-alert-1-daniel_simon.wav
-git
-git diff --name-only
-git commit
-git add
-git gc --auto
-git reset --hard
-git fsck
-sudo simple-scan
-cd .. 
-cd Baruch
-cd FSA 2023
-cd "FSA 2023"
 sudo simple-scan
 ls
 sudo simple-scan
@@ -126,3 +113,16 @@ cd /home/betsy/.thunderbird/mgzibeze.default-release/ImapMail/127.0.0.1/
 mu index
 mu find hello
 sudo simple-scan
+downgrade gnupg
+sudo downgrade gnupg
+DOWNGRADE_FROM_ALA=1
+grep DOWNGRADE_FROM_ALA
+printenv DOWNGRADE_FROM_ALA
+printenv HOME
+DOWNGRADE_FROM_ALA=1
+export DOWNGRADE_FROM_ALA
+printenv DOWNGRADE_FROM_ALA=1
+bash
+printenv
+DOWNGRADE_FROM_ALA='1'
+EXAMPLE="this is an example"
