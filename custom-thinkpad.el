@@ -11,7 +11,7 @@
      (python-mode . bibtex-completion-format-citation-sphinxcontrib-bibtex)
      (rst-mode . bibtex-completion-format-citation-sphinxcontrib-bibtex)
      (default . bibtex-completion-format-citation-default)))
- '(bmkp-last-as-first-bookmark-file "/home/betsy/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(custom-safe-themes
    '("5a611788d47c1deec31494eb2bb864fde402b32b139fe461312589a9f28835db" default))
  '(default-input-method "korean-hangul")
