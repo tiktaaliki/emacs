@@ -1,32 +1,4 @@
 sudo simple-scan
-ls
-sudo simple-scan
-cd Downloads
-cd .. 
-cd..
-cd ..
-cd Downloads
-youtube-dl -o https://www.youtube.com/watch?v=TulTyPZFLdc
-youtube-dl -o "https://www.youtube.com/watch?v=TulTyPZFLdc"
-youtube-dl -o URL "https://www.youtube.com/watch?v=TulTyPZFLdc"
-youtube-dl U
-youtube-dl update
-youtube-dl -U
-youtube-dl -v URL "https://www.youtube.com/watch?v=TulTyPZFLdc"
-youtube-dl -v URL https://www.youtube.com/watch?v=TulTyPZFLdc
-youtube-dl -v https://www.youtube.com/watch?v=TulTyPZFLdc
-yt-dlp -v https://www.youtube.com/watch?v=TulTyPZFLdc
-emacs -Q
-sudo xkill
-emacs -Q
-emacs -q
-sudo xkill
-sudo xkill
-sudo xkill
-sudo xkill
-sudo killall firefox
-cd /run/media/betsy/storage/Sync/Records/Taxes/
-sudo simple-scan
 sudo simple-scan
 cd ..
 ls
@@ -126,3 +98,31 @@ bash
 printenv
 DOWNGRADE_FROM_ALA='1'
 EXAMPLE="this is an example"
+sudo killall firefox
+xrandr --output DP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-2 --off --output HDMI-1 --off --output DP-3 --primary --scale .75 --pos 1920x0 --rotate normal --output HDMI-2 --off
+emacs -Q
+sudo simple-scan
+cd ..
+sudo simple-scan
+emacs -Q
+sudo simple-scan
+sudo simple-scan
+sudo killall firefox
+sudo killall firefox
+sudo org.signal.Signal
+sudo xkill
+sudo xkill
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo killall firefox
+sudo killall firefox
+fuser -fv /dev/snd/* /dev/dsp*
+sudo fuser -fv /dev/snd/* /dev/dsp*
+aplay -D default test.wav
+aplay -D default /home/betsy/Dropbox/emacs/.emacs.d/tick.wav
+aplay -D default /home/betsy/Dropbox/emacs/.emacs.d/tick.wav 
+sudo simple-scan
+sudo simple-scan
+sudo simple-scan
+sudo killall firefox

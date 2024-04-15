@@ -6,6 +6,7 @@
  ;; If there is more than one, they won't work right.
  '(bold ((t (:foreground "#faaf08" :weight bold))))
  '(custom-link ((t (:inherit link :foreground "#f9d2ef"))))
+ '(ereader-link ((t (:inherit link :family "KoHO"))))
  '(italic ((t (:foreground "yellow green" :slant italic))))
  '(mode-line ((t (:inherit modus-themes-ui-variable-pitch :background "#323232" :foreground "#f4f4f4" :box (:line-width (1 . 1) :color "#a8a8a8") :height 0.8))))
  '(org-agenda-calendar-event ((t (:inherit shadow :foreground "dark turquoise" :underline nil))))
@@ -30,7 +31,7 @@
  '(org-level-8 ((t (:inherit org-level-7 :extend nil :foreground "#e05858"))))
  '(org-link ((t (:inherit link :foreground "peru" :weight normal :family "monofur"))))
  '(org-list-dt ((t nil)))
- '(org-property-value ((t (:foreground "#83898d" :height 0.8))) t)
+ '(org-property-value ((t (:foreground "#83898d" :height 0.8))))
  '(org-quote ((t (:extend t :background "gray13" :foreground "#c6eaff"))))
  '(org-scheduled ((t (:foreground "khaki"))))
  '(org-scheduled-previously ((t (:inherit org-scheduled :foreground "deep sky blue"))))
@@ -40,6 +41,7 @@
  '(org-superstar-item ((t (:inherit default :foreground "turquoise"))))
  '(org-todo ((t (:foreground "#ffc61a" :underline t :weight normal))))
  '(org-warning ((t (:foreground "green" :weight normal))))
+ '(shr-text ((t (:inherit variable-pitch-text :height 1.5 :family "KoHo"))))
  '(underline ((t (:foreground "dodger blue" :underline t))))
  '(variable-pitch ((t (:family "Koho")))))
 (custom-set-variables
@@ -111,9 +113,10 @@
      (clock-out . "")))
  '(org-pomodoro-ticking-sound-states '(:pomodoro))
  '(org-roam-directory "/home/betsy/Dropbox/Zettelkasten/Zettels")
+ '(org-timeblock-span 1)
  '(org-use-fast-tag-selection t)
  '(package-selected-packages
-   '(org-notifications org-transclusion mpv emms restart-emacs marginalia modus-vivendi modus-themes org-projectile org-projectile-helm citeproc-org ov org-ref-prettify mu4e org helm async helm-bibtex org-gcal transient pomm yas yasnippet-snippets org-time-budgets org-timeline org-pomodoro zoom yankpad xml+ workgroups2 worf which-key wc-mode wc-goal-mode w3m visual-fill-column visible-mark uptimes unkillable-scratch unicode-fonts undo-tree ssh-agency spray speed-type smartparens scrollkeeper rainbow-delimiters quelpa-use-package powerthesaurus pdf-view-restore pdf-continuous-scroll-mode pandoc-mode ox-tufte ox-pandoc ox-clip org-wild-notifier org-web-tools org-wc org-superstar org-sticky-header org-ref org-recent-headings org-plus-contrib org-pdfview org-noter-pdftools org-msg org-mru-clock org-edna org-drill org-download org-clock-today org-clock-split org-clock-convenience org-cliplink org-chef org-bookmark-heading org-auto-tangle org-analyzer org-alert org-ac openwith on-screen olivetti nov mw-thesaurus multiple-cursors mu4e-conversation most-used-words mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane korean-holidays keychain-environment interleave image+ html2org hl-anything highlight helm-unicode helm-swoop helm-projectile helm-org-rifle helm-org-ql helm-flyspell helm-chronos helm-bufler helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update frog-jump-buffer flyspell-correct-helm expand-region doom-themes dired-toggle-sudo diminish deft define-word csv-mode crux counsel copyit-pandoc company-org-roam company-bibtex company-auctex clean-buffers centered-cursor-mode calibredb calfw-org calfw-cal calfw auto-complete-auctex anki-editor anki-connect amread-mode all-the-icons aggressive-indent activity-watch-mode ace-window ace-jump-mode ace-jump-helm-line ace-jump-buffer ac-helm 2048-game))
+   '(sound-wav calfw-gcal org-timeblock seq org-notifications org-transclusion mpv emms restart-emacs marginalia modus-vivendi modus-themes org-projectile org-projectile-helm citeproc-org ov org-ref-prettify mu4e org helm async helm-bibtex org-gcal transient pomm yas yasnippet-snippets org-time-budgets org-timeline org-pomodoro zoom yankpad xml+ workgroups2 worf which-key wc-mode wc-goal-mode w3m visual-fill-column visible-mark uptimes unkillable-scratch unicode-fonts undo-tree ssh-agency spray speed-type smartparens scrollkeeper rainbow-delimiters quelpa-use-package powerthesaurus pdf-view-restore pdf-continuous-scroll-mode pandoc-mode ox-tufte ox-pandoc ox-clip org-wild-notifier org-web-tools org-wc org-superstar org-sticky-header org-ref org-recent-headings org-plus-contrib org-pdfview org-noter-pdftools org-msg org-mru-clock org-edna org-drill org-download org-clock-today org-clock-split org-clock-convenience org-cliplink org-chef org-bookmark-heading org-auto-tangle org-analyzer org-alert org-ac openwith on-screen olivetti nov mw-thesaurus multiple-cursors mu4e-conversation most-used-words mixed-pitch markdown-preview-eww markdown-mode magit-popup magit ledger-mode latex-preview-pane korean-holidays keychain-environment interleave image+ html2org hl-anything highlight helm-unicode helm-swoop helm-projectile helm-org-rifle helm-org-ql helm-flyspell helm-chronos helm-bufler helm-bibtexkey gnuplot-mode gnuplot gnu-elpa-keyring-update frog-jump-buffer flyspell-correct-helm expand-region doom-themes dired-toggle-sudo diminish deft define-word csv-mode crux counsel copyit-pandoc company-org-roam company-bibtex company-auctex clean-buffers centered-cursor-mode calibredb calfw-org calfw-cal calfw auto-complete-auctex anki-editor anki-connect amread-mode all-the-icons aggressive-indent activity-watch-mode ace-window ace-jump-mode ace-jump-helm-line ace-jump-buffer ac-helm 2048-game))
  '(pdf-annot-default-annotation-properties
    '((t
       (label . "Betsy"))

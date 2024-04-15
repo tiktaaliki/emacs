@@ -32,22 +32,24 @@
      (refile . "Refiled on %t")
      (clock-out . "")))
  '(org-support-shift-select 'always)
+ '(org-timeblock-span 1)
  '(org-todo-keyword-faces
    '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "goldenrod")
      ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "magenta")
      ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#00BFFF")
      ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
  '(package-selected-packages
-   '(org-ref org-edna helm-bibtex helm-bibtexkey powershell sound-wav mpv visual-fill-column avy org-gcal centered-window zenburn-theme sudoku 2048-game yasnippet unicode-fonts org-superstar interleave aggressive-indent unkillable-scratch org-plus-contrib deft ace-jump-mode bufler helm-projectile))
+   '(ereader org-timeblock org-super-agenda pcache org-ref org-edna helm-bibtex helm-bibtexkey powershell sound-wav mpv visual-fill-column avy org-gcal centered-window zenburn-theme sudoku 2048-game yasnippet unicode-fonts org-superstar interleave aggressive-indent unkillable-scratch org-plus-contrib deft ace-jump-mode bufler helm-projectile))
  '(safe-local-variable-values '((org-reverse-note-order)))
- '(visual-fill-column-center-text t))
+ '(visual-fill-column-center-text t)
+ '(visual-fill-column-width 110))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(bold ((t (:foreground "gold" :weight bold))))
- '(italic ((t (:foreground "violet" :slant italic))))
+ '(italic ((t (:foreground "dark sea green" :slant italic))))
  '(org-agenda-calendar-event ((t (:inherit default :foreground "cornflower blue"))))
  '(org-agenda-current-time ((t (:inherit org-time-grid :foreground "deep pink"))))
  '(org-date ((t (:foreground "#ECBE7B" :underline t))))
@@ -55,7 +57,12 @@
  '(org-level-2 ((t (:inherit outline-2 :extend nil :weight normal))))
  '(org-level-3 ((t (:inherit outline-3 :extend nil :weight normal))))
  '(org-level-4 ((t (:inherit outline-4 :extend nil :weight normal))))
- '(org-link ((t (:inherit link :foreground "gray" :weight normal))))
- '(org-quote ((t (:inherit org-block :foreground "alice blue" :slant italic))))
- '(org-scheduled-today ((t (:foreground "misty rose"))))
+ '(org-link ((t (:inherit link :foreground "goldenrod" :weight normal))))
+ '(org-quote ((t (:inherit org-block :foreground "misty rose" :slant italic))))
+ '(org-timeblock-blue ((t (:extend t :background "#242679" :foreground "#8fcfff" :height 0.8 :family "Calibri"))))
+ '(org-timeblock-cyan ((t (:extend t :background "#004065" :foreground "#8eecf4" :height 0.8 :family "Calibri"))))
+ '(org-timeblock-green ((t (:extend t :background "#00422a" :foreground "#aceaac" :height 0.8))))
+ '(org-timeblock-magenta ((t (:extend t :background "#71206a" :foreground "#ffccff" :height 0.8 :family "Calibri"))))
+ '(org-timeblock-red ((t (:extend t :background "#77002a" :foreground "#ffcccc" :height 0.8))))
+ '(org-timeblock-yellow ((t (:extend t :background "#693200" :foreground "#fff29a" :height 0.8 :family "calibri"))))
  '(underline ((t (:foreground "firebrick1" :underline t)))))
