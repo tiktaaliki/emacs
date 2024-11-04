@@ -1,133 +1,60 @@
 #+auto_tangle: t
 
+[[file:configoct2024.org]]
 
+#+BEGIN_SRC emacs-lisp :tangle yes
+
+#+END_SRC
 * Minimum Usability
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-    (set-fringe-mode '(10 . 10))
-    (fset 'yes-or-no-p 'y-or-n-p)
-                                            ;  (setq confirm-kill-emacs (quote y-or-n-p))
-    (setq confirm-kill-emacs nil
-          visible-bell nil
-          inhibit-startup-screen t
-          org-support-shift-select t
-          ring-bell-function (quote ignore)
-          split-width-threshold 100
-          )
+      (set-fringe-mode '(10 . 10))
+      (fset 'yes-or-no-p 'y-or-n-p)
+      (setq confirm-kill-emacs nil
+            visible-bell nil
+            inhibit-startup-screen t
+            org-support-shift-select t
+            ring-bell-function (quote ignore)
+            split-width-threshold 100
+            )
+
+      (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+      (tool-bar-mode -1)
+      (menu-bar-mode -1)
+      (scroll-bar-mode -1)
+
+      (delete-selection-mode) ;allows to delete selected text by typing
+      (global-set-key (kbd "M-o") 'other-window)
+     (setq org-special-ctrl-a/e (quote (t . t)))
+
+    ;  (setq debug-on-error t)
 
 
-    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+       (use-package modus-themes)
+    ;  (modus-themes-load-themes)
+    ; (load-theme 'modus-vivendi t)
+  ;(load-theme 'modus-vivendi-tinted t) 
+  (load-theme 'modus-vivendi-deuteranopia t) 
+  ;   (load-theme 'modus-vivendi-tritanopia t)
 
-    (tool-bar-mode -1)
-    (menu-bar-mode -1)
-    (scroll-bar-mode -1)
 
-    (delete-selection-mode) ;allows to delete selected text by typing
-    (global-set-key (kbd "M-o") 'other-window)
 
-  ;  (setq debug-on-error t)
+     (setq org-startup-indented t
+           org-hide-emphasis-markers t
+           org-startup-folded t
+           org-ellipsis " »"
+           org-hide-leading-stars t)
+
+    (setq org-indirect-buffer-display 'current-window)
 #+END_SRC
 
 #+RESULTS:
-: other-window
+: current-window
 
 
-
-
-* UX
-** navigation
-   #+BEGIN_SRC emacs-lisp :tangle yes
-
-        (use-package helm
-          :config (helm-mode +1)
-          :bind (("M-x"   . helm-M-x)
-                 ([f3] . helm-buffers-list)       
-                 ("<Hangul> x" . helm-M-x)
-                 ([f9] . helm-occur )
-                 ))
-        (use-package projectile
-          :config
-          (projectile-mode +1))
-
-        (use-package helm-projectile
-          :bind    ([f5] . helm-projectile))
-
-        (use-package bufler
-          :custom
-          (bufler-column-name-width 70)
-          (bufler-filter-buffer-modes nil))
-
-        (setq org-special-ctrl-a/e (quote (t . t)))
-
-        (add-hook 'bufler-list-mode-hook
-                  (lambda ()
-                    (visual-line-mode -1)
-                    (toggle-truncate-lines 1)))
-
-        (use-package ace-jump-mode)
-     ;   (global-set-key (kbd "M-z") 'ace-jump-mode)
-        (global-unset-key (kbd "C-z"))
-        (global-set-key (kbd "C-z") 'ace-jump-helm-line)
-        (setq tab-bar-mode nil)
-
-     (use-package avy)
-     (global-set-key (kbd "M-z") 'avy-goto-char)
-
-                         #+END_SRC
-
-#+RESULTS:
-: avy-goto-char
-   
-(use-package good-scroll
-:config (good-scroll-mode +1)
-)
-
-
-
-** files
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
-  (use-package openwith
-    :defer t
-    :config (progn
-              (when (require 'openwith nil 'noerror)
-                (setq openwith-associations
-                      (list
-                                          ;                   (list (openwith-make-extension-regexp
-                                          ;                           '("mpg" "mpeg" "mp3" "mp4"
-                                          ;                           "avi" "wmv" "wav" "mov" "flv"
-                                          ;                          "ogm" "ogg" "mkv"))
-                                          ;                      "audacious"
-                                          ;                     '(file))
-                                          ;                    (list (openwith-make-extension-regexp
-                                          ;                          '("xbm" "pbm" "pgm" "ppm" "pnm"
-                                          ;                           "png" "bmp" "tif" "jpeg" "jpg"))
-                                          ;                       "gpicview"
-                                          ;                      '(file))
-                                          ;                       (list (openwith-make-extension-regexp
-                                          ;                             '("pdf"))
-                                          ;                           "zathura"
-                                          ;                          '(file))
-                       (list (openwith-make-extension-regexp
-                              '("doc" "docx" "ppt" "xls" "xlsx" "pptx"))
-                             "LibreOffice"
-                             '(file))
-
-
-                       ))
-                (openwith-mode 1)))
-    :ensure t)
-  
-(setq openwith-associations '(("\\.docx\\'" "com.wps.Office" (file))))
-
-
-#+END_SRC
-
-#+RESULTS:
-| \.docx\' | com.wps.Office | (file) |
-
-** deft
+* deft
 [2022-06-13 Mon] deft has seemed to lag. disabling it to see if that has any impact. 
 #+begin_src emacs-lisp :tangle yes
   (use-package deft
@@ -158,327 +85,146 @@
 #+RESULTS:
 | visual-line-mode |
 
-** functionality
-#+BEGIN_SRC emacs-lisp  :tangle yes
-  (use-package undo-tree)
-  (use-package s)
-  (use-package org
+* minibuffer
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;; The `vertico' package applies a vertical layout to the minibuffer.
+  ;; It also pops up the minibuffer eagerly so we can see the available
+  ;; options without further interactions.  This package is very fast
+  ;; and "just works", though it also is highly customisable in case we
+  ;; need to modify its behaviour.
+  ;;
+  ;; Further reading: https://protesilaos.com/emacs/dotemacs#h:cff33514-d3ac-4c16-a889-ea39d7346dc5
+  (use-package vertico
     :ensure t
-    :pin gnu)
-  (use-package unkillable-scratch
     :config
-    (unkillable-scratch 1))
+    (setq vertico-cycle t)
+    (setq vertico-resize nil)
+    (vertico-mode 1))
 
-
-  (use-package aggressive-indent
-    :custom (global-aggressive-indent-mode t)
-    )
-
-  ;;(straight-use-package '(org-plus-contrib :includes org))
-
-
-  (setq org-modules
-        (quote
-         (ol-bibtex ol-docview ol-eww org-habit org-id org-inlinetask org-protocol org-tempo ol-w3m org-annotate-file ol-bookmark org-checklist org-collector org-depend org-invoice org-notify org-registry)))
-
-
-  (defun kdm/html2org-clipboard ()
-    "Convert clipboard contents from HTML to Org and then paste (yank)."
-    (interactive)
-    (kill-new (shell-command-to-string "xclip -o -t text/html | pandoc -f html -t json | pandoc -f json -t org --wrap=none"
-                                       ))
-    (yank))
-
-
-
-  (use-package smartparens
+  ;; The `marginalia' package provides helpful annotations next to
+  ;; completion candidates in the minibuffer.  The information on
+  ;; display depends on the type of content.  If it is about files, it
+  ;; shows file permissions and the last modified date.  If it is a
+  ;; buffer, it shows the buffer's size, major mode, and the like.
+  ;;
+  ;; Further reading: https://protesilaos.com/emacs/dotemacs#h:bd3f7a1d-a53d-4d3e-860e-25c5b35d8e7e
+  (use-package marginalia
     :ensure t
-    :defer t
-    :init
-    (show-smartparens-global-mode 1))
-  (smartparens-global-mode 1)
-  (setq show-paren-style 'expression)
+    :config
+    (marginalia-mode 1))
 
-  (sp-local-pair 'org-mode "/" "/" :actions '(wrap))
-  (sp-local-pair 'org-mode "_" "_" :actions '(wrap))
-  (sp-local-pair 'org-mode "*" "*" :actions '(wrap))
-  (sp-local-pair 'org-mode "+" "+" :actions '(wrap))
-  (sp-local-pair 'org-mode "~" "~" :actions '(wrap))
-  (sp-local-pair 'org-mode "=" "=" :actions '(wrap))
-  (sp-local-pair 'org-mode "-" "-" :actions '(wrap))
-  (sp-pair "'" nil :actions :rem)
+  ;; The `orderless' package lets the minibuffer use an out-of-order
+  ;; pattern matching algorithm.  It matches space-separated words or
+  ;; regular expressions in any order.  In its simplest form, something
+  ;; like "ins pac" matches `package-menu-mark-install' as well as
+  ;; `package-install'.  This is a powerful tool because we no longer
+  ;; need to remember exactly how something is named.
+  ;;
+  ;; Note that Emacs has lots of "completion styles" (pattern matching
+  ;; algorithms), but let us keep things simple.
+  ;;
+  ;; Further reading: https://protesilaos.com/emacs/dotemacs#h:7cc77fd0-8f98-4fc0-80be-48a758fcb6e2
+  (use-package orderless
+    :ensure t
+    :config
+    (setq completion-styles '(orderless basic)))
 
-#+END_SRC
+  ;; The `consult' package provides lots of commands that are enhanced
+  ;; variants of basic, built-in functionality.  One of the headline
+  ;; features of `consult' is its preview facility, where it shows in
+  ;; another Emacs window the context of what is currently matched in
+  ;; the minibuffer.  Here I define key bindings for some commands you
+  ;; may find useful.  The mnemonic for their prefix is "alternative
+  ;; search" (as opposed to the basic C-s or C-r keys).
+  ;;
+  ;; Further reading: https://protesilaos.com/emacs/dotemacs#h:22e97b4c-d88d-4deb-9ab3-f80631f9ff1d
+  (use-package consult
+    :ensure t
+    :bind (;; A recursive grep
+           ("M-s M-g" . consult-grep)
+           ;; Search for files names recursively
+           ("M-s M-f" . consult-find)
+           ;; Search through the outline (headings) of the file
+           ("M-s M-o" . consult-outline)
+           ;; Search the current buffer
+           ("M-s M-l" . consult-line)
+           ;; Switch to another buffer, or bookmarked file, or recently
+           ;; opened file.
+  ;         ("M-s M-b" . consult-buffer)))
+  	 ([f3] . consult-buffer)))
+  ;; The `embark' package lets you target the thing or context at point
+  ;; and select an action to perform on it.  Use the `embark-act'
+  ;; command while over something to find relevant commands.
+  ;;
+  ;; When inside the minibuffer, `embark' can collect/export the
+  ;; contents to a fully fledged Emacs buffer.  The `embark-collect'
+  ;; command retains the original behaviour of the minibuffer, meaning
+  ;; that if you navigate over the candidate at hit RET, it will do what
+  ;; the minibuffer would have done.  In contrast, the `embark-export'
+  ;; command reads the metadata to figure out what category this is and
+  ;; places them in a buffer whose major mode is specialised for that
+  ;; type of content.  For example, when we are completing against
+  ;; files, the export will take us to a `dired-mode' buffer; when we
+  ;; preview the results of a grep, the export will put us in a
+  ;; `grep-mode' buffer.
+  ;;
+  ;; Further reading: https://protesilaos.com/emacs/dotemacs#h:61863da4-8739-42ae-a30f-6e9d686e1995
+  (use-package embark
+    :ensure t
+    :bind (("C-." . embark-act)
+           :map minibuffer-local-map
+           ("C-c C-c" . embark-collect)
+           ("C-c C-e" . embark-export)))
 
-#+RESULTS:
-| org-mode | (:open - :close - :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open = :close = :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open ~ :close ~ :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open + :close + :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open * :close * :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add))                                                                  | (:open _ :close _ :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open / :close / :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) |                                                             |                                                             |
-| t        | (:open \\( :close \\) :actions (insert wrap autoskip navigate))                                           | (:open \{ :close \} :actions (insert wrap autoskip navigate))                                             | (:open \( :close \) :actions (insert wrap autoskip navigate))                                             | (:open \" :close \" :actions (insert wrap autoskip navigate))                                             | (:open " :close " :actions (insert wrap autoskip navigate escape) :unless (sp-in-string-quotes-p) :post-handlers (sp-escape-wrapped-region sp-escape-quotes-after-insert)) | (:open ( :close ) :actions (insert wrap autoskip navigate))                                               | (:open [ :close ] :actions (insert wrap autoskip navigate))                                               | (:open { :close } :actions (insert wrap autoskip navigate)) | (:open ` :close ` :actions (insert wrap autoskip navigate)) |
-https://emacs.stackexchange.com/questions/12121/org-mode-parsing-rich-html-directly-when-pasting
-https://ivanaf.com/emacs_drag-drop_pdfs_paste_html_custom_templates.html
-(use-package smartparens 
-:defer t 
-:config
-(setq sp-show-pair-from-inside nil)
-(require 'smartparens-config)
-:diminish smartparens-mode
-:custom
-(smartparens-global-mode t)
-(global-highlight-parentheses-mode 1)
-)
-(sp-pair "'" nil :actions :rem)
-(sp-pair "=" nil :actions :rem)
+  ;; The `embark-consult' package is glue code to tie together `embark'
+  ;; and `consult'.
+  (use-package embark-consult
+    :ensure t)
 
+  ;; The `wgrep' packages lets us edit the results of a grep search
+  ;; while inside a `grep-mode' buffer.  All we need is to toggle the
+  ;; editable mode, make the changes, and then type C-c C-c to confirm
+  ;; or C-c C-k to abort.
+  ;;
+  ;; Further reading: https://protesilaos.com/emacs/dotemacs#h:9a3581df-ab18-4266-815e-2edd7f7e4852
+  (use-package wgrep
+    :ensure t
+    :bind ( :map grep-mode-map
+            ("e" . wgrep-change-to-wgrep-mode)
+            ("C-x C-q" . wgrep-change-to-wgrep-mode)
+            ("C-c C-c" . wgrep-finish-edit)))
 
-(sp-local-pair 'org-mode "/" "/" :actions '(wrap))
-(sp-local-pair 'org-mode "_" "_" :actions '(wrap))
-(sp-local-pair 'org-mode "*" "*" :actions '(wrap))
-(sp-local-pair 'org-mode "+" "+" :actions '(wrap))
-(sp-local-pair 'org-mode "~" "~" :actions '(wrap))
-(sp-local-pair 'org-mode "=" "=" :actions '(wrap))
-(sp-local-pair 'org-mode "-" "-" :actions '(wrap))
+  ;; The built-in `savehist-mode' saves minibuffer histories.  Vertico
+  ;; can then use that information to put recently selected options at
+  ;; the top.
+  ;;
+  ;; Further reading: https://protesilaos.com/emacs/dotemacs#h:25765797-27a5-431e-8aa4-cc890a6a913a
+  (savehist-mode 1)
 
-  
-** calendar
-:LOGBOOK:
-CLOCK: [2023-06-20 Tue 11:57]--[2023-06-20 Tue 11:58] =>  0:01
-:END:
+  ;; The built-in `recentf-mode' keeps track of recently visited files.
+  ;; You can then access those through the `consult-buffer' interface or
+  ;; with `recentf-open'/`recentf-open-files'.
+  ;;
+  ;; I do not use this facility, because the files I care about are
+  ;; either in projects or are bookmarked.
+  (recentf-mode 1)
 
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-        (use-package calfw)
-        (use-package calfw-org)
-                                                ;   (use-package calfw-gcal)
-        (use-package calfw-cal) 
-        (setq package-check-signature nil)
-                                                ;  (setq org-gcal-down-days '30)
-                                                ;for http400 error, open scratch and evaluate (org-gcal-request-token) using C-x C-e
-
-
-        (defun my-open-calendar ()
-          (interactive)
-          (cfw:open-calendar-buffer
-           :contents-sources
-           (list
-            (cfw:org-create-source "pale green")  ; orgmode source
-                                                ;    (cfw:cal-create-source "light goldenrod") ; diary source
-            ))) 
-        (add-hook 'cfw:calendar-mode-hook (lambda () (visual-fill-column-mode 0)))
-                                                ;   (setq calendar-daylight-savings-starts '(3 11 year))
-                                                ;  (setq calendar-daylight-savings-ends: '(11 4 year))
-        (setq calendar-week-start-day 1)
-
-        (setq diary-file "~/Dropbox/Zettelkasten/diary")
-
-
-
-        (use-package org-gcal)
-        (setq org-gcal-client-id "217294084435-7e5idjaji94bamhu6n5mnchamfl5it6r.apps.googleusercontent.com"
-              org-gcal-client-secret "OlIZFIll-Md3n6NxVkpSWr-3"
-              org-gcal-fetch-file-alist '(
-                                          ("betsy.yoon@gmail.com" . "~/Dropbox/Zettelkasten/events.org" )
-                                  ("yoonbetsy@protonmail.com" . "~/Dropbox/Zettelkasten/events.org")        
-            ("ua08veaq1ei5a9li8s2tiiecbg@group.calendar.google.com" . "~/Dropbox/Zettelkasten/time.org")
-            ))
-    (org-gcal-reload-client-id-secret)
-        (setq org-gcal-recurring-events-mode 'top-level)
-
-    (setq plstore-cache-passphrase-for-symmetric-encryption t)
-
-    (require 'plstore)
- ; (add-to-list 'plstore-encrypt-to '("A922544B1884A3CC"))
-
-     (require 'epa-file)
-    ;; And then this setting probably is also the winner.
-    (setq epg-pinentry-mode 'loopback)
-    (epa-file-enable)
-    
-    ;; I don't know if this is necessary. I removed it again.
-    ;; Essentially it is the path to the downgrade package I used.
-  ;  (setq epg-gpg-program "~/Downloads/gnupg-2.4.0/bin/gpg")
-
-    ;; No clue if I need this. But I kept it.
-    (setq plstore-cache-passphrase-for-symmetric-encryption t)
-    ;; Same thing here. This is more or less
-    ;; lazy copy pasting without reading the descriptions
-    (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-
-    (use-package org-gcal
-       ;; This is just to make sure I use the correct version.
-       ;; Most likely not needed.
-      :elpaca '(org-gcal :host github :repo "kidd/org-gcal.el")
-      :init
-      (setq org-gcal-client-id "CLIENT_ID_HERE"
-            org-gcal-client-secret "CLIENT_SECRET_HERE")
-            ...
-     )
-
-#+end_src
-
-#+RESULTS:
-
-#+RESULTS:
-: #s(deferred #[257 "\303!>\204\304\305\306D\"\210\211\307H\303!>\204!\304\305\306D\"\210\310H\303!>\2043\304\305\306D\"\210\311H\312=\203I\313\314\315\"\210\316\317#\202p\211\312=\204b\313\320\321!P\322!\"\210\316\323#\202p\203m\324
-: \"\210\325\312!\207" [cl-struct-request-response-tags org-gcal-token-plist org-gcal-token-file type-of signal wrong-type-argument request-response 3 1 4 nil org-gcal--notify "Got Error" "Could not contact remote service. Please check your network connectivity." error "Network connectivity issue %s: %s" "Status code: " number-to-string pp-to-string "Got error %S: %S" org-gcal--save-sexp deferred:succeed] 8 "
-: 
-: (fn RESPONSE)"] deferred:default-errorback deferred:default-cancel nil nil nil)
-
-** windows
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (setq org-indirect-buffer-display 'current-window)
-  (defun transpose-windows ()
-    (interactive)
-    (let ((this-buffer (window-buffer (selected-window)))
-          (other-buffer (prog2
-                            (other-window +1)
-                            (window-buffer (selected-window))
-                          (other-window -1))))
-      (switch-to-buffer other-buffer)
-      (switch-to-buffer-other-window this-buffer)
-      (other-window -1)))
-  
-  (setq pop-up-windows nil)
-  (setq switch-to-buffer-obey-display-actions t)
-  
 #+END_SRC
 
 #+RESULTS:
 : t
 
 
-(use-package good-scroll
-:config (good-scroll-mode 1)
-)
 
-** autosave/backup
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package magit
-    :init (progn
-            (setq magit-repository-directories '("~/Dropbox/" ))))
-  (setq global-auto-revert-mode t
-        auto-save-interval 5)
-  (auto-save-visited-mode 1)
-  
-  (add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
-
-  (setq vc-follow-symlinks t)
+* projectile
+   #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package projectile
+          :config
+          (projectile-mode +1))
 #+END_SRC
 
-#+RESULTS:
-: t
 
-** org-protocol
-#+BEGIN_SRC emacs-lisp :tangle yes
-  
-  (server-start)
-  (require 'org-protocol)
-  (require 'org-protocol-capture-html)
-  (setq org-protocol-default-template-key "w")
-  
-  
-#+END_SRC
-
-#+RESULTS:
-: w
-** org-keybindings
-#+BEGIN_SRC emacs-lisp :tangle yes
-        (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
-    (global-set-key (kbd "C-c <f2>") 'org-clock-out)
-;    (global-unset-key (kbd "C-v"))
-
-    (global-set-key (kbd "<f1>") 'org-capture)
-    (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
-    (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
-    (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
-    (define-key org-mode-map (kbd "C-.") 'org-todo)
-    (bind-keys
-     ("C-c r" . org-clock-report)
-     ("C-c l" . org-store-link)
-     ("C-c C-l" . org-insert-link)
-     ("C-c b" . list-bookmarks)
-     ("C-a" . org-beginning-of-line) 
-     ("C-e" . end-of-line) 
-     ("C-k" . org-kill-line)
-     ("M->" . end-of-buffer)
-     ("C->" . end-of-buffer) ; necessary b/c for some reason emacs in kde plasma doesn't seem to recognize M-< and only see is it as M-.
-     ("C-<" . beginning-of-buffer)    ; necessary b/c for some reason emacs in kde plasma doesn't seem to recognize M-< and only see is it as M-.
-     ("C-."   . org-todo)
-     ("C-x /" . shrink-window-horizontally)
-     ("C-x ." . org-archive-subtree-default)
-     ("C-c 5" . yas-insert-snippet)
-  
-     ([f1] . org-capture)
-     ([f2] . org-clock-in)
-     ;;f3 is helm
-     ([f4] . org-refile)
-     ;;f5 is projectile
-     ([f6] . helm-bibtex-with-local-bibliography)
-     ([f7] . org-agenda)
-     ;;f8 is deft
-                                            ; ([f10] . org-tree-to-indirect-buffer)
-     ([f11] . org-id-goto)
-     ([f12] . bury-buffer)     )
-
-
-    (global-set-key (kbd "<f10>") (lambda ()
-                                    (interactive)
-                                    (let ((current-prefix-arg '(4)))
-                                      (call-interactively #'org-tree-to-indirect-buffer))))
-
-
-#+END_SRC
-
-#+RESULTS:
-| lambda | nil | (interactive) | (let ((current-prefix-arg '(4))) (call-interactively #'org-tree-to-indirect-buffer)) |
-
-#+BEGIN_SRC emacs-lisp :tangle yes :results none
-  
-  
-  (define-key key-translation-map (kbd "C-c <up>") (kbd "↑"))
-  (define-key key-translation-map (kbd "C-c <down>") (kbd "↓"))
-  (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
-  (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
-  (define-key key-translation-map (kbd "C-c m") (kbd "—"))
-  (define-key key-translation-map (kbd "C-_") (kbd "–"))
-  (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
-  (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
-#+END_SRC
-
-#+RESULTS:
-: [8756]
-** org hydra
-#+begin_src emacs-lisp :tangle yes
-  
-  (defhydra hydra-org (:color amaranth :columns 3)
-    "Org Mode Movements"
-    ("n" outline-next-visible-heading "next heading")
-    ("p" outline-previous-visible-heading "prev heading")
-    ("N" org-forward-heading-same-level "next heading at same level")
-    ("P" org-backward-heading-same-level "prev heading at same level")
-    ("u" outline-up-heading "up heading")
-    ("k" kill-region "kill region")
-    ("y" yank "paste")
-    ("l" helm-show-kill-ring "list" :color blue)  
-    ("r" org-refile "refile")
-    ("t" org-todo "todo")
-    ("g" org-set-tags-command "tags")
-    ("s" show-subtree "expand subtree")
-    ("h" hide-subtree "collapse subtree")
-    ("a" org-archive-subtree "archive")
-    ("G" org-goto "goto" :exit t)
-    ("q" nil "quit" :color blue)
-    )
-  
-  
-  
-  
-#+end_src
-
-#+RESULTS:
-: hydra-org/body
-
-
-** scratch buffer
+* scratch
 #+BEGIN_SRC emacs-lisp  :tangle yes
   ;; Set the default mode of the scratch buffer to Org
   (setq initial-major-mode 'org-mode)
@@ -490,314 +236,95 @@ CLOCK: [2023-06-20 Tue 11:57]--[2023-06-20 Tue 11:58] =>  0:01
   # then enter the text in that file's own buffer.
    
   ")
-#+END_SRC
 
-#+RESULTS:
-: # This buffer is for notes you don't want to save. You can use
-: # org-mode markup (and all Org's goodness) to organise the notes.
-: # If you want to create a file, visit that file with C-x C-f,
-: # then enter the text in that file's own buffer.
-:  
-
-
-
-
-* UI
-("◉" "❤" "☆""♢" "★ ""⭆" )
-"⁕"
-"⁍" 
-"❤"
- "☆"
-"★"  "✶" "❢"
- "¶"  "♧" 
-#+begin_src emacs-lisp :tangle yes
-
-    (use-package org-superstar
-      :config
-      (setq org-superstar-headline-bullets-list '("◉" "›" "※" "⌘"  "♡"  "♧" "⟳" "★ ")
-            org-superstar-item-bullet-alist (quote ((42  . 33) (43 . 62) (45 . 45)))
-            )
-      (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
-
-#+end_src
-
-#+RESULTS:
-: t
-
-
-#+BEGIN_SRC emacs-lisp  :tangle yes
- ; (use-package emojify
-  ;  :hook (after-init . global-emojify-mode))
-
-    (setq org-startup-indented t
-          org-hide-emphasis-markers t
-          org-startup-folded t
-          org-ellipsis " »"
-          org-hide-leading-stars t)
-   
-    (setq org-startup-shrink-all-tables t)
-
-  ;strikethrough org-emphasis-alist
-  (require 'cl)   ; for delete*
-(setq org-emphasis-alist
-      (cons '("+" '(:strike-through t :foreground "gray"))
-            (delete* "+" org-emphasis-alist :key 'car :test 'equal)))
+   (use-package unkillable-scratch
+    :config
+    (unkillable-scratch 1))
 
 #+END_SRC
 
 
-#+RESULTS:
-
-** mode line format
-:LOGBOOK:
-CLOCK: [2021-06-08 Tue 13:51]--[2021-06-08 Tue 14:06] =>  0:15
-:END:
-#+begin_src emacs-lisp :tangle yes
-  (setq-default mode-line-format '("%e"  mode-line-front-space
-                                   mode-line-mule-info
-                                   mode-line-modified
-                                   mode-line-misc-info 
-                                   mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
-                                   (vc-mode vc-mode)
-                                   "  " mode-line-modes  mode-line-end-spaces)
-                )
-  (display-time-mode 1)
-#+end_src
-
-#+RESULTS:
-: t
-
-** font encoding
-:LOGBOOK:
-CLOCK: [2021-10-18 Mon 11:25]--[2021-10-18 Mon 11:25] =>  0:00
-:END:
-#+begin_src emacs-lisp :tangle yes
-    
-  (use-package unicode-fonts)
-(unicode-fonts-setup)  
-#+end_src
-
-#+RESULTS:
-
-
-#+BEGIN_SRC emacs-lisp  :tangle yes
-
-  
-    (defvar symbola-font (if (eq system-type 'gnu/linux)
-                             (font-spec :name "Symbola" :size 14)
-                           "Symbola"))
-    (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                      '("NanumBarunpen" . "unicode-bmp" ))
-    (set-fontset-font "fontset-default" '(#xe0bc . #xf66e) 
-                      '("Nanumbarunpen" . "unicode-bmp"))
-  
-    (set-fontset-font "fontset-default" '(#x2000 . #x206F)
-                      '("Symbola" . "unicode-bmp" ))
-                                            ;
-    (set-fontset-font "fontset-default" '(#x2190 . #x21FF)
-                      '("Symbola" . "unicode-bmp" ))
-    (set-fontset-font "fontset-default" '(#x2B00 . #x2BFF)
-                      '("Symbola" . "unicode-bmp" ))
-  
-    (set-fontset-font "fontset-default" '(#x2200 . #x22FF)
-                      '("Symbola" . "unicode-bmp" ))
-  
-    (set-fontset-font "fontset-default" '(#x25A0 . #x25FF)
-                      '("Symbola" . "unicode-bmp" ))
-  
-    (set-fontset-font "fontset-default" '(#x2600 . #x26FF)
-                      '("Symbola" . "unicode-bmp" ))
-    (set-fontset-font "fontset-default" '(#x2700 . #x27BF)
-                      '("Symbola" . "unicode-bmp" ))
-  
-    (set-fontset-font "fontset-default" '(#x1f800 . #x1f8ff)
-                      '("Symbola" . "unicode-bmp" ))
-  
-    (set-fontset-font "fontset-default" '(#x3400 . #x4dbf)
-                      '("NanumBarunpen" . "unicode-bmp" ))
-    (set-fontset-font "fontset-default" '(#x20000 . #x2EBEF)
-                      '("NanumBarunpen" . "unicode-bmp" ))  
-  
-  
-                                            ;https://www.reddit.com/r/emacs/comments/8tz1r0/how_to_set_font_according_to_languages_that_i/e1bjce6?utm_source=share&utm_medium=web2x&context=3
-    (when (fboundp #'set-fontset-font)
-      (set-fontset-font t 'korean-ksc5601	
-                        ;; Noto Sans CJK: https://www.google.com/get/noto/help/cjk/
-                        (font-spec :family "Nanum Gothic Coding")))
-    (dolist (item '(("Nanum Gothic Coding" . 1.0)))
-      (add-to-list 'face-font-rescale-alist item))
-  
-    (setq use-default-font-for-symbols nil)
-  
-    (prefer-coding-system 'utf-8)
-  (set-default-coding-systems 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (set-selection-coding-system 'utf-8)
-  (set-file-name-coding-system 'utf-8)
-  (set-clipboard-coding-system 'utf-8)
-  (set-buffer-file-coding-system 'utf-8) 
-  
-#+END_SRC  
-
-#+RESULTS:
-
-** org-src
-#+BEGIN_SRC emacs-lisp  :tangle yes
-  (setq org-src-fontify-natively t
-        org-src-tab-acts-natively t)
-  
-  (setq org-fontify-quote-and-verse-blocks t)
-#+END_SRC
-
-#+RESULTS:
-: t
-
-** accessibility
+* org capture
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package hydra)
-  (defhydra hydra-zoom (:color red)  "zoom"
-    ("=" text-scale-increase "in")
-    ("-" text-scale-decrease "out")
-    ("0" (text-scale-adjust 0) "reset")
-    ("o" (other-window) "other window")
-    ("q" nil "quit" :color blue))
-  
-  (global-set-key (kbd "C-=") 'hydra-zoom/body)
-  (use-package visual-fill-column)
-  (setq visual-fill-column-center-text t)
+
+    (setq org-capture-templates
+          '(
+            ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil)
+
+            ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/inbox.org" ) "** %^{EVENT}\n%^t\n%a\n%?")
+
+            ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
+            ("f" "Anki Flashcards")
+            ("fb" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic \n:ANKI_DECK: 위저드\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
+
+            ("fc" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
+
+            ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t ) 
+  ;removed "scheduled" from todo entries
+       ;added it back in [2022-07-09 Sat]
+            ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \nSCHEDULED: %t \n%a\n" :prepend nil)
+("r" "research consultation" entry (file+headline "~/Dropbox/Zettelkasten/baruch.org" "Consultations") "*** TODO \n:PROPERTIES:\n:PROFESSOR:\n:COURSE_NUMBER:\n:COURSE_TITLE:\n:END:\n
+- [ ] email student\n- [ ] send calendar invite\n- [ ] review materials\n- [ ] prep consult\n- [ ] report consult \n\n %?\n**** template \n\nYour requested research consultation
+
+Dear
+\n\n
+Thanks for reaching out to the library to request a consultation!
+\n\n
+Please send me your syllabus and assignment description (if not included in the syllabus).
+\n\n
+Please also let me know if you've done any research on this yet, and if so, what databases you looked at, what you found, and what you'd like to find during our session. If you haven't done any research yet, that's fine! I just want to make sure I don't cover anything you've already done.
+\n\n
+Would ____ work for you to meet? If yes, I will send a calendar invite with the zoom link. If not, please propose a few alternative times.
+\n\n
+Please note that until a calendar invite is sent, this appointment is not confirmed.
+\n\n
+Talk soon!" :clock-in t :prepend t)
+              ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
+             "* %a \nSCHEDULED: %t %?\n%:initial" )
+            ("x" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
+             "* TODO %? \nSCHEDULED: %t\n%a\n\n%:initial" )
+            ("p" "org-protocol" table-line (id "pens")
+             "|%^{Pen}|%A|%^{Price}|%U|" )
+
+            ("y" "org-protocol" item (id "resources")
+             "[ ] %a %:initial" )
+
+            ))
+
+
+
 #+END_SRC
 
-#+RESULTS:
-: t
+
+** org-todo
+#+begin_src emacs-lisp :tangle yes :results none
+  (setq org-enforce-todo-dependencies t
+        org-clock-out-when-done t
+        )
+
+  (setq org-log-into-drawer t)
+
+  (setq org-todo-keywords
+        (quote
+         ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "|" "DONE(d)"  "x(c)" )
+          (type    "HABIT(h)" "PROJ(p)"  "WAIT(w)" "|" "DONE(d)")     )))
+
+  (setq org-todo-keyword-faces
+        '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
+                                          ;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
+          ("TODO" :weight regular :underline nil :inherit org-todo )
+          ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
+          ("IN-PROG" :weight bold :underline nil :inherit org-todo :foreground "#c9e467")
+           ("HABIT" :weight bold :underline nil :inherit org-todo :foreground "forestgreen")
+          ("PROJ" :foreground "magenta")
+          ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
 
 
-
-
-* editing
-:LOGBOOK:
-CLOCK: [2021-09-02 Thu 18:05]--[2021-09-02 Thu 18:05] =>  0:00
-:END:
-#+begin_src emacs-lisp :tangle yes
-  (use-package yasnippet)
-
-     (define-key yas-minor-mode-map [backtab]    nil)
-  
-    ;; Strangely, just redefining one of the variations below won't work.
-    ;; All rebinds seem to be needed.
-    (define-key yas-minor-mode-map [(tab)]        nil)
-    (define-key yas-minor-mode-map (kbd "TAB")    nil)
-    (define-key yas-minor-mode-map (kbd "<tab>")  nil)
-
-  (defhydra hydra-yasnippet (:color red :hint nil)
-    "
-                            ^YASnippets^
-              --------------------------------------------
-                Modes:    Load/Visit:    Actions:
-
-               _g_lobal  _d_irectory    _i_nsert
-               _m_inor   _f_ile         _t_ryout
-               _e_xtra   _l_ist         _n_ew
-                        reload _a_ll
-              "
-    ("n" down "done")
-    ("p" down "up")
-    ("N" outline-next-visible-heading "next heading")
-    ("P" outline-previous-visible-heading "prev heading")
-    ("d" yas-load-directory)
-    ("e" yas-activate-extra-mode)
-    ("i" yas-insert-snippet)
-    ("f" yas-visit-snippet-file :color blue)
-    ("n" yas-new-snippet)
-    ("t" yas-tryout-snippet)
-    ("l" yas-describe-tables)
-    ("g" yas-global-mode :color red)
-    ("m" yas-minor-mode :color red)
-    ("a" yas-reload-all))
-
-
-
-  (use-package flyspell)
-  (define-key flyspell-mode-map (kbd "C-.") nil)
-
-  (use-package ace-jump-helm-line)
-  (eval-after-load "helm"
-    '(define-key helm-map (kbd "C-'") 'ace-jump-helm-line))
-
-
+  (use-package org-edna)
+  (org-edna-mode 1)
+  (setq org-log-done 'time)
 
 #+end_src
-
-#+RESULTS:
-: ace-jump-helm-line
-
- 
-
-                   
-#+begin_src emacs-lisp :tangle no
-  (define-key yas-minor-mode-map [backtab]     'yas-expand)
-  
-  ;; Strangely, just redefining one of the variations below won't work.
-  ;; All rebinds seem to be needed.
-  (define-key yas-minor-mode-map [(tab)]        nil)
-  (define-key yas-minor-mode-map (kbd "TAB")    nil)
-  (define-key yas-minor-mode-map (kbd "<tab>")  nil)
-
-#+end_src
-
-#+RESULTS:
-  
-
-
-
-(define-key yas-minor-mode-map (kbd "<tab>") nil)
-(define-key yas-minor-mode-map (kbd "TAB") nil)
-  
-  
-
-
-
-* file management
-#+begin_src emacs-lisp :tangle yes
-(use-package helm-org-rifle)
-#+end_src
-
-#+RESULTS:
-
-* writing
-#+begin_src emacs-lisp :tangle yes
-  (use-package org-wc)
-
-#+end_src
-
-#+RESULTS:
-
-
-
-
-* org
-
-** misc
-#+BEGIN_SRC emacs-lisp :tangle yes
-                (use-package org-auto-tangle
-                  :hook (org-mode . org-auto-tangle-mode)
-  
-                  )
-    (setq org-html-head "<link rel=\"stylesheet\" href=\"\\home\\betsy\\Dropbox\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
-    (setq org-agenda-export-html-style "/home/betsy/Dropbox/Zettelkasten/css/tufte.css")
-  (setq org-export-with-toc nil)
-  (setq org-export-initial-scope 'subtree)
-    (setq org-export-with-section-numbers nil)
-  (use-package org-clock-split)
-#+END_SRC
-
-#+RESULTS:
-
-
-(add-hook 'org-mode-hook 'org-auto-tangle-mode) = :hook (org-mode . org-auto-tangle-mode)
-
-
-
 
 
 ** org-refile and archiving
@@ -865,6 +392,218 @@ CLOCK: [2021-09-06 Mon 15:03]--[2021-09-06 Mon 15:04] =>  0:01
 
 
 
+
+
+
+
+* autosave/backup
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package magit
+    :init (progn
+            (setq magit-repository-directories '("~/Dropbox/" ))))
+  (setq global-auto-revert-mode t
+        auto-save-interval 5)
+  (auto-save-visited-mode 1)
+  
+  (add-hook 'org-mode-hook (lambda () (auto-revert-mode 1)))
+
+  (setq vc-follow-symlinks t)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* org superstar
+("◉" "❤" "☆""♢" "★ ""⭆" )
+"⁕"
+"⁍" 
+"❤"
+ "☆"
+"★"  "✶" "❢"
+ "¶"  "♧" 
+#+begin_src emacs-lisp :tangle yes
+
+    (use-package org-superstar
+      :config
+      (setq org-superstar-headline-bullets-list '("◉" "›" "※" "⌘"  "♡"  "♧" "⟳" "★ ")
+            org-superstar-item-bullet-alist (quote ((42  . 33) (43 . 62) (45 . 45)))
+            )
+      (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+
+#+end_src
+
+#+RESULTS:
+: t
+
+
+
+* helm
+#+BEGIN_SRC emacs-lisp :tangle yes
+ (use-package helm
+    ;      :config (helm-mode +1)
+     ;     :bind (("M-x"   . helm-M-x)
+      ;           ([f3] . helm-buffers-list)       
+       ;          ("<Hangul> x" . helm-M-x)
+        ;         ([f9] . helm-occur )
+                 )
+#+END_SRC
+
+#+RESULTS:
+
+* org-protocol
+#+BEGIN_SRC emacs-lisp :tangle yes
+  
+  (server-start)
+  (require 'org-protocol)
+  (require 'org-protocol-capture-html)
+  (setq org-protocol-default-template-key "w")
+  
+  
+#+END_SRC
+
+#+RESULTS:
+: w
+
+* smartparens
+#+BEGIN_SRC emacs-lisp  :tangle yes
+  (use-package smartparens
+    :ensure t
+    :defer t
+    :init
+    (show-smartparens-global-mode 1))
+  (smartparens-global-mode 1)
+  (setq show-paren-style 'expression)
+
+  (sp-local-pair 'org-mode "/" "/" :actions '(wrap))
+  (sp-local-pair 'org-mode "_" "_" :actions '(wrap))
+  (sp-local-pair 'org-mode "*" "*" :actions '(wrap))
+  (sp-local-pair 'org-mode "+" "+" :actions '(wrap))
+  (sp-local-pair 'org-mode "~" "~" :actions '(wrap))
+  (sp-local-pair 'org-mode "=" "=" :actions '(wrap))
+  (sp-local-pair 'org-mode "-" "-" :actions '(wrap))
+  (sp-pair "'" nil :actions :rem)
+#+END_SRC
+
+#+RESULTS:
+| org-mode | (:open - :close - :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open = :close = :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open ~ :close ~ :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open + :close + :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open * :close * :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add))                                                                  | (:open _ :close _ :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) | (:open / :close / :actions (wrap) :when (:add) :unless (:add) :pre-handlers (:add) :post-handlers (:add)) |                                                             |                                                             |
+| t        | (:open \\( :close \\) :actions (insert wrap autoskip navigate))                                           | (:open \{ :close \} :actions (insert wrap autoskip navigate))                                             | (:open \( :close \) :actions (insert wrap autoskip navigate))                                             | (:open \" :close \" :actions (insert wrap autoskip navigate))                                             | (:open " :close " :actions (insert wrap autoskip navigate escape) :unless (sp-in-string-quotes-p) :post-handlers (sp-escape-wrapped-region sp-escape-quotes-after-insert)) | (:open ( :close ) :actions (insert wrap autoskip navigate))                                               | (:open [ :close ] :actions (insert wrap autoskip navigate))                                               | (:open { :close } :actions (insert wrap autoskip navigate)) | (:open ` :close ` :actions (insert wrap autoskip navigate)) |
+
+* org-keybindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+    (global-set-key (kbd "C-c C-x C-o") 'org-clock-out)
+    (global-set-key (kbd "C-c <f2>") 'org-clock-out)
+;    (global-unset-key (kbd "C-v"))
+
+    (global-set-key (kbd "<f1>") 'org-capture)
+    (global-set-key (kbd "C-c C-x C-j") 'org-clock-goto)
+    (define-key org-mode-map (kbd "C-a") 'org-beginning-of-line)
+    (define-key org-mode-map (kbd "C-e") 'org-end-of-line)
+    (define-key org-mode-map (kbd "C-.") 'org-todo)
+    (bind-keys
+     ("C-c r" . org-clock-report)
+     ("C-c l" . org-store-link)
+     ("C-c C-l" . org-insert-link)
+     ("C-c b" . list-bookmarks)
+     ("C-a" . org-beginning-of-line) 
+     ("C-e" . end-of-line) 
+     ("C-k" . org-kill-line)
+     ("M->" . end-of-buffer)
+     ("C->" . end-of-buffer) ; necessary b/c for some reason emacs in kde plasma doesn't seem to recognize M-< and only see is it as M-.
+     ("C-<" . beginning-of-buffer)    ; necessary b/c for some reason emacs in kde plasma doesn't seem to recognize M-< and only see is it as M-.
+     ("C-."   . org-todo)
+     ("C-x /" . shrink-window-horizontally)
+     ("C-x ." . org-archive-subtree-default)
+     ("C-c 5" . yas-insert-snippet)
+  
+     ([f1] . org-capture)
+     ([f2] . org-clock-in)
+     ;;f3 is helm
+     ([f4] . org-refile)
+     ;;f5 is projectile
+     ([f6] . helm-bibtex-with-local-bibliography)
+     ([f7] . org-agenda)
+     ;;f8 is deft
+                                            ; ([f10] . org-tree-to-indirect-buffer)
+     ([f11] . org-id-goto)
+     ([f12] . bury-buffer)     )
+
+
+    (global-set-key (kbd "<f10>") (lambda ()
+                                    (interactive)
+                                    (let ((current-prefix-arg '(4)))
+                                      (call-interactively #'org-tree-to-indirect-buffer))))
+
+
+#+END_SRC
+
+#+RESULTS:
+| lambda | nil | (interactive) | (let ((current-prefix-arg '(4))) (call-interactively #'org-tree-to-indirect-buffer)) |
+
+#+BEGIN_SRC emacs-lisp :tangle yes :results none
+  
+  
+  (define-key key-translation-map (kbd "C-c <up>") (kbd "↑"))
+  (define-key key-translation-map (kbd "C-c <down>") (kbd "↓"))
+  (define-key key-translation-map (kbd "C-c =") (kbd "≠"))
+  (define-key key-translation-map (kbd "C-c <right>") (kbd "→"))
+  (define-key key-translation-map (kbd "C-c m") (kbd "—"))
+  (define-key key-translation-map (kbd "C-_") (kbd "–"))
+  (define-key key-translation-map (kbd "C-c d") (kbd "Δ"))
+  (define-key key-translation-map (kbd "C-c z")  (kbd "∴"))
+#+END_SRC
+
+#+RESULTS:
+: [8756]
+* kdm/html2org-clipboard
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun kdm/html2org-clipboard ()
+    "Convert clipboard contents from HTML to Org and then paste (yank)."
+    (interactive)
+    (kill-new (shell-command-to-string "xclip -o -t text/html | pandoc -f html -t json | pandoc -f json -t org --wrap=none"
+                                       ))
+    (yank))
+
+
+#+END_SRC
+
+* mode line format
+:LOGBOOK:
+CLOCK: [2021-06-08 Tue 13:51]--[2021-06-08 Tue 14:06] =>  0:15
+:END:
+#+begin_src emacs-lisp :tangle yes
+  (setq-default mode-line-format '("%e"  mode-line-front-space
+                                   mode-line-mule-info
+                                   mode-line-modified
+                                   mode-line-misc-info 
+                                   mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
+                                   (vc-mode vc-mode)
+                                   "  " mode-line-modes  mode-line-end-spaces)
+                )
+  (display-time-mode 1)
+#+end_src
+
+
+
+* org
+
+** misc
+#+BEGIN_SRC emacs-lisp :tangle yes
+                (use-package org-auto-tangle
+                  :hook (org-mode . org-auto-tangle-mode)
+  
+                  )
+    (setq org-html-head "<link rel=\"stylesheet\" href=\"\\home\\betsy\\Dropbox\\Zettelkasten\\css\\tufte.css\" type=\"text/css\" />")
+    (setq org-agenda-export-html-style "/home/betsy/Dropbox/Zettelkasten/css/tufte.css")
+  (setq org-export-with-toc nil)
+  (setq org-export-initial-scope 'subtree)
+    (setq org-export-with-section-numbers nil)
+  (use-package org-clock-split)
+#+END_SRC
+
+#+RESULTS:
+
+
+(add-hook 'org-mode-hook 'org-auto-tangle-mode) = :hook (org-mode . org-auto-tangle-mode)
 
 
 
@@ -1125,38 +864,7 @@ old version of alltodo....changed to reflect categories
                                              (:name "necessary but not timely" :and (:tag "#necessary" :tag "@nottimely"))
                                              (:tag "workflow")
 
-#+BEGIN_SRC emacs-lisp :tangle no
- (:name "Waiting"
-:todo "WAIT" )
-(:name "Next Items"
-:time-grid t
-:todo "NEXT")
 
-(setq org-super-agenda-groups
-'(
-         
-
-))
-   (:name "today" :scheduled today)
-                                            ;                (:name "next" :todo "NEXT")
-                                                 (:name "In PROGRESS" :todo "PROG")
-                                                 (:name "Next" :todo "NEXT")
-                                                 (:name "baruch" :and ( :category "baruch" :not (:todo "WAIT") ))  
-                                                 (:name "to read" :tag "read")
-                                                 (:name "research" :tag "research")
-                                                 (:name "Waiting" :todo "WAIT")
-                                                 (:name "Deadlines" 
-                                                        :and (:deadline t :scheduled nil))
-  
-                                                 (:name "ndd" :category "ndd")
-                                                 (:name "lis" :category "lis")
-                                                 (:name "csi" :category "CSI")
-                                                 (:discard (:todo "HOLD"))
-                                            ;     (:name "not scheduled"
-                                            ;           :and (:deadline nil :scheduled nil))
-                                                 (:name "past due" :scheduled past)
-  
-#+END_SRC
 ** org-agenda-custom-commands additions
 #+begin_src emacs-lisp :tangle yes
 
@@ -1238,125 +946,12 @@ old version of alltodo....changed to reflect categories
 #+end_src
 
 #+RESULTS:
-: ((z agenda + buckets ((agenda  ((org-agenda-span 2) (org-super-agenda-groups '((:discard (:todo WAIT)) (:name Day :time-grid t :order 1) (:name PRIORITY :priority A :order 2) (:name baruch :and (:tag baruch) :order 5) (:name ndd :and (:tag ndd) :order 10) (:name home :tag home :order 15))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name ndd :and (:tag ndd)) (:name baruch scholarship :and (:tag baruch :tag scholarship)) (:name baruch librarianship :and (:tag baruch :tag librarianship)) (:name baruch tenure :and (:tag baruch :tag tenure)) (:name baruch service :and (:tag baruch :tag service)) (:name baruch :and (:tag baruch)) (:name finances :and (:tag finances)) (:name health :and (:tag health)) (:name home :and (:tag home)) (:name admin :and (:tag sysadmin))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (c class ((agenda  ((org-agenda-span 'day)) (tags-todo 1015)))) (xn agenda + ndd ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name leadership :and (:tag lc)) (:name tongsol :and (:tag tongsol)) (:name keep :and (:tag keep)) (:name archives :and (:tag archives)) (:name ndd :and (:tag ndd))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (z agenda + buckets ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:discard (:todo WAIT)) (:name Day :time-grid t :order 1) (:name PRIORITY :priority A :order 2) (:name baruch :and (:tag baruch) :order 5) (:name ndd :and (:tag ndd) :order 10) (:name home :tag home :order 15))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name ndd :and (:tag ndd)) (:name baruch scholarship :and (:tag baruch :tag scholarship)) (:name baruch librarianship :and (:tag baruch :tag librarianship)) (:name baruch tenure :and (:tag baruch :tag tenure)) (:name baruch service :and (:tag baruch :tag service)) (:name baruch :and (:tag baruch)) (:name finances :and (:tag finances)) (:name health :and (:tag health)) (:name home :and (:tag home)) (:name admin :and (:tag sysadmin))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (u 3 month agenda  ((org-agenda-span 90))) (o three-week view agenda  ((org-agenda-span 21))) (f two-week view agenda  ((org-agenda-span 14))) (w todo WAIT) (p todo PROJ) (l . just todo lists) (lt tags-todo untagged todos -{.*}) (ls alltodo all unscheduled by type ((org-agenda-todo-ignore-scheduled t) (org-super-agenda-groups '((:discard (:todo HABIT :todo PROJ)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name analog :and (:tag analog)) (:name waiting :and (:todo WAIT))))) (org-agenda-skip-function)) (lb alltodo all unscheduled by bucket ((org-agenda-todo-ignore-scheduled t) (org-super-agenda-groups '((:discard (:todo HABIT :todo PROJ)) (:name NDD :and (:tag ndd)) (:name Baruch :and (:tag baruch)) (:name scholarship :and (:tag schol)) (:name sysadmin :and (:tag sysadmin)) (:name finances :and (:tag finances)) (:name me :and (:tag me)) (:name home :and (:tag home))))) (org-agenda-skip-function)) (lx With deadline columns alltodo  ((org-agenda-overriding-columns-format %40ITEM %SCHEDULED %DEADLINE %EFFORT ) (org-agenda-view-columns-initially t) (org-agenda-sorting-strategy '(timestamp-up)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD HABIT WAIT))))) (la all todos ((alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name away from computer :and (:tag analog)) (:name waiting :and (:todo WAIT)))))))) (x . agenda + tasks) (xt agenda by task type ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name Projects :and (:todo PROJ)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name away from computer :and (:tag analog)) (:name waiting :and (:todo WAIT))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))))
-
-
-** org-todo
-#+begin_src emacs-lisp :tangle yes :results none
-  (setq org-enforce-todo-dependencies t
-        org-clock-out-when-done t
-        )
-
-  (setq org-log-into-drawer t)
-
-  (setq org-todo-keywords
-        (quote
-         ((sequence "TODO(t)" "NEXT(n)" "IN-PROG(i)" "|" "DONE(d)"  "x(c)" )
-          (type    "HABIT(h)" "PROJ(p)"  "WAIT(w)" "|" "DONE(d)")     )))
-
-  (setq org-todo-keyword-faces
-        '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "yellow")
-                                          ;          ("TODO" :weight regular :underline nil :inherit org-todo :foreground "#89da59")
-          ("TODO" :weight regular :underline nil :inherit org-todo )
-          ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "#c7d800")
-          ("IN-PROG" :weight bold :underline nil :inherit org-todo :foreground "#c9e467")
-           ("HABIT" :weight bold :underline nil :inherit org-todo :foreground "forestgreen")
-          ("PROJ" :foreground "magenta")
-          ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
-
-
-  (use-package org-edna)
-  (org-edna-mode 1)
-  (setq org-log-done 'time)
-
-#+end_src
-
-
-** org-capture
-:PROPERTIES:
-:ID:       eqodj18147j0
-:END:
-#+BEGIN_SRC emacs-lisp :tangle yes
-
-    (setq org-capture-templates
-          '(
-            ("a" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil)
-
-            ("c" "calendar" entry (file "~/Dropbox/Zettelkasten/inbox.org" ) "** %^{EVENT}\n%^t\n%a\n%?")
-
-            ("e" "emacs log" item (id "config") "%U %a %?" :prepend t) 
-            ("f" "Anki Flashcards")
-            ("fb" "Anki basic" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic \n:ANKI_DECK: 위저드\n:END:\n** Front\n%^{Front}\n** Back\n%^{Back}%?")
-
-            ("fc" "Anki cloze" entry (file+headline "~/Dropbox/Zettelkasten/anki.org" "Dispatch Shelf") "* %<%H:%M>   \n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Default\n:END:\n** Text\n%^{Front}%?\n** Extra")
-
-            ("j" "journal" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** journal :journal: \n%U  \n%?\n\n"   :clock-in t :clock-resume t :clock-keep nil :kill-buffer nil :append t ) 
-  ;removed "scheduled" from todo entries
-       ;added it back in [2022-07-09 Sat]
-            ("t" "todo" entry (file "~/Dropbox/Zettelkasten/inbox.org") "* TODO %? \nSCHEDULED: %t \n%a\n" :prepend nil)
-("r" "research consultation" entry (file+headline "~/Dropbox/Zettelkasten/baruch.org" "Consultations") "*** TODO \n:PROPERTIES:\n:PROFESSOR:\n:COURSE_NUMBER:\n:COURSE_TITLE:\n:END:\n
-- [ ] email student\n- [ ] send calendar invite\n- [ ] review materials\n- [ ] prep consult\n- [ ] report consult \n\n %?\n**** template \n\nYour requested research consultation
-
-Dear
-\n\n
-Thanks for reaching out to the library to request a consultation!
-\n\n
-Please send me your syllabus and assignment description (if not included in the syllabus).
-\n\n
-Please also let me know if you've done any research on this yet, and if so, what databases you looked at, what you found, and what you'd like to find during our session. If you haven't done any research yet, that's fine! I just want to make sure I don't cover anything you've already done.
-\n\n
-Would ____ work for you to meet? If yes, I will send a calendar invite with the zoom link. If not, please propose a few alternative times.
-\n\n
-Please note that until a calendar invite is sent, this appointment is not confirmed.
-\n\n
-Talk soon!" :clock-in t :prepend t)
-              ("w" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
-             "* %a \nSCHEDULED: %t %?\n%:initial" )
-            ("x" "org-protocol" entry (file "~/Dropbox/Zettelkasten/inbox.org")
-             "* TODO %? \nSCHEDULED: %t\n%a\n\n%:initial" )
-            ("p" "org-protocol" table-line (id "pens")
-             "|%^{Pen}|%A|%^{Price}|%U|" )
-
-            ("y" "org-protocol" item (id "resources")
-             "[ ] %a %:initial" )
-
-            ))
+: ((xn agenda + ndd ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name leadership :and (:tag lc)) (:name tongsol :and (:tag tongsol)) (:name keep :and (:tag keep)) (:name archives :and (:tag archives)) (:name ndd :and (:tag ndd))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (z agenda + buckets ((agenda  ((org-agenda-span 2) (org-super-agenda-groups '((:discard (:todo WAIT)) (:name Day :time-grid t :order 1) (:name PRIORITY :priority A :order 2) (:name baruch :and (:tag baruch) :order 5) (:name ndd :and (:tag ndd) :order 10) (:name home :tag home :order 15))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name ndd :and (:tag ndd)) (:name baruch scholarship :and (:tag baruch :tag scholarship)) (:name baruch librarianship :and (:tag baruch :tag librarianship)) (:name baruch tenure :and (:tag baruch :tag tenure)) (:name baruch service :and (:tag baruch :tag service)) (:name baruch :and (:tag baruch)) (:name finances :and (:tag finances)) (:name health :and (:tag health)) (:name home :and (:tag home)) (:name admin :and (:tag sysadmin))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))) (u 3 month agenda  ((org-agenda-span 90))) (o three-week view agenda  ((org-agenda-span 21))) (f two-week view agenda  ((org-agenda-span 14))) (w todo WAIT) (p todo PROJ) (l . just todo lists) (lt tags-todo untagged todos -{.*}) (ls alltodo all unscheduled by type ((org-agenda-todo-ignore-scheduled t) (org-super-agenda-groups '((:discard (:todo HABIT :todo PROJ)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name analog :and (:tag analog)) (:name waiting :and (:todo WAIT))))) (org-agenda-skip-function)) (lb alltodo all unscheduled by bucket ((org-agenda-todo-ignore-scheduled t) (org-super-agenda-groups '((:discard (:todo HABIT :todo PROJ)) (:name NDD :and (:tag ndd)) (:name Baruch :and (:tag baruch)) (:name scholarship :and (:tag schol)) (:name sysadmin :and (:tag sysadmin)) (:name finances :and (:tag finances)) (:name me :and (:tag me)) (:name home :and (:tag home))))) (org-agenda-skip-function)) (lx With deadline columns alltodo  ((org-agenda-overriding-columns-format %40ITEM %SCHEDULED %DEADLINE %EFFORT ) (org-agenda-view-columns-initially t) (org-agenda-sorting-strategy '(timestamp-up)) (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD HABIT WAIT))))) (la all todos ((alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name away from computer :and (:tag analog)) (:name waiting :and (:todo WAIT)))))))) (x . agenda + tasks) (xt agenda by task type ((agenda  ((org-agenda-span 'day) (org-super-agenda-groups '((:name Day :time-grid t :order 1))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups '((:discard (:todo HABIT)) (:name Projects :and (:todo PROJ)) (:name TO READ :and (:tag read)) (:name Meetings :and (:tag meetings)) (:name TO WRITE :and (:tag write)) (:name TO PROCESS :and (:tag process)) (:name look up :and (:tag lookup)) (:name focus :and (:tag focus)) (:name quick :and (:tag quick)) (:name away from computer :and (:tag analog)) (:name waiting :and (:todo WAIT))))))) ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '(습관 HOLD AREA))) (org-agenda-todo-ignore-scheduled t))))
 
 
 
-#+END_SRC
-
-#+RESULTS:
-| a         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/journal.org) | ** %?        |     |
-| :clock-in | t                | :clock-keep | t                                                      | :kill-buffer | nil |
-| c         | calendar         | entry       | (file ~/Dropbox/Zettelkasten/inbox.org)                | ** %^{EVENT} |     |
-
-          ("r" "resistance" item (file+headline "~/Dropbox/Zettelkasten/inbox.org" "resistance") "%U\n*What resistance am I facing?*\n%?\n*What should I be working on? / What is my plan?*\n"  )
 
 
-#+RESULTS:
-| a         | current activity | entry       | (file+olp+datetree ~/Dropbox/Zettelkasten/journal.org) | ** %?        |     |
-| :clock-in | t                | :clock-keep | t                                                      | :kill-buffer | nil |
-| c         | calendar         | entry       | (file ~/Dropbox/Zettelkasten/inbox.org)                | ** %^{EVENT} |     |
-
-removed templates:
-- ("d" "download" table-line (id "reading") "|%^{Author} | %^{Title} | %^{Format}|"  )
-- ("l" "look up" item (id "5br4n6815pi0") "[ ] %? %U %a" :prepend nil)
-- ("s" "to buy" item (id "shopping") "[ ] %?" :prepend t)
-- ("z" "zettel" entry (file "~/Dropbox/Zettelkasten/zettels.org") "* %^{TOPIC}\n%U\n %? \n%a\n\n\n" :prepend nil :unarrowed t)
--           ("m" "meditation" table-line (id "meditation") "|%u | %^{Time} | %^{Notes}|" :table-line-pos "II-1" )
-
-
-    ("a" "Activities")
-          ("aa" "current activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/journal.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
-  
-          ("ab" "baruch activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/baruch.org") "** %? \n" :clock-in t :clock-keep t :kill-buffer nil )
-  
-          ("an" "ndd activity" entry (file+olp+datetree "~/Dropbox/Zettelkasten/ndd.org") "** %? %^g \n" :clock-in t :clock-keep t :kill-buffer nil )
-  
-
-
-#+RESULTS:
 
 
 ** org-clock
@@ -1493,7 +1088,7 @@ removed templates:
   
 #+end_src
 #+RESULTS:
-: 0
+: ((NOW . 110) (workflow . 119) (:startgroup) (SHALLOW . 115) (DEEP . 100) (HOME . 104) (:endgroup) (:startgroup) (#necessary . 99) (#wouldbenice . 98) (:endgroup) (:startgroup) (@timely . 116) (@nottimely . 101) (:endgroup))
 
 ** org-pomodoro
 :PROPERTIES:
@@ -1609,23 +1204,6 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
    (add-hook 'org-checkbox-statistics-hook 'my/org-checkbox-todo)
 #+end_src
 
-* sound
-#+begin_src emacs-lisp :tangle yes
-(use-package emms)
-#+end_src
-
-#+RESULTS:
-
-* *mentat*
-#+begin_src emacs-lisp :tangle yes
-(load "annot")
-  (require 'annot)
-
-#+end_src
-
-#+RESULTS:
-: annot
-
 ** anki
   #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package anki-editor
@@ -1659,7 +1237,7 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
   #+END_SRC
 
   #+RESULTS:
-  | anki-editor-reset-cloze-number | org-gcal--capture-post |
+  | anki-editor-reset-cloze-number |
   :after org
 
   ; Reset cloze-number after each capture.
@@ -1667,22 +1245,7 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
   :hook (org-capture-after-finalize . anki-editor-reset-cloze-number)
   #+RESULTS:
 
-
-** epub
-   #+BEGIN_SRC emacs-lisp :tangle yes
-
-(use-package olivetti)
-(use-package nov
-:config
-  (setq nov-post-html-render-hook  (lambda () (visual-line-mode 1)))
-  (add-hook 'nov-post-html-render-hook 'olivetti-mode)
-)
-   #+END_SRC
-
-   #+RESULTS:
-   : t
-
-** pdfs
+* pdfs
   #+BEGIN_SRC emacs-lisp :tangle yes
     
                     (use-package pdf-tools
@@ -1744,105 +1307,8 @@ CLOCK: [2021-04-30 Fri 11:58]--[2021-04-30 Fri 12:00] =>  0:02
   (use-package org-noter-pdf-tools
   :straight t)
 
-** org-roam
-:PROPERTIES:
-:ID:       qjfd04u0u7j0
-:END:
 
-:file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
-
-(file "~/Dropbox/Zettelkasten/Zettels/%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) ${slug}.org")
-
-    (setq org-roam-capture-templates '(("d" "default" plain :target 
-                                        "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CATEGORY: zettels\n:CONTEXT: %a\n:END:\n%?\n\n
-  \n\n\n
-  ----------------------
-  \n
-  - What is the purpose of this zettel?\n
-  - What is the nature of the content I wish to include in this zettel?\n
-  - How does it relate to the existing network?\n
-  - How do I wish to discover this information in the future?\n" 
-                                        "#+title: ${title}" :unnarrowed t :kill-buffer t)))
-
-                                        
-
-  (setq org-roam-capture-templates '(("d" "default" plain "%$" #'org-roam--capture-get-point "* ${title}\n:PROPERTIES:\n:VISIBILITY: all\n:CREATED: %U\n:CATEGORY: zettels\n:CONTEXT: %a\n:END:\n%?\n\n
-- What is the purpose of this zettel?\n
-- What is the nature of the content I wish to include in this zettel?\n
-- How does it relate to the existing network?\n
-- How do I wish to discover this information in the future?\n
-
-" :file-name "%(format-time-string \"%Y%m%d-%H%M_${slug}\" (current-time) )"
-                                      "#+title: ${title}" :unnarrowed t :kill-buffer t)))
-
-                                        (file+head "%<%Y%m%d%>_${slug}.org" "#+title: ${title}\n   \n\n\n
-  ----------------------
-  \n
-  - What is the purpose of this zettel?\n
-%?
-  - What is the nature of the content I wish to include in this zettel?\n
-  - How does it relate to the existing network?\n
-  - How do I wish to discover this information in the future?\n")
-
-                                      
-#+begin_src emacs-lisp  :tangle yes 
-
-  (use-package org-roam
-    :ensure t
-    :init
-    (setq org-roam-v2-ack t)
-    :custom
-    (setq org-roam-directory (file-truename "~/Dropbox/Zettelkasten/Zettels"))
-    (org-roam-db-autosync-mode)
-    :bind (("C-c n l" . org-roam-buffer-toggle)
-           ("C-c n f" . org-roam-node-find)
-           ("C-c n i" . org-roam-node-insert))
-    :config
-    (org-roam-setup))
-
-     (defun my/org-roam--title-to-slug (title) ;;<< changed the name
-       "Convert TITLE to a filename-suitable slug."
-       (cl-flet* ((nonspacing-mark-p (char)
-                                     (eq 'Mn (get-char-code-property char 'general-category)))
-                  (strip-nonspacing-marks (s)
-                                          (apply #'string (seq-remove #'nonspacing-mark-p
-                                                                      (ucs-normalize-NFD-string s))))
-                  (cl-replace (title pair)
-                              (replace-regexp-in-string (car pair) (cdr pair) title)))
-         (let* ((pairs `(("[^[:alnum:][:digit:]]" . "-")  ;; convert anything not alphanumeric << nobiot underscore to hyphen
-                         ("__*" . "-")  ;; remove sequential underscores << nobiot underscore to hyphen
-                         ("^_" . "")  ;; remove starting underscore
-                         ("_$" . "")))  ;; remove ending underscore
-                (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
-           (downcase slug))))
-
-
-     (setq org-roam-title-to-slug-function 'my/org-roam--title-to-slug)
-(setq org-roam-directory "~/Dropbox/Zettelkasten/Zettels/")
-#+end_src
-
-#+RESULTS:
-: ~/Dropbox/Zettelkasten/Zettels/
-
-("C-c <f1>" . org-roam-capture)
-#+begin_src emacs-lisp :tangle no
-  
-      (setq org-roam-capture-templates '(("d" "default" plain "#+title: ${title}\n* ${title}\n%?\n* Metadata \n- What is the purpose of this zettel?\n\n- What is the nature of the content I wish to include in this zettel?\n- How does it relate to the existing network?\n- How do I wish to discover this information in the future?" :target
-  (file+head "%<%Y%m%d%H%M%S>_${slug}.org" "") :jump-to-captured t :unnarrowed t)))
-
-   (setq org-roam-completion-system 'helm)
-
-
-
-
-
-
-
-#+end_src
-#+RESULTS:
-: my/org-roam--title-to-slug
-
-** references/citations
+* references/citations
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   
@@ -1933,7 +1399,7 @@ there's a few other things here
 
 #+RESULTS:
 
-** bibtex
+* bibtex
 #+begin_src emacs-lisp :tangle yes
   (setq bibtex-autokey-additional-names "etal"
         bibtex-autokey-name-separator "-"
@@ -1947,254 +1413,22 @@ there's a few other things here
 
 #+end_src
 
-#+RESULTS:
-: capitalize
-
-** org-cite
-#+begin_src emacs-lisp :tangle yes
-
-        (use-package citeproc)
-      (use-package org-ref-cite
-        :load-path "/home/betsy/Dropbox/emacs/.emacs.d/lisp/org-ref-cite-main/"
-        :config
-        ;; I like green links
-        (set-face-attribute 'org-cite nil :foreground "DarkSeaGreen4")
-        (set-face-attribute 'org-cite-key nil :foreground "forest green")
-        (setq
-         org-cite-global-bibliography bibtex-completion-bibliography
-         ;; https://github.com/citation-style-language/styles
-         ;; or https://www.zotero.org/styles
-         org-cite-csl-styles-dir "/home/betsy/Dropbox/emacs/.emacs.d/lisp/org-ref-cite-main/csl-styles/"
-         org-cite-insert-processor 'org-ref-cite
-         org-cite-follow-processor 'org-ref-cite
-         org-cite-activate-processor 'org-ref-cite
-         org-cite-export-processors '((html csl "elsevier-with-titles.csl")
-                                      (latex org-ref-cite)
-                                      (t basic))))
+* UI
 
 
-     ;from https://blog.tecosaur.com/tmio/2021-07-31-citations.html
-  (require 'oc-natbib)
-  (require 'oc-csl)
-  ;  (setq org-cite-export-processors 'csl)
-    (setq org-cite-csl-styles-dir "~/Zotero/styles")
 
+            #+BEGIN_SRC emacs-lisp :tangle yes
+  ;strikethrough org-emphasis-alist
+  (require 'cl)   ; for delete*
+(setq org-emphasis-alist
+      (cons '("+" '(:strike-through t :foreground "gray"))
+            (delete* "+" org-emphasis-alist :key 'car :test 'equal)))
 
-#+end_src
+#+END_SRC
 
 #+RESULTS:
-: ~/Zotero/styles
-
-* latex
-#+begin_src emacs-lisp :tangle yes 
-  (require 'ox-extra)
-  (ox-extras-activate '(ignore-headlines))
-
-
-
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-(with-eval-after-load 'ox-latex
-(add-to-list 'org-latex-classes
-             '("org-plain-latex"
-               "\\documentclass{article}
-           [NO-DEFAULT-PACKAGES]
-           [PACKAGES]
-           [EXTRA]"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
- (add-to-list 'org-latex-classes
-               '("apa6"
-                 "\\documentclass{apa6}"
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-#+end_src
-
-#+RESULTS:
-| org-plain-latex | \documentclass{article} |
-
-
-  (use-package tex :ensure auctex)
-
-
-  (use-package company-auctex)
-  (company-auctex-init)
-
-* mu4e
-#+begin_src emacs-lisp :tangle yes 
-  (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-
-  (use-package mu4e
-  :ensure nil
-  :config
-
-  ;; This is set to 't' to avoid mail syncing issues when using mbsync
-  (setq mu4e-change-filenames-when-moving t)
-
-  ;; Refresh mail using isync every 10 minutes
-  (setq mu4e-update-interval (* 10 60))
-  (setq mu4e-get-mail-command "mbsync -a")
-  (setq mu4e-maildir "/home/betsy/.thunderbird/mgzibeze.default-release/ImapMail/")
-
-  (setq mu4e-contexts
-        (list
-         ;; Work account
-         (make-mu4e-context
-          :name "Work"
-          :match-func
-            (lambda (msg)
-              (when msg
-                (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
-          :vars '((user-mail-address . "systemcrafters.test@gmail.com")
-                  (user-full-name    . "System Crafters Gmail")
-                  (mu4e-drafts-folder  . "/Gmail/[Gmail]/Drafts")
-                  (mu4e-sent-folder  . "/Gmail/[Gmail]/Sent Mail")
-                  (mu4e-refile-folder  . "/Gmail/[Gmail]/All Mail")
-                  (mu4e-trash-folder  . "/Gmail/[Gmail]/Trash")))))
-
-  (setq mu4e-maildir-shortcuts
-        '(("/Gmail/Inbox"             . ?i)
-          ("/Gmail/[Gmail]/Sent Mail" . ?s)
-          ("/Gmail/[Gmail]/Trash"     . ?t)
-          ("/Gmail/[Gmail]/Drafts"    . ?d)
-          ("/Gmail/[Gmail]/All Mail"  . ?a))))
-#+end_src
-    
-    (setq mu4e-attachment-dir "/home/betsy/Dropbox/2022")
-    (setq mu4e-refile-folder "/baruch/Temp/")
-    (setq mu4e-sent-folder "/baruch/Sent Items/" )
-      (setq mu4e-trash-folder "/baruch/Deleted Items/" )
-    (setq mu4e-drafts-folder "/baruch/Drafts/")
-    (setq mu4e-get-mail-command "mbsync -aV")
-    (setq mu4e-bookmarks
-     (quote
-      ((:name "Inbox" :query "maildir:/baruch/Inbox" :key 117)
-       (:name "Today's messages" :query "date:today..now" :key 116)
-       (:name "Last 7 days" :query "date:7d..now" :show-unread t :key 119)
-       (:name "Messages with images" :query "mime:image/*" :key 112))))
-
-    (setq mu4e-compose-dont-reply-to-self t)
-  (setq mu4e-view-show-images t)
-  (setq org-mu4e-convert-to-html t)
-   (setq mu4e-compose-format-flowed t)
-      (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
-               (add-hook 'mu4e-view-mode-hook 'visual-fill-column-mode)
-
-               (defun no-auto-fill ()
-                 "Turn off auto-fill-mode."
-                 (auto-fill-mode -1))
-
-
-               (defun vcfm-off ()
-                                                       ;turn off visual fill column mode
-                 (visual-fill-column-mode nil))
-
-               (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
-               (add-hook 'mu4e-headers-mode-hook (lambda ()(visual-line-mode -1)))
-
-               (setq mu4e-compose-dont-reply-to-self t)
-               (setq mu4e-confirm-quit nil)
-               (setq mu4e-display-update-status-in-modeline nil)
-               (setq mu4e-index-lazy-check t)
-
-    (require 'smtpmail)
-         (setq message-send-mail-function 'smtpmail-send-it
-               smtpmail-starttls-credentials
-               '(("smtp.baruch.cuny.edu" 587 nil nil))
-               smtpmail-default-smtp-server "smtp.baruch.cuny.edu"
-               smtpmail-smtp-server "smtp.baruch.cuny.edu"
-               smtpmail-smtp-service 587
-               smtpmail-debug-info t)
-
-  
-
-* load files
-:LOGBOOK:
-CLOCK: [2021-04-13 Tue 10:17]--[2021-04-13 Tue 10:17] =>  0:00
-:END:
-
-#+RESULTS:
-: -0.8
-   (find-file "~/Dropbox/Zettelkasten/inbox.org")   
-   (find-file "/home/betsy/.emacs")
-#+begin_src emacs-lisp :tangle yes
-
-
-
-#+end_src
-
-#+RESULTS:
-
-#+BEGIN_SRC emacs-lisp :tangle yes
- (load "bookmark+")
- (load "clipboard2org")
-  (load "hangul")
-  (load "org-book")
-  (load "org-super-links")
-  (load "ov-highlight")
-  (load "annot")
-  (load "backup-each-save")
-    
-;    (load "dired+")
-
-#+END_SRC  
-
-#+RESULTS:
-: t
-
- 
-
-  ;had to add xml+ and ov via package manager
-
-
- 
- 
-    (define-key dired-mode-map (kbd "<f1>") 'org-capture)
-    (setq dired-auto-revert-buffer (quote dired-directory-changed-p)
-          dired-omit-verbose nil
-          dired-omit-files
-          (concat dired-omit-files "\\|^.DS_STORE$\\|^.projectile$\\|^.org~$")
-          )
-    (add-hook 'dired-load-hook
-              (function (lambda () (load "dired-x"))))
-
-    (add-hook 'dired-mode-hook
-              (lambda ()
-                ;; Set dired-x buffer-local variables here.  For example:
-                (dired-omit-mode 1)
-                ))
-
-    ;; toggle `dired-omit-mode' with C-x M-o
-    (add-hook 'dired-mode-hook #'dired-omit-mode)
-
-     (define-key dired-mode-map (kbd "M-z") 'ace-jump-mode)
-
-* theme
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package modus-themes)
-;  (modus-themes-load-themes)
- (load-theme 'modus-vivendi t)
-
-
-;to fontify done checkbox items
-(font-lock-add-keywords
- 'org-mode
- `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-headline-done prepend))
- 'append)
-
-
-#+end_src
-
-#+RESULTS:
-
-#+RESULTS:
-: t
-2
+| + | '(:strike-through t :foreground gray) |          |
+| * | bold                                  |          |
+| _ | underline                             |          |
+| = | org-verbatim                          | verbatim |
+| ~ | org-code                              | verbatim |
