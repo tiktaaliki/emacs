@@ -13,13 +13,13 @@
  '(delete-selection-mode t)
  '(global-auto-revert-mode t)
  '(global-visual-line-mode t)
- '(org-agenda-skip-scheduled-if-deadline-is-shown 'not-today)
+ '(org-agenda-skip-scheduled-if-deadline-is-shown t)
  '(org-agenda-sticky t)
  '(org-agenda-tags-column -80)
  '(org-clock-out-remove-zero-time-clocks t)
  '(org-ellipsis " ↯ ")
  '(org-fontify-quote-and-verse-blocks t)
- '(org-habit-graph-column 40)
+ '(org-habit-graph-column 60)
  '(org-id-link-to-org-use-id 'create-if-interactive)
  '(org-log-note-headings
    '((done . "State %-12s from %-12S %t")
@@ -33,16 +33,14 @@
      (clock-out . "")))
  '(org-support-shift-select 'always)
  '(org-timeblock-span 1)
- '(org-todo-keyword-faces
-   '(("WAIT" :weight regular :underline nil :inherit org-todo :foreground "goldenrod")
-     ("NEXT" :weight regular :underline nil :inherit org-todo :foreground "magenta")
-     ("PROG" :weight bold :underline nil :inherit org-todo :foreground "#00BFFF")
-     ("HOLD" :weight bold :underline nil :inherit org-todo :foreground "#336b87")))
+ '(org-use-extra-keys t)
  '(package-selected-packages
-   '(ereader org-timeblock org-super-agenda pcache org-ref org-edna helm-bibtex helm-bibtexkey powershell sound-wav mpv visual-fill-column avy org-gcal centered-window zenburn-theme sudoku 2048-game yasnippet unicode-fonts org-superstar interleave aggressive-indent unkillable-scratch org-plus-contrib deft ace-jump-mode bufler helm-projectile))
+   '(esxml emacsql tablist org-download mw-thesaurus org-auto-tangle citar org-clock-convenience org-tidy wgrep embark-consult embark consult orderless marginalia vertico annotate ereader org-timeblock org-super-agenda pcache org-ref org-edna helm-bibtex helm-bibtexkey powershell sound-wav mpv visual-fill-column avy org-gcal centered-window zenburn-theme sudoku 2048-game yasnippet unicode-fonts org-superstar interleave aggressive-indent unkillable-scratch org-plus-contrib deft ace-jump-mode bufler helm-projectile))
  '(safe-local-variable-values '((org-reverse-note-order)))
  '(visual-fill-column-center-text t)
- '(visual-fill-column-width 110))
+ '(visual-fill-column-width 110)
+ '(yas-snippet-dirs
+   '("c:/Users/byoon/Dropbox (Personal)/emacs/.emacs.d/snippets")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -59,10 +57,11 @@
  '(org-level-4 ((t (:inherit outline-4 :extend nil :weight normal))))
  '(org-link ((t (:inherit link :foreground "goldenrod" :weight normal))))
  '(org-quote ((t (:inherit org-block :foreground "misty rose" :slant italic))))
+ '(org-scheduled-today ((t (:foreground "misty rose"))))
  '(org-timeblock-blue ((t (:extend t :background "#242679" :foreground "#8fcfff" :height 0.8 :family "Calibri"))))
  '(org-timeblock-cyan ((t (:extend t :background "#004065" :foreground "#8eecf4" :height 0.8 :family "Calibri"))))
  '(org-timeblock-green ((t (:extend t :background "#00422a" :foreground "#aceaac" :height 0.8))))
  '(org-timeblock-magenta ((t (:extend t :background "#71206a" :foreground "#ffccff" :height 0.8 :family "Calibri"))))
  '(org-timeblock-red ((t (:extend t :background "#77002a" :foreground "#ffcccc" :height 0.8))))
  '(org-timeblock-yellow ((t (:extend t :background "#693200" :foreground "#fff29a" :height 0.8 :family "calibri"))))
- '(underline ((t (:foreground "firebrick1" :underline t)))))
+ '(underline ((t (:foreground "chartreuse" :underline t)))))

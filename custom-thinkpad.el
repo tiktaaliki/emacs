@@ -55,7 +55,7 @@
  '(org-gcal-remove-api-cancelled-events t)
  '(org-global-properties '(("EFFORT_ALL" . "5 10 15 20 25 30 35 40 45 50 55 60")))
  '(org-habit-graph-column 50)
- '(org-habit-show-habits-only-for-today t)
+ '(org-habit-show-habits-only-for-today nil)
  '(org-id-link-to-org-use-id 'create-if-interactive)
  '(org-image-actual-width '(400))
  '(org-log-note-headings
@@ -77,7 +77,7 @@
  '(org-super-agenda-unmatched-name "")
  '(org-timeblock-span 1)
  '(package-selected-packages
-   '(helm-org-ql org-ql org-timeblock ov org-transclusion emojify org-roam-bibtex org-roam-timestamps org-roam-ui helm-bibtex helm-bibtexkey org-noter-pdftools unicode-fonts pomm cnfonts org-pomodoro auctex auctex-lua company company-auctex helm-unicode ace-mode ace-jump-helm-line ace-jump-mode pdf-continuous-scroll-mode quelpa-use-package quelpa org-auto-tangle highlight-quoted highlight-parentheses org-pdfview openwith good-scroll visual-fill-column interleave org-noter org-ref deft burly org-sidebar org-plus-contrib helm-chronos chronos org-alert pdf-view-restore pdf-tools nov olivetti anki-editor org-mru-clock org-roam magit doom-themes org-superstar use-package unkillable-scratch helm-projectile aggressive-indent))
+   '(embark-consult embark orderless marginalia vertico consult helm-org-ql org-ql org-timeblock ov org-transclusion emojify org-roam-bibtex org-roam-timestamps org-roam-ui helm-bibtex helm-bibtexkey org-noter-pdftools unicode-fonts pomm cnfonts org-pomodoro auctex auctex-lua company company-auctex helm-unicode ace-mode ace-jump-helm-line ace-jump-mode pdf-continuous-scroll-mode quelpa-use-package quelpa org-auto-tangle highlight-quoted highlight-parentheses org-pdfview openwith good-scroll visual-fill-column interleave org-noter org-ref deft burly org-sidebar org-plus-contrib helm-chronos chronos org-alert pdf-view-restore pdf-tools nov olivetti anki-editor org-mru-clock org-roam magit doom-themes org-superstar use-package unkillable-scratch helm-projectile aggressive-indent))
  '(pdf-annot-default-annotation-properties
    '((t
       (label . "Betsy"))
