@@ -26,6 +26,20 @@ If a variable is not buffer-local, then setq and setq-default do the same thing.
 #+RESULTS:
 : -0.75
 
+* vertico height issue
+#+begin_src emacs-lisp :tangle yes
+    (advice-add 'vertico--setup :before (lambda () (setq vertico-count 15)))
+(define-key minibuffer-local-map (kbd "s-'") (lambda ()
+  (interactive)
+  (let ((vertico-resize t))
+    (setq vertico-count (if (= vertico-count 15) (- (frame-height) 5) 15))
+    (vertico--exhibit))))
+
+#+end_src
+
+#+RESULTS:
+| lambda | nil | (interactive) | (let ((vertico-resize t)) (setq vertico-count (if (= vertico-count 15) (- (frame-height) 5) 15)) (vertico--exhibit)) |
+
 * font encoding
 #+begin_src emacs-lisp :tangle yes
 
@@ -40,3 +54,219 @@ If a variable is not buffer-local, then setq and setq-default do the same thing.
           ("文泉驿等宽微米黑" "Ubuntu Mono" "隶书" "新宋体")
           ("HanaMinB" "SimSun-ExtB" "MingLiU-ExtB")))
   
+;;; secret entries
+"-----BEGIN PGP MESSAGE-----
+
+jA0ECQMI4s5crOfTJ+js0ukBPkMiuqlehu18RHnZyAcVnDvc9R2Cx5aUGeYJNFtV
+COtoqt0fB0HVxWt2NitVr8VNfDrBJJEGLcI+osC16oqOjdMC90J6YJiT8u4IG4WK
+/o4zkhbnJsqQnSOp39j3jM9PM7M/oR06atz/DtcgxvXZcfH1Rz2y8SiUg3FvOZPX
+3pMXIw34m/M4Y5mWbh3mmxR5MKaXZcVhH2DFWMZdT7o8vwQtXI2cXV/X8PL28L7a
+4onWOotDpFdNKHAvoP0CwOwQ0zW0TnEXQeqJ9tcGSDUWBLpe52DaXgKLTrMCzctT
+dmlt5iXuRHg73Dvzsy2TXxsSq6kPWZMCUPZDPpEqWgajYR06pcPHpoXwDoZCLE7O
+Px5HGS+9gGIaaLNcLFT1ND3IbKxPoj7XpV4K7tU9fss32uA5cPgKWRloo4MfkPrD
+Ku4P8Ci+CIgunOj1TQWrKW+14EK6GWhFxaZ3iT58BnxJuGDZVikfTb61gQvq93kZ
+oKCEQaTmd/VdUdXWHS4HaL2s5slzNT++1rolTTgtfNlSFT/LTarUCmPLQavTX5iO
+UTfGrEQHXdoBXu4xeaz0utRB4yDDfO3wc9lABwb14i+rxWFE/ft0Px/6SS73pKdF
+8VuQQuMDI/Deak7qcAzNWPFvCc9SaNbiAZrJSL76DIhBLHWjjUaq1R6bqPe5nnVy
+t8D+NgKeoKdY/r7rP4NLqIf0XRU4wP9umz38NEkfZsa4oBZjOQdzN3NcMMxYtaEX
+T7TbUmzeebAflBHp3iVE902d28Gyl+lUpzDXuOUyyJt5VrChoMdcJRP71fh/57uL
+UqtTJ3PsCCp2hiXpSyd6lJQDTD6xjDTAeL1xl4pvFSU3GyCrgHF4+kKpKnLuiiNA
++Sa0T7p2yiL0U1WxkMLitDdqPlXI4dtw4D2hAVEE/I8onEWZjv4IykXHsdRjKypM
+7XFyRqGYodnandv5+5fU22W+LgifsX3s+X1xvwZV9xelJLNYwnt/okUrqSmOZarF
+ipyRRro08YTXprDD27Km5Us49aH5/n+O1kYAqomEAXv8FpcY6I+rsAxjbbSSxH8w
+RlxMdMxbukD+mPbo5eUyKa1tH5M7TIKAsC9Nt+RA3zwXBariCv29rDGOe2QmPRL+
+l6Ahbrx9Cfh4HOQ9/tUX1NpIKJLSZ1BSE7/5i5MSU7Ebdg0XFo3YE+k8trQ77mOC
+xIUjQHanAQ9JswW03NzbPF7SVwAxOcixHBx/rCkKgWLoA7v1JgQtmvBZ6Mo6w1rB
+0FdBUplh6cNAPYkHcK4vNPU=
+=j8Wv
+-----END PGP MESSAGE-----
+"
+;;; secret entries
+"-----BEGIN PGP MESSAGE-----
+
+jA0ECQMISvKquJTmgRvs0ukBwZcJFOn0H4E5rNwuTp+BkwWntGBTcF8APHHystSt
+blpjZp25vUR1/Cwk+Se+cxX4ejHwrmYj2FoYWlQu3VNCa5kgKanytWP88djtFzCy
+EsyyxP/LJz36/p+DIySDzUJNDKE+paNtoTRhTbY5OgYL3Urds2y2VyJ4SOSkSFZb
+1RQoS+IvxNyYP0OVAWxTWC2baoxPW63PgoVJyIWzcwZBGJqxITrd5QCFmNJDYw3j
+kcr80/N/u/qNfaH2p498zTBvwuYfnL+9nLTSNAu07sgin2Rbn2OQm3moplLML3YA
+erqppmtvNVo6DwgaMBavji53n/ZUhYDmzFBGfY+EH8j+0a3TZo3qVficr1LDYPfZ
+7kEYsf+OTuF1C0Zozcgij1K70HMc/UDYlAhOKP6jeFTOR24MhvcGFCZy2EG2N89R
+/IY2fUQz7IHmQitcyxdiloaxaAHrZuPqZlinSTODCOb1Xe1YCtk73ascHaWOq6QV
+WezePzxQ7757ZWOTSAnhb74caEeog+9nE0SLf1TQndu/0dt0hOvh4PGKsNW+5cmU
+hZeuooCmTkehysb5WkvUD/sjs/zIc5sH7RMszk/7uXjWi4Tk6sWWmW9lUykFv483
+iDEWY/A1oXLZVA5KriGlj535aPAR5IVi++3ixq/KIdOt8FU3s0zYRigb3k+ibwqJ
+b8D6FskmRkQktzLMKECcpVg1G7v0vR/bZ6UDGob1TsTga/rmuvZqwp2HYrlnIa6t
+WlrQGQKcJuImgy+EcXwvHvUbyt214OxS3amOYp2jHP/Il0Q/ej9MGjZH3NtljzxB
+Mwrz9Tkchjs5+kN4XhRMv6DJDJRqXOuFYqNKdu8X5xdSBIIdZf++6elVSF/RVSfm
+rD4K5TB8g/LbOp03mLKuOpc4qYiRuW7Hh1KoxXoXplX9kZ5xgz8mpBEkKtXSO+Ao
+VYgfMLrVSH8+6Ov98tgbmY0VPcB0512DiMIXBqEX9YXizuau+D7ZQACR4mA/rsng
+RyNYreiG1AeCHFRIKAsyyPsZ4Dd4+Frjc7ILTJQwNlPdYg54HlZnyJBBGYCK5GVC
+1KA1No02Lzg3WU+0H1xeDY3h5IeZYErJ7V491dDjDeH2PwNJpB+3+NYtx4YNyHNJ
+EGRHE/wzNMb+i7qaYnFB/mZfGShkbEP+kEufuSmYT78R6mDSk1pcvlmwkZEyuQLO
+A2enau2KcaFZ2bSdYIwaWbu/YtA46fGXpn6kxgGsMBv0199tPdb+DwRsGwe1S4pR
+PITAeVEQVSd4UstE9g==
+=W5uu
+-----END PGP MESSAGE-----
+"
+;;; secret entries
+"-----BEGIN PGP MESSAGE-----
+
+jA0ECQMIckNMjK/pc1Ps0ukBZ741HOmPrMJMaNGRGmU8maNWxn19f3/MzYBPIOtu
+GbZcpe6RmOrDW/NXO4rGuZA470SXWJuZTRaB41yR3KapX9VF/HMOAqyH6cv6WHQh
+YcLVE3G9URxmLp1rsDWUK7w6pNhLm4dc71/XRyvWlFMRwNmCZ5mmtyDCYsUaBK/j
+lqTaS3CHttPkoK2J6SaJycz955qtJA+io7/aqUVUAUkLzKDLVHL9paBGKLy8rnvt
+q+cG62xM/bDuYbxQWjGfi5+zcuAg+C/0wQcBvlilWJ/ZavOPTz8a1bxRYTH0/s6+
+S7wjGXKBIV23vf5dsqpcXGe5001nL8QzioLCTF3WBHf0qLrbWSySDoTQ/vBA1Wrf
+N8ai0ys2PPLgD56xgv4ORGiyuzpsHnNljkNGGqe/lljr2vfuIXA2t93b+iJ1ayZ4
+Dp6wJ45Rs289wxdEOumenbu+yI31oIta77bywCyqbh/cIn6QDQgzPGbqPoEsC453
+aVBRTBmqRv54bcBjK6EWgimC9T4AQSqOB9k8CsbLJwgZI5z1beKZjehpNhqNkHWh
+7UVeJ/ME3jPjsk6hstG44QQyHPsHBmycGioI6/tVz6mZNgj+DbBrB0j19RVzws58
+x99+BakUPE9y5VJW+g/b6j03CfN1nH0SqIS1bCrOSr+dpftXfYJJqWR7pN0FfczL
+t8D7U49jP+8APK/QoNcGbEvh0mW9O/9SOydUUWRhuPJ0VmmogNOIEDkZchOCimW6
+z+at7vojv6bz8b2wtFtXQO/fzcuU+0OG2MnufipWPjnvb+ATa7Qo2qvCRnWpA6qp
+TxgqPv95irWa2VNjtCpE2v+hf8L3qQjZdqxUg76t0HaHlCbfvsPpaPQPHcKHnJ5A
+dSsW1o0LtxXPe6q3stqP80OS6TfMtdxGgIWtghjIdYmPOsoYBrLXeHbQ6T7pArtW
+ejqHG8ZTgZz60QmPx8EbGE0/COhOxWvqOaGYUckdD4Z+g7v/Cc1/ruQ8Xcf7p8Ln
+fcIMKpLXnteG3ChoXyB89ZPXESuFh5bzu9Em0UNRaa1LsfngRPZE9hLeufUicSNl
+igDp5HFdtbh3ecZ7Lwit7asoqyYhQImBdNd/pgGqY7ZcmFraN9VMGZv7JPFKGfpd
+KQzMrA05K/ov5Qm9QQ7fYsRVYUoled23lrwj09OpOsDDkoWrxbfmlrtcyEQoJFs0
+Mx3gKXq4W+R9roJRypMpJJO4TVBDbs3nleTXRP5TAoKwffiJNXfyeaygyAuRFVwh
+ElEu4nlDaA/gGA1wsHs=
+=qOsL
+-----END PGP MESSAGE-----
+"
+;;; secret entries
+"-----BEGIN PGP MESSAGE-----
+
+jA0ECQMIDOzvDObXgpHs0ukBPm48HegqtBjWC1W62LaFqHJS5AHkb3tohOgiG0Hg
+RAW/uqfSplA7dg+5KjEpVx++CUuzQZs4q+fz/pOg+sgU2DhRqDEcsmnvqkAAean3
+dixR/T7iJKqlejr7RCV1I+zKdcWwl954i5t3IB8RPRRPJu7PlMY0fONbPly8Kpqu
+UpYrZM7aNF3kHMS1r2m3+xJ3So/Hr7Nrinr0/9ouUTAVveRUuUETLmmsUAsDPzBi
+ejuCILCQuwFLaGAWDzj9eQDpeT9SkLiGRZr9Eds5r57Mlye0qJMqB0bXkMQfxZQJ
+jjxFclbwYDULUujbghe+l/6yLCXAd+zOTUmoBFMSi39faa9mpjhMTZ7ryP7z8Rp/
+fH0wf/LfqhIhIDMmrj9/DFJ3m5L2OEXSMgvyLCO2LQ2uM/xxqE2xiB+InpP79wRW
+3ENXJSmjdorbFTRjo0DJMROw2v8efNRblWfpn+FhEzkTC1M4RLRaiYYFo51RwHaq
+PFzYWhqQXSikoVpyJzxrMjCwT5U/pfjgINB6U4jnzQI0OljN8LZXUNrDEFSz5T15
+hbREA6fs1yk6RRtkeLpkJwVxELbkhT65XNTYlKI+KTNulVOSc8EzFTPUd5bbem3d
+vhCXexQlJ4tsXQoQVx0p5mb1EjP1jhCffqkH1BiNPcwDJgMByQ1CXwOPjV3PsRvk
+XsD6L9VpOeJ8PZNGHqcginOeug5bR7CQQ9qmP3ypKq3ik/dJWYT2KUYV/A9DmSzD
+jRiARPzjgQQx3xd4yZiH352nQDKQ0d69hVCMYFHCG7HxB+qv86Rcw35BN0ZqkdrY
+ADEYcORpdxuDaL/2t4fmd9egGqcM+GNIMoulnTmJbfQ0MYiR9IqUFowlPeSw4sRh
+SgW4sdDYqSJaq6h73snpRaBlity8MKUMEg++KzQmBz3//i2LR2tu3KynHczbQGXq
+UFQHGgPSlPCn3Cg5cb70CwlDlcgKt0TnR9HamNzywmkUJ0tEiK2FKZpnaSvXeIV6
+Ebg7szhJCiUz2apCRAPT0UDGz83IVlCDvihP137VcaXDJtmVaBQVjQY7kxNFfovR
+xYmEdhDbTuybpClgbWbjxVleNt7IwxeYKM7DDtmaB8SUTcOaVNe1tpzLlJuv9y4w
+xIHaMFqj7nf9vAPUyPY3iWWht9Hq9Wd94QwQtDIrYkZEdnubCCiI1OowXcni9Dyk
+lR3xkUzRca+0rdNk5beWlzy2xWwJ64jNnChRpibkOIyvKJZV1er4LCKN1nuDYer0
+fLlCy16Yl5Iws21ORQ==
+=H5/l
+-----END PGP MESSAGE-----
+"
+;;; secret entries
+"-----BEGIN PGP MESSAGE-----
+
+jA0ECQMIn4LWhrsCJpXs0ukB/g5Vlvh6ZeVRxwItoJChg96QvvxKnDSpirjhXzt6
+T/YYih1E1JTMvkTS7+iox579VqYfAFqvZIjAz2RtDjRDLS0GZJecWNeZ9cyTdMeQ
+E8GH6jYSB3rDqLl/BNsxfG34MBbFIx3fijt7pwjQIuqsyw6IwEhZ+hf4FC8RCjUD
+adhIs8NBV+953TewDlDOtY3/pnmZvgA2mBG56djc0K+K2PqsXhIyFx1hJikgS8E5
+9ipSR8ApmCEYByEDqBch6+8syRGP0lEkBQzuYFp03NtP4zo7T19cEEvFobk4HsSA
+c3jBcZCWI0NlTaeYGVguN5olBnRuaXVWAOTbuaE4t6kECLnv8qyNbIu4hbetHd6X
+R+rCdDk96aCV5Vx26H+Edws+9jbWXZf7ppJpgRR6dRG5YarmqoMfbtCRE4Hg/Cf4
+gdJMmz13amyCYGcNs4qAB4pHrzFHDBxKvsjKukorWdXvDwQR+tu50y6ez+o6vTIp
+N31qDvJc7YpJb/lmBvksKzcbIscA3CWuJ8HdabsWNkOTujlCn+00QcVH0PvVFwl3
+dFreeF8VfFFQ/5LNICJGbGfr/zdP/Kl5Fm6ipQJEtphNbj1LBugS+vpT53Ne8Kgw
+N8rRRaRtBVEseII+us3ei1y9hD8VdfydDEZZTAOfjtE57bzoYkhWm9Gc/6YJKd5I
+MMD7c/t39Beo9dGf1KEYfGsrxuXshfPS5NvIrlPwtpXOe8z4XTo55AHkUk7M3vwf
+0n+uSnWC+kAQzetTpO3RW2MdCQgO5CC1BrfbGSEHGzKMdBDJxkxXw6NLIpC1sOYV
+zR7v3zVLLFc1qOFyP27qf85WXWRnkR9DlgX6pYvaecVwCPN74CaSyHTu7hMa/r9g
+nt9IU0mbSQBFfop5I3yqfFOgrducuSz29AxL9SqF0Ci/8CfCtcyR6MhnSKU1Tfkn
+4CdghqIvnI1dIDVdbEQrdMz8Pvu7EBdyIkg1GRyb7Ou4qtwPdngwxuTwB5P8KbzL
+gIO4V/Jg3O5Y5iI0Oe79Yqt4v7ZdO1SxOjMXGuRr3rFVPXTwzJ02R7DNMAVooavr
+69MOyeEG32qx2Os+SdQs3aNigIXrjwwTmdNrH1rtwh/jl600qooVdVaoo5eJuxxw
+XmxRpoMoPrMua84Kr4g5HGAZImQf0Bx/aGe2uwxEQW13xLxE72Pqpkkuk25Ur6Cz
+YS+/8UAXwa5Ans0RKYcloGH/Df6JugLVXd799ftWTy6Ueg4w4S27sWrL7oo4EP7L
+e/GBv/Haa3L/BzNKzsk=
+=XD6n
+-----END PGP MESSAGE-----
+"
+;;; secret entries
+"-----BEGIN PGP MESSAGE-----
+
+jA0ECQMIZxM1LqJt9YTs0ukBhwv1mKzB4OL/gZSamv5UOQ7kmNblZV3HzRuB9yzN
+gTj0u9JpoqtYr+fPpvJ4ul8HGvjGScxgI38p0k9IXnXqz5lmrBm4dLiF/ECXb7Ds
+NT0CEhDQ2VWq7vQHvHhimCkuJHwGm0SJCfSaSjaeAZsnIhXdGOzte+ZuV4aIquCM
+yl+yKvgN8EBM74dLnaNsPRVuw+QoUl3UQoWpCNsDaLENNdfrjtqfuLZ+76tvSCJc
+EKXriskvvaqZHuSMtjAQcsMjTKpv1+lROAzr/4VIfMFG2t/l6gavuggt3ZEA7qMW
+8zvoNJrbJ2R7PEKZXqIXuXNDmoFWNRYZzrUAnRdrG4LOzYHxBf4Az94/krPGvh8b
+knvJOKir4UTNQ/e7Pw9mKNTKPZPArIlpzY8Xcy/bDJBPOGTO9zVJoFefsHxYI0Dm
+IWRw9cx8as+hQZNJe/LZ4SgLfxIcxZ1/6qEB2+XB/EjOrTaLnBaipzksmaJp8q2l
+RtlQGJ6xtX79jQlQMjC3RBxol0P9Nl6VlsV6k/XSgMTROjkdUpASDf3gWW0RmYqa
+wVxsvvtjGZHAqM6zccFfQUuv6A5O3Bihng3z8J5tiCBdBIH5cX8ktHOL3uKHgcbq
+IpsVj0XeACKU+j0EFcLSyEiNqT0Zsx/GDFR3Nf99NvSuKTViABlO0UMl3BU01vHf
+8MD6btLrHPKL1fzgKPVDjZaWwd2400h8BHrfs8ReWI4zi9tQqJs6+sIN4g90y0uU
+vZV+DuzO8hkwTuBJWGh9/z5ulybLV+DyUQUZjbL2hbwV6QkJcO0KEWWqmixMFSjQ
+/uu8l2G3Q0Wgo/qkcU7R5TbagEbysSJEm674KDozvS6XiCP412fMlwcxmSLT7ih0
+POGgwS732OHLsZlnvY4SIYmalBGRUSbmZISLU8M0UDQfgU3RfZhgCCKOdkmcyPC8
+0qBrHLrrKAxWMzBRD1CWuvRLqdE64j0Ig2I6SjTqCIMLvGLtHAVTjJd+iQK4OoPc
+H7q7OU1BpQ8gVAobzsi6d7U7iz2th9TAqlyGqN9b8OE6h17dBDNzLXs0QE6X4B6H
+a31vijhn/XOdC1j3HjYCR4OjHl2I0iw+CBYTG7NlBWzqXfzr/yhl5IgZSYk7/ZeJ
+DIUUu7Ny/nczEe5ZobUSLVD9/r1TERyevg7m81xH4M9r2xMvQ76RDJ9nDN677/iX
+kU09KM1ErIl0z0S/FBLKJgzuw0L/KpzBxqdL+Nx6jLoRXOdaqX4TKKxENVpG0YQQ
+MB2RylBKYf3cwX+K7Q==
+=aDYz
+-----END PGP MESSAGE-----
+"
+;;; secret entries
+"-----BEGIN PGP MESSAGE-----
+
+jA0ECQMIq5OYFgKNyTns0ukBqo59fuyPwKGmma3D1VwlKtRZoiOOP6UFJIFaL6Rv
+jKDAp+GDX9sQp78nOZMZ+mi6Gy12v7Je2qrfqckkXmaSy98x9ZaeeZzHlOheEelH
+HJd6r/Duj+xMt6nySH4w/l7jGWHVjJf7kN4bacIzT0+Gl91qcCI24RGkQsb1+706
+izWaMM/kc+jhrQmnb2+gpY/iwmySlNC2OPH16GyVYHT5pdiZBA87XdPjCYOJmLRu
+L7qjTCO+48/TAFwKcReJftri77ViUt1AsZWh1XGX3NYoS748PO7TajL2hbHbwmdM
+qPWOEz9Ybgio3uo0CTTvZIUIMIdwOBkPB36h8Tc2uefi/YiSpU9c8UVDoFSz37aO
+iKQ4qV+5slU0P2KzYSOFWttBS+mXsWKZ2Ol6+ZE84shDtXFd40BZCNupkZfHsORR
+K6KdHdy9A7kKU2MiLs5HNhiL/+dUlxpppIjZ7tLc8UqsOeP3TetMr/gIvpDIgs6Z
+CoME/MqgI0gpiLu6lDSiL2JfwFWxe3WZAmHg8hvzP4CUVwFhF5yrnH5LM3j3v2j6
+qv5MKAJgKFZLXFKQoSr9rqqZjfT+Z5CUv5jJ/F5nz28xEkgbyxa1idGq8B4AR5X4
+kAwvDZIK3VRwlIuoYN0zkXz0a+t4KDVei7LuRRmpQ4mEh/e87pIH3DcNVUbs4p5D
+OcDwbVOO5JOOW6SYu8N16C7URYqejcku+N12KdmetZbGQWlOfeEDEptIbrjJz9V3
+DRRKwJcIUYFBNPCI0rMi9/govj/2xtrlcy1bgLRggfJSPeOE4+CDGswn4QUDisVd
+JDkAuNq6HYA7R4AcyAzDS6pQS178ylhTJpD7m/EEK1lhdXf0a4qCeR/Z/AbRZkXF
+pdhYatJdVWQWXTpxB3HrVzpxREdXwzt5fSZG58zgXNpgY4gZcbhYQkEf4lp/pgzH
+cG93umh8+9XLDgybq37rTaqpDrDvjKJxYq+jzvyu6NnGXxiWAcAd8sgNA0j2FTZU
+IqXSgMkr9IsmbntthYm7DX1j5KNyc2M3UqDTsbZUKI+9rL2Rkc9hQe8va4zk5w5o
+juu4Y2VCOEGLaIjlqZHWoUUGxfWaANbtusCSSEEhZdZXlOIWcU5iCr6+xBUajmbJ
+UkRkaLiTLlmtKGlQtH7XNkpQaNrinXnEz97lkDNo8Cn+w2YQKVmZWPtM5+K6g7Zj
+qumcsCDuirrF8oB3rCWBoQ3orwxhQx27oyWLZqJkZfK/y41SqUybCZxaTZ9X/f6b
+X3hS
+=4Z9T
+-----END PGP MESSAGE-----
+"
+;;; secret entries
+"-----BEGIN PGP MESSAGE-----
+
+jA0ECQMInphlrKT610rs0ukBWISL5o9Xc8UYUVR9fsdvYceCZ/aF9TtCokGC0hhr
+4jHtgtBN3H7ueGtHOxjzHguORApeLmN5A8ju1xjPrRt5qJ7P/4UkU3yjQmxt8moR
+HfwRAXKR5PdzEPYdT5bT4RYCo5Jqz4kwTBVSiaVijA8EBTxbgTMILh48ICrRg3mK
+Cw8QMeaMFhFWsqkBvK75UA2fWH81BFYWnNjZqBdMn8qHkguxvZp2gnYaaGED972V
+4qUtM04gWE7evwGEV2iyvccDIwfzwv3Xaq7mDMnBDbd0+3oyQI6SAOVYZZBO4PwH
+sMyQ9fxkrTtUb2itqgQ9lM0cG+X4OYmAhOFaEyBCqZFUMP4ILPcrBJ1+MKMU274c
+WRyIxcw9yJ5NjPPglnjg8b5ubFwyQ6aKYnagkqvVCPe2I5ICd3zC8hbANG8HzRQr
+I0kc9qjI2IiW1NXrgoyrJV4b3BmLimtPhUKTRfWJ4E9LlXuvzJmRcVQCXgqgIuNg
+PMLHViMovg4UqfakMy3bFQ7+Xj8UkG3z+sJb/yVqjVWC6DgUgIJkDgDofCqvA7rn
+3xpPV4xCJJIZt48EgXG6IyWrE8qA9MVx6iHBH6vmwvbTf05W5yBWrCmhxkAEFL/V
+Cg+lfCVUwEKJ+Vk7X01V1MeCxFpeve4Qq+37MovLcPlWOlF9t+srfTI4LVfe7ENX
+6MDwilc17BTpQV9kvWibql991yGYk7dzvZKW8SuMB/dz6DfB/DZxrWn9+DQmsoSc
+niu5P1penfs0tf1Yd2uBGtpJ4XUdnAuymGX/ulhR8r1lMJAqZJT23tR7YM+ZGLoH
+uMxv1d1qRTmS6zK4f/PtZQUW3MYg/BWXHUzlnyb7IkpAkv1YSN7VBvbdGc66BJp2
+GmzfTWRxDfHAaC4ZaUmFrAWPg5OEoBsNmdPkGhcr98ssZWTWY4Gb7kTkSwa9QT7Q
+iwPCia9Swtl8lLXnb/GSfqaWDq8XKtFTVv72rrAAa07LENW7NgPFzGYr0cP0OimN
+88l989w3M0sITTtk7odEm0UKp/dZQWPFPNwfhvOcWhOzxaXDYoBJTjAWx3pzYSap
+b6GO48AYkKKaQhWbl3RFVA5au7aQ1aysfAOpyS6UaD3QSZex2q6gol9tB6VE1QlT
+R+1pGrGk03bhxmLQ5tewNULKTLkWfzXKFzxzhGOU4D7A6dz2p04I5F7Ve8KDrVeR
+QO4OgudjkoLZbxNuvnON1z03Cylw+VeUJft+5CeEvgyML+pqavFHZWtLiCjVU3rm
+j4bx
+=Bz00
+-----END PGP MESSAGE-----
+"

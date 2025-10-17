@@ -1,20 +1,19 @@
-#+auto_tangle: t
+ #+auto_tangle: t
 
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-   (find-file "~/Dropbox/emacs/config.org")
+  (find-file "~/Dropbox/emacs/config.org")
   (find-file "~/Dropbox/emacs/config_desktop.org")
 
 
 #+END_SRC
 
 #+RESULTS:
-: #<buffer config_desktop.org>
+#+BEGIN_SRC emacs-lisp :tangle yes  
+(set-face-attribute 'default nil :family "Fantasque sans mono" :height 200 :weight 'normal  :foreground "#ebdcb2")
 
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (setq-default line-spacing 0)
-  
-  (set-face-attribute 'default nil :family "Fantasque sans mono" :height 200 :weight 'normal  :foreground "#ebdcb2");
 #+END_SRC
 
 #+RESULTS:
+
+
